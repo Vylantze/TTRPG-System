@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { parseSystemFile, deserializeCharacter, serializeCharacter, type Character, type SystemFile, type Value, type Engine } from '../../src/index';
 import bundledUrl from '../../src/systems/dnd5e-2014/system.json?url';
 import noticeUrl from '../../NOTICE.md?url';
-import { createRegistry, download, readWorkspace, writeWorkspace, updateSystemDescriptions, systemKey, labelFromId, type Workspace } from './workspace';
+import { createRegistry, download, readWorkspace, writeWorkspace, updateSystemDescriptions, applyDescriptionUpdate, systemKey, labelFromId, type Workspace } from './workspace';
 import { FeatureDetail } from './FeatureDetail';
 import { CharacterBuilder } from './CharacterBuilder';
 import { Modal } from './Modal';
@@ -26,6 +26,7 @@ export function App() {
   const [initial]=useState(()=>{try{return {workspace:readWorkspace(localStorage),error:''};}catch(e){return {workspace:empty,error:errorMessage(e)};}});
   const [workspace,setWorkspace]=useState(initial.workspace),[route,setRoute]=useState(readRoute),[error,setError]=useState(initial.error),[storageError,setStorageError]=useState(initial.error),[blocked,setBlocked]=useState(Boolean(initial.error));
   const [saved,setSaved]=useState(false),[loading,setLoading]=useState(false),[creating,setCreating]=useState(false),[query,setQuery]=useState(''),[tag,setTag]=useState(''),[page,setPage]=useState(0);
+  const [updatingDescriptions,setUpdatingDescriptions]=useState(false);
   const [selectedSystem,setSelectedSystem]=useState(systemKey(workspace.systems[0]??{id:'',revision:1})),[options,setOptions]=useState<Record<string,Value>>({});
   const registry=useMemo(()=>createRegistry(workspace.systems),[workspace.systems]);
   const selected=workspace.systems.find(s=>systemKey(s)===selectedSystem)??workspace.systems[0];
@@ -43,6 +44,24 @@ export function App() {
     }catch(e){return {error:errorMessage(e)};}
   },[registry,active,route.system,route.revision,route.catalogue,browserEngine,workspace.systems]);
   const engine=resolved.engine;
+  useEffect(()=>{
+    const existing=initial.workspace.systems.find(file=>file.id==='dnd5e:2014-srd5.1');
+    if(initial.error||!existing)return;
+    const controller=new AbortController();let cancelled=false;
+    setUpdatingDescriptions(true);
+    void (async()=>{
+      try {
+        const response=await fetch(bundledUrl,{signal:controller.signal,cache:'no-store'});
+        if(!response.ok)throw new Error('Bundled SRD descriptions could not be loaded.');
+        const incoming=parseSystemFile(await response.text());
+        const updated=updateSystemDescriptions(existing,incoming);
+        if(!cancelled)setWorkspace(current=>applyDescriptionUpdate(current,existing,updated));
+      } catch(e) {
+        if(!cancelled)setError(`Automatic SRD description update failed. ${errorMessage(e)} Retry with Systems → Update bundled descriptions.`);
+      } finally {if(!cancelled)setUpdatingDescriptions(false);}
+    })();
+    return()=>{cancelled=true;controller.abort();};
+  },[initial]);
   useEffect(()=>{const onHash=()=>{setRoute(readRoute());setQuery('');setTag('');setPage(0);};window.addEventListener('hashchange',onHash);return()=>window.removeEventListener('hashchange',onHash);},[]);
   useEffect(()=>{
     if(blocked)return;
@@ -58,9 +77,9 @@ export function App() {
   const loadBundled=async()=>{setLoading(true);try{const response=await fetch(bundledUrl);if(!response.ok)throw new Error('Bundled System could not be loaded.');await loadFile(await response.text());}catch(e){setError(errorMessage(e));setLoading(false);}};
   const refreshDescriptions=async()=>{
     setLoading(true);setError('');
-    try{const response=await fetch(bundledUrl);if(!response.ok)throw new Error('Bundled System could not be loaded.');const incoming=parseSystemFile(await response.text());
+    try{const response=await fetch(bundledUrl,{cache:'no-store'});if(!response.ok)throw new Error('Bundled System could not be loaded.');const incoming=parseSystemFile(await response.text());
       const existing=workspace.systems.find(file=>systemKey(file)===systemKey(incoming));if(!existing)throw new Error('Load the bundled System before updating its descriptions.');const updated=updateSystemDescriptions(existing,incoming);
-      change(current=>({...current,systems:current.systems.map(file=>file===existing?updated:file)}));
+      change(current=>applyDescriptionUpdate(current,existing,updated));
     }catch(e){setError(errorMessage(e));}finally{setLoading(false);}
   };
   const importCharacter=async(file:File)=>{
@@ -80,6 +99,7 @@ export function App() {
     </aside>
     <div className="main-shell"><header className="topbar"><span>{route.page.slice(0,1).toUpperCase()+route.page.slice(1)}</span><div className="toolbar">{selected&&<label className="system-switch">System<select aria-label="Browse System" value={systemKey(selected)} onChange={e=>{setSelectedSystem(e.target.value);setOptions({});go(route.page==='characters'?'characters':route.page);}}>{workspace.systems.map(s=><option key={systemKey(s)} value={systemKey(s)}>{s.configurations[0].system.name} · r{s.revision}</option>)}</select></label>}<button onClick={()=>setCreating(true)} disabled={!selected}>+ New character</button></div></header>
       <main id="main-content" tabIndex={-1}>
+        {updatingDescriptions&&<p role="status" className="muted">Updating bundled SRD descriptions…</p>}
         {error&&<div role="alert" className="alert row"><span>{error}</span><button className="quiet" onClick={()=>setError('')}>Dismiss</button></div>}
         {storageError&&<div role="alert" className="alert"><p>{storageError}</p>{blocked&&<button className="quiet" onClick={()=>{try{download('workspace-recovery.json',localStorage.getItem('ttrpg-feature-forge:v1')??'{}');setBlocked(false);setStorageError('');}catch(e){setError(errorMessage(e));}}}>Export stored data and start a new workspace</button>}</div>}
         {resolved.error&&<div className="notice"><p>{resolved.error}</p><a href="#systems">Manage Systems →</a></div>}

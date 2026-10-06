@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T17:03:09.203Z
+Export refreshed UTC: 2026-10-06T17:17:04.474Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -747,5 +747,38 @@ The live browser check caught a focus issue: closing a popup did not return keyb
 
 [2026-10-06T16:59:33.592Z] ASSISTANT
 The browser checks passed for ability, skill, and spell popups, including ambiguous names, Escape dismissal, focus restoration, and opening the linked Feature. The rules data is unchanged. I’m finishing the source-text checks and production build before committing.
+
+----------------------------------------
+
+[2026-10-06T17:04:09.610Z] ASSISTANT
+Implemented in `cb6100d`.
+
+- Bundled 2014 Features now display original SRD wording, with PDF layout cleanup.
+- Recognized Feature and skill names automatically link to source-text popups. Ambiguous names offer a choice of targets.
+- Reference matching lives in the engine.
+
+Use **Systems → Update bundled descriptions** for existing loads.
+
+All 187 engine tests, 15 UI tests, browser interaction checks, and the production build passed.
+
+----------------------------------------
+
+[2026-10-06T17:12:27.751Z] USER
+The UI's features have not been updated with the srd descriptions
+
+----------------------------------------
+
+[2026-10-06T17:12:37.333Z] ASSISTANT
+I’ll check how the UI loads saved System data and fix the update path so the SRD descriptions appear in your existing workspace.
+
+----------------------------------------
+
+[2026-10-06T17:13:35.547Z] ASSISTANT
+The UI restores its own copy of the System from browser storage, so updating the bundled JSON left previously loaded Features on the old text. I’ll make it refresh the bundled SRD descriptions automatically when the app opens, using the existing check that protects customized rules.
+
+----------------------------------------
+
+[2026-10-06T17:16:59.472Z] ASSISTANT
+I reproduced the issue with an older saved System. It now refreshes automatically, shows the SRD text and links, and retains the update after a page reload. The browser check also confirmed that character data is preserved and customized rules are protected.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

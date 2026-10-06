@@ -51,6 +51,11 @@ export function updateSystemDescriptions(existing:SystemFile,incoming:SystemFile
   if(JSON.stringify(canonical(rules(existing)))!==JSON.stringify(canonical(rules(validated))))throw new Error('Bundled rules differ from this loaded System. Description refresh cannot replace its rules. Export the System before unloading or migrating it.');
   return validated;
 }
+/** Replace only the snapshot that was checked, preserving concurrent edits and unloads. */
+export function applyDescriptionUpdate(workspace:Workspace,existing:SystemFile,updated:SystemFile):Workspace {
+  if(!workspace.systems.includes(existing)||JSON.stringify(existing)===JSON.stringify(updated))return workspace;
+  return {...workspace,systems:workspace.systems.map(file=>file===existing?updated:file)};
+}
 export function createRegistry(files: SystemFile[]): SystemRegistry {
   const registry = new SystemRegistry(); files.forEach(f => registry.load(f)); return registry;
 }
