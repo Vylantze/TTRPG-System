@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T06:10:16.804Z
+Export refreshed UTC: 2026-10-06T06:17:32.455Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -112,5 +112,47 @@ I’m using the write-page skill’s local-document workflow to save the specifi
 Your answers confirm the draft’s architecture: arbitrary named stats and formulas, independent class progressions governed by a rules profile, and invalidation of dependent choices after retraining until they are repaired.
 
 The specification now covers nested composition, per-instance selections, stat dependencies and stacking, acquisition history, and resource expenditure. I’m checking the examples and edge cases before committing the document under Mira-Dev’s identity.
+
+----------------------------------------
+
+[2026-10-06T06:10:22.056Z] ASSISTANT
+Created the [Feature system specification](</D:/User/Workspace/TTRPG System/docs/feature-system-specification.md>) covering:
+
+- Independent Features at each class level.
+- Nested grants, composition, and selections.
+- Basic stats, derived formulas, and modifier stacking.
+- Prerequisites, retraining, and limited-use resources.
+- Generic rules profiles and independent class progressions.
+
+Your confirmed choices are incorporated. This is a specification draft; implementation comes next.
+
+Validation: **4/4 document checks passed**.
+
+Committed as Mira-Dev’s `Codex Agent` identity: `3a1f490`.
+
+----------------------------------------
+
+[2026-10-06T06:15:41.667Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-06T06:15:41.693Z] USER
+For features, additionally allow the following:&#x20;
+
+- Feature selection can have an option to ignore prerequisites. If a feature requires a resource provided by a prerequisite feature, it would not be allowed, however. A Feature that contains a SubFeature with a resource prerequisite would be able to provide the resource using another SubFeature, thereby fulfilling the prerequisite.
+- The Feature builder should be able to handle scaling capacity or resources based on other stats or its own arbitrary table.
+
+----------------------------------------
+
+[2026-10-06T06:15:45.206Z] ASSISTANT
+I’ll update the specification so selections can waive ordinary prerequisites while still enforcing required resources, including resources supplied by sibling SubFeatures. I’ll also define stat-based and table-based scaling for resource capacity.
+
+----------------------------------------
+
+[2026-10-06T06:17:05.114Z] ASSISTANT
+The draft now separates waivable acquisition prerequisites from required resources. A composite resolves eligible resource-providing SubFeatures before validating consumers, so sibling display order does not matter.
+
+Capacity can use a constant, stat formula, a Feature-owned table, or a combination. Table lookups have explicit missing-key and boundary rules, and capacity changes preserve recorded expenditure.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

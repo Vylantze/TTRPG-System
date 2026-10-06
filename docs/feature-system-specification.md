@@ -62,7 +62,7 @@ These are example keys, not mandatory engine stats. A profile may instead use ab
 
 ### Expression language
 
-Expressions use a serializable syntax tree, never executable source strings. Initial operations are numeric literals, stat references, acquisition-context references, arithmetic, minimum, maximum, floor, ceiling, comparisons, boolean operations, and conditional expressions. Profiles can register named pure functions with declared argument and dependency types. Division by zero and unknown functions are errors. Expressions do not read clocks, random numbers, arbitrary files, or hidden global state.
+Expressions use a serializable syntax tree, never executable source strings. Initial operations are numeric literals, stat references, acquisition-context references, arithmetic, minimum, maximum, floor, ceiling, comparisons, boolean operations, conditional expressions, and table lookups. Profiles can register named pure functions with declared argument and dependency types. Division by zero and unknown functions are errors. Expressions do not read clocks, random numbers, arbitrary files, or hidden global state.
 
 Stat references read the final value of the referenced stat in the current evaluation view. Therefore a modifier to agility flows through to defense. A modifier to a stat cannot read that same final stat. Instead, its own pre-modifier value is available as `base`; all dependencies through modifiers participate in cycle detection. `base` does not mean an unmodified value of some other stat.
 
@@ -86,7 +86,7 @@ Every applied, suppressed, or inactive modifier records its source instance, com
 
 ## Features and their components
 
-A FeatureDefinition contains `id`, `revision`, `name`, `description`, source metadata, tags, acquisition prerequisites, optional maintenance requirements, repeat policy, parameter definitions, and an ordered list of components. Components have stable local IDs. Component order is for presentation and stable identity, not a hidden stat-calculation order.
+A FeatureDefinition contains `id`, `revision`, `name`, `description`, source metadata, tags, acquisition prerequisites, nonwaivable resource requirements, optional maintenance requirements, repeat policy, parameter definitions, optional local scaling tables, and an ordered list of components. Components have stable local IDs. Component order is for presentation and stable identity, not a hidden stat-calculation order.
 
 | Component | Purpose |
 | --- | --- |
@@ -111,7 +111,9 @@ The same definition may occur multiple times if its repeat policy allows it. Def
 
 ### Choices inside Features
 
-Each `chooseFeatures` component declares a local ID, minimum and maximum picks, a candidate source, candidate filters, duplicate policy, and retraining policy. Candidate sources are explicit Feature IDs or a query over profile content tags. Filters include content level, class tag, and parameter requirements. Content level and acquisition level are distinct fields.
+Each `chooseFeatures` component declares a local ID, minimum and maximum picks, a candidate source, candidate filters, duplicate policy, retraining policy, and `ignorePrerequisites` (default `false`). This option waives ordinary acquisition predicates for the directly selected Feature. It does not waive resource requirements, pick counts, candidate filters, repeat limits, maintenance conditions, or ability-use costs. Candidate sources are explicit Feature IDs or a query over profile content tags. Filters include content level, class tag, and parameter requirements. Content level and acquisition level are distinct fields. A builder that intends to waive a level prerequisite must not separately exclude that option through a level filter.
+
+The waiver belongs to the selection and is recorded on the acquired instance with its source selection ID. It does not modify the reusable definition or automatically propagate to descendants. A nested choice can declare its own waiver. Automatic grants keep their normal prerequisite rules unless they explicitly declare an ordinary-prerequisite exemption. All paths still enforce resource requirements.
 
 A choice acquires complete Feature instances, so its selected children can grant more Features and contain their own choices. Two choices inside one Feature are independent. A class can also provide two independent selection entries at the same level.
 
@@ -141,11 +143,25 @@ Multiple class progressions can be represented with independent instance IDs and
 
 ## Prerequisites and validation
 
-Acquisition prerequisites use structured predicates: minimum level, acquired Feature or tag, parameter match, build-stat threshold, all, any, and not. The initial implementation should support all of these. Profile-specific predicates need declared inputs and explicit error behavior.
+Acquisition prerequisites use structured predicates: minimum level, acquired Feature or tag, parameter match, build-stat threshold, all, any, and not. The initial implementation should support all of these. Profile-specific predicates need declared inputs and explicit error behavior. A selection with `ignorePrerequisites: true` records those predicates as waived rather than falsely reporting them satisfied.
 
-Evaluate acquisition prerequisites at the acquisition event using the build up to that point. Within a level, automatic grants are applied first; choices that depend on other same-level choices require explicit prerequisite order. Resolve positive dependencies in that order and reject cycles. A Feature cannot satisfy its own prerequisite through its own effects or descendants. Temporary bonuses, equipment context, and active stances do not qualify by default. Use a separate eligibility stat view containing only the permanent build effects permitted by the profile.
+Evaluate ordinary acquisition prerequisites at the acquisition event using the build up to that point. Within a level, automatic grants are applied first; choices that depend on other same-level choices require explicit prerequisite order. Resolve positive dependencies in that order and reject cycles. A Feature cannot satisfy an ordinary prerequisite through its own effects or descendants. Resource provision within a composite follows the separate sibling-resolution rule below. Temporary bonuses, equipment context, and active stances do not qualify by default. Use a separate eligibility stat view containing only the permanent build effects permitted by the profile.
 
-Automatic grants must also satisfy their declared prerequisites. Granting content does not implicitly bypass restrictions. Content can explicitly declare a documented exemption, with the reason included in provenance.
+Automatic grants must also satisfy their declared prerequisites. Granting content does not implicitly bypass restrictions. Content can explicitly declare a documented exemption for ordinary prerequisites, with the reason included in provenance. Resource requirements cannot be exempted.
+
+### Required resources and sibling SubFeatures
+
+A resource requirement is a structured dependency on a usable pool definition, separate from a requirement to own a particular Feature. It declares a resource key, required scope, and optionally a minimum capacity. A Feature that normally requires a provider Feature must also declare the resource requirement if its mechanics rely on that provider's resource. The converter and Feature builder must preserve that dependency; merely marking every prerequisite waivable would lose essential information.
+
+Ignoring prerequisites can waive ownership of the original provider Feature, but cannot waive the resource it supplies. A compatible alternative provider may satisfy the resource dependency. Compatibility uses the resource key, scope, units, and profile-defined contract, never a display name. Bind the consumer to a specific resolved pool ID; ambiguous multiple pools require an explicit binding or a profile selection rule.
+
+A composite may grant a resource-providing SubFeature and a resource-consuming SubFeature in the same acquisition transaction. First expand its proposed children, then validate independently eligible providers, then bind and validate consumers. The provider may appear after the consumer in the display list. A provider in another sibling branch within the same composite can qualify if scope permits. A descendant cannot bootstrap its ancestor's ordinary eligibility, and a consumer cannot fulfill its own external resource requirement using grants that only become eligible through that consumer. Resource-dependency cycles with no independently valid provider are invalid.
+
+For example, Arcane Package grants Energy Reserve and offers a choice of Arcane Technique. Energy Reserve defines an `arcane-energy` pool, and Arcane Technique requires that resource. Arcane Technique can be selected with its ordinary spellcaster prerequisite ignored because Energy Reserve fulfills the nonwaivable resource dependency. Selecting Arcane Technique alone without any compatible provider is invalid. The containing package needs no special hard-coded exception.
+
+Candidate validation uses the enclosing composite's proposed acquisition context. A consumer awaiting an unfilled sibling provider choice is shown as pending with the missing resource identified; it cannot finalize as valid until that sibling choice supplies a compatible provider. Candidate eligibility is recomputed when sibling selections change.
+
+Resource requirements are checked both when acquiring the Feature and when validating the current build. An inactive, removed, or incompatible provider does not qualify. Resource availability is different from resource provision: an exhausted pool still fulfills a provision requirement, while using an ability must pay its costs. Zero capacity is permitted only if the requirement's minimum capacity permits zero. Removing the only provider through retraining makes dependent Features invalid until repaired, even if their ordinary prerequisites were waived.
 
 Prerequisites default to acquisition-only checks. A separate maintenance requirement controls whether an already acquired Feature remains usable in changing circumstances. A historical prerequisite failure after retraining follows the profile's chosen repair policy; ordinary loss of a temporary condition does not trigger retraining repair.
 
@@ -167,7 +183,27 @@ A `grantCapability` component can declare an ability with action cost, trigger, 
 
 A resource definition includes a pool ID, capacity expression, initial state, sharing scope, recovery events, and usage costs. Instance-owned pools remain separate; a character-wide pool intentionally combines contributions under a declared policy. Two unrelated limited-use abilities must not share a pool because they have the same display name.
 
-Persist expenditure separately from computed capacity: `available = max(0, capacity - spent)`. If capacity falls below expenditure, preserve that expenditure so raising capacity later cannot restore uses accidentally. New acquisition uses the profile's explicit initialization rule. Retraining preserves expenditure for equivalent pools, and a new pool may initialize empty or inherit expenditure according to the profile; replacement must not provide free recovery by default.
+### Capacity scaling and Feature tables
+
+The Feature builder must let authors express resource capacity as a constant, a formula referencing named stats or context, a lookup in the Feature's own arbitrary table, or a combination of those expressions. The same expression system also supports scaling stat modifiers, recovery amounts, and ability costs. No class-level or character-level formula is mandatory.
+
+A local table has a stable ID, numeric keys and values, a lookup mode (`exact` or `threshold`), and explicit policies for missing keys and values outside its range. Keys must be unique. Threshold mode returns the value at the greatest key less than or equal to the lookup input; below the first key uses the declared below-range policy. Above the last key uses the declared above-range policy. Exact mode requires a matching key within the range or applies its declared missing-key policy. Policies can return an explicit fallback, use the boundary value for out-of-range input, or produce an error. There is no implicit interpolation, extrapolation, or fixed 20-level size.
+
+Tables belong to the Feature definition revision. A lookup identifies its table owner and table ID explicitly and supplies an input expression; a nested Feature does not inherit a parent's table implicitly. A granted child can receive an explicit table reference or a parameter from the parent. Initial table outputs are numeric; structured ability-result tables can be a later extension. The builder should validate keys, preview values for representative inputs, and show lookup policy and dependencies.
+
+For example, Energy Reserve can use the following authored capacity table indexed by the `arcane.training` stat:
+
+| Training threshold | Base capacity |
+| --- | --- |
+| 0 | 1 |
+| 2 | 3 |
+| 5 | 6 |
+
+With threshold lookup, below-range error, and above-range boundary value, training 4 yields 3 and training 8 yields 6. A combined capacity formula `tableValue + max(0, attribute.insight)` yields 5 at training 4 and insight 2. An alternative formula can omit the table entirely. These are invented authoring examples, not PF2e resource rules.
+
+Capacity dependencies join the calculation graph. Declared rounding and bounds apply to the final expression; negative or nonfinite capacity is invalid, and an integer-use pool requires an integer result after explicit rounding. The builder must reject self-referential capacity or stat-resource dependency cycles. Resource requirements that inspect capacity are checked after the independently eligible provider's capacity is calculated; they cannot validate a provider using bonuses from its not-yet-eligible consumer.
+
+Persist expenditure separately from computed capacity: `available = max(0, capacity - spent)`. If capacity falls below expenditure, preserve that expenditure. Recalculating or increasing capacity does not clear expenditure, though higher capacity can legitimately increase available uses. For example, capacity 5 with 4 spent has 1 available; lowering capacity to 2 gives 0; returning to 5 gives 1, not 5. New acquisition uses the profile's explicit initialization rule. Retraining preserves expenditure for equivalent pools, and a new pool may initialize empty or inherit expenditure according to the profile; replacement must not provide free recovery by default.
 
 Recovery happens only through explicit events, such as daily preparation, rest, or a recharge activity. Recovery never occurs as a side effect of evaluation or loading. Each event records its identity, affected pools, and effect; replaying the same event is idempotent. Timers and elapsed time are recorded game state, not wall-clock assumptions.
 
@@ -181,12 +217,12 @@ Evaluation is pure and deterministic for the same content, character, and contex
 
 1. Validate the catalogue and character references against pinned revisions.
 2. Resolve legal progressions and the character-level policy.
-3. Replay acquisition order and expand permanent grants and selected descendants with stable instance IDs.
-4. Check selection counts, repeat policies, and acquisition eligibility; expose incomplete and invalid choices.
+3. Replay acquisition order and expand proposed permanent grants and selected descendants with stable instance IDs; preserve each selection's prerequisite-waiver policy.
+4. Check selection counts, repeat policies, and ordinary acquisition eligibility. Resolve independently eligible resource providers and their capacity dependencies before validating resource-dependent consumers, including siblings in the same composite. Expose incomplete and invalid choices; reject unsupported dependency cycles.
 5. Resolve the active instance set and component conditions for the requested build or runtime view.
 6. Collect effects and build the full stat dependency graph, including modifier expressions.
 7. Evaluate stats in dependency order, apply declared stacking policies, and retain explanations.
-8. Calculate capabilities and resource capacities without changing expenditure.
+8. Calculate capabilities and final resource capacities without changing expenditure; recheck active resource bindings and minimum capacity requirements. Provisional effects from invalid consumers cannot make their providers eligible.
 9. Return results and diagnostics. An incomplete or invalid build may expose provisional totals clearly labeled as provisional; it cannot be represented as a legal character.
 
 The build view supplies permanent character totals. A runtime view can add equipment and temporary effects with context predicates. Eligibility uses the restricted historical build view described above. Derived-stat references never silently switch between views.
@@ -221,6 +257,7 @@ This JSON illustrates naming and relationships. The final schema must formally d
         "kind": "chooseFeatures",
         "minimum": 1,
         "maximum": 1,
+        "ignorePrerequisites": false,
         "candidates": {
           "ids": ["example:guarded-style", "example:mobile-style"]
         },
@@ -295,6 +332,17 @@ These are future behavioral checks, not claims that an engine has already been i
 | Formula or composition cycle | Validation explains the cycle instead of recursing indefinitely |
 | Missing mandatory selection | Build is incomplete and the missing instance path is identified |
 | Self-satisfying or mutually circular prerequisites | Build is invalid |
+| Selection ignores ordinary prerequisites | Selected instance records the waiver; resource requirements and selection constraints still apply |
+| Waived Feature requires an absent resource | Build is invalid and identifies the missing resource |
+| Sibling SubFeature supplies the required resource | Consumer validates regardless of sibling presentation order |
+| Alternate provider supplies the same compatible resource | Waived original provider ownership is unnecessary; consumer binds to the alternate pool |
+| Only resource provider is removed through retraining | Dependents become invalid and require repair |
+| Required pool is exhausted | Feature remains acquired; ability use fails if costs cannot be paid |
+| Feature capacity references another stat | Capacity follows that stat and preserves expenditure |
+| Capacity uses an arbitrary local threshold table | Lookup uses the declared thresholds and boundary policies |
+| Table lookup misses a key or exceeds its range | Declared policy applies without implicit interpolation |
+| Capacity combines a table lookup and a stat formula | Both contributions evaluate under declared rounding and bounds |
+| Resource provider depends on its consumer to validate | Build is invalid rather than circularly self-validating |
 | Choice gained earlier than current level | Its acquisition-level eligibility remains stable |
 | Retraining a parent choice | Only its owned descendants change, with dependency consequences previewed |
 | Resource capacity decreases then increases | Expenditure persists without automatic recovery |
