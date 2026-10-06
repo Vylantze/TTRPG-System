@@ -2,11 +2,11 @@
 
 A class is a progression of Features. Each level contains independent grants and choices; each Feature can grant other Features, offer further choices, and contain small mechanical components. A character stores its acquired instances and choices separately from reusable definitions. Numeric stats are defined by the rules profile and calculated from basic inputs, formulas, and Feature effects.
 
-This specification defines the model and its behavior before implementation. Pathfinder2e and PF2e refer to the same system. PF2e is the first intended conversion target, but the engine must not require fixed ability names, proficiency ranks, class names, or a particular action economy.
+This specification defines the model and its behavior before implementation. Dungeons and Dragons 5e, DnD5e, and 5e refer to the same system. Implement separate 2014 and 2024 5e profiles first, before PF2e. Pathfinder2e and PF2e refer to the same system. The engine must not require fixed ability names, proficiency ranks, class names, or a particular action economy.
 
 ## Scope and decisions
 
-The first deliverable is a written specification. Retraining, prerequisites, and limited-use abilities belong in the initial model. The design reference is `D:\User\Workspace\Anime5e`; all new project work belongs in `D:\User\Workspace\TTRPG System`.
+The first deliverable is a written specification. Retraining, prerequisites, and limited-use abilities belong in the initial model. The design reference is `D:\User\Workspace\Anime5e`; official D&D rules and SRDs are additionally authorized to study and define the 5e profiles. All new project work belongs in `D:\User\Workspace\TTRPG System`.
 
 Confirmed decisions are an unrestricted named-stat registry, support for independent class progressions with profile-controlled legality, and prerequisite repair after retraining. Dependent choices that lose eligibility make the build invalid until repaired; they are never changed automatically.
 
@@ -113,6 +113,8 @@ The same definition may occur multiple times if its repeat policy allows it. Def
 
 Each `chooseFeatures` component declares a local ID, minimum and maximum picks, a candidate source, candidate filters, duplicate policy, retraining policy, and `ignorePrerequisites` (default `false`). This option waives ordinary acquisition predicates for the directly selected Feature. It does not waive resource requirements, pick counts, candidate filters, repeat limits, maintenance conditions, or ability-use costs. Candidate sources are explicit Feature IDs or a query over profile content tags. Filters include content level, class tag, and parameter requirements. Content level and acquisition level are distinct fields. A builder that intends to waive a level prerequisite must not separately exclude that option through a level filter.
 
+Pick counts can be constants or expressions evaluated from declared stats, context, or tables. Counts must be nonnegative integers with minimum no greater than maximum. A change in capacity exposes missing or excess selections for repair rather than silently choosing or dropping options. Choices also declare permitted replacement events, such as level advancement or daily preparation; these differ from general retraining. These contracts support 5e spell preparation and other profile-specific changing selections.
+
 The waiver belongs to the selection and is recorded on the acquired instance with its source selection ID. It does not modify the reusable definition or automatically propagate to descendants. A nested choice can declare its own waiver. Automatic grants keep their normal prerequisite rules unless they explicitly declare an ordinary-prerequisite exemption. All paths still enforce resource requirements.
 
 A choice acquires complete Feature instances, so its selected children can grant more Features and contain their own choices. Two choices inside one Feature are independent. A class can also provide two independent selection entries at the same level.
@@ -208,6 +210,8 @@ Persist expenditure separately from computed capacity: `available = max(0, capac
 Recovery happens only through explicit events, such as daily preparation, rest, or a recharge activity. Recovery never occurs as a side effect of evaluation or loading. Each event records its identity, affected pools, and effect; replaying the same event is idempotent. Timers and elapsed time are recorded game state, not wall-clock assumptions.
 
 Using an ability validates active ownership, requirements, available actions, and all resource costs before spending anything. Commit all costs atomically; failure spends none. Combat results can initially be resolved manually. Stat effects with durations are separate effect instances that remember their source, start, and expiration event; automatic combat timing is a later implementation scope.
+
+For an ability with outcome-dependent expenditure, an explicit pending-use event reserves the declared costs atomically. A later settlement event spends or releases the reservation according to the authored outcome rule, exactly once. Reservations reduce available uses while pending but are recorded separately from settled expenditure. Reloading preserves them; evaluation never settles them. This extends the immediate-payment contract for rules such as revised 5e Tactical Mind without relying on ad hoc refunds.
 
 ## Character state and calculation
 
@@ -314,7 +318,7 @@ A conversion record preserves source name, source revision, original content ide
 
 Do not force a complex ability into a numeric modifier. If a feat changes how an action resolves, model an action rule or leave that clause descriptive with partial coverage. Future extensions should add typed components with validation rather than executable snippets attached to individual feats.
 
-No external PF2e sources or other workspace projects are design references for this draft. Filling official class data requires a later source decision consistent with the user's reference restriction.
+No external PF2e sources or other workspace projects are design references for this draft. Official D&D rules and SRDs are authorized for the first two profiles; see the [5e profile study and implementation plan](dnd5e-profile-plan.md). Filling official PF2e class data still requires a later source decision consistent with the user's reference restriction.
 
 ## Acceptance criteria for implementation
 
@@ -429,7 +433,7 @@ Keep character commands and persisted data separate from view state such as an o
 
 ### Lightweight tooling suggestions
 
-The following are recommendations, not dependencies already installed. Choose compatible versions and pin them during implementation. Anime5e remains the system-design reference; the linked official library documentation supports only these tooling descriptions.
+The following are recommendations, not dependencies already installed. Choose compatible versions and pin them during implementation. Anime5e remains the code-design reference; official D&D sources additionally support the 5e profiles. The linked official library documentation supports only these tooling descriptions.
 
 | Tool | Suggested role and adoption |
 | --- | --- |
@@ -451,8 +455,10 @@ Acceptance scenarios for the UI include creating and reopening a complete charac
 ### Implementation sequence
 
 1. Formal schemas, engine evaluation, resource resolution, transactions, and serialization, with an invented example catalogue.
-2. React application shell and direct Class and Feature browsing using those validated definitions.
-3. Character builder, sheet, local save and import/export, retraining previews, and resource commands.
-4. Custom Feature editor, expression and table controls, previews, local catalogue revisions, and migrations.
+2. Separate 2014 and 2024 5e profiles using authorized official rules and SRDs, following the [5e profile plan](dnd5e-profile-plan.md).
+3. React application shell and direct Class and Feature browsing using those validated definitions.
+4. Character builder, sheet, local save and import/export, retraining previews, and resource commands for both 5e profiles.
+5. Custom Feature editor, expression and table controls, previews, local catalogue revisions, and migrations.
+6. PF2e profile and converted content after both 5e profiles satisfy their character-building acceptance criteria.
 
 The next deliverable remains the formal schema and calculation engine. The React UI follows it using this contract.

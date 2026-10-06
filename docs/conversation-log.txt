@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T06:22:13.723Z
+Export refreshed UTC: 2026-10-06T06:27:07.905Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -202,5 +202,70 @@ Anime5e remains the system-design reference. I’m using the libraries’ offici
 The specification now includes the character-building flow, Class and Feature detail views, save/import/export behavior, and the future Feature editor. The editor plan covers prerequisite waivers, sibling resource provision, formulas, and arbitrary scaling tables.
 
 The UI will use the engine’s validation results and explanations, so the same rules apply during character creation, browsing, and custom Feature authoring.
+
+----------------------------------------
+
+[2026-10-06T06:22:19.423Z] ASSISTANT
+Added the React UI plan to the [specification](</D:/User/Workspace/TTRPG System/docs/feature-system-specification.md>): character creation, direct Class and Feature browsing, and future custom Feature authoring. Implementation follows the engine.
+
+Suggested libraries: [React Router](https://reactrouter.com/start/declarative/installation), [React Hook Form](https://www.react-hook-form.com/), [Zod](https://zod.dev/), and selected [Radix controls](https://www.radix-ui.com/primitives/docs/overview/introduction), with Vite, TypeScript, and plain CSS.
+
+**3/3 document checks passed.** Committed as Mira-Dev’s identity: `3cea380`.
+
+----------------------------------------
+
+[2026-10-06T06:23:10.447Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-06T06:23:10.469Z] USER
+Study Dungeons and Dragons 5e (DnD5e, or 5e) first. Implement that as the first system, before PF2e.
+
+----------------------------------------
+
+[2026-10-06T06:23:14.520Z] ASSISTANT
+I’ll study 5e’s rules and revise the implementation order so it comes before PF2e. I’ll also distinguish the 2014 and 2024 rules, since that affects the first rules profile.
+
+----------------------------------------
+
+[2026-10-06T06:23:16.711Z] ASSISTANT QUESTIONS
+Which Dungeons & Dragons 5e rules should be the first profile?
+Options: 2024 revised rules; 2014 rules; Both as separate profiles
+
+Your earlier instruction allowed only Anime5e as a reference. May I use official D&D rules and the SRD to study 5e accurately?
+Options: Yes, use official D&D rules and SRDs; Keep Anime5e as the only reference
+
+----------------------------------------
+
+[2026-10-06T06:23:28.735Z] USER
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_ge2PtV2X2guXDMi7ztZm78ph\",0]","question":"Which Dungeons & Dragons 5e rules should be the first profile?","answer":"Both as separate profiles"},{"questionItemId":"[\"request_user_input_async\",\"call_ge2PtV2X2guXDMi7ztZm78ph\",1]","question":"Your earlier instruction allowed only Anime5e as a reference. May I use official D&D rules and the SRD to study 5e accurately?","answer":"Yes, use official D&D rules and SRDs"}]
+</send_user_message_question_reply>
+
+----------------------------------------
+
+[2026-10-06T06:24:22.214Z] ASSISTANT QUESTIONS
+Should I remain in the specification phase and set 5e as the first implementation milestone, or start building the engine and the two 5e profiles in this turn?
+Options: Update the specification and implementation order first; Start implementing the engine and 5e profiles now
+
+----------------------------------------
+
+[2026-10-06T06:24:28.115Z] ASSISTANT
+I’ll use separate 2014 and 2024 profiles, with official rules and SRDs as authorized references. The study has already identified important differences for the model: origin benefits, subclass timing, resource recovery, and multiclass spell-slot calculations. Those rules need to stay versioned rather than sharing one mutable “5e” profile.
+
+----------------------------------------
+
+[2026-10-06T06:24:37.223Z] USER
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_oSvOx0H2PIE6g8vX607Gqa3q\",0]","question":"Should I remain in the specification phase and set 5e as the first implementation milestone, or start building the engine and the two 5e profiles in this turn?","answer":"Update the specification and implementation order first"}]
+</send_user_message_question_reply>
+
+----------------------------------------
+
+[2026-10-06T06:26:36.704Z] ASSISTANT
+I’ve updated the plan for separate 2014 and 2024 profiles before PF2e, while keeping this turn in the specification phase. The study notes map 5e mechanics to Features and identify engine requirements such as partial resource recovery, outcome-dependent expenditure, and separate spell selection and slot capacity.
+
+They also flag where Anime5e’s calculations need correction rather than reuse—for example, an untrained saving throw must not receive proficiency automatically.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
