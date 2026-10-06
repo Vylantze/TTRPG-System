@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T06:17:32.455Z
+Export refreshed UTC: 2026-10-06T06:22:13.723Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -154,5 +154,53 @@ I’ll update the specification so selections can waive ordinary prerequisites w
 The draft now separates waivable acquisition prerequisites from required resources. A composite resolves eligible resource-providing SubFeatures before validating consumers, so sibling display order does not matter.
 
 Capacity can use a constant, stat formula, a Feature-owned table, or a combination. Table lookups have explicit missing-key and boundary rules, and capacity changes preserve recorded expenditure.
+
+----------------------------------------
+
+[2026-10-06T06:17:37.670Z] ASSISTANT
+Updated the [specification](</D:/User/Workspace/TTRPG System/docs/feature-system-specification.md>) to include:
+
+- Optional prerequisite waivers on Feature selections, with resource requirements always enforced.
+- Resource provision by sibling SubFeatures within a composite.
+- Capacity scaling through stats, arbitrary Feature-owned tables, or combined formulas.
+
+Validation: **5/5 specification checks passed**. Committed as Mira-Dev’s identity: `0f1c6ca`.
+
+----------------------------------------
+
+[2026-10-06T06:20:04.649Z] USER
+After the system has been constructed, create a UI that will enable a user to create a character using this system. Use React as a base to construct this UI, and make suggestions for what other lightweight libraries can be used for the UI. The UI should also have the ability to view Classes and Features directly, as well as eventually be able to create one's own features.
+
+----------------------------------------
+
+[2026-10-06T06:20:11.135Z] ASSISTANT
+I’ll add the React UI requirements to the specification, including character creation, Class and Feature browsers, and a future Feature editor. I’ll also compare lightweight library options and define how the UI will connect to the engine once it is built.
+
+----------------------------------------
+
+[2026-10-06T06:20:13.093Z] ASSISTANT QUESTIONS
+The current project contains the specification but no engine yet. Should this step define the React UI plan, or begin implementation?
+Options: Extend the specification with the UI plan; implement after the engine; Begin building the engine, then the React UI now
+
+----------------------------------------
+
+[2026-10-06T06:20:30.867Z] USER
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_o2aIaFzA3UOGMTBIChA71xAp\",0]","question":"The current project contains the specification but no engine yet. Should this step define the React UI plan, or begin implementation?","answer":"Extend the specification with the UI plan; implement after the engine"}]
+</send_user_message_question_reply>
+
+----------------------------------------
+
+[2026-10-06T06:20:36.455Z] ASSISTANT
+I’ll keep this step to the UI plan, as you requested. My suggested starting stack is React with TypeScript and Vite, React Router for navigation, React Hook Form for forms, Zod for data validation, and selected Radix components for accessible controls. Plain CSS and React’s built-in state tools should be enough initially; additional libraries can be added when a specific need emerges.
+
+Anime5e remains the system-design reference. I’m using the libraries’ official documentation only to verify these tooling suggestions.
+
+----------------------------------------
+
+[2026-10-06T06:22:00.726Z] ASSISTANT
+The specification now includes the character-building flow, Class and Feature detail views, save/import/export behavior, and the future Feature editor. The editor plan covers prerequisite waivers, sibling resource provision, formulas, and arbitrary scaling tables.
+
+The UI will use the engine’s validation results and explanations, so the same rules apply during character creation, browsing, and custom Feature authoring.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

@@ -10,7 +10,7 @@ The first deliverable is a written specification. Retraining, prerequisites, and
 
 Confirmed decisions are an unrestricted named-stat registry, support for independent class progressions with profile-controlled legality, and prerequisite repair after retraining. Dependent choices that lose eligibility make the build invalid until repaired; they are never changed automatically.
 
-A later implementation should provide definition validation, character validation, calculation, and serialization before adding a character-building interface. A complete PF2e class catalogue and combat automation are separate work. Examples below are invented conversion examples, not official class progressions or exact transcriptions of PF2e rules.
+A later implementation should provide definition validation, character validation, calculation, and serialization before adding a React character-building interface. The UI will also browse Classes and Features directly and eventually allow custom Feature creation. This step specifies the UI plan; implementation follows the engine. A complete PF2e class catalogue and combat automation are separate work. Examples below are invented conversion examples, not official class progressions or exact transcriptions of PF2e rules.
 
 ## Lessons from Anime5e
 
@@ -351,4 +351,108 @@ These are future behavioral checks, not claims that an engine has already been i
 | Evaluate the same build twice | Same results, no state mutation or duplicate grants |
 | Increase or reduce class level | Correct entries activate or deactivate without duplicating acquisitions |
 
-The next deliverable should turn the agreed model into a formal schema and a small calculation engine, using an invented example class to verify these behaviors before converting official content.
+## React UI plan
+
+Build the UI after the engine and serialization contracts are working. React is the required UI foundation, with TypeScript to share model types. The UI reads definitions and engine results, submits character-edit commands, and renders diagnostics. Calculation, eligibility, stacking, resource binding, and retraining behavior remain engine responsibilities; React components must not implement competing versions of those rules.
+
+The initial application runs in the browser with local character storage and JSON import and export. Cloud accounts, collaboration, and a backend are future scope. A storage adapter should let those capabilities be added without changing the rules engine.
+
+### Navigation and direct content browsing
+
+Provide four main destinations: Characters, Classes, Features, and eventually Create Feature. Class and Feature browsers work without an open character. When a character is open, a browser may additionally show eligibility for a chosen selection slot, clearly distinguished from the definition's general requirements.
+
+| Destination | Required behavior |
+| --- | --- |
+| Characters | List saved characters, create a draft, reopen, duplicate, import, and export |
+| Class browser | Search and filter by profile, source, and tags; inspect full progression grouped by class level |
+| Class detail | Show every independent grant and choice at each level, with links to referenced Features |
+| Feature browser | Search and filter by profile, source, tags, content level, and automation coverage |
+| Feature detail | Show descriptions, components, grants, nested choices, prerequisites, resource requirements, scaling tables, and source revision |
+| Character builder | Edit identity, profile-driven basic stats, progressions, and level-by-level Feature selections |
+| Character sheet | Show calculated stats, acquired Features, usable abilities, resource capacity and expenditure, and explanations |
+| Feature editor | Future authoring workflow for new reusable definitions, preview, validation, and revision management |
+
+Use addressable detail routes based on stable IDs so content can be opened directly, bookmarked, and navigated with browser back and forward. Preserve source profile and revision in the resolved detail context. Expand composite Features progressively, with a breadcrumb or ownership path for nested items; a definition detail must not imply that a character has acquired it.
+
+### Character creation and editing
+
+Character creation starts with a name and rules profile, then profile-defined inputs and class progressions. Profile-specific ancestry, background, or other origins should appear as root Feature choices when the profile defines them. No fixed six-attribute screen or PF2e-specific class list belongs in the generic UI.
+
+1. Create a draft with pinned profile and content revisions.
+2. Enter basic stats using profile-defined labels, constraints, defaults, and help text.
+3. Choose legal class progressions and attained levels; show automatic grants separately from selectable entries.
+4. Work through independent choice slots by level. Selecting a Feature reveals any nested choices and parameter inputs immediately.
+5. Review provisional stats, missing choices, eligibility issues, and resource dependencies as the draft changes.
+6. Save the draft at any time. Mark it complete only when the engine reports a valid build.
+
+Use a level navigation panel, a main selection area, and a character summary with diagnostics on wider screens. Stack these areas on smaller screens, retaining a visible count of unresolved choices. Every independent choice remains visible as its own slot, even when two slots use the same candidate catalogue.
+
+Candidate lists show eligible, ineligible, and pending options with engine-provided reasons. For a selection that ignores ordinary prerequisites, show which requirements are waived and which resource requirements still apply. This policy is authored on the selection; a player cannot switch it on arbitrarily in a character slot. When a sibling choice can provide the missing resource, link the diagnostic to that choice. Recompute candidates when the sibling changes.
+
+Each selection view shows minimum and maximum picks, current count, acquisition level, and parameter requirements. Opening a candidate's detail should preserve the unfinished choice. Invalid imported or retrained selections remain visible for repair, rather than disappearing from the UI.
+
+Changing levels or retraining shows the engine's transaction preview: changed Features and stats, affected descendants and independent dependencies, and resource consequences. Allow the user to save an invalid draft while repairing choices; do not present it as a completed legal character. Preserve instance IDs, historical choices, and expenditure according to the engine contract.
+
+### Character sheet and resource controls
+
+Show basic and derived stats with an explanation action that reveals formulas, contributing Features, and applied or suppressed modifiers. Keep permanent build totals distinct from any runtime context, such as an active stance.
+
+Resource controls show capacity, spent amount, available amount, recovery rules, and provider identity. Ability use and recovery invoke explicit engine commands; rendering, reloading, and opening a sheet do not spend or recover resources. If capacity changes, preserve expenditure and explain any resulting change in available uses. Manual expenditure edits, if exposed, are explicit recorded adjustments.
+
+### Future Feature authoring
+
+The Feature editor creates definitions rather than attaching hidden custom logic to a particular character. Begin with identity, description, source metadata, tags, repeat rules, and parameters. Then provide component editors for stat modifiers, automatic grants, nested Feature choices, capabilities, and resource pools.
+
+The choice editor exposes candidate lists or tag queries, pick counts, `ignorePrerequisites`, and retraining rules. The prerequisite editor distinguishes ordinary predicates from nonwaivable resource requirements. The composition editor shows resource providers and consumers across SubFeatures, including unresolved bindings.
+
+A structured expression editor supports constants, stat references, context values, arithmetic, and table lookups. A table editor supports arbitrary numeric rows, exact or threshold lookup, missing-key and boundary policies, and explicit rounding. A preview displays output for representative inputs and a selected sample character, including capacity, expenditure, and validation errors. Users do not need to write executable JavaScript to author Features.
+
+Store unfinished definitions as drafts. Publishing to the local custom-content catalogue requires successful definition and reference validation. Here, publishing means making content available locally, not uploading it to a service. Use a separate custom namespace and create a new revision when editing an existing published definition. Existing characters remain pinned until an explicit migration preview is accepted. Export and import custom content with its dependency manifest; reject missing references or conflicting revisions instead of silently replacing definitions.
+
+### Engine and UI boundary
+
+The engine must expose the following operations before the character builder is implemented. Function names can change; behavior is the contract.
+
+| Operation | UI use |
+| --- | --- |
+| Validate and load a catalogue | Populate browsers and report invalid content |
+| Resolve a definition by ID and revision | Open linked Class or Feature details |
+| Evaluate a character draft | Render totals, instance graph, capabilities, pools, and diagnostics |
+| Get candidates for a selection instance | Render eligibility, waivers, missing resources, and pending sibling dependencies |
+| Preview a character edit | Show retraining and progression consequences |
+| Apply a character edit | Update saved inputs, acquisitions, and choices atomically |
+| Use an ability or recover a resource | Update expenditure through explicit events |
+| Serialize, validate, and migrate saves | Save, reopen, import, export, and upgrade deliberately |
+| Validate a Feature draft and evaluate a preview | Support future custom-content authoring |
+
+Keep character commands and persisted data separate from view state such as an open panel or search query. React's local state handles view details; a reducer and context can coordinate the active draft. Cache evaluation results by revision only when necessary, and discard stale results before applying a later edit. Save failures must remain visible; the UI must not claim an edit was persisted when storage rejected it.
+
+### Lightweight tooling suggestions
+
+The following are recommendations, not dependencies already installed. Choose compatible versions and pin them during implementation. Anime5e remains the system-design reference; the linked official library documentation supports only these tooling descriptions.
+
+| Tool | Suggested role and adoption |
+| --- | --- |
+| [Vite](https://vite.dev/guide/) | Development and static production builds; use its React and TypeScript setup |
+| [React Router](https://reactrouter.com/start/declarative/installation) | Declarative routes for characters, Class details, and Feature details |
+| [React Hook Form](https://www.react-hook-form.com/) | Form handling for stat inputs, parameters, and eventually nested authoring forms |
+| [Zod](https://zod.dev/) | Runtime validation and TypeScript inference for schemas and imported data; use shared schemas where possible, while keeping semantic rules in the engine |
+| [Radix Primitives](https://www.radix-ui.com/primitives/docs/overview/introduction) | Selected unstyled accessible controls for dialogs, menus, and expandable content; style with plain CSS |
+| [Lucide React](https://lucide.dev/guide/react) | Optional SVG icons; import named icons and retain text labels for important actions |
+
+Start with plain CSS or CSS Modules and React's reducer/context for application state. This keeps the initial set of libraries small. Consider additional state management, IndexedDB helpers, list virtualization, or fuzzy search only when character complexity, storage needs, or catalogue size establishes a concrete need. Measure the production bundle before calling the resulting application lightweight; these suggestions do not imply a verified bundle size.
+
+### Accessibility and verification
+
+All inputs need labels, and required selections and errors must be understandable without color. Support keyboard navigation, focus restoration after dialogs, and accessible announcements for validation changes. Collapsed nested Features must reveal where an unresolved choice lives. Use readable layouts across desktop and mobile sizes.
+
+Acceptance scenarios for the UI include creating and reopening a complete character; preserving an incomplete draft; independently filling two same-level slots; resolving nested selections; browsing Classes and Features without a character; exposing resource failures despite prerequisite waivers; repairing retraining dependencies; and exporting and reimporting a character without losing selections or expenditure. The future editor must validate and preview both stat formulas and arbitrary capacity tables before custom content becomes selectable. Verify user workflows in the rendered browser in addition to testing engine and schema behavior.
+
+### Implementation sequence
+
+1. Formal schemas, engine evaluation, resource resolution, transactions, and serialization, with an invented example catalogue.
+2. React application shell and direct Class and Feature browsing using those validated definitions.
+3. Character builder, sheet, local save and import/export, retraining previews, and resource commands.
+4. Custom Feature editor, expression and table controls, previews, local catalogue revisions, and migrations.
+
+The next deliverable remains the formal schema and calculation engine. The React UI follows it using this contract.
