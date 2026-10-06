@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T17:21:37.673Z
+Export refreshed UTC: 2026-10-06T17:25:54.805Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -804,5 +804,27 @@ I’ll add the source descriptions beneath each Feature in the class’s level p
 
 [2026-10-06T17:21:30.239Z] ASSISTANT
 The class progression now shows full descriptions for granted Features and listed selection options. The browser check confirmed they are visible by default and their reference popups work. All 16 UI tests and the production build passed.
+
+----------------------------------------
+
+[2026-10-06T17:21:53.604Z] ASSISTANT
+Updated **Features by Level** to show full SRD descriptions by default for granted Features and listed selection options, including reference links and popups.
+
+All 16 UI tests, browser checks, and the production build passed. Committed as `c0b4fba`.
+
+----------------------------------------
+
+[2026-10-06T17:23:04.708Z] USER
+The ability description duplicates the header of the feature.
+
+----------------------------------------
+
+[2026-10-06T17:23:10.369Z] ASSISTANT
+I’ll remove the repeated heading from the displayed description while preserving the original source text in the System data.
+
+----------------------------------------
+
+[2026-10-06T17:25:39.098Z] ASSISTANT
+The repeated source heading is now hidden when it matches the Feature title. I also removed the redundant label above granted Features in the class view. Browser checks confirmed that class entries and popups show the title once.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
