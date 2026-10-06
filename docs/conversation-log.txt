@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T06:30:43.769Z
+Export refreshed UTC: 2026-10-06T06:32:21.790Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -293,5 +293,22 @@ Profile Plans should be called Systems.
 
 [2026-10-06T06:30:06.429Z] ASSISTANT
 I’ll rename the Profile Plan document to Systems and update its title and links.
+
+----------------------------------------
+
+[2026-10-06T06:30:48.594Z] ASSISTANT
+Renamed Profile Plans to **Systems**, updated the terminology and links, and renamed the document to [DnD5e Systems](</D:/User/Workspace/TTRPG System/docs/dnd5e-systems.md>).
+
+Committed under Mira-Dev’s identity: `f6f2db8`.
+
+----------------------------------------
+
+[2026-10-06T06:31:12.763Z] USER
+DnD5e 2014, DnD5e 2024, PF2e should not be called a Profile, but System. Name all files and references accordingly, including the previously renamed DnD5e Systems
+
+----------------------------------------
+
+[2026-10-06T06:31:16.345Z] ASSISTANT
+I’ll check all current files and references for the System terminology and make each System’s document naming consistent.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
