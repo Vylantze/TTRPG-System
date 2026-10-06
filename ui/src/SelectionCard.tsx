@@ -2,7 +2,7 @@ import { featureName, tagName } from './display';
 import { useMemo, useState } from 'react';
 import { type Engine, type Character, type Edit, type SelectionResult, type Value } from '../../src/index';
 import { labelFromId } from './workspace';
-import { descriptionPreview, FeatureRules } from './RulesText';
+import { descriptionPreview, featureDescription, FeatureRules, RulesText } from './RulesText';
 import { FeatureRequirements } from './FeatureRequirements';
 
 const PAGE=12;
@@ -39,7 +39,7 @@ export function SelectionCard({slot,engine,character,edit,openFeature,ownerName}
         const candidate=candidates.find(c=>c.feature===f.id), selected=picks.some(p=>p.feature===f.id);
         return <div className="candidate" key={f.id}>
           <div><button className="link" onClick={()=>openFeature(f.id)}>{featureName(f)}</button><span className={`badge ${candidate?.status??'incomplete'}`}>{candidate?.status==='valid'?'Eligible':candidate?.status==='invalid'?'Requirements unmet':'Pending'}</span>
-          {f.description&&<p className="muted small">{descriptionPreview(f.description)}</p>}
+          <RulesText text={descriptionPreview(featureDescription(f,engine))} engine={engine} openFeature={openFeature} exclude={[f.id]} />
           <FeatureRequirements feature={f} engine={engine} compact />
           {candidate?.diagnostics.length ? <p className="muted small">{candidate.diagnostics.slice(0,2).map(d=>d.message).join(' ')}</p>:null}</div>
           <button className="quiet" disabled={picks.length>=slot.maximum || (selected&&!slot.definition.allowDuplicates)} onClick={()=>update([...picks,{id:crypto.randomUUID(),feature:f.id}])}>{selected&&!slot.definition.allowDuplicates?'Selected':'Choose'}</button>

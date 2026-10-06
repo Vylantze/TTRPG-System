@@ -108,6 +108,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       for (const id of f.textReferences) { text(id); if (!c.features.some(reference => reference.id === id)) throw new RuleError('UNKNOWN_FEATURE', `Unknown text reference ${id}.`); }
     }
     for (const f of c.features) if (f.displayName !== undefined) text(f.displayName);
+    for (const f of c.features) if (f.textAliases !== undefined) { list(f.textAliases); unique(f.textAliases, 'text alias'); f.textAliases.forEach(text); }
     if (c.system.tagDisplayNames !== undefined) { record(c.system.tagDisplayNames); for (const [id, name] of Object.entries(c.system.tagDisplayNames)) { text(id); text(name); } }
     checkExpression(c.system.characterLevel, c, functions);
     if (c.system.validation !== undefined) { list(c.system.validation); unique(c.system.validation.map(r => r.id), 'System rule'); for (const rule of c.system.validation) { record(rule); text(rule.id); text(rule.message); checkPredicate(rule.requirement, c, 0, functions); } }

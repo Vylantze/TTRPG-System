@@ -59,7 +59,7 @@ npm run ui:build
 
 The engine suite covers construction state, finalization, backward compatibility, resource initialization, and paged candidate evaluation, alongside existing rule tests. UI integration tests exercise storage roundtrips, quota errors, React server rendering of browsers and nested character choices, unavailable-System saves, and corrupted-storage recovery notices. The production build type-checks UI and engine imports.
 
-Automated interactive browser verification was blocked by the available browser tool (`ERR_BLOCKED_BY_CLIENT` for both local URLs). Local HTTP responses, React server-rendering checks, and production compilation were verified. Responsive rendering, keyboard interactions, download/upload dialogs, and complete click-through workflows still require a browser review; server rendering does not establish those results.
+The original broad browser review was blocked by the available browser tool. The source-reference workflow has since been verified in a temporary headless Chrome session: ability, skill, and spell dialogs, an ambiguous-name picker, Escape dismissal, focus restoration, and exact-System navigation. React server-rendering checks and production compilation are also verified. Full responsive rendering, download/upload dialogs, and complete character workflows still require a broader browser review.
 
 ## Remaining scope
 
@@ -68,6 +68,10 @@ The structured custom Feature editor, explicit resource-binding and alternative-
 ## Descriptions and display names
 
 The bundled 2014 JSON now retains Class traits and equipment text, Feature descriptions, and full descriptions for all 204 Wizard spells. Class and Feature browsers show description previews and full source text. Selected Features and class traits can be expanded inside the builder; acquired Features can be expanded on the character sheet. Spell wrappers display the shared canonical spell description. Paragraphs are preserved and imported text is rendered as plain text.
+
+All displayed Feature rules use the original source wording stored in JSON. Supporting building blocks use corresponding SRD passages, and spell wrappers display shared original spell text instead of implementation summaries. Mechanical component notes remain inside engine definitions. Browser and candidate previews are excerpts of the same source text, including shared descriptions; they do not summarize or rewrite it.
+
+Rules text automatically links references using the engine's `FeatureTextIndex`. Links preserve the original words and open a native dialog containing the target Feature's source text and an **Open Feature** link. References inside the popup update that same popup; ambiguous names offer all matching Features. Escape and Close dismiss the popup and return focus to the originating link. Links include the exact System, revision, and catalogue identity; ordinary unambiguous links also support opening the Feature in another tab. Classes, Feature pages, choices, acquired Features, and ability source rules use the same renderer. Imported text remains inert even when it contains HTML or Markdown.
 
 All bundled Features have `displayName` values. Systems supply tag labels with `tagDisplayNames`; browsers, filters, selections, source links, advancement lists, and sheet labels use these display names while retaining internal identities for rules and saves. Older/custom Systems fall back to Feature names and humanized tag IDs.
 

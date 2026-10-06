@@ -9,7 +9,7 @@ import { exampleCharacter } from '../../examples/dnd2014-character.js';
 const server=await createServer({server:{middlewareMode:true},appType:'custom'});
 const model=await server.ssrLoadModule('/src/workspace.ts');
 const {App}=await server.ssrLoadModule('/src/App.tsx');
-const {RulesText,FeatureRules}=await server.ssrLoadModule('/src/RulesText.tsx');
+const {RulesText,FeatureRules,ReferencePopup}=await server.ssrLoadModule('/src/RulesText.tsx');
 const {FeatureRequirements,advancementLabels}=await server.ssrLoadModule('/src/FeatureRequirements.tsx');
 const file=JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/system.json',import.meta.url),'utf8'));
 function storage(){const values=new Map();return {getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value)};}
@@ -56,7 +56,7 @@ test('stored workspaces deduplicate repeated configuration data and read older s
   const broken=JSON.parse(packed);broken.systems[0].configurations[0].classes=999;store.setItem(model.STORAGE_KEY,JSON.stringify(broken));assert.throws(()=>model.readWorkspace(store),/invalid shared-data reference/);
 });
 test('description refresh preserves pinned rules and rejects mechanical changes',()=>{
-  const older=structuredClone(file);older.features.forEach(f=>{delete f.description;delete f.textReferences;delete f.source;delete f.displayName;});older.configurations.forEach(c=>{delete c.system.tagDisplayNames;c.classes.forEach(cls=>{delete cls.description;delete cls.source;});});
+  const older=structuredClone(file);older.features.forEach(f=>{delete f.description;delete f.textReferences;delete f.textAliases;delete f.source;delete f.displayName;});older.configurations.forEach(c=>{delete c.system.tagDisplayNames;c.classes.forEach(cls=>{delete cls.description;delete cls.source;});});
   assert.deepEqual(model.updateSystemDescriptions(older,file),file);
   const changed=structuredClone(file);changed.configurations[0].classes[0].maximumLevel=19;
   assert.throws(()=>model.updateSystemDescriptions(changed,file),/rules differ/);
@@ -99,7 +99,22 @@ test('imported descriptions render as text and shared references do not recurse'
   const html=renderToStaticMarkup(createElement(RulesText,{text:'<script>alert(1)</script>\n\nSecond paragraph',source:'javascript:alert(1)'}));
   assert.doesNotMatch(html,/<script>/);assert.match(html,/&lt;script&gt;/);assert.match(html,/<p>Second paragraph<\/p>/);assert.doesNotMatch(html,/<a/);
   const feature={id:'loop',name:'Loop',revision:1,description:'Shared text',textReferences:['loop'],components:[]};
-  const shared=renderToStaticMarkup(createElement(FeatureRules,{feature,engine:{catalogue:{features:[feature]}},openFeature(){}}));assert.equal((shared.match(/Shared text/g)??[]).length,2);
+  const shared=renderToStaticMarkup(createElement(FeatureRules,{feature,engine:{catalogue:{id:'fixture',system:{id:'fixture',revision:1},features:[feature]}},openFeature(){}}));assert.equal((shared.match(/Shared text/g)??[]).length,2);
+});
+
+test('source mentions link skills and abilities within their System and popup retains original rules',()=>{
+  const engine=model.createRegistry([file]).createEngine(file.id,file.revision,{});
+  const thief=file.features.find(f=>f.id==='dnd5e:2014:rogue.thief');
+  const html=renderToStaticMarkup(createElement(FeatureRules,{feature:thief,engine}));
+  assert.match(html,/aria-haspopup="dialog"[^>]*>Cunning Action<\/a>/);
+  assert.match(html,/href="#features\/dnd5e%3A2014%3Askill.sleight-of-hand\?system=/);
+  assert.match(html,/>Sleight of Hand<\/a>/);
+  const popup=renderToStaticMarkup(createElement(ReferencePopup,{reference:{ids:['dnd5e:2014:rogue.cunning-action'],text:'Cunning Action'},engine,onClose(){}}));
+  assert.match(popup,/<dialog[^>]*aria-label="Cunning Action"/);assert.match(popup,/This action can be used only to take the Dash/);assert.match(popup,/Open Cunning Action Feature/);
+  const ambiguous=renderToStaticMarkup(createElement(ReferencePopup,{reference:{ids:['dnd5e:2014:expertise.arcana','dnd5e:2014:expertise.athletics'],text:'Expertise'},engine,onClose(){}}));
+  assert.match(ambiguous,/Choose the Feature/);assert.match(ambiguous,/Arcana Expertise/);assert.match(ambiguous,/Athletics Expertise/);
+  const prepared=file.features.find(f=>f.id==='dnd5e:2014:prepared.fireball');
+  const spell=renderToStaticMarkup(createElement(FeatureRules,{feature:prepared,engine}));assert.match(spell,/8d6 fire damage/);assert.doesNotMatch(spell,/require adjudication/);
 });
 test('React character builder exposes nested selections and preserves a construction draft',()=>{
   const {character}=exampleCharacter();character.buildState='draft';
