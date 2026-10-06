@@ -21,13 +21,15 @@ export interface NumericConstraints { integer?: boolean; minimum?: number; maxim
 export type StatDefinition = NumericConstraints & { id: string; name: string } & (
   { kind: 'input'; default?: number } | { kind: 'derived'; expression: Expression });
 export type StackingPolicy = 'sum' | 'highest' | 'lowest' | 'bestBonusAndWorstPenalty';
-export interface ParameterDefinition { kind: 'number' | 'string' | 'boolean'; default?: Value; options?: Value[]; minimum?: number; maximum?: number }
+export interface ParameterDefinition { kind: 'number' | 'string' | 'boolean'; default?: Value; options?: Value[]; minimum?: number; maximum?: number; integer?: boolean }
 export interface ComponentBase { id: string; condition?: Expression }
 export interface Grant extends ComponentBase { kind: 'grantFeature'; feature: string; parameters?: Record<string, Value>; ignorePrerequisites?: boolean }
 export interface Choice extends ComponentBase {
   kind: 'chooseFeatures'; minimum: Expression; maximum: Expression;
   candidates: { ids?: string[]; tags?: string[]; maximumLevel?: Expression };
   ignorePrerequisites?: boolean; allowDuplicates?: boolean;
+  /** Daily preparation can check current ownership rather than historical acquisition. */
+  eligibility?: 'acquisition' | 'current';
   retraining?: { allowed: boolean; events?: string[] };
 }
 export interface Modifier extends ComponentBase {
@@ -54,10 +56,14 @@ export interface FeatureDefinition {
   repeat?: { maximum: number; scope: 'character' | 'progression' | 'parent'; uniqueBy?: string[] };
   parameters?: Record<string, ParameterDefinition>; tables?: Record<string, ScalingTable>; components: Component[];
 }
-export interface ClassDefinition { id: string; revision: number; name: string; levels: Record<string, (Grant | Choice)[]> }
+export interface ClassDefinition { id: string; revision: number; name: string; levels: Record<string, (Grant | Choice)[]>; maximumLevel?: number; multiclassPrerequisites?: Predicate }
 export interface SystemDefinition {
   id: string; revision: number; name: string; stats: StatDefinition[]; classes?: string[];
   allowMultipleClasses: boolean; characterLevel: Expression;
+  allowDuplicateClasses?: boolean;
+  /** Restrict additional root acquisitions without restricting nested or class Features. */
+  rootCandidates?: { ids?: string[]; tags?: string[] };
+  validation?: { id: string; requirement: Predicate; message: string }[];
   contextDefaults?: Record<string, Value>; advancement?: Record<string, (Grant | Choice)[]>;
   /** Explicit alternative base calculations, selected by character input. */
   alternatives?: Record<string, { id: string; expression: Expression; requirements?: Predicate }[]>;

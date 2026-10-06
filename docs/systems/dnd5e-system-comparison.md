@@ -4,7 +4,7 @@ The canonical System documents are [DnD5e 2014 System](dnd5e-2014-system.md) and
 
 Dungeons and Dragons 5e, DnD5e, and 5e are interchangeable project terms. The first implemented system will have two separate Systems: DnD5e 2014 and DnD5e 2024. Both precede PF2e. Build the 2014 system first, then the 2024 system against the same generic engine, so differences become explicit system data and policies. React follows the engine and the 5e character-building contracts.
 
-This is a specification milestone, not an implemented rules engine. The initial distributable catalogues target SRD content rather than every published supplement. The official SRD index provides SRD 5.1 and SRD 5.2.1; use the former for the 2014 baseline and the latter for the revised baseline. Retain document revision and attribution with imported content. Official Basic Rules are also authorized study references. [Official SRD index](https://www.dndbeyond.com/srd).
+The generic engine and the first DnD5e 2014 character-building milestone are implemented; see its canonical System document for coverage. The initial distributable catalogues target SRD content rather than every published supplement. The official SRD index provides SRD 5.1 and SRD 5.2.1; use the former for the 2014 baseline and the latter for the revised baseline. Retain document revision and attribution with imported content. Official Basic Rules are also authorized study references. [Official SRD index](https://www.dndbeyond.com/srd).
 
 ## Shared rules and model implications
 

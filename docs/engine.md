@@ -1,6 +1,6 @@
 # Feature Engine
 
-The generic engine is implemented in TypeScript with no runtime dependencies. It exposes plain, versioned System, Class, Feature, and Character data for a later React UI. The official DnD5e 2014, DnD5e 2024, and PF2e content catalogues are separate milestones; the included example is invented.
+The generic engine is implemented in TypeScript with no runtime dependencies. It exposes plain, versioned System, Class, Feature, and Character data for a later React UI. The [first DnD5e 2014 catalogue milestone](systems/dnd5e-2014-system.md) is implemented separately; the original small engine example is invented. DnD5e 2024 and PF2e follow the remaining 2014 classes.
 
 ## Run the engine
 
@@ -65,6 +65,10 @@ Prerequisites support level, Feature or tag ownership, parameters, stat threshol
 
 System level expressions use explicit context such as `totalClassLevels` or `maximumClassLevel`. Per-instance context includes `characterLevel`, `classLevel`, `acquiredCharacterLevel`, `acquiredClassLevel`, `isStartingClass`, and named progression levels as `class.<progression ID>`. Runtime flags require declared context defaults when permanent evaluation needs them.
 
+Context also exposes `classCount` and aggregate `level.<Class definition ID>` values. Systems may declare permanent predicate checks, a duplicate-class policy, and allowed additional root candidates. Classes may declare a maximum level and multiclass prerequisites. These controls are generic data, not hard-coded DnD5e logic. Multiclass requirements are checked at entry and against the current permanent build. `System.advancement` may use level zero for pre-class origins; class progression starts at level one.
+
+Choices default to historical acquisition eligibility. Set `eligibility: 'current'` for mutable choices such as daily spell preparation; those selections check current ownership and current class levels. Count and candidate limits still use the permanent build, and retraining/replacement-event policy remains separate. Numeric Feature parameters can declare `integer: true`.
+
 ## Stats and resources
 
 Stat values have an input or derived base, followed by priority overrides, grouped additions, multipliers, floors and ceilings, and declared rounding and bounds. Each result includes source explanations for applied, suppressed, and inactive modifiers. Alternative base formulas require an explicit selected alternative. Static catalogue validation conservatively rejects possible stat cycles, including dependencies in conditional modifiers and mutually exclusive formulas.
@@ -85,4 +89,4 @@ Commands require unique caller-supplied event IDs. Replaying the same event and 
 
 ## Remaining milestones
 
-Implement the DnD5e 2014 System catalogue, then DnD5e 2024, before PF2e. Those catalogues must supply their own advancement, origins, class entry rules, spell selections, and rule exceptions. The engine currently supplies their building blocks, not a complete official class catalogue or automated combat resolution. The React UI and Feature editor follow the validated System data.
+The first DnD5e 2014 milestone implements three SRD classes through level 20, origins, and Wizard spell selections. Complete its remaining nine classes, then implement DnD5e 2024 before the React UI and PF2e. The engine does not provide automated combat resolution. The React UI and Feature editor follow the validated System data.

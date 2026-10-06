@@ -65,6 +65,8 @@ export class Engine {
       acquiredClassLevel: instance?.acquiredClassLevel ?? 0, acquiredCharacterLevel: instance?.acquiredCharacterLevel ?? 0 };
     context.isStartingClass = !!instance?.progression && character.history[0]?.progression === instance.progression;
     for (const p of character.progressions) context[`class.${p.id}`] = counts[p.id] ?? 0;
+    context.classCount = character.progressions.filter(p => (counts[p.id] ?? 0) > 0).length;
+    for (const cls of this.catalogue.classes) context[`level.${cls.id}`] = character.progressions.filter(p => p.class === cls.id).reduce((sum, p) => sum + (counts[p.id] ?? 0), 0);
     const env = this.environment(context, () => { throw new RuleError('LEVEL_DEPENDENCY', 'Character level cannot depend on stats.'); });
     context.characterLevel = constrain(number(evaluateExpression(this.catalogue.system.characterLevel, env)), { integer: true, minimum: 0 });
     return context;
@@ -206,6 +208,7 @@ export class Engine {
       const revisions = Object.fromEntries([...this.catalogue.features, ...this.catalogue.classes].map(f => [f.id, f.revision]));
       if (Object.keys(revisions).length !== Object.keys(character.contentRevisions).length || Object.entries(revisions).some(([id, revision]) => character.contentRevisions[id] !== revision)) throw new RuleError('REVISION', 'Content revision manifest mismatch.');
       if (!this.catalogue.system.allowMultipleClasses && character.progressions.length > 1) throw new RuleError('MULTICLASS', 'This System permits only one class.');
+      if (this.catalogue.system.allowDuplicateClasses === false && new Set(character.progressions.map(p => p.class)).size !== character.progressions.length) throw new RuleError('DUPLICATE_CLASS', 'This System permits only one progression per class.');
       for (const [id] of Object.entries(character.inputs)) if (!this.catalogue.system.stats.some(s => s.id === id && s.kind === 'input')) throw new RuleError('UNKNOWN_INPUT', `Unknown or derived input ${id}.`);
       const snapshots = new Map<number, Record<string, number>>([[0, {}]]), eventSnapshots = new Map<number, Record<string, number>>([[0, {}]]);
       const acquiredLevels = new Map<string, number>(), acquiredEvents = new Map<string, number>(), historical: Record<string, number> = {};
@@ -217,7 +220,9 @@ export class Engine {
         const event = eventSnapshots.size; eventSnapshots.set(event, { ...historical }); acquiredEvents.set(`${entry.progression}/${entry.level}`, event);
       }
       for (const p of character.progressions) {
-        if (!this.catalogue.classes.some(c => c.id === p.class) || (this.catalogue.system.classes && !this.catalogue.system.classes.includes(p.class))) throw new RuleError('UNKNOWN_CLASS', `Class ${p.class} is not in this System.`);
+        const cls = this.catalogue.classes.find(c => c.id === p.class);
+        if (!cls || (this.catalogue.system.classes && !this.catalogue.system.classes.includes(p.class))) throw new RuleError('UNKNOWN_CLASS', `Class ${p.class} is not in this System.`);
+        if (cls.maximumLevel !== undefined && p.level > cls.maximumLevel) throw new RuleError('CLASS_LEVEL', `Class ${cls.name} exceeds its maximum level.`);
         if (p.level > (historical[p.id] ?? 0)) throw new RuleError('HISTORY', 'Attained level exceeds recorded acquisitions.');
       }
       result.characterLevel = number(this.context(character).characterLevel);
@@ -228,7 +233,7 @@ export class Engine {
         const params: Record<string, Value> = { ...Object.fromEntries(Object.entries(f.parameters ?? {}).filter(([, p]) => p.default !== undefined).map(([k, p]) => [k, p.default!])), ...pick.parameters };
         let parameterValid = true;
         for (const [key, def] of Object.entries(f.parameters ?? {})) {
-          const v = params[key]; if (typeof v !== def.kind || (def.options && !def.options.includes(v)) || (typeof v === 'number' && (v < (def.minimum ?? -Infinity) || v > (def.maximum ?? Infinity)))) { report(new RuleError('PARAMETER', `Invalid parameter ${key}.`), id); parameterValid = false; }
+          const v = params[key]; if (typeof v !== def.kind || (def.options && !def.options.includes(v)) || (typeof v === 'number' && (!Number.isFinite(v) || (def.integer && !Number.isInteger(v)) || v < (def.minimum ?? -Infinity) || v > (def.maximum ?? Infinity)))) { report(new RuleError('PARAMETER', `Invalid parameter ${key}.`), id); parameterValid = false; }
         }
         for (const key of Object.keys(params)) if (!Object.hasOwn(f.parameters ?? {}, key)) { report(new RuleError('PARAMETER', `Unknown parameter ${key}.`), id); parameterValid = false; }
         const instance: Instance = { id, feature: f.id, parent, progression, parameters: params, acquiredCharacterLevel, acquiredClassLevel, acquiredEvent: event, active: active && parameterValid, eligible: false, waived, selection };
@@ -242,9 +247,13 @@ export class Engine {
         rawSlots.push({ id, definition, active, level, classLevel, event, owner, progression, parameters });
         const picks = character.selections[id] ?? [];
         if (new Set(picks.map(p => p.id)).size !== picks.length) throw new RuleError('DUPLICATE_PICK_ID', 'Selection entry IDs must be unique.', id);
-        for (const pick of picks) instantiate(pickPath(id, pick.id), pick, level, classLevel, active, owner, progression, definition.ignorePrerequisites ?? false, id, event);
+        const eligibilityEvent = definition.eligibility === 'current' ? eventSnapshots.size - 1 : event;
+        for (const pick of picks) instantiate(pickPath(id, pick.id), pick, level, classLevel, active, owner, progression, definition.ignorePrerequisites ?? false, id, eligibilityEvent);
       };
       for (const root of character.roots) {
+        const policy = this.catalogue.system.rootCandidates;
+        const f = this.features.get(root.feature);
+        if (policy && (!f || (policy.ids && !policy.ids.includes(f.id)) || (policy.tags && !policy.tags.every(t => f.tags?.includes(t))))) throw new RuleError('ROOT_FEATURE', `Feature ${root.feature} is not allowed as an additional root in this System.`);
         if (root.acquiredCharacterLevel > Math.max(0, ...snapshots.keys())) throw new RuleError('HISTORY', 'Root acquisition is beyond recorded character history.');
         const event = root.acquiredEvent ?? [...eventSnapshots].find(([, levels]) => this.context(character, levels).characterLevel === root.acquiredCharacterLevel)?.[0];
         if (event === undefined || !eventSnapshots.has(event) || this.context(character, eventSnapshots.get(event)).characterLevel !== root.acquiredCharacterLevel) throw new RuleError('HISTORY', 'Root acquisition event does not match its character level.');
@@ -292,8 +301,10 @@ export class Engine {
             try {
               if (i.parent && !admitted.some(parent => parent.id === i.parent)) throw new RuleError('PARENT_INELIGIBLE', 'Owning Feature is not eligible.');
               const f = this.features.get(i.feature)!;
-              const stats = this.statView(character, admitted, levels);
-              const context = this.context(character, levels, {}, i);
+              const currentChoice = i.selection && rawSlots.find(s => s.id === i.selection)?.definition.eligibility === 'current';
+              const instanceLevels = currentChoice ? Object.fromEntries(character.progressions.map(p => [p.id, p.level])) : levels;
+              const stats = this.statView(character, admitted, instanceLevels);
+              const context = this.context(character, instanceLevels, {}, i);
               if (i.selection) {
                 const slot = rawSlots.find(s => s.id === i.selection)!;
                 const slotOwner = slot.owner ? admitted.find(p => p.id === slot.owner) : undefined;
@@ -302,7 +313,7 @@ export class Engine {
                 if (slot.definition.candidates.maximumLevel !== undefined && (f.contentLevel ?? 0) > number(evaluateExpression(slot.definition.candidates.maximumLevel, env))) throw new RuleError('CANDIDATE', 'Feature exceeds the acquisition-level candidate limit.');
               }
               if (!i.waived && !this.satisfies(f.prerequisites, i, admitted, stats.get, context)) throw new RuleError('PREREQUISITE', `Prerequisites are not satisfied for ${f.name}.`);
-              const pools = this.pools(character, admitted, stats, levels);
+              const pools = this.pools(character, admitted, stats, instanceLevels);
               for (const req of f.resources ?? []) this.matchPool(character, i, req, pools, admitted);
               i.eligible = true; admitted.push(i); progress = true; errors.delete(i.id);
             } catch (e) { errors.set(i.id, e); }
@@ -334,6 +345,28 @@ export class Engine {
       }
       const view = this.statView(character, result.instances, undefined, runtime);
       const permanentView = Object.keys(runtime).length ? this.statView(character, result.instances) : view;
+      const stub: Instance = { id: 'system', feature: '', parameters: {}, acquiredCharacterLevel: 0, acquiredClassLevel: 0, active: true, eligible: true, waived: false };
+      const permanentContext = this.context(character);
+      for (const rule of this.catalogue.system.validation ?? []) {
+        try { if (!this.satisfies(rule.requirement, stub, result.instances, permanentView.get, permanentContext)) report(new RuleError('SYSTEM_RULE', rule.message), `system/${rule.id}`); }
+        catch (e) { report(e, `system/${rule.id}`); }
+      }
+      if (number(permanentContext.classCount) > 1) for (const p of character.progressions.filter(p => p.level > 0)) {
+        const cls = this.catalogue.classes.find(c => c.id === p.class)!;
+        try { if (!this.satisfies(cls.multiclassPrerequisites, { ...stub, progression: p.id }, result.instances, permanentView.get, this.context(character, undefined, {}, { ...stub, progression: p.id }))) report(new RuleError('MULTICLASS_PREREQUISITE', `Multiclass prerequisites are not met for ${cls.name}.`), `class/${segment(p.id)}`); }
+        catch (e) { report(e, `class/${segment(p.id)}`); }
+      }
+      // Entry legality also uses its historical stat view: later Features cannot qualify an earlier multiclass entry.
+      for (const [event, levels] of eventSnapshots) {
+        const entry = character.history[event - 1];
+        if (!entry || entry.level !== 1 || character.progressions.filter(p => p.level > 0 && (levels[p.id] ?? 0) > 0).length < 2 || !character.progressions.some(p => p.id === entry.progression && p.level > 0)) continue;
+        const historicalView = this.statView(character, result.instances.filter(i => (i.acquiredEvent ?? 0) <= event), levels);
+        for (const p of character.progressions.filter(p => p.level > 0 && (levels[p.id] ?? 0) > 0)) {
+          const cls = this.catalogue.classes.find(c => c.id === p.class)!;
+          try { if (!this.satisfies(cls.multiclassPrerequisites, { ...stub, progression: p.id }, result.instances.filter(i => (i.acquiredEvent ?? 0) <= event), historicalView.get, this.context(character, levels, {}, { ...stub, progression: p.id }))) report(new RuleError('MULTICLASS_PREREQUISITE', `Multiclass prerequisites were not met when entering ${cls.name}.`), `class/${segment(p.id)}/history/${event}`); }
+          catch (e) { report(e, `class/${segment(p.id)}/history/${event}`); }
+        }
+      }
       for (const stat of this.catalogue.system.stats) try { view.get(stat.id); } catch (e) { report(e, `stat/${stat.id}`); }
       result.stats = view.results;
       try { result.resources = this.pools(character, result.instances, view, undefined, runtime); } catch (e) { report(e, 'resources'); }
