@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T17:17:04.474Z
+Export refreshed UTC: 2026-10-06T17:21:37.673Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -780,5 +780,29 @@ The UI restores its own copy of the System from browser storage, so updating the
 
 [2026-10-06T17:16:59.472Z] ASSISTANT
 I reproduced the issue with an older saved System. It now refreshes automatically, shows the SRD text and links, and retains the update after a page reload. The browser check also confirmed that character data is preserved and customized rules are protected.
+
+----------------------------------------
+
+[2026-10-06T17:17:35.130Z] ASSISTANT
+Fixed: the UI was showing an older System copy saved in browser storage. It now refreshes bundled SRD descriptions automatically on startup.
+
+**Reload the UI once** to apply the update.
+
+Verified with an older saved workspace, all 16 UI tests, browser checks, and the production build. Committed as `2126efc`.
+
+----------------------------------------
+
+[2026-10-06T17:19:16.198Z] USER
+The Features by Level in the class view should also show their descriptions by default
+
+----------------------------------------
+
+[2026-10-06T17:19:20.959Z] ASSISTANT
+I’ll add the source descriptions beneath each Feature in the class’s level progression, with the existing links and popups available.
+
+----------------------------------------
+
+[2026-10-06T17:21:30.239Z] ASSISTANT
+The class progression now shows full descriptions for granted Features and listed selection options. The browser check confirmed they are visible by default and their reference popups work. All 16 UI tests and the production build passed.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

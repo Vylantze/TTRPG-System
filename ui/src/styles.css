@@ -11,3 +11,4 @@
 
 .feature-requirements{font-size:13px;line-height:1.65;overflow-wrap:anywhere}.feature-requirements:empty{display:none}.feature-requirements p{margin:8px 0}.requirement-text{margin:12px 0}.candidate .feature-requirements{font-size:12px;color:var(--muted)}
 .feature-mention{text-decoration-style:dotted;text-decoration-thickness:1px;cursor:pointer}.feature-mention:hover{text-decoration-style:solid}.reference-options{padding-left:20px}.reference-options li{margin:12px 0}.modal .rules-text{font-size:14px}.feature-card .rules-text{font-size:12px}.feature-card .rules-text p{margin:0}.feature-card-title{font-weight:600;font-family:Georgia,serif;font-size:18px}.candidate .rules-text{font-size:12px}
+.class-level-feature{margin-top:18px}.class-level-feature+.class-level-feature{border-top:1px solid var(--line);padding-top:18px}.class-level-feature h3{margin-bottom:10px}
