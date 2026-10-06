@@ -80,6 +80,8 @@ export interface Pick { id: string; feature: string; parameters?: Record<string,
 export interface RootAcquisition extends Pick { acquiredCharacterLevel: number; acquiredEvent?: number }
 export interface PendingUse { ability: string; costs: Record<string, number>; spendOnOutcomes: string[] }
 export interface Character {
+  /** Omitted on older saves: normal retraining rules apply. Construction drafts cannot spend resources. */
+  buildState?: 'draft' | 'finalized';
   version: 1; id: string; name: string; system: { id: string; revision: number };
   catalogue: { id: string; revision: number }; contentRevisions: Record<string, number>;
   inputs: Record<string, number>; progressions: Progression[];
@@ -107,6 +109,7 @@ export interface EvaluationResult {
   diagnostics: Diagnostic[];
 }
 export type Edit = { kind: 'input'; stat: string; value: number }
+  | { kind: 'removeProgression'; progression: string }
   | { kind: 'addProgression'; progression: Progression }
   | { kind: 'select'; selection: string; picks: Pick[]; event?: string }
   | { kind: 'level'; progression: string; level: number }

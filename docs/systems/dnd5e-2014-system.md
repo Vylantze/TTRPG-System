@@ -1,6 +1,6 @@
 # DnD5e 2014 System
 
-DnD5e 2014 is a System with its own rules, content identities, and revision history. Its implemented baseline is SRD 5.1. Complete its remaining classes before the separate DnD5e 2024 System, then implement the React UI and PF2e.
+DnD5e 2014 is a System with its own rules, content identities, and revision history. Its implemented baseline is SRD 5.1. The [React UI baseline](../react-ui.md) is implemented before further System work. Complete the remaining 2014 classes and the separate DnD5e 2024 and PF2e Systems afterward.
 
 The [DnD5e System comparison](dnd5e-system-comparison.md) contains the study notes, conversion requirements, and implementation milestones. The [generic Feature specification](../feature-system-specification.md) defines the shared engine contract.
 
@@ -8,7 +8,7 @@ Status: the first character-building milestone is implemented. Fighter (Champion
 
 ## Run and import
 
-Rules are authored in [system.json](../../src/systems/dnd5e-2014/system.json), with optional reference data in [metadata.json](../../src/systems/dnd5e-2014/metadata.json). A generic engine registry can load and unload this System for the future React UI. The existing TypeScript imports below remain thin compatibility adapters.
+Rules are authored in [system.json](../../src/systems/dnd5e-2014/system.json), with optional reference data in [metadata.json](../../src/systems/dnd5e-2014/metadata.json). A generic engine registry can load and unload this System for the React UI. The existing TypeScript imports below remain thin compatibility adapters.
 
 Run `npm run demo:dnd2014` for a complete Fighter 3 / Rogue 2 example. `npm test` verifies all included classes at every level and their rule interactions. The [example builder](../../examples/dnd2014-character.js) supplies explicit choices, and the [demo](../../examples/dnd2014-demo.js) evaluates them.
 

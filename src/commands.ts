@@ -28,6 +28,16 @@ export function previewEdit(engine: Engine, input: Character, edits: Edit[]): Ed
   for (const edit of edits) {
     switch (edit.kind) {
       case 'input': character.inputs[edit.stat] = number(edit.value); break;
+      case 'removeProgression': {
+        if (character.buildState !== 'draft') throw new RuleError('DRAFT', 'Only construction drafts can remove class progressions; use an explicit migration for finalized characters.');
+        if (!character.progressions.some(p => p.id === edit.progression)) throw new RuleError('UNKNOWN_PROGRESSION', 'Unknown class progression.');
+        character.progressions = character.progressions.filter(p => p.id !== edit.progression);
+        character.history = character.history.filter(h => h.progression !== edit.progression);
+        const prefix = `class/${encodeURIComponent(edit.progression)}/`;
+        for (const id of Object.keys(character.selections)) if (id.startsWith(prefix)) delete character.selections[id];
+        for (const id of Object.keys(character.bindings)) if (id.startsWith(prefix)) delete character.bindings[id];
+        break;
+      }
       case 'addProgression': {
         if (character.progressions.some(p => p.id === edit.progression.id)) throw new RuleError('DUPLICATE_PROGRESSION', 'Progression ID already exists.');
         const p = clone(edit.progression); constrain(p.level, { integer: true, minimum: 0 });
@@ -40,7 +50,7 @@ export function previewEdit(engine: Engine, input: Character, edits: Edit[]): Ed
         if (!slot) throw new RuleError('UNKNOWN_SELECTION', `Unknown active selection ${edit.selection}.`);
         if ((character.selections[edit.selection]?.length ?? 0) > 0 && JSON.stringify(character.selections[edit.selection]) !== JSON.stringify(edit.picks)) {
           const policy = slot.definition.retraining;
-          if (!policy?.allowed && !(edit.event && policy?.events?.includes(edit.event))) throw new RuleError('RETRAINING', 'This selection does not permit replacement at this event.');
+          if (character.buildState !== 'draft' && !policy?.allowed && !(edit.event && policy?.events?.includes(edit.event))) throw new RuleError('RETRAINING', 'This selection does not permit replacement at this event.');
           retraining = true;
         }
         // Remove only owned descendant choices/bindings; independent siblings remain.
@@ -85,7 +95,7 @@ export function previewEdit(engine: Engine, input: Character, edits: Edit[]): Ed
   const provisional = engine.evaluate(character);
   for (const pool of Object.values(provisional.resources)) if (!Object.hasOwn(character.resources, pool.id)) {
     // Replacement never supplies free recovery; an equivalent stable pool preserves expenditure.
-    character.resources[pool.id] = { spent: retraining || pool.initial === 'empty' ? pool.capacity : 0 };
+    character.resources[pool.id] = { spent: (retraining && character.buildState !== 'draft') || pool.initial === 'empty' ? pool.capacity : 0 };
   }
   const after = engine.evaluate(character);
   const active = (r: EvaluationResult) => r.instances.filter(i => i.active && i.eligible).map(i => i.id + ':' + i.feature);
@@ -104,8 +114,14 @@ export function applyEdit(engine: Engine, input: Character, edits: Edit[], event
   return preview.character;
 }
 export interface UseOptions { runtime?: Record<string, Value>; actions?: Record<string, number> }
+export function finalizeCharacter(engine: Engine, input: Character, eventId: string): Character {
+  checkCharacter(input); const character = clone(input);
+  if (!stamp(character, eventId, {kind:'finalize'})) return character;
+  requireValid(engine.evaluate(character)); character.buildState = 'finalized'; return character;
+}
 export function useAbility(engine: Engine, input: Character, ability: string, eventId: string, options: UseOptions = {}): { character: Character; actions?: Record<string, number>; pending: boolean } {
   checkCharacter(input);
+  if (input.buildState === 'draft') throw new RuleError('DRAFT', 'Finalize the construction draft before using abilities.');
   const character = clone(input), payload = { kind: 'use', ability, options };
   const prior = character.events.find(e => e.id === eventId);
   if (prior) { if (prior.fingerprint !== canonical(payload)) throw new RuleError('EVENT_CONFLICT', 'Event ID collision.'); return { character, actions: clone(prior.actions), pending: !!character.pending[eventId] }; }
@@ -136,6 +152,7 @@ export function settleAbility(input: Character, pendingId: string, outcome: stri
 }
 export function recoverResources(engine: Engine, input: Character, recoveryEvent: string, eventId: string): Character {
   checkCharacter(input); const character = clone(input);
+  if (input.buildState === 'draft') throw new RuleError('DRAFT', 'Finalize the construction draft before recovery.');
   if (!stamp(character, eventId, { kind: 'recover', recoveryEvent })) return character;
   const result = engine.evaluate(character); requireValid(result);
   for (const pool of Object.values(result.resources)) {

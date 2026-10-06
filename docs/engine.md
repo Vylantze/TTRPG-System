@@ -1,6 +1,6 @@
 # Feature Engine
 
-The generic engine is implemented in TypeScript with no runtime dependencies. It exposes plain, versioned System, Class, Feature, and Character data for a later React UI. The [first DnD5e 2014 catalogue milestone](systems/dnd5e-2014-system.md) is implemented separately; the original small engine example is invented. DnD5e 2024 and PF2e follow the remaining 2014 classes.
+The generic engine is implemented in TypeScript with no runtime dependencies. It exposes plain, versioned System, Class, Feature, and Character data for the React UI. The [first DnD5e 2014 catalogue milestone](systems/dnd5e-2014-system.md) is implemented separately; the original small engine example is invented. DnD5e 2024 and PF2e follow the remaining 2014 classes.
 
 ## Run the engine
 
@@ -91,8 +91,12 @@ Commands require unique caller-supplied event IDs. Replaying the same event and 
 
 ## Remaining milestones
 
-The first DnD5e 2014 milestone implements three SRD classes through level 20, origins, and Wizard spell selections. Complete its remaining nine classes, then implement DnD5e 2024 before the React UI and PF2e. The engine does not provide automated combat resolution. The React UI and Feature editor follow the validated System data.
+The first DnD5e 2014 milestone implements three SRD classes through level 20, origins, and Wizard spell selections. The [React UI baseline](react-ui.md) is now implemented before further System work. Complete the remaining nine 2014 classes, DnD5e 2024, and PF2e afterward. The engine does not provide automated combat resolution. A structured Feature editor remains future work.
 
 ## JSON System lifecycle
 
 The 2014 content ships as JSON; its TypeScript entry point is an optional compatibility adapter. Core `SystemRegistry` can load any validated System file, create engines from declared options, find the exact System for a saved character, and unload content without changing saves. See [the JSON file contract and React integration](json-systems.md). `castSpell` and `recoverSelectedResources` are core engine commands configured by `SystemDefinition.commandRules`; their 2014 behavior is declared in JSON.
+
+## Construction drafts
+
+Create an initial build with `engine.createCharacter(id, name, progressions, roots, { draft: true })`. Draft selections can be changed without invoking final-character retraining, but resource use and recovery remain blocked. `finalizeCharacter(engine, character, eventId)` requires a valid build and records finalization idempotently. Saves without `buildState` retain the previous behavior. `getCandidates` accepts an optional fourth argument `{ features: ids }` to evaluate one UI page while enforcing the same candidate rules.

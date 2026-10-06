@@ -359,7 +359,7 @@ These behavioral criteria guide engine verification. The implemented API and tes
 
 ## React UI plan
 
-Build the UI after the engine and serialization contracts are working. React is the required UI foundation, with TypeScript to share model types. The UI reads definitions and engine results, submits character-edit commands, and renders diagnostics. Calculation, eligibility, stacking, resource binding, and retraining behavior remain engine responsibilities; React components must not implement competing versions of those rules.
+The first UI baseline is implemented after the engine and JSON serialization contracts, before additional Systems. See [React UI usage and remaining scope](react-ui.md). React is the required UI foundation, with TypeScript to share model types. The UI reads definitions and engine results, submits character-edit commands, and renders diagnostics. Calculation, eligibility, stacking, resource binding, and retraining behavior remain engine responsibilities; React components must not implement competing versions of those rules.
 
 The initial application runs in the browser with local character storage and JSON import and export. Cloud accounts, collaboration, and a backend are future scope. A storage adapter should let those capabilities be added without changing the rules engine.
 
@@ -457,14 +457,14 @@ Acceptance scenarios for the UI include creating and reopening a complete charac
 ### Implementation sequence
 
 1. Formal schemas, engine evaluation, resource resolution, transactions, and serialization, with an invented example catalogue.
-2. Separate 2014 and 2024 5e systems using authorized official rules and SRDs, following the [DnD5e System comparison](systems/dnd5e-system-comparison.md).
-3. React application shell and direct Class and Feature browsing using those validated definitions.
-4. Character builder, sheet, local save and import/export, retraining previews, and resource commands for both 5e systems.
-5. Custom Feature editor, expression and table controls, previews, local catalogue revisions, and migrations.
-6. PF2e system and converted content after both 5e systems satisfy their character-building acceptance criteria.
+2. First 2014 JSON milestone using authorized official rules and SRDs, following the [DnD5e System comparison](systems/dnd5e-system-comparison.md).
+3. React application shell, loadable JSON Systems, Class and Feature browsing, character builder, sheet, local persistence, import/export, retraining previews, and resource commands.
+4. Extend the UI with custom Feature authoring, expression and table controls, previews, local catalogue revisions, and migrations.
+5. Complete remaining 2014 content and implement the separate DnD5e 2024 System.
+6. PF2e System and converted content after both 5e Systems satisfy their character-building acceptance criteria.
 
-The generic engine and the first DnD5e 2014 character-building milestone are implemented. The 2014 catalogue supports Fighter, Rogue, Wizard, SRD racial options, Acolyte, and Wizard spell selections; its canonical document records calculated and descriptive coverage. Complete the remaining 2014 classes, followed by DnD5e 2024. The React UI follows those Systems using this contract.
+The generic engine and the first DnD5e 2014 character-building milestone are implemented. The 2014 catalogue supports Fighter, Rogue, Wizard, SRD racial options, Acolyte, and Wizard spell selections; its canonical document records calculated and descriptive coverage. The React UI baseline is implemented now, before completing the remaining 2014 classes and implementing DnD5e 2024 or PF2e. Structured Feature authoring remains future work.
 
 ### Loadable JSON Systems
 
-System content is supplied through versioned JSON files rather than executable rules modules. The React shell will import and unload these files using the engine registry, derive configuration controls from declared option domains, and browse their Classes and Features directly. Unloading preserves character saves; reopening requires their exact pinned System and catalogue revisions. The future Feature editor will export data using the same engine-validated format. The implemented [JSON contract](json-systems.md) defines lifecycle APIs, configuration identities, and data-driven command policies.
+System content is supplied through versioned JSON files rather than executable rules modules. The React shell imports and unloads these files using the engine registry, derive configuration controls from declared option domains, and browse their Classes and Features directly. Unloading preserves character saves; reopening requires their exact pinned System and catalogue revisions. The future Feature editor will export data using the same engine-validated format. The implemented [JSON contract](json-systems.md) defines lifecycle APIs, configuration identities, and data-driven command policies.

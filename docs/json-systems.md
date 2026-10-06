@@ -2,7 +2,7 @@
 
 The engine accepts a self-contained, versioned `ttrpg-system` JSON file. DnD5e 2014 is defined in [system.json](../src/systems/dnd5e-2014/system.json). Its [metadata.json](../src/systems/dnd5e-2014/metadata.json) supplies display and reference data: armor, Wizard spell headers, class summaries, and coverage. Loading `system.json` is sufficient to evaluate characters; the optional metadata file does not execute rules or affect calculations.
 
-The TypeScript module at `systems/dnd5e-2014` is a compatibility adapter that imports these files and calls the generic loader. It contains no class rules, progression generators, spell calculations, or rule commands. The core engine entry point does not import bundled System content. A future React application can load user-selected files without knowing their System names.
+The TypeScript module at `systems/dnd5e-2014` is a compatibility adapter that imports these files and calls the generic loader. It contains no class rules, progression generators, spell calculations, or rule commands. The core engine entry point does not import bundled System content. The React application can load user-selected files without knowing their System names.
 
 ## File contract
 
@@ -55,7 +55,7 @@ const saved = serializeCharacter(draft);
 registry.unload(system.id, system.revision);
 ```
 
-The UI should keep the registry in application state, refresh its available-System list after successful loads or unloads, and display loader errors without replacing existing content. It should render configuration controls from option domains, then use the existing engine selection and edit APIs to construct characters. The React UI remains a later milestone.
+The UI keeps the registry in application state, refresh its available-System list after successful loads or unloads, and display loader errors without replacing existing content. It should render configuration controls from option domains, then use the existing engine selection and edit APIs to construct characters. The [React UI baseline](react-ui.md) implements this lifecycle before additional Systems.
 
 Loading is atomic. Duplicate System ID/revision pairs are rejected; explicitly unload before replacing one. Catalogue ID/revision pairs cannot collide between loaded Systems. Multiple Systems and explicit revisions can coexist. An unloaded System becomes unavailable through registry lookup, while character saves and selections remain intact. Previously acquired Engine objects are immutable snapshots and remain usable; the UI must discard active handles on unload and resolve through `engineForCharacter(character)` before resuming work. This method requires the saved System and catalogue revisions, with no automatic fallback to newer rules. Reloading those revisions restores availability; evaluation still checks the saved content revision manifest. Persist uploaded files separately if availability should survive application restart.
 
