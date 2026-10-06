@@ -28,6 +28,8 @@ Do not copy Anime5e's fixed ability calculations or class instances as the gener
 
 ## Core entities
 
+DnD5e 2014, DnD5e 2024, and PF2e are Systems. Their canonical documents are [DnD5e 2014 System](systems/dnd5e-2014-system.md), [DnD5e 2024 System](systems/dnd5e-2024-system.md), and [PF2e System](systems/pf2e-system.md). Each is represented by a `SystemDefinition`; the character pins its System ID and revision.
+
 | Entity | Responsibility |
 | --- | --- |
 | SystemDefinition | Defines stats, stacking policies, legal progression structures, and system-specific conventions |
@@ -318,7 +320,7 @@ A conversion record preserves source name, source revision, original content ide
 
 Do not force a complex ability into a numeric modifier. If a feat changes how an action resolves, model an action rule or leave that clause descriptive with partial coverage. Future extensions should add typed components with validation rather than executable snippets attached to individual feats.
 
-No external PF2e sources or other workspace projects are design references for this draft. Official D&D rules and SRDs are authorized for the first two systems; see the [5e Systems](dnd5e-systems.md). Filling official PF2e class data still requires a later source decision consistent with the user's reference restriction.
+No external PF2e sources or other workspace projects are design references for this draft. Official D&D rules and SRDs are authorized for the first two systems; see the [DnD5e System comparison](systems/dnd5e-system-comparison.md). Filling official PF2e class data still requires a later source decision consistent with the user's reference restriction.
 
 ## Acceptance criteria for implementation
 
@@ -455,7 +457,7 @@ Acceptance scenarios for the UI include creating and reopening a complete charac
 ### Implementation sequence
 
 1. Formal schemas, engine evaluation, resource resolution, transactions, and serialization, with an invented example catalogue.
-2. Separate 2014 and 2024 5e systems using authorized official rules and SRDs, following the [5e Systems](dnd5e-systems.md).
+2. Separate 2014 and 2024 5e systems using authorized official rules and SRDs, following the [DnD5e System comparison](systems/dnd5e-system-comparison.md).
 3. React application shell and direct Class and Feature browsing using those validated definitions.
 4. Character builder, sheet, local save and import/export, retraining previews, and resource commands for both 5e systems.
 5. Custom Feature editor, expression and table controls, previews, local catalogue revisions, and migrations.
