@@ -73,6 +73,8 @@ All displayed Feature rules use the original source wording stored in JSON. Supp
 
 Class progression rows display full source descriptions by default beneath each granted Feature and each explicitly listed selection option. Shared descriptions, automatic references, and reference popups use the same renderer as Feature detail pages.
 
+When a description starts with a standalone heading matching the displayed Feature title, the renderer omits that repeated heading. Other source headings and the stored source text are preserved. Granted Class entries use the Feature title without an additional entry-ID label.
+
 Rules text automatically links references using the engine's `FeatureTextIndex`. Links preserve the original words and open a native dialog containing the target Feature's source text and an **Open Feature** link. References inside the popup update that same popup; ambiguous names offer all matching Features. Escape and Close dismiss the popup and return focus to the originating link. Links include the exact System, revision, and catalogue identity; ordinary unambiguous links also support opening the Feature in another tab. Classes, Feature pages, choices, acquired Features, and ability source rules use the same renderer. Imported text remains inert even when it contains HTML or Markdown.
 
 All bundled Features have `displayName` values. Systems supply tag labels with `tagDisplayNames`; browsers, filters, selections, source links, advancement lists, and sheet labels use these display names while retaining internal identities for rules and saves. Older/custom Systems fall back to Feature names and humanized tag IDs.

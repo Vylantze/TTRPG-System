@@ -39,11 +39,18 @@ export function ReferencePopup({reference,engine,openFeature,onClose}:{reference
 }
 
 export function FeatureRules({feature,engine,openFeature,onPreview}:{feature:FeatureDefinition;engine:Engine;openFeature?:(id:string)=>void;onPreview?:(reference:Preview)=>void}) {
-  return <><RulesText text={feature.description} source={feature.source} engine={engine} openFeature={openFeature} exclude={[feature.id]} onPreview={onPreview} />{feature.textReferences?.map(id=>{
+  return <><RulesText text={descriptionBody(feature)} source={feature.source} engine={engine} openFeature={openFeature} exclude={[feature.id]} onPreview={onPreview} />{feature.textReferences?.map(id=>{
     const reference=engine.catalogue.features.find(f=>f.id===id);
-    return reference?<section className="shared-rules" key={id}><h3>{featureName(reference)}</h3><RulesText text={reference.description} source={reference.source} engine={engine} openFeature={openFeature} exclude={[feature.id,id]} onPreview={onPreview} /><a className="link" href={featureHref(id,engine)} onClick={()=>openFeature?.(id)}>View {featureName(reference)} Feature →</a></section>:null;
+    return reference?<section className="shared-rules" key={id}><h3>{featureName(reference)}</h3><RulesText text={descriptionBody(reference)} source={reference.source} engine={engine} openFeature={openFeature} exclude={[feature.id,id]} onPreview={onPreview} /><a className="link" href={featureHref(id,engine)} onClick={()=>openFeature?.(id)}>View {featureName(reference)} Feature →</a></section>:null;
   })}</>;
 }
 
-export const featureDescription=(feature:FeatureDefinition,engine:Engine)=>feature.description??feature.textReferences?.map(id=>engine.catalogue.features.find(f=>f.id===id)?.description??'').filter(Boolean).join('\n\n');
+/** The surrounding UI already displays this title. Keep all other source headings. */
+export function descriptionBody(feature:FeatureDefinition):string|undefined {
+  const text=feature.description;if(!text)return text;
+  const end=text.indexOf('\n');if(end<0)return text;
+  const normalize=(value:string)=>value.trim().replace(/[’‘ʼ]/g,"'").toLocaleLowerCase();
+  return normalize(text.slice(0,end))===normalize(featureName(feature))?text.slice(end+1).trimStart():text;
+}
+export const featureDescription=(feature:FeatureDefinition,engine:Engine)=>descriptionBody(feature)??feature.textReferences?.map(id=>{const reference=engine.catalogue.features.find(f=>f.id===id);return reference?descriptionBody(reference)??'':'';}).filter(Boolean).join('\n\n');
 export const descriptionPreview=(text?:string)=>text?text.replace(/\s+/g,' ').slice(0,160)+(text.length>160?'…':''):undefined;
