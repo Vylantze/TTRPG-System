@@ -35,6 +35,11 @@ test('spell descriptions retain complete effects and share canonical text across
   assert.match(feature('spell.wish').description,/33 percent chance/);
   for(const name of ['spellbook.fireball','prepared.fireball','signature.fireball'])assert.deepEqual(feature(name).textReferences,['dnd5e:2014:spell.fireball']);
 });
+test('Class Feature category includes class and subclass abilities without categorizing individual spells or origins',()=>{
+  for(const name of ['fighter.second-wind','fighter.champion','fighter.remarkable-athlete','rogue.cunning-action','rogue.thief','wizard.spellcasting','wizard.arcane-recovery','style.defense','expertise.arcana','ability-score-improvement'])assert.ok(feature(name).tags.includes('class-feature'),name);
+  for(const name of ['race.human','background.acolyte','spell.fireball','prepared.fireball','spellbook.fireball','feat.grappler'])assert.ok(!feature(name).tags.includes('class-feature'),name);
+  for(const config of file.configurations)assert.equal(config.system.tagDisplayNames['class-feature'],'Class Feature');
+});
 
 test('display references do not acquire Features or alter evaluation, including cycles',()=>{
   const original=structuredClone(fixture),decorated=structuredClone(fixture);

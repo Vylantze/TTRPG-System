@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T13:42:27.402Z
+Export refreshed UTC: 2026-10-06T14:26:29.777Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -652,5 +652,53 @@ The saved JSON now includes descriptions and display names for all 825 Features,
 
 [2026-10-06T13:40:06.459Z] ASSISTANT
 All 183 engine tests and 12 UI tests passed, and the production build succeeded. I found one final text correction: the shared Ability Score Improvement description needs to include each Class’s timing, so it doesn’t show the Fighter schedule for a Rogue or Wizard.
+
+----------------------------------------
+
+[2026-10-06T13:44:01.996Z] ASSISTANT
+Implemented and committed as `7d7965a`.
+
+- Saved 2014 Class, Feature, and spell descriptions.
+- Added display names for all 825 Features and 16 tags throughout the UI.
+- Preserved internal identities and character saves.
+
+For existing loaded content, choose **Systems → Update bundled descriptions**.
+
+183 engine tests, 12 UI tests, and the production build passed.
+
+----------------------------------------
+
+[2026-10-06T14:14:03.892Z] USER
+The tag for class Features are not in the Feature tags.
+
+----------------------------------------
+
+[2026-10-06T14:14:10.648Z] ASSISTANT
+I’ll add a Class Feature tag to the relevant Features and make sure it appears in the UI’s tag filter.
+
+----------------------------------------
+
+[2026-10-06T14:15:24.276Z] USER
+Feature's level requirements should also be shown in the UI for features
+
+----------------------------------------
+
+[2026-10-06T14:15:51.740Z] ASSISTANT
+I’ll also show readable level requirements on Feature pages and in character selections. I’ll distinguish levels where a Class grants a Feature from prerequisite levels and spell content levels.
+
+----------------------------------------
+
+[2026-10-06T14:19:39.967Z] ASSISTANT
+The missing tag is now attached to class abilities, fighting styles, Expertise choices, subclasses, and class progression benefits, with the display name **Class Feature**. I’m also making the existing refresh button accept this category update while still rejecting changes to tags used by rules.
+
+----------------------------------------
+
+[2026-10-06T14:24:36.177Z] ASSISTANT
+Features now show their class progression levels and readable prerequisites, with content levels such as spell levels labeled separately. The Class Feature tag is also available in the filter. All 14 UI tests and the production build passed; I’m finishing the repository checks and saving the changes.
+
+----------------------------------------
+
+[2026-10-06T14:26:13.418Z] ASSISTANT
+The refresh check also passed: **Systems → Update bundled descriptions** adds the new category to an already loaded 2014 System while protecting tags used by rules. I’m waiting for the full engine regression suite before committing.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

@@ -2,10 +2,12 @@ import { featureName, tagName } from './display';
 import type { Engine, FeatureDefinition } from '../../src/index';
 import { labelFromId } from './workspace';
 import { FeatureRules } from './RulesText';
+import { FeatureRequirements } from './FeatureRequirements';
 
 export function FeatureDetail({feature,engine,openFeature}:{feature:FeatureDefinition;engine:Engine;openFeature:(id:string)=>void}) {
   return <article className="feature-detail">
     <p className="eyebrow">Feature · revision {feature.revision}</p><h2>{featureName(feature)}</h2>
+    <FeatureRequirements feature={feature} engine={engine} />
     <FeatureRules feature={feature} engine={engine} openFeature={openFeature} />
     <div className="tags">{feature.tags?.map(t=><span className="tag" key={t}>{tagName(engine.catalogue.system,t)}</span>)}</div>
     {!feature.description && feature.source && <p className="muted source">Source: {feature.source}</p>}

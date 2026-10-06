@@ -34,10 +34,20 @@ export function writeWorkspace(storage: Pick<Storage, 'setItem'>, workspace: Wor
 
 /** A display-only refresh must not silently replace a character's pinned rules. */
 export function updateSystemDescriptions(existing:SystemFile,incoming:SystemFile):SystemFile {
-  const strip=(definition:{description?:string;source?:string;textReferences?:string[];displayName?:string})=>{const {description,source,textReferences,displayName,...rules}=definition;return rules;};
-  const rules=(file:SystemFile)=>({...file,features:file.features.map(strip),configurations:file.configurations.map(c=>{const {tagDisplayNames,...system}=c.system;return {...c,system,classes:c.classes.map(strip)};})});
-  const canonical=(value:unknown):unknown=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.entries(value).sort(([a],[b])=>a.localeCompare(b)).map(([key,item])=>[key,canonical(item)])):value;
   const validated=parseSystemFile(incoming);
+  // Tags used by predicates or candidate/root filters are mechanical. Other
+  // category tags can be refreshed alongside labels without changing rules.
+  const ruleTags=new Set<string>();
+  const visit=(value:unknown):void=>{if(Array.isArray(value))value.forEach(visit);else if(value&&typeof value==='object'){
+    const object=value as Record<string,unknown>;if(typeof object.tag==='string')ruleTags.add(object.tag);
+    for(const key of ['candidates','rootCandidates']){const tags=(object[key] as {tags?:string[]}|undefined)?.tags;if(Array.isArray(tags))tags.forEach(tag=>ruleTags.add(tag));}
+    Object.values(object).forEach(visit);
+  }};
+  visit(existing);visit(validated);
+  const strip=(definition:{description?:string;source?:string;textReferences?:string[];displayName?:string})=>{const {description,source,textReferences,displayName,...rules}=definition;return rules;};
+  const featureRules=(feature:SystemFile['features'][number])=>{const {tags,...rules}=strip(feature) as SystemFile['features'][number];const mechanicalTags=tags?.filter(tag=>ruleTags.has(tag));return {...rules,...(mechanicalTags?.length?{tags:mechanicalTags}:{})};};
+  const rules=(file:SystemFile)=>({...file,features:file.features.map(featureRules),configurations:file.configurations.map(c=>{const {tagDisplayNames,...system}=c.system;return {...c,system,classes:c.classes.map(strip)};})});
+  const canonical=(value:unknown):unknown=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.entries(value).sort(([a],[b])=>a.localeCompare(b)).map(([key,item])=>[key,canonical(item)])):value;
   if(JSON.stringify(canonical(rules(existing)))!==JSON.stringify(canonical(rules(validated))))throw new Error('Bundled rules differ from this loaded System. Description refresh cannot replace its rules. Export the System before unloading or migrating it.');
   return validated;
 }
