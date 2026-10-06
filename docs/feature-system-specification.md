@@ -1,14 +1,14 @@
 # Generic Feature System Specification Draft
 
-A class is a progression of Features. Each level contains independent grants and choices; each Feature can grant other Features, offer further choices, and contain small mechanical components. A character stores its acquired instances and choices separately from reusable definitions. Numeric stats are defined by the rules profile and calculated from basic inputs, formulas, and Feature effects.
+A class is a progression of Features. Each level contains independent grants and choices; each Feature can grant other Features, offer further choices, and contain small mechanical components. A character stores its acquired instances and choices separately from reusable definitions. Numeric stats are defined by the rules system and calculated from basic inputs, formulas, and Feature effects.
 
-This specification defines the model and its behavior before implementation. Dungeons and Dragons 5e, DnD5e, and 5e refer to the same system. Implement separate 2014 and 2024 5e profiles first, before PF2e. Pathfinder2e and PF2e refer to the same system. The engine must not require fixed ability names, proficiency ranks, class names, or a particular action economy.
+This specification defines the model and its behavior before implementation. Dungeons and Dragons 5e, DnD5e, and 5e refer to the same system. Implement separate 2014 and 2024 5e systems first, before PF2e. Pathfinder2e and PF2e refer to the same system. The engine must not require fixed ability names, proficiency ranks, class names, or a particular action economy.
 
 ## Scope and decisions
 
-The first deliverable is a written specification. Retraining, prerequisites, and limited-use abilities belong in the initial model. The design reference is `D:\User\Workspace\Anime5e`; official D&D rules and SRDs are additionally authorized to study and define the 5e profiles. All new project work belongs in `D:\User\Workspace\TTRPG System`.
+The first deliverable is a written specification. Retraining, prerequisites, and limited-use abilities belong in the initial model. The design reference is `D:\User\Workspace\Anime5e`; official D&D rules and SRDs are additionally authorized to study and define the 5e systems. All new project work belongs in `D:\User\Workspace\TTRPG System`.
 
-Confirmed decisions are an unrestricted named-stat registry, support for independent class progressions with profile-controlled legality, and prerequisite repair after retraining. Dependent choices that lose eligibility make the build invalid until repaired; they are never changed automatically.
+Confirmed decisions are an unrestricted named-stat registry, support for independent class progressions with system-controlled legality, and prerequisite repair after retraining. Dependent choices that lose eligibility make the build invalid until repaired; they are never changed automatically.
 
 A later implementation should provide definition validation, character validation, calculation, and serialization before adding a React character-building interface. The UI will also browse Classes and Features directly and eventually allow custom Feature creation. This step specifies the UI plan; implementation follows the engine. A complete PF2e class catalogue and combat automation are separate work. Examples below are invented conversion examples, not official class progressions or exact transcriptions of PF2e rules.
 
@@ -30,7 +30,7 @@ Do not copy Anime5e's fixed ability calculations or class instances as the gener
 
 | Entity | Responsibility |
 | --- | --- |
-| RulesProfile | Defines stats, stacking policies, legal progression structures, and system-specific conventions |
+| SystemDefinition | Defines stats, stacking policies, legal progression structures, and system-specific conventions |
 | FeatureDefinition | Reusable content and components; describes what a Feature does |
 | FeatureInstance | One acquired occurrence, its parameters, choices, and acquisition context |
 | ClassDefinition | Level-indexed progression entries that grant or select Features |
@@ -39,30 +39,30 @@ Do not copy Anime5e's fixed ability calculations or class instances as the gener
 | Character | Inputs, progressions, root instances, selection history, and resource state |
 | EvaluationResult | Calculated stats, expanded Features, capabilities, resources, and diagnostics with provenance |
 
-Every reusable definition has a stable namespaced ID and revision. Character saves pin a rules-profile revision and content revision set. Editing published content creates a revision and an explicit migration; loading a save must not silently apply different rules.
+Every reusable definition has a stable namespaced ID and revision. Character saves pin a rules-system revision and content revision set. Editing published content creates a revision and an explicit migration; loading a save must not silently apply different rules.
 
 ## Basic and derived stats
 
-A basic stat is a character input, such as an attribute modifier or movement value. A derived stat has an expression built from other stats and context. Derived stats cannot also accept an independent base input. Character level is computed from the profile's progression policy, rather than silently assumed to equal the sum of class levels.
+A basic stat is a character input, such as an attribute modifier or movement value. A derived stat has an expression built from other stats and context. Derived stats cannot also accept an independent base input. Character level is computed from the system's progression policy, rather than silently assumed to equal the sum of class levels.
 
-Each StatDefinition contains `id`, `name`, `kind` (`input` or `derived`), numeric constraints, a default input or expression, and a modifier policy. Constraints declare integer or decimal values, rounding, and optional bounds. Unknown stat IDs, missing required inputs, nonfinite results, and dependency cycles are errors. Bounds should reject invalid authored inputs; final-value clamping occurs only when explicitly declared by the profile.
+Each StatDefinition contains `id`, `name`, `kind` (`input` or `derived`), numeric constraints, a default input or expression, and a modifier policy. Constraints declare integer or decimal values, rounding, and optional bounds. Unknown stat IDs, missing required inputs, nonfinite results, and dependency cycles are errors. Bounds should reject invalid authored inputs; final-value clamping occurs only when explicitly declared by the system.
 
-For example, a profile could define:
+For example, a system could define:
 
 | Stat ID | Kind | Base value or formula |
 | --- | --- | --- |
 | `attribute.agility` | Input | Character-entered modifier |
 | `attribute.vitality` | Input | Character-entered modifier |
 | `defense.rank` | Input | Default 0; permanent Features may raise it |
-| `defense.proficiency` | Derived | Profile function of rank and character level |
+| `defense.proficiency` | Derived | System function of rank and character level |
 | `defense.total` | Derived | 10 + agility + defense proficiency |
 | `health.maximum` | Derived | Ancestry health + class health + vitality contribution |
 
-These are example keys, not mandatory engine stats. A profile may instead use ability scores and derive modifiers. Text values, tags, actions, and proficiencies with nonnumeric meaning are separate capabilities or profile data, not disguised numeric stats.
+These are example keys, not mandatory engine stats. A system may instead use ability scores and derive modifiers. Text values, tags, actions, and proficiencies with nonnumeric meaning are separate capabilities or system data, not disguised numeric stats.
 
 ### Expression language
 
-Expressions use a serializable syntax tree, never executable source strings. Initial operations are numeric literals, stat references, acquisition-context references, arithmetic, minimum, maximum, floor, ceiling, comparisons, boolean operations, conditional expressions, and table lookups. Profiles can register named pure functions with declared argument and dependency types. Division by zero and unknown functions are errors. Expressions do not read clocks, random numbers, arbitrary files, or hidden global state.
+Expressions use a serializable syntax tree, never executable source strings. Initial operations are numeric literals, stat references, acquisition-context references, arithmetic, minimum, maximum, floor, ceiling, comparisons, boolean operations, conditional expressions, and table lookups. Systems can register named pure functions with declared argument and dependency types. Division by zero and unknown functions are errors. Expressions do not read clocks, random numbers, arbitrary files, or hidden global state.
 
 Stat references read the final value of the referenced stat in the current evaluation view. Therefore a modifier to agility flows through to defense. A modifier to a stat cannot read that same final stat. Instead, its own pre-modifier value is available as `base`; all dependencies through modifiers participate in cycle detection. `base` does not mean an unmodified value of some other stat.
 
@@ -78,9 +78,9 @@ Context distinguishes `characterLevel`, `classLevel`, `acquiredCharacterLevel`, 
 | `ceiling` | Enforces a maximum |
 | `override` | Replaces the base value using an explicit priority |
 
-For each stat, calculate its input or formula; resolve the highest-priority override; combine additions; apply multipliers; apply floor and ceiling; then apply declared rounding and bounds. An override changes the starting value, so additions still apply. Equal-priority conflicting overrides are invalid. A floor above a ceiling is invalid. Alternative calculation methods, such as competing defense formulas, use explicit profile alternatives with a named selection rule; they must not be represented as whichever override happens to run last.
+For each stat, calculate its input or formula; resolve the highest-priority override; combine additions; apply multipliers; apply floor and ceiling; then apply declared rounding and bounds. An override changes the starting value, so additions still apply. Equal-priority conflicting overrides are invalid. A floor above a ceiling is invalid. Alternative calculation methods, such as competing defense formulas, use explicit system alternatives with a named selection rule; they must not be represented as whichever override happens to run last.
 
-An addition declares a stacking group and policy. Supported policies are `sum`, `highest`, `lowest`, and `bestBonusAndWorstPenalty`. In the last policy, use the largest positive and most negative amount in the group. PF2e-style typed bonuses and penalties can use that policy; untyped additions can use `sum`. Distinct groups combine. The engine imposes no PF2e stacking policy on another profile. Multipliers and overrides use separate policies rather than borrowing addition groups.
+An addition declares a stacking group and policy. Supported policies are `sum`, `highest`, `lowest`, and `bestBonusAndWorstPenalty`. In the last policy, use the largest positive and most negative amount in the group. PF2e-style typed bonuses and penalties can use that policy; untyped additions can use `sum`. Distinct groups combine. The engine imposes no PF2e stacking policy on another system. Multipliers and overrides use separate policies rather than borrowing addition groups.
 
 Every applied, suppressed, or inactive modifier records its source instance, component, evaluated amount, and reason. A stat explanation must show enough detail to reproduce the total.
 
@@ -111,9 +111,9 @@ The same definition may occur multiple times if its repeat policy allows it. Def
 
 ### Choices inside Features
 
-Each `chooseFeatures` component declares a local ID, minimum and maximum picks, a candidate source, candidate filters, duplicate policy, retraining policy, and `ignorePrerequisites` (default `false`). This option waives ordinary acquisition predicates for the directly selected Feature. It does not waive resource requirements, pick counts, candidate filters, repeat limits, maintenance conditions, or ability-use costs. Candidate sources are explicit Feature IDs or a query over profile content tags. Filters include content level, class tag, and parameter requirements. Content level and acquisition level are distinct fields. A builder that intends to waive a level prerequisite must not separately exclude that option through a level filter.
+Each `chooseFeatures` component declares a local ID, minimum and maximum picks, a candidate source, candidate filters, duplicate policy, retraining policy, and `ignorePrerequisites` (default `false`). This option waives ordinary acquisition predicates for the directly selected Feature. It does not waive resource requirements, pick counts, candidate filters, repeat limits, maintenance conditions, or ability-use costs. Candidate sources are explicit Feature IDs or a query over system content tags. Filters include content level, class tag, and parameter requirements. Content level and acquisition level are distinct fields. A builder that intends to waive a level prerequisite must not separately exclude that option through a level filter.
 
-Pick counts can be constants or expressions evaluated from declared stats, context, or tables. Counts must be nonnegative integers with minimum no greater than maximum. A change in capacity exposes missing or excess selections for repair rather than silently choosing or dropping options. Choices also declare permitted replacement events, such as level advancement or daily preparation; these differ from general retraining. These contracts support 5e spell preparation and other profile-specific changing selections.
+Pick counts can be constants or expressions evaluated from declared stats, context, or tables. Counts must be nonnegative integers with minimum no greater than maximum. A change in capacity exposes missing or excess selections for repair rather than silently choosing or dropping options. Choices also declare permitted replacement events, such as level advancement or daily preparation; these differ from general retraining. These contracts support 5e spell preparation and other system-specific changing selections.
 
 The waiver belongs to the selection and is recorded on the acquired instance with its source selection ID. It does not modify the reusable definition or automatically propagate to descendants. A nested choice can declare its own waiver. Automatic grants keep their normal prerequisite rules unless they explicitly declare an ordinary-prerequisite exemption. All paths still enforce resource requirements.
 
@@ -139,15 +139,15 @@ This invented example illustrates structure only. A progression entry becomes av
 
 Recurring benefits require an explicit encoding. A health Feature granted once can scale with `classLevel`; alternatively each class level can grant a repeatable health increment. Content must choose one representation to avoid double counting. A choice gained at level 2 normally uses its frozen acquisition level for its level cap, so reaching level 10 does not silently permit replacing it with a level 10 option. A retraining rule may explicitly change this.
 
-Profile-wide advancement such as general choices or attribute increases may use a separate character-level progression. An entry must declare whether it belongs to a class or to character advancement; adding another class must not duplicate character-wide benefits.
+System-wide advancement such as general choices or attribute increases may use a separate character-level progression. An entry must declare whether it belongs to a class or to character advancement; adding another class must not duplicate character-wide benefits.
 
-Multiple class progressions can be represented with independent instance IDs and class levels. The profile decides whether they are permitted, how character level is derived, and how shared benefits interact. PF2e archetype-style progression should be expressible as selected Features; it must not automatically mean adding a second full class.
+Multiple class progressions can be represented with independent instance IDs and class levels. The system decides whether they are permitted, how character level is derived, and how shared benefits interact. PF2e archetype-style progression should be expressible as selected Features; it must not automatically mean adding a second full class.
 
 ## Prerequisites and validation
 
-Acquisition prerequisites use structured predicates: minimum level, acquired Feature or tag, parameter match, build-stat threshold, all, any, and not. The initial implementation should support all of these. Profile-specific predicates need declared inputs and explicit error behavior. A selection with `ignorePrerequisites: true` records those predicates as waived rather than falsely reporting them satisfied.
+Acquisition prerequisites use structured predicates: minimum level, acquired Feature or tag, parameter match, build-stat threshold, all, any, and not. The initial implementation should support all of these. System-specific predicates need declared inputs and explicit error behavior. A selection with `ignorePrerequisites: true` records those predicates as waived rather than falsely reporting them satisfied.
 
-Evaluate ordinary acquisition prerequisites at the acquisition event using the build up to that point. Within a level, automatic grants are applied first; choices that depend on other same-level choices require explicit prerequisite order. Resolve positive dependencies in that order and reject cycles. A Feature cannot satisfy an ordinary prerequisite through its own effects or descendants. Resource provision within a composite follows the separate sibling-resolution rule below. Temporary bonuses, equipment context, and active stances do not qualify by default. Use a separate eligibility stat view containing only the permanent build effects permitted by the profile.
+Evaluate ordinary acquisition prerequisites at the acquisition event using the build up to that point. Within a level, automatic grants are applied first; choices that depend on other same-level choices require explicit prerequisite order. Resolve positive dependencies in that order and reject cycles. A Feature cannot satisfy an ordinary prerequisite through its own effects or descendants. Resource provision within a composite follows the separate sibling-resolution rule below. Temporary bonuses, equipment context, and active stances do not qualify by default. Use a separate eligibility stat view containing only the permanent build effects permitted by the system.
 
 Automatic grants must also satisfy their declared prerequisites. Granting content does not implicitly bypass restrictions. Content can explicitly declare a documented exemption for ordinary prerequisites, with the reason included in provenance. Resource requirements cannot be exempted.
 
@@ -155,7 +155,7 @@ Automatic grants must also satisfy their declared prerequisites. Granting conten
 
 A resource requirement is a structured dependency on a usable pool definition, separate from a requirement to own a particular Feature. It declares a resource key, required scope, and optionally a minimum capacity. A Feature that normally requires a provider Feature must also declare the resource requirement if its mechanics rely on that provider's resource. The converter and Feature builder must preserve that dependency; merely marking every prerequisite waivable would lose essential information.
 
-Ignoring prerequisites can waive ownership of the original provider Feature, but cannot waive the resource it supplies. A compatible alternative provider may satisfy the resource dependency. Compatibility uses the resource key, scope, units, and profile-defined contract, never a display name. Bind the consumer to a specific resolved pool ID; ambiguous multiple pools require an explicit binding or a profile selection rule.
+Ignoring prerequisites can waive ownership of the original provider Feature, but cannot waive the resource it supplies. A compatible alternative provider may satisfy the resource dependency. Compatibility uses the resource key, scope, units, and system-defined contract, never a display name. Bind the consumer to a specific resolved pool ID; ambiguous multiple pools require an explicit binding or a system selection rule.
 
 A composite may grant a resource-providing SubFeature and a resource-consuming SubFeature in the same acquisition transaction. First expand its proposed children, then validate independently eligible providers, then bind and validate consumers. The provider may appear after the consumer in the display list. A provider in another sibling branch within the same composite can qualify if scope permits. A descendant cannot bootstrap its ancestor's ordinary eligibility, and a consumer cannot fulfill its own external resource requirement using grants that only become eligible through that consumer. Resource-dependency cycles with no independently valid provider are invalid.
 
@@ -165,7 +165,7 @@ Candidate validation uses the enclosing composite's proposed acquisition context
 
 Resource requirements are checked both when acquiring the Feature and when validating the current build. An inactive, removed, or incompatible provider does not qualify. Resource availability is different from resource provision: an exhausted pool still fulfills a provision requirement, while using an ability must pay its costs. Zero capacity is permitted only if the requirement's minimum capacity permits zero. Removing the only provider through retraining makes dependent Features invalid until repaired, even if their ordinary prerequisites were waived.
 
-Prerequisites default to acquisition-only checks. A separate maintenance requirement controls whether an already acquired Feature remains usable in changing circumstances. A historical prerequisite failure after retraining follows the profile's chosen repair policy; ordinary loss of a temporary condition does not trigger retraining repair.
+Prerequisites default to acquisition-only checks. A separate maintenance requirement controls whether an already acquired Feature remains usable in changing circumstances. A historical prerequisite failure after retraining follows the system's chosen repair policy; ordinary loss of a temporary condition does not trigger retraining repair.
 
 Return structured diagnostics with code, severity, entity path, and human-readable explanation. Distinguish `incomplete`, `invalid`, and `valid` builds. Catalogue validation rejects missing references, illegal component data, stat cycles, composition cycles, and invalid candidate queries before character evaluation.
 
@@ -181,7 +181,7 @@ Keep an acquisition and revision history sufficient to reconstruct prerequisite 
 
 ## Abilities and limited resources
 
-A `grantCapability` component can declare an ability with action cost, trigger, requirements, targets, range, duration, traits, resource costs, and descriptive resolution. A reaction and a free action are distinct action-cost kinds. Profiles supply their own permitted action kinds and units. Unsupported automation stays descriptive rather than being replaced with guessed effects.
+A `grantCapability` component can declare an ability with action cost, trigger, requirements, targets, range, duration, traits, resource costs, and descriptive resolution. A reaction and a free action are distinct action-cost kinds. Systems supply their own permitted action kinds and units. Unsupported automation stays descriptive rather than being replaced with guessed effects.
 
 A resource definition includes a pool ID, capacity expression, initial state, sharing scope, recovery events, and usage costs. Instance-owned pools remain separate; a character-wide pool intentionally combines contributions under a declared policy. Two unrelated limited-use abilities must not share a pool because they have the same display name.
 
@@ -205,7 +205,7 @@ With threshold lookup, below-range error, and above-range boundary value, traini
 
 Capacity dependencies join the calculation graph. Declared rounding and bounds apply to the final expression; negative or nonfinite capacity is invalid, and an integer-use pool requires an integer result after explicit rounding. The builder must reject self-referential capacity or stat-resource dependency cycles. Resource requirements that inspect capacity are checked after the independently eligible provider's capacity is calculated; they cannot validate a provider using bonuses from its not-yet-eligible consumer.
 
-Persist expenditure separately from computed capacity: `available = max(0, capacity - spent)`. If capacity falls below expenditure, preserve that expenditure. Recalculating or increasing capacity does not clear expenditure, though higher capacity can legitimately increase available uses. For example, capacity 5 with 4 spent has 1 available; lowering capacity to 2 gives 0; returning to 5 gives 1, not 5. New acquisition uses the profile's explicit initialization rule. Retraining preserves expenditure for equivalent pools, and a new pool may initialize empty or inherit expenditure according to the profile; replacement must not provide free recovery by default.
+Persist expenditure separately from computed capacity: `available = max(0, capacity - spent)`. If capacity falls below expenditure, preserve that expenditure. Recalculating or increasing capacity does not clear expenditure, though higher capacity can legitimately increase available uses. For example, capacity 5 with 4 spent has 1 available; lowering capacity to 2 gives 0; returning to 5 gives 1, not 5. New acquisition uses the system's explicit initialization rule. Retraining preserves expenditure for equivalent pools, and a new pool may initialize empty or inherit expenditure according to the system; replacement must not provide free recovery by default.
 
 Recovery happens only through explicit events, such as daily preparation, rest, or a recharge activity. Recovery never occurs as a side effect of evaluation or loading. Each event records its identity, affected pools, and effect; replaying the same event is idempotent. Timers and elapsed time are recorded game state, not wall-clock assumptions.
 
@@ -215,7 +215,7 @@ For an ability with outcome-dependent expenditure, an explicit pending-use event
 
 ## Character state and calculation
 
-Persist profile and content revisions, character identity, base stat inputs, class progressions, root Feature acquisitions, nested choices, parameter values, advancement history, resource expenditure and recovery events, and explicit active context. Do not persist calculated totals as authoritative inputs.
+Persist system and content revisions, character identity, base stat inputs, class progressions, root Feature acquisitions, nested choices, parameter values, advancement history, resource expenditure and recovery events, and explicit active context. Do not persist calculated totals as authoritative inputs.
 
 Evaluation is pure and deterministic for the same content, character, and context. It does not mutate saved choices or consume resources.
 
@@ -294,7 +294,7 @@ This JSON illustrates naming and relationships. The final schema must formally d
 }
 ```
 
-Suppose the profile defines a trained defense bonus as character level + 2. At level 3 with agility 2, Combat Training raises rank to trained and defense becomes `10 + 2 + (3 + 2) = 17`. If Guarded Style grants a conditional circumstance bonus of 1, the runtime defense is 18 while its condition holds. A simultaneous circumstance bonus of 2 replaces that bonus under `bestBonusAndWorstPenalty`, yielding 19. Neither temporary bonus qualifies the character for a permanent prerequisite.
+Suppose the system defines a trained defense bonus as character level + 2. At level 3 with agility 2, Combat Training raises rank to trained and defense becomes `10 + 2 + (3 + 2) = 17`. If Guarded Style grants a conditional circumstance bonus of 1, the runtime defense is 18 while its condition holds. A simultaneous circumstance bonus of 2 replaces that bonus under `bestBonusAndWorstPenalty`, yielding 19. Neither temporary bonus qualifies the character for a permanent prerequisite.
 
 The sample refers to other definitions supplied by a future example catalogue. It is a schema illustration rather than a loadable complete character.
 
@@ -306,19 +306,19 @@ The sample refers to other definitions supplied by a future example catalogue. I
 | Class feat slot | Progression choice filtered to an eligible feat catalogue |
 | Skill or general feat slot | Independent choice using the corresponding tags and eligibility predicates |
 | Subclass decision | Feature containing a choice whose options grant subclass Features |
-| Proficiency advancement | Modifier enforcing a minimum rank, with profile-defined numeric interpretation |
+| Proficiency advancement | Modifier enforcing a minimum rank, with system-defined numeric interpretation |
 | Passive bonus | Stat modifier with stacking type, condition, and source |
 | New action or reaction | Capability with structured costs and descriptive resolution |
 | Focus or other shared limited resource | Named shared resource pool with explicit contribution and recovery rules |
 | Feature that bundles benefits | Multiple components or grants to smaller Features |
 | Feature with no numeric effect | Descriptive or permission capability |
-| Archetype progression | Features, prerequisites, and choices governed by the profile |
+| Archetype progression | Features, prerequisites, and choices governed by the system |
 
 A conversion record preserves source name, source revision, original content identity, original text where available, modeled components, and automation coverage (`descriptive`, `partial`, or `complete`). Complete coverage means every mechanical clause has a representation; it does not mean an entire combat engine exists.
 
 Do not force a complex ability into a numeric modifier. If a feat changes how an action resolves, model an action rule or leave that clause descriptive with partial coverage. Future extensions should add typed components with validation rather than executable snippets attached to individual feats.
 
-No external PF2e sources or other workspace projects are design references for this draft. Official D&D rules and SRDs are authorized for the first two profiles; see the [5e profile study and implementation plan](dnd5e-profile-plan.md). Filling official PF2e class data still requires a later source decision consistent with the user's reference restriction.
+No external PF2e sources or other workspace projects are design references for this draft. Official D&D rules and SRDs are authorized for the first two systems; see the [5e Systems](dnd5e-systems.md). Filling official PF2e class data still requires a later source decision consistent with the user's reference restriction.
 
 ## Acceptance criteria for implementation
 
@@ -368,22 +368,22 @@ Provide four main destinations: Characters, Classes, Features, and eventually Cr
 | Destination | Required behavior |
 | --- | --- |
 | Characters | List saved characters, create a draft, reopen, duplicate, import, and export |
-| Class browser | Search and filter by profile, source, and tags; inspect full progression grouped by class level |
+| Class browser | Search and filter by system, source, and tags; inspect full progression grouped by class level |
 | Class detail | Show every independent grant and choice at each level, with links to referenced Features |
-| Feature browser | Search and filter by profile, source, tags, content level, and automation coverage |
+| Feature browser | Search and filter by system, source, tags, content level, and automation coverage |
 | Feature detail | Show descriptions, components, grants, nested choices, prerequisites, resource requirements, scaling tables, and source revision |
-| Character builder | Edit identity, profile-driven basic stats, progressions, and level-by-level Feature selections |
+| Character builder | Edit identity, system-driven basic stats, progressions, and level-by-level Feature selections |
 | Character sheet | Show calculated stats, acquired Features, usable abilities, resource capacity and expenditure, and explanations |
 | Feature editor | Future authoring workflow for new reusable definitions, preview, validation, and revision management |
 
-Use addressable detail routes based on stable IDs so content can be opened directly, bookmarked, and navigated with browser back and forward. Preserve source profile and revision in the resolved detail context. Expand composite Features progressively, with a breadcrumb or ownership path for nested items; a definition detail must not imply that a character has acquired it.
+Use addressable detail routes based on stable IDs so content can be opened directly, bookmarked, and navigated with browser back and forward. Preserve source system and revision in the resolved detail context. Expand composite Features progressively, with a breadcrumb or ownership path for nested items; a definition detail must not imply that a character has acquired it.
 
 ### Character creation and editing
 
-Character creation starts with a name and rules profile, then profile-defined inputs and class progressions. Profile-specific ancestry, background, or other origins should appear as root Feature choices when the profile defines them. No fixed six-attribute screen or PF2e-specific class list belongs in the generic UI.
+Character creation starts with a name and rules system, then system-defined inputs and class progressions. System-specific ancestry, background, or other origins should appear as root Feature choices when the system defines them. No fixed six-attribute screen or PF2e-specific class list belongs in the generic UI.
 
-1. Create a draft with pinned profile and content revisions.
-2. Enter basic stats using profile-defined labels, constraints, defaults, and help text.
+1. Create a draft with pinned system and content revisions.
+2. Enter basic stats using system-defined labels, constraints, defaults, and help text.
 3. Choose legal class progressions and attained levels; show automatic grants separately from selectable entries.
 4. Work through independent choice slots by level. Selecting a Feature reveals any nested choices and parameter inputs immediately.
 5. Review provisional stats, missing choices, eligibility issues, and resource dependencies as the draft changes.
@@ -433,7 +433,7 @@ Keep character commands and persisted data separate from view state such as an o
 
 ### Lightweight tooling suggestions
 
-The following are recommendations, not dependencies already installed. Choose compatible versions and pin them during implementation. Anime5e remains the code-design reference; official D&D sources additionally support the 5e profiles. The linked official library documentation supports only these tooling descriptions.
+The following are recommendations, not dependencies already installed. Choose compatible versions and pin them during implementation. Anime5e remains the code-design reference; official D&D sources additionally support the 5e systems. The linked official library documentation supports only these tooling descriptions.
 
 | Tool | Suggested role and adoption |
 | --- | --- |
@@ -455,10 +455,10 @@ Acceptance scenarios for the UI include creating and reopening a complete charac
 ### Implementation sequence
 
 1. Formal schemas, engine evaluation, resource resolution, transactions, and serialization, with an invented example catalogue.
-2. Separate 2014 and 2024 5e profiles using authorized official rules and SRDs, following the [5e profile plan](dnd5e-profile-plan.md).
+2. Separate 2014 and 2024 5e systems using authorized official rules and SRDs, following the [5e Systems](dnd5e-systems.md).
 3. React application shell and direct Class and Feature browsing using those validated definitions.
-4. Character builder, sheet, local save and import/export, retraining previews, and resource commands for both 5e profiles.
+4. Character builder, sheet, local save and import/export, retraining previews, and resource commands for both 5e systems.
 5. Custom Feature editor, expression and table controls, previews, local catalogue revisions, and migrations.
-6. PF2e profile and converted content after both 5e profiles satisfy their character-building acceptance criteria.
+6. PF2e system and converted content after both 5e systems satisfy their character-building acceptance criteria.
 
 The next deliverable remains the formal schema and calculation engine. The React UI follows it using this contract.

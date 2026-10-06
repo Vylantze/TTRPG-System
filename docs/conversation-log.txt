@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T06:27:07.905Z
+Export refreshed UTC: 2026-10-06T06:30:43.769Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -267,5 +267,31 @@ I’ll use separate 2014 and 2024 profiles, with official rules and SRDs as auth
 I’ve updated the plan for separate 2014 and 2024 profiles before PF2e, while keeping this turn in the specification phase. The study notes map 5e mechanics to Features and identify engine requirements such as partial resource recovery, outcome-dependent expenditure, and separate spell selection and slot capacity.
 
 They also flag where Anime5e’s calculations need correction rather than reuse—for example, an untrained saving throw must not receive proficiency automatically.
+
+----------------------------------------
+
+[2026-10-06T06:27:15.724Z] ASSISTANT
+Studied the official 5e rules and SRDs, then saved the [5e profile plan](</D:/User/Workspace/TTRPG System/docs/dnd5e-profile-plan.md>).
+
+Implementation order is now **2014 5e → 2024 5e → PF2e**, with separate profiles. The specification also covers changing selection counts and outcome-dependent resource expenditure.
+
+As requested, this remains the specification phase.
+
+**3/3 document checks passed.** Committed as Mira-Dev’s identity: `d9e04c5`.
+
+----------------------------------------
+
+[2026-10-06T06:30:00.413Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-06T06:30:00.435Z] USER
+Profile Plans should be called Systems.
+
+----------------------------------------
+
+[2026-10-06T06:30:06.429Z] ASSISTANT
+I’ll rename the Profile Plan document to Systems and update its title and links.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
