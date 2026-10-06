@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import { type Engine, type Character, type Edit, type SelectionResult, type Value } from '../../src/index';
 import { labelFromId } from './workspace';
 import { descriptionPreview, FeatureRules } from './RulesText';
+import { FeatureRequirements } from './FeatureRequirements';
 
 const PAGE=12;
 export function SelectionCard({slot,engine,character,edit,openFeature,ownerName}:{slot:SelectionResult;engine:Engine;character:Character;edit:(edits:Edit[])=>void;openFeature:(id:string)=>void;ownerName?:string}) {
@@ -24,7 +25,7 @@ export function SelectionCard({slot,engine,character,edit,openFeature,ownerName}
       const feature=definitions.find(f=>f.id===p.feature);
       return <div className="picked" key={p.id}>
         <div className="row"><button className="link" onClick={()=>openFeature(p.feature)}>{featureName(feature)}</button><button className="quiet" aria-label={`Remove ${featureName(feature)}`} onClick={()=>update(picks.filter(x=>x.id!==p.id))}>Remove</button></div>
-        {feature && (feature.description || feature.textReferences?.length) ? <details><summary>Read Feature rules</summary><FeatureRules feature={feature} engine={engine} openFeature={openFeature} /></details>:null}
+        {feature ? <details><summary>Read Feature rules</summary><FeatureRequirements feature={feature} engine={engine} /><FeatureRules feature={feature} engine={engine} openFeature={openFeature} /></details>:null}
         {feature?.parameters && <div className="input-grid">{Object.entries(feature.parameters).map(([key,parameter])=>{
           const value=p.parameters?.[key]??parameter.default;
           const change=(value:Value)=>update(picks.map(x=>x.id===p.id?{...x,parameters:{...x.parameters,[key]:value}}:x));
@@ -39,6 +40,7 @@ export function SelectionCard({slot,engine,character,edit,openFeature,ownerName}
         return <div className="candidate" key={f.id}>
           <div><button className="link" onClick={()=>openFeature(f.id)}>{featureName(f)}</button><span className={`badge ${candidate?.status??'incomplete'}`}>{candidate?.status==='valid'?'Eligible':candidate?.status==='invalid'?'Requirements unmet':'Pending'}</span>
           {f.description&&<p className="muted small">{descriptionPreview(f.description)}</p>}
+          <FeatureRequirements feature={f} engine={engine} compact />
           {candidate?.diagnostics.length ? <p className="muted small">{candidate.diagnostics.slice(0,2).map(d=>d.message).join(' ')}</p>:null}</div>
           <button className="quiet" disabled={picks.length>=slot.maximum || (selected&&!slot.definition.allowDuplicates)} onClick={()=>update([...picks,{id:crypto.randomUUID(),feature:f.id}])}>{selected&&!slot.definition.allowDuplicates?'Selected':'Choose'}</button>
         </div>;

@@ -1702,6 +1702,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -1726,6 +1727,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -1750,6 +1752,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -1774,6 +1777,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -1798,6 +1802,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -1822,6 +1827,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -1846,6 +1852,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -1870,6 +1877,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -1894,6 +1902,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -1918,6 +1927,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -1942,6 +1952,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -1966,6 +1977,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -1990,6 +2002,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -2014,6 +2027,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -2038,6 +2052,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -2062,6 +2077,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -2086,6 +2102,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -2110,6 +2127,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -2134,6 +2152,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "expertise"
       ],
       "prerequisites": {
@@ -3100,7 +3119,10 @@
         }
       },
       "displayName": "Ability Score Improvement",
-      "description": "Fighter: Ability Score Improvement\nWhen you reach 4th level, and again at 6th, 8th, 12th, 14th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above 20 using this feature.\n\nRogue: Ability Score Improvement\nWhen you reach 4th level, and again at 8th, 10th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above 20 using this feature.\n\nWizard: Ability Score Improvement\nWhen you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above 20 using this feature."
+      "description": "Fighter: Ability Score Improvement\nWhen you reach 4th level, and again at 6th, 8th, 12th, 14th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above 20 using this feature.\n\nRogue: Ability Score Improvement\nWhen you reach 4th level, and again at 8th, 10th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above 20 using this feature.\n\nWizard: Ability Score Improvement\nWhen you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above 20 using this feature.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:feat.grappler",
@@ -4978,7 +5000,10 @@
         }
       ],
       "displayName": "Fighter Starting Traits",
-      "description": "Proficiencies\nArmor: All armor, shields\n\nWeapons: Simple weapons, martial weapons\n\nTools: None\n\nSaving Throws: Strength, Constitution\n\nSkills: Choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) chain mail or (b) leather armor, longbow, and 20 arrows\n\n• (a) a martial weapon and a shield or (b) two martial weapons\n\n• (a) a light crossbow and 20 bolts or (b) two handaxes\n\n• (a) a dungeoneer’s pack or (b) an explorer’s pack"
+      "description": "Proficiencies\nArmor: All armor, shields\n\nWeapons: Simple weapons, martial weapons\n\nTools: None\n\nSaving Throws: Strength, Constitution\n\nSkills: Choose two skills from Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) chain mail or (b) leather armor, longbow, and 20 arrows\n\n• (a) a martial weapon and a shield or (b) two martial weapons\n\n• (a) a light crossbow and 20 bolts or (b) two handaxes\n\n• (a) a dungeoneer’s pack or (b) an explorer’s pack",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.hit-points",
@@ -5044,7 +5069,10 @@
         }
       },
       "displayName": "Fighter Hit Points",
-      "description": "Hit Points\nHit Dice: 1d10 per fighter level\n\nHit Points at 1st Level: 10 + your Constitution modifier\n\nHit Points at Higher Levels: 1d10 (or 6) + your Constitution modifier per fighter level after 1st"
+      "description": "Hit Points\nHit Dice: 1d10 per fighter level\n\nHit Points at 1st Level: 10 + your Constitution modifier\n\nHit Points at Higher Levels: 1d10 (or 6) + your Constitution modifier per fighter level after 1st",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.entry",
@@ -5139,7 +5167,10 @@
         }
       ],
       "displayName": "Rogue Starting Traits",
-      "description": "Proficiencies\nArmor: Light armor\n\nWeapons: Simple weapons, hand crossbows, longswords, rapiers, shortswords\n\nTools: Thieves’ tools\n\nSaving Throws: Dexterity, Intelligence\n\nSkills: Choose four from Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, and Stealth\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a rapier or (b) a shortsword\n\n• (a) a shortbow and quiver of 20 arrows or (b) a shortsword\n\n• (a) a burglar’s pack, (b) a dungeoneer’s pack, or (c)an explorer’s pack\n\n• (a) Leather armor, two daggers, and thieves’ tools Thievesʼ Cant"
+      "description": "Proficiencies\nArmor: Light armor\n\nWeapons: Simple weapons, hand crossbows, longswords, rapiers, shortswords\n\nTools: Thieves’ tools\n\nSaving Throws: Dexterity, Intelligence\n\nSkills: Choose four from Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Performance, Persuasion, Sleight of Hand, and Stealth\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a rapier or (b) a shortsword\n\n• (a) a shortbow and quiver of 20 arrows or (b) a shortsword\n\n• (a) a burglar’s pack, (b) a dungeoneer’s pack, or (c)an explorer’s pack\n\n• (a) Leather armor, two daggers, and thieves’ tools Thievesʼ Cant",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.hit-points",
@@ -5205,7 +5236,10 @@
         }
       },
       "displayName": "Rogue Hit Points",
-      "description": "Hit Points\nHit Dice: 1d8 per rogue level\n\nHit Points at 1st Level: 8 + your Constitution modifier\n\nHit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per rogue level after 1st"
+      "description": "Hit Points\nHit Dice: 1d8 per rogue level\n\nHit Points at 1st Level: 8 + your Constitution modifier\n\nHit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per rogue level after 1st",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:wizard.entry",
@@ -5271,7 +5305,10 @@
         }
       ],
       "displayName": "Wizard Starting Traits",
-      "description": "Proficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook"
+      "description": "Proficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:wizard.hit-points",
@@ -5337,7 +5374,10 @@
         }
       },
       "displayName": "Wizard Hit Points",
-      "description": "Hit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st"
+      "description": "Hit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.second-wind",
@@ -5382,7 +5422,10 @@
         }
       ],
       "displayName": "Second Wind",
-      "description": "Second Wind\nYou have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again."
+      "description": "Second Wind\nYou have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.action-surge",
@@ -5445,7 +5488,10 @@
         }
       },
       "displayName": "Action Surge",
-      "description": "Action Surge\nStarting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action on top of your regular action and a possible bonus action.\n\nOnce you use this feature, you must finish a short or long rest before you can use it again. Starting at 17th level, you can use it twice before a rest, but only once on the same turn."
+      "description": "Action Surge\nStarting at 2nd level, you can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action on top of your regular action and a possible bonus action.\n\nOnce you use this feature, you must finish a short or long rest before you can use it again. Starting at 17th level, you can use it twice before a rest, but only once on the same turn.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.extra-attack",
@@ -5492,7 +5538,10 @@
         }
       },
       "displayName": "Extra Attack",
-      "description": "Extra Attack\nBeginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn.\n\nThe number of attacks increases to three when you reach 11th level in this class and to four when you reach 20th level in this class."
+      "description": "Extra Attack\nBeginning at 5th level, you can attack twice, instead of once, whenever you take the Attack action on your turn.\n\nThe number of attacks increases to three when you reach 11th level in this class and to four when you reach 20th level in this class.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.indomitable",
@@ -5555,7 +5604,10 @@
         }
       },
       "displayName": "Indomitable",
-      "description": "Indomitable\nBeginning at 9th level, you can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can’t use this feature again until you finish a long rest.\n\nYou can use this feature twice between long rests starting at 13th level and three times between long r ests starting at 17th level."
+      "description": "Indomitable\nBeginning at 9th level, you can reroll a saving throw that you fail. If you do so, you must use the new roll, and you can’t use this feature again until you finish a long rest.\n\nYou can use this feature twice between long rests starting at 13th level and three times between long r ests starting at 17th level.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:style.archery",
@@ -5577,7 +5629,10 @@
         }
       ],
       "displayName": "Archery",
-      "description": "Archery\nYou gain a +2 bonus to attack rolls you make with ranged weapons."
+      "description": "Archery\nYou gain a +2 bonus to attack rolls you make with ranged weapons.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:style.defense",
@@ -5603,7 +5658,10 @@
         }
       ],
       "displayName": "Defense",
-      "description": "Defense\nWhile you are wearing armor, you gain a +1 bonus to AC."
+      "description": "Defense\nWhile you are wearing armor, you gain a +1 bonus to AC.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:style.dueling",
@@ -5625,7 +5683,10 @@
         }
       ],
       "displayName": "Dueling",
-      "description": "Dueling\nWhen you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon."
+      "description": "Dueling\nWhen you are wielding a melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:style.great-weapon-fighting",
@@ -5640,7 +5701,10 @@
         }
       ],
       "displayName": "Great Weapon Fighting",
-      "description": "Great Weapon Fighting\nWhen you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2.The weapon must have the two-handed or versatile property for you to gain this benefit."
+      "description": "Great Weapon Fighting\nWhen you roll a 1 or 2 on a damage die for an attack you make with a melee weapon that you are wielding with two hands, you can reroll the die and must use the new roll, even if the new roll is a 1 or a 2.The weapon must have the two-handed or versatile property for you to gain this benefit.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:style.protection",
@@ -5660,7 +5724,10 @@
         }
       ],
       "displayName": "Protection",
-      "description": "Protection\nWhen a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield."
+      "description": "Protection\nWhen a creature you can see attacks a target other than you that is within 5 feet of you, you can use your reaction to impose disadvantage on the attack roll. You must be wielding a shield.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:style.two-weapon-fighting",
@@ -5675,7 +5742,10 @@
         }
       ],
       "displayName": "Two-Weapon Fighting",
-      "description": "Two-Weapon Fighting\nWhen you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack."
+      "description": "Two-Weapon Fighting\nWhen you engage in two-weapon fighting, you can add your ability modifier to the damage of the second attack.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.champion",
@@ -5692,6 +5762,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "subclass",
         "fighter-subclass"
       ],
@@ -5870,7 +5941,10 @@
         "feature": "dnd5e:2014:fighter.champion"
       },
       "displayName": "Remarkable Athlete",
-      "description": "Remarkable Athlete\nStarting at 7th level, you can add half your proficiency bonus (round up) to any Strength, Dexterity, or Constitution check you make that doesn’t already use your proficiency bonus.\n\nIn addition, when you make a running long jump, the distance you can cover increases by a number of feet equal to your Strength modifier."
+      "description": "Remarkable Athlete\nStarting at 7th level, you can add half your proficiency bonus (round up) to any Strength, Dexterity, or Constitution check you make that doesn’t already use your proficiency bonus.\n\nIn addition, when you make a running long jump, the distance you can cover increases by a number of feet equal to your Strength modifier.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.superior-critical",
@@ -5890,7 +5964,10 @@
         "feature": "dnd5e:2014:fighter.champion"
       },
       "displayName": "Superior Critical",
-      "description": "Superior Critical\nStarting at 15th level, your weapon attacks score a critical hit on a roll of 18–20."
+      "description": "Superior Critical\nStarting at 15th level, your weapon attacks score a critical hit on a roll of 18–20.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.survivor",
@@ -5909,7 +5986,10 @@
         "feature": "dnd5e:2014:fighter.champion"
       },
       "displayName": "Survivor",
-      "description": "Survivor\nAt 18th level, you attain the pinnacle of resilience in battle. At the start of each of your turns, you regain hit points equal to 5 + your Constitution modifier if you have no more than half of your hit points left. You don’t gain this benefit if you have 0 hit points."
+      "description": "Survivor\nAt 18th level, you attain the pinnacle of resilience in battle. At the start of each of your turns, you regain hit points equal to 5 + your Constitution modifier if you have no more than half of your hit points left. You don’t gain this benefit if you have 0 hit points.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.sneak-attack",
@@ -5944,7 +6024,10 @@
         }
       ],
       "displayName": "Sneak Attack",
-      "description": "Sneak Attack\nBeginning at 1st level, you know how to strike subtly and exploit a foe’s distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.\n\nYou don’t need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn’t incapacitated, and you don’t have disadvantage on the attack roll.\n\nThe amount of the extra damage increases as you gain levels in this class, as shown in the Sneak Attack column of the Rogue table."
+      "description": "Sneak Attack\nBeginning at 1st level, you know how to strike subtly and exploit a foe’s distraction. Once per turn, you can deal an extra 1d6 damage to one creature you hit with an attack if you have advantage on the attack roll. The attack must use a finesse or a ranged weapon.\n\nYou don’t need advantage on the attack roll if another enemy of the target is within 5 feet of it, that enemy isn’t incapacitated, and you don’t have disadvantage on the attack roll.\n\nThe amount of the extra damage increases as you gain levels in this class, as shown in the Sneak Attack column of the Rogue table.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.thieves-cant",
@@ -5959,7 +6042,10 @@
         }
       ],
       "displayName": "Thieves’ Cant",
-      "description": "Thieves’ Cant\nDuring your rogue training you learned thieves’ cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves’ cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.\n\nIn addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves’ guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run."
+      "description": "Thieves’ Cant\nDuring your rogue training you learned thieves’ cant, a secret mix of dialect, jargon, and code that allows you to hide messages in seemingly normal conversation. Only another creature that knows thieves’ cant understands such messages. It takes four times longer to convey such a message than it does to speak the same idea plainly.\n\nIn addition, you understand a set of secret signs and symbols used to convey short, simple messages, such as whether an area is dangerous or the territory of a thieves’ guild, whether loot is nearby, or whether the people in an area are easy marks or will provide a safe house for thieves on the run.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.cunning-action",
@@ -5996,7 +6082,10 @@
         }
       ],
       "displayName": "Cunning Action",
-      "description": "Cunning Action\nStarting at 2nd level, your quick thinking and agility allow you to move and act quickly. You can take a bonus action on each of your turns in combat. This action can be used only to take the Dash, Disengage, or Hide action."
+      "description": "Cunning Action\nStarting at 2nd level, your quick thinking and agility allow you to move and act quickly. You can take a bonus action on each of your turns in combat. This action can be used only to take the Dash, Disengage, or Hide action.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.thief",
@@ -6021,6 +6110,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "subclass",
         "rogue-subclass"
       ],
@@ -6045,7 +6135,10 @@
         }
       ],
       "displayName": "Uncanny Dodge",
-      "description": "Uncanny Dodge\nStarting at 5th level, when an attacker that you can see hits you with an attack, you can use your reaction to halve the attack’s damage against you."
+      "description": "Uncanny Dodge\nStarting at 5th level, when an attacker that you can see hits you with an attack, you can use your reaction to halve the attack’s damage against you.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.evasion",
@@ -6060,7 +6153,10 @@
         }
       ],
       "displayName": "Evasion",
-      "description": "Evasion\nBeginning at 7th level, you can nimbly dodge out of the way of certain area effects, such as a red dragon’s fiery breath or an ice storm spell. When you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on the saving throw, and only half damage if you fail."
+      "description": "Evasion\nBeginning at 7th level, you can nimbly dodge out of the way of certain area effects, such as a red dragon’s fiery breath or an ice storm spell. When you are subjected to an effect that allows you to make a Dexterity saving throw to take only half damage, you instead take no damage if you succeed on the saving throw, and only half damage if you fail.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.supreme-sneak",
@@ -6078,7 +6174,10 @@
         "feature": "dnd5e:2014:rogue.thief"
       },
       "displayName": "Supreme Sneak",
-      "description": "Supreme Sneak\nStarting at 9th level, you have advantage on a Dexterity (Stealth) check if you move no more than half your speed on the same turn."
+      "description": "Supreme Sneak\nStarting at 9th level, you have advantage on a Dexterity (Stealth) check if you move no more than half your speed on the same turn.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.reliable-talent",
@@ -6093,7 +6192,10 @@
         }
       ],
       "displayName": "Reliable Talent",
-      "description": "Reliable Talent\nBy 11th level, you have refined your chosen skills until they approach perfection. Whenever you make an ability check that lets you add your proficiency bonus, you can treat a d20 roll of 9 or lower as a 10."
+      "description": "Reliable Talent\nBy 11th level, you have refined your chosen skills until they approach perfection. Whenever you make an ability check that lets you add your proficiency bonus, you can treat a d20 roll of 9 or lower as a 10.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.use-magic-device",
@@ -6111,7 +6213,10 @@
         "feature": "dnd5e:2014:rogue.thief"
       },
       "displayName": "Use Magic Device",
-      "description": "Use Magic Device\nBy 13th level, you have learned enough about the workings of magic that you can improvise the use of items even when they are not intended for you. You ignore all class, race, and level requirements on the use of magic items."
+      "description": "Use Magic Device\nBy 13th level, you have learned enough about the workings of magic that you can improvise the use of items even when they are not intended for you. You ignore all class, race, and level requirements on the use of magic items.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.blindsense",
@@ -6126,7 +6231,10 @@
         }
       ],
       "displayName": "Blindsense",
-      "description": "Blindsense\nStarting at 14th level, if you are able to hear, you are aware of the location of any hidden or invisible creature within 10 feet of you."
+      "description": "Blindsense\nStarting at 14th level, if you are able to hear, you are aware of the location of any hidden or invisible creature within 10 feet of you.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.slippery-mind",
@@ -6143,7 +6251,10 @@
         }
       ],
       "displayName": "Slippery Mind",
-      "description": "Slippery Mind\nBy 15th level, you have acquired greater mental strength. You gain proficiency in Wisdom saving throws."
+      "description": "Slippery Mind\nBy 15th level, you have acquired greater mental strength. You gain proficiency in Wisdom saving throws.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.thiefs-reflexes",
@@ -6161,7 +6272,10 @@
         "feature": "dnd5e:2014:rogue.thief"
       },
       "displayName": "Thief’s Reflexes",
-      "description": "Thief’s Reflexes\nWhen you reach 17th level, you have become adept at laying ambushes and quickly escaping danger. You can take two turns during the first round of any combat. You take your first turn at your normal initiative and your second turn at your initiative minus 10. You can’t use this feature when you are surprised."
+      "description": "Thief’s Reflexes\nWhen you reach 17th level, you have become adept at laying ambushes and quickly escaping danger. You can take two turns during the first round of any combat. You take your first turn at your normal initiative and your second turn at your initiative minus 10. You can’t use this feature when you are surprised.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.elusive",
@@ -6176,7 +6290,10 @@
         }
       ],
       "displayName": "Elusive",
-      "description": "Elusive\nBeginning at 18th level, you are so evasive that attackers rarely gain the upper hand against you. No attack roll has advantage against you while you aren’t incapacitated."
+      "description": "Elusive\nBeginning at 18th level, you are so evasive that attackers rarely gain the upper hand against you. No attack roll has advantage against you while you aren’t incapacitated.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.stroke-of-luck",
@@ -6217,7 +6334,10 @@
         }
       ],
       "displayName": "Stroke of Luck",
-      "description": "Stroke of Luck\nAt 20th level, you have an uncanny knack for succeeding when you need to. If your attack misses a target within range, you can turn the miss into a hit. Alternatively, if you fail an ability check, you can treat the d20 roll as a 20.\n\nOnce you use this feature, you can’t use it again until you finish a short or long rest."
+      "description": "Stroke of Luck\nAt 20th level, you have an uncanny knack for succeeding when you need to. If your attack misses a target within range, you can turn the miss into a hit. Alternatively, if you fail an ability check, you can treat the d20 roll as a 20.\n\nOnce you use this feature, you can’t use it again until you finish a short or long rest.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:wizard.evocation",
@@ -6232,6 +6352,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "subclass",
         "wizard-subclass"
       ],
@@ -6254,7 +6375,10 @@
         "feature": "dnd5e:2014:wizard.evocation"
       },
       "displayName": "Potent Cantrip",
-      "description": "Potent Cantrip\nStarting at 6th level, your damaging cantrips affect even creatures that avoid the brunt of the effect. When a creature succeeds on a saving throw against your cantrip, the creature takes half the cantrip’s damage (if any) but suffers no additional effect from the cantrip."
+      "description": "Potent Cantrip\nStarting at 6th level, your damaging cantrips affect even creatures that avoid the brunt of the effect. When a creature succeeds on a saving throw against your cantrip, the creature takes half the cantrip’s damage (if any) but suffers no additional effect from the cantrip.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:wizard.empowered-evocation",
@@ -6272,7 +6396,10 @@
         "feature": "dnd5e:2014:wizard.evocation"
       },
       "displayName": "Empowered Evocation",
-      "description": "Empowered Evocation\nBeginning at 10th level, you can add your Intelligence modifier to one damage roll of any wizard evocation spell you cast."
+      "description": "Empowered Evocation\nBeginning at 10th level, you can add your Intelligence modifier to one damage roll of any wizard evocation spell you cast.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:wizard.overchannel",
@@ -6290,7 +6417,10 @@
         "feature": "dnd5e:2014:wizard.evocation"
       },
       "displayName": "Overchannel",
-      "description": "Overchannel\nStarting at 14th level, you can increase the power of your simpler spells. When you cast a wizard spell of 1st through 5th level that deals damage, you can deal maximum damage with that spell.\n\nThe first time you do so, you suffer no adverse effect. If you use this feature again before you finish a long rest, you take 2d12 necrotic damage for each level of the spell, immediately after you cast it. Each time you use this feature again before finishing a long rest, the necrotic damage per spell level increases by 1d12. This damage ignores resistance and immunity."
+      "description": "Overchannel\nStarting at 14th level, you can increase the power of your simpler spells. When you cast a wizard spell of 1st through 5th level that deals damage, you can deal maximum damage with that spell.\n\nThe first time you do so, you suffer no adverse effect. If you use this feature again before you finish a long rest, you take 2d12 necrotic damage for each level of the spell, immediately after you cast it. Each time you use this feature again before finishing a long rest, the necrotic damage per spell level increases by 1d12. This damage ignores resistance and immunity.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.upgrade-11",
@@ -6305,7 +6435,10 @@
         }
       ],
       "displayName": "Extra Attack: Three Attacks",
-      "description": "Extra Attack now allows three attacks."
+      "description": "Extra Attack now allows three attacks.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.upgrade-13",
@@ -6320,7 +6453,10 @@
         }
       ],
       "displayName": "Indomitable: Two Uses",
-      "description": "Indomitable now has two uses."
+      "description": "Indomitable now has two uses.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.upgrade-17",
@@ -6335,7 +6471,10 @@
         }
       ],
       "displayName": "Action Surge and Indomitable: Additional Uses",
-      "description": "Action Surge now has two uses; Indomitable has three."
+      "description": "Action Surge now has two uses; Indomitable has three.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.upgrade-20",
@@ -6350,7 +6489,10 @@
         }
       ],
       "displayName": "Extra Attack: Four Attacks",
-      "description": "Extra Attack now allows four attacks."
+      "description": "Extra Attack now allows four attacks.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:spell.acid-splash",
@@ -11233,6 +11375,7 @@
         }
       ],
       "tags": [
+        "class-feature",
         "wizard-caster"
       ],
       "displayName": "Wizard Spellcasting",
@@ -11281,7 +11424,10 @@
         }
       ],
       "displayName": "Arcane Recovery",
-      "description": "Arcane Recovery\nYou have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.\n\nFor example, if you’re a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots."
+      "description": "Arcane Recovery\nYou have learned to regain some of your magical energy by studying your spellbook. Once per day when you finish a short rest, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.\n\nFor example, if you’re a 4th-level wizard, you can recover up to two levels worth of spell slots. You can recover either a 2nd-level spell slot or two 1st-level spell slots.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:wizard.spell-mastery",
@@ -11383,7 +11529,10 @@
         }
       ],
       "displayName": "Spell Mastery",
-      "description": "Spell Mastery\nAt 18th level, you have achieved such mastery over certain spells that you can cast them at will. Choose a 1st-level wizard spell and a 2nd-level wizard spell that are in your spellbook. You can cast those spells at their lowest level without expending a spell slot when you have them prepared. If you want to cast either spell at a higher level, you must expend a spell slot as normal.\n\nBy spending 8 hours in study, you can exchange one or both of the spells you chose for different spells of the same levels."
+      "description": "Spell Mastery\nAt 18th level, you have achieved such mastery over certain spells that you can cast them at will. Choose a 1st-level wizard spell and a 2nd-level wizard spell that are in your spellbook. You can cast those spells at their lowest level without expending a spell slot when you have them prepared. If you want to cast either spell at a higher level, you must expend a spell slot as normal.\n\nBy spending 8 hours in study, you can exchange one or both of the spells you chose for different spells of the same levels.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:wizard.signature-spells",
@@ -11434,7 +11583,10 @@
         }
       ],
       "displayName": "Signature Spells",
-      "description": "Signature Spells\nWhen you reach 20th level, you gain mastery over two powerful spells and can cast them with little effort. Choose two 3rd-level wizard spells in your spellbook as your signature spells. You always have these spells prepared, they don’t count against the number of spells you have prepared, and you can cast each of them once at 3rd level without expending a spell slot. When you do so, you can’t do so again until you finish a short or long rest.\n\nIf you want to cast either spell at a higher level, you must expend a spell slot as normal."
+      "description": "Signature Spells\nWhen you reach 20th level, you gain mastery over two powerful spells and can cast them with little effort. Choose two 3rd-level wizard spells in your spellbook as your signature spells. You always have these spells prepared, they don’t count against the number of spells you have prepared, and you can cast each of them once at 3rd level without expending a spell slot. When you do so, you can’t do so again until you finish a short or long rest.\n\nIf you want to cast either spell at a higher level, you must expend a spell slot as normal.",
+      "tags": [
+        "class-feature"
+      ]
     },
     {
       "id": "dnd5e:2014:cantrip.acid-splash",
@@ -103779,7 +103931,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "class-feature": "Class Feature"
         }
       },
       "classes": [
@@ -109615,7 +109768,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "class-feature": "Class Feature"
         }
       },
       "classes": [
@@ -115478,7 +115632,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "class-feature": "Class Feature"
         }
       },
       "classes": [
@@ -121314,7 +121469,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "class-feature": "Class Feature"
         }
       },
       "classes": [
@@ -126834,7 +126990,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "class-feature": "Class Feature"
         }
       },
       "classes": [
@@ -132327,7 +132484,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "class-feature": "Class Feature"
         }
       },
       "classes": [
@@ -137847,7 +138005,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "class-feature": "Class Feature"
         }
       },
       "classes": [
@@ -143340,7 +143499,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "class-feature": "Class Feature"
         }
       },
       "classes": [
@@ -148658,7 +148818,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "class-feature": "Class Feature"
         }
       },
       "classes": [
@@ -153949,7 +154110,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "class-feature": "Class Feature"
         }
       },
       "classes": [
@@ -159267,7 +159429,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "class-feature": "Class Feature"
         }
       },
       "classes": [
@@ -164558,7 +164721,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "class-feature": "Class Feature"
         }
       },
       "classes": [

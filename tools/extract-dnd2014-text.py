@@ -9,6 +9,7 @@ import json
 import re
 from pathlib import Path
 import pdfplumber
+from dnd2014_class_tags import apply_class_tags
 
 ROOT = Path(__file__).resolve().parents[1]
 PDF = ROOT / '.reference-cache/srd-5.1.pdf'
@@ -78,6 +79,7 @@ def source(first, last=None):
 
 system = json.loads(SYSTEM.read_text(encoding='utf8'))
 features = {f['id']: f for f in system['features']}
+apply_class_tags(system)
 for feature in features.values():
     feature.pop('description', None)
     feature.pop('textReferences', None)
@@ -119,6 +121,7 @@ for feature in features.values():
     feature['displayName'] = name
 
 tag_names = {
+    'class-feature': 'Class Feature',
     'background': 'Background', 'expertise': 'Expertise', 'feat': 'Feat',
     'fighter-subclass': 'Fighter Subclass', 'language': 'Language', 'race': 'Race',
     'racial-cantrip': 'Racial Cantrip', 'rogue-subclass': 'Rogue Subclass',

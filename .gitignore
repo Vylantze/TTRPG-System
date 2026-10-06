@@ -4,3 +4,4 @@ dist/
 coverage/
 *.tsbuildinfo
 .reference-cache/
+__pycache__/

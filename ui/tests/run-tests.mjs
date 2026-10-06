@@ -10,6 +10,7 @@ const server=await createServer({server:{middlewareMode:true},appType:'custom'})
 const model=await server.ssrLoadModule('/src/workspace.ts');
 const {App}=await server.ssrLoadModule('/src/App.tsx');
 const {RulesText,FeatureRules}=await server.ssrLoadModule('/src/RulesText.tsx');
+const {FeatureRequirements,advancementLabels}=await server.ssrLoadModule('/src/FeatureRequirements.tsx');
 const file=JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/system.json',import.meta.url),'utf8'));
 function storage(){const values=new Map();return {getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value)};}
 const data=()=>({version:1,systems:[file],characters:[]});
@@ -60,6 +61,30 @@ test('description refresh preserves pinned rules and rejects mechanical changes'
   const changed=structuredClone(file);changed.configurations[0].classes[0].maximumLevel=19;
   assert.throws(()=>model.updateSystemDescriptions(changed,file),/rules differ/);
   assert.equal(changed.configurations[0].classes[0].maximumLevel,19);
+});
+test('bundled category refresh accepts the Class Feature tag but preserves tags used by rules',()=>{
+  const old=structuredClone(file);old.features.forEach(f=>{if(f.tags?.includes('class-feature')){f.tags=f.tags.filter(t=>t!=='class-feature');if(!f.tags.length)delete f.tags;}});old.configurations.forEach(c=>{delete c.system.tagDisplayNames['class-feature'];});
+  assert.deepEqual(model.updateSystemDescriptions(old,file),file);
+  const changed=structuredClone(file);changed.features.find(f=>f.id.endsWith(':prepared.fireball')).tags=[];
+  assert.throws(()=>model.updateSystemDescriptions(changed,file),/rules differ/);
+  const prerequisite=structuredClone(file);prerequisite.features.find(f=>f.id.endsWith(':fighter.second-wind')).maintenance={tag:'class-feature'};
+  const changedPrerequisite=structuredClone(prerequisite);changedPrerequisite.features.find(f=>f.id.endsWith(':fighter.second-wind')).tags=[];
+  assert.throws(()=>model.updateSystemDescriptions(changedPrerequisite,prerequisite),/rules differ/);
+  const roots=structuredClone(file);roots.configurations.forEach(c=>{c.system.rootCandidates={tags:['class-feature']};});const changedRoots=structuredClone(roots);changedRoots.features.find(f=>f.id.endsWith(':fighter.second-wind')).tags=[];
+  assert.throws(()=>model.updateSystemDescriptions(changedRoots,roots),/rules differ/);
+  const html=render(data(),'#features');assert.match(html,/value="class-feature">Class Feature/);
+  assert.match(render(data(),'#features/dnd5e%3A2014%3Afighter.second-wind'),/class="tag">Class Feature/);
+});
+test('Feature pages show Class progression timing and preserve readable prerequisite logic',()=>{
+  const engine=model.createRegistry([file]).createEngine(file.id,file.revision);
+  const find=name=>engine.catalogue.features.find(f=>f.id===`dnd5e:2014:${name}`);
+  const surge=render(data(),'#features/dnd5e%3A2014%3Afighter.action-surge');assert.match(surge,/Levels &amp; requirements/);assert.match(surge,/Fighter level 2/);
+  assert.deepEqual(advancementLabels(find('fighter.remarkable-athlete'),engine),['Fighter level 7']);
+  const athlete=render(data(),'#features/dnd5e%3A2014%3Afighter.remarkable-athlete');assert.match(athlete,/Requires Champion/);
+  const spell=renderToStaticMarkup(createElement(FeatureRequirements,{feature:find('spellbook.fireball'),engine}));assert.match(spell,/Content level:<\/strong> 3/);assert.match(spell,/Wizard Spellcasting/);assert.match(spell,/3 or higher/);
+  assert.doesNotMatch(spell,/Character level 3|Wizard level 1/);
+  const alternate={id:'fixture',revision:1,name:'Alternate',components:[],prerequisites:{any:[{level:4},{all:[{level:2,kind:'class'},{feature:'dnd5e:2014:fighter.champion'}]}]},maintenance:{not:{level:10}}};
+  const text=renderToStaticMarkup(createElement(FeatureRequirements,{feature:alternate,engine}));assert.match(text,/Character level 4 or higher/);assert.match(text,/Class level 2 or higher/);assert.match(text,/ OR /);assert.match(text,/ AND /);assert.match(text,/NOT \(Character level 10 or higher\)/);
 });
 test('React uses Feature and tag display names while retaining internal filter identities',()=>{
   const custom=structuredClone(file),feature=custom.features.find(f=>f.id.endsWith(':skill.acrobatics'));
