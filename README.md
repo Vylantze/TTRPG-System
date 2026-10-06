@@ -2,7 +2,9 @@
 
 A generic character system in which classes, feats, and class abilities are composed from reusable Features.
 
-Start with the [Feature system specification](docs/feature-system-specification.md). The current deliverable is a design draft; no engine or user interface is implemented yet.
+The generic TypeScript engine is implemented. See [engine usage and API](docs/engine.md) and the [Feature system specification](docs/feature-system-specification.md). Official System catalogues and the React UI are the next milestones.
+
+Run `npm run build`, `npm test`, or `npm run demo` after installing the TypeScript development dependency. The engine has no runtime dependencies.
 
 The specification includes a React UI plan for character creation, direct Class and Feature browsing, and future custom Feature authoring. Implementation proceeds from the engine to the UI.
 

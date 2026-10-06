@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T06:32:21.790Z
+Export refreshed UTC: 2026-10-06T07:01:10.158Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -310,5 +310,50 @@ DnD5e 2014, DnD5e 2024, PF2e should not be called a Profile, but System. Name al
 
 [2026-10-06T06:31:16.345Z] ASSISTANT
 I’ll check all current files and references for the System terminology and make each System’s document naming consistent.
+
+----------------------------------------
+
+[2026-10-06T06:32:27.638Z] ASSISTANT
+Updated current filenames and references to use **System** consistently:
+
+- [DnD5e 2014 System](</D:/User/Workspace/TTRPG System/docs/systems/dnd5e-2014-system.md>)
+- [DnD5e 2024 System](</D:/User/Workspace/TTRPG System/docs/systems/dnd5e-2024-system.md>)
+- [PF2e System](</D:/User/Workspace/TTRPG System/docs/systems/pf2e-system.md>)
+
+The combined document is now **DnD5e System Comparison**. Links verified; committed as Mira-Dev: `3aa1d5a`.
+
+----------------------------------------
+
+[2026-10-06T06:33:44.335Z] USER
+Implement the engine
+
+----------------------------------------
+
+[2026-10-06T06:33:52.218Z] ASSISTANT
+I’ll implement the generic engine from the specification, starting with Feature composition, selections, stat calculations, resource dependencies, and character saves. I’ll inspect the current documents and repository instructions first, then build and test the engine before committing it under Mira-Dev’s identity.
+
+----------------------------------------
+
+[2026-10-06T06:35:21.568Z] ASSISTANT
+The repository currently contains specifications only. I’m building a standalone TypeScript engine with no runtime dependencies, so the later React UI can use it directly. The engine will keep definitions immutable, give each acquired Feature a stable identity, and return diagnostics and stat explanations for the UI.
+
+----------------------------------------
+
+[2026-10-06T06:43:49.989Z] ASSISTANT
+The core evaluator and immutable edit commands now compile. It supports nested choices, prerequisite waivers that still enforce resource requirements, sibling resource providers, stat-based and table-based capacity, and resource reservations for outcome-dependent costs.
+
+I’m testing those behaviors with an invented catalogue first, including retraining failures and save/load preservation. The official DnD5e System catalogues remain the next milestone.
+
+----------------------------------------
+
+[2026-10-06T06:53:01.686Z] ASSISTANT
+The tests are passing for composition, prerequisite enforcement, resource scaling, save/load, and level changes. I’ve also fixed edge cases around historical acquisition order and replaying action costs.
+
+I’m finishing the API documentation and checking the remaining command paths. The engine will be delivered with a runnable example and tests; the official System catalogues and React UI remain later milestones.
+
+----------------------------------------
+
+[2026-10-06T06:59:15.786Z] ASSISTANT
+The engine now passes all 60 behavioral tests, and the demo produces a valid character with calculated stats and resource pools. I’m reviewing the final files and committing the engine, example, tests, and API documentation under Mira-Dev’s identity.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

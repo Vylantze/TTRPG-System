@@ -1,0 +1,14 @@
+{
+  "name": "ttrpg-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node tests/engine.test.js",
+    "demo": "npm run build && node examples/demo.js"
+  },
+  "devDependencies": { "typescript": "5.4.5" },
+  "engines": { "node": ">=20" }
+}

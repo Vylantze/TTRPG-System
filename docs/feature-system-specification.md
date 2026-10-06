@@ -2,7 +2,7 @@
 
 A class is a progression of Features. Each level contains independent grants and choices; each Feature can grant other Features, offer further choices, and contain small mechanical components. A character stores its acquired instances and choices separately from reusable definitions. Numeric stats are defined by the rules system and calculated from basic inputs, formulas, and Feature effects.
 
-This specification defines the model and its behavior before implementation. Dungeons and Dragons 5e, DnD5e, and 5e refer to the same system. Implement separate 2014 and 2024 5e systems first, before PF2e. Pathfinder2e and PF2e refer to the same system. The engine must not require fixed ability names, proficiency ranks, class names, or a particular action economy.
+This specification defines the generic model, now implemented by the [TypeScript engine](engine.md). Dungeons and Dragons 5e, DnD5e, and 5e refer to the same system. Implement separate 2014 and 2024 5e systems first, before PF2e. Pathfinder2e and PF2e refer to the same system. The engine must not require fixed ability names, proficiency ranks, class names, or a particular action economy.
 
 ## Scope and decisions
 
@@ -10,7 +10,7 @@ The first deliverable is a written specification. Retraining, prerequisites, and
 
 Confirmed decisions are an unrestricted named-stat registry, support for independent class progressions with system-controlled legality, and prerequisite repair after retraining. Dependent choices that lose eligibility make the build invalid until repaired; they are never changed automatically.
 
-A later implementation should provide definition validation, character validation, calculation, and serialization before adding a React character-building interface. The UI will also browse Classes and Features directly and eventually allow custom Feature creation. This step specifies the UI plan; implementation follows the engine. A complete PF2e class catalogue and combat automation are separate work. Examples below are invented conversion examples, not official class progressions or exact transcriptions of PF2e rules.
+The engine provides definition validation, character validation, calculation, and serialization. The React character-building interface follows the engine and System catalogues. The UI will also browse Classes and Features directly and eventually allow custom Feature creation. A complete PF2e class catalogue and combat automation are separate work. Examples below are invented conversion examples, not official class progressions or exact transcriptions of PF2e rules.
 
 ## Lessons from Anime5e
 
@@ -324,7 +324,7 @@ No external PF2e sources or other workspace projects are design references for t
 
 ## Acceptance criteria for implementation
 
-These are future behavioral checks, not claims that an engine has already been implemented.
+These behavioral criteria guide engine verification. The implemented API and test commands are documented in [engine usage](engine.md).
 
 | Scenario | Required result |
 | --- | --- |
@@ -463,4 +463,4 @@ Acceptance scenarios for the UI include creating and reopening a complete charac
 5. Custom Feature editor, expression and table controls, previews, local catalogue revisions, and migrations.
 6. PF2e system and converted content after both 5e systems satisfy their character-building acceptance criteria.
 
-The next deliverable remains the formal schema and calculation engine. The React UI follows it using this contract.
+The generic engine is implemented. The next deliverable is the DnD5e 2014 System catalogue, followed by DnD5e 2024. The React UI follows those Systems using this contract.
