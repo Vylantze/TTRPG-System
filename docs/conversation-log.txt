@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T14:26:29.777Z
+Export refreshed UTC: 2026-10-06T17:03:09.203Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -700,5 +700,52 @@ Features now show their class progression levels and readable prerequisites, wit
 
 [2026-10-06T14:26:13.418Z] ASSISTANT
 The refresh check also passed: **Systems → Update bundled descriptions** adds the new category to an already loaded 2014 System while protecting tags used by rules. I’m waiting for the full engine regression suite before committing.
+
+----------------------------------------
+
+[2026-10-06T14:27:03.669Z] ASSISTANT
+Implemented:
+
+- Features show class progression levels, content levels, and readable prerequisites in detail pages and character selections.
+- Added the **Class Feature** tag to 66 relevant Features and the tag filter.
+
+For an already loaded System, use **Systems → Update bundled descriptions**.
+
+All 184 engine tests, 14 UI tests, and the production build passed. Committed as `300cab8`.
+
+----------------------------------------
+
+[2026-10-06T16:34:15.800Z] USER
+The text shown for each feature should always be the text shown for each feature in the source material itself. Any skills or features mentioned in each feature should be automatically linked to an existing feature within the system and provided a link and popup for.
+
+----------------------------------------
+
+[2026-10-06T16:34:22.393Z] ASSISTANT
+I’ll check how Feature text is stored and rendered, then use the source wording and add automatic links with popups for references to existing Features and skills.
+
+----------------------------------------
+
+[2026-10-06T16:35:00.020Z] ASSISTANT
+Some spell wrappers and supporting Features still use project-written summaries. I’ll replace those with the relevant SRD wording as well. I’m using the PDF skill to verify the passages against the cached official SRD, and the links will preserve the original wording.
+
+----------------------------------------
+
+[2026-10-06T16:40:18.291Z] ASSISTANT
+I’ll put the reference matching in the engine so it works with any loaded System. Skills will have source-name aliases such as “Sleight of Hand,” and identically named spell wrappers will link to the shared spell Feature. If a name matches several Features, the popup will let the user choose the target.
+
+----------------------------------------
+
+[2026-10-06T16:46:28.200Z] ASSISTANT
+The updated data now uses SRD passages for skills, Expertise, tools, languages, ancestry choices, and class upgrades. Spell wrappers share the complete original spell text. The UI has inline references to Features such as Cunning Action and Sleight of Hand, with source-text popups. I’m checking the interactions and confirming that the rules are unchanged.
+
+----------------------------------------
+
+[2026-10-06T16:51:42.439Z] ASSISTANT
+The live browser check caught a focus issue: closing a popup did not return keyboard focus to its source link. That is fixed. I’m finishing checks for skill popups and navigation, then comparing the updated System data with the previous version.
+
+----------------------------------------
+
+[2026-10-06T16:59:33.592Z] ASSISTANT
+The browser checks passed for ability, skill, and spell popups, including ambiguous names, Escape dismissal, focus restoration, and opening the linked Feature. The rules data is unchanged. I’m finishing the source-text checks and production build before committing.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

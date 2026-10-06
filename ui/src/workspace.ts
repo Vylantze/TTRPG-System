@@ -44,7 +44,7 @@ export function updateSystemDescriptions(existing:SystemFile,incoming:SystemFile
     Object.values(object).forEach(visit);
   }};
   visit(existing);visit(validated);
-  const strip=(definition:{description?:string;source?:string;textReferences?:string[];displayName?:string})=>{const {description,source,textReferences,displayName,...rules}=definition;return rules;};
+  const strip=(definition:{description?:string;source?:string;textReferences?:string[];textAliases?:string[];displayName?:string})=>{const {description,source,textReferences,textAliases,displayName,...rules}=definition;return rules;};
   const featureRules=(feature:SystemFile['features'][number])=>{const {tags,...rules}=strip(feature) as SystemFile['features'][number];const mechanicalTags=tags?.filter(tag=>ruleTags.has(tag));return {...rules,...(mechanicalTags?.length?{tags:mechanicalTags}:{})};};
   const rules=(file:SystemFile)=>({...file,features:file.features.map(featureRules),configurations:file.configurations.map(c=>{const {tagDisplayNames,...system}=c.system;return {...c,system,classes:c.classes.map(strip)};})});
   const canonical=(value:unknown):unknown=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.entries(value).sort(([a],[b])=>a.localeCompare(b)).map(([key,item])=>[key,canonical(item)])):value;

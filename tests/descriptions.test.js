@@ -9,19 +9,40 @@ const feature=name=>file.features.find(f=>f.id===`dnd5e:2014:${name}`);
 
 test('2014 JSON ships descriptions for every included Class and Feature',()=>{
   parseSystemFile(file);
-  for(const f of file.features){assert.ok(f.description?.trim(),f.id);assert.ok(f.displayName?.trim(),f.id);}
+  for(const f of file.features){assert.ok(f.description?.trim()||f.textReferences?.length,f.id);assert.ok(f.displayName?.trim(),f.id);}
   for(const config of file.configurations)for(const cls of config.classes){
     assert.match(cls.description,/Hit Points at 1st Level/);assert.match(cls.description,/Equipment/);assert.match(cls.source,/SRD 5.1/);
     assert.doesNotMatch(cls.description,/20th \+6/,'PDF progression tables must not spill into introductory prose');
   }
   assert.match(feature('fighter.second-wind').description,/1d10 \+ your fighter level/);
   assert.match(feature('rogue.thief').description,/Second-Story Work/);
-  for(const name of ['Fighter','Rogue','Wizard'])assert.match(feature('ability-score-improvement').description,new RegExp(`${name}: Ability Score Improvement`));
+  assert.equal((feature('ability-score-improvement').description.match(/Ability Score Improvement\n/g)??[]).length,3);
   assert.doesNotMatch(feature('wizard.overchannel').description,/Your Spellbook/);
   assert.match(feature('wizard.spellcasting').description,/Copying a Spell into the Book/);
   assert.match(file.configurations[0].classes.find(c=>c.name==='Wizard').description,/Weapons: Daggers, darts, slings/);
   for(const config of file.configurations)for(const f of file.features)for(const tag of f.tags??[])assert.ok(config.system.tagDisplayNames[tag]?.trim(),tag);
   assert.equal(feature('skill.animal-handling').displayName,'Animal Handling Proficiency');
+});
+
+test('supporting Features use source passages and spell wrappers only share original spell text',()=>{
+  for(const f of file.features) {
+    if(f.description)assert.match(f.source,/#page=\d+/);
+    assert.doesNotMatch(f.description??'',/Effects and duration: SRD|require adjudication|proficiency contribution|supplied by another origin|breathWeaponDC/);
+  }
+  assert.match(feature('skill.acrobatics').description,/Your Dexterity \(Acrobatics\) check covers your attempt/);
+  assert.match(feature('skill.sleight-of-hand').description,/coin purse off another person/);
+  assert.match(feature('expertise.arcana').description,/At 1st level, choose two of your skill proficiencies/);
+  assert.match(feature('fighter.upgrade-11').description,/The number of attacks increases to three/);
+  assert.doesNotMatch(feature('fighter.indomitable').description,/r ests/);
+  assert.doesNotMatch(feature('rogue.thief').description,/e qual/);
+  assert.doesNotMatch(feature('rogue.entry').description,/Thievesʼ Cant/);
+  assert.match(feature('race.dragonborn').description,/Breath Weapon\. You can use your action/);
+  assert.match(feature('dragon-ancestry.red').description,/Damage Resistance\./);
+  assert.doesNotMatch(feature('dragon-ancestry.red').description,/Ability Score Increase/);
+  assert.match(feature('tool.smith').description,/Each type of artisan/);
+  assert.match(feature('background-replacement.insight').description,/If a character would gain the same proficiency/);
+  for(const name of ['prepared.fireball','spellbook.fireball','mastery.alarm'])assert.equal(feature(name).description,undefined);
+  assert.deepEqual(feature('skill.sleight-of-hand').textAliases,['Sleight of Hand']);
 });
 
 test('spell descriptions retain complete effects and share canonical text across wrappers',()=>{
@@ -30,6 +51,7 @@ test('spell descriptions retain complete effects and share canonical text across
   for(const spell of spells){assert.match(spell.description,/Casting Time:/);assert.match(spell.description,/Duration:/);assert.match(spell.source,/#page=\d+/);}
   assert.match(feature('spell.fireball').description,/8d6 fire damage/);
   assert.match(feature('spell.fireball').description,/At Higher Levels/);
+  assert.match(feature('spell.ice-storm').description,/20-foot-radius, 40-foot-high cylinder/);
   assert.match(feature('spell.wish').description,/life drain attack/);
   assert.match(feature('spell.wish').description,/You undo a single recent event/);
   assert.match(feature('spell.wish').description,/33 percent chance/);
@@ -46,6 +68,7 @@ test('display references do not acquire Features or alter evaluation, including 
   decorated.classes[0].description='Class narrative';decorated.classes[0].source='Custom source';
   const first=decorated.features[0],second=decorated.features[1];
   first.description='Feature narrative';first.displayName='Readable narrative';decorated.system.tagDisplayNames={'custom-tag':'Readable Tag'};first.textReferences=[second.id];second.textReferences=[first.id];
+  first.textAliases=['Alternative name'];
   const a=new Engine(original),b=new Engine(decorated),character=a.createCharacter('test','Test',[{id:'main',class:original.classes[0].id,level:1}]);
   assert.deepEqual(b.evaluate(character),a.evaluate(character));
 });
@@ -56,6 +79,9 @@ test('catalogue validation rejects malformed display text and unresolved referen
     [c=>{c.classes[0].description=12;},'SCHEMA'],
     [c=>{c.classes[0].source=[];},'SCHEMA'],
     [c=>{c.features[0].displayName=12;},'SCHEMA'],
+    [c=>{c.features[0].textAliases=[12];},'SCHEMA'],
+    [c=>{c.features[0].textAliases=[''];},'SCHEMA'],
+    [c=>{c.features[0].textAliases=['Alias','Alias'];},'DUPLICATE_ID'],
     [c=>{c.system.tagDisplayNames={tag:12};},'SCHEMA'],
     [c=>{c.features[0].textReferences=['missing'];},'UNKNOWN_FEATURE'],
     [c=>{c.features[0].textReferences=[c.features[1].id,c.features[1].id];},'DUPLICATE_ID'],

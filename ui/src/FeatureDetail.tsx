@@ -17,8 +17,8 @@ export function FeatureDetail({feature,engine,openFeature}:{feature:FeatureDefin
     <h3>Building blocks</h3>
     {feature.components.map(c=><section className="component" key={c.id}>
       <div className="row"><strong>{labelFromId(c.id)}</strong><span className="tag">{labelFromId(c.kind)}</span></div>
-      {c.kind==='describe' ? <p>{c.text}</p> : c.kind==='grantFeature' ? <button className="link" onClick={()=>openFeature(c.feature)}>{featureName(engine.catalogue.features.find(f=>f.id===c.feature))} →</button> : c.kind==='grantCapability' ? <><p>{c.name}</p>{c.description&&<p>{c.description}</p>}<p className="muted">Availability and costs are calculated. Resolve effects and triggers at the table.</p></> : null}
-      {c.kind!=='describe' && <details><summary>Definition</summary><pre>{JSON.stringify(c,null,2)}</pre></details>}
+      {c.kind==='grantFeature' ? <button className="link" onClick={()=>openFeature(c.feature)}>{featureName(engine.catalogue.features.find(f=>f.id===c.feature))} →</button> : c.kind==='grantCapability' ? <p>{c.name}</p> : null}
+      <details><summary>Engine definition</summary><pre>{JSON.stringify(c,null,2)}</pre></details>
     </section>)}
     {feature.parameters && <details><summary>Parameters</summary><pre>{JSON.stringify(feature.parameters,null,2)}</pre></details>}
     {feature.tables && <details><summary>Scaling tables</summary><pre>{JSON.stringify(feature.tables,null,2)}</pre></details>}

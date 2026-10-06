@@ -54,6 +54,8 @@ export interface FeatureDefinition {
   id: string; revision: number; name: string; displayName?: string; description?: string; source?: string; tags?: string[]; contentLevel?: number;
   /** Display-only references to shared Feature descriptions; these grant no rules or ownership. */
   textReferences?: string[];
+  /** Alternate source names for automatic prose links; never grants rules. */
+  textAliases?: string[];
   prerequisites?: Predicate; maintenance?: Predicate; resources?: ResourceRequirement[];
   repeat?: { maximum: number; scope: 'character' | 'progression' | 'parent'; uniqueBy?: string[] };
   parameters?: Record<string, ParameterDefinition>; tables?: Record<string, ScalingTable>; components: Component[];
