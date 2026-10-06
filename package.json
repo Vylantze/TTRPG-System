@@ -19,7 +19,10 @@
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && node tests/run-tests.js",
     "demo": "npm run build && node examples/demo.js",
-    "demo:dnd2014": "npm run build && node examples/dnd2014-demo.js"
+    "demo:dnd2014": "npm run build && node examples/dnd2014-demo.js",
+    "ui:dev": "npm run dev --prefix ui",
+    "ui:build": "npm run build --prefix ui",
+    "test:ui": "npm run build && npm run test --prefix ui"
   },
   "devDependencies": {
     "typescript": "5.4.5"

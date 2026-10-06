@@ -167,6 +167,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
 }
 
 export function checkCharacter(v: unknown): asserts v is Character {
+  record(v); if (v.buildState !== undefined && v.buildState !== 'draft' && v.buildState !== 'finalized') throw new RuleError('SCHEMA', 'Invalid character build state.');
   record(v); if (v.version !== 1) throw new RuleError('SAVE_VERSION', 'Unsupported character version.'); text(v.id); if (typeof v.name !== 'string') throw new RuleError('SCHEMA', 'Invalid name.');
   for (const k of ['system', 'catalogue']) { const ref = v[k]; record(ref); text(ref.id); integer(ref.revision, 1); }
   record(v.contentRevisions); record(v.inputs); record(v.selections); record(v.bindings); record(v.alternatives); record(v.resources); record(v.pending);

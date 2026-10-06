@@ -39,10 +39,11 @@ export class Engine {
       return result.stats[id].value;
     }, instance));
   }
-  createCharacter(id: string, name: string, progressions: Progression[] = [], roots: RootAcquisition[] = []): Character {
+  createCharacter(id: string, name: string, progressions: Progression[] = [], roots: RootAcquisition[] = [], options: { draft?: boolean } = {}): Character {
     const c = this.catalogue;
     const character: Character = {
       version: 1, id, name, system: { id: c.system.id, revision: c.system.revision }, catalogue: { id: c.id, revision: c.revision },
+      ...(options.draft ? { buildState: 'draft' as const } : {}),
       contentRevisions: Object.fromEntries([...c.features, ...c.classes].map(f => [f.id, f.revision])),
       inputs: Object.fromEntries(c.system.stats.filter(s => s.kind === 'input' && s.default !== undefined).map(s => [s.id, s.kind === 'input' ? s.default! : 0])),
       progressions: clone(progressions), history: progressions.flatMap(p => Array.from({ length: p.level }, (_, i) => ({ progression: p.id, level: i + 1 }))),
@@ -409,10 +410,10 @@ export class Engine {
     result.provisional = result.status !== 'valid';
     return result;
   }
-  getCandidates(character: Character, selection: string, parameters: Record<string, Value> = {}): Candidate[] {
+  getCandidates(character: Character, selection: string, parameters: Record<string, Value> = {}, options: { features?: string[] } = {}): Candidate[] {
     const result = this.evaluate(character), slot = result.selections.find(s => s.id === selection);
     if (!slot) throw new RuleError('UNKNOWN_SELECTION', `Unknown active selection ${selection}.`);
-    return this.catalogue.features.filter(f => (!slot.definition.candidates.ids || slot.definition.candidates.ids.includes(f.id)) && (!slot.definition.candidates.tags || slot.definition.candidates.tags.every(t => f.tags?.includes(t)))).map(f => {
+    return this.catalogue.features.filter(f => (!options.features || options.features.includes(f.id)) && (!slot.definition.candidates.ids || slot.definition.candidates.ids.includes(f.id)) && (!slot.definition.candidates.tags || slot.definition.candidates.tags.every(t => f.tags?.includes(t)))).map(f => {
       const draft = clone(character), pick: Pick = { id: 'candidate-preview', feature: f.id, parameters };
       draft.selections[selection] = [...(character.selections[selection] ?? []).slice(0, Math.max(0, slot.maximum - 1)), pick];
       const evaluation = this.evaluate(draft), path = pickPath(selection, pick.id);

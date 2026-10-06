@@ -75,8 +75,8 @@ Do not impose a global ability-score cap of 20 in the engine: limits belong to t
 
 1. Implement generic schemas, calculations, composition, resources, and save contracts, using small invented fixtures.
 2. Implement the 2014 system with SRD class progressions and origins, explicit optional-rule settings, and a content coverage manifest. Begin with Fighter, then add a spellcaster and multiclass fixtures before expanding the catalogue.
-3. Implement the separate 2024 system. Verify origin choices, revised class progressions, table-scaled and shared resources, and changed caster-level rounding against its own fixtures.
-4. Build the React Class and Feature browsers, character builder, and sheet against both systems. Add custom Feature authoring afterward.
+3. Build the React Class and Feature browsers, character builder, and sheet against the first JSON 2014 milestone, before further System implementation. Add custom Feature authoring afterward.
+4. Complete the remaining 2014 content and implement the separate 2024 system. Verify origin choices, revised class progressions, table-scaled and shared resources, and changed caster-level rounding against its own fixtures.
 5. Add PF2e using the same generic contracts once both 5e systems pass character-building acceptance checks.
 
 Before either system is called complete, validate every included class through levels 1–20, track each clause's descriptive or automated coverage, and cover ability allocation, skill choices, HP, proficiencies, equipment-dependent AC, subclasses, spell selections, resources, and multiclass interactions. Unsupported clauses remain visible and marked partial; an SRD catalogue must not be advertised as every official 5e option.

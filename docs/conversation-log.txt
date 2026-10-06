@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T10:55:52.798Z
+Export refreshed UTC: 2026-10-06T11:31:02.590Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -481,5 +481,57 @@ All 164 existing tests still pass. The new checks also confirm that the engine�
 
 [2026-10-06T10:55:45.109Z] ASSISTANT
 The conversion is complete: 174 tests pass, including the original rule tests and the new loading, unloading, save-restoration, and generic-command checks. The Fighter/Rogue demo also remains valid. I’m committing the JSON content, engine APIs, and updated UI integration specification.
+
+----------------------------------------
+
+[2026-10-06T10:56:06.333Z] ASSISTANT
+Converted the existing DnD5e 2014 content to JSON.
+
+- Added engine APIs to validate, load, configure, and unload Systems.
+- Moved spell-turn and resource-recovery behavior into the engine, configured through JSON.
+- Preserved catalogue identities and character saves.
+- Documented the future React integration in [JSON Systems](</D:/User/Workspace/TTRPG System/docs/json-systems.md>).
+
+All **174 tests pass**. Committed as `b3d9b1a`; working tree is clean.
+
+----------------------------------------
+
+[2026-10-06T10:56:42.233Z] USER
+Proceed with the UI creation first, before the implementation of other systems.
+
+----------------------------------------
+
+[2026-10-06T10:56:47.187Z] ASSISTANT
+I’ll build the React UI around the existing engine and JSON loader, starting with System loading, Class and Feature browsing, and character creation.
+
+----------------------------------------
+
+[2026-10-06T10:58:15.734Z] ASSISTANT
+The first UI will support incomplete drafts, nested Feature choices, stat inputs, class progression, and character import/export. It will also browse Classes and Features without a character and preserve saves when a System is unloaded. I’ll start with React, Vite, and plain CSS; optional library suggestions will go in the documentation.
+
+----------------------------------------
+
+[2026-10-06T11:02:07.613Z] ASSISTANT
+One engine gap surfaced while wiring the builder: it treats changing an initial choice as retraining, which would lock choices before a draft is finished. I’ll add an explicit construction-draft state so choices can be revised freely during creation. Finalization will require a valid build, after which the normal retraining rules will apply.
+
+----------------------------------------
+
+[2026-10-06T11:08:38.366Z] ASSISTANT
+The UI now has System loading, searchable Class and Feature browsers, and an engine-driven character builder. Drafts and loaded Systems are saved locally, and character export/import preserves pinned revisions. I’m checking the production build and browser workflows next, including nested choices, finalization, and unload/reload behavior.
+
+----------------------------------------
+
+[2026-10-06T11:11:08.982Z] ASSISTANT
+The production build passes. I’ve also kept the bundled System JSON separate from the application code, so it loads on demand. The browser tool rejected both local-server URLs; I’ll verify what I can through integration checks and clearly distinguish those results from interactive browser testing.
+
+----------------------------------------
+
+[2026-10-06T11:18:27.887Z] ASSISTANT
+The new integration checks pass: they cover persisted drafts, JSON-based browsing, character rendering, and preserving exportable saves when a System is unavailable. All engine tests pass too, including draft editing and finalization. The UI also has resource recovery and reserved-use settlement controls. I’m finishing the usage guide and updating the implementation order to put this UI ahead of other Systems.
+
+----------------------------------------
+
+[2026-10-06T11:27:27.305Z] ASSISTANT
+The first UI baseline is complete, including draft class removal, editable initial choices, stat explanations, and JSON exports. I’m running the final checks and committing it. The remaining verification gap is interactive browser review: the browser tool blocked localhost, so the UI checks use React server rendering rather than click-through tests.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

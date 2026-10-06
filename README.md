@@ -2,9 +2,11 @@
 
 A generic character system in which classes, feats, and class abilities are composed from reusable Features.
 
-The generic TypeScript engine and the first [DnD5e 2014 character-building milestone](docs/systems/dnd5e-2014-system.md) are implemented. See [engine usage and API](docs/engine.md) and the [Feature system specification](docs/feature-system-specification.md). The 2014 catalogue currently supports Fighter, Rogue, Wizard, SRD racial options, Acolyte, and Wizard spell selections. Its remaining classes, DnD5e 2024, and the React UI follow in that order.
+The generic TypeScript engine and the first [DnD5e 2014 character-building milestone](docs/systems/dnd5e-2014-system.md) are implemented. See [engine usage and API](docs/engine.md) and the [Feature system specification](docs/feature-system-specification.md). The 2014 catalogue currently supports Fighter, Rogue, Wizard, SRD racial options, Acolyte, and Wizard spell selections. The first React UI is implemented ahead of the remaining System work; DnD5e 2024 and PF2e remain later milestones.
 
-DnD5e 2014 rules and reference metadata are JSON files. The engine provides a browser-safe loader and System registry for the future React UI to load and unload Systems. See the [JSON format and integration API](docs/json-systems.md).
+DnD5e 2014 rules and reference metadata are JSON files. The engine provides a browser-safe loader and System registry for the React UI to load and unload Systems. See the [JSON format and integration API](docs/json-systems.md).
+
+Run `npm install --prefix ui` and `npm run ui:dev` to open the React character workspace. See [UI usage, scope, and verification](docs/react-ui.md).
 
 Run `npm run build`, `npm test`, or `npm run demo` after installing the TypeScript development dependency. The engine has no runtime dependencies.
 

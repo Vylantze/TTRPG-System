@@ -1,0 +1,25 @@
+{
+  "name": "ttrpg-system-ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "tsc --noEmit && node tests/run-tests.mjs"
+  },
+  "dependencies": {
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.4.5",
+    "vite": "7.3.7"
+  },
+  "engines": {
+    "node": ">=22.12"
+  }
+}
