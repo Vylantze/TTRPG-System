@@ -8,6 +8,8 @@ Status: the first character-building milestone is implemented. Fighter (Champion
 
 ## Run and import
 
+Rules are authored in [system.json](../../src/systems/dnd5e-2014/system.json), with optional reference data in [metadata.json](../../src/systems/dnd5e-2014/metadata.json). A generic engine registry can load and unload this System for the future React UI. The existing TypeScript imports below remain thin compatibility adapters.
+
 Run `npm run demo:dnd2014` for a complete Fighter 3 / Rogue 2 example. `npm test` verifies all included classes at every level and their rule interactions. The [example builder](../../examples/dnd2014-character.js) supplies explicit choices, and the [demo](../../examples/dnd2014-demo.js) evaluates them.
 
 ```js
@@ -52,7 +54,7 @@ Wizard spellbook ownership, daily preparation, cantrips, spell slots, Spell Mast
 
 The `prepared` selection owned by `wizard.spellcasting` checks current spellbook ownership and class-level eligibility. Its maximum is Wizard level plus Intelligence modifier, with a minimum limit of one; the character may leave capacity unused. Replacements require `event: 'long-rest'` on the selection edit. Spellbook learning at each level checks the historical Wizard level instead. Ritual spells in the book need no preparation or slot and add ten minutes to casting time. Spell Mastery needs preparation; Signature Spells are always prepared in addition to the daily list and each has its own short/long-rest use.
 
-Use System command `castSpell` (also exported as `castWizardSpell`) for the 2014 bonus-action restriction. Supply `{ bonusActionSpell: false, otherSpell: false, onlyActionCantrips: true }` at the start of a turn and retain the returned turn state with the returned action budget. A bonus-action spell permits other spells that turn only when they are cantrips with a casting time of one action. The rule works in either casting order and includes racial spells. The caller owns turn boundaries, reactions on other turns, and casting time across multiple rounds. Generic `useAbility` alone does not enforce this System turn rule.
+Use engine command `castSpell` (also exported as `castWizardSpell`) for the 2014 bonus-action restriction. Supply `{ bonusActionSpell: false, otherSpell: false, onlyActionCantrips: true }` at the start of a turn and retain the returned turn state with the returned action budget. A bonus-action spell permits other spells that turn only when they are cantrips with a casting time of one action. The rule works in either casting order and includes racial spells. The caller owns turn boundaries, reactions on other turns, and casting time across multiple rounds. Generic `useAbility` alone does not enforce this System turn rule.
 
 The runtime flag `spellComponentsAvailable` defaults to true. Set it to false when a focus, hands, voice, or required components do not permit casting. The caller determines actual component availability. Both Wizard and racial casting check it and armor proficiency.
 
@@ -64,4 +66,4 @@ Export `dnd2014Coverage` gives overall coverage; `getDnd2014FeatureCoverage()` r
 
 Source references: SRD 5.1 pp. 3–9 (races), 24–25 (Fighter), 39–41 (Rogue), 52–54 (Wizard), 56–58 (advancement and multiclassing), 60–61 (Acolyte), 62–64 (armor), 75 (Grappler), and 111–113 (Wizard spell list), plus each extracted spell's description page. See [the official SRD](https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf) and [attribution](../../NOTICE.md).
 
-The optional development script `tools/extract-wizard-spells.py` reproduces header metadata from the official PDF in an ignored `.reference-cache` directory. It requires `pypdf`; that dependency is not needed to build or run the engine. Generated spell data ships as ordinary TypeScript.
+The optional development script `tools/extract-wizard-spells.py` reproduces header metadata from the official PDF in an ignored `.reference-cache` directory. It requires `pypdf`; that dependency is not needed to build or run the engine. Spell header metadata ships in `metadata.json`; rules, Features, Classes, and option configurations ship in `system.json`. The script updates reference headers, while mechanical Features are edited explicitly. See [the JSON loader and registry contract](../json-systems.md).

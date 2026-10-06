@@ -49,8 +49,9 @@ for level, names in enumerate(SPELLS):
         school = next(s for s in ['abjuration','conjuration','divination','enchantment','evocation','illusion','necromancy','transmutation'] if s in header)
         rows.append({'slug': re.sub(r'[^a-z0-9]+','-',name.lower()).strip('-'), 'name': name, 'level': level, 'school': school, 'ritual': '(ritual)' in header, 'castingTime': match[2], 'range': match[3], 'components': match[4], 'page': page})
 
-output = '// Generated from the official SRD 5.1; see tools/extract-wizard-spells.py and NOTICE.md.\n'
-output += 'export interface Spell { slug: string; name: string; level: number; school: string; ritual: boolean; castingTime: string; range: string; components: string; page: number }\n'
-output += 'export const wizardSpells: Spell[] = ' + json.dumps(rows, ensure_ascii=False, indent=2) + ';\n'
-Path('src/systems/dnd5e-2014/spells.ts').write_text(output, encoding='utf8')
+# Update cosmetic spell header metadata; executable rules remain in system.json.
+metadata_path = Path('src/systems/dnd5e-2014/metadata.json')
+metadata = json.loads(metadata_path.read_text(encoding='utf8'))
+metadata['wizardSpells'] = rows
+metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
 print(f'Extracted {len(rows)} Wizard spell headers from SRD 5.1.')

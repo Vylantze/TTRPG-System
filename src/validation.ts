@@ -102,6 +102,22 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     unique([...c.features, ...c.classes].map(f => f.id), 'content definition');
     checkExpression(c.system.characterLevel, c, functions);
     if (c.system.validation !== undefined) { list(c.system.validation); unique(c.system.validation.map(r => r.id), 'System rule'); for (const rule of c.system.validation) { record(rule); text(rule.id); text(rule.message); checkPredicate(rule.requirement, c, 0, functions); } }
+    if (c.system.commandRules !== undefined) {
+      record(c.system.commandRules);
+      for (const key of Object.keys(c.system.commandRules)) if (!['spellTurn','selectedRecovery'].includes(key)) throw new RuleError('SCHEMA', 'Unknown command policy.');
+      const turn = c.system.commandRules.spellTurn;
+      if (turn) { record(turn); for (const key of ['castingAbilityKey','levelKey','timeKey','ritualKey','bonusTime','actionTime'] as const) text(turn[key]); }
+      const recovery = c.system.commandRules.selectedRecovery;
+      if (recovery) {
+        record(recovery); if (recovery.eventKind !== undefined) text(recovery.eventKind); text(recovery.capabilityName); text(recovery.requiredEvent); text(recovery.budgetStat);
+        if (!c.system.stats.some(s => s.id === recovery.budgetStat)) throw new RuleError('UNKNOWN_STAT', 'Unknown recovery budget stat.');
+        if (recovery.boundaryEvent !== undefined) text(recovery.boundaryEvent);
+        record(recovery.targets); if (!Object.keys(recovery.targets).length) throw new RuleError('SCHEMA', 'Recovery needs targets.');
+        unique(Object.values(recovery.targets).map(t => `${t.scope}:${t.key}`), 'recovery target pool');
+        for (const [key, target] of Object.entries(recovery.targets)) { text(key); record(target); text(target.key); if (!['character','progression','parent','instance'].includes(target.scope) || number(target.weight) <= 0) throw new RuleError('SCHEMA', 'Invalid recovery target.'); }
+        if (!c.features.some(f => f.components.some(v => v.kind === 'grantCapability' && v.name === recovery.capabilityName && !v.spendOnOutcomes))) throw new RuleError('SCHEMA', 'Recovery needs a capability with immediate costs.');
+      }
+    }
     for (const cls of c.classes) { if (cls.maximumLevel !== undefined) integer(cls.maximumLevel, 1); if (cls.multiclassPrerequisites) checkPredicate(cls.multiclassPrerequisites, c, 0, functions); }
     for (const s of c.system.stats) if (s.kind === 'derived') checkExpression(s.expression, c, functions);
     if (c.system.contextDefaults) { record(c.system.contextDefaults); Object.values(c.system.contextDefaults).forEach(value); }

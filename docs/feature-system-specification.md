@@ -464,3 +464,7 @@ Acceptance scenarios for the UI include creating and reopening a complete charac
 6. PF2e system and converted content after both 5e systems satisfy their character-building acceptance criteria.
 
 The generic engine and the first DnD5e 2014 character-building milestone are implemented. The 2014 catalogue supports Fighter, Rogue, Wizard, SRD racial options, Acolyte, and Wizard spell selections; its canonical document records calculated and descriptive coverage. Complete the remaining 2014 classes, followed by DnD5e 2024. The React UI follows those Systems using this contract.
+
+### Loadable JSON Systems
+
+System content is supplied through versioned JSON files rather than executable rules modules. The React shell will import and unload these files using the engine registry, derive configuration controls from declared option domains, and browse their Classes and Features directly. Unloading preserves character saves; reopening requires their exact pinned System and catalogue revisions. The future Feature editor will export data using the same engine-validated format. The implemented [JSON contract](json-systems.md) defines lifecycle APIs, configuration identities, and data-driven command policies.
