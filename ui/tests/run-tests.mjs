@@ -9,6 +9,7 @@ import { exampleCharacter } from '../../examples/dnd2014-character.js';
 const server=await createServer({server:{middlewareMode:true},appType:'custom'});
 const model=await server.ssrLoadModule('/src/workspace.ts');
 const {App}=await server.ssrLoadModule('/src/App.tsx');
+const {RulesText,FeatureRules}=await server.ssrLoadModule('/src/RulesText.tsx');
 const file=JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/system.json',import.meta.url),'utf8'));
 function storage(){const values=new Map();return {getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value)};}
 const data=()=>({version:1,systems:[file],characters:[]});
@@ -39,11 +40,48 @@ test('React Class and Feature browsers render directly from the loaded JSON',()=
   const features=render(data(),'#features');assert.match(features,/Explore Features/);assert.match(features,/Features found/);
   const detail=render(data(),'#features/dnd5e%3A2014%3Awizard.spellcasting');assert.match(detail,/Building blocks/);assert.match(detail,/chooseFeatures/);
 });
+test('Class and Feature detail pages display source rules and shared spell effects',()=>{
+  const cls=render(data(),'#classes/dnd5e%3A2014%3Afighter');assert.match(cls,/Hit Points at 1st Level/);assert.match(cls,/martial weapons/);assert.match(cls,/SRD 5.1 pp. 24/);
+  const secondWind=render(data(),'#features/dnd5e%3A2014%3Afighter.second-wind');assert.match(secondWind,/1d10 \+ your fighter level/);
+  const spell=render(data(),'#features/dnd5e%3A2014%3Aprepared.fireball');assert.match(spell,/8d6 fire damage/);assert.match(spell,/At Higher Levels/);assert.match(spell,/View Fireball Feature/);
+  assert.match(render(data(),'#systems'),/Update bundled descriptions/);
+});
+test('stored workspaces deduplicate repeated configuration data and read older saves',()=>{
+  const store=storage(),workspace={...data(),characters:[exampleCharacter().character]};
+  model.writeWorkspace(store,workspace);
+  const packed=store.getItem(model.STORAGE_KEY);assert.ok(packed.length<JSON.stringify(workspace).length&&packed.length*2<5_000_000,'System copies should not exhaust browser storage');
+  assert.deepEqual(model.readWorkspace(store).systems,workspace.systems);assert.deepEqual(model.readWorkspace(store).characters,workspace.characters);
+  store.setItem(model.STORAGE_KEY,JSON.stringify(workspace));assert.deepEqual(model.readWorkspace(store).systems,workspace.systems);
+  const broken=JSON.parse(packed);broken.systems[0].configurations[0].classes=999;store.setItem(model.STORAGE_KEY,JSON.stringify(broken));assert.throws(()=>model.readWorkspace(store),/invalid shared-data reference/);
+});
+test('description refresh preserves pinned rules and rejects mechanical changes',()=>{
+  const older=structuredClone(file);older.features.forEach(f=>{delete f.description;delete f.textReferences;delete f.source;delete f.displayName;});older.configurations.forEach(c=>{delete c.system.tagDisplayNames;c.classes.forEach(cls=>{delete cls.description;delete cls.source;});});
+  assert.deepEqual(model.updateSystemDescriptions(older,file),file);
+  const changed=structuredClone(file);changed.configurations[0].classes[0].maximumLevel=19;
+  assert.throws(()=>model.updateSystemDescriptions(changed,file),/rules differ/);
+  assert.equal(changed.configurations[0].classes[0].maximumLevel,19);
+});
+test('React uses Feature and tag display names while retaining internal filter identities',()=>{
+  const custom=structuredClone(file),feature=custom.features.find(f=>f.id.endsWith(':skill.acrobatics'));
+  feature.name='internal_feature_name';feature.displayName='Graceful Movement';feature.description='A readable custom description.';
+  custom.configurations.forEach(c=>{c.system.tagDisplayNames['skill-proficiency']='Trained Skill';});
+  const workspace={version:1,systems:[custom],characters:[]};
+  const browse=render(workspace,'#features');assert.match(browse,/Graceful Movement/);assert.match(browse,/value="skill-proficiency">Trained Skill/);assert.doesNotMatch(browse,/internal_feature_name/);
+  const detail=render(workspace,'#features/dnd5e%3A2014%3Askill.acrobatics');assert.match(detail,/<h2>Graceful Movement<\/h2>/);assert.match(detail,/class="tag">Trained Skill/);
+  const legacy=structuredClone(file);delete legacy.features[1].displayName;legacy.configurations.forEach(c=>{delete c.system.tagDisplayNames;});assert.match(render({version:1,systems:[legacy],characters:[]},'#features'),/Proficiency: acrobatics/);
+});
+test('imported descriptions render as text and shared references do not recurse',()=>{
+  const html=renderToStaticMarkup(createElement(RulesText,{text:'<script>alert(1)</script>\n\nSecond paragraph',source:'javascript:alert(1)'}));
+  assert.doesNotMatch(html,/<script>/);assert.match(html,/&lt;script&gt;/);assert.match(html,/<p>Second paragraph<\/p>/);assert.doesNotMatch(html,/<a/);
+  const feature={id:'loop',name:'Loop',revision:1,description:'Shared text',textReferences:['loop'],components:[]};
+  const shared=renderToStaticMarkup(createElement(FeatureRules,{feature,engine:{catalogue:{features:[feature]}},openFeature(){}}));assert.equal((shared.match(/Shared text/g)??[]).length,2);
+});
 test('React character builder exposes nested selections and preserves a construction draft',()=>{
   const {character}=exampleCharacter();character.buildState='draft';
   const html=render({...data(),characters:[character]},`#characters/${character.id}`);
   assert.match(html,/Feature selections/);assert.match(html,/Basic stats/);assert.match(html,/Finalize character/);assert.match(html,/Ready to finalize/);
   assert.match(html,/languages/);assert.match(html,/Second Wind|Fighting style|fighting style/i);
+  assert.match(html,/Read Fighter Class rules/);assert.match(html,/Read Feature rules/);assert.match(html,/While you are wearing armor, you gain a \+1 bonus to AC/);
 });
 test('unloaded Systems keep characters exportable and display an explicit reload requirement',()=>{
   const {character}=exampleCharacter();

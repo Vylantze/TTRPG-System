@@ -67,3 +67,9 @@ Export `dnd2014Coverage` gives overall coverage; `getDnd2014FeatureCoverage()` r
 Source references: SRD 5.1 pp. 3–9 (races), 24–25 (Fighter), 39–41 (Rogue), 52–54 (Wizard), 56–58 (advancement and multiclassing), 60–61 (Acolyte), 62–64 (armor), 75 (Grappler), and 111–113 (Wizard spell list), plus each extracted spell's description page. See [the official SRD](https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf) and [attribution](../../NOTICE.md).
 
 The optional development script `tools/extract-wizard-spells.py` reproduces header metadata from the official PDF in an ignored `.reference-cache` directory. It requires `pypdf`; that dependency is not needed to build or run the engine. Spell header metadata ships in `metadata.json`; rules, Features, Classes, and option configurations ship in `system.json`. The script updates reference headers, while mechanical Features are edited explicitly. See [the JSON loader and registry contract](../json-systems.md).
+
+## Saved rule text and UI labels
+
+All 825 included Features now retain descriptions and display names in `system.json`. All 16 tag identities have display names in each System configuration. Fighter, Rogue, and Wizard retain source-backed starting traits and equipment text. The included class Features, racial traits, Acolyte, Grappler, and all 204 Wizard spells retain normalized source text with page references. Spell wrappers share canonical descriptions through display-only `textReferences`; supporting building blocks use explanatory project text.
+
+Run `tools/extract-dnd2014-text.py` with `pdfplumber` installed and the pinned PDF at `.reference-cache/srd-5.1.pdf` to regenerate text and labels. This changes display fields only. Rules and content identities stay at revision 1; existing characters can receive these cosmetic fields using **Update bundled descriptions** in the UI's Systems page. Mechanical modifications require the normal revision/migration workflow.

@@ -1,13 +1,15 @@
+import { featureName, tagName } from './display';
 import { useMemo, useState } from 'react';
 import { type Engine, type Character, type Edit, type SelectionResult, type Value } from '../../src/index';
 import { labelFromId } from './workspace';
+import { descriptionPreview, FeatureRules } from './RulesText';
 
 const PAGE=12;
 export function SelectionCard({slot,engine,character,edit,openFeature,ownerName}:{slot:SelectionResult;engine:Engine;character:Character;edit:(edits:Edit[])=>void;openFeature:(id:string)=>void;ownerName?:string}) {
   const [open,setOpen]=useState(false),[query,setQuery]=useState(''),[page,setPage]=useState(0),[event,setEvent]=useState('');
   const definitions=engine.catalogue.features;
   const title=ownerName?`${ownerName} · ${labelFromId(slot.definition.id)}`:labelFromId(slot.definition.id);
-  const matches=useMemo(()=>definitions.filter(f=>(!slot.definition.candidates.ids || slot.definition.candidates.ids.includes(f.id)) && (!slot.definition.candidates.tags || slot.definition.candidates.tags.every(t=>f.tags?.includes(t))) && `${f.name} ${f.tags?.join(' ')??''}`.toLowerCase().includes(query.toLowerCase())),[definitions,slot.definition,query]);
+  const matches=useMemo(()=>definitions.filter(f=>(!slot.definition.candidates.ids || slot.definition.candidates.ids.includes(f.id)) && (!slot.definition.candidates.tags || slot.definition.candidates.tags.every(t=>f.tags?.includes(t))) && `${featureName(f)} ${f.name} ${f.tags?.map(tag=>tagName(engine.catalogue.system,tag)).join(' ')??''}`.toLowerCase().includes(query.toLowerCase())),[definitions,slot.definition,query]);
   const visible=matches.slice(page*PAGE,(page+1)*PAGE);
   const candidates=useMemo(()=>open?engine.getCandidates(character,slot.id,{}, {features:visible.map(f=>f.id)}):[],[engine,character,slot.id,open,query,page]);
   const picks=character.selections[slot.id]??[];
@@ -21,7 +23,8 @@ export function SelectionCard({slot,engine,character,edit,openFeature,ownerName}
     {picks.map(p=>{
       const feature=definitions.find(f=>f.id===p.feature);
       return <div className="picked" key={p.id}>
-        <div className="row"><button className="link" onClick={()=>openFeature(p.feature)}>{feature?.name??p.feature}</button><button className="quiet" aria-label={`Remove ${feature?.name??p.feature}`} onClick={()=>update(picks.filter(x=>x.id!==p.id))}>Remove</button></div>
+        <div className="row"><button className="link" onClick={()=>openFeature(p.feature)}>{featureName(feature)}</button><button className="quiet" aria-label={`Remove ${featureName(feature)}`} onClick={()=>update(picks.filter(x=>x.id!==p.id))}>Remove</button></div>
+        {feature && (feature.description || feature.textReferences?.length) ? <details><summary>Read Feature rules</summary><FeatureRules feature={feature} engine={engine} openFeature={openFeature} /></details>:null}
         {feature?.parameters && <div className="input-grid">{Object.entries(feature.parameters).map(([key,parameter])=>{
           const value=p.parameters?.[key]??parameter.default;
           const change=(value:Value)=>update(picks.map(x=>x.id===p.id?{...x,parameters:{...x.parameters,[key]:value}}:x));
@@ -34,7 +37,8 @@ export function SelectionCard({slot,engine,character,edit,openFeature,ownerName}
       <div className="candidate-list">{visible.map(f=>{
         const candidate=candidates.find(c=>c.feature===f.id), selected=picks.some(p=>p.feature===f.id);
         return <div className="candidate" key={f.id}>
-          <div><button className="link" onClick={()=>openFeature(f.id)}>{f.name}</button><span className={`badge ${candidate?.status??'incomplete'}`}>{candidate?.status==='valid'?'Eligible':candidate?.status==='invalid'?'Requirements unmet':'Pending'}</span>
+          <div><button className="link" onClick={()=>openFeature(f.id)}>{featureName(f)}</button><span className={`badge ${candidate?.status??'incomplete'}`}>{candidate?.status==='valid'?'Eligible':candidate?.status==='invalid'?'Requirements unmet':'Pending'}</span>
+          {f.description&&<p className="muted small">{descriptionPreview(f.description)}</p>}
           {candidate?.diagnostics.length ? <p className="muted small">{candidate.diagnostics.slice(0,2).map(d=>d.message).join(' ')}</p>:null}</div>
           <button className="quiet" disabled={picks.length>=slot.maximum || (selected&&!slot.definition.allowDuplicates)} onClick={()=>update([...picks,{id:crypto.randomUUID(),feature:f.id}])}>{selected&&!slot.definition.allowDuplicates?'Selected':'Choose'}</button>
         </div>;

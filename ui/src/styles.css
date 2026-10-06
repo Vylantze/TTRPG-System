@@ -6,3 +6,5 @@
 @media(prefers-reduced-motion:no-preference){button,a{transition:background-color .12s,filter .12s}}
 
 .skip-link{position:fixed;left:250px;top:-100px;z-index:100;background:#fffefa;padding:12px;border:2px solid var(--green)}.skip-link:focus{top:12px}
+
+.rules-text{max-width:78ch;line-height:1.75;font-size:14px;font-weight:400;color:#253930;overflow-wrap:anywhere}.rules-text p{white-space:pre-wrap;margin:16px 0}.rules-text .source{font-size:12px;color:var(--muted)}.shared-rules{border-left:3px solid var(--line);padding-left:20px;margin:24px 0}.acquired-feature{padding:12px 0;border-bottom:1px solid var(--line)}.acquired-feature summary{cursor:pointer}.class-rules:empty{display:none}

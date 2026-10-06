@@ -64,3 +64,13 @@ Automated interactive browser verification was blocked by the available browser 
 ## Remaining scope
 
 The structured custom Feature editor, explicit resource-binding and alternative-formula controls, custom advancement-history editing, full 2014 class content, DnD5e 2024, and PF2e remain later work. Loading manually authored engine-compatible JSON is already supported. The UI does not automate combat adjudication, spell effects, dice, targets, equipment inventory, or runtime rule triggers. Session turn/action controls are not persisted as character state.
+
+## Descriptions and display names
+
+The bundled 2014 JSON now retains Class traits and equipment text, Feature descriptions, and full descriptions for all 204 Wizard spells. Class and Feature browsers show description previews and full source text. Selected Features and class traits can be expanded inside the builder; acquired Features can be expanded on the character sheet. Spell wrappers display the shared canonical spell description. Paragraphs are preserved and imported text is rendered as plain text.
+
+All bundled Features have `displayName` values. Systems supply tag labels with `tagDisplayNames`; browsers, filters, selections, source links, advancement lists, and sheet labels use these display names while retaining internal identities for rules and saves. Older/custom Systems fall back to Feature names and humanized tag IDs.
+
+On the Systems page, **Update bundled descriptions** updates previously loaded bundled 2014 text and display labels. It compares all mechanical data before replacement and refuses to overwrite customized or different rules. Character saves and their System/catalogue revision pins remain unchanged.
+
+Browser workspace storage now deduplicates repeated class and stat arrays across System configurations (storage envelope version 2, under the existing key). Version 1 workspaces remain readable and are rewritten on the next save. System import/export JSON and character JSON retain their original formats. The enlarged bundled content fits within the tested five-million-byte UTF-16 storage budget with an example character; storage failures still remain visible. Larger collections can still require JSON exports or a later IndexedDB migration.
