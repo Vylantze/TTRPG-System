@@ -463,4 +463,4 @@ Acceptance scenarios for the UI include creating and reopening a complete charac
 5. Custom Feature editor, expression and table controls, previews, local catalogue revisions, and migrations.
 6. PF2e system and converted content after both 5e systems satisfy their character-building acceptance criteria.
 
-The generic engine is implemented. The next deliverable is the DnD5e 2014 System catalogue, followed by DnD5e 2024. The React UI follows those Systems using this contract.
+The generic engine and the first DnD5e 2014 character-building milestone are implemented. The 2014 catalogue supports Fighter, Rogue, Wizard, SRD racial options, Acolyte, and Wizard spell selections; its canonical document records calculated and descriptive coverage. Complete the remaining 2014 classes, followed by DnD5e 2024. The React UI follows those Systems using this contract.

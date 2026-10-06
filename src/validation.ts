@@ -59,6 +59,7 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
   switch (v.kind) {
     case 'grantFeature': text(v.feature); if (!c.features.some(f => f.id === v.feature)) throw new RuleError('UNKNOWN_FEATURE', `Missing grant ${v.feature}.`); if (v.condition) throw new RuleError('CONDITIONAL_GRANT', 'Use advancement entries for conditional acquisition; grants cannot have runtime conditions.'); if (v.parameters !== undefined) { record(v.parameters); Object.values(v.parameters).forEach(value); } break;
     case 'chooseFeatures':
+      if (v.eligibility !== undefined && !['acquisition', 'current'].includes(String(v.eligibility))) throw new RuleError('SCHEMA', 'Invalid choice eligibility timing.');
       if (v.condition) throw new RuleError('CONDITIONAL_CHOICE', 'Choices cannot depend on runtime conditions.');
       expr(v.minimum); expr(v.maximum); record(v.candidates);
       if (v.candidates.ids !== undefined) { list(v.candidates.ids); for (const id of v.candidates.ids) { text(id); if (!c.features.some(f => f.id === id)) throw new RuleError('UNKNOWN_FEATURE', `Missing candidate ${id}.`); } }
@@ -92,12 +93,16 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     const c = input as unknown as Catalogue;
     text(c.system.id); integer(c.system.revision, 1); text(c.system.name); list(c.system.stats);
     if (typeof c.system.allowMultipleClasses !== 'boolean') throw new RuleError('SCHEMA', 'System must declare multiclass policy.');
+    if (c.system.allowDuplicateClasses !== undefined && typeof c.system.allowDuplicateClasses !== 'boolean') throw new RuleError('SCHEMA', 'Invalid duplicate class policy.');
+    if (c.system.rootCandidates !== undefined) { record(c.system.rootCandidates); const policy = c.system.rootCandidates; if (!policy.ids && !policy.tags) throw new RuleError('SCHEMA', 'Root candidates need IDs or tags.'); if (policy.ids) { list(policy.ids); policy.ids.forEach(id => { text(id); if (!c.features.some(f => f.id === id)) throw new RuleError('UNKNOWN_FEATURE', 'Unknown root candidate.'); }); } if (policy.tags) { list(policy.tags); policy.tags.forEach(text); } }
     for (const s of c.system.stats) { record(s); text(s.id); text(s.name); constraints(s); if (s.kind === 'input') { if (s.default !== undefined) number(s.default); } else if (s.kind !== 'derived') throw new RuleError('SCHEMA', 'Invalid stat kind.'); }
     unique(c.system.stats.map(s => s.id), 'stat');
     for (const f of c.features) { record(f); text(f.id); integer(f.revision, 1); text(f.name); list(f.components); }
     for (const cls of c.classes) { record(cls); text(cls.id); integer(cls.revision, 1); text(cls.name); record(cls.levels); }
     unique([...c.features, ...c.classes].map(f => f.id), 'content definition');
     checkExpression(c.system.characterLevel, c, functions);
+    if (c.system.validation !== undefined) { list(c.system.validation); unique(c.system.validation.map(r => r.id), 'System rule'); for (const rule of c.system.validation) { record(rule); text(rule.id); text(rule.message); checkPredicate(rule.requirement, c, 0, functions); } }
+    for (const cls of c.classes) { if (cls.maximumLevel !== undefined) integer(cls.maximumLevel, 1); if (cls.multiclassPrerequisites) checkPredicate(cls.multiclassPrerequisites, c, 0, functions); }
     for (const s of c.system.stats) if (s.kind === 'derived') checkExpression(s.expression, c, functions);
     if (c.system.contextDefaults) { record(c.system.contextDefaults); Object.values(c.system.contextDefaults).forEach(value); }
     for (const f of c.features) {
@@ -118,9 +123,9 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       const visitTables = (v: unknown): void => { if (!v || typeof v !== 'object') return; if (Array.isArray(v)) { v.forEach(visitTables); return; } const o = v as Record<string, unknown>; if ('table' in o && !('owner' in o) && !Object.hasOwn(f.tables ?? {}, String(o.table))) throw new RuleError('UNKNOWN_TABLE', `Missing ${f.id}/${o.table}.`); Object.values(o).forEach(visitTables); };
       visitTables(f.components);
     }
-    const entries = (levels: unknown): void => { record(levels); for (const [level, rows] of Object.entries(levels)) { integer(Number(level), 1); list(rows); unique(rows.map(v => { record(v); text(v.id); return v.id; }), 'progression entry'); for (const v of rows) { checkComponent(v, c, functions); if (!['grantFeature', 'chooseFeatures'].includes(v.kind)) throw new RuleError('SCHEMA', 'Invalid progression entry.'); } } };
+    const entries = (levels: unknown, minimumLevel = 1): void => { record(levels); for (const [level, rows] of Object.entries(levels)) { integer(Number(level), minimumLevel); list(rows); unique(rows.map(v => { record(v); text(v.id); return v.id; }), 'progression entry'); for (const v of rows) { checkComponent(v, c, functions); if (!['grantFeature', 'chooseFeatures'].includes(v.kind)) throw new RuleError('SCHEMA', 'Invalid progression entry.'); } } };
     for (const cls of c.classes) entries(cls.levels);
-    if (c.system.advancement) entries(c.system.advancement);
+    if (c.system.advancement) entries(c.system.advancement, 0);
     if (c.system.classes) { list(c.system.classes); for (const id of c.system.classes) if (!c.classes.some(v => v.id === id)) throw new RuleError('UNKNOWN_CLASS', `Unknown System class ${id}.`); }
     if (c.system.alternatives) { record(c.system.alternatives); for (const [stat, alternatives] of Object.entries(c.system.alternatives)) { if (!c.system.stats.some(s => s.id === stat)) throw new RuleError('UNKNOWN_STAT', stat); list(alternatives); unique(alternatives.map(a => a.id), 'alternative'); for (const a of alternatives) { text(a.id); checkExpression(a.expression, c, functions); if (a.requirements) checkPredicate(a.requirements, c, 0, functions); } } }
     const visiting = new Set<string>(), done = new Set<string>();
