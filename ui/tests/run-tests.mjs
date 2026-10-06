@@ -62,6 +62,19 @@ test('description refresh preserves pinned rules and rejects mechanical changes'
   assert.throws(()=>model.updateSystemDescriptions(changed,file),/rules differ/);
   assert.equal(changed.configurations[0].classes[0].maximumLevel,19);
 });
+
+test('saved System description updates preserve character edits and never restore unloaded or replaced Systems',()=>{
+  const old=structuredClone(file);old.features[0].description='Old summary';
+  const character=exampleCharacter().character;
+  const workspace={version:1,systems:[old],characters:[character],active:character.id};
+  const updated=model.updateSystemDescriptions(old,file);
+  const refreshed=model.applyDescriptionUpdate(workspace,old,updated);
+  assert.deepEqual(refreshed.systems,[file]);assert.equal(refreshed.characters,workspace.characters);assert.equal(refreshed.active,workspace.active);
+  const store=storage();model.writeWorkspace(store,refreshed);assert.deepEqual(model.readWorkspace(store).systems,[file]);
+  assert.equal(model.applyDescriptionUpdate(refreshed,updated,structuredClone(updated)),refreshed,'Current text does not cause another workspace write');
+  const unloaded={...workspace,systems:[]};assert.equal(model.applyDescriptionUpdate(unloaded,old,updated),unloaded);
+  const replaced={...workspace,systems:[structuredClone(old)]};assert.equal(model.applyDescriptionUpdate(replaced,old,updated),replaced);
+});
 test('bundled category refresh accepts the Class Feature tag but preserves tags used by rules',()=>{
   const old=structuredClone(file);old.features.forEach(f=>{if(f.tags?.includes('class-feature')){f.tags=f.tags.filter(t=>t!=='class-feature');if(!f.tags.length)delete f.tags;}});old.configurations.forEach(c=>{delete c.system.tagDisplayNames['class-feature'];});
   assert.deepEqual(model.updateSystemDescriptions(old,file),file);
