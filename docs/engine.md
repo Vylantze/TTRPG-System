@@ -4,7 +4,7 @@ The generic engine is implemented in TypeScript with no runtime dependencies. It
 
 ## Run the engine
 
-Use Node.js 20 or later and TypeScript 5.4.5. Install the development dependency with `npm install`, then run:
+Use Node.js 22 or later and TypeScript 5.4.5. Install the development dependency with `npm install`, then run:
 
 ```text
 npm run build
@@ -25,6 +25,8 @@ This workspace's dependency download was unavailable during development. Build a
 | `src/expression.ts` | Typed, deterministic arithmetic, predicates, tables, and registered functions |
 | `src/engine.ts` | Acquisition replay, nested instance expansion, eligibility, stats, capabilities, and pools |
 | `src/commands.ts` | Immutable edit previews, resource commands, serialization, and explicit migrations |
+| `src/system-loader.ts` | JSON validation, declarative option configurations, loading and unloading Systems |
+| `src/policy-commands.ts` | JSON-configured spell-turn restrictions and selected resource recovery |
 | `src/index.ts` | Public exports |
 
 `new Engine(catalogue, functions?)` validates, clones, and freezes the catalogue. Invalid catalogues throw a `RuleError` with a code and path. `validateCatalogue` returns diagnostics without constructing an engine. Definitions use stable IDs and positive revisions; character saves pin the entire catalogue's definition revision manifest.
@@ -90,3 +92,7 @@ Commands require unique caller-supplied event IDs. Replaying the same event and 
 ## Remaining milestones
 
 The first DnD5e 2014 milestone implements three SRD classes through level 20, origins, and Wizard spell selections. Complete its remaining nine classes, then implement DnD5e 2024 before the React UI and PF2e. The engine does not provide automated combat resolution. The React UI and Feature editor follow the validated System data.
+
+## JSON System lifecycle
+
+The 2014 content ships as JSON; its TypeScript entry point is an optional compatibility adapter. Core `SystemRegistry` can load any validated System file, create engines from declared options, find the exact System for a saved character, and unload content without changing saves. See [the JSON file contract and React integration](json-systems.md). `castSpell` and `recoverSelectedResources` are core engine commands configured by `SystemDefinition.commandRules`; their 2014 behavior is declared in JSON.

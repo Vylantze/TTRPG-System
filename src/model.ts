@@ -67,6 +67,12 @@ export interface SystemDefinition {
   contextDefaults?: Record<string, Value>; advancement?: Record<string, (Grant | Choice)[]>;
   /** Explicit alternative base calculations, selected by character input. */
   alternatives?: Record<string, { id: string; expression: Expression; requirements?: Predicate }[]>;
+  /** Engine command policies, authored as data rather than System-specific code. */
+  commandRules?: {
+    spellTurn?: { castingAbilityKey: string; levelKey: string; timeKey: string; ritualKey: string; bonusTime: string; actionTime: string };
+    selectedRecovery?: { eventKind?: string; capabilityName: string; requiredEvent: string; boundaryEvent?: string; budgetStat: string;
+      targets: Record<string, { key: string; scope: Scope; weight: number }> };
+  };
 }
 export interface Catalogue { id: string; revision: number; system: SystemDefinition; features: FeatureDefinition[]; classes: ClassDefinition[] }
 export interface Progression { id: string; class: string; level: number }
