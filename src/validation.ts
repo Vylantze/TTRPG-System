@@ -100,6 +100,15 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     for (const f of c.features) { record(f); text(f.id); integer(f.revision, 1); text(f.name); list(f.components); }
     for (const cls of c.classes) { record(cls); text(cls.id); integer(cls.revision, 1); text(cls.name); record(cls.levels); }
     unique([...c.features, ...c.classes].map(f => f.id), 'content definition');
+    for (const definition of [...c.features, ...c.classes]) {
+      for (const key of ['description', 'source'] as const) if (definition[key] !== undefined && typeof definition[key] !== 'string') throw new RuleError('SCHEMA', `Invalid ${key}.`);
+    }
+    for (const f of c.features) if (f.textReferences !== undefined) {
+      list(f.textReferences); unique(f.textReferences, 'text reference');
+      for (const id of f.textReferences) { text(id); if (!c.features.some(reference => reference.id === id)) throw new RuleError('UNKNOWN_FEATURE', `Unknown text reference ${id}.`); }
+    }
+    for (const f of c.features) if (f.displayName !== undefined) text(f.displayName);
+    if (c.system.tagDisplayNames !== undefined) { record(c.system.tagDisplayNames); for (const [id, name] of Object.entries(c.system.tagDisplayNames)) { text(id); text(name); } }
     checkExpression(c.system.characterLevel, c, functions);
     if (c.system.validation !== undefined) { list(c.system.validation); unique(c.system.validation.map(r => r.id), 'System rule'); for (const rule of c.system.validation) { record(rule); text(rule.id); text(rule.message); checkPredicate(rule.requirement, c, 0, functions); } }
     if (c.system.commandRules !== undefined) {

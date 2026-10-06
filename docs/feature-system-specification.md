@@ -90,6 +90,8 @@ Every applied, suppressed, or inactive modifier records its source instance, com
 
 A FeatureDefinition contains `id`, `revision`, `name`, `description`, source metadata, tags, acquisition prerequisites, nonwaivable resource requirements, optional maintenance requirements, repeat policy, parameter definitions, optional local scaling tables, and an ordered list of components. Components have stable local IDs. Component order is for presentation and stable identity, not a hidden stat-calculation order.
 
+`displayName` supplies a Feature's user-facing label independently of its internal name. Systems map tag IDs to user-facing labels through `tagDisplayNames`. Descriptions and source text travel with JSON; optional `textReferences` share another Feature's description without granting that Feature or supplying its prerequisites. Classes also retain descriptive text and source metadata. These fields have no mechanical effect.
+
 | Component | Purpose |
 | --- | --- |
 | `modifyStat` | Applies one numeric modifier |

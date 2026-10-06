@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T11:31:02.590Z
+Export refreshed UTC: 2026-10-06T13:42:27.402Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -533,5 +533,124 @@ The new integration checks pass: they cover persisted drafts, JSON-based browsin
 
 [2026-10-06T11:27:27.305Z] ASSISTANT
 The first UI baseline is complete, including draft class removal, editable initial choices, stat explanations, and JSON exports. I’m running the final checks and committing it. The remaining verification gap is interactive browser review: the browser tool blocked localhost, so the UI checks use React server rendering rather than click-through tests.
+
+----------------------------------------
+
+[2026-10-06T11:31:34.110Z] ASSISTANT
+Implemented the React UI before further System work, with JSON System loading/unloading, Class and Feature browsers, character creation, stats, resources, and save import/export.
+
+Run `npm run ui:dev`. See the [UI guide and library suggestions](</D:/User/Workspace/TTRPG System/docs/react-ui.md>).
+
+Production build and **186 tests pass**. Interactive browser testing remains unverified because the browser tool blocked localhost.
+
+Committed as `bf5d4af`; working tree is clean.
+
+----------------------------------------
+
+[2026-10-06T13:01:44.854Z] USER
+Implement 5e 2024
+
+----------------------------------------
+
+[2026-10-06T13:01:50.314Z] ASSISTANT
+I’ll implement DnD5e 2024 as a separate JSON System, using the official SRD and the existing engine and UI. I’ll first review the 2024 specification and source material to establish its coverage and rule differences.
+
+----------------------------------------
+
+[2026-10-06T13:03:04.935Z] ASSISTANT
+I’m using the PDF skill to extract and check the official SRD tables. The 2024 System will have separate content identities; origins, class resources, progression, and spell-turn rules will be authored from the revised rules.
+
+----------------------------------------
+
+[2026-10-06T13:11:30.910Z] ASSISTANT
+The SRD confirms several changes the engine needs to handle: background ability boosts, subclasses starting at level 3, revised class resource recovery, and one spell slot spent to cast a spell per turn. I’m keeping these rules in the 2024 JSON System and adding generic engine support where needed.
+
+----------------------------------------
+
+[2026-10-06T13:12:08.686Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-06T13:12:08.709Z] USER
+Stop current task.
+
+----------------------------------------
+
+[2026-10-06T13:12:12.203Z] ASSISTANT
+Stopped the 5e 2024 implementation. No tracked project files were changed; the downloaded SRD and extracted text remain in the ignored reference cache.
+
+----------------------------------------
+
+[2026-10-06T13:13:01.640Z] USER
+Save the text for features and classes as well, and incorporate them into the UI display
+
+----------------------------------------
+
+[2026-10-06T13:13:06.327Z] ASSISTANT
+I’ll save the available class and Feature descriptions in the System data and show them in the React browsers and character view. I’ll check the current data first to identify which text is missing.
+
+----------------------------------------
+
+[2026-10-06T13:13:59.331Z] ASSISTANT
+The loaded 2014 System has rule summaries and spell headers, but lacks full descriptions for most class Features. I’ll add the source text to its JSON, keep shared spell text in one place, and display it where related Features are viewed. The 2024 implementation remains stopped.
+
+----------------------------------------
+
+[2026-10-06T13:14:12.537Z] ASSISTANT
+I’m using the PDF skill to extract the official SRD text and check the page boundaries. I’ll retain paragraphs and source pages, and display descriptions as plain text so imported Systems can use the same UI.
+
+----------------------------------------
+
+[2026-10-06T13:20:30.175Z] ASSISTANT
+The description fields and shared-text references are in place. Class and Feature pages now show rule text, and character selections can expand it without leaving the builder. I’m checking the extraction for broken headings and text that crosses section boundaries before saving it.
+
+----------------------------------------
+
+[2026-10-06T13:23:30.802Z] ASSISTANT QUESTIONS
+Should I also save the 2024 SRD class and Feature text for future implementation, alongside descriptions for the currently loaded 2014 System?
+Options: 2014 descriptions only for now; Also save 2024 text for later
+
+----------------------------------------
+
+[2026-10-06T13:24:14.282Z] USER
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_4I9KyerScUGNuHByE59mpKyr\",0]","question":"Should I also save the 2024 SRD class and Feature text for future implementation, alongside descriptions for the currently loaded 2014 System?","answer":"2014 descriptions only for now"}]
+</send_user_message_question_reply>
+
+----------------------------------------
+
+[2026-10-06T13:25:36.011Z] ASSISTANT
+The 2014 text is extracted, including full descriptions for all 204 Wizard spells. I corrected an extraction issue that dropped part of Wish and mixed spellbook rules into Overchannel. The larger JSON also risks exceeding browser storage limits, so I’m reducing duplicated data in saved workspaces while preserving character saves.
+
+----------------------------------------
+
+[2026-10-06T13:28:37.371Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-06T13:28:37.404Z] USER
+Add displayNames for all features and tags and display those displayNames instead of the internal names on the UI.
+
+----------------------------------------
+
+[2026-10-06T13:29:03.345Z] ASSISTANT
+I’ll add display names to every bundled Feature and a display-name map for tags, then use those labels throughout the UI. Internal IDs and names will remain stable for saved characters and rule references.
+
+----------------------------------------
+
+[2026-10-06T13:32:29.822Z] ASSISTANT
+Display names now cover Feature titles, selection labels, character-sheet entries, tag filters, and subclass lists. I’m also checking older saved workspaces and the bundled-text refresh so existing characters can receive the descriptions and labels without changing their rules.
+
+----------------------------------------
+
+[2026-10-06T13:37:48.360Z] ASSISTANT
+The saved JSON now includes descriptions and display names for all 825 Features, display names for all 16 tags, and source text for the three implemented Classes. I verified that the mechanical data matches the previous version. I’m running the final engine and UI checks.
+
+----------------------------------------
+
+[2026-10-06T13:40:06.459Z] ASSISTANT
+All 183 engine tests and 12 UI tests passed, and the production build succeeded. I found one final text correction: the shared Ability Score Improvement description needs to include each Class’s timing, so it doesn’t show the Fighter schedule for a Rogue or Wizard.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

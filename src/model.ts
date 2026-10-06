@@ -51,14 +51,18 @@ export interface Capability extends ComponentBase {
 }
 export type Component = Grant | Choice | Modifier | Resource | Capability | (ComponentBase & { kind: 'describe'; text: string });
 export interface FeatureDefinition {
-  id: string; revision: number; name: string; description?: string; source?: string; tags?: string[]; contentLevel?: number;
+  id: string; revision: number; name: string; displayName?: string; description?: string; source?: string; tags?: string[]; contentLevel?: number;
+  /** Display-only references to shared Feature descriptions; these grant no rules or ownership. */
+  textReferences?: string[];
   prerequisites?: Predicate; maintenance?: Predicate; resources?: ResourceRequirement[];
   repeat?: { maximum: number; scope: 'character' | 'progression' | 'parent'; uniqueBy?: string[] };
   parameters?: Record<string, ParameterDefinition>; tables?: Record<string, ScalingTable>; components: Component[];
 }
-export interface ClassDefinition { id: string; revision: number; name: string; levels: Record<string, (Grant | Choice)[]>; maximumLevel?: number; multiclassPrerequisites?: Predicate }
+export interface ClassDefinition { id: string; revision: number; name: string; description?: string; source?: string; levels: Record<string, (Grant | Choice)[]>; maximumLevel?: number; multiclassPrerequisites?: Predicate }
 export interface SystemDefinition {
   id: string; revision: number; name: string; stats: StatDefinition[]; classes?: string[];
+  /** Tag identities remain stable; Systems supply their user-facing labels separately. */
+  tagDisplayNames?: Record<string, string>;
   allowMultipleClasses: boolean; characterLevel: Expression;
   allowDuplicateClasses?: boolean;
   /** Restrict additional root acquisitions without restricting nested or class Features. */
