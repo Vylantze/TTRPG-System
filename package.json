@@ -16,6 +16,10 @@
     "./systems/dnd5e-2014/metadata.json": "./dist/systems/dnd5e-2014/metadata.json"
   },
   "scripts": {
+    "lint": "node tools/lint.mjs",
+    "lint:test": "node tests/lint.test.js",
+    "hooks:install": "node tools/install-hooks.mjs",
+    "prepare": "npm run hooks:install",
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && node tests/run-tests.js",
     "demo": "npm run build && node examples/demo.js",

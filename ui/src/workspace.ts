@@ -1,7 +1,8 @@
-import { SystemRegistry, parseSystemFile, deserializeCharacter, serializeCharacter, type SystemFile, type Character } from '../../src/index';
+import { SystemRegistry, deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type SystemFile } from '../../src/index';
+import type { Workspace } from './types/Workspace';
+export type { Workspace } from './types/Workspace';
 
 export const STORAGE_KEY = 'ttrpg-feature-forge:v1';
-export interface Workspace { version: 1; systems: SystemFile[]; characters: Character[]; active?: string }
 
 /** Storage-only deduplication; imported/exported System JSON retains its engine format. */
 function packSystem(file:SystemFile) {

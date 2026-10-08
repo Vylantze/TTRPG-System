@@ -1,16 +1,15 @@
-import { featureName, tagName } from './display';
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
-import { parseSystemFile, deserializeCharacter, serializeCharacter, type Character, type SystemFile, type Value, type Engine } from '../../src/index';
-import bundledUrl from '../../src/systems/dnd5e-2014/system.json?url';
 import noticeUrl from '../../NOTICE.md?url';
-import { createRegistry, download, readWorkspace, writeWorkspace, updateSystemDescriptions, applyDescriptionUpdate, systemKey, labelFromId, type Workspace } from './workspace';
-import { FeatureDetail } from './FeatureDetail';
-import { ClassFeature } from './ClassFeature';
+import { deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type Engine, type SystemFile, type Value } from '../../src/index';
+import bundledUrl from '../../src/systems/dnd5e-2014/system.json?url';
 import { CharacterBuilder } from './CharacterBuilder';
+import { ClassFeature } from './ClassFeature';
+import { FeatureDetail } from './FeatureDetail';
 import { Modal } from './Modal';
-import { descriptionPreview, featureDescription, RulesText } from './RulesText';
-
-interface Route { page:string; id?:string; system?:string; revision?:number; catalogue?:string }
+import { RulesText, descriptionPreview, featureDescription } from './RulesText';
+import { featureName, tagName } from './display';
+import type { Route } from './types/Route';
+import { applyDescriptionUpdate, createRegistry, download, labelFromId, readWorkspace, systemKey, updateSystemDescriptions, writeWorkspace, type Workspace } from './workspace';
 function readRoute():Route {
   const [path,query]=window.location.hash.slice(1).split('?');const params=new URLSearchParams(query);
   const [page,id]=path.split('/');

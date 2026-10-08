@@ -1,8 +1,8 @@
-import type { Expression, FeatureDefinition, FunctionRegistry, ScalingTable, Value, NumericConstraints } from './model.js';
-
-export class RuleError extends Error {
-  constructor(public code: string, message: string, public path = '') { super(message); }
-}
+import type { Expression, NumericConstraints, ScalingTable } from './model.js';
+import type { Environment } from './types/Environment.js';
+import { RuleError } from './types/RuleError.js';
+export type { Environment } from './types/Environment.js';
+export { RuleError } from './types/RuleError.js';
 export function number(value: unknown): number {
   if (typeof value !== 'number' || !Number.isFinite(value)) throw new RuleError('INVALID_NUMBER', 'Expected a finite number.');
   return value;
@@ -18,10 +18,6 @@ export function constrain(value: number, rules: NumericConstraints, input = fals
   if (!input && rules.clamp) value = Math.min(rules.maximum ?? Infinity, Math.max(rules.minimum ?? -Infinity, value));
   if (value < (rules.minimum ?? -Infinity) || value > (rules.maximum ?? Infinity)) throw new RuleError('OUT_OF_BOUNDS', `Value ${value} is outside its bounds.`);
   return value;
-}
-export interface Environment {
-  stats: (id: string) => number; context: Record<string, Value>; parameters: Record<string, Value>;
-  owner?: string; base?: number; features: Map<string, FeatureDefinition>; functions: FunctionRegistry;
 }
 function lookup(table: ScalingTable, input: number): number {
   const rows = [...table.rows].sort((a, b) => a.key - b.key);

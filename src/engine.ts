@@ -1,7 +1,8 @@
+import { RuleError, boolean, constrain, evaluateExpression, number, type Environment } from './expression.js';
 import type { Catalogue, Character, Choice, Diagnostic, Expression, FunctionRegistry, Instance, Value,
   Predicate, EvaluationResult, StatResult, Modifier, ModifierExplanation, PoolResult, Resource,
   ResourceRequirement, Candidate, Pick, Progression, RootAcquisition } from './model.js';
-import { boolean, constrain, evaluateExpression, number, RuleError, type Environment } from './expression.js';
+import type { StatView } from './types/StatView.js';
 import { checkCharacter, validateCatalogue } from './validation.js';
 
 export const segment = (id: string): string => encodeURIComponent(id);
@@ -16,7 +17,6 @@ function diagnostic(error: unknown, path: string): Diagnostic {
   const e = error instanceof RuleError ? error : new RuleError('EVALUATION', error instanceof Error ? error.message : String(error));
   return { code: e.code, message: e.message, severity: 'invalid', path: e.path || path };
 }
-interface StatView { results: Record<string, StatResult>; get: (id: string) => number }
 export class Engine {
   readonly catalogue: Catalogue;
   private readonly features: Map<string, Catalogue['features'][number]>;

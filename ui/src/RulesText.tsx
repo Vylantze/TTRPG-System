@@ -1,10 +1,9 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import { FeatureTextIndex, type Engine, type FeatureDefinition } from '../../src/index';
-import { featureName } from './display';
 import { Modal } from './Modal';
-
-type Preview = { ids:string[]; text:string };
-type References = { engine?:Engine; openFeature?:(id:string)=>void; exclude?:string[]; onPreview?:(reference:Preview)=>void };
+import { featureName } from './display';
+import type { Preview } from './types/Preview';
+import type { References } from './types/References';
 const indexes=new WeakMap<Engine,FeatureTextIndex>();
 function textIndex(engine:Engine) {let index=indexes.get(engine);if(!index){index=new FeatureTextIndex(engine.catalogue.features);indexes.set(engine,index);}return index;}
 export function featureHref(id:string,engine:Engine) {

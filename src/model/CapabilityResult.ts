@@ -1,0 +1,3 @@
+import type { Capability } from './Capability.js';
+
+export interface CapabilityResult { id: string; source: string; definition: Capability; costs: Record<string, number> }
