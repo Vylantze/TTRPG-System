@@ -10,6 +10,10 @@ Run `npm install --prefix ui` and `npm run ui:dev` to open the React character w
 
 Run `npm run build`, `npm test`, or `npm run demo` after installing the TypeScript development dependency. The engine has no runtime dependencies.
 
+Install development dependencies with `npm install` and `npm install --prefix ui`. The root install automatically sets up the tracked Git hooks; existing checkouts can also run `npm run hooks:install`. The pre-commit hook runs `npm run lint` and blocks the commit if linting fails. Both projects' dependencies must be installed before committing.
+
+`npm run lint` checks JavaScript and TypeScript source files and type-checks both the engine and React UI without emitting build output. The TypeScript-based linter rejects syntax errors, `debugger`, `var`, and files containing more than one class, interface, type alias, or enum definition (including nested declarations). Inline object types, functions, imports and re-exports are allowed. Model definitions live in `src/model/`; other extracted definitions live in adjacent `types/` folders. Compatibility barrels preserve existing public imports. Generated output, dependencies and hidden folders are excluded. The hook checks the working tree; keep staged changes synchronized with the files you have validated. Run `npm run lint:test` to check the lint rules themselves.
+
 Run `npm run demo:dnd2014` for a valid Fighter 3 / Rogue 2 character. SRD adaptations carry [Creative Commons attribution](NOTICE.md); the System documentation distinguishes calculated rules from descriptive coverage.
 
 The specification includes a React UI plan for character creation, direct Class and Feature browsing, and future custom Feature authoring. Implementation proceeds from the engine to the UI.

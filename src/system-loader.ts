@@ -1,15 +1,9 @@
 import { Engine, clone } from './engine.js';
 import { RuleError } from './expression.js';
-import { record, checkCharacter } from './validation.js';
 import type { Catalogue, Character, Value } from './model.js';
-
-export interface SystemFile {
-  format: 'ttrpg-system'; version: 1; id: string; revision: number;
-  options: Record<string, { default: Value; values: Value[] }>;
-  features: Catalogue['features'];
-  configurations: { options: Record<string, Value>; id: string; revision: number;
-    system: Catalogue['system']; classes: Catalogue['classes'] }[];
-}
+import type { SystemFile } from './types/SystemFile.js';
+import { checkCharacter, record } from './validation.js';
+export type { SystemFile } from './types/SystemFile.js';
 function safe(value: unknown, depth = 0): void {
   if (depth > 96) throw new RuleError('SYSTEM_JSON', 'System data is too deep.');
   if (Array.isArray(value)) { if (value.length > 10000) throw new RuleError('SYSTEM_JSON', 'Array exceeds limit.'); value.forEach(v => safe(v, depth + 1)); }

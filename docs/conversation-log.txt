@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-06T17:25:54.805Z
+Export refreshed UTC: 2026-10-08T19:12:26.050Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -826,5 +826,80 @@ I’ll remove the repeated heading from the displayed description while preservi
 
 [2026-10-06T17:25:39.098Z] ASSISTANT
 The repeated source heading is now hidden when it matches the Feature title. I also removed the redundant label above granted Features in the class view. Browser checks confirmed that class entries and popups show the title once.
+
+----------------------------------------
+
+[2026-10-06T17:26:13.678Z] ASSISTANT
+Fixed duplicate headings in Feature descriptions, class progression entries, and popups. Original SRD text remains intact in the System data.
+
+All 16 UI tests, browser checks, and the production build passed. Committed as `6871c7d`.
+
+----------------------------------------
+
+[2026-10-06T17:26:54.856Z] USER
+Ability Score Improvement's text is repeated thrice
+
+----------------------------------------
+
+[2026-10-06T17:27:00.122Z] ASSISTANT
+I’ll check the three passages and remove the repetition, keeping any class-specific level information clear.
+
+----------------------------------------
+
+[2026-10-06T17:27:33.801Z] ASSISTANT QUESTIONS
+The three ASI passages are the Fighter, Rogue, and Wizard versions, which differ in their level schedules. I can show the matching passage in each class view and offer a class selector on the standalone Feature page. Is that the presentation you prefer?
+Options: Show the matching class passage (recommended); Show the shared benefit once, with levels listed separately
+
+----------------------------------------
+
+[2026-10-06T17:27:33.946Z] USER
+Why was Ability Score Improvement text added thrice?
+
+----------------------------------------
+
+[2026-10-06T17:27:38.854Z] ASSISTANT
+I combined the Fighter, Rogue, and Wizard SRD passages because they share one ASI Feature in the engine. Each passage lists a different level schedule, but repeats the same benefit.
+
+That was a presentation mistake: the UI displayed all three passages together instead of showing the one relevant to the class.
+
+----------------------------------------
+
+[2026-10-08T19:01:45.584Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-08T19:01:45.607Z] USER
+Refactor the code such that there is a single class or type definition per file, and add a linting feature. Automatically run linting before every commit
+
+----------------------------------------
+
+[2026-10-08T19:01:52.917Z] ASSISTANT
+I’ll inspect the TypeScript definitions and existing checks, split the definitions into individual files, and add linting with a Git hook that runs it before every commit.
+
+----------------------------------------
+
+[2026-10-08T19:04:48.755Z] ASSISTANT
+I found shared type files in the engine and several types embedded in UI components. I’ll split them while preserving existing import paths. The linter will enforce one named class, interface, or type alias per file and run TypeScript checks for both projects; it will use the existing TypeScript dependency.
+
+----------------------------------------
+
+[2026-10-08T19:07:30.243Z] ASSISTANT
+The definitions are split, and the engine builds successfully. Existing imports still work through re-exports. I’ve added the lint command and pre-commit hook; next I’m checking the UI and verifying that the hook rejects violations.
+
+----------------------------------------
+
+[2026-10-08T19:10:06.574Z] ASSISTANT
+Linting passes, and the installed Git hook correctly rejected a temporary file containing two type definitions. The regression tests are still running. No new dependencies were needed, and the refactor preserves the existing public imports.
+
+----------------------------------------
+
+[2026-10-08T19:11:15.518Z] ASSISTANT
+All 191 engine and lint-rule tests pass. The React checks are still running. I’m also preserving your existing package changes and making sure fresh installs enable the hook automatically.
+
+----------------------------------------
+
+[2026-10-08T19:12:13.052Z] ASSISTANT
+The 16 UI tests and production build also pass. I’m committing the refactor now; the installed hook will run lint automatically as part of the commit.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

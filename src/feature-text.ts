@@ -1,7 +1,7 @@
 import type { FeatureDefinition } from './model.js';
-
-export interface FeatureTextSpan { text: string; start: number; end: number; features: string[] }
-interface Node { children: Map<string, Node>; ids: Set<string> }
+import type { FeatureTextSpan } from './types/FeatureTextSpan.js';
+import type { Node } from './types/Node.js';
+export type { FeatureTextSpan } from './types/FeatureTextSpan.js';
 const node = (): Node => ({ children: new Map(), ids: new Set() });
 const word = (value: string | undefined) => !!value && /[\p{L}\p{N}_]/u.test(value);
 

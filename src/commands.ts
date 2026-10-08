@@ -1,7 +1,9 @@
 import { Engine, clone } from './engine.js';
-import { checkCharacter } from './validation.js';
 import { RuleError, constrain, number } from './expression.js';
-import type { Character, Edit, EditPreview, EvaluationResult, Value } from './model.js';
+import type { Character, Edit, EditPreview, EvaluationResult } from './model.js';
+import type { UseOptions } from './types/UseOptions.js';
+import { checkCharacter } from './validation.js';
+export type { UseOptions } from './types/UseOptions.js';
 
 function requireValid(result: EvaluationResult): void {
   if (result.status !== 'valid') throw new RuleError('INVALID_BUILD', 'This command requires a valid, complete character.');
@@ -113,7 +115,6 @@ export function applyEdit(engine: Engine, input: Character, edits: Edit[], event
   checkCharacter(preview.character);
   return preview.character;
 }
-export interface UseOptions { runtime?: Record<string, Value>; actions?: Record<string, number> }
 export function finalizeCharacter(engine: Engine, input: Character, eventId: string): Character {
   checkCharacter(input); const character = clone(input);
   if (!stamp(character, eventId, {kind:'finalize'})) return character;

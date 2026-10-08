@@ -4,3 +4,4 @@ import './system-loader.test.js';
 import './drafts.test.js';
 import './descriptions.test.js';
 import './feature-text.test.js';
+import './lint.test.js';

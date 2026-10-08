@@ -1,10 +1,10 @@
-import { Engine, clone } from './engine.js';
 import { useAbility } from './commands.js';
+import { Engine, clone } from './engine.js';
 import { RuleError, constrain } from './expression.js';
-import { checkCharacter, record } from './validation.js';
 import type { Character, Value } from './model.js';
-
-export interface SpellTurn { bonusActionSpell: boolean; otherSpell: boolean; onlyActionCantrips: boolean }
+import type { SpellTurn } from './types/SpellTurn.js';
+import { checkCharacter, record } from './validation.js';
+export type { SpellTurn } from './types/SpellTurn.js';
 
 /** The caller owns turn boundaries and supplies fresh turn state each turn. */
 export function castSpell(engine: Engine, character: Character, capability: string, eventId: string, turn: SpellTurn, options: { actions?: Record<string, number>; runtime?: Record<string, Value> } = {}): { character: Character; turn: SpellTurn; actions?: Record<string, number> } {

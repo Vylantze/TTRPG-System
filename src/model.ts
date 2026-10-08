@@ -1,127 +1,40 @@
-/** Plain, versioned content data. No expressions contain executable source. */
-export type Value = number | boolean | string;
-export type Expression = number | boolean | { literal: number | boolean }
-  | { stat: string } | { context: string } | { parameter: string } | { base: true }
-  | { op: 'add' | 'subtract' | 'multiply' | 'divide' | 'min' | 'max' | 'floor' | 'ceil'
-      | 'eq' | 'gt' | 'gte' | 'lt' | 'lte' | 'and' | 'or' | 'not'; args: Expression[] }
-  | { if: Expression; then: Expression; else: Expression }
-  | { table: string; owner?: string; input: Expression }
-  | { call: string; args: Expression[] };
-export type BoundaryPolicy = 'error' | 'boundary' | { fallback: number };
-export interface ScalingTable {
-  mode: 'exact' | 'threshold'; rows: { key: number; value: number }[];
-  below: BoundaryPolicy; above: BoundaryPolicy; missing?: 'error' | { fallback: number };
-}
-export type Predicate = { level: number; kind?: 'character' | 'class' }
-  | { feature: string; parameters?: Record<string, Value> } | { tag: string }
-  | { stat: string; minimum: number } | { parameter: string; equals: Value }
-  | { expression: Expression }
-  | { all: Predicate[] } | { any: Predicate[] } | { not: Predicate };
-export interface NumericConstraints { integer?: boolean; minimum?: number; maximum?: number; rounding?: 'floor' | 'ceil' | 'round'; clamp?: boolean }
-export type StatDefinition = NumericConstraints & { id: string; name: string } & (
-  { kind: 'input'; default?: number } | { kind: 'derived'; expression: Expression });
-export type StackingPolicy = 'sum' | 'highest' | 'lowest' | 'bestBonusAndWorstPenalty';
-export interface ParameterDefinition { kind: 'number' | 'string' | 'boolean'; default?: Value; options?: Value[]; minimum?: number; maximum?: number; integer?: boolean }
-export interface ComponentBase { id: string; condition?: Expression }
-export interface Grant extends ComponentBase { kind: 'grantFeature'; feature: string; parameters?: Record<string, Value>; ignorePrerequisites?: boolean }
-export interface Choice extends ComponentBase {
-  kind: 'chooseFeatures'; minimum: Expression; maximum: Expression;
-  candidates: { ids?: string[]; tags?: string[]; maximumLevel?: Expression };
-  ignorePrerequisites?: boolean; allowDuplicates?: boolean;
-  /** Daily preparation can check current ownership rather than historical acquisition. */
-  eligibility?: 'acquisition' | 'current';
-  retraining?: { allowed: boolean; events?: string[] };
-}
-export interface Modifier extends ComponentBase {
-  kind: 'modifyStat'; stat: string; operation: 'add' | 'multiply' | 'floor' | 'ceiling' | 'override';
-  value: Expression; group?: string; stacking?: StackingPolicy; priority?: number;
-}
-export type Scope = 'character' | 'progression' | 'parent' | 'instance';
-export interface ResourceRequirement { id: string; key: string; scope?: Scope; units?: string; contract?: string; minimumCapacity?: number }
-export interface Resource extends ComponentBase, NumericConstraints {
-  kind: 'defineResource'; key: string; scope: Scope; units: string; contract?: string;
-  capacity: Expression; combine?: 'sum' | 'highest'; initial?: 'full' | 'empty';
-  recovery: { event: string; amount: Expression | 'full' }[];
-}
-export interface Capability extends ComponentBase {
-  kind: 'grantCapability'; name: string; description?: string; action?: { kind: string; amount: number };
-  requirements?: Predicate; costs?: { key: string; amount: Expression; requirement?: string }[];
-  /** Outcomes that consume a reserved use. Other outcomes release it. */
-  spendOnOutcomes?: string[]; metadata?: Record<string, Value>;
-}
-export type Component = Grant | Choice | Modifier | Resource | Capability | (ComponentBase & { kind: 'describe'; text: string });
-export interface FeatureDefinition {
-  id: string; revision: number; name: string; displayName?: string; description?: string; source?: string; tags?: string[]; contentLevel?: number;
-  /** Display-only references to shared Feature descriptions; these grant no rules or ownership. */
-  textReferences?: string[];
-  /** Alternate source names for automatic prose links; never grants rules. */
-  textAliases?: string[];
-  prerequisites?: Predicate; maintenance?: Predicate; resources?: ResourceRequirement[];
-  repeat?: { maximum: number; scope: 'character' | 'progression' | 'parent'; uniqueBy?: string[] };
-  parameters?: Record<string, ParameterDefinition>; tables?: Record<string, ScalingTable>; components: Component[];
-}
-export interface ClassDefinition { id: string; revision: number; name: string; description?: string; source?: string; levels: Record<string, (Grant | Choice)[]>; maximumLevel?: number; multiclassPrerequisites?: Predicate }
-export interface SystemDefinition {
-  id: string; revision: number; name: string; stats: StatDefinition[]; classes?: string[];
-  /** Tag identities remain stable; Systems supply their user-facing labels separately. */
-  tagDisplayNames?: Record<string, string>;
-  allowMultipleClasses: boolean; characterLevel: Expression;
-  allowDuplicateClasses?: boolean;
-  /** Restrict additional root acquisitions without restricting nested or class Features. */
-  rootCandidates?: { ids?: string[]; tags?: string[] };
-  validation?: { id: string; requirement: Predicate; message: string }[];
-  contextDefaults?: Record<string, Value>; advancement?: Record<string, (Grant | Choice)[]>;
-  /** Explicit alternative base calculations, selected by character input. */
-  alternatives?: Record<string, { id: string; expression: Expression; requirements?: Predicate }[]>;
-  /** Engine command policies, authored as data rather than System-specific code. */
-  commandRules?: {
-    spellTurn?: { castingAbilityKey: string; levelKey: string; timeKey: string; ritualKey: string; bonusTime: string; actionTime: string };
-    selectedRecovery?: { eventKind?: string; capabilityName: string; requiredEvent: string; boundaryEvent?: string; budgetStat: string;
-      targets: Record<string, { key: string; scope: Scope; weight: number }> };
-  };
-}
-export interface Catalogue { id: string; revision: number; system: SystemDefinition; features: FeatureDefinition[]; classes: ClassDefinition[] }
-export interface Progression { id: string; class: string; level: number }
-export interface Pick { id: string; feature: string; parameters?: Record<string, Value> }
-export interface RootAcquisition extends Pick { acquiredCharacterLevel: number; acquiredEvent?: number }
-export interface PendingUse { ability: string; costs: Record<string, number>; spendOnOutcomes: string[] }
-export interface Character {
-  /** Omitted on older saves: normal retraining rules apply. Construction drafts cannot spend resources. */
-  buildState?: 'draft' | 'finalized';
-  version: 1; id: string; name: string; system: { id: string; revision: number };
-  catalogue: { id: string; revision: number }; contentRevisions: Record<string, number>;
-  inputs: Record<string, number>; progressions: Progression[];
-  history: { progression: string; level: number }[]; roots: RootAcquisition[];
-  selections: Record<string, Pick[]>; bindings: Record<string, string>;
-  alternatives: Record<string, string>; resources: Record<string, { spent: number }>;
-  pending: Record<string, PendingUse>; events: { id: string; fingerprint: string; actions?: Record<string, number> }[];
-}
-export interface Diagnostic { code: string; severity: 'invalid' | 'incomplete'; path: string; message: string }
-export interface Instance {
-  id: string; feature: string; parent?: string; progression?: string;
-  parameters: Record<string, Value>; acquiredCharacterLevel: number; acquiredClassLevel: number;
-  acquiredEvent?: number;
-  active: boolean; eligible: boolean; waived: boolean; selection?: string;
-}
-export interface ModifierExplanation { source: string; component: string; operation: Modifier['operation']; amount?: number; applied: boolean; reason: string }
-export interface StatResult { value: number; base: number; modifiers: ModifierExplanation[] }
-export interface PoolResult { id: string; key: string; scope: Scope; units: string; contract?: string; integer: boolean; capacity: number; spent: number; reserved: number; available: number; providers: string[]; recovery: Resource['recovery']; initial: 'full' | 'empty' }
-export interface CapabilityResult { id: string; source: string; definition: Capability; costs: Record<string, number> }
-export interface SelectionResult { id: string; owner?: string; definition: Choice; minimum: number; maximum: number; picks: Pick[]; context: Record<string, Value> }
-export interface EvaluationResult {
-  status: 'valid' | 'incomplete' | 'invalid'; provisional: boolean; characterLevel: number;
-  instances: Instance[]; selections: SelectionResult[]; stats: Record<string, StatResult>;
-  resources: Record<string, PoolResult>; capabilities: CapabilityResult[]; bindings: Record<string, string>;
-  diagnostics: Diagnostic[];
-}
-export type Edit = { kind: 'input'; stat: string; value: number }
-  | { kind: 'removeProgression'; progression: string }
-  | { kind: 'addProgression'; progression: Progression }
-  | { kind: 'select'; selection: string; picks: Pick[]; event?: string }
-  | { kind: 'level'; progression: string; level: number }
-  | { kind: 'root'; acquisition: RootAcquisition } | { kind: 'removeRoot'; id: string }
-  | { kind: 'alternative'; stat: string; alternative: string } | { kind: 'bind'; requirement: string; pool: string };
-export interface Candidate { feature: string; status: EvaluationResult['status']; waived: boolean; diagnostics: Diagnostic[] }
-export interface EditPreview { character: Character; before: EvaluationResult; after: EvaluationResult; added: string[]; removed: string[]; changedStats: string[]; changedResources: string[] }
-export interface RegisteredFunction { arguments: ('number' | 'boolean')[]; result: 'number' | 'boolean'; invoke: (...values: (number | boolean)[]) => number | boolean }
-export type FunctionRegistry = Record<string, RegisteredFunction>;
+export type { BoundaryPolicy } from './model/BoundaryPolicy.js';
+export type { Candidate } from './model/Candidate.js';
+export type { Capability } from './model/Capability.js';
+export type { CapabilityResult } from './model/CapabilityResult.js';
+export type { Catalogue } from './model/Catalogue.js';
+export type { Character } from './model/Character.js';
+export type { Choice } from './model/Choice.js';
+export type { ClassDefinition } from './model/ClassDefinition.js';
+export type { Component } from './model/Component.js';
+export type { ComponentBase } from './model/ComponentBase.js';
+export type { Diagnostic } from './model/Diagnostic.js';
+export type { Edit } from './model/Edit.js';
+export type { EditPreview } from './model/EditPreview.js';
+export type { EvaluationResult } from './model/EvaluationResult.js';
+export type { Expression } from './model/Expression.js';
+export type { FeatureDefinition } from './model/FeatureDefinition.js';
+export type { FunctionRegistry } from './model/FunctionRegistry.js';
+export type { Grant } from './model/Grant.js';
+export type { Instance } from './model/Instance.js';
+export type { Modifier } from './model/Modifier.js';
+export type { ModifierExplanation } from './model/ModifierExplanation.js';
+export type { NumericConstraints } from './model/NumericConstraints.js';
+export type { ParameterDefinition } from './model/ParameterDefinition.js';
+export type { PendingUse } from './model/PendingUse.js';
+export type { Pick } from './model/Pick.js';
+export type { PoolResult } from './model/PoolResult.js';
+export type { Predicate } from './model/Predicate.js';
+export type { Progression } from './model/Progression.js';
+export type { RegisteredFunction } from './model/RegisteredFunction.js';
+export type { Resource } from './model/Resource.js';
+export type { ResourceRequirement } from './model/ResourceRequirement.js';
+export type { RootAcquisition } from './model/RootAcquisition.js';
+export type { ScalingTable } from './model/ScalingTable.js';
+export type { Scope } from './model/Scope.js';
+export type { SelectionResult } from './model/SelectionResult.js';
+export type { StackingPolicy } from './model/StackingPolicy.js';
+export type { StatDefinition } from './model/StatDefinition.js';
+export type { StatResult } from './model/StatResult.js';
+export type { SystemDefinition } from './model/SystemDefinition.js';
+export type { Value } from './model/Value.js';
