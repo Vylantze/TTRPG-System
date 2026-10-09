@@ -18,7 +18,7 @@ export function featureHref(id: string, engine: Engine, origin?: string) {
 }
 
 /** The surrounding UI already displays this title. Keep all other source headings. */
-export function descriptionBody(feature: FeatureDefinition): string | undefined {
+export function descriptionBody(feature: Pick<FeatureDefinition, 'description' | 'name' | 'displayName'>): string | undefined {
   const text = feature.description;
   if (!text) return text;
   const end = text.indexOf('\n');

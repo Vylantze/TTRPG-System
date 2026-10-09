@@ -5534,7 +5534,12 @@
       ],
       "description": "Hit Points\nHit Dice: 1d10 per fighter level\n\nHit Points at 1st Level: 10 + your Constitution modifier\n\nHit Points at Higher Levels: 1d10 (or 6) + your Constitution modifier per fighter level after 1st",
       "processDescription": false,
-      "descriptionOverride": "Hit Points\nHit Dice: 1d10 per fighter level\n\nHit Points at 1st Level: 10 + {{CON}}\n\nHit Points at Higher Levels: 1d10 (or 6) + {{CON}} per fighter level after 1st"
+      "descriptionOverride": [
+        {
+          "originalString": "your Constitution modifier",
+          "overrideString": "{{stat:modifier.constitution}}"
+        }
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.entry",
@@ -5713,7 +5718,12 @@
       ],
       "description": "Hit Points\nHit Dice: 1d8 per rogue level\n\nHit Points at 1st Level: 8 + your Constitution modifier\n\nHit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per rogue level after 1st",
       "processDescription": false,
-      "descriptionOverride": "Hit Points\nHit Dice: 1d8 per rogue level\n\nHit Points at 1st Level: 8 + {{CON}}\n\nHit Points at Higher Levels: 1d8 (or 5) + {{CON}} per rogue level after 1st"
+      "descriptionOverride": [
+        {
+          "originalString": "your Constitution modifier",
+          "overrideString": "{{stat:modifier.constitution}}"
+        }
+      ]
     },
     {
       "id": "dnd5e:2014:wizard.entry",
@@ -5863,7 +5873,12 @@
       ],
       "description": "Hit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st",
       "processDescription": false,
-      "descriptionOverride": "Hit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + {{CON}}\n\nHit Points at Higher Levels: 1d6 (or 4) + {{CON}} per wizard level after 1st"
+      "descriptionOverride": [
+        {
+          "originalString": "your Constitution modifier",
+          "overrideString": "{{stat:modifier.constitution}}"
+        }
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.second-wind",
@@ -103503,7 +103518,12 @@
       ],
       "description": "Hit Points\nHit Dice: 1d8 per cleric level\n\nHit Points at 1st Level: 8 + your Constitution modifier\n\nHit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st",
       "processDescription": false,
-      "descriptionOverride": "Hit Points\nHit Dice: 1d8 per cleric level\n\nHit Points at 1st Level: 8 + {{CON}}\n\nHit Points at Higher Levels: 1d8 (or 5) + {{CON}} per cleric level after 1st"
+      "descriptionOverride": [
+        {
+          "originalString": "your Constitution modifier",
+          "overrideString": "{{stat:modifier.constitution}}"
+        }
+      ]
     },
     {
       "id": "dnd5e:2014:cleric.disciple-of-life",
@@ -104438,7 +104458,12 @@
       "description": "Hit points represent a combination of physical and mental durability, the will to live, and luck. Creatures with more hit points are more difficult to kill. Those with fewer hit points are more fragile.",
       "source": "SRD 5.1, Hit Points, https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=96",
       "processDescription": false,
-      "descriptionOverride": "Hit points represent a combination of physical and mental durability, the will to live, and luck. Creatures with more hit points are more difficult to kill. Those with fewer hit points are more fragile."
+      "descriptionOverride": [
+        {
+          "originalString": "your Constitution modifier",
+          "overrideString": "{{stat:modifier.constitution}}"
+        }
+      ]
     },
     {
       "id": "dnd5e:2014:race.lightfoot-halfling.roll.reference-1",
@@ -112790,15 +112815,6 @@
               "scope": "character"
             }
           ]
-        },
-        "descriptionTokens": {
-          "STR": "modifier.strength",
-          "DEX": "modifier.dexterity",
-          "CON": "modifier.constitution",
-          "INT": "modifier.intelligence",
-          "WIS": "modifier.wisdom",
-          "CHA": "modifier.charisma",
-          "PB": "proficiencyBonus"
         }
       },
       "classes": [
@@ -118562,15 +118578,6 @@
               "scope": "character"
             }
           ]
-        },
-        "descriptionTokens": {
-          "STR": "modifier.strength",
-          "DEX": "modifier.dexterity",
-          "CON": "modifier.constitution",
-          "INT": "modifier.intelligence",
-          "WIS": "modifier.wisdom",
-          "CHA": "modifier.charisma",
-          "PB": "proficiencyBonus"
         }
       },
       "classes": [
@@ -124361,15 +124368,6 @@
               "scope": "character"
             }
           ]
-        },
-        "descriptionTokens": {
-          "STR": "modifier.strength",
-          "DEX": "modifier.dexterity",
-          "CON": "modifier.constitution",
-          "INT": "modifier.intelligence",
-          "WIS": "modifier.wisdom",
-          "CHA": "modifier.charisma",
-          "PB": "proficiencyBonus"
         }
       },
       "classes": [
@@ -130133,15 +130131,6 @@
               "scope": "character"
             }
           ]
-        },
-        "descriptionTokens": {
-          "STR": "modifier.strength",
-          "DEX": "modifier.dexterity",
-          "CON": "modifier.constitution",
-          "INT": "modifier.intelligence",
-          "WIS": "modifier.wisdom",
-          "CHA": "modifier.charisma",
-          "PB": "proficiencyBonus"
         }
       },
       "classes": [
@@ -135589,15 +135578,6 @@
               "scope": "character"
             }
           ]
-        },
-        "descriptionTokens": {
-          "STR": "modifier.strength",
-          "DEX": "modifier.dexterity",
-          "CON": "modifier.constitution",
-          "INT": "modifier.intelligence",
-          "WIS": "modifier.wisdom",
-          "CHA": "modifier.charisma",
-          "PB": "proficiencyBonus"
         }
       },
       "classes": [
@@ -141018,15 +140998,6 @@
               "scope": "character"
             }
           ]
-        },
-        "descriptionTokens": {
-          "STR": "modifier.strength",
-          "DEX": "modifier.dexterity",
-          "CON": "modifier.constitution",
-          "INT": "modifier.intelligence",
-          "WIS": "modifier.wisdom",
-          "CHA": "modifier.charisma",
-          "PB": "proficiencyBonus"
         }
       },
       "classes": [
@@ -146474,15 +146445,6 @@
               "scope": "character"
             }
           ]
-        },
-        "descriptionTokens": {
-          "STR": "modifier.strength",
-          "DEX": "modifier.dexterity",
-          "CON": "modifier.constitution",
-          "INT": "modifier.intelligence",
-          "WIS": "modifier.wisdom",
-          "CHA": "modifier.charisma",
-          "PB": "proficiencyBonus"
         }
       },
       "classes": [
@@ -151903,15 +151865,6 @@
               "scope": "character"
             }
           ]
-        },
-        "descriptionTokens": {
-          "STR": "modifier.strength",
-          "DEX": "modifier.dexterity",
-          "CON": "modifier.constitution",
-          "INT": "modifier.intelligence",
-          "WIS": "modifier.wisdom",
-          "CHA": "modifier.charisma",
-          "PB": "proficiencyBonus"
         }
       },
       "classes": [
@@ -157157,15 +157110,6 @@
               "scope": "character"
             }
           ]
-        },
-        "descriptionTokens": {
-          "STR": "modifier.strength",
-          "DEX": "modifier.dexterity",
-          "CON": "modifier.constitution",
-          "INT": "modifier.intelligence",
-          "WIS": "modifier.wisdom",
-          "CHA": "modifier.charisma",
-          "PB": "proficiencyBonus"
         }
       },
       "classes": [
@@ -162384,15 +162328,6 @@
               "scope": "character"
             }
           ]
-        },
-        "descriptionTokens": {
-          "STR": "modifier.strength",
-          "DEX": "modifier.dexterity",
-          "CON": "modifier.constitution",
-          "INT": "modifier.intelligence",
-          "WIS": "modifier.wisdom",
-          "CHA": "modifier.charisma",
-          "PB": "proficiencyBonus"
         }
       },
       "classes": [
@@ -167638,15 +167573,6 @@
               "scope": "character"
             }
           ]
-        },
-        "descriptionTokens": {
-          "STR": "modifier.strength",
-          "DEX": "modifier.dexterity",
-          "CON": "modifier.constitution",
-          "INT": "modifier.intelligence",
-          "WIS": "modifier.wisdom",
-          "CHA": "modifier.charisma",
-          "PB": "proficiencyBonus"
         }
       },
       "classes": [
@@ -172865,15 +172791,6 @@
               "scope": "character"
             }
           ]
-        },
-        "descriptionTokens": {
-          "STR": "modifier.strength",
-          "DEX": "modifier.dexterity",
-          "CON": "modifier.constitution",
-          "INT": "modifier.intelligence",
-          "WIS": "modifier.wisdom",
-          "CHA": "modifier.charisma",
-          "PB": "proficiencyBonus"
         }
       },
       "classes": [

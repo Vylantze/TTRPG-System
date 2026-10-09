@@ -15,8 +15,8 @@ export interface FeatureDefinition {
   textAliases?: string[];
   /** Whether source prose receives automatic character-value replacements; defaults to true. */
   processDescription?: boolean;
-  /** Full character-sheet text override. Only explicit {{tokens}} are substituted. */
-  descriptionOverride?: string;
+  /** Exact source-text replacements. Replacement text resolves explicit tokens only. */
+  descriptionOverride?: { originalString: string; overrideString: string }[];
   /** Ambiguous prose names require an adjacent phrase; display-only, case-insensitive. */
   textLinkContext?: { before?: string[]; after?: string[] };
   prerequisites?: Predicate; maintenance?: Predicate; resources?: ResourceRequirement[];
