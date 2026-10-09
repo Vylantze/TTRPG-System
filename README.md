@@ -8,6 +8,10 @@ DnD5e 2014 rules and reference metadata are JSON files. The engine provides a br
 
 Run `npm install --prefix ui` and `npm run ui:dev` to open the React character workspace. See [UI usage, scope, and verification](docs/react-ui.md).
 
+The [hosted UI](https://vylantze.github.io/TTRPG-System/) deploys from `develop` through `.github/workflows/pages.yml`. Pushes run lint, engine tests, UI tests, and a production build before publishing `ui/dist`; pull requests targeting `develop` run the same checks without deploying. The workflow uses GitHub's Pages base path for all built assets, including System JSON and attribution. Hash-based navigation supports direct links without server rewrites. Character data stays in browser storage; local development and the hosted site have separate storage origins.
+
+For a new repository, select **Settings → Pages → Build and deployment → Source: GitHub Actions** and allow `develop` in any `github-pages` environment deployment restrictions. This follows the [Vite Pages deployment guide](https://vite.dev/guide/static-deploy.html#github-pages). To verify a repository-path build locally, run `npm run build --prefix ui -- --base /TTRPG-System/` and `npm run preview --prefix ui -- --base /TTRPG-System/`. Manual dispatch becomes available once the workflow is present on the repository's default branch; pushes to `develop` deploy automatically.
+
 Run `npm run build`, `npm test`, or `npm run demo` after installing the TypeScript development dependency. The engine has no runtime dependencies.
 
 Install development dependencies with `npm install` and `npm install --prefix ui`. The root install automatically sets up the tracked Git hooks; existing checkouts can also run `npm run hooks:install`. The pre-commit hook runs `npm run lint` and blocks the commit if linting fails. Both projects' dependencies must be installed before committing.
