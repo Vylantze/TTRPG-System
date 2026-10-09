@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { itemProperties, updateInventory, type Character, type Engine, type InventoryEntry } from '@/src/index';
+import { getCurrency, itemProperties, updateInventory, type Character, type Engine, type InventoryEntry } from '@/src/index';
 
 export function Inventory({ engine, character, update, report }: { engine: Engine;
   character: Character;
@@ -73,7 +73,7 @@ export function Inventory({ engine, character, update, report }: { engine: Engin
           Add item
           <select value={selected} onChange={(event) => setSelected(event.target.value)}>
             <option value="">Choose an item…</option>
-            {engine.catalogue.items?.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+            {engine.catalogue.items?.filter((item) => !getCurrency(engine.catalogue.system).denominations.some((unit) => unit.legacyItemIds?.includes(item.id))).map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
           </select>
         </label>
         <button

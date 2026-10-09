@@ -81,7 +81,7 @@ export function updateSystemDescriptions(existing: SystemFile, incoming: SystemF
   };
   const rules = (file: SystemFile) => ({ ...file, ...(!existing.items && !existing.itemFeatures ? { items: undefined, itemFeatures: undefined } : {}), features: file.features.map(featureRules), configurations: file.configurations.map((c) => {
     const { tagDisplayNames, sheetSections, featureCategories, ...system } = c.system;
-    return { ...c, system, classes: c.classes.map(strip) };
+    return { ...c, system: { ...system, ...(!existing.configurations.find((old) => old.id === c.id)?.system.currency ? { currency: undefined } : {}) }, classes: c.classes.map(strip) };
   }) });
   const canonical = (value: unknown): unknown => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, item]) => [key, canonical(item)])) : value;
   if (JSON.stringify(canonical(rules(existing))) !== JSON.stringify(canonical(rules(validated)))) throw new Error('Bundled rules differ from this loaded System. Description refresh cannot replace its rules. Export the System before unloading or migrating it.');

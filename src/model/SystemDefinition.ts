@@ -6,8 +6,10 @@ import type { Grant } from '@/src/model/Grant.js';
 import type { Choice } from '@/src/model/Choice.js';
 import type { Scope } from '@/src/model/Scope.js';
 import type { SheetSection } from '@/src/model/SheetSection.js';
+import type { CurrencyDefinition } from '@/src/model/CurrencyDefinition.js';
 
 export interface SystemDefinition {
+  currency?: CurrencyDefinition;
   sheetSections?: SheetSection[];
   featureCategories?: { id: string; name: string; tags: string[] }[];
   id: string; revision: number; name: string; stats: StatDefinition[]; classes?: string[];

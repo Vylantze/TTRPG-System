@@ -59,3 +59,31 @@
 .skill-list .stat-explanation summary { font-size: 10px; }
 .resource-stepper label { margin: 0; max-width: 7rem; }
 .character-details textarea { font: inherit; }
+/* Character sheet controls */
+.detail-editor { width:100%; max-width:36rem; }
+.detail-editor textarea { display:block; width:100%; height:9rem; max-width:36rem; resize:none; line-height:1.5; padding:.75rem; }
+.character-facts dt .link { font-size:.75rem; font-weight:500; }
+.character-facts dd { white-space:pre-wrap; }
+.money-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:1rem; }
+.money-input { display:flex; align-items:center; border:1px solid var(--line,#d8dce3); border-radius:8px; overflow:hidden; background:white; }
+.money-input input { border:0; min-width:0; margin:0; }
+.money-input span { padding-right:.75rem; color:#6b7280; }
+.sort-heading { background:none; border:0; padding:4px 0; color:inherit; font:inherit; text-align:left; white-space:nowrap; }
+.skill-list .bonus-disclosure summary { display:flex; align-items:center; justify-content:flex-end; gap:.5rem; padding:2px 0; cursor:pointer; list-style:none; }
+.bonus-disclosure summary::-webkit-details-marker { display:none; }
+.bonus-disclosure[open] .disclosure-arrow { transform:rotate(90deg); }
+.disclosure-arrow { display:inline-block; color:#64748b; }
+.calculation-box { background:#f3f5f9; border:1px solid #dbe1eb; border-radius:8px; padding:.7rem; font-size:.8rem; text-align:left; min-width:150px; margin:.4rem 0; }
+.calculation-box p { margin:.25rem 0; }
+.calculation-box small { display:block; }
+.resource-card { border-top:3px solid #526b91; gap:.75rem; }
+.resource-card > strong { font-size:1.8rem; }
+.resource-card .resource-stepper { display:flex; gap:0; width:fit-content; align-items:stretch; border:1px solid #ccd4e1; border-radius:10px; overflow:hidden; background:#f7f9fc; }
+.resource-card .resource-stepper button { border:0; border-radius:0; margin:0; min-width:44px; font-size:1.4rem; background:transparent; }
+.resource-card .resource-stepper label { margin:0; padding:.25rem .5rem; text-align:center; font-size:.65rem; color:#5b6678; }
+.resource-card .resource-stepper input { width:65px; margin:0; padding:2px; text-align:center; border:0; background:transparent; font-size:1rem; }
+.resource-ability { border-top:1px solid #e1e6ef; padding-top:.75rem; }
+.resource-ability h3 { font-size:1rem; }
+.resource-ability .row { flex-wrap:wrap; gap:.5rem; }
+.resource-ability summary { font-size:.8rem; padding:.5rem 0; }
+.sheet-stat .stat-value, .sheet-stat .ability-modifier { cursor:help; }

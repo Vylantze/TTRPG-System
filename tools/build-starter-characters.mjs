@@ -21,7 +21,8 @@ const characters = templates.map((t) => {
   abilities.forEach((a, i) => c.inputs[`base.${a}`] = t.base[i]);
   c.inputs.armorIndex = 0;
   c.inputs.shield = 0;
-  c.inventory = starterInventory[t.key].map(([item, quantity], index) => ({ id: `starting-${index}`, item: `dnd5e:2014:item.${item}`, quantity, equipped: ['chain-mail', 'leather-armor', 'shield'].includes(item) }));
+  c.money = { gp: starterInventory[t.key].find(([item]) => item === 'gold-piece')?.[1] ?? 0 };
+  c.inventory = starterInventory[t.key].filter(([item]) => item !== 'gold-piece').map(([item, quantity], index) => ({ id: `starting-${index}`, item: `dnd5e:2014:item.${item}`, quantity, equipped: ['chain-mail', 'leather-armor', 'shield'].includes(item) }));
   const [race] = select('advancement/0/race', [`race.${t.race}`]);
   const [background] = select('advancement/0/background', [`background.${t.background}`]);
   select(selectionPath(classEntryPath('class-0', 1, 'entry'), 'skills'), t.skills.map((s) => `skill.${s}`));

@@ -14,7 +14,7 @@ const { FeatureRequirements } = await server.ssrLoadModule('/src/FeatureRequirem
 const { CharacterFeatures } = await server.ssrLoadModule('/src/CharacterFeatures.tsx');
 const { ResourceSummary } = await server.ssrLoadModule('/src/ResourceSummary.tsx');
 const { SelectionCard } = await server.ssrLoadModule('/src/SelectionCard.tsx');
-const { addStarterCharacters, addStarterInventory } = await server.ssrLoadModule('/src/starter-characters.ts');
+const { addStarterCharacters, addStarterInventory, migrateMoney } = await server.ssrLoadModule('/src/starter-characters.ts');
 const starterSaves = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8'));
 const { featureHref } = await server.ssrLoadModule('/src/feature-description.ts');
 const { safeReturn } = await server.ssrLoadModule('/src/feature-origin.ts');
@@ -429,6 +429,39 @@ test('additive item and layout updates preserve rules and safely migrate origina
   assert.equal(addStarterInventory(workspace, starterSaves), workspace);
   const changed = structuredClone(file);
   changed.itemFeatures.find((feature) => feature.modifiers).modifiers[0].value++;
+  assert.throws(() => model.updateSystemDescriptions(file, changed), /rules differ/);
+});
+
+test('sheet controls expose inline editing, five coin balances, sortable columns and number labels', () => {
+  const html = render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=stats`);
+  assert.match(html, /Edit Alignment/);
+  assert.doesNotMatch(html, /Edit character details/);
+  for (const coin of ['Copper', 'Silver', 'Electrum', 'Gold', 'Platinum']) assert.match(html, new RegExp(`${coin} balance`));
+  assert.match(html, /25 gp total/);
+  assert.match(html, /aria-sort="ascending"/);
+  assert.match(html, /Calculation for Athletics/);
+  assert.match(html, /Show modifiers first/);
+  assert.match(html, /title="Strength score"/);
+  assert.match(html, /title="Strength modifier"/);
+  const resources = render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=resources`);
+  assert.doesNotMatch(resources, /Turn budget|Start new turn/);
+  assert.match(resources, /resource-card[\s\S]*Use ability[\s\S]*Provided by/);
+});
+
+test('money migration removes coins and old starting-money notes without double counting', () => {
+  const old = structuredClone(starterSaves[0]);
+  delete old.money;
+  old.inventory.push({ id: 'coins', item: 'dnd5e:2014:item.gold-piece', quantity: 25, equipped: false });
+  old.notes['Starting money'] = '25 gp';
+  const migrated = migrateMoney({ ...data(), characters: [old] });
+  assert.deepEqual(migrated.characters[0].money, { gp: 25 });
+  assert.equal(migrated.characters[0].notes['Starting money'], undefined);
+  assert.equal(migrateMoney(migrated), migrated);
+  const oldSystem = structuredClone(file);
+  oldSystem.configurations.forEach((config) => delete config.system.currency);
+  assert(model.updateSystemDescriptions(oldSystem, file).configurations[0].system.currency);
+  const changed = structuredClone(file);
+  changed.configurations[0].system.currency.denominations[0].value = 2;
   assert.throws(() => model.updateSystemDescriptions(file, changed), /rules differ/);
 });
 

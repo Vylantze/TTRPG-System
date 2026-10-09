@@ -5,6 +5,7 @@ import type { PendingUse } from '@/src/model/PendingUse.js';
 import type { InventoryEntry } from '@/src/model/InventoryEntry.js';
 
 export interface Character {
+  money?: Record<string, number>;
   inventory?: InventoryEntry[];
   /** Player-facing sheet notes, independent of calculated rules. */
   notes?: Record<string, string>;

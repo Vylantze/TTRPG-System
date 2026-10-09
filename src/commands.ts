@@ -1,3 +1,4 @@
+import { checkMoney, moneyTotal } from '@/src/currency.js';
 import { Engine, clone } from '@/src/engine.js';
 import { RuleError, constrain, number } from '@/src/expression.js';
 import type { Character, Edit, EditPreview, EvaluationResult } from '@/src/model.js';
@@ -7,6 +8,17 @@ import { storeTrackers } from '@/src/resource-trackers.js';
 import { checkInventory } from '@/src/items.js';
 import type { InventoryEntry } from '@/src/model/InventoryEntry.js';
 export type { UseOptions } from '@/src/types/UseOptions.js';
+
+export function setMoney(engine: Engine, input: Character, money: Record<string, number>, eventId: string): Character {
+  checkCharacter(input);
+  if (input.system.id !== engine.catalogue.system.id || input.system.revision !== engine.catalogue.system.revision || input.catalogue.id !== engine.catalogue.id || input.catalogue.revision !== engine.catalogue.revision) throw new RuleError('REVISION', 'System or catalogue revision mismatch.');
+  checkMoney(money, engine.catalogue.system);
+  const character = clone(input);
+  if (!stamp(character, eventId, { kind: 'money', money })) return character;
+  character.money = clone(money);
+  moneyTotal(character, engine.catalogue.system);
+  return character;
+}
 
 export function updateInventory(engine: Engine, input: Character, inventory: InventoryEntry[], eventId: string): Character {
   checkCharacter(input);
@@ -189,7 +201,9 @@ export function useAbility(engine: Engine, input: Character, ability: string, ev
   const actions = options.actions ? clone(options.actions) : undefined;
   if (actions) for (const value of Object.values(actions)) constrain(value, { integer: true, minimum: 0 });
   const cost = capability.definition.action;
-  if (cost && cost.amount > 0) {
+  if (options.actionTracking !== undefined && options.actionTracking !== 'manual') throw new RuleError('ACTION_TRACKING', 'Invalid action tracking mode.');
+  if (options.actionTracking === 'manual' && actions) throw new RuleError('ACTION_TRACKING', 'Manual action tracking cannot include a budget.');
+  if (cost && cost.amount > 0 && options.actionTracking !== 'manual') {
     if (!actions || number(actions[cost.kind] ?? 0) < cost.amount) throw new RuleError('ACTION_COST', `Insufficient ${cost.kind} actions.`);
     actions[cost.kind] -= cost.amount;
   }
@@ -257,7 +271,7 @@ export function deserializeCharacter(text: string, engine?: Engine): Character {
   checkCharacter(parsed);
   if (engine) {
     const result = engine.evaluate(parsed);
-    const errors = result.diagnostics.filter((d) => ['INVENTORY', 'REVISION', 'HISTORY', 'UNKNOWN_INPUT', 'UNKNOWN_CLASS', 'UNKNOWN_SELECTION'].includes(d.code));
+    const errors = result.diagnostics.filter((d) => ['MONEY', 'INVENTORY', 'REVISION', 'HISTORY', 'UNKNOWN_INPUT', 'UNKNOWN_CLASS', 'UNKNOWN_SELECTION'].includes(d.code));
     if (errors.length) throw new RuleError(errors[0].code, errors[0].message);
   }
   return parsed;

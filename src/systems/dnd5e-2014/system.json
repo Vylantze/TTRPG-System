@@ -107232,7 +107232,47 @@
               "race"
             ]
           }
-        ]
+        ],
+        "currency": {
+          "name": "Coins",
+          "primary": "gp",
+          "decimalPlaces": 0,
+          "denominations": [
+            {
+              "id": "cp",
+              "name": "Copper",
+              "symbol": "cp",
+              "value": 1
+            },
+            {
+              "id": "sp",
+              "name": "Silver",
+              "symbol": "sp",
+              "value": 10
+            },
+            {
+              "id": "ep",
+              "name": "Electrum",
+              "symbol": "ep",
+              "value": 50
+            },
+            {
+              "id": "gp",
+              "name": "Gold",
+              "symbol": "gp",
+              "value": 100,
+              "legacyItemIds": [
+                "dnd5e:2014:item.gold-piece"
+              ]
+            },
+            {
+              "id": "pp",
+              "name": "Platinum",
+              "symbol": "pp",
+              "value": 1000
+            }
+          ]
+        }
       },
       "classes": [
         {
@@ -112899,7 +112939,47 @@
               "race"
             ]
           }
-        ]
+        ],
+        "currency": {
+          "name": "Coins",
+          "primary": "gp",
+          "decimalPlaces": 0,
+          "denominations": [
+            {
+              "id": "cp",
+              "name": "Copper",
+              "symbol": "cp",
+              "value": 1
+            },
+            {
+              "id": "sp",
+              "name": "Silver",
+              "symbol": "sp",
+              "value": 10
+            },
+            {
+              "id": "ep",
+              "name": "Electrum",
+              "symbol": "ep",
+              "value": 50
+            },
+            {
+              "id": "gp",
+              "name": "Gold",
+              "symbol": "gp",
+              "value": 100,
+              "legacyItemIds": [
+                "dnd5e:2014:item.gold-piece"
+              ]
+            },
+            {
+              "id": "pp",
+              "name": "Platinum",
+              "symbol": "pp",
+              "value": 1000
+            }
+          ]
+        }
       },
       "classes": [
         {
@@ -118593,7 +118673,47 @@
               "race"
             ]
           }
-        ]
+        ],
+        "currency": {
+          "name": "Coins",
+          "primary": "gp",
+          "decimalPlaces": 0,
+          "denominations": [
+            {
+              "id": "cp",
+              "name": "Copper",
+              "symbol": "cp",
+              "value": 1
+            },
+            {
+              "id": "sp",
+              "name": "Silver",
+              "symbol": "sp",
+              "value": 10
+            },
+            {
+              "id": "ep",
+              "name": "Electrum",
+              "symbol": "ep",
+              "value": 50
+            },
+            {
+              "id": "gp",
+              "name": "Gold",
+              "symbol": "gp",
+              "value": 100,
+              "legacyItemIds": [
+                "dnd5e:2014:item.gold-piece"
+              ]
+            },
+            {
+              "id": "pp",
+              "name": "Platinum",
+              "symbol": "pp",
+              "value": 1000
+            }
+          ]
+        }
       },
       "classes": [
         {
@@ -124260,7 +124380,47 @@
               "race"
             ]
           }
-        ]
+        ],
+        "currency": {
+          "name": "Coins",
+          "primary": "gp",
+          "decimalPlaces": 0,
+          "denominations": [
+            {
+              "id": "cp",
+              "name": "Copper",
+              "symbol": "cp",
+              "value": 1
+            },
+            {
+              "id": "sp",
+              "name": "Silver",
+              "symbol": "sp",
+              "value": 10
+            },
+            {
+              "id": "ep",
+              "name": "Electrum",
+              "symbol": "ep",
+              "value": 50
+            },
+            {
+              "id": "gp",
+              "name": "Gold",
+              "symbol": "gp",
+              "value": 100,
+              "legacyItemIds": [
+                "dnd5e:2014:item.gold-piece"
+              ]
+            },
+            {
+              "id": "pp",
+              "name": "Platinum",
+              "symbol": "pp",
+              "value": 1000
+            }
+          ]
+        }
       },
       "classes": [
         {
@@ -129611,7 +129771,47 @@
               "race"
             ]
           }
-        ]
+        ],
+        "currency": {
+          "name": "Coins",
+          "primary": "gp",
+          "decimalPlaces": 0,
+          "denominations": [
+            {
+              "id": "cp",
+              "name": "Copper",
+              "symbol": "cp",
+              "value": 1
+            },
+            {
+              "id": "sp",
+              "name": "Silver",
+              "symbol": "sp",
+              "value": 10
+            },
+            {
+              "id": "ep",
+              "name": "Electrum",
+              "symbol": "ep",
+              "value": 50
+            },
+            {
+              "id": "gp",
+              "name": "Gold",
+              "symbol": "gp",
+              "value": 100,
+              "legacyItemIds": [
+                "dnd5e:2014:item.gold-piece"
+              ]
+            },
+            {
+              "id": "pp",
+              "name": "Platinum",
+              "symbol": "pp",
+              "value": 1000
+            }
+          ]
+        }
       },
       "classes": [
         {
@@ -134935,7 +135135,47 @@
               "race"
             ]
           }
-        ]
+        ],
+        "currency": {
+          "name": "Coins",
+          "primary": "gp",
+          "decimalPlaces": 0,
+          "denominations": [
+            {
+              "id": "cp",
+              "name": "Copper",
+              "symbol": "cp",
+              "value": 1
+            },
+            {
+              "id": "sp",
+              "name": "Silver",
+              "symbol": "sp",
+              "value": 10
+            },
+            {
+              "id": "ep",
+              "name": "Electrum",
+              "symbol": "ep",
+              "value": 50
+            },
+            {
+              "id": "gp",
+              "name": "Gold",
+              "symbol": "gp",
+              "value": 100,
+              "legacyItemIds": [
+                "dnd5e:2014:item.gold-piece"
+              ]
+            },
+            {
+              "id": "pp",
+              "name": "Platinum",
+              "symbol": "pp",
+              "value": 1000
+            }
+          ]
+        }
       },
       "classes": [
         {
@@ -140286,7 +140526,47 @@
               "race"
             ]
           }
-        ]
+        ],
+        "currency": {
+          "name": "Coins",
+          "primary": "gp",
+          "decimalPlaces": 0,
+          "denominations": [
+            {
+              "id": "cp",
+              "name": "Copper",
+              "symbol": "cp",
+              "value": 1
+            },
+            {
+              "id": "sp",
+              "name": "Silver",
+              "symbol": "sp",
+              "value": 10
+            },
+            {
+              "id": "ep",
+              "name": "Electrum",
+              "symbol": "ep",
+              "value": 50
+            },
+            {
+              "id": "gp",
+              "name": "Gold",
+              "symbol": "gp",
+              "value": 100,
+              "legacyItemIds": [
+                "dnd5e:2014:item.gold-piece"
+              ]
+            },
+            {
+              "id": "pp",
+              "name": "Platinum",
+              "symbol": "pp",
+              "value": 1000
+            }
+          ]
+        }
       },
       "classes": [
         {
@@ -145610,7 +145890,47 @@
               "race"
             ]
           }
-        ]
+        ],
+        "currency": {
+          "name": "Coins",
+          "primary": "gp",
+          "decimalPlaces": 0,
+          "denominations": [
+            {
+              "id": "cp",
+              "name": "Copper",
+              "symbol": "cp",
+              "value": 1
+            },
+            {
+              "id": "sp",
+              "name": "Silver",
+              "symbol": "sp",
+              "value": 10
+            },
+            {
+              "id": "ep",
+              "name": "Electrum",
+              "symbol": "ep",
+              "value": 50
+            },
+            {
+              "id": "gp",
+              "name": "Gold",
+              "symbol": "gp",
+              "value": 100,
+              "legacyItemIds": [
+                "dnd5e:2014:item.gold-piece"
+              ]
+            },
+            {
+              "id": "pp",
+              "name": "Platinum",
+              "symbol": "pp",
+              "value": 1000
+            }
+          ]
+        }
       },
       "classes": [
         {
@@ -150759,7 +151079,47 @@
               "race"
             ]
           }
-        ]
+        ],
+        "currency": {
+          "name": "Coins",
+          "primary": "gp",
+          "decimalPlaces": 0,
+          "denominations": [
+            {
+              "id": "cp",
+              "name": "Copper",
+              "symbol": "cp",
+              "value": 1
+            },
+            {
+              "id": "sp",
+              "name": "Silver",
+              "symbol": "sp",
+              "value": 10
+            },
+            {
+              "id": "ep",
+              "name": "Electrum",
+              "symbol": "ep",
+              "value": 50
+            },
+            {
+              "id": "gp",
+              "name": "Gold",
+              "symbol": "gp",
+              "value": 100,
+              "legacyItemIds": [
+                "dnd5e:2014:item.gold-piece"
+              ]
+            },
+            {
+              "id": "pp",
+              "name": "Platinum",
+              "symbol": "pp",
+              "value": 1000
+            }
+          ]
+        }
       },
       "classes": [
         {
@@ -155881,7 +156241,47 @@
               "race"
             ]
           }
-        ]
+        ],
+        "currency": {
+          "name": "Coins",
+          "primary": "gp",
+          "decimalPlaces": 0,
+          "denominations": [
+            {
+              "id": "cp",
+              "name": "Copper",
+              "symbol": "cp",
+              "value": 1
+            },
+            {
+              "id": "sp",
+              "name": "Silver",
+              "symbol": "sp",
+              "value": 10
+            },
+            {
+              "id": "ep",
+              "name": "Electrum",
+              "symbol": "ep",
+              "value": 50
+            },
+            {
+              "id": "gp",
+              "name": "Gold",
+              "symbol": "gp",
+              "value": 100,
+              "legacyItemIds": [
+                "dnd5e:2014:item.gold-piece"
+              ]
+            },
+            {
+              "id": "pp",
+              "name": "Platinum",
+              "symbol": "pp",
+              "value": 1000
+            }
+          ]
+        }
       },
       "classes": [
         {
@@ -161030,7 +161430,47 @@
               "race"
             ]
           }
-        ]
+        ],
+        "currency": {
+          "name": "Coins",
+          "primary": "gp",
+          "decimalPlaces": 0,
+          "denominations": [
+            {
+              "id": "cp",
+              "name": "Copper",
+              "symbol": "cp",
+              "value": 1
+            },
+            {
+              "id": "sp",
+              "name": "Silver",
+              "symbol": "sp",
+              "value": 10
+            },
+            {
+              "id": "ep",
+              "name": "Electrum",
+              "symbol": "ep",
+              "value": 50
+            },
+            {
+              "id": "gp",
+              "name": "Gold",
+              "symbol": "gp",
+              "value": 100,
+              "legacyItemIds": [
+                "dnd5e:2014:item.gold-piece"
+              ]
+            },
+            {
+              "id": "pp",
+              "name": "Platinum",
+              "symbol": "pp",
+              "value": 1000
+            }
+          ]
+        }
       },
       "classes": [
         {
@@ -166152,7 +166592,47 @@
               "race"
             ]
           }
-        ]
+        ],
+        "currency": {
+          "name": "Coins",
+          "primary": "gp",
+          "decimalPlaces": 0,
+          "denominations": [
+            {
+              "id": "cp",
+              "name": "Copper",
+              "symbol": "cp",
+              "value": 1
+            },
+            {
+              "id": "sp",
+              "name": "Silver",
+              "symbol": "sp",
+              "value": 10
+            },
+            {
+              "id": "ep",
+              "name": "Electrum",
+              "symbol": "ep",
+              "value": 50
+            },
+            {
+              "id": "gp",
+              "name": "Gold",
+              "symbol": "gp",
+              "value": 100,
+              "legacyItemIds": [
+                "dnd5e:2014:item.gold-piece"
+              ]
+            },
+            {
+              "id": "pp",
+              "name": "Platinum",
+              "symbol": "pp",
+              "value": 1000
+            }
+          ]
+        }
       },
       "classes": [
         {

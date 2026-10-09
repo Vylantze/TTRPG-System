@@ -996,6 +996,9 @@
     },
     "pending": {},
     "events": [],
+    "money": {
+      "gp": 25
+    },
     "inventory": [
       {
         "id": "starting-0",
@@ -1061,12 +1064,6 @@
         "id": "starting-10",
         "item": "dnd5e:2014:item.pedigree-scroll",
         "quantity": 1,
-        "equipped": false
-      },
-      {
-        "id": "starting-11",
-        "item": "dnd5e:2014:item.gold-piece",
-        "quantity": 25,
         "equipped": false
       }
     ],
@@ -2095,6 +2092,9 @@
     },
     "pending": {},
     "events": [],
+    "money": {
+      "gp": 10
+    },
     "inventory": [
       {
         "id": "starting-0",
@@ -2214,12 +2214,6 @@
         "id": "starting-19",
         "item": "dnd5e:2014:item.sergeants-insignia",
         "quantity": 1,
-        "equipped": false
-      },
-      {
-        "id": "starting-20",
-        "item": "dnd5e:2014:item.gold-piece",
-        "quantity": 10,
         "equipped": false
       }
     ],
@@ -3225,6 +3219,9 @@
     "resources": {},
     "pending": {},
     "events": [],
+    "money": {
+      "gp": 15
+    },
     "inventory": [
       {
         "id": "starting-0",
@@ -3338,12 +3335,6 @@
         "id": "starting-18",
         "item": "dnd5e:2014:item.pouch",
         "quantity": 1,
-        "equipped": false
-      },
-      {
-        "id": "starting-19",
-        "item": "dnd5e:2014:item.gold-piece",
-        "quantity": 15,
         "equipped": false
       }
     ],
@@ -4462,6 +4453,9 @@
     },
     "pending": {},
     "events": [],
+    "money": {
+      "gp": 5
+    },
     "inventory": [
       {
         "id": "starting-0",
@@ -4539,12 +4533,6 @@
         "id": "starting-12",
         "item": "dnd5e:2014:item.pouch",
         "quantity": 1,
-        "equipped": false
-      },
-      {
-        "id": "starting-13",
-        "item": "dnd5e:2014:item.gold-piece",
-        "quantity": 5,
         "equipped": false
       }
     ],
@@ -5548,6 +5536,9 @@
     },
     "pending": {},
     "events": [],
+    "money": {
+      "gp": 10
+    },
     "inventory": [
       {
         "id": "starting-0",
@@ -5649,12 +5640,6 @@
         "id": "starting-16",
         "item": "dnd5e:2014:item.pouch",
         "quantity": 1,
-        "equipped": false
-      },
-      {
-        "id": "starting-17",
-        "item": "dnd5e:2014:item.gold-piece",
-        "quantity": 10,
         "equipped": false
       }
     ],
