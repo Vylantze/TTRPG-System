@@ -34,6 +34,29 @@ function render(workspace, hash = '') {
   return renderToStaticMarkup(createElement(App));
 }
 
+test('System tabs partition skills and notes, persist ability preferences, and lead with HP', () => {
+  const character = { ...starterSaves[0], displayPreferences: { 'modifierFirst:abilities': true }, notes: { ...starterSaves[0].notes, 'Note 1': 'A long custom note\n'.repeat(1000) } };
+  const workspace = { ...data(), characters: [character] };
+  const sheet = render(workspace, `#characters/${character.id}?view=stats`);
+  assert.match(sheet, /Show scores first/);
+  assert.match(sheet, /Roll Strength check/);
+  assert.ok(sheet.indexOf('sheet-hit-points') < sheet.indexOf('Character details'));
+  assert.doesNotMatch(sheet, /id="build-summary"/);
+  assert.doesNotMatch(sheet, /Calculation for Athletics|A long custom note/);
+  const notes = render(workspace, `#characters/${character.id}?view=notes`);
+  assert.match(notes, /A long custom note/);
+  assert.match(notes, /Add note/);
+  const resources = render(workspace, `#characters/${character.id}?view=resources`);
+  assert.ok(resources.indexOf('sheet-hit-points') < resources.indexOf('>Long rest</button>'));
+  const store = storage();
+  model.writeWorkspace(store, workspace);
+  assert.deepEqual(model.readWorkspace(store).characters[0].displayPreferences, character.displayPreferences);
+  assert.equal(model.readWorkspace(store).characters[0].notes['Note 1'], character.notes['Note 1']);
+  const custom = structuredClone(file);
+  custom.configurations.forEach((config) => config.system.sheetTabs.push({ id: 'explore', name: 'Exploration', content: 'sections', sections: ['combat'] }));
+  assert.match(render({ ...workspace, systems: [custom] }, `#characters/${character.id}?view=explore`), /Combat &amp; exploration/);
+});
+
 test('workspace roundtrip preserves loaded rules, character choices and exact catalogue pins', () => {
   const store = storage(), { character } = exampleCharacter();
   character.buildState = 'draft';
@@ -360,7 +383,8 @@ test('Starter Set party loads its System, saves all five characters, and preserv
   assert.deepEqual(model.readWorkspace(store).characters, repeated.characters);
   const html = render(repeated, `#characters/${repeated.characters[1].id}`);
   assert.match(html, /Character details/);
-  assert.match(html, /Original character sheet/);
+  assert.doesNotMatch(html, /Original character sheet/);
+  assert.match(render(repeated, `#characters/${repeated.characters[1].id}?view=notes`), /Original character sheet/);
   assert.match(html, /All calculated stats/);
   assert.match(render(workspace), /Add 2014 Starter Set party/);
 });
@@ -414,6 +438,7 @@ test('additive item and layout updates preserve rules and safely migrate origina
   delete old.itemFeatures;
   old.configurations.forEach((config) => {
     delete config.system.sheetSections;
+    delete config.system.sheetTabs;
     delete config.system.featureCategories;
   });
   const updated = model.updateSystemDescriptions(old, file);
@@ -445,7 +470,8 @@ test('sheet controls expose inline editing, five coin balances, sortable columns
   for (const coin of ['Copper', 'Silver', 'Electrum', 'Gold', 'Platinum']) assert.match(html, new RegExp(`${coin} balance`));
   assert.match(html, /25 gp total/);
   assert.match(html, /aria-sort="ascending"/);
-  assert.match(html, /Calculation for Athletics/);
+  assert.doesNotMatch(html, /Calculation for Athletics/);
+  assert.match(render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=skills`), /Calculation for Athletics/);
   assert.match(html, /Show modifiers first/);
   assert.match(html, /role="tooltip"[^>]*>Strength score/);
   assert.match(html, /role="tooltip"[^>]*>Strength modifier/);

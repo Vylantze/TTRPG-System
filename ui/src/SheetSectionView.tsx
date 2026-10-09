@@ -1,17 +1,19 @@
 import { Tooltip } from '@/ui/src/Tooltip';
 import { useState } from 'react';
-import type { Character, Engine, EvaluationResult } from '@/src/index';
+import { rollDice, type Character, type Engine, type EvaluationResult } from '@/src/index';
 import type { SheetSection } from '@/src/model/SheetSection';
 import { FeatureLink } from '@/ui/src/FeatureLink';
 import { StatCalculation } from '@/ui/src/StatCalculation';
 
 const signed = (value: number) => `${value >= 0 ? '+' : ''}${value}`;
 
-export function SheetSectionView({ section, engine, character, result }: { section: SheetSection; engine: Engine; character: Character; result: EvaluationResult }) {
+export function SheetSectionView({ section, engine, character, result, update }: { section: SheetSection; engine: Engine; character: Character; result: EvaluationResult; update?: (character: Character) => void }) {
   const [expanded, setExpanded] = useState<string[]>([]);
   const [sort, setSort] = useState('Name');
   const [descending, setDescending] = useState(false);
-  const [modifierFirst, setModifierFirst] = useState(false);
+  const preference = `modifierFirst:${section.id}`;
+  const modifierFirst = character.displayPreferences?.[preference] ?? false;
+  const [checks, setChecks] = useState<Record<string, ReturnType<typeof rollDice>>>({});
   const rows = section.rows.filter((row) => result.stats[row.stat]);
   const name = (row: SheetSection['rows'][number]) => row.name ?? engine.getStatDefinition(row.stat)?.name ?? row.stat;
   const training = (row: SheetSection['rows'][number]) => row.proficiencyStat ? result.stats[row.proficiencyStat]?.value ?? 0 : 0;
@@ -25,7 +27,7 @@ export function SheetSectionView({ section, engine, character, result }: { secti
     <section className={`panel sheet-section sheet-${section.layout}`}>
       <div className="section-heading">
         <h2>{section.layout === 'abilities' ? 'Abilities' : section.name}</h2>
-        {section.layout === 'abilities' && <Tooltip text={modifierFirst ? 'Show scores first' : 'Show modifiers first'}><button className="quiet icon-button" aria-label={modifierFirst ? 'Show scores first' : 'Show modifiers first'} aria-pressed={modifierFirst} onClick={() => setModifierFirst(!modifierFirst)}><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h15l-4-4M20 17H5l4 4M19 7l-4 4M5 17l4-4" /></svg></button></Tooltip>}
+        {section.layout === 'abilities' && <Tooltip text={modifierFirst ? 'Show scores first' : 'Show modifiers first'}><button className="quiet icon-button" aria-label={modifierFirst ? 'Show scores first' : 'Show modifiers first'} aria-pressed={modifierFirst} onClick={() => update?.({ ...character, displayPreferences: { ...character.displayPreferences, [preference]: !modifierFirst } })}><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h15l-4-4M20 17H5l4 4M19 7l-4 4M5 17l4-4" /></svg></button></Tooltip>}
       </div>
       {section.layout === 'skills'
         ? (
@@ -74,7 +76,22 @@ export function SheetSectionView({ section, engine, character, result }: { secti
                 const swapped = section.layout === 'abilities' && modifierFirst && secondary;
                 return (
                   <article className="sheet-stat" key={row.stat}>
-                    <h3>{name(row)}</h3>
+                    <h3>
+                      {section.layout === 'abilities' && secondary
+                        ? (
+                            <button
+                              className="link ability-check"
+                              aria-label={`Roll ${name(row)} check`}
+                              onClick={() => {
+                                setChecks({ ...checks, [row.stat]: rollDice(`1d20 ${signed(secondary.value)}`) });
+                              }}
+                            >
+                              {name(row)}
+                            </button>
+                          )
+                        : name(row)}
+                    </h3>
+                    {checks[row.stat] && <Tooltip text={checks[row.stat].breakdown}><output aria-live="polite">{`Roll: ${checks[row.stat].total}`}</output></Tooltip>}
                     <Tooltip text={`${name(row)} ${swapped ? 'modifier' : 'score'}`}><strong className="stat-value">{swapped ? signed(secondary.value) : result.stats[row.stat].value}</strong></Tooltip>
                     {secondary && <Tooltip text={`${name(row)} ${swapped ? 'score' : 'modifier'}`}><span className="ability-modifier">{swapped ? result.stats[row.stat].value : signed(secondary.value)}</span></Tooltip>}
                     <details>

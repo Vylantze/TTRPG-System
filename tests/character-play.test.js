@@ -100,3 +100,25 @@ test('spell roll children exclude At Higher Levels dice but retain base dice', (
   assert.deepEqual(rolls.map((roll) => roll.dice), ['8d6']);
   assert.match(fireball.description, /At Higher Levels/);
 });
+
+test('manual base abilities enforce 3–18 without capping Feature bonuses at 18', () => {
+  const { engine, character } = exampleCharacter({ settings: { abilityMethod: 'manual' } });
+  for (const value of [3, 18]) {
+    const edited = { ...character, inputs: { ...character.inputs, 'base.strength': value } };
+    const result = engine.evaluate(edited);
+    assert.equal(result.stats['base.strength'].value, value);
+    assert.equal(result.stats.strength.value, value + 1);
+  }
+  for (const value of [2, 19]) {
+    const result = engine.evaluate({ ...character, inputs: { ...character.inputs, 'base.strength': value } });
+    assert.equal(result.status, 'invalid');
+  }
+});
+
+test('System tab schema rejects duplicate IDs and unknown sections', () => {
+  for (const tab of [{ id: 'stats', name: 'Duplicate', content: 'sheet' }, { id: 'custom', name: 'Custom', content: 'sections', sections: ['missing'] }]) {
+    const invalid = structuredClone(file);
+    invalid.configurations[0].system.sheetTabs.push(tab);
+    assert.throws(() => new SystemRegistry().load(invalid));
+  }
+});

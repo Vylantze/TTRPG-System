@@ -135,3 +135,12 @@ Feature `processDescriptionAutomatically` controls automatic value replacement i
 The favicon is an original vector wizard-hat d6 in `ui/public/wizard-die.svg`, pending visual review.
 
 Roll histories can be cleared per Feature or for the entire character from the resource view. Clearing removes stored results, including unapplied ones, without changing resources, rest state, or event IDs. Cleared results can no longer be applied. Spell Roll Features are generated only from text before the “At Higher Levels” heading; higher-slot effects remain outside reference-roll generation. System reload can retire removed Roll definitions while preserving character balances and validating the updated build. The top-left brand uses the same wizard-d6 icon as the favicon.
+
+
+### System-authored character tabs and details
+
+`system.sheetTabs` is an ordered array of `{ id, name, content, sections? }`. Content may be `choices`, `sheet`, `features`, `resources`, `notes`, or `sections`. The `sections` array references IDs in `system.sheetSections`; `sections` content creates a custom stat tab, while `sheet` content filters the main sheet's stat panels. IDs must be unique and references must exist. Omitted tab configuration uses the standard tabs. DnD5e places Skills immediately after Character sheet.
+
+`system.importantDetails` lists the exact note labels displayed on Character sheet (DnD5e: Name and Alignment). Race and class levels remain visible there. Other detail labels appear in Notes. Add note creates another editable text entry with no application text-length limit; browser storage capacity still applies. Notes and `character.displayPreferences` travel with character exports. `modifierFirst:SECTION_ID` remembers the ability score/modifier toggle. Clicking an ability name rolls 1d20 plus its calculated modifier, with the die and modifier in the result tooltip; these checks do not spend resources.
+
+Hit Points leads both Character sheet and Abilities & resources. The validity button toggles build counts; invalid builds reveal them automatically. Loading uses a modal spinner that blocks pointer input, keyboard interaction, and background focus until loading finishes. DnD5e base ability inputs accept integral values from 3 through 18; racial and Feature bonuses apply to the derived scores independently. Existing loaded Systems receive presentation updates automatically, but changed input rules require Reload System, which rejects changes that would invalidate a previously valid character.

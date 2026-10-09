@@ -134,7 +134,7 @@ test('standard array and point-buy validate base inputs before race and ASI adju
 });
 
 test('ASI requires two integral points and respects its own cap without capping other Features', () => {
-  const { engine, character } = setup('fighter', 4, { settings: { abilityMethod: 'manual' } });
+  const { engine, character } = setup('fighter', 4, { race: 'half-orc', settings: { abilityMethod: 'manual' } });
   const path = classEntryPath('class-0', 4, 'improvement'), params = { strength: 1, dexterity: 1, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 };
   character.selections[path] = [pick('ability-score-improvement', params)];
   assert.equal(engine.evaluate(character).status, 'valid');
@@ -142,7 +142,7 @@ test('ASI requires two integral points and respects its own cap without capping 
   assert(code(engine.evaluate(character), 'PARAMETER'));
   params.strength = 1;
   character.selections[path][0].parameters = params;
-  character.inputs['base.strength'] = 20;
+  character.inputs['base.strength'] = 18;
   assert(code(engine.evaluate(character), 'PREREQUISITE'));
 });
 
@@ -156,8 +156,8 @@ test('Constitution changes recalculate every historical HP contribution', () => 
 });
 
 test('automatic HP contributes at least one per level', () => {
-  const { engine, character } = setup('wizard', 2, { settings: { abilityMethod: 'manual' } });
-  character.inputs['base.constitution'] = 1;
+  const { engine, character } = setup('wizard', 2, { race: 'high-elf', settings: { abilityMethod: 'manual' } });
+  character.inputs['base.constitution'] = 3;
   assert.equal(engine.evaluate(character).stats.hitPoints.value, 3);
 });
 
@@ -184,8 +184,8 @@ test('Second Wind consumes one bonus action and recovers on either rest', () => 
 });
 
 test('armor AC handles medium Dex caps, heavy armor, shields and Defense', () => {
-  const { engine, character } = setup('fighter', 1, { settings: { abilityMethod: 'manual' } });
-  character.inputs['base.dexterity'] = 19;
+  const { engine, character } = setup('fighter', 1, { race: 'high-elf', settings: { abilityMethod: 'manual' } });
+  character.inputs['base.dexterity'] = 18;
   character.inputs.armorIndex = armor.findIndex((a) => a.name === 'Half plate');
   character.inputs.shield = 1;
   assert.equal(engine.evaluate(character).stats.armorClass.value, 20);

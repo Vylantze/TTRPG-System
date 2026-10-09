@@ -108180,8 +108180,8 @@
             "kind": "input",
             "default": 15,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.dexterity",
@@ -108189,8 +108189,8 @@
             "kind": "input",
             "default": 14,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.constitution",
@@ -108198,8 +108198,8 @@
             "kind": "input",
             "default": 13,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.intelligence",
@@ -108207,8 +108207,8 @@
             "kind": "input",
             "default": 12,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.wisdom",
@@ -108216,8 +108216,8 @@
             "kind": "input",
             "default": 10,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.charisma",
@@ -108225,8 +108225,8 @@
             "kind": "input",
             "default": 8,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "strength",
@@ -112119,7 +112119,51 @@
               "scope": "character"
             }
           ]
-        }
+        },
+        "importantDetails": [
+          "Name",
+          "Alignment"
+        ],
+        "sheetTabs": [
+          {
+            "id": "choices",
+            "name": "Build & choices",
+            "content": "choices"
+          },
+          {
+            "id": "stats",
+            "name": "Character sheet",
+            "content": "sheet",
+            "sections": [
+              "abilities",
+              "combat",
+              "saves"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "content": "sections",
+            "sections": [
+              "skills"
+            ]
+          },
+          {
+            "id": "features",
+            "name": "Features & traits",
+            "content": "features"
+          },
+          {
+            "id": "resources",
+            "name": "Abilities & resources",
+            "content": "resources"
+          },
+          {
+            "id": "notes",
+            "name": "Notes",
+            "content": "notes"
+          }
+        ]
       },
       "classes": [
         {
@@ -113952,8 +113996,8 @@
             "kind": "input",
             "default": 15,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.dexterity",
@@ -113961,8 +114005,8 @@
             "kind": "input",
             "default": 14,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.constitution",
@@ -113970,8 +114014,8 @@
             "kind": "input",
             "default": 13,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.intelligence",
@@ -113979,8 +114023,8 @@
             "kind": "input",
             "default": 12,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.wisdom",
@@ -113988,8 +114032,8 @@
             "kind": "input",
             "default": 10,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.charisma",
@@ -113997,8 +114041,8 @@
             "kind": "input",
             "default": 8,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "strength",
@@ -117882,7 +117926,51 @@
               "scope": "character"
             }
           ]
-        }
+        },
+        "importantDetails": [
+          "Name",
+          "Alignment"
+        ],
+        "sheetTabs": [
+          {
+            "id": "choices",
+            "name": "Build & choices",
+            "content": "choices"
+          },
+          {
+            "id": "stats",
+            "name": "Character sheet",
+            "content": "sheet",
+            "sections": [
+              "abilities",
+              "combat",
+              "saves"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "content": "sections",
+            "sections": [
+              "skills"
+            ]
+          },
+          {
+            "id": "features",
+            "name": "Features & traits",
+            "content": "features"
+          },
+          {
+            "id": "resources",
+            "name": "Abilities & resources",
+            "content": "resources"
+          },
+          {
+            "id": "notes",
+            "name": "Notes",
+            "content": "notes"
+          }
+        ]
       },
       "classes": [
         {
@@ -119733,8 +119821,8 @@
             "kind": "input",
             "default": 15,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.dexterity",
@@ -119742,8 +119830,8 @@
             "kind": "input",
             "default": 14,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.constitution",
@@ -119751,8 +119839,8 @@
             "kind": "input",
             "default": 13,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.intelligence",
@@ -119760,8 +119848,8 @@
             "kind": "input",
             "default": 12,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.wisdom",
@@ -119769,8 +119857,8 @@
             "kind": "input",
             "default": 10,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.charisma",
@@ -119778,8 +119866,8 @@
             "kind": "input",
             "default": 8,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "strength",
@@ -123672,7 +123760,51 @@
               "scope": "character"
             }
           ]
-        }
+        },
+        "importantDetails": [
+          "Name",
+          "Alignment"
+        ],
+        "sheetTabs": [
+          {
+            "id": "choices",
+            "name": "Build & choices",
+            "content": "choices"
+          },
+          {
+            "id": "stats",
+            "name": "Character sheet",
+            "content": "sheet",
+            "sections": [
+              "abilities",
+              "combat",
+              "saves"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "content": "sections",
+            "sections": [
+              "skills"
+            ]
+          },
+          {
+            "id": "features",
+            "name": "Features & traits",
+            "content": "features"
+          },
+          {
+            "id": "resources",
+            "name": "Abilities & resources",
+            "content": "resources"
+          },
+          {
+            "id": "notes",
+            "name": "Notes",
+            "content": "notes"
+          }
+        ]
       },
       "classes": [
         {
@@ -125505,8 +125637,8 @@
             "kind": "input",
             "default": 15,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.dexterity",
@@ -125514,8 +125646,8 @@
             "kind": "input",
             "default": 14,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.constitution",
@@ -125523,8 +125655,8 @@
             "kind": "input",
             "default": 13,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.intelligence",
@@ -125532,8 +125664,8 @@
             "kind": "input",
             "default": 12,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.wisdom",
@@ -125541,8 +125673,8 @@
             "kind": "input",
             "default": 10,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.charisma",
@@ -125550,8 +125682,8 @@
             "kind": "input",
             "default": 8,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "strength",
@@ -129435,7 +129567,51 @@
               "scope": "character"
             }
           ]
-        }
+        },
+        "importantDetails": [
+          "Name",
+          "Alignment"
+        ],
+        "sheetTabs": [
+          {
+            "id": "choices",
+            "name": "Build & choices",
+            "content": "choices"
+          },
+          {
+            "id": "stats",
+            "name": "Character sheet",
+            "content": "sheet",
+            "sections": [
+              "abilities",
+              "combat",
+              "saves"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "content": "sections",
+            "sections": [
+              "skills"
+            ]
+          },
+          {
+            "id": "features",
+            "name": "Features & traits",
+            "content": "features"
+          },
+          {
+            "id": "resources",
+            "name": "Abilities & resources",
+            "content": "resources"
+          },
+          {
+            "id": "notes",
+            "name": "Notes",
+            "content": "notes"
+          }
+        ]
       },
       "classes": [
         {
@@ -131286,8 +131462,8 @@
             "kind": "input",
             "default": 15,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.dexterity",
@@ -131295,8 +131471,8 @@
             "kind": "input",
             "default": 14,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.constitution",
@@ -131304,8 +131480,8 @@
             "kind": "input",
             "default": 13,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.intelligence",
@@ -131313,8 +131489,8 @@
             "kind": "input",
             "default": 12,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.wisdom",
@@ -131322,8 +131498,8 @@
             "kind": "input",
             "default": 10,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.charisma",
@@ -131331,8 +131507,8 @@
             "kind": "input",
             "default": 8,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "strength",
@@ -134882,7 +135058,51 @@
               "scope": "character"
             }
           ]
-        }
+        },
+        "importantDetails": [
+          "Name",
+          "Alignment"
+        ],
+        "sheetTabs": [
+          {
+            "id": "choices",
+            "name": "Build & choices",
+            "content": "choices"
+          },
+          {
+            "id": "stats",
+            "name": "Character sheet",
+            "content": "sheet",
+            "sections": [
+              "abilities",
+              "combat",
+              "saves"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "content": "sections",
+            "sections": [
+              "skills"
+            ]
+          },
+          {
+            "id": "features",
+            "name": "Features & traits",
+            "content": "features"
+          },
+          {
+            "id": "resources",
+            "name": "Abilities & resources",
+            "content": "resources"
+          },
+          {
+            "id": "notes",
+            "name": "Notes",
+            "content": "notes"
+          }
+        ]
       },
       "classes": [
         {
@@ -136715,8 +136935,8 @@
             "kind": "input",
             "default": 15,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.dexterity",
@@ -136724,8 +136944,8 @@
             "kind": "input",
             "default": 14,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.constitution",
@@ -136733,8 +136953,8 @@
             "kind": "input",
             "default": 13,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.intelligence",
@@ -136742,8 +136962,8 @@
             "kind": "input",
             "default": 12,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.wisdom",
@@ -136751,8 +136971,8 @@
             "kind": "input",
             "default": 10,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.charisma",
@@ -136760,8 +136980,8 @@
             "kind": "input",
             "default": 8,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "strength",
@@ -140302,7 +140522,51 @@
               "scope": "character"
             }
           ]
-        }
+        },
+        "importantDetails": [
+          "Name",
+          "Alignment"
+        ],
+        "sheetTabs": [
+          {
+            "id": "choices",
+            "name": "Build & choices",
+            "content": "choices"
+          },
+          {
+            "id": "stats",
+            "name": "Character sheet",
+            "content": "sheet",
+            "sections": [
+              "abilities",
+              "combat",
+              "saves"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "content": "sections",
+            "sections": [
+              "skills"
+            ]
+          },
+          {
+            "id": "features",
+            "name": "Features & traits",
+            "content": "features"
+          },
+          {
+            "id": "resources",
+            "name": "Abilities & resources",
+            "content": "resources"
+          },
+          {
+            "id": "notes",
+            "name": "Notes",
+            "content": "notes"
+          }
+        ]
       },
       "classes": [
         {
@@ -142153,8 +142417,8 @@
             "kind": "input",
             "default": 15,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.dexterity",
@@ -142162,8 +142426,8 @@
             "kind": "input",
             "default": 14,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.constitution",
@@ -142171,8 +142435,8 @@
             "kind": "input",
             "default": 13,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.intelligence",
@@ -142180,8 +142444,8 @@
             "kind": "input",
             "default": 12,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.wisdom",
@@ -142189,8 +142453,8 @@
             "kind": "input",
             "default": 10,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.charisma",
@@ -142198,8 +142462,8 @@
             "kind": "input",
             "default": 8,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "strength",
@@ -145749,7 +146013,51 @@
               "scope": "character"
             }
           ]
-        }
+        },
+        "importantDetails": [
+          "Name",
+          "Alignment"
+        ],
+        "sheetTabs": [
+          {
+            "id": "choices",
+            "name": "Build & choices",
+            "content": "choices"
+          },
+          {
+            "id": "stats",
+            "name": "Character sheet",
+            "content": "sheet",
+            "sections": [
+              "abilities",
+              "combat",
+              "saves"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "content": "sections",
+            "sections": [
+              "skills"
+            ]
+          },
+          {
+            "id": "features",
+            "name": "Features & traits",
+            "content": "features"
+          },
+          {
+            "id": "resources",
+            "name": "Abilities & resources",
+            "content": "resources"
+          },
+          {
+            "id": "notes",
+            "name": "Notes",
+            "content": "notes"
+          }
+        ]
       },
       "classes": [
         {
@@ -147582,8 +147890,8 @@
             "kind": "input",
             "default": 15,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.dexterity",
@@ -147591,8 +147899,8 @@
             "kind": "input",
             "default": 14,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.constitution",
@@ -147600,8 +147908,8 @@
             "kind": "input",
             "default": 13,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.intelligence",
@@ -147609,8 +147917,8 @@
             "kind": "input",
             "default": 12,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.wisdom",
@@ -147618,8 +147926,8 @@
             "kind": "input",
             "default": 10,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.charisma",
@@ -147627,8 +147935,8 @@
             "kind": "input",
             "default": 8,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "strength",
@@ -151169,7 +151477,51 @@
               "scope": "character"
             }
           ]
-        }
+        },
+        "importantDetails": [
+          "Name",
+          "Alignment"
+        ],
+        "sheetTabs": [
+          {
+            "id": "choices",
+            "name": "Build & choices",
+            "content": "choices"
+          },
+          {
+            "id": "stats",
+            "name": "Character sheet",
+            "content": "sheet",
+            "sections": [
+              "abilities",
+              "combat",
+              "saves"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "content": "sections",
+            "sections": [
+              "skills"
+            ]
+          },
+          {
+            "id": "features",
+            "name": "Features & traits",
+            "content": "features"
+          },
+          {
+            "id": "resources",
+            "name": "Abilities & resources",
+            "content": "resources"
+          },
+          {
+            "id": "notes",
+            "name": "Notes",
+            "content": "notes"
+          }
+        ]
       },
       "classes": [
         {
@@ -153020,8 +153372,8 @@
             "kind": "input",
             "default": 15,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.dexterity",
@@ -153029,8 +153381,8 @@
             "kind": "input",
             "default": 14,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.constitution",
@@ -153038,8 +153390,8 @@
             "kind": "input",
             "default": 13,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.intelligence",
@@ -153047,8 +153399,8 @@
             "kind": "input",
             "default": 12,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.wisdom",
@@ -153056,8 +153408,8 @@
             "kind": "input",
             "default": 10,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.charisma",
@@ -153065,8 +153417,8 @@
             "kind": "input",
             "default": 8,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "strength",
@@ -156414,7 +156766,51 @@
               "scope": "character"
             }
           ]
-        }
+        },
+        "importantDetails": [
+          "Name",
+          "Alignment"
+        ],
+        "sheetTabs": [
+          {
+            "id": "choices",
+            "name": "Build & choices",
+            "content": "choices"
+          },
+          {
+            "id": "stats",
+            "name": "Character sheet",
+            "content": "sheet",
+            "sections": [
+              "abilities",
+              "combat",
+              "saves"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "content": "sections",
+            "sections": [
+              "skills"
+            ]
+          },
+          {
+            "id": "features",
+            "name": "Features & traits",
+            "content": "features"
+          },
+          {
+            "id": "resources",
+            "name": "Abilities & resources",
+            "content": "resources"
+          },
+          {
+            "id": "notes",
+            "name": "Notes",
+            "content": "notes"
+          }
+        ]
       },
       "classes": [
         {
@@ -158247,8 +158643,8 @@
             "kind": "input",
             "default": 15,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.dexterity",
@@ -158256,8 +158652,8 @@
             "kind": "input",
             "default": 14,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.constitution",
@@ -158265,8 +158661,8 @@
             "kind": "input",
             "default": 13,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.intelligence",
@@ -158274,8 +158670,8 @@
             "kind": "input",
             "default": 12,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.wisdom",
@@ -158283,8 +158679,8 @@
             "kind": "input",
             "default": 10,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.charisma",
@@ -158292,8 +158688,8 @@
             "kind": "input",
             "default": 8,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "strength",
@@ -161632,7 +162028,51 @@
               "scope": "character"
             }
           ]
-        }
+        },
+        "importantDetails": [
+          "Name",
+          "Alignment"
+        ],
+        "sheetTabs": [
+          {
+            "id": "choices",
+            "name": "Build & choices",
+            "content": "choices"
+          },
+          {
+            "id": "stats",
+            "name": "Character sheet",
+            "content": "sheet",
+            "sections": [
+              "abilities",
+              "combat",
+              "saves"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "content": "sections",
+            "sections": [
+              "skills"
+            ]
+          },
+          {
+            "id": "features",
+            "name": "Features & traits",
+            "content": "features"
+          },
+          {
+            "id": "resources",
+            "name": "Abilities & resources",
+            "content": "resources"
+          },
+          {
+            "id": "notes",
+            "name": "Notes",
+            "content": "notes"
+          }
+        ]
       },
       "classes": [
         {
@@ -163483,8 +163923,8 @@
             "kind": "input",
             "default": 15,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.dexterity",
@@ -163492,8 +163932,8 @@
             "kind": "input",
             "default": 14,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.constitution",
@@ -163501,8 +163941,8 @@
             "kind": "input",
             "default": 13,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.intelligence",
@@ -163510,8 +163950,8 @@
             "kind": "input",
             "default": 12,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.wisdom",
@@ -163519,8 +163959,8 @@
             "kind": "input",
             "default": 10,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.charisma",
@@ -163528,8 +163968,8 @@
             "kind": "input",
             "default": 8,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "strength",
@@ -166877,7 +167317,51 @@
               "scope": "character"
             }
           ]
-        }
+        },
+        "importantDetails": [
+          "Name",
+          "Alignment"
+        ],
+        "sheetTabs": [
+          {
+            "id": "choices",
+            "name": "Build & choices",
+            "content": "choices"
+          },
+          {
+            "id": "stats",
+            "name": "Character sheet",
+            "content": "sheet",
+            "sections": [
+              "abilities",
+              "combat",
+              "saves"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "content": "sections",
+            "sections": [
+              "skills"
+            ]
+          },
+          {
+            "id": "features",
+            "name": "Features & traits",
+            "content": "features"
+          },
+          {
+            "id": "resources",
+            "name": "Abilities & resources",
+            "content": "resources"
+          },
+          {
+            "id": "notes",
+            "name": "Notes",
+            "content": "notes"
+          }
+        ]
       },
       "classes": [
         {
@@ -168710,8 +169194,8 @@
             "kind": "input",
             "default": 15,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.dexterity",
@@ -168719,8 +169203,8 @@
             "kind": "input",
             "default": 14,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.constitution",
@@ -168728,8 +169212,8 @@
             "kind": "input",
             "default": 13,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.intelligence",
@@ -168737,8 +169221,8 @@
             "kind": "input",
             "default": 12,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.wisdom",
@@ -168746,8 +169230,8 @@
             "kind": "input",
             "default": 10,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "base.charisma",
@@ -168755,8 +169239,8 @@
             "kind": "input",
             "default": 8,
             "integer": true,
-            "minimum": 1,
-            "maximum": 30
+            "minimum": 3,
+            "maximum": 18
           },
           {
             "id": "strength",
@@ -172095,7 +172579,51 @@
               "scope": "character"
             }
           ]
-        }
+        },
+        "importantDetails": [
+          "Name",
+          "Alignment"
+        ],
+        "sheetTabs": [
+          {
+            "id": "choices",
+            "name": "Build & choices",
+            "content": "choices"
+          },
+          {
+            "id": "stats",
+            "name": "Character sheet",
+            "content": "sheet",
+            "sections": [
+              "abilities",
+              "combat",
+              "saves"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "content": "sections",
+            "sections": [
+              "skills"
+            ]
+          },
+          {
+            "id": "features",
+            "name": "Features & traits",
+            "content": "features"
+          },
+          {
+            "id": "resources",
+            "name": "Abilities & resources",
+            "content": "resources"
+          },
+          {
+            "id": "notes",
+            "name": "Notes",
+            "content": "notes"
+          }
+        ]
       },
       "classes": [
         {

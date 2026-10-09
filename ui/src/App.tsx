@@ -1,3 +1,4 @@
+import { LoadingOverlay } from '@/ui/src/LoadingOverlay';
 import multiclassUrl from '@/src/systems/dnd5e-2014/multiclass-sample.json?url';
 import { SystemLoader } from '@/ui/src/SystemLoader';
 import { ReloadSystemButton } from '@/ui/src/ReloadSystemButton';
@@ -247,7 +248,8 @@ export function App() {
   const cls = engine?.catalogue.classes.find((c) => c.id === route.id);
   const list = useMemo(() => route.page === 'features' && !route.id ? engine?.catalogue.features.filter((f) => `${featureName(f)} ${f.name} ${featureDescription(f, engine!) ?? ''} ${f.source ?? ''}`.toLowerCase().includes(query.toLowerCase()) && (!tag || f.tags?.includes(tag))).sort((a, b) => sort === 'level' ? (a.contentLevel ?? 0) - (b.contentLevel ?? 0) || featureName(a).localeCompare(featureName(b)) : featureName(a).localeCompare(featureName(b)) * (sort === 'name-desc' ? -1 : 1)) ?? [] : [], [engine, query, tag, sort, route.page, route.id]);
   return (
-    <div className="app-shell">
+    <div className="app-shell" aria-busy={loading || navigating || updatingDescriptions}>
+      {(loading || navigating || updatingDescriptions) && <LoadingOverlay />}
       <a
         href="#main-content"
         className="skip-link"
@@ -302,7 +304,7 @@ export function App() {
           <div className="toolbar">
             {selected && (
               <label className="system-switch">
-                System
+                <span>System</span>
                 <select
                   aria-label="Browse System"
                   value={systemKey(selected)}
