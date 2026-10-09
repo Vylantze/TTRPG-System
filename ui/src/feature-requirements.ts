@@ -1,6 +1,6 @@
-import type { Engine, Expression, FeatureDefinition, Predicate } from '../../src/index';
-import { featureName, tagName } from './display';
-import { labelFromId } from './workspace';
+import type { Engine, Expression, FeatureDefinition, Predicate } from '@/src/index';
+import { featureName, tagName } from '@/ui/src/display';
+import { labelFromId } from '@/ui/src/workspace';
 
 export function expressionText(expression: Expression, engine: Engine): string {
   if (typeof expression !== 'object') return String(expression);

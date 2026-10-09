@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { Engine, classEntryPath } from '../dist/index.js';
-import { catalogue } from '../examples/catalogue.js';
+import { Engine, classEntryPath } from '@/dist/index.js';
+import { catalogue } from '@/examples/catalogue.js';
 
 test('catalogue lookups return frozen definitions and independent sorted progression arrays', () => {
   const engine = new Engine(catalogue);

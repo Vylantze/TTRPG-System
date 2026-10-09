@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { createServer } from 'vite';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { exampleCharacter } from '../../examples/dnd2014-character.js';
+import { exampleCharacter } from '@/examples/dnd2014-character.js';
 
 const server = await createServer({ server: { middlewareMode: true }, appType: 'custom' });
 const model = await server.ssrLoadModule('/src/workspace.ts');
@@ -13,6 +13,7 @@ const { RulesText, FeatureRules, ReferencePopup } = await server.ssrLoadModule('
 const { FeatureRequirements } = await server.ssrLoadModule('/src/FeatureRequirements.tsx');
 const { CharacterFeatures } = await server.ssrLoadModule('/src/CharacterFeatures.tsx');
 const { ResourceSummary } = await server.ssrLoadModule('/src/ResourceSummary.tsx');
+const { SelectionCard } = await server.ssrLoadModule('/src/SelectionCard.tsx');
 const { advancementLabels } = await server.ssrLoadModule('/src/feature-requirements.ts');
 const file = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
 function storage() {
@@ -322,6 +323,18 @@ test('prototype reset discards the old workspace before loading the new storage 
   } });
   assert.deepEqual(removed, ['ttrpg-feature-forge:v1']);
   assert.deepEqual(fresh, { version: 1, systems: [], characters: [] });
+});
+
+test('Feature selections default to a dropdown with a list toggle and no HP choices', () => {
+  const { engine, character } = exampleCharacter();
+  const result = engine.evaluate(character);
+  assert(!result.selections.some((slot) => slot.definition.id === 'hit-points'));
+  const slot = result.selections.find((slot) => engine.getSelectionFeatures(slot.definition).length > 1);
+  const html = renderToStaticMarkup(createElement(SelectionCard, { engine, character, slot, edit() {}, openFeature() {} }));
+  assert.match(html, /<select aria-label="Feature for /);
+  assert.match(html, /aria-pressed="false">Use list/);
+  assert.match(html, /Choose a Feature/);
+  assert.doesNotMatch(html, /class="row pagination"/);
 });
 
 await server.close();

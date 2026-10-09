@@ -1,10 +1,10 @@
 import { useId, useState } from 'react';
-import type { ClassDefinition, Engine } from '../../src/index';
-import { ClassFeature } from './ClassFeature';
-import { FeatureRules, RulesText } from './RulesText';
-import { Modal } from './Modal';
-import { featureName } from './display';
-import { labelFromId } from './workspace';
+import type { ClassDefinition, Engine } from '@/src/index';
+import { ClassFeature } from '@/ui/src/ClassFeature';
+import { FeatureRules, RulesText } from '@/ui/src/RulesText';
+import { Modal } from '@/ui/src/Modal';
+import { featureName } from '@/ui/src/display';
+import { labelFromId } from '@/ui/src/workspace';
 
 export function ClassDetail({ cls, engine, openFeature }: { cls: ClassDefinition; engine: Engine; openFeature: (id: string) => void }) {
   const prefix = useId();

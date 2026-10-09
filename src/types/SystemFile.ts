@@ -1,4 +1,4 @@
-import type { Catalogue, Value } from '../model.js';
+import type { Catalogue, Value } from '@/src/model.js';
 
 export interface SystemFile {
   format: 'ttrpg-system'; version: 1; id: string; revision: number;

@@ -1,4 +1,4 @@
-import { exampleCharacter } from './dnd2014-character.js';
+import { exampleCharacter } from '@/examples/dnd2014-character.js';
 const { engine, character, evaluation } = exampleCharacter({ classes: [{ class: 'fighter', level: 3 }, { class: 'rogue', level: 2 }], settings: { multiclass: true } });
 if (evaluation.status !== 'valid') throw new Error(JSON.stringify(evaluation.diagnostics));
 console.log(`${engine.catalogue.system.name}: Fighter 3 / Rogue 2`);

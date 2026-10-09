@@ -1,7 +1,7 @@
-import type { Value } from './Value.js';
-import type { Expression } from './Expression.js';
-import type { Predicate } from './Predicate.js';
-import type { ComponentBase } from './ComponentBase.js';
+import type { Value } from '@/src/model/Value.js';
+import type { Expression } from '@/src/model/Expression.js';
+import type { Predicate } from '@/src/model/Predicate.js';
+import type { ComponentBase } from '@/src/model/ComponentBase.js';
 
 export interface Capability extends ComponentBase {
   kind: 'grantCapability'; name: string; description?: string; action?: { kind: string; amount: number };

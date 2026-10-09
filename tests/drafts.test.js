@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { Engine, applyEdit, finalizeCharacter, useAbility, recoverResources, deserializeCharacter, serializeCharacter, classEntryPath } from '../dist/index.js';
-import { catalogue } from '../examples/catalogue.js';
+import { Engine, applyEdit, finalizeCharacter, useAbility, recoverResources, deserializeCharacter, serializeCharacter, classEntryPath } from '@/dist/index.js';
+import { catalogue } from '@/examples/catalogue.js';
 const path = classEntryPath('main', 1, 'technique');
 function setup() {
   const data = structuredClone(catalogue);

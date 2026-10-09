@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { lintSource } from '../tools/lint-rules.mjs';
+import { lintSource } from '@/tools/lint-rules.mjs';
 import { ESLint } from 'eslint';
 
 test('shared standard checks JavaScript formatting and Node globals', async () => {

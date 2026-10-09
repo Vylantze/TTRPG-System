@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { Engine, applyEdit, useAbility, recoverResources, classEntryPath, selectionPath, pickPath, serializeCharacter, deserializeCharacter, validateCatalogue } from '../dist/index.js';
-import { createDnd2014Catalogue, createDnd2014Engine, wizardSpells, armor, castSpell, castWizardSpell, recoverArcaneSlots, dnd2014Coverage, getDnd2014FeatureCoverage } from '../dist/systems/dnd5e-2014/index.js';
-import { exampleCharacter } from '../examples/dnd2014-character.js';
+import { Engine, applyEdit, useAbility, recoverResources, classEntryPath, selectionPath, pickPath, serializeCharacter, deserializeCharacter, validateCatalogue } from '@/dist/index.js';
+import { createDnd2014Catalogue, createDnd2014Engine, wizardSpells, armor, castSpell, castWizardSpell, recoverArcaneSlots, dnd2014Coverage, getDnd2014FeatureCoverage } from '@/dist/systems/dnd5e-2014/index.js';
+import { exampleCharacter } from '@/examples/dnd2014-character.js';
 const id = (name) => `dnd5e:2014:${name}`;
 const pick = (feature, parameters, entry = 'pick-0') => ({ id: entry, feature: id(feature), ...(parameters ? { parameters } : {}) });
 const code = (r, c) => r.diagnostics.some((d) => d.code === c);
@@ -151,18 +151,14 @@ test('Constitution changes recalculate every historical HP contribution', () => 
   const before = engine.evaluate(character);
   const after = applyEdit(engine, character, [{ kind: 'input', stat: 'base.constitution', value: 15 }], 'increase-con', { requireValid: true });
   assert.equal(engine.evaluate(after).stats.hitPoints.value, before.stats.hitPoints.value + 3);
-  const rolled = structuredClone(after);
-  rolled.selections[classEntryPath('class-0', 2, 'hit-points')] = [pick('fighter.hit-points', { roll: 1 })];
-  assert.equal(engine.evaluate(rolled).stats.hitPoints.value, engine.evaluate(after).stats.hitPoints.value - 5);
+  assert(!Object.keys(after.selections).some((key) => key.endsWith('/hit-points')));
+  assert(!engine.evaluate(after).selections.some((slot) => slot.definition.id === 'hit-points'));
 });
 
-test('each HP level contributes at least one and fractional/out-of-die rolls fail', () => {
+test('automatic HP contributes at least one per level', () => {
   const { engine, character } = setup('wizard', 2, { settings: { abilityMethod: 'manual' } });
   character.inputs['base.constitution'] = 1;
-  character.selections[classEntryPath('class-0', 2, 'hit-points')] = [pick('wizard.hit-points', { roll: 1 })];
   assert.equal(engine.evaluate(character).stats.hitPoints.value, 3);
-  character.selections[classEntryPath('class-0', 2, 'hit-points')][0].parameters.roll = 6.5;
-  assert(code(engine.evaluate(character), 'PARAMETER'));
 });
 
 test('optional Grappler is filtered, and losing Strength invalidates its maintenance', () => {

@@ -50,8 +50,8 @@ This workspace's dependency download was unavailable during development. Build a
 ## Create and edit a character
 
 ```js
-import { Engine, applyEdit, classEntryPath } from './dist/index.js';
-import { catalogue } from './examples/catalogue.js';
+import { Engine, applyEdit, classEntryPath } from '@/dist/index.js';
+import { catalogue } from '@/examples/catalogue.js';
 
 const engine = new Engine(catalogue);
 const draft = engine.createCharacter('hero', 'Hero', [

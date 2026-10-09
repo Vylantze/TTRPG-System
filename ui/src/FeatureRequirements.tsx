@@ -1,5 +1,5 @@
-import type { Engine, FeatureDefinition } from '../../src/index';
-import { advancementLabels, predicateText } from './feature-requirements';
+import type { Engine, FeatureDefinition } from '@/src/index';
+import { advancementLabels, predicateText } from '@/ui/src/feature-requirements';
 
 export function FeatureRequirements({ feature, engine, compact = false }: { feature: FeatureDefinition; engine: Engine; compact?: boolean }) {
   const advancement = advancementLabels(feature, engine);

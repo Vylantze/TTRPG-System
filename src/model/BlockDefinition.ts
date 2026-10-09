@@ -1,4 +1,4 @@
-import type { ParameterDefinition } from './ParameterDefinition.js';
+import type { ParameterDefinition } from '@/src/model/ParameterDefinition.js';
 
 /** JSON templates use exact { argument: name } nodes; never executable strings. */
 export interface BlockDefinition {

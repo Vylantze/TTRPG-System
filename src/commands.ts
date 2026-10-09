@@ -1,10 +1,10 @@
-import { Engine, clone } from './engine.js';
-import { RuleError, constrain, number } from './expression.js';
-import type { Character, Edit, EditPreview, EvaluationResult } from './model.js';
-import type { UseOptions } from './types/UseOptions.js';
-import { checkCharacter } from './validation.js';
-import { storeTrackers } from './resource-trackers.js';
-export type { UseOptions } from './types/UseOptions.js';
+import { Engine, clone } from '@/src/engine.js';
+import { RuleError, constrain, number } from '@/src/expression.js';
+import type { Character, Edit, EditPreview, EvaluationResult } from '@/src/model.js';
+import type { UseOptions } from '@/src/types/UseOptions.js';
+import { checkCharacter } from '@/src/validation.js';
+import { storeTrackers } from '@/src/resource-trackers.js';
+export type { UseOptions } from '@/src/types/UseOptions.js';
 
 function requireValid(result: EvaluationResult): void {
   if (result.status !== 'valid') throw new RuleError('INVALID_BUILD', 'This command requires a valid, complete character.');

@@ -1,5 +1,5 @@
-import type { Character, Expression, FeatureDefinition, Instance, PoolResult } from './model.js';
-import { constrain, RuleError } from './expression.js';
+import type { Character, Expression, FeatureDefinition, Instance, PoolResult } from '@/src/model.js';
+import { constrain, RuleError } from '@/src/expression.js';
 
 /** Shared identity, independent current amounts, and idempotent assignment grants. */
 export function trackerPools(character: Character, instances: Instance[], features: Map<string, FeatureDefinition>, read: (expression: Expression, instance: Instance) => number | boolean): Record<string, PoolResult> {

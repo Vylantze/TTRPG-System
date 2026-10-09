@@ -2,7 +2,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { lintSource } from './lint-rules.mjs';
+import { lintSource } from '@/tools/lint-rules.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const excluded = new Set(['node_modules', 'dist', 'coverage']);

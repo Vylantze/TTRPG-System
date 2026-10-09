@@ -1,4 +1,4 @@
-import type { Value } from './Value.js';
+import type { Value } from '@/src/model/Value.js';
 
 export interface Instance {
   id: string; feature: string; parent?: string; progression?: string;

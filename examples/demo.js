@@ -1,5 +1,5 @@
-import { Engine, applyEdit, classEntryPath, selectionPath, serializeCharacter } from '../dist/index.js';
-import { catalogue } from './catalogue.js';
+import { Engine, applyEdit, classEntryPath, selectionPath, serializeCharacter } from '@/dist/index.js';
+import { catalogue } from '@/examples/catalogue.js';
 const engine = new Engine(catalogue);
 let character = engine.createCharacter('demo', 'Example adventurer', [{ id: 'main', class: 'example:adventurer', level: 3 }]);
 character = applyEdit(engine, character, [

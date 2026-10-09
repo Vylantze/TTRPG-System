@@ -1,5 +1,5 @@
-import { classEntryPath, selectionPath, pickPath } from '../dist/index.js';
-import { createDnd2014Engine, classInfo, wizardSpells } from '../dist/systems/dnd5e-2014/index.js';
+import { classEntryPath, selectionPath, pickPath } from '@/dist/index.js';
+import { createDnd2014Engine, classInfo, wizardSpells } from '@/dist/systems/dnd5e-2014/index.js';
 
 /** A complete example builder with explicit choices, not a rules recommendation. */
 export function exampleCharacter({ classes = [{ class: 'fighter', level: 3 }], race = 'human', settings = {}, history } = {}) {
@@ -29,7 +29,6 @@ export function exampleCharacter({ classes = [{ class: 'fighter', level: 3 }], r
     const p = character.progressions.find((p) => p.id === entry.progression);
     const cls = p.class.split(':').at(-1);
     const info = classInfo[cls], lvl = entry.level;
-    select(classEntryPath(p.id, lvl, 'hit-points'), [`${cls}.hit-points`]);
     if (lvl === 1) {
       const count = character.history[0].progression === p.id ? info.startingSkills : info.multiclassSkills;
       const chosen = info.skills.filter((s) => !trained.has(s)).slice(0, count);

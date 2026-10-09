@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { Engine, applyEdit, useAbility, settleAbility, recoverResources, serializeCharacter, deserializeCharacter, validateCatalogue, parseSystemFile } from '../dist/index.js';
+import { Engine, applyEdit, useAbility, settleAbility, recoverResources, serializeCharacter, deserializeCharacter, validateCatalogue, parseSystemFile } from '@/dist/index.js';
 
 const feature = (id, components, extra = {}) => ({ id, name: id, revision: 1, components, ...extra });
 const grant = (id, target) => ({ id, kind: 'grantFeature', feature: target });

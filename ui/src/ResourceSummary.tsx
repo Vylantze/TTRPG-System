@@ -1,7 +1,7 @@
-import type { Engine, EvaluationResult, PoolResult } from '../../src/index';
-import { expressionText } from './feature-requirements';
-import { featureName } from './display';
-import { labelFromId } from './workspace';
+import type { Engine, EvaluationResult, PoolResult } from '@/src/index';
+import { expressionText } from '@/ui/src/feature-requirements';
+import { featureName } from '@/ui/src/display';
+import { labelFromId } from '@/ui/src/workspace';
 
 export function ResourceSummary({ pool, engine, result }: { pool: PoolResult; engine: Engine; result: EvaluationResult }) {
   const providers = [...new Set(pool.providers.map((id) => featureName(engine.getFeature(result.instances.find((i) => i.id === id)!.feature))))];

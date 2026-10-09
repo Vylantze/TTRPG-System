@@ -1,7 +1,7 @@
-import type { Expression } from './Expression.js';
-import type { NumericConstraints } from './NumericConstraints.js';
-import type { ComponentBase } from './ComponentBase.js';
-import type { Scope } from './Scope.js';
+import type { Expression } from '@/src/model/Expression.js';
+import type { NumericConstraints } from '@/src/model/NumericConstraints.js';
+import type { ComponentBase } from '@/src/model/ComponentBase.js';
+import type { Scope } from '@/src/model/Scope.js';
 
 export interface Resource extends ComponentBase, NumericConstraints {
   kind: 'defineResource'; key: string; scope: Scope; units: string; contract?: string;

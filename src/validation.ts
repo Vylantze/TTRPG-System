@@ -1,6 +1,6 @@
-import type { Catalogue, Character, Diagnostic, Expression, Predicate, Component, FunctionRegistry } from './model.js';
-import { RuleError, number } from './expression.js';
-import { compileBlocks } from './blocks.js';
+import type { Catalogue, Character, Diagnostic, Expression, Predicate, Component, FunctionRegistry } from '@/src/model.js';
+import { RuleError, number } from '@/src/expression.js';
+import { compileBlocks } from '@/src/blocks.js';
 
 const unsafe = new Set(['__proto__', 'constructor', 'prototype']);
 export function record(v: unknown): asserts v is Record<string, unknown> {

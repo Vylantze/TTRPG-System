@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
-import type { Character, Engine, EvaluationResult } from '../../src/index';
-import { FeatureRules } from './RulesText';
-import { FeatureRequirements } from './FeatureRequirements';
-import { featureName, tagName } from './display';
+import type { Character, Engine, EvaluationResult } from '@/src/index';
+import { FeatureRules } from '@/ui/src/RulesText';
+import { FeatureRequirements } from '@/ui/src/FeatureRequirements';
+import { featureName, tagName } from '@/ui/src/display';
 
 export function CharacterFeatures({ engine, character, result, openFeature }: { engine: Engine; character: Character; result: EvaluationResult; openFeature: (id: string) => void }) {
   const [query, setQuery] = useState(''), [origin, setOrigin] = useState('all'), [showInactive, setShowInactive] = useState(false);

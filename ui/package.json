@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "tsc --noEmit && node tests/run-tests.mjs"
+    "test": "tsc --noEmit && node --import ../tools/register-alias.mjs tests/run-tests.mjs"
   },
   "dependencies": {
     "react": "19.2.4",
