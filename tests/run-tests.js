@@ -6,3 +6,4 @@ import './descriptions.test.js';
 import './feature-text.test.js';
 import './lint.test.js';
 import './catalogue-queries.test.js';
+import './building-blocks.test.js';

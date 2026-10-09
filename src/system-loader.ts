@@ -3,6 +3,7 @@ import { RuleError } from './expression.js';
 import type { Catalogue, Character, Value } from './model.js';
 import type { SystemFile } from './types/SystemFile.js';
 import { checkCharacter, record } from './validation.js';
+import { compileBlocks } from './blocks.js';
 export type { SystemFile } from './types/SystemFile.js';
 function safe(value: unknown, depth = 0): void {
   if (depth > 96) throw new RuleError('SYSTEM_JSON', 'System data is too deep.');
@@ -50,7 +51,7 @@ export function parseSystemFile(input: string | unknown): SystemFile {
     record(config.system);
     if (config.system.id !== file.id || config.system.revision !== file.revision) throw new RuleError('SYSTEM_ID', 'Configuration System identity differs from file identity.');
     // Validate every configuration before publishing any of the file.
-    new Engine({ id: config.id, revision: config.revision, system: config.system, classes: config.classes, features: file.features });
+    new Engine({ id: config.id, revision: config.revision, system: config.system, classes: config.classes, features: file.features, blocks: file.blocks });
   }
   const combinations = Object.values(file.options).reduce((n, d) => n * d.values.length, 1);
   if (seen.size !== combinations) throw new RuleError('SYSTEM_OPTIONS', 'Missing option configurations.');
@@ -66,7 +67,7 @@ function selectCatalogue(file: SystemFile, settings: Record<string, Value>): Cat
   const options = Object.fromEntries(Object.entries(file.options).map(([key, domain]) => [key, settings[key] ?? domain.default]));
   if (Object.entries(options).some(([key, v]) => !file.options[key].values.includes(v))) throw new RuleError('SYSTEM_OPTIONS', 'Invalid System option value.');
   const config = file.configurations.find((c) => signature(c.options) === signature(options))!;
-  return clone({ id: config.id, revision: config.revision, system: config.system, classes: config.classes, features: file.features });
+  return clone(compileBlocks({ id: config.id, revision: config.revision, system: config.system, classes: config.classes, features: file.features, ...(file.blocks ? { blocks: file.blocks } : {}) }));
 }
 
 /** Registry ownership controls availability; unloading never edits character saves. */

@@ -3,6 +3,7 @@ import { RuleError, constrain, number } from './expression.js';
 import type { Character, Edit, EditPreview, EvaluationResult } from './model.js';
 import type { UseOptions } from './types/UseOptions.js';
 import { checkCharacter } from './validation.js';
+import { storeTrackers } from './resource-trackers.js';
 export type { UseOptions } from './types/UseOptions.js';
 
 function requireValid(result: EvaluationResult): void {
@@ -30,6 +31,7 @@ function canonical(value: unknown): string {
 export function previewEdit(engine: Engine, input: Character, edits: Edit[]): EditPreview {
   checkCharacter(input);
   const before = engine.evaluate(input), character = clone(input);
+  storeTrackers(character, before.resources);
   let retraining = false;
   for (const edit of edits) {
     switch (edit.kind) {
@@ -108,6 +110,7 @@ export function previewEdit(engine: Engine, input: Character, edits: Edit[]): Ed
     }
   }
   const provisional = engine.evaluate(character);
+  storeTrackers(character, provisional.resources);
   for (const pool of Object.values(provisional.resources)) if (!Object.hasOwn(character.resources, pool.id)) {
     // Replacement never supplies free recovery; an equivalent stable pool preserves expenditure.
     character.resources[pool.id] = { spent: (retraining && character.buildState !== 'draft') || pool.initial === 'empty' ? pool.capacity : 0 };
@@ -116,7 +119,7 @@ export function previewEdit(engine: Engine, input: Character, edits: Edit[]): Ed
   const active = (r: EvaluationResult) => r.instances.filter((i) => i.active && i.eligible).map((i) => i.id + ':' + i.feature);
   const prior = active(before), next = active(after);
   return { character, before, after, added: next.filter((id) => !prior.includes(id)), removed: prior.filter((id) => !next.includes(id)),
-    changedStats: engine.catalogue.system.stats.map((s) => s.id).filter((id) => before.stats[id]?.value !== after.stats[id]?.value),
+    changedStats: [...new Set([...Object.keys(before.stats), ...Object.keys(after.stats)])].filter((id) => before.stats[id]?.value !== after.stats[id]?.value),
     changedResources: [...new Set([...Object.keys(before.resources), ...Object.keys(after.resources)])].filter((id) => JSON.stringify(before.resources[id]) !== JSON.stringify(after.resources[id])) };
 }
 export function applyEdit(engine: Engine, input: Character, edits: Edit[], eventId: string, options: { requireValid?: boolean } = {}): Character {
@@ -133,6 +136,7 @@ export function finalizeCharacter(engine: Engine, input: Character, eventId: str
   const character = clone(input);
   if (!stamp(character, eventId, { kind: 'finalize' })) return character;
   requireValid(engine.evaluate(character));
+  storeTrackers(character, engine.evaluate(character).resources);
   character.buildState = 'finalized';
   return character;
 }
@@ -147,6 +151,7 @@ export function useAbility(engine: Engine, input: Character, ability: string, ev
   }
   const result = engine.evaluate(character, options.runtime);
   requireValid(result);
+  storeTrackers(character, result.resources);
   const capability = result.capabilities.find((c) => c.id === ability);
   if (!capability) throw new RuleError('ABILITY', 'This ability is unavailable.');
   const actions = options.actions ? clone(options.actions) : undefined;
@@ -161,7 +166,10 @@ export function useAbility(engine: Engine, input: Character, ability: string, ev
   if (actions) character.events.at(-1)!.actions = clone(actions);
   const pending = capability.definition.spendOnOutcomes !== undefined;
   if (pending) character.pending[eventId] = { ability, costs: clone(capability.costs), spendOnOutcomes: [...capability.definition.spendOnOutcomes!] };
-  else for (const [id, amount] of Object.entries(capability.costs)) character.resources[id] = { spent: result.resources[id].spent + amount };
+  else for (const [id, amount] of Object.entries(capability.costs)) {
+    const pool = result.resources[id];
+    character.resources[id] = { ...character.resources[id], spent: pool.spent + amount, ...(pool.tracking ? { current: pool.current! - amount } : {}) };
+  }
   return { character, actions, pending };
 }
 export function settleAbility(input: Character, pendingId: string, outcome: string, eventId: string): Character {
@@ -170,7 +178,10 @@ export function settleAbility(input: Character, pendingId: string, outcome: stri
   if (!stamp(character, eventId, { kind: 'settle', pendingId, outcome })) return character;
   const pending = character.pending[pendingId];
   if (!pending) throw new RuleError('PENDING_USE', 'Unknown or already settled ability use.');
-  if (pending.spendOnOutcomes.includes(outcome)) for (const [id, amount] of Object.entries(pending.costs)) character.resources[id] = { spent: (character.resources[id]?.spent ?? 0) + amount };
+  if (pending.spendOnOutcomes.includes(outcome)) for (const [id, amount] of Object.entries(pending.costs)) {
+    const state = character.resources[id];
+    character.resources[id] = { ...state, spent: (state?.spent ?? 0) + amount, ...(state?.current !== undefined ? { current: state.current - amount } : {}) };
+  }
   delete character.pending[pendingId];
   return character;
 }
@@ -181,6 +192,7 @@ export function recoverResources(engine: Engine, input: Character, recoveryEvent
   if (!stamp(character, eventId, { kind: 'recover', recoveryEvent })) return character;
   const result = engine.evaluate(character);
   requireValid(result);
+  storeTrackers(character, result.resources);
   for (const pool of Object.values(result.resources)) {
     const rules = pool.recovery.filter((r) => r.event === recoveryEvent);
     // Every provider was validated to use identical recovery rules. Apply the pool rule once.
@@ -190,7 +202,10 @@ export function recoverResources(engine: Engine, input: Character, recoveryEvent
       if (amount < 0) throw new RuleError('RECOVERY', 'Negative recovery amount.');
       if (amount !== Infinity) constrain(amount, { integer: pool.integer, minimum: 0 });
       const spent = character.resources[pool.id]?.spent ?? pool.spent;
-      character.resources[pool.id] = { spent: Math.max(0, spent - amount) };
+      if (pool.tracking) {
+        const current = number(Math.min(pool.capacity, character.resources[pool.id].current! + amount));
+        character.resources[pool.id] = { ...character.resources[pool.id], current, spent: Number.isFinite(pool.capacity) ? pool.capacity - current : 0 };
+      } else character.resources[pool.id] = { spent: Math.max(0, spent - amount) };
     }
   }
   return character;
@@ -230,7 +245,11 @@ export function migrateCharacter(engine: Engine, source: Character, target: Char
   const evaluation = engine.evaluate(character);
   requireValid(evaluation);
   for (const pool of Object.values(evaluation.resources)) {
-    character.resources[pool.id] = clone(source.resources[pool.id] ?? { spent: pool.capacity });
+    if (pool.tracking) {
+      const prior = source.resources[pool.id];
+      const current = constrain(prior?.current ?? pool.minimum!, { minimum: pool.minimum, maximum: pool.capacity, integer: pool.integer, clamp: true });
+      character.resources[pool.id] = { current, spent: Number.isFinite(pool.capacity) ? pool.capacity - current : 0, grants: clone(prior?.grants ?? pool.grants) };
+    } else character.resources[pool.id] = clone(source.resources[pool.id] ?? { spent: pool.capacity });
   }
   requireValid(engine.evaluate(character));
   return character;

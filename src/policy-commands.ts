@@ -76,7 +76,8 @@ export function recoverSelectedResources(engine: Engine, input: Character, slots
   const character = useAbility(engine, input, ability.id, `${eventId}/charge`).character;
   for (const [levelText, count] of entries) {
     const pool = Object.values(result.resources).find((p) => p.key === policy.targets[levelText].key && p.scope === policy.targets[levelText].scope)!;
-    character.resources[pool.id] = { spent: (character.resources[pool.id]?.spent ?? pool.spent) - count };
+    character.resources[pool.id] = { ...character.resources[pool.id], spent: (character.resources[pool.id]?.spent ?? pool.spent) - count,
+      ...(pool.tracking ? { current: (character.resources[pool.id]?.current ?? pool.current!) + count, grants: pool.grants } : {}) };
   }
   character.events.push({ id: eventId, fingerprint });
   return character;

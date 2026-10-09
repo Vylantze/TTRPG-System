@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { parseSystemFile, catalogueFromSystemFile, SystemRegistry, Engine, castSpell, recoverSelectedResources, recoverResources, useAbility, serializeCharacter } from '../dist/index.js';
+import { parseSystemFile, catalogueFromSystemFile, compileBlocks, SystemRegistry, Engine, castSpell, recoverSelectedResources, recoverResources, useAbility, serializeCharacter } from '../dist/index.js';
 import { exampleCharacter } from '../examples/dnd2014-character.js';
 
 const text = readFileSync(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8');
@@ -37,7 +37,7 @@ test('2014 System JSON contains all twelve option configurations and matches bun
   registry.load(file);
   for (const c of file.configurations) {
     const engine = registry.createEngine(file.id, file.revision, c.options);
-    assert.deepEqual(engine.catalogue, { id: c.id, revision: c.revision, system: c.system, classes: c.classes, features: file.features });
+    assert.deepEqual(engine.catalogue, compileBlocks({ id: c.id, revision: c.revision, system: c.system, classes: c.classes, features: file.features, blocks: file.blocks }));
   }
 });
 test('registry loads independent Systems, isolates input and list data, and rejects duplicates', () => {

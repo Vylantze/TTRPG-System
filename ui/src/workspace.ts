@@ -2,7 +2,8 @@ import { SystemRegistry, deserializeCharacter, parseSystemFile, serializeCharact
 import type { Workspace } from './types/Workspace';
 export type { Workspace } from './types/Workspace';
 
-export const STORAGE_KEY = 'ttrpg-feature-forge:v1';
+// Prototype reset: old expenditure-based saves are intentionally not loaded.
+export const STORAGE_KEY = 'ttrpg-feature-forge:v2';
 
 /** Storage-only deduplication; imported/exported System JSON retains its engine format. */
 function packSystem(file: SystemFile) {
@@ -25,7 +26,9 @@ function unpackSystem(packed: ReturnType<typeof packSystem>): SystemFile {
   };
   return { ...packed.definition, configurations: packed.configurations.map((c) => ({ ...c, classes: item(packed.classes, c.classes), system: { ...c.system, stats: item(packed.stats, c.system.stats) } })) };
 }
-export function readWorkspace(storage: Pick<Storage, 'getItem'>): Workspace {
+export function readWorkspace(storage: Pick<Storage, 'getItem'> & Partial<Pick<Storage, 'removeItem'>>): Workspace {
+  // User-authorized prototype reset also releases quota occupied by the old workspace.
+  storage.removeItem?.('ttrpg-feature-forge:v1');
   const raw = storage.getItem(STORAGE_KEY);
   if (!raw) return { version: 1, systems: [], characters: [] };
   const value = JSON.parse(raw);

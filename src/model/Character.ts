@@ -11,6 +11,6 @@ export interface Character {
   inputs: Record<string, number>; progressions: Progression[];
   history: { progression: string; level: number }[]; roots: RootAcquisition[];
   selections: Record<string, Pick[]>; bindings: Record<string, string>;
-  alternatives: Record<string, string>; resources: Record<string, { spent: number }>;
+  alternatives: Record<string, string>; resources: Record<string, { spent: number; current?: number; grants?: string[] }>;
   pending: Record<string, PendingUse>; events: { id: string; fingerprint: string; actions?: Record<string, number> }[];
 }

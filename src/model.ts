@@ -38,3 +38,8 @@ export type { StatDefinition } from './model/StatDefinition.js';
 export type { StatResult } from './model/StatResult.js';
 export type { SystemDefinition } from './model/SystemDefinition.js';
 export type { Value } from './model/Value.js';
+export type { DefineStat } from './model/DefineStat.js';
+export type { TrackResource } from './model/TrackResource.js';
+export type { GrantResource } from './model/GrantResource.js';
+export type { UseBlock } from './model/UseBlock.js';
+export type { BlockDefinition } from './model/BlockDefinition.js';

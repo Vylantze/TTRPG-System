@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T16:21:58.509Z
+Export refreshed UTC: 2026-10-09T16:58:30.301Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -1247,5 +1247,259 @@ Spell wrappers are an even larger source of repetition: the catalogue has 190 sp
 
 [2026-10-09T16:21:03.362Z] ASSISTANT
 Lint passes, and the JSON comparison confirms that only link metadata changed—source text, mechanics, and Feature IDs are untouched. Regression tests are still running, including checks for equipment false positives, valid spell links, and refreshing previously saved Systems.
+
+----------------------------------------
+
+[2026-10-09T16:22:18.955Z] ASSISTANT
+All 200 engine tests and 19 UI tests pass, and the production build succeeds.
+
+The engine already has six core component types: stat modifiers, resources, capabilities, Feature grants, Feature selections, and descriptive text. The duplication appears to call for reusable templates and shared reference data, rather than additional skill-specific component types. I’m committing and pushing the link fix now.
+
+----------------------------------------
+
+[2026-10-09T16:23:07.921Z] ASSISTANT
+Fixed and pushed as `cdfed13` to `develop`.
+
+Ambiguous spell names now require context: “cast shield” and “light spell” link correctly; “a shield and light crossbow” does not. Source text remains unchanged. Unqualified ambiguous mentions stay unlinked. Existing saved Systems receive the metadata through description refresh.
+
+Validation: **200 engine tests, 19 UI tests, lint, and production build passed.**
+
+The building-block review found:
+
+| Repeated definitions | Recommended reuse |
+|---|---|
+| 18 skill proficiencies | One proficiency template, with a skill parameter |
+| 19 Expertise options | One Expertise template, with a trained skill/tool parameter |
+| 16 languages | One language-grant template |
+| 190 spellbook + 190 prepared-spell Features | Separate learning/preparation templates using shared spell records |
+
+**Keep the six existing primitives:** modify a stat, define a resource, grant a capability, grant a Feature, select Features, and descriptive text. Parameters, predicates, formulas, and scaling tables support these primitives.
+
+The missing abstraction is reusable **Feature templates**. Parameters exist today, but modifier targets and prerequisite stat references are fixed strings.
+
+I recommend implementing templates that compile into the existing validated Feature format first. This reduces duplicated authoring while preserving stable Feature IDs, readable choices, source descriptions, and saved-character compatibility. It would not initially reduce the number of generated runtime Features.
+
+The consolidation is reviewed, not yet implemented.
+
+----------------------------------------
+
+[2026-10-09T16:24:17.871Z] USER
+- The simplest building block should modify 1 stat or create 1 stat based on other stats.&#x20;
+- Features should be simplified to use the simplest building blocks possible, or to use/reuse recursive building blocks as much as possible.&#x20;
+
+Modify accordingly and interview me as needed.
+
+----------------------------------------
+
+[2026-10-09T16:24:22.440Z] ASSISTANT
+I’ll inspect how stats and Features are currently defined, then work out how to make single-stat operations reusable. I’ll ask about the design choices that affect composition and saved characters before changing those parts.
+
+----------------------------------------
+
+[2026-10-09T16:24:25.482Z] ASSISTANT QUESTIONS
+When a Feature creates a stat, should that stat exist only while at least one active Feature provides it, or remain available after the Feature is removed?
+Options: Only while an active Feature provides it (Recommended); Remain available with its default value
+
+Should resource pools and usable abilities remain specialized building blocks built on stats, or should every part of them be expressed purely as stats?
+Options: Keep specialized behavior built on stats (Recommended); Express everything purely as stats
+
+----------------------------------------
+
+[2026-10-09T16:25:04.226Z] ASSISTANT
+The current engine already modifies one stat per modifier, but only Systems can define stats. Features need a new **create-stat primitive**.
+
+I propose this structure:
+
+- **Atomic blocks:** create one stat from a formula, or modify one stat.
+- **Composite blocks:** combine and reuse other blocks, with parameters.
+- **Features:** attach names, source text, prerequisites, and selections to those blocks.
+- **Recursive reuse:** allow nested composition, while rejecting circular references.
+
+For example, `Skill Proficiency(Acrobatics)` could reuse `Training(targetStat, rank)`, which ultimately modifies only `training.skill.acrobatics`. Expertise would reuse the same block with a different rank and prerequisite.
+
+Two decisions affect implementation:
+
+1. **Stat lifetime:** Should a Feature-created stat disappear when its last active provider is removed? I recommend yes; dependent Features would become invalid until repaired.
+2. **Resources and abilities:** Should spending, recovery, and activation remain specialized behaviors built on stats, or must everything be represented purely as stats? I recommend retaining specialized behaviors.
+
+I’ll preserve existing saved-character identities during the refactor. No files have changed yet, pending these decisions.
+
+----------------------------------------
+
+[2026-10-09T16:25:31.317Z] USER
+> When a Feature creates a stat, should that stat exist only while at least one active Feature provides it, or remain available after the Feature is removed?
+
+
+
+Only while an active Feature provides it (Recommended)
+
+----------------------------------------
+
+[2026-10-09T16:25:36.037Z] ASSISTANT
+Confirmed: a Feature-created stat exists only while an active, eligible Feature provides it. If removing its last provider breaks dependent Features, the build becomes invalid and requires repair.
+
+One decision remains: should resource spending, recovery, and ability activation remain specialized behaviors built on stats, or be represented entirely as stats? I recommend retaining specialized behaviors while expressing their numeric values through reusable stat blocks.
+
+----------------------------------------
+
+[2026-10-09T16:27:42.368Z] USER
+What will happen if the following is requested:
+
+- Resource tracking should be attached to a feature.
+- A single feature should at most track 1 type of resource, at any range of value up to a maximum (if needed).
+- A feature that requires multiple resources will track them via multiple sub-features. Thus, resource tracking can be reused.
+
+----------------------------------------
+
+[2026-10-09T16:27:57.224Z] ASSISTANT
+That fits the recursive design well. **A resource-tracking Feature would manage one resource type; a parent Feature could compose several trackers through sub-Features.**
+
+For example:
+
+```text
+Spellcasting
+├── Level 1 Spell Slots
+│   ├── Maximum: formula or scaling table
+│   └── Tracks expenditure and recovery
+├── Level 2 Spell Slots
+│   ├── Maximum: formula or scaling table
+│   └── Tracks expenditure and recovery
+└── Cast Spell
+    └── Consumes the appropriate slot resource
+```
+
+The engine would enforce:
+
+- A Feature directly defines **at most one resource tracker**. It may contain multiple resource-tracking sub-Features.
+- A tracker has a current amount, optional minimum/maximum, and recovery rules. Its bounds can use stats, formulas, or tables.
+- Resource-consuming Features reference an existing tracker rather than maintain their own copy.
+- An action requiring multiple resources checks all costs before spending any.
+- Removing the last active provider removes the resource from the evaluated character. Dependents become invalid, even when ordinary prerequisites are waived.
+
+This preserves the distinction between **numeric building blocks** and **tracking behavior**: stat blocks calculate capacity; the tracker handles spending, recovery, and reservations.
+
+One important choice remains: **if two parent Features include the same resource-tracking sub-Feature, should they share a pool or receive separate pools?** I recommend making this explicit per tracker—character-wide sharing, sharing within a class progression, or a separate pool per Feature instance.
+
+----------------------------------------
+
+[2026-10-09T16:31:45.827Z] USER
+They should share a pool. If there would be a pool that would accumulate exclusively, the sub-feature should simply have a different ID or name or identification.
+
+----------------------------------------
+
+[2026-10-09T16:31:52.252Z] ASSISTANT
+Understood. **Resource identity determines pool identity.**
+
+- All active sub-Features referencing the same resource ID share one pool, including its current amount, expenditure, and recovery.
+- Independent pools require different IDs. Display names can differ or change without affecting identity.
+- Including the same tracker through multiple parents does not duplicate its capacity or reset its balance.
+- The pool remains available while at least one active, eligible provider exists.
+- Capacity increases must be explicit stat modifiers; duplicate inclusion alone grants no increase.
+- Conflicting definitions for the same resource ID produce a validation error.
+
+This makes resource trackers reusable while keeping independent pools explicit.
+
+----------------------------------------
+
+[2026-10-09T16:32:59.162Z] USER
+Resource trackers could also be set at specific values or increment at specific levels.
+
+----------------------------------------
+
+[2026-10-09T16:33:07.234Z] ASSISTANT
+Yes. A resource tracker’s **capacity** can be:
+
+- **Fixed:** maximum 3 uses.
+- **Formula-based:** maximum equals a stat or expression.
+- **Table-based:** maximum 2 at level 1, 3 at level 5, and 4 at level 11.
+- **Incremental:** start at 2, then gain +1 at specified levels.
+
+Each capacity change would use a single-stat building block. Sub-Features could reuse those blocks, and the System would specify whether scaling uses character level or a particular class progression’s level.
+
+Do you also want level-based rules to **set or increase the current resource amount**, separately from changing its maximum? For example, increasing maximum capacity could preserve expenditure, refill the pool, or leave the current amount unchanged.
+
+----------------------------------------
+
+[2026-10-09T16:35:10.295Z] USER
+No, if a resource amount would be increased, it should be defined as part of the feature when it is assigned. The character sheet should also possess a list of resources that has been provided by the features it has, with the current amount, maximum and the reset/recovery condition.
+
+----------------------------------------
+
+[2026-10-09T16:35:17.288Z] ASSISTANT
+I’ll make resource changes explicit in Feature definitions and have the character sheet list each shared resource with its current amount, maximum, and recovery conditions. I’ll also check how this fits the single-stat primitives and recursive blocks, so the refactor preserves existing characters.
+
+----------------------------------------
+
+[2026-10-09T16:36:25.545Z] ASSISTANT
+Understood. Resource changes must be explicitly declared by the Feature that grants them.
+
+- **Capacity and current amount are separate.** Increasing the maximum alone does not replenish the resource.
+- A Feature specifies the initial amount and any explicit increases when assigned.
+- Including an already-owned tracker through another Feature does not reset or refill its shared pool.
+- Recovery changes the current amount only when its declared condition occurs.
+
+The character sheet will list all resources supplied by active Features, showing:
+
+| Resource | Current | Maximum | Reset/recovery condition |
+|---|---:|---:|---|
+| Example ability uses | 2 | 3 | Fully restores after a long rest |
+| Example points | 5 | — | Recovers 1 after a specified event |
+
+Each entry should also expose its contributing Features and explain how its maximum was calculated.
+
+The current engine stores expenditure and derives availability from capacity, so preserving the current amount when capacity increases will require an explicit change to that behavior.
+
+----------------------------------------
+
+[2026-10-09T16:38:52.836Z] USER
+Implement the engine changes as specified. Interview me as needed.
+
+----------------------------------------
+
+[2026-10-09T16:38:56.636Z] ASSISTANT
+I’ll implement reusable stat blocks, Feature-created stats, and shared resource trackers with explicit grants and recovery. I’ll check the saved-character format first so the changes don’t silently alter existing resource balances.
+
+----------------------------------------
+
+[2026-10-09T16:40:17.289Z] ASSISTANT
+There’s a compatibility boundary to handle: older Systems store expenditure, while the new trackers need to store a current amount so increasing capacity doesn’t refill them. I’ll retain the legacy format for existing saves and add the new shared-tracker model alongside it.
+
+Reusable blocks will expand into validated single-stat operations. They can call other blocks; recursive Feature grants will continue to handle ownership and resource-provider lifetimes.
+
+----------------------------------------
+
+[2026-10-09T16:41:25.950Z] USER
+Discard existing saves, since this is still a prototype.
+
+----------------------------------------
+
+[2026-10-09T16:41:35.255Z] ASSISTANT
+That removes the migration constraint. I’ll update the bundled System to the new tracker model and version the prototype workspace storage so it starts fresh. Resource IDs will identify shared pools; names will remain display labels.
+
+----------------------------------------
+
+[2026-10-09T16:46:36.941Z] ASSISTANT
+The core implementation and bundled-data conversion are in place. The 18 skill-proficiency and 19 Expertise Features now reuse one parameterized training block. I’ve also moved resource definitions into 46 tracker sub-Features, each responsible for one resource type.
+
+The tests now exercise the key distinction: raising a pool’s maximum preserves its current amount; only an explicit assignment grant or recovery rule adds to it.
+
+----------------------------------------
+
+[2026-10-09T16:51:26.117Z] ASSISTANT
+The focused tests pass for shared pools, provider removal, explicit grants, reservations, unbounded resources, and recursive-block validation. The character sheet now shows current amount, maximum, recovery amounts and conditions, and provider names.
+
+I’m running the full regression suite now, including the converted 2014 System. The prototype will use fresh workspace storage; it won’t migrate old browser saves.
+
+----------------------------------------
+
+[2026-10-09T16:56:06.773Z] ASSISTANT
+The 2014 regression tests are passing with the converted trackers. One new test failed because its fixture shared a mutable stat object with another test; I’ve isolated that fixture, and the focused tests pass again.
+
+I also caught a storage issue: keeping the old workspace alongside the new one could consume the browser’s quota. Since you authorized discarding prototype saves, startup now removes the old workspace key before loading the new one.
+
+----------------------------------------
+
+[2026-10-09T16:58:23.258Z] ASSISTANT
+All 208 engine tests and 21 UI tests pass. A final review found that the old resource matcher assumed a nonnegative maximum, which would reject a tracker whose entire range is negative. I’ve removed that assumption and added a focused regression check; it’s running before I commit.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
