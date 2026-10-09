@@ -31,7 +31,7 @@ test('all five Starter Set builds reproduce printed level-one ability scores, HP
   });
 });
 
-test('Cleric spell slots are shared, spendable and recoverable, and unsupported progression is rejected', () => {
+test('Cleric spell slots are shared, spendable and recoverable, and Cleric progression now continues past level one', () => {
   const cleric = characters[1], result = engine.evaluate(cleric);
   assert.equal(result.stats.clericSpellDC.value, 13);
   assert.equal(result.stats.clericSpellAttack.value, 5);
@@ -45,7 +45,7 @@ test('Cleric spell slots are shared, spendable and recoverable, and unsupported 
   const advanced = structuredClone(cleric);
   advanced.progressions[0].level = 2;
   advanced.history.push({ progression: 'class-0', level: 2 });
-  assert.equal(engine.evaluate(advanced).status, 'invalid');
+  assert.equal(engine.evaluate(advanced).status, 'valid', JSON.stringify(engine.evaluate(advanced).diagnostics));
   const invalid = { ...cleric, notes: { Equipment: 42 } };
   assert.throws(() => serializeCharacter(invalid), /notes must be text/);
 });

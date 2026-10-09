@@ -10,7 +10,7 @@ export function featureHref(id: string, engine: Engine, origin?: string) {
     const previous = safeReturn(back.get('returnTo'));
     if (previous && path.startsWith('#features/')) params.set('returnTo', previous);
     else if (safeReturn(current)) {
-      if (path.startsWith('#classes') || path.startsWith('#features')) for (const [key, value] of params) back.set(key, value);
+      if (path.startsWith('#classes') || path.startsWith('#features') || path.startsWith('#races')) for (const [key, value] of params) back.set(key, value);
       params.set('returnTo', `${path}?${back}`);
     }
   }

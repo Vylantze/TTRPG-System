@@ -6,5 +6,5 @@ export interface SpellDisplay {
   slotLevelKey: string;
   ritualKey: string;
   castingAbilityKey: string;
-  slots: { level: number; key: string; scope: Scope }[];
+  slots: { level?: number; levelStat?: string; key: string; scope: Scope }[];
 }

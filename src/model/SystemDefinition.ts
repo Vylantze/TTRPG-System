@@ -11,6 +11,11 @@ import type { CurrencyDefinition } from '@/src/model/CurrencyDefinition.js';
 import type { SpellDisplay } from '@/src/model/SpellDisplay.js';
 
 export interface SystemDefinition {
+  /** Resource recovery allocation shares one budget across all listed character pools. */
+  recoveryAllocations?: Record<string, { budgetStat: string; keys: string[] }>;
+  terminology?: { classSingular: string; classPlural: string; creatureSingular: string; creaturePlural: string; creatureTag: string };
+  recoveryEvents?: string[];
+  healingFeaturesTag?: string;
   sheetTabs?: SheetTab[];
   importantDetails?: string[];
   spellDisplay?: SpellDisplay;

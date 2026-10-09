@@ -251,7 +251,12 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       list(display.slots);
       unique(display.slots.map((slot) => `${slot.scope}/${slot.key}`), 'spell slot');
       for (const slot of display.slots) {
-        integer(slot.level, 1);
+        if ((slot.level === undefined) === (slot.levelStat === undefined)) throw new RuleError('SCHEMA', 'Spell slots require either a fixed level or a level stat.');
+        if (slot.level !== undefined) integer(slot.level, 1);
+        if (slot.levelStat !== undefined) {
+          text(slot.levelStat);
+          if (!compiled.system.stats.some((stat) => stat.id === slot.levelStat)) throw new RuleError('SCHEMA', 'Unknown spell slot level stat.');
+        }
         text(slot.key);
         if (!['character', 'progression', 'parent', 'instance'].includes(slot.scope)) throw new RuleError('SCHEMA', 'Invalid spell slot scope.');
       }
@@ -319,6 +324,25 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       if (item.source !== undefined) text(item.source);
       itemFeatures(compiled, item.id);
     }
+    if (compiled.system.terminology !== undefined) {
+      record(compiled.system.terminology);
+      for (const key of ['classSingular', 'classPlural', 'creatureSingular', 'creaturePlural', 'creatureTag']) text(compiled.system.terminology[key as keyof typeof compiled.system.terminology]);
+    }
+    if (compiled.system.recoveryEvents !== undefined) {
+      list(compiled.system.recoveryEvents);
+      compiled.system.recoveryEvents.forEach(text);
+    }
+    if (compiled.system.healingFeaturesTag !== undefined) text(compiled.system.healingFeaturesTag);
+    if (compiled.system.recoveryAllocations !== undefined) {
+      record(compiled.system.recoveryAllocations);
+      for (const [event, policy] of Object.entries(compiled.system.recoveryAllocations)) {
+        text(event);
+        if (!compiled.system.stats.some((stat) => stat.id === policy.budgetStat)) throw new RuleError('RECOVERY', 'Unknown recovery budget stat.');
+        list(policy.keys);
+        policy.keys.forEach(text);
+        unique(policy.keys, 'recovery resource key');
+      }
+    }
     if (compiled.system.importantDetails !== undefined) {
       list(compiled.system.importantDetails);
       compiled.system.importantDetails.forEach(text);
@@ -329,7 +353,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       for (const tab of compiled.system.sheetTabs) {
         text(tab.id);
         text(tab.name);
-        if (!['choices', 'sheet', 'features', 'resources', 'notes', 'sections'].includes(tab.content)) throw new RuleError('PRESENTATION', 'Unknown sheet tab content.');
+        if (!['choices', 'sheet', 'features', 'resources', 'notes', 'sections', 'items'].includes(tab.content)) throw new RuleError('PRESENTATION', 'Unknown sheet tab content.');
         if (tab.sections !== undefined) {
           list(tab.sections);
           for (const id of tab.sections) if (!compiled.system.sheetSections?.some((section) => section.id === id)) throw new RuleError('PRESENTATION', `Unknown sheet section ${id}.`);
@@ -708,6 +732,11 @@ export function checkCharacter(v: unknown): asserts v is Character {
   if (v && typeof v === 'object') checkInventory(v as Character);
   record(v);
   checkMoney(v.money);
+  if (v.tabOrder !== undefined) {
+    list(v.tabOrder);
+    v.tabOrder.forEach(text);
+    unique(v.tabOrder as string[], 'character tab order');
+  }
   if (v.displayPreferences !== undefined) {
     record(v.displayPreferences);
     if (Object.values(v.displayPreferences).some((entry) => typeof entry !== 'boolean')) throw new RuleError('SCHEMA', 'Display preferences must be booleans.');

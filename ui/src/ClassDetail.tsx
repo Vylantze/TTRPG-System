@@ -34,7 +34,7 @@ export function ClassDetail({ cls, engine, openFeature }: { cls: ClassDefinition
         <p className="eyebrow">
           {engine.catalogue.system.name}
           {' '}
-          · Class guide
+          {`· ${engine.catalogue.system.terminology?.classSingular ?? 'Class'} guide`}
         </p>
         <h1>{cls.name}</h1>
         <p>Follow your progression. Explore each Feature. Make the choices your character needs.</p>
@@ -55,14 +55,14 @@ export function ClassDetail({ cls, engine, openFeature }: { cls: ClassDefinition
       <div className="reference-layout">
         <nav className="reference-index" aria-label={`${cls.name} contents`}>
           <p className="eyebrow">On this page</p>
-          <button onClick={() => jump('overview')}>Class overview</button>
+          <button onClick={() => jump('overview')}>{`${engine.catalogue.system.terminology?.classSingular ?? 'Class'} overview`}</button>
           <button onClick={() => jump('progression')}>Progression at a glance</button>
           <p className="eyebrow">Features by level</p>
           <div className="level-jumps">{levels.map((row) => <button key={row.level} aria-label={`Jump to level ${row.level}`} onClick={() => jump(`level-${row.level}`)}>{row.level}</button>)}</div>
         </nav>
         <div className="reference-content">
           <section id={`${prefix}-overview`} tabIndex={-1} className="panel reference-section">
-            <h2>Class overview</h2>
+            <h2>{`${engine.catalogue.system.terminology?.classSingular ?? 'Class'} overview`}</h2>
             <RulesText text={cls.description} source={cls.source} engine={engine} openFeature={openFeature} />
           </section>
           <section id={`${prefix}-progression`} tabIndex={-1} className="panel reference-section">

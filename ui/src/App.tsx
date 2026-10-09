@@ -246,7 +246,7 @@ export function App() {
   };
   const feature = engine?.catalogue.features.find((f) => f.id === route.id);
   const cls = engine?.catalogue.classes.find((c) => c.id === route.id);
-  const list = useMemo(() => route.page === 'features' && !route.id ? engine?.catalogue.features.filter((f) => `${featureName(f)} ${f.name} ${featureDescription(f, engine!) ?? ''} ${f.source ?? ''}`.toLowerCase().includes(query.toLowerCase()) && (!tag || f.tags?.includes(tag))).sort((a, b) => sort === 'level' ? (a.contentLevel ?? 0) - (b.contentLevel ?? 0) || featureName(a).localeCompare(featureName(b)) : featureName(a).localeCompare(featureName(b)) * (sort === 'name-desc' ? -1 : 1)) ?? [] : [], [engine, query, tag, sort, route.page, route.id]);
+  const list = useMemo(() => ['features', 'races'].includes(route.page) && !route.id ? engine?.catalogue.features.filter((f) => (route.page !== 'races' || f.tags?.includes(engine.catalogue.system.terminology?.creatureTag ?? 'race')) && `${featureName(f)} ${f.name} ${featureDescription(f, engine!) ?? ''} ${f.source ?? ''}`.toLowerCase().includes(query.toLowerCase()) && (!tag || f.tags?.includes(tag))).sort((a, b) => sort === 'level' ? (a.contentLevel ?? 0) - (b.contentLevel ?? 0) || featureName(a).localeCompare(featureName(b)) : featureName(a).localeCompare(featureName(b)) * (sort === 'name-desc' ? -1 : 1)) ?? [] : [], [engine, query, tag, sort, route.page, route.id]);
   return (
     <div className="app-shell" aria-busy={loading || navigating || updatingDescriptions}>
       {(loading || navigating || updatingDescriptions) && <LoadingOverlay />}
@@ -270,7 +270,7 @@ export function App() {
         </a>
         <p className="sidebar-label">WORKSPACE</p>
         <nav aria-label="Main navigation">
-          {[['characters', 'Characters', '◈'], ['classes', 'Classes', '▤'], ['features', 'Features', '◇'], ['systems', 'Systems', '⬡']].map(([id, title, icon]) => (
+          {[['characters', 'Characters', '◈'], ['classes', engine?.catalogue.system.terminology?.classPlural ?? 'Classes', '▤'], ['races', engine?.catalogue.system.terminology?.creaturePlural ?? 'Races', '♧'], ['features', 'Features', '◇'], ['systems', 'Systems', '⬡']].map(([id, title, icon]) => (
             <a href={`#${id}`} className={route.page === id ? 'active' : ''} aria-current={route.page === id ? 'page' : undefined} key={id}>
               <span aria-hidden="true">{icon}</span>
               {title}
@@ -300,7 +300,7 @@ export function App() {
       </aside>
       <div className="main-shell">
         <header className="topbar">
-          <span>{route.page.slice(0, 1).toUpperCase() + route.page.slice(1)}</span>
+          <span>{route.page === 'races' ? engine?.catalogue.system.terminology?.creaturePlural ?? 'Races' : route.page === 'classes' ? engine?.catalogue.system.terminology?.classPlural ?? 'Classes' : route.page.slice(0, 1).toUpperCase() + route.page.slice(1)}</span>
           <div className="toolbar">
             {selected && (
               <label className="system-switch">
@@ -380,7 +380,7 @@ export function App() {
                     <p>
                       {file.configurations[0].classes.length}
                       {' '}
-                      {'Classes · '}
+                      {`${file.configurations[0].system.terminology?.classPlural ?? 'Classes'} · `}
                       {' '}
                       {file.features.length}
                       {' '}
@@ -411,7 +411,7 @@ export function App() {
               </div>
               <section className="panel">
                 <h3>Current bundled content</h3>
-                <p>DnD5e 2014 includes Fighter, Rogue, and Wizard through level 20, SRD racial options, Acolyte, and Wizard spell selections. Other classes and Systems will follow this UI. Some rules are descriptive and require adjudication.</p>
+                <p>DnD5e 2014 includes all 12 SRD classes through level 20, their SRD subclasses, racial options, and class spell lists. Some class effects and selections remain descriptive; consult the source rules. Artificer and additional subclasses await approved final published sources.</p>
                 <p className="muted">
                   {'The SRD 5.1 is licensed under CC BY 4.0. '}
                   <a href="https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf" target="_blank" rel="noreferrer">Official SRD</a>
@@ -495,9 +495,9 @@ export function App() {
                   {engine ? <CharacterBuilder key={active.id} engine={engine} character={active} update={update} openFeature={openFeature} report={setError} /> : <h1>{active.name}</h1>}
                 </>
               ))}
-          {(route.page === 'classes' || route.page === 'features') && !route.id && (
+          {['classes', 'features', 'races'].includes(route.page) && !route.id && (
             <>
-              <PageTitle eyebrow="The building blocks of a character" title={route.page === 'classes' ? 'Find your path.' : 'Explore Features.'} description={route.page === 'classes' ? 'Inspect each Class progression, including every independent grant and selection at each level.' : 'Browse reusable abilities, choices, resources, and stat modifiers. Open a Feature to see what it contains.'} />
+              <PageTitle eyebrow="The building blocks of a character" title={route.page === 'classes' ? 'Find your path.' : route.page === 'races' ? `Explore ${engine?.catalogue.system.terminology?.creaturePlural ?? 'Races'}.` : 'Explore Features.'} description={route.page === 'classes' ? `Inspect each ${engine?.catalogue.system.terminology?.classSingular ?? 'Class'} progression, including every independent grant and selection at each level.` : 'Browse reusable abilities, choices, resources, and stat modifiers. Open a Feature to see what it contains.'} />
               {engine
                 ? (
                     <>
@@ -524,7 +524,7 @@ export function App() {
                         </details>
                       )}
                       <div className="toolbar browser-filters">
-                        {route.page === 'features' && (
+                        {['features', 'races'].includes(route.page) && (
                           <label>
                             Sort
                             <select
@@ -574,7 +574,7 @@ export function App() {
                               {engine.catalogue.classes.filter((c) => `${c.name} ${c.description ?? ''}`.toLowerCase().includes(query.toLowerCase())).map((c) => (
                                 <article className="panel class-card" key={c.id}>
                                   <p className="eyebrow">
-                                    {'Class · revision '}
+                                    {`${engine.catalogue.system.terminology?.classSingular ?? 'Class'} · revision `}
                                     {c.revision}
                                   </p>
                                   <h2>{c.name}</h2>
@@ -584,7 +584,7 @@ export function App() {
                                     {' '}
                                     levels of progression
                                   </p>
-                                  <button className="quiet" onClick={() => go('classes', c.id, engine)}>Explore Class →</button>
+                                  <button className="quiet" onClick={() => go('classes', c.id, engine)}>{`Explore ${engine.catalogue.system.terminology?.classSingular ?? 'Class'} →`}</button>
                                 </article>
                               ))}
                             </div>
@@ -594,7 +594,7 @@ export function App() {
                               <p className="muted small">
                                 {list.length}
                                 {' '}
-                                Features found
+                                {route.page === 'races' ? `${engine.catalogue.system.terminology?.creaturePlural ?? 'Races'} found` : 'Features found'}
                               </p>
                               <div className="catalogue-grid">
                                 {list.slice(page * 24, (page + 1) * 24).map((f) => (
@@ -645,7 +645,7 @@ export function App() {
                 <>
                   <a className="button quiet" href={route.returnTo ?? featureHref('', engine).replace('#features/', '#features').split('&returnTo=')[0]}>
                     {'← '}
-                    {route.returnTo?.startsWith('#classes/') ? 'Back to Class Features' : route.returnTo?.startsWith('#characters/') ? 'Back to character' : 'Features'}
+                    {route.returnTo?.startsWith('#classes/') ? `Back to ${engine.catalogue.system.terminology?.classSingular ?? 'Class'} Features` : route.returnTo?.startsWith('#characters/') ? 'Back to character' : route.returnTo?.startsWith('#races') ? `Back to ${engine.catalogue.system.terminology?.creaturePlural ?? 'Races'}` : 'Features'}
                   </a>
                   <FeatureDetail feature={feature} engine={engine} openFeature={openFeature} />
                 </>
@@ -654,11 +654,11 @@ export function App() {
           {route.page === 'classes' && route.id && engine && (cls
             ? (
                 <>
-                  <button className="quiet" onClick={() => go('classes', undefined, engine)}>← Classes</button>
+                  <button className="quiet" onClick={() => go('classes', undefined, engine)}>{`← ${engine.catalogue.system.terminology?.classPlural ?? 'Classes'}`}</button>
                   <ClassDetail key={`${engine.catalogue.id}:${cls.id}`} cls={cls} engine={engine} openFeature={openFeature} />
                 </>
               )
-            : <p>This Class is unavailable in the loaded catalogue.</p>)}
+            : <p>{`This ${engine.catalogue.system.terminology?.classSingular ?? 'Class'} is unavailable in the loaded catalogue.`}</p>)}
         </main>
         <footer>
           {'Feature Forge '}
@@ -745,14 +745,14 @@ function CreateForm({ files, initial, create }: { files: SystemFile[];
       ))}
       <div className="input-grid">
         <label>
-          Starting Class
+          {`Starting ${file.configurations[0].system.terminology?.classSingular ?? 'Class'}`}
           <select value={classId} onChange={(e) => setClassId(e.target.value)}>
-            <option value="">Choose a Class later</option>
+            <option value="">{`Choose a ${file.configurations[0].system.terminology?.classSingular ?? 'Class'} later`}</option>
             {classes.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
         </label>
         <label>
-          Class level
+          {`${file.configurations[0].system.terminology?.classSingular ?? 'Class'} level`}
           <input type="number" min="1" step="1" max={classes.find((c) => c.id === classId)?.maximumLevel} value={level} disabled={!classId} onChange={(e) => setLevel(Number(e.target.value))} />
         </label>
       </div>

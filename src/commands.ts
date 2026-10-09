@@ -3,7 +3,7 @@ import { Engine, clone } from '@/src/engine.js';
 import { RuleError, constrain, number } from '@/src/expression.js';
 import type { Character, Edit, EditPreview, EvaluationResult } from '@/src/model.js';
 import type { UseOptions } from '@/src/types/UseOptions.js';
-import { checkCharacter } from '@/src/validation.js';
+import { checkCharacter, record } from '@/src/validation.js';
 import { storeTrackers } from '@/src/resource-trackers.js';
 import { checkInventory } from '@/src/items.js';
 import type { InventoryEntry } from '@/src/model/InventoryEntry.js';
@@ -241,16 +241,34 @@ export function settleAbility(input: Character, pendingId: string, outcome: stri
   delete character.pending[pendingId];
   return character;
 }
-export function recoverResources(engine: Engine, input: Character, recoveryEvent: string, eventId: string): Character {
+export function recoverResources(engine: Engine, input: Character, recoveryEvent: string, eventId: string, allocation?: Record<string, number>): Character {
   checkCharacter(input);
   const character = clone(input);
   if (input.buildState === 'draft') throw new RuleError('DRAFT', 'Finalize the construction draft before recovery.');
-  if (!stamp(character, eventId, { kind: 'recover', recoveryEvent })) return character;
+  if (!stamp(character, eventId, { kind: 'recover', recoveryEvent, ...(allocation !== undefined ? { allocation } : {}) })) return character;
   const result = engine.evaluate(character);
   requireValid(result);
   storeTrackers(character, result.resources);
+  const policy = engine.catalogue.system.recoveryAllocations?.[recoveryEvent];
+  const amounts: Record<string, number> = {};
+  if (allocation !== undefined && !policy) throw new RuleError('RECOVERY', 'This event has no recovery allocation.');
+  if (policy) {
+    let budget = constrain(result.stats[policy.budgetStat].value, { integer: true, minimum: 0 });
+    if (allocation !== undefined) {
+      record(allocation);
+      for (const key of Object.keys(allocation)) if (!policy.keys.includes(key)) throw new RuleError('RECOVERY', 'Unknown allocated resource.');
+    }
+    for (const key of policy.keys) {
+      const pool = Object.values(result.resources).find((pool) => pool.key === key && pool.scope === 'character');
+      const count = allocation !== undefined ? allocation[key] ?? 0 : Math.min(budget, pool?.spent ?? 0);
+      constrain(count, { integer: true, minimum: 0 });
+      if (count > (pool?.spent ?? 0) || count > budget) throw new RuleError('RECOVERY', 'Recovery exceeds spent resources or the shared budget.');
+      budget -= count;
+      if (pool) amounts[pool.id] = count;
+    }
+  }
   for (const pool of Object.values(result.resources)) {
-    const rules = pool.recovery.filter((r) => r.event === recoveryEvent);
+    const rules = pool.id in amounts ? [{ event: recoveryEvent, amount: amounts[pool.id] }] : pool.recovery.filter((r) => r.event === recoveryEvent);
     // Every provider was validated to use identical recovery rules. Apply the pool rule once.
     for (const rule of rules) {
       const source = result.instances.find((i) => i.id === pool.providers[0])!;

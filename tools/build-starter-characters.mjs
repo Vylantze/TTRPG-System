@@ -47,7 +47,6 @@ const characters = templates.map((t) => {
   }
   c.notes = { 'Source': `https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=${t.page}`, 'Alignment': t.alignment, 'Starting attacks (reference only)': `${t.attacks} These printed starting values do not recalculate when you edit the build.`, 'Template scope': 'Level 1. The source leaves the character name blank; this descriptive name is editable. See the linked original for personality, history, and background Feature text.' };
   if (t.cls === 'cleric' || t.cls === 'wizard') c.notes['Prepared spells'] = 'The source leaves daily preparation to the player. The selected prepared spells are editable application defaults, not printed selections.';
-  if (t.cls === 'cleric') c.notes['Implemented coverage'] = 'Life Cleric level 1 only. Three printed cantrips, two domain spells, and four preparation options are supported; other Cleric spells and higher levels are not implemented.';
   const result = engine.evaluate(c);
   if (result.status !== 'valid') throw new Error(`${t.key}: ${JSON.stringify(result.diagnostics)}`);
   c.buildState = 'finalized';

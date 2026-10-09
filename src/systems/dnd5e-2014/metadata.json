@@ -2460,6 +2460,220 @@
       ],
       "subclassAt": 2,
       "subclass": "evocation"
+    },
+    "barbarian": {
+      "hitDie": 12,
+      "asi": [
+        4,
+        8,
+        12,
+        16,
+        19
+      ],
+      "subclassAt": 3,
+      "subclass": "subclass",
+      "startingSkills": 2,
+      "multiclassSkills": 0,
+      "skills": [
+        "animal-handling",
+        "athletics",
+        "intimidation",
+        "nature",
+        "perception",
+        "survival"
+      ]
+    },
+    "bard": {
+      "hitDie": 8,
+      "asi": [
+        4,
+        8,
+        12,
+        16,
+        19
+      ],
+      "subclassAt": 3,
+      "subclass": "subclass",
+      "startingSkills": 3,
+      "multiclassSkills": 1,
+      "skills": [
+        "acrobatics",
+        "animal-handling",
+        "arcana",
+        "athletics",
+        "deception",
+        "history",
+        "insight",
+        "intimidation",
+        "investigation",
+        "medicine",
+        "nature",
+        "perception",
+        "performance",
+        "persuasion",
+        "religion",
+        "sleight-of-hand",
+        "stealth",
+        "survival"
+      ]
+    },
+    "druid": {
+      "hitDie": 8,
+      "asi": [
+        4,
+        8,
+        12,
+        16,
+        19
+      ],
+      "subclassAt": 2,
+      "subclass": "subclass",
+      "startingSkills": 2,
+      "multiclassSkills": 0,
+      "skills": [
+        "arcana",
+        "animal-handling",
+        "insight",
+        "medicine",
+        "nature",
+        "perception",
+        "religion",
+        "survival"
+      ]
+    },
+    "monk": {
+      "hitDie": 8,
+      "asi": [
+        4,
+        8,
+        12,
+        16,
+        19
+      ],
+      "subclassAt": 3,
+      "subclass": "subclass",
+      "startingSkills": 2,
+      "multiclassSkills": 0,
+      "skills": [
+        "acrobatics",
+        "athletics",
+        "history",
+        "insight",
+        "religion",
+        "stealth"
+      ]
+    },
+    "paladin": {
+      "hitDie": 10,
+      "asi": [
+        4,
+        8,
+        12,
+        16,
+        19
+      ],
+      "subclassAt": 3,
+      "subclass": "subclass",
+      "startingSkills": 2,
+      "multiclassSkills": 0,
+      "skills": [
+        "athletics",
+        "insight",
+        "intimidation",
+        "medicine",
+        "persuasion",
+        "religion"
+      ]
+    },
+    "ranger": {
+      "hitDie": 10,
+      "asi": [
+        4,
+        8,
+        12,
+        16,
+        19
+      ],
+      "subclassAt": 3,
+      "subclass": "subclass",
+      "startingSkills": 3,
+      "multiclassSkills": 1,
+      "skills": [
+        "animal-handling",
+        "athletics",
+        "insight",
+        "investigation",
+        "nature",
+        "perception",
+        "stealth",
+        "survival"
+      ]
+    },
+    "sorcerer": {
+      "hitDie": 6,
+      "asi": [
+        4,
+        8,
+        12,
+        16,
+        19
+      ],
+      "subclassAt": 1,
+      "subclass": "subclass",
+      "startingSkills": 2,
+      "multiclassSkills": 0,
+      "skills": [
+        "arcana",
+        "deception",
+        "insight",
+        "intimidation",
+        "persuasion",
+        "religion"
+      ]
+    },
+    "warlock": {
+      "hitDie": 8,
+      "asi": [
+        4,
+        8,
+        12,
+        16,
+        19
+      ],
+      "subclassAt": 1,
+      "subclass": "subclass",
+      "startingSkills": 2,
+      "multiclassSkills": 0,
+      "skills": [
+        "arcana",
+        "deception",
+        "history",
+        "intimidation",
+        "investigation",
+        "nature",
+        "religion"
+      ]
+    },
+    "cleric": {
+      "hitDie": 8,
+      "startingSkills": 2,
+      "multiclassSkills": 0,
+      "skills": [
+        "history",
+        "insight",
+        "medicine",
+        "persuasion",
+        "religion"
+      ],
+      "asi": [
+        4,
+        8,
+        12,
+        16,
+        19
+      ],
+      "subclassAt": 1,
+      "subclass": "life"
     }
   },
   "coverage": {
@@ -2468,10 +2682,18 @@
     "license": "CC-BY-4.0",
     "revision": 1,
     "classes": [
+      "Barbarian (Berserker)",
+      "Bard (Lore)",
+      "Cleric (Life)",
+      "Druid (Land)",
       "Fighter (Champion)",
+      "Monk (Open Hand)",
+      "Paladin (Devotion)",
+      "Ranger (Hunter)",
       "Rogue (Thief)",
-      "Wizard (Evocation)",
-      "Cleric (Life, level 1 only; Starter Set spell subset)"
+      "Sorcerer (Draconic)",
+      "Warlock (Fiend)",
+      "Wizard (Evocation)"
     ],
     "classLevels": [
       1,
@@ -2508,27 +2730,27 @@
       "resource spending and recovery",
       "Wizard spellbook ownership, preparation, slots, mastery, signature spells",
       "Arcane Recovery allocation",
-      "2014 bonus-action spell restriction with caller-supplied turn state"
+      "2014 bonus-action spell restriction with caller-supplied turn state",
+      "shared Hit Dice by die size and budgeted long-rest recovery",
+      "combined full/half-caster spell slots and independent Pact Magic",
+      "class known/prepared spells, Mystic Arcanum and nested subclass selections",
+      "Monk movement, unarmored AC, Sorcerer resilience and Barbarian Primal Champion"
     ],
     "descriptive": [
-      "starting equipment choices and inventory",
-      "conditional racial traits",
-      "dice, targets, spell effects, concentration and durations",
-      "damage, temporary/current HP and healing",
-      "advantage/disadvantage and class rule triggers",
-      "manual spell copying costs",
-      "combat rounds, additional actions and once-per-turn limits"
+      "starting equipment choices beyond the Starter templates",
+      "conditional combat bonuses, advantage/disadvantage, attacks, temporary HP and durations",
+      "transformations, companions and environmental triggers",
+      "spell effects, upcast dice, concentration and targets except explicitly supported healing rolls",
+      "spell copying costs, invocation effects and sorcery point conversions",
+      "Natural Recovery allocation and conditional class recovery triggers",
+      "narrative language/tool/weapon exceptions and restrictions on retraining at the table"
     ],
-    "unsupportedClasses": [
-      "Barbarian",
-      "Bard",
-      "Druid",
-      "Monk",
-      "Paladin",
-      "Ranger",
-      "Sorcerer",
-      "Warlock"
+    "unsupportedClasses": [],
+    "status": "All 12 core SRD class progressions, with source-backed descriptions and partial automation; final published non-SRD content awaits approved sources.",
+    "additionalSourcesPending": [
+      "Artificer (final published 2014-compatible version)",
+      "Non-SRD subclasses: final published sources pending approval/access"
     ],
-    "status": "first character-building milestone; remaining SRD classes are not implemented; level-one Starter Set Cleric and background adaptations included"
+    "classCatalogue": "All 12 SRD classes; conditional combat, transformations, companions, and narrative effects remain source-text adjudicated."
   }
 }
