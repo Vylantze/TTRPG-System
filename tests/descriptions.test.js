@@ -7,6 +7,14 @@ import { catalogue as fixture } from '../examples/catalogue.js';
 const file = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
 const feature = (name) => file.features.find((f) => f.id === `dnd5e:2014:${name}`);
 
+test('text link contexts reject malformed metadata', () => {
+  for (const context of [{}, { before: [] }, { after: [' '] }, { before: [42] }, { unknown: ['spell'] }]) {
+    const catalogue = structuredClone(fixture);
+    catalogue.features[0].textLinkContext = context;
+    assert.ok(validateCatalogue(catalogue).length);
+  }
+});
+
 test('2014 JSON ships descriptions for every included Class and Feature', () => {
   parseSystemFile(file);
   for (const f of file.features) {

@@ -1,7 +1,30 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { FeatureTextIndex } from '../dist/index.js';
+import { readFileSync } from 'node:fs';
 const definition = (id, name, extra = {}) => ({ id, name, revision: 1, components: [], ...extra });
+
+test('ambiguous spell names require spell context without changing source wording', () => {
+  const file = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
+  const index = new FeatureTextIndex(file.features);
+  assert.deepEqual(index.resolve('You start with a shield and light crossbow. Bright light, darkness, fear, and sleep.'), []);
+  const text = 'Cast SHIELD, the light spell, and casting\n the darkness. Fireball';
+  assert.deepEqual(index.resolve(text).map((span) => span.features), [
+    ['dnd5e:2014:spell.shield'], ['dnd5e:2014:spell.light'], ['dnd5e:2014:spell.darkness'], ['dnd5e:2014:spell.fireball'],
+  ]);
+  for (const span of index.resolve(text)) assert.equal(text.slice(span.start, span.end), span.text);
+  assert.deepEqual(index.resolve('forecast light; light spellbook; Shield'), []);
+  assert.deepEqual(index.resolve('cast shield', ['dnd5e:2014:spell.shield']), []);
+});
+
+test('shared description wrappers cannot bypass the canonical target context', () => {
+  const index = new FeatureTextIndex([
+    definition('spell', 'Light', { textLinkContext: { after: ['spell'] } }),
+    definition('wrapper', 'Light', { textReferences: ['spell'] }),
+  ]);
+  assert.deepEqual(index.resolve('light crossbow'), []);
+  assert.deepEqual(index.resolve('light spell').map((span) => span.features), [['spell']]);
+});
 
 test('automatic references preserve source text and resolve longest whole names with typography variants', () => {
   const index = new FeatureTextIndex([

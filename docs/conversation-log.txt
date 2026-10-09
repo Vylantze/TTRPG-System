@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T15:06:07.641Z
+Export refreshed UTC: 2026-10-09T16:21:58.509Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -1136,5 +1136,116 @@ GitHub Pages is already configured to deploy through Actions. I’ll deploy from
 
 [2026-10-09T15:05:56.576Z] ASSISTANT
 The Pages build passes, including the repository-prefixed asset URLs. I found one deployment blocker: the `github-pages` environment only allows `master`, while the current app is on `develop`. The GitHub account has push access but no admin access to change that restriction. I’ll finish the workflow; a repository admin will need to allow `develop` under Settings → Environments → github-pages.
+
+----------------------------------------
+
+[2026-10-09T15:07:22.477Z] ASSISTANT
+The workflow is committed and lint passed. I’m pushing it now, then checking that GitHub starts the build. Deployment will remain blocked until the environment allows `develop`.
+
+----------------------------------------
+
+[2026-10-09T15:08:04.627Z] ASSISTANT
+Added and pushed as `8c99513` to `develop`.
+
+- Runs lint, engine/UI tests, and builds before deployment.
+- Configures correct Pages asset paths.
+- Local lint and Pages build passed; [GitHub Actions is running](https://github.com/Vylantze/TTRPG-System/actions/runs/37949378245).
+
+**Required setup:** An admin must allow `develop` under **Settings → Environments → github-pages → Deployment branches**. Currently only `master` is allowed, blocking deployment.
+
+----------------------------------------
+
+[2026-10-09T16:02:02.734Z] USER
+The permissions have been updated for Github pages
+
+----------------------------------------
+
+[2026-10-09T16:02:06.288Z] ASSISTANT
+I’ll check the updated Pages permissions and retry the deployment if needed.
+
+----------------------------------------
+
+[2026-10-09T16:03:07.863Z] ASSISTANT
+`develop` is now allowed. The build and tests had already passed, so I retried only the failed deployment job. GitHub is publishing the site now.
+
+----------------------------------------
+
+[2026-10-09T16:04:35.117Z] ASSISTANT
+Deployment succeeded. The [UI is now live](https://vylantze.github.io/TTRPG-System/).
+
+Verified the page, scripts, styles, System JSON, and attribution all load successfully. Future pushes to `develop` will deploy automatically after checks pass.
+
+----------------------------------------
+
+[2026-10-09T16:10:41.055Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-09T16:10:41.151Z] USER
+Analyze the current system and determine areas of possible improvement.
+
+----------------------------------------
+
+[2026-10-09T16:10:44.610Z] ASSISTANT
+I’ll review the engine, System data, React UI, and development workflow, then prioritize improvements based on concrete issues and gaps.
+
+----------------------------------------
+
+[2026-10-09T16:11:17.992Z] ASSISTANT
+Two concrete issues stand out: System data is validated repeatedly during loading, and automatic text links can mistake ordinary equipment words for spells. A local probe linked “shield” and “light crossbow” to the Shield and Light spells. I’m also checking gaps between the engine’s capabilities and the controls available in the UI.
+
+----------------------------------------
+
+[2026-10-09T16:11:55.049Z] ASSISTANT
+The foundation is sound: rules are separate from React, Systems load from JSON, character saves pin revisions, and deployment runs lint and tests. **I would improve correctness, persistence, and responsiveness before adding more Systems.**
+
+These findings come from source review and targeted local probes, not a complete browser or rules audit.
+
+| Priority | Area | Finding and recommended improvement |
+|---|---|---|
+| **High** | Automatic rules links | Confirmed incorrect links: “a shield and light crossbow” links to the **Shield** and **Light** spells. Add explicit reference annotations and exclusions, with automatic matching as a fallback. Keep source wording unchanged. See [feature-text.ts](/D:/User/Workspace/TTRPG%20System/src/feature-text.ts:28). |
+| **High** | Loading and evaluation performance | The bundled System contains **825 Features, 12 configurations, and 5.37 MB of JSON**. One local run took approximately **1.13 seconds to parse/validate**, another **1.16 seconds to load into a registry**, and **138 ms to create an engine**. Startup repeats validation, and character edits recreate engines. Cache validated immutable catalogues and engines by System/configuration identity. See [system-loader.ts](/D:/User/Workspace/TTRPG%20System/src/system-loader.ts:25) and [App.tsx](/D:/User/Workspace/TTRPG%20System/ui/src/App.tsx:44). |
+| **High** | Save reliability | Every workspace change serializes and writes the loaded Systems and characters into synchronous `localStorage`. This increases editing cost and storage-pressure risk; concurrent tabs also lack conflict handling. Move to IndexedDB with separate System and character records, transactional saves, backup/export, and conflict detection. See [workspace.ts](/D:/User/Workspace/TTRPG%20System/ui/src/workspace.ts:44). |
+| **High** | Browser regression coverage | Current UI tests primarily use server rendering. They cannot reliably validate effects, real persistence, keyboard interactions, file imports, or complete character workflows. Add browser tests covering creation → selection → finalization → resource use → reload, plus mobile layouts and the deployed repository path. See [run-tests.mjs](/D:/User/Workspace/TTRPG%20System/ui/tests/run-tests.mjs:1). |
+| **Medium** | Completing the character builder | The engine supports functionality the UI does not fully expose: resource bindings, alternative formulas, and explicit migrations. Add these controls alongside actionable diagnostics that take users directly to the choice requiring repair. This should precede the custom Feature editor. See [documented remaining scope](/D:/User/Workspace/TTRPG%20System/docs/react-ui.md). |
+| **Medium** | System authoring and configuration | Each option combination contains a complete System/class configuration. Requiring every combination scales poorly as options increase. Introduce shared definitions and declarative configuration overrides, compiled into the existing engine format. Add a JSON Schema and authoring validation that reports multiple errors with precise paths. See [SystemFile.ts](/D:/User/Workspace/TTRPG%20System/src/types/SystemFile.ts). |
+| **Medium** | Feature eligibility performance | Candidate browsing evaluates the entire character for each candidate. Pagination helps, but larger characters and Systems will amplify this cost. Measure realistic high-level characters, then share baseline work and index prerequisite/resource dependencies while preserving full validation semantics. See [engine.ts](/D:/User/Workspace/TTRPG%20System/src/engine.ts:545). |
+| **Medium** | Coverage transparency | The 2014 System currently supports three classes; many abilities automate availability and costs while leaving effects to adjudication. Show coverage prominently in System, Class, and Feature views so users can distinguish automated, partial, and descriptive behavior. See [2014 coverage](/D:/User/Workspace/TTRPG%20System/docs/systems/dnd5e-2014-system.md:65). |
+
+A further maintainability improvement is to split `App` and `CharacterBuilder` by responsibility—System management, persistence, navigation, selections, and play controls. The one-type-per-file rule helps organization, but does not prevent large components from accumulating unrelated responsibilities.
+
+**Recommended sequence:** correct reference linking → add browser regression tests → improve persistence and engine caching → complete builder controls → build the Feature editor → expand rules coverage.
+
+No tracked files were changed.
+
+----------------------------------------
+
+[2026-10-09T16:15:40.455Z] USER
+Fix the automatic rules link. Then, review the minimum building blocks that are used. For example, currently, there is a single feature for every Skill Proficiency in the game, but that could be optimized.
+
+----------------------------------------
+
+[2026-10-09T16:15:44.479Z] ASSISTANT
+I’ll fix the incorrect automatic links first, then review how parameterized building blocks could reduce repeated Features such as skill proficiencies without losing readable choices or source text.
+
+----------------------------------------
+
+[2026-10-09T16:17:49.367Z] ASSISTANT
+The link fix adds optional context rules to Feature metadata. Ambiguous spell names such as “Light” and “Shield” will link in phrases like “cast shield” or “the light spell,” but not in equipment descriptions. Source wording stays unchanged, and existing saved Systems can receive the fix through the description refresh.
+
+The building-block review found 18 skill-proficiency Features and 19 Expertise Features with nearly identical mechanics. Parameters already exist, but modifier targets and prerequisite stat references are fixed strings, so simply merging these Features would need further engine support.
+
+----------------------------------------
+
+[2026-10-09T16:19:39.894Z] ASSISTANT
+The review points toward reusable authored templates while retaining stable generated Feature IDs for saved characters. That would let one proficiency template produce the 18 skill choices, and one Expertise template produce the 19 eligible choices.
+
+Spell wrappers are an even larger source of repetition: the catalogue has 190 spellbook Features and 190 prepared-spell Features around shared spell definitions. I’d keep learning and preparation as separate mechanics, but generate their repeated structure from templates.
+
+----------------------------------------
+
+[2026-10-09T16:21:03.362Z] ASSISTANT
+Lint passes, and the JSON comparison confirms that only link metadata changed—source text, mechanics, and Feature IDs are untouched. Regression tests are still running, including checks for equipment false positives, valid spell links, and refreshing previously saved Systems.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

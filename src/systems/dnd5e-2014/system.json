@@ -6786,7 +6786,21 @@
         "scope": "character"
       },
       "displayName": "Light",
-      "description": "Light\nEvocation cantrip\n\nCasting Time: 1 action\n\nRange: Touch\n\nComponents: V, M (a firefly or phosphorescent moss)\n\nDuration: 1 hour\n\nYou touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.\n\nIf you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell."
+      "description": "Light\nEvocation cantrip\n\nCasting Time: 1 action\n\nRange: Touch\n\nComponents: V, M (a firefly or phosphorescent moss)\n\nDuration: 1 hour\n\nYou touch one object that is no larger than 10 feet in any dimension. Until the spell ends, the object sheds bright light in a 20-foot radius and dim light for an additional 20 feet. The light can be colored as you like. Completely covering the object with something opaque blocks the light. The spell ends if you cast it again or dismiss it as an action.\n\nIf you target an object held or worn by a hostile creature, that creature must succeed on a Dexterity saving throw to avoid the spell.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.mage-hand",
@@ -6855,7 +6869,21 @@
         "scope": "character"
       },
       "displayName": "Message",
-      "description": "Message\nTransmutation cantrip\n\nCasting Time: 1 action\n\nRange: 120 feet\n\nComponents: V, S, M (a short piece of copper wire)\n\nDuration: 1 round\n\nYou point your finger toward a creature within range and whisper a message. The target (and only the target) hears the message and can reply in a whisper that only you can hear.\n\nYou can cast this spell through solid objects if you are familiar with the target and know it is beyond the barrier. Magical silence, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood blocks the spell. The spell doesn’t have to follow a straight line and can travel freely around corners or through openings."
+      "description": "Message\nTransmutation cantrip\n\nCasting Time: 1 action\n\nRange: 120 feet\n\nComponents: V, S, M (a short piece of copper wire)\n\nDuration: 1 round\n\nYou point your finger toward a creature within range and whisper a message. The target (and only the target) hears the message and can reply in a whisper that only you can hear.\n\nYou can cast this spell through solid objects if you are familiar with the target and know it is beyond the barrier. Magical silence, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood blocks the spell. The spell doesn’t have to follow a straight line and can travel freely around corners or through openings.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.minor-illusion",
@@ -7016,7 +7044,21 @@
         "scope": "character"
       },
       "displayName": "Alarm",
-      "description": "Alarm\n1st-level abjuration (ritual)\n\nCasting Time: 1 minute\n\nRange: 30 feet\n\nComponents: V, S, M (a tiny bell and a piece of fine silver wire)\n\nDuration: 8 hours\n\nYou set an alarm against unwanted intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the spell ends, an alarm alerts you whenever a Tiny or larger creature touches or enters the warded area. When you cast the spell, you can designate creatures that won’t set off the alarm. You also choose whether the alarm is mental or audible.\n\nA mental alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping.\n\nAn audible alarm produces the sound of a hand bell for 10 seconds within 60 feet."
+      "description": "Alarm\n1st-level abjuration (ritual)\n\nCasting Time: 1 minute\n\nRange: 30 feet\n\nComponents: V, S, M (a tiny bell and a piece of fine silver wire)\n\nDuration: 8 hours\n\nYou set an alarm against unwanted intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the spell ends, an alarm alerts you whenever a Tiny or larger creature touches or enters the warded area. When you cast the spell, you can designate creatures that won’t set off the alarm. You also choose whether the alarm is mental or audible.\n\nA mental alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping.\n\nAn audible alarm produces the sound of a hand bell for 10 seconds within 60 feet.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.burning-hands",
@@ -7315,7 +7357,21 @@
         "scope": "character"
       },
       "displayName": "Grease",
-      "description": "Grease\n1st-level conjuration\n\nCasting Time: 1 action\n\nRange: 60 feet\n\nComponents: V, S, M (a bit of pork rind or butter)\n\nDuration: 1 minute\n\nSlick grease covers the ground in a 10-foot square centered on a point within range and turns it into difficult terrain for the duration.\n\nWhen the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or fall prone. A creature that enters the area or ends its turn there must also succeed on a Dexterity saving throw or fall prone."
+      "description": "Grease\n1st-level conjuration\n\nCasting Time: 1 action\n\nRange: 60 feet\n\nComponents: V, S, M (a bit of pork rind or butter)\n\nDuration: 1 minute\n\nSlick grease covers the ground in a 10-foot square centered on a point within range and turns it into difficult terrain for the duration.\n\nWhen the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or fall prone. A creature that enters the area or ends its turn there must also succeed on a Dexterity saving throw or fall prone.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.hideous-laughter",
@@ -7361,7 +7417,21 @@
         "scope": "character"
       },
       "displayName": "Identify",
-      "description": "Identify\n1st-level divination (ritual)\n\nCasting Time: 1 minute\n\nRange: Touch\n\nComponents: V, S, M (a pearl worth at least 100 gp and an owl feather)\n\nDuration: Instantaneous\n\nYou choose one object that you must touch throughout the casting of the spell. If it is a magic item or some other magic-imbued object, you learn its properties and how to use them, whether it requires attunement to use, and how many charges it has, if any. You learn whether any spells are affecting the item and what they are. If the item was created by a spell, you learn which spell created it.\n\nIf you instead touch a creature throughout the casting, you learn what spells, if any, are currently affecting it."
+      "description": "Identify\n1st-level divination (ritual)\n\nCasting Time: 1 minute\n\nRange: Touch\n\nComponents: V, S, M (a pearl worth at least 100 gp and an owl feather)\n\nDuration: Instantaneous\n\nYou choose one object that you must touch throughout the casting of the spell. If it is a magic item or some other magic-imbued object, you learn its properties and how to use them, whether it requires attunement to use, and how many charges it has, if any. You learn whether any spells are affecting the item and what they are. If the item was created by a spell, you learn which spell created it.\n\nIf you instead touch a creature throughout the casting, you learn what spells, if any, are currently affecting it.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.illusory-script",
@@ -7407,7 +7477,21 @@
         "scope": "character"
       },
       "displayName": "Jump",
-      "description": "Jump\n1st-level transmutation\n\nCasting Time: 1 action\n\nRange: Touch\n\nComponents: V, S, M (a grasshopper’s hind leg)\n\nDuration: 1 minute\n\nYou touch a creature. The creature’s jump distance is tripled until the spell ends."
+      "description": "Jump\n1st-level transmutation\n\nCasting Time: 1 action\n\nRange: Touch\n\nComponents: V, S, M (a grasshopper’s hind leg)\n\nDuration: 1 minute\n\nYou touch a creature. The creature’s jump distance is tripled until the spell ends.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.longstrider",
@@ -7522,7 +7606,21 @@
         "scope": "character"
       },
       "displayName": "Shield",
-      "description": "Shield\n1st-level abjuration\n\nCasting Time: 1 reaction, which you take when you are hit by an attack or targeted by the magic missile spell\n\nRange: Self\n\nComponents: V, S\n\nDuration: 1 round\n\nAn invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile."
+      "description": "Shield\n1st-level abjuration\n\nCasting Time: 1 reaction, which you take when you are hit by an attack or targeted by the magic missile spell\n\nRange: Self\n\nComponents: V, S\n\nDuration: 1 round\n\nAn invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.silent-image",
@@ -7568,7 +7666,21 @@
         "scope": "character"
       },
       "displayName": "Sleep",
-      "description": "Sleep\n1st-level enchantment\n\nCasting Time: 1 action\n\nRange: 90 feet\n\nComponents: V, S, M (a pinch of fine sand, rose petals, or a cricket)\n\nDuration: 1 minute\n\nThis spell sends creatures into a magical slumber. Roll 5d8; the total is how many hit points of creatures this spell can affect. Creatures within 20 feet of a point you choose within range are affected in ascending order of their current hit points (ignoring unconscious creatures).\n\nStarting with the creature that has the lowest current hit points, each creature affected by this spell falls unconscious until the spell ends, the sleeper takes damage, or someone uses an action to shake or slap the sleeper awake. Subtract each creature’s hit points from the total before moving on to the creature with the next lowest hit points. A creature’s hit points must be equal to or less than the remaining total for that creature to be affected.\n\nUndead and creatures immune to being charmed aren’t affected by this spell.\n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d8 for each slot level above 1st."
+      "description": "Sleep\n1st-level enchantment\n\nCasting Time: 1 action\n\nRange: 90 feet\n\nComponents: V, S, M (a pinch of fine sand, rose petals, or a cricket)\n\nDuration: 1 minute\n\nThis spell sends creatures into a magical slumber. Roll 5d8; the total is how many hit points of creatures this spell can affect. Creatures within 20 feet of a point you choose within range are affected in ascending order of their current hit points (ignoring unconscious creatures).\n\nStarting with the creature that has the lowest current hit points, each creature affected by this spell falls unconscious until the spell ends, the sleeper takes damage, or someone uses an action to shake or slap the sleeper awake. Subtract each creature’s hit points from the total before moving on to the creature with the next lowest hit points. A creature’s hit points must be equal to or less than the remaining total for that creature to be affected.\n\nUndead and creatures immune to being charmed aren’t affected by this spell.\n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, roll an additional 2d8 for each slot level above 1st.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.thunderwave",
@@ -7752,7 +7864,21 @@
         "scope": "character"
       },
       "displayName": "Blur",
-      "description": "Blur\n2nd-level illusion\n\nCasting Time: 1 action\n\nRange: Self\n\nComponents: V\n\nDuration: Concentration, up to 1 minute\n\nYour body becomes blurred, shifting and wavering to all who can see you. For the duration, any creature has disadvantage on attack rolls against you. An attacker is immune to this effect if it doesn’t rely on sight, as with blindsight, or can see through illusions, as with truesight."
+      "description": "Blur\n2nd-level illusion\n\nCasting Time: 1 action\n\nRange: Self\n\nComponents: V\n\nDuration: Concentration, up to 1 minute\n\nYour body becomes blurred, shifting and wavering to all who can see you. For the duration, any creature has disadvantage on attack rolls against you. An attacker is immune to this effect if it doesn’t rely on sight, as with blindsight, or can see through illusions, as with truesight.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.continual-flame",
@@ -7798,7 +7924,21 @@
         "scope": "character"
       },
       "displayName": "Darkness",
-      "description": "Darkness\n2nd-level evocation\n\nCasting Time: 1 action\n\nRange: 60 feet\n\nComponents: V, M (bat fur and a drop of pitch or piece of coal)\n\nDuration: Concentration, up to 10 minutes\n\nMagical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can’t see through this darkness, and nonmagical light can’t illuminate it.\n\nIf the point you choose is on an object you are holding or one that isn’t being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.\n\nIf any of this spell’s area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled."
+      "description": "Darkness\n2nd-level evocation\n\nCasting Time: 1 action\n\nRange: 60 feet\n\nComponents: V, M (bat fur and a drop of pitch or piece of coal)\n\nDuration: Concentration, up to 10 minutes\n\nMagical darkness spreads from a point you choose within range to fill a 15-foot-radius sphere for the duration. The darkness spreads around corners. A creature with darkvision can’t see through this darkness, and nonmagical light can’t illuminate it.\n\nIf the point you choose is on an object you are holding or one that isn’t being worn or carried, the darkness emanates from the object and moves with it. Completely covering the source of the darkness with an opaque object, such as a bowl or a helm, blocks the darkness.\n\nIf any of this spell’s area overlaps with an area of light created by a spell of 2nd level or lower, the spell that created the light is dispelled.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.darkvision",
@@ -7821,7 +7961,21 @@
         "scope": "character"
       },
       "displayName": "Darkvision",
-      "description": "Darkvision\n2nd-level transmutation\n\nCasting Time: 1 action\n\nRange: Touch\n\nComponents: V, S, M (either a pinch of dried carrot or an agate)\n\nDuration: 8 hours\n\nYou touch a willing creature to grant it the ability to see in the dark. For the duration, that creature has darkvision out to a range of 60 feet."
+      "description": "Darkvision\n2nd-level transmutation\n\nCasting Time: 1 action\n\nRange: Touch\n\nComponents: V, S, M (either a pinch of dried carrot or an agate)\n\nDuration: 8 hours\n\nYou touch a willing creature to grant it the ability to see in the dark. For the duration, that creature has darkvision out to a range of 60 feet.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.detect-thoughts",
@@ -8005,7 +8159,21 @@
         "scope": "character"
       },
       "displayName": "Knock",
-      "description": "Knock\n2nd-level transmutation\n\nCasting Time: 1 action\n\nRange: 60 feet\n\nComponents: V\n\nDuration: Instantaneous\n\nChoose an object that you can see within range. The object can be a door, a box, a chest, a set of manacles, a padlock, or another object that contains a mundane or magical means that prevents access.\n\nA target that is held shut by a mundane lock or that is stuck or barred becomes unlocked, unstuck, or unbarred. If the object has multiple locks, only one of them is unlocked.\n\nIf you choose a target that is held shut with arcane lock, that spell is suppressed for 10 minutes, during which time the target can be opened and shut normally.\n\nWhen you cast the spell, a loud knock, audible from as far away as 300 feet, emanates from the target object."
+      "description": "Knock\n2nd-level transmutation\n\nCasting Time: 1 action\n\nRange: 60 feet\n\nComponents: V\n\nDuration: Instantaneous\n\nChoose an object that you can see within range. The object can be a door, a box, a chest, a set of manacles, a padlock, or another object that contains a mundane or magical means that prevents access.\n\nA target that is held shut by a mundane lock or that is stuck or barred becomes unlocked, unstuck, or unbarred. If the object has multiple locks, only one of them is unlocked.\n\nIf you choose a target that is held shut with arcane lock, that spell is suppressed for 10 minutes, during which time the target can be opened and shut normally.\n\nWhen you cast the spell, a loud knock, audible from as far away as 300 feet, emanates from the target object.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.levitate",
@@ -8258,7 +8426,21 @@
         "scope": "character"
       },
       "displayName": "Shatter",
-      "description": "Shatter\n2nd-level evocation\n\nCasting Time: 1 action\n\nRange: 60 feet\n\nComponents: V, S, M (a chip of mica)\n\nDuration: Instantaneous\n\nA sudden loud ringing noise, painfully intense, erupts from a point of your choice within range. Each creature in a 10-foot-radius sphere centered on that point must make a Constitution saving throw. A creature takes 3d8 thunder damage on a failed save, or half as much damage on a successful one. A creature made of inorganic material such as stone, crystal, or metal has disadvantage on this saving throw.\n\nA nonmagical object that isn’t being worn or carried also takes the damage if it’s in the spell’s area.\n\nAt Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd."
+      "description": "Shatter\n2nd-level evocation\n\nCasting Time: 1 action\n\nRange: 60 feet\n\nComponents: V, S, M (a chip of mica)\n\nDuration: Instantaneous\n\nA sudden loud ringing noise, painfully intense, erupts from a point of your choice within range. Each creature in a 10-foot-radius sphere centered on that point must make a Constitution saving throw. A creature takes 3d8 thunder damage on a failed save, or half as much damage on a successful one. A creature made of inorganic material such as stone, crystal, or metal has disadvantage on this saving throw.\n\nA nonmagical object that isn’t being worn or carried also takes the damage if it’s in the spell’s area.\n\nAt Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.spider-climb",
@@ -8327,7 +8509,21 @@
         "scope": "character"
       },
       "displayName": "Web",
-      "description": "Web\n2nd-level conjuration\n\nCasting Time: 1 action\n\nRange: 60 feet\n\nComponents: V, S, M (a bit of spiderweb)\n\nDuration: Concentration, up to 1 hour\n\nYou conjure a mass of thick, sticky webbing at a point of your choice within range. The webs fill a 20-foot cube from that point for the duration. The webs are difficult terrain and lightly obscure their area.\n\nIf the webs aren’t anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the conjured web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet.\n\nEach creature that starts its turn in the webs or that enters them during its turn must make a Dexterity saving throw. On a failed save, the creature is restrained as long as it remains in the webs or until it breaks free.\n\nA creature restrained by the webs can use its action to make a Strength check against your spell save DC. If it succeeds, it is no longer restrained.\n\nThe webs are flammable. Any 5-foot cube of webs exposed to fire burns away in 1 round, dealing 2d4 fire damage to any creature that starts its turn in the fire."
+      "description": "Web\n2nd-level conjuration\n\nCasting Time: 1 action\n\nRange: 60 feet\n\nComponents: V, S, M (a bit of spiderweb)\n\nDuration: Concentration, up to 1 hour\n\nYou conjure a mass of thick, sticky webbing at a point of your choice within range. The webs fill a 20-foot cube from that point for the duration. The webs are difficult terrain and lightly obscure their area.\n\nIf the webs aren’t anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the conjured web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet.\n\nEach creature that starts its turn in the webs or that enters them during its turn must make a Dexterity saving throw. On a failed save, the creature is restrained as long as it remains in the webs or until it breaks free.\n\nA creature restrained by the webs can use its action to make a Strength check against your spell save DC. If it succeeds, it is no longer restrained.\n\nThe webs are flammable. Any 5-foot cube of webs exposed to fire burns away in 1 round, dealing 2d4 fire damage to any creature that starts its turn in the fire.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.animate-dead",
@@ -8488,7 +8684,21 @@
         "scope": "character"
       },
       "displayName": "Fear",
-      "description": "Fear\n3rd-level illusion\n\nCasting Time: 1 action\n\nRange: Self (30-foot cone)\n\nComponents: V, S, M (a white feather or the heart of a hen)\n\nDuration: Concentration, up to 1 minute\n\nYou project a phantasmal image of a creature’s worst fears. Each creature in a 30-foot cone must succeed on a Wisdom saving throw or drop whatever it is holding and become frightened for the duration.\n\nWhile frightened by this spell, a creature must take the Dash action and move away from you by the safest available route on each of its turns, unless there is nowhere to move. If the creature ends its turn in a location where it doesn’t have line of sight to you, the creature can make a Wisdom saving throw. On a successful save, the spell ends for that creature."
+      "description": "Fear\n3rd-level illusion\n\nCasting Time: 1 action\n\nRange: Self (30-foot cone)\n\nComponents: V, S, M (a white feather or the heart of a hen)\n\nDuration: Concentration, up to 1 minute\n\nYou project a phantasmal image of a creature’s worst fears. Each creature in a 30-foot cone must succeed on a Wisdom saving throw or drop whatever it is holding and become frightened for the duration.\n\nWhile frightened by this spell, a creature must take the Dash action and move away from you by the safest available route on each of its turns, unless there is nowhere to move. If the creature ends its turn in a location where it doesn’t have line of sight to you, the creature can make a Wisdom saving throw. On a successful save, the spell ends for that creature.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.fireball",
@@ -8534,7 +8744,21 @@
         "scope": "character"
       },
       "displayName": "Fly",
-      "description": "Fly\n3rd-level transmutation\n\nCasting Time: 1 action\n\nRange: Touch\n\nComponents: V, S, M (a wing feather from any bird)\n\nDuration: Concentration, up to 10 minutes\n\nYou touch a willing creature. The target gains a flying speed of 60 feet for the duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.\n\nAt Higher Levels. When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd."
+      "description": "Fly\n3rd-level transmutation\n\nCasting Time: 1 action\n\nRange: Touch\n\nComponents: V, S, M (a wing feather from any bird)\n\nDuration: Concentration, up to 10 minutes\n\nYou touch a willing creature. The target gains a flying speed of 60 feet for the duration. When the spell ends, the target falls if it is still aloft, unless it can stop the fall.\n\nAt Higher Levels. When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.gaseous-form",
@@ -8603,7 +8827,21 @@
         "scope": "character"
       },
       "displayName": "Haste",
-      "description": "Haste\n3rd-level transmutation\n\nCasting Time: 1 action\n\nRange: 30 feet\n\nComponents: V, S, M (a shaving of licorice root)\n\nDuration: Concentration, up to 1 minute\n\nChoose a willing creature that you can see within range. Until the spell ends, the target’s speed is doubled, it gains a +2 bonus to AC, it has advantage on Dexterity saving throws, and it gains an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.\n\nWhen the spell ends, the target can’t move or take actions until after its next turn, as a wave of lethargy sweeps over it."
+      "description": "Haste\n3rd-level transmutation\n\nCasting Time: 1 action\n\nRange: 30 feet\n\nComponents: V, S, M (a shaving of licorice root)\n\nDuration: Concentration, up to 1 minute\n\nChoose a willing creature that you can see within range. Until the spell ends, the target’s speed is doubled, it gains a +2 bonus to AC, it has advantage on Dexterity saving throws, and it gains an additional action on each of its turns. That action can be used only to take the Attack (one weapon attack only), Dash, Disengage, Hide, or Use an Object action.\n\nWhen the spell ends, the target can’t move or take actions until after its next turn, as a wave of lethargy sweeps over it.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.hypnotic-pattern",
@@ -8856,7 +9094,21 @@
         "scope": "character"
       },
       "displayName": "Slow",
-      "description": "Slow\n3rd-level transmutation\n\nCasting Time: 1 action\n\nRange: 120 feet\n\nComponents: V, S, M (a drop of molasses)\n\nDuration: Concentration, up to 1 minute\n\nYou alter time around up to six creatures of your choice in a 40-foot cube within range. Each target must succeed on a Wisdom saving throw or be affected by this spell for the duration.\n\nAn affected target’s speed is halved, it takes a −2 penalty to AC and Dexterity saving throws, and it can’t use reactions. On its turn, it can use either an action or a bonus action, not both. Regardless of the creature’s abilities or magic items, it can’t make more than one melee or ranged attack during its turn.\n\nIf the creature attempts to cast a spell with a casting time of 1 action, roll a d20. On an 11 or higher, the spell doesn’t take effect until the creature’s next turn, and the creature must use its action on that turn to complete the spell. If it can’t, the spell is wasted.\n\nA creature affected by this spell makes another Wisdom saving throw at the end of its turn. On a successful save, the effect ends for it."
+      "description": "Slow\n3rd-level transmutation\n\nCasting Time: 1 action\n\nRange: 120 feet\n\nComponents: V, S, M (a drop of molasses)\n\nDuration: Concentration, up to 1 minute\n\nYou alter time around up to six creatures of your choice in a 40-foot cube within range. Each target must succeed on a Wisdom saving throw or be affected by this spell for the duration.\n\nAn affected target’s speed is halved, it takes a −2 penalty to AC and Dexterity saving throws, and it can’t use reactions. On its turn, it can use either an action or a bonus action, not both. Regardless of the creature’s abilities or magic items, it can’t make more than one melee or ranged attack during its turn.\n\nIf the creature attempts to cast a spell with a casting time of 1 action, roll a d20. On an 11 or higher, the spell doesn’t take effect until the creature’s next turn, and the creature must use its action on that turn to complete the spell. If it can’t, the spell is wasted.\n\nA creature affected by this spell makes another Wisdom saving throw at the end of its turn. On a successful save, the effect ends for it.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.stinking-cloud",
@@ -11156,7 +11408,21 @@
         "scope": "character"
       },
       "displayName": "Gate",
-      "description": "Gate\n9th-level conjuration\n\nCasting Time: 1 action\n\nRange: 60 feet\n\nComponents: V, S, M (a diamond worth at least 5,000 gp)\n\nDuration: Concentration, up to 1 minute\n\nYou conjure a portal linking an unoccupied space you can see within range to a precise location on a different plane of existence. The portal is a circular opening, which you can make 5 to 20 feet in diameter. You can orient the portal in any direction you choose. The portal lasts for the duration.\n\nThe portal has a front and a back on each plane where it appears. Travel through the portal is possible only by moving through its front. Anything that does so is instantly transported to the other plane, appearing in the unoccupied space nearest to the portal.\n\nDeities and other planar rulers can prevent portals created by this spell from opening in their presence or anywhere within their domains.\n\nWhen you cast this spell, you can speak the name of a specific creature (a pseudonym, title, or nickname doesn’t work). If that creature is on a plane other than the one you are on, the portal opens in the named creature’s immediate vicinity and draws the creature through it to the nearest unoccupied space on your side of the portal. You gain no special power over the creature, and it is free to act as the GM deems appropriate. It might leave, attack you, or help you."
+      "description": "Gate\n9th-level conjuration\n\nCasting Time: 1 action\n\nRange: 60 feet\n\nComponents: V, S, M (a diamond worth at least 5,000 gp)\n\nDuration: Concentration, up to 1 minute\n\nYou conjure a portal linking an unoccupied space you can see within range to a precise location on a different plane of existence. The portal is a circular opening, which you can make 5 to 20 feet in diameter. You can orient the portal in any direction you choose. The portal lasts for the duration.\n\nThe portal has a front and a back on each plane where it appears. Travel through the portal is possible only by moving through its front. Anything that does so is instantly transported to the other plane, appearing in the unoccupied space nearest to the portal.\n\nDeities and other planar rulers can prevent portals created by this spell from opening in their presence or anywhere within their domains.\n\nWhen you cast this spell, you can speak the name of a specific creature (a pseudonym, title, or nickname doesn’t work). If that creature is on a plane other than the one you are on, the portal opens in the named creature’s immediate vicinity and draws the creature through it to the nearest unoccupied space on your side of the portal. You gain no special power over the creature, and it is free to act as the GM deems appropriate. It might leave, attack you, or help you.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:spell.imprisonment",
@@ -11363,7 +11629,21 @@
         "scope": "character"
       },
       "displayName": "Wish",
-      "description": "Wish\n9th-level conjuration\n\nCasting Time: 1 action\n\nRange: Self\n\nComponents: V\n\nDuration: Instantaneous\n\nWish is the mightiest spell a mortal creature can cast. By simply speaking aloud, you can alter the very foundations of reality in accord with your desires.\n\nThe basic use of this spell is to duplicate any other spell of 8th level or lower. You don’t need to meet any requirements in that spell, including costly components. The spell simply takes effect.\n\nAlternatively, you can create one of the following effects of your choice:\n\n• You create one object of up to 25,000 gp in value that isn’t a magic item. The object can be no more than 300 feet in any dimension, and it appears in an unoccupied space you can see on the ground.\n\n• You allow up to twenty creatures that you can see to regain all hit points, and you end all effects on them described in the greater restoration spell.\n\n• You grant up to ten creatures that you can see resistance to a damage type you choose.\n\n• You grant up to ten creatures you can see immunity to a single spell or other magical effect for 8 hours. For instance, you could make yourself and all your companions immune to a lich’s life drain attack.\n\n• You undo a single recent event by forcing a reroll of any roll made within the last round (including your last turn). Reality reshapes itself to accommodate the new result. For example, a wish spell could undo an opponent’s successful save, a foe’s critical hit, or a friend’s failed save. You can force the reroll to be made with advantage or disadvantage, and you can choose whether to use the reroll or the original roll. You might be able to achieve something beyond the scope of the above examples. State your wish to the GM as precisely as possible. The GM has great latitude in ruling what occurs in such an instance; the greater the wish, the greater the likelihood that something goes wrong. This spell might simply fail, the effect you desire might only be partly achieved, or you might suffer some unforeseen consequence as a result of how you worded the wish. For example, wishing that a villain were dead might propel you forward in time to a period when that villain is no longer alive, effectively removing you from the game. Similarly, wishing for a legendary magic item or artifact might instantly transport you to the presence of the item’s current owner.\n\nThe stress of casting this spell to produce any effect other than duplicating another spell weakens you. After enduring that stress, each time you cast a spell until you finish a long rest, you take 1d10 necrotic damage per level of that spell. This damage can’t be reduced or prevented in any way. In addition, your Strength drops to 3, if it isn’t 3 or lower already, for 2d4 days. For each of those days that you spend resting and doing nothing more than light activity, your remaining recovery time decreases by 2 days. Finally, there is a 33 percent chance that you are unable to cast wish ever again if you suffer this stress."
+      "description": "Wish\n9th-level conjuration\n\nCasting Time: 1 action\n\nRange: Self\n\nComponents: V\n\nDuration: Instantaneous\n\nWish is the mightiest spell a mortal creature can cast. By simply speaking aloud, you can alter the very foundations of reality in accord with your desires.\n\nThe basic use of this spell is to duplicate any other spell of 8th level or lower. You don’t need to meet any requirements in that spell, including costly components. The spell simply takes effect.\n\nAlternatively, you can create one of the following effects of your choice:\n\n• You create one object of up to 25,000 gp in value that isn’t a magic item. The object can be no more than 300 feet in any dimension, and it appears in an unoccupied space you can see on the ground.\n\n• You allow up to twenty creatures that you can see to regain all hit points, and you end all effects on them described in the greater restoration spell.\n\n• You grant up to ten creatures that you can see resistance to a damage type you choose.\n\n• You grant up to ten creatures you can see immunity to a single spell or other magical effect for 8 hours. For instance, you could make yourself and all your companions immune to a lich’s life drain attack.\n\n• You undo a single recent event by forcing a reroll of any roll made within the last round (including your last turn). Reality reshapes itself to accommodate the new result. For example, a wish spell could undo an opponent’s successful save, a foe’s critical hit, or a friend’s failed save. You can force the reroll to be made with advantage or disadvantage, and you can choose whether to use the reroll or the original roll. You might be able to achieve something beyond the scope of the above examples. State your wish to the GM as precisely as possible. The GM has great latitude in ruling what occurs in such an instance; the greater the wish, the greater the likelihood that something goes wrong. This spell might simply fail, the effect you desire might only be partly achieved, or you might suffer some unforeseen consequence as a result of how you worded the wish. For example, wishing that a villain were dead might propel you forward in time to a period when that villain is no longer alive, effectively removing you from the game. Similarly, wishing for a legendary magic item or artifact might instantly transport you to the presence of the item’s current owner.\n\nThe stress of casting this spell to produce any effect other than duplicating another spell weakens you. After enduring that stress, each time you cast a spell until you finish a long rest, you take 1d10 necrotic damage per level of that spell. This damage can’t be reduced or prevented in any way. In addition, your Strength drops to 3, if it isn’t 3 or lower already, for 2d4 days. For each of those days that you spend resting and doing nothing more than light activity, your remaining recovery time decreases by 2 days. Finally, there is a 33 percent chance that you are unable to cast wish ever again if you suffer this stress.",
+      "textLinkContext": {
+        "before": [
+          "cast",
+          "casts",
+          "casting",
+          "cast the",
+          "casts the",
+          "casting the"
+        ],
+        "after": [
+          "spell",
+          "cantrip"
+        ]
+      }
     },
     {
       "id": "dnd5e:2014:wizard.spellcasting",
