@@ -3,7 +3,7 @@ import { FeatureLink } from '@/ui/src/FeatureLink';
 import { CharacterFeatures } from '@/ui/src/CharacterFeatures';
 import { featureName } from '@/ui/src/display';
 import { useMemo, useState } from 'react';
-import { adjustResource, applyEdit, previewEdit, finalizeCharacter, recoverResources, recoverSelectedResources, settleAbility, useAbility as activateAbility, castSpell, type Engine, type Character, type Edit, type EditPreview, type SpellTurn } from '@/src/index';
+import { adjustResource, applyEdit, previewEdit, finalizeCharacter, recoverResources, recoverSelectedResources, settleAbility, useAbility as activateAbility, type Engine, type Character, type Edit, type EditPreview } from '@/src/index';
 import { labelFromId } from '@/ui/src/workspace';
 import { SelectionCard } from '@/ui/src/SelectionCard';
 import { Modal } from '@/ui/src/Modal';
@@ -17,9 +17,6 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
       return requested && ['stats', 'choices', 'features', 'resources'].includes(requested) ? requested : character.buildState === 'finalized' ? 'stats' : 'choices';
     }), [level, setLevel] = useState('all'), [classId, setClassId] = useState(engine.catalogue.classes[0]?.id ?? '');
   const [preview, setPreview] = useState<{ edits: Edit[]; result: EditPreview } | null>(null);
-  const initialBudget = Object.fromEntries([...new Set(result.capabilities.flatMap((c) => c.definition.action ? [c.definition.action.kind] : []))].map((kind) => [kind, 1]));
-  const [budget, setBudget] = useState<Record<string, number>>(initialBudget), [actions, setActions] = useState<Record<string, number>>(initialBudget);
-  const [turn, setTurn] = useState<SpellTurn>({ bonusActionSpell: false, otherSpell: false, onlyActionCantrips: true });
   const attempt = (action: () => void) => {
     try {
       action();
@@ -36,6 +33,38 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
   const inputs = engine.catalogue.system.stats.filter((s) => s.kind === 'input');
   const incomplete = result.diagnostics.filter((d) => d.severity === 'incomplete').length;
   const ready = character.buildState !== 'draft' && result.status === 'valid';
+  const ability = (c: (typeof result.capabilities)[number]) => c.definition.name === engine.catalogue.system.commandRules?.selectedRecovery?.capabilityName
+    ? <SelectedRecovery key={c.id} engine={engine} character={character} ready={ready} update={update} report={report} />
+    : (
+        <article className="resource-ability" key={c.id}>
+          <div className="row">
+            <div>
+              <h3>{c.definition.name}</h3>
+              <p className="muted small">
+                {c.definition.action ? `${c.definition.action.amount} ${labelFromId(c.definition.action.kind)}` : 'No action cost'}
+                {' '}
+                {'· '}
+                {' '}
+                {Object.entries(c.costs).map(([id, n]) => `${n} ${result.resources[id]?.name ?? labelFromId(result.resources[id]?.key ?? id)}`).join(', ') || 'No resource cost'}
+              </p>
+            </div>
+            <button
+              className="quiet"
+              disabled={!ready || Object.entries(c.costs).some(([id, amount]) => (result.resources[id]?.available ?? 0) < amount)}
+              onClick={() => attempt(() => {
+                update(activateAbility(engine, character, c.id, crypto.randomUUID(), { actionTracking: 'manual' }).character);
+              })}
+            >
+              Use ability
+            </button>
+          </div>
+          <details>
+            <summary>Read source rules</summary>
+            <FeatureRules feature={engine.catalogue.features.find((f) => f.id === result.instances.find((i) => i.id === c.source)!.feature)!} engine={engine} openFeature={openFeature} />
+          </details>
+          <FeatureLink className="link" id={result.instances.find((i) => i.id === c.source)!.feature} engine={engine}>View source Feature →</FeatureLink>
+        </article>
+      );
   return (
     <>
       <div className="character-title">
@@ -235,14 +264,13 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
       {tab === 'resources' && (
         <>
           <h2>Resources</h2>
-          <p className="muted">Finalize a valid character to use these controls. Maximum changes do not refill tracked resources; Features explicitly grant amounts and recovery.</p>
+          <p className="muted">{ready ? 'Use abilities or adjust resource amounts below. Rest buttons apply the recovery rules shown on each resource.' : 'Finalize a valid character to use these controls.'}</p>
           <div className="stat-grid">
             {Object.values(result.resources).map((p) => (
-              <ResourceSummary key={p.id} pool={p} engine={engine} result={result} ready={ready} adjust={(delta) => attempt(() => update(adjustResource(engine, character, p.id, delta, crypto.randomUUID())))} />
+              <ResourceSummary key={p.id} pool={p} engine={engine} result={result} ready={ready} adjust={(delta) => attempt(() => update(adjustResource(engine, character, p.id, delta, crypto.randomUUID())))}>{result.capabilities.filter((c) => Object.keys(c.costs)[0] === p.id).map(ability)}</ResourceSummary>
             ))}
           </div>
           <div className="toolbar">{[...new Set(Object.values(result.resources).flatMap((p) => p.recovery.map((r) => r.event)))].map((event) => <button className="quiet" key={event} disabled={!ready} onClick={() => attempt(() => update(recoverResources(engine, character, event, crypto.randomUUID())))}>{labelFromId(event)}</button>)}</div>
-          {result.capabilities.some((capability) => capability.definition.name === engine.catalogue.system.commandRules?.selectedRecovery?.capabilityName) && <SelectedRecovery engine={engine} character={character} ready={ready} update={update} report={report} />}
           {Object.entries(character.pending).map(([id, pending]) => (
             <section className="panel" key={id}>
               <h3>Resolve reserved ability use</h3>
@@ -268,80 +296,9 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
               </div>
             </section>
           ))}
-          <h2>Abilities</h2>
-          <div className="panel">
-            <div className="row">
-              <h3>Turn budget</h3>
-              <button
-                className="quiet"
-                onClick={() => {
-                  setActions({ ...budget });
-                  setTurn({ bonusActionSpell: false, otherSpell: false, onlyActionCantrips: true });
-                }}
-              >
-                Start new turn
-              </button>
-            </div>
-            <div className="input-grid">
-              {[...new Set([...Object.keys(actions), ...result.capabilities.flatMap((c) => c.definition.action ? [c.definition.action.kind] : [])])].map((kind) => (
-                <label key={kind}>
-                  {labelFromId(kind)}
-                  <input
-                    type="number"
-                    min="0"
-                    value={actions[kind] ?? 0}
-                    onChange={(e) => {
-                      const amount = Math.max(0, Number(e.target.value));
-                      setActions({ ...actions, [kind]: amount });
-                      setBudget({ ...budget, [kind]: amount });
-                    }}
-                  />
-                </label>
-              ))}
-            </div>
-            <p className="muted small">Turn and action budgets are session controls. Set them to what is available at your table.</p>
-          </div>
-          {result.capabilities.map((c) => (
-            <article className="component" key={c.id}>
-              <div className="row">
-                <div>
-                  <h3>{c.definition.name}</h3>
-                  <p className="muted small">
-                    {c.definition.action ? `${c.definition.action.amount} ${labelFromId(c.definition.action.kind)}` : 'No action cost'}
-                    {' '}
-                    {'· '}
-                    {' '}
-                    {Object.entries(c.costs).map(([id, n]) => `${n} ${result.resources[id]?.key}`).join(', ') || 'No resource cost'}
-                  </p>
-                </div>
-                <button
-                  className="quiet"
-                  disabled={!ready || c.definition.name === engine.catalogue.system.commandRules?.selectedRecovery?.capabilityName}
-                  onClick={() => attempt(() => {
-                    const policy = engine.catalogue.system.commandRules?.spellTurn;
-                    if (policy && typeof c.definition.metadata?.[policy.castingAbilityKey] === 'string') {
-                      const used = castSpell(engine, character, c.id, crypto.randomUUID(), turn, { actions });
-                      update(used.character);
-                      setActions(used.actions ?? actions);
-                      setTurn(used.turn);
-                    } else {
-                      const used = activateAbility(engine, character, c.id, crypto.randomUUID(), { actions });
-                      update(used.character);
-                      setActions(used.actions ?? actions);
-                    }
-                  })}
-                >
-                  Use ability
-                </button>
-              </div>
-              <details>
-                <summary>Read source rules</summary>
-                <FeatureRules feature={engine.catalogue.features.find((f) => f.id === result.instances.find((i) => i.id === c.source)!.feature)!} engine={engine} openFeature={openFeature} />
-              </details>
-              <FeatureLink className="link" id={result.instances.find((i) => i.id === c.source)!.feature} engine={engine}>View source Feature →</FeatureLink>
-            </article>
-          ))}
-          <p className="muted">Ability effects, targets, dice, and triggers require adjudication. Long casting times and reactions on other turns require the appropriate turn budget.</p>
+          {result.capabilities.some((c) => !Object.keys(c.costs).length) && <h2>Abilities</h2>}
+          {result.capabilities.filter((c) => !Object.keys(c.costs).length).map(ability)}
+          <p className="muted">Ability effects, targets, dice, and triggers require adjudication. Action timing and spellcasting restrictions are adjudicated at the table.</p>
         </>
       )}
       {preview && (

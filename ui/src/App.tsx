@@ -5,7 +5,7 @@ import noticeUrl from '@/NOTICE.md?url';
 import { deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type Engine, type SystemFile, type Value } from '@/src/index';
 import bundledUrl from '@/src/systems/dnd5e-2014/system.json?url';
 import starterUrl from '@/src/systems/dnd5e-2014/starter-characters.json?url';
-import { addStarterCharacters, addStarterInventory } from '@/ui/src/starter-characters';
+import { addStarterCharacters, addStarterInventory, migrateMoney } from '@/ui/src/starter-characters';
 import { CharacterBuilder } from '@/ui/src/CharacterBuilder';
 import { ClassDetail } from '@/ui/src/ClassDetail';
 import { FeatureDetail } from '@/ui/src/FeatureDetail';
@@ -81,7 +81,7 @@ export function App() {
         const templates = await fetch(starterUrl, { signal: controller.signal, cache: 'no-store' });
         if (!templates.ok) throw new Error('Starter inventory could not be loaded.');
         const saves: unknown = await templates.json();
-        if (!cancelled)setWorkspace((current) => addStarterInventory(applyDescriptionUpdate(current, existing, updated), saves));
+        if (!cancelled)setWorkspace((current) => migrateMoney(addStarterInventory(applyDescriptionUpdate(current, existing, updated), saves)));
       } catch (e) {
         if (!cancelled)setError(`Automatic SRD description update failed. ${errorMessage(e)} Retry with Systems → Update bundled descriptions.`);
       } finally {
@@ -125,7 +125,7 @@ export function App() {
     try {
       const file = parseSystemFile(typeof input === 'string' ? input : await input.text());
       registry.load(file);
-      change((current) => ({ ...current, systems: [...current.systems, file] }));
+      change((current) => migrateMoney({ ...current, systems: [...current.systems, file] }));
       setSelectedSystem(systemKey(file));
       setOptions({});
     } catch (e) {
@@ -155,7 +155,7 @@ export function App() {
       const existing = workspace.systems.find((file) => systemKey(file) === systemKey(incoming));
       if (!existing) throw new Error('Load the bundled System before updating its descriptions.');
       const updated = updateSystemDescriptions(existing, incoming);
-      change((current) => applyDescriptionUpdate(current, existing, updated));
+      change((current) => migrateMoney(applyDescriptionUpdate(current, existing, updated)));
     } catch (e) {
       setError(errorMessage(e));
     } finally {
@@ -172,7 +172,7 @@ export function App() {
       } catch (e) {
         if ((e as { code?: string }).code !== 'SYSTEM_UNAVAILABLE') throw e;
       }
-      change((current) => ({ ...current, characters: [...current.characters, character], active: character.id }));
+      change((current) => migrateMoney({ ...current, characters: [...current.characters, character], active: character.id }));
       go('characters', character.id);
     } catch (e) {
       setError(errorMessage(e));
@@ -651,7 +651,7 @@ export function App() {
               try {
                 const e = registry.createEngine(file.id, file.revision, settings);
                 const character = e.createCharacter(crypto.randomUUID(), name, classId ? [{ id: crypto.randomUUID(), class: classId, level }] : [], [], { draft: true });
-                change((current) => ({ ...current, characters: [...current.characters, character], active: character.id }));
+                change((current) => migrateMoney({ ...current, characters: [...current.characters, character], active: character.id }));
                 setCreating(false);
                 go('characters', character.id);
               } catch (e) {

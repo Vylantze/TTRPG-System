@@ -1,3 +1,4 @@
+import { checkMoney } from '@/src/currency.js';
 import { checkInventory, itemFeatures } from '@/src/items.js';
 import type { Catalogue, Character, Diagnostic, Expression, Predicate, Component, FunctionRegistry } from '@/src/model.js';
 import { RuleError, number } from '@/src/expression.js';
@@ -242,6 +243,33 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     list(input.classes);
     if (input.blocks !== undefined) list(input.blocks);
     const compiled = compileBlocks(input as unknown as Catalogue);
+    if (compiled.system.currency !== undefined) {
+      const currency = compiled.system.currency;
+      record(currency);
+      text(currency.name);
+      text(currency.primary);
+      integer(currency.decimalPlaces);
+      if (currency.decimalPlaces > 6) throw new RuleError('CURRENCY', 'Currency supports up to six decimal places.');
+      list(currency.denominations);
+      if (!currency.denominations.length) throw new RuleError('CURRENCY', 'Currency needs at least one denomination.');
+      unique(currency.denominations.map((unit) => unit.id), 'currency denomination');
+      const legacyIds: string[] = [];
+      for (const unit of currency.denominations) {
+        record(unit);
+        text(unit.id);
+        text(unit.name);
+        if (typeof unit.symbol !== 'string') throw new RuleError('CURRENCY', 'Currency symbol must be text.');
+        integer(unit.value, 1);
+        if (!Number.isSafeInteger(unit.value)) throw new RuleError('CURRENCY', 'Currency value exceeds the supported range.');
+        if (unit.legacyItemIds !== undefined) {
+          list(unit.legacyItemIds);
+          unit.legacyItemIds.forEach(text);
+          legacyIds.push(...unit.legacyItemIds);
+        }
+      }
+      unique(legacyIds, 'legacy currency item');
+      if (!currency.denominations.some((unit) => unit.id === currency.primary)) throw new RuleError('CURRENCY', 'Primary denomination is missing.');
+    }
     if (compiled.items !== undefined) list(compiled.items);
     if (compiled.itemFeatures !== undefined) list(compiled.itemFeatures);
     unique((compiled.items ?? []).map((i) => i.id), 'item');
@@ -620,6 +648,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
 export function checkCharacter(v: unknown): asserts v is Character {
   if (v && typeof v === 'object') checkInventory(v as Character);
   record(v);
+  checkMoney(v.money);
   if (v.notes !== undefined) {
     record(v.notes);
     if (Object.values(v.notes).some((note) => typeof note !== 'string')) throw new RuleError('SCHEMA', 'Character notes must be text.');

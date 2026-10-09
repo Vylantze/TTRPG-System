@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T18:06:55.969Z
+Export refreshed UTC: 2026-10-09T18:41:09.095Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -1700,5 +1700,87 @@ The armor checks pass, including AC changes when armor is removed. The open brow
 
 [2026-10-09T18:02:02.848Z] ASSISTANT
 The browser checks confirm that a Fighter sees Second Wind without Arcane Recovery, resource +/− controls respect the limits, and “Back to Class Features” returns to the exact entry. Ctrl-click also opens Features in a new tab. All 214 engine tests pass; I’m finishing the UI regressions and documentation.
+
+----------------------------------------
+
+[2026-10-09T18:07:49.375Z] ASSISTANT
+The 27 UI tests now pass, including filter restoration, Class return links, and inventory migration. The live sheet also recalculates the Fighter’s AC from 17 to 9 when chain mail is removed, then restores it to 17 when equipped again. I’m completing the final checks before committing and pushing.
+
+----------------------------------------
+
+[2026-10-09T18:11:00.912Z] ASSISTANT
+Implemented and pushed to `develop` (`3c2f32e`).
+
+- Feature links support new tabs and restore Class locations, filters, sorting, and pagination.
+- Character sheets have formatted details, ability cards, skill lists, and categorized stats configured through System JSON.
+- Fighters no longer see ungranted Arcane Recovery controls. Resources support adjustable +/− amounts.
+- Added separate Items, reusable item-only Features, and Starter Set inventories. Equipped armor updates AC.
+
+Passed: 216 engine tests, 27 UI tests, lint, production build, and browser checks.
+
+![Updated character sheet](<D:/User/Workspace/TTRPG System/.reference-cache/character-sheet-updated.png>)
+
+----------------------------------------
+
+[2026-10-09T18:27:12.505Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-09T18:27:12.546Z] USER
+- The character details should not have a separate edit characters section like this, but it should instead have a edit button that would give a fixed height max width textarea for the user to edit with.
+- Starting money should just be reflected in a money section. Money should also have a separate section in the character sheet exclusively for itself. There should be a definition in the system for the type of currency system used. The default would be a single value (for Zenny/dollars as a universal currency). However, DnD uses the gold, silver, platinum and copper piece system
+- The resources increment or decrement should have a better design look to it. The use ability button should be put together with the resource
+- Turn budget is not a thing that needs to be tracked (specifically for actions and bonus actions)
+- In the Saving Throws and Skills menu, it should be default be able to sort the columns. Additionally, the calculation for the bonuses should be just an arrow next to the number that expands a box that shows the details
+- Ability scores should have the option to swap between showing the modifiers as the main or the scores as the main value. Hovering over the numbers should also indicate what type of value they are. This should be a built in feature if this type of display is used.
+
+----------------------------------------
+
+[2026-10-09T18:27:22.321Z] ASSISTANT
+I’ll update the sheet’s editing and stat controls, add System-defined currencies with a dedicated money section, and group resource-backed abilities with their resources. I’ll also remove action and bonus-action budget tracking from the UI.
+
+----------------------------------------
+
+[2026-10-09T18:27:44.816Z] ASSISTANT QUESTIONS
+For DnD money, should I include electrum alongside copper, silver, gold, and platinum? I’ll keep coin quantities separate and show their total value without automatically exchanging coins.
+Options: Include all five denominations (Recommended); Use only the four denominations I listed
+
+----------------------------------------
+
+[2026-10-09T18:27:51.251Z] USER
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_c6e0e922986e4a0192af2fe9859cf6b2\",0]","question":"For DnD money, should I include electrum alongside copper, silver, gold, and platinum? I’ll keep coin quantities separate and show their total value without automatically exchanging coins.","answer":"Include all five denominations (Recommended)"}]
+</send_user_message_question_reply>
+
+----------------------------------------
+
+[2026-10-09T18:29:09.039Z] ASSISTANT
+I’ll include all five DnD coin types and keep their quantities separate. For the sheet, I’ll use inline Edit/Save controls, sortable table headers, compact calculation disclosures, and a score/modifier toggle built into every ability-card section.
+
+----------------------------------------
+
+[2026-10-09T18:31:52.750Z] ASSISTANT
+The currency model is in place. I’m now connecting it to saved characters and the sheet, including moving existing coin items into Money without changing their quantities.
+
+----------------------------------------
+
+[2026-10-09T18:34:01.432Z] ASSISTANT
+The sheet now has inline detail editors, a separate Money section, sortable skill and saving throw headers, and a score/modifier toggle. I’ve also grouped resource-backed abilities with their resource controls and removed the turn-budget UI. I’m checking compilation, save migration, and the controls next.
+
+----------------------------------------
+
+[2026-10-09T18:36:38.456Z] ASSISTANT
+Existing coin items now migrate into Money, and the browser shows the Fighter’s 25 gp there. The inline editor and score/modifier toggle also work. I’m testing resource use and checking that migrations don’t count old starting-money notes twice.
+
+----------------------------------------
+
+[2026-10-09T18:38:27.272Z] ASSISTANT
+All 221 engine tests pass. In the browser, using Second Wind consumes its resource and disables further use at zero; incrementing restores it. Calculation disclosures now include the formula and contributing stat values. The UI regression suite is still running.
+
+----------------------------------------
+
+[2026-10-09T18:40:51.222Z] ASSISTANT
+The production build passes, and coin edits update the total while leaving the other denominations unchanged. The UI test process stalled while files were being updated, so I’ve stopped it and will rerun against the settled code before committing.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

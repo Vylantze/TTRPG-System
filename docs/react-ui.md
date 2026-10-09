@@ -98,3 +98,11 @@ Reviewed the public [D&D Beyond Fighter page](https://www.dndbeyond.com/classes/
 The resulting implementation adds a class guide with sticky section navigation, keyboard-focusable level destinations, an advancement table with Feature previews, and full source descriptions still visible by default. Feature detail pages lead with rules, readable requirements, tags, action kinds, and source attribution; authoring JSON is grouped under a closed disclosure. Character Features now have their own searchable section with source-progression filters, acquisition levels, parent Feature provenance, and explicit inactive/unmet states. The existing palette remains, with a stronger class header and responsive reading columns.
 
 The engine owns `getFeature`, `getClassLevels`, `getSelectionFeatures`, and `getFeatureAdvancement`. React consumes these queries instead of independently interpreting catalogue selection filters. None of the queries grants Features or bypasses eligibility checks. No new UI dependencies or System migrations are required.
+
+## Sheet editing and presentation controls
+
+Character detail fields expose inline Edit buttons with fixed-height, bounded-width textareas and Save/Cancel controls. Money has its own panel, using the loaded System currency definition and preserving denomination counts separately. Existing currency items and recognized starting-money notes migrate into this panel without counting a note twice. Unrecognized legacy money notes remain visible in Money.
+
+Every `skills` layout (including Saving Throws) defaults to name sorting and provides ascending/descending controls on all column headers. An arrow beside each bonus expands its formula, contributing stat values and applied modifiers. Every `abilities` layout includes a score/modifier primary-value toggle; number tooltips identify the value type. Other stat sections preserve the System-authored row order.
+
+Resource cards group current/maximum values, adjustment controls, recovery conditions and associated abilities. Abilities costing multiple resources appear with their first cost pool and list all costs; the engine checks every pool. Selected-recovery allocation is grouped with its owning resource. The UI has no turn budget or action/bonus-action counters.

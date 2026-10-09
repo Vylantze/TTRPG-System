@@ -1,3 +1,4 @@
+import { checkMoney, moneyTotal } from '@/src/currency.js';
 import { inventoryModifiers, checkInventory } from '@/src/items.js';
 import { RuleError, boolean, constrain, evaluateExpression, number, type Environment } from '@/src/expression.js';
 import type { Catalogue, Character, Choice, Diagnostic, Expression, FunctionRegistry, Instance, Value,
@@ -297,6 +298,8 @@ export class Engine {
     try {
       checkCharacter(character);
       checkInventory(character, this.catalogue);
+      checkMoney(character.money, this.catalogue.system);
+      moneyTotal(character, this.catalogue.system);
       if (character.system.id !== this.catalogue.system.id || character.system.revision !== this.catalogue.system.revision || character.catalogue.id !== this.catalogue.id || character.catalogue.revision !== this.catalogue.revision) throw new RuleError('REVISION', 'System or catalogue revision mismatch.');
       const revisions = Object.fromEntries([...this.catalogue.features, ...this.catalogue.classes].map((f) => [f.id, f.revision]));
       if (Object.keys(revisions).length !== Object.keys(character.contentRevisions).length || Object.entries(revisions).some(([id, revision]) => character.contentRevisions[id] !== revision)) throw new RuleError('REVISION', 'Content revision manifest mismatch.');
