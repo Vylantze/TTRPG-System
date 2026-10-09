@@ -7,3 +7,4 @@ import '@/tests/feature-text.test.js';
 import '@/tests/lint.test.js';
 import '@/tests/catalogue-queries.test.js';
 import '@/tests/building-blocks.test.js';
+import '@/tests/starter-characters.test.js';

@@ -555,6 +555,10 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
 
 export function checkCharacter(v: unknown): asserts v is Character {
   record(v);
+  if (v.notes !== undefined) {
+    record(v.notes);
+    if (Object.values(v.notes).some((note) => typeof note !== 'string')) throw new RuleError('SCHEMA', 'Character notes must be text.');
+  }
   if (v.buildState !== undefined && v.buildState !== 'draft' && v.buildState !== 'finalized') throw new RuleError('SCHEMA', 'Invalid character build state.');
   record(v);
   if (v.version !== 1) throw new RuleError('SAVE_VERSION', 'Unsupported character version.');

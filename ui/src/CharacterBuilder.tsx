@@ -10,7 +10,7 @@ import { ResourceSummary } from '@/ui/src/ResourceSummary';
 
 export function CharacterBuilder({ engine, character, update, openFeature, report }: { engine: Engine; character: Character; update: (c: Character) => void; openFeature: (id: string) => void; report: (message: string) => void }) {
   const result = useMemo(() => engine.evaluate(character), [engine, character]);
-  const [tab, setTab] = useState('choices'), [level, setLevel] = useState('all'), [classId, setClassId] = useState(engine.catalogue.classes[0]?.id ?? '');
+  const [tab, setTab] = useState(character.buildState === 'finalized' ? 'stats' : 'choices'), [level, setLevel] = useState('all'), [classId, setClassId] = useState(engine.catalogue.classes[0]?.id ?? '');
   const [preview, setPreview] = useState<{ edits: Edit[]; result: EditPreview } | null>(null);
   const initialBudget = Object.fromEntries([...new Set(result.capabilities.flatMap((c) => c.definition.action ? [c.definition.action.kind] : []))].map((kind) => [kind, 1]));
   const [budget, setBudget] = useState<Record<string, number>>(initialBudget), [actions, setActions] = useState<Record<string, number>>(initialBudget);
@@ -211,6 +211,18 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
       )}
       {tab === 'stats' && (
         <>
+          {character.notes && (
+            <section className="panel">
+              <h2>Character details</h2>
+              {character.notes.Source && /^https:\/\/[^\s]+$/.test(character.notes.Source) && <a href={character.notes.Source} target="_blank" rel="noopener noreferrer">View original character sheet</a>}
+              {Object.entries(character.notes).map(([label, text]) => (
+                <label key={label}>
+                  {label}
+                  <textarea value={text} onChange={(e) => update({ ...character, notes: { ...character.notes, [label]: e.target.value } })} />
+                </label>
+              ))}
+            </section>
+          )}
           <h2>Calculated stats</h2>
           <p className="muted">
             {'Open a stat to inspect its base and Feature modifiers. '}

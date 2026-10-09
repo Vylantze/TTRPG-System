@@ -1,7 +1,9 @@
-import { useEffect, useMemo, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import noticeUrl from '@/NOTICE.md?url';
 import { deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type Engine, type SystemFile, type Value } from '@/src/index';
 import bundledUrl from '@/src/systems/dnd5e-2014/system.json?url';
+import starterUrl from '@/src/systems/dnd5e-2014/starter-characters.json?url';
+import { addStarterCharacters } from '@/ui/src/starter-characters';
 import { CharacterBuilder } from '@/ui/src/CharacterBuilder';
 import { ClassDetail } from '@/ui/src/ClassDetail';
 import { FeatureDetail } from '@/ui/src/FeatureDetail';
@@ -42,6 +44,10 @@ export function App() {
   const [updatingDescriptions, setUpdatingDescriptions] = useState(() => !initial.error && initial.workspace.systems.some((file) => file.id === 'dnd5e:2014-srd5.1'));
   const [selectedSystem, setSelectedSystem] = useState(systemKey(workspace.systems[0] ?? { id: '', revision: 1 })), [options, setOptions] = useState<Record<string, Value>>({});
   const registry = useMemo(() => createRegistry(workspace.systems), [workspace.systems]);
+  const workspaceRef = useRef(workspace);
+  useEffect(() => {
+    workspaceRef.current = workspace;
+  }, [workspace]);
   const selected = workspace.systems.find((s) => systemKey(s) === selectedSystem) ?? workspace.systems[0];
   const browserEngine = useMemo(() => selected ? registry.createEngine(selected.id, selected.revision, options) : undefined, [registry, selected, options]);
   const active = route.page === 'characters' && route.id ? workspace.characters.find((c) => c.id === route.id) : undefined;
@@ -171,6 +177,22 @@ export function App() {
     }
   };
   const openFeature = (id: string) => go('features', id, engine);
+  const loadStarterParty = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const responses = await Promise.all([fetch(bundledUrl), fetch(starterUrl)]);
+      if (responses.some((response) => !response.ok)) throw new Error('Starter Set files could not be loaded.');
+      const [system, saves] = await Promise.all(responses.map((response) => response.json()));
+      const next = addStarterCharacters(workspaceRef.current, system, saves);
+      change(next);
+      go('characters');
+    } catch (e) {
+      setError(errorMessage(e));
+    } finally {
+      setLoading(false);
+    }
+  };
   const feature = engine?.catalogue.features.find((f) => f.id === route.id);
   const cls = engine?.catalogue.classes.find((c) => c.id === route.id);
   const list = engine?.catalogue.features.filter((f) => `${featureName(f)} ${f.name} ${featureDescription(f, engine!) ?? ''} ${f.source ?? ''}`.toLowerCase().includes(query.toLowerCase()) && (!tag || f.tags?.includes(tag))) ?? [];
@@ -371,6 +393,7 @@ export function App() {
                   <PageTitle eyebrow="A character is a collection of choices" title="Every adventure starts with a Feature." description="Build your character one choice at a time. Explore what makes them different, and let the System handle the numbers." />
                   <div className="toolbar">
                     <button disabled={!selected} onClick={() => setCreating(true)}>Create a character →</button>
+                    <button className="quiet" disabled={loading || blocked} onClick={() => void loadStarterParty()}>{loading ? 'Loading…' : 'Add 2014 Starter Set party'}</button>
                     <label className="button quiet">
                       Import character
                       <input

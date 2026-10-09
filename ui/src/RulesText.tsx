@@ -52,7 +52,7 @@ export function RulesText({ text, source, engine, openFeature, exclude = [], onP
       {source && (
         <p className="muted small source">
           {'Source: '}
-          {source}
+          {source.split(/(https?:\/\/[^\s,]+)/).map((part, i) => /^https?:\/\//.test(part) ? <a key={i} href={part} target="_blank" rel="noopener noreferrer">{part}</a> : part)}
         </p>
       )}
       {preview && engine && <ReferencePopup reference={preview} engine={engine} openFeature={openFeature} onClose={() => setPreview(undefined)} />}
