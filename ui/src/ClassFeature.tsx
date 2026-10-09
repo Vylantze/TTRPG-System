@@ -1,3 +1,4 @@
+import { FeatureLink } from '@/ui/src/FeatureLink';
 import type { Engine } from '@/src/index';
 import { featureName } from '@/ui/src/display';
 import { FeatureRules } from '@/ui/src/RulesText';
@@ -8,11 +9,11 @@ export function ClassFeature({ id, engine, openFeature }: { id: string; engine: 
   return (
     <section className="class-level-feature">
       <h3>
-        <button className="link" onClick={() => openFeature(id)}>
+        <FeatureLink className="link" id={id} engine={engine}>
           {featureName(feature)}
           {' '}
           →
-        </button>
+        </FeatureLink>
       </h3>
       <FeatureRules feature={feature} engine={engine} openFeature={openFeature} />
     </section>

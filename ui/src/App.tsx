@@ -1,15 +1,17 @@
+import { safeReturn } from '@/ui/src/feature-origin';
+import { FeatureLink } from '@/ui/src/FeatureLink';
 import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import noticeUrl from '@/NOTICE.md?url';
 import { deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type Engine, type SystemFile, type Value } from '@/src/index';
 import bundledUrl from '@/src/systems/dnd5e-2014/system.json?url';
 import starterUrl from '@/src/systems/dnd5e-2014/starter-characters.json?url';
-import { addStarterCharacters } from '@/ui/src/starter-characters';
+import { addStarterCharacters, addStarterInventory } from '@/ui/src/starter-characters';
 import { CharacterBuilder } from '@/ui/src/CharacterBuilder';
 import { ClassDetail } from '@/ui/src/ClassDetail';
 import { FeatureDetail } from '@/ui/src/FeatureDetail';
 import { Modal } from '@/ui/src/Modal';
 import { RulesText } from '@/ui/src/RulesText';
-import { descriptionPreview, featureDescription } from '@/ui/src/feature-description';
+import { descriptionPreview, featureDescription, featureHref } from '@/ui/src/feature-description';
 
 import { featureName, tagName } from '@/ui/src/display';
 import type { Route } from '@/ui/src/types/Route';
@@ -19,7 +21,7 @@ function readRoute(): Route {
   const params = new URLSearchParams(query);
   const [page, id] = path.split('/');
   try {
-    return { page: page || 'characters', id: id ? decodeURIComponent(id) : undefined, system: params.get('system') ?? undefined, revision: Number(params.get('revision')) || undefined, catalogue: params.get('catalogue') ?? undefined };
+    return { page: page || 'characters', id: id ? decodeURIComponent(id) : undefined, system: params.get('system') ?? undefined, revision: Number(params.get('revision')) || undefined, catalogue: params.get('catalogue') ?? undefined, query: params.get('q') ?? '', tag: params.get('tag') ?? '', sort: params.get('sort') ?? 'name', listPage: Math.max(0, Math.floor(Number(params.get('page')) || 0)), returnTo: safeReturn(params.get('returnTo')) };
   } catch {
     return { page: 'characters' };
   }
@@ -40,7 +42,7 @@ export function App() {
     }
   });
   const [workspace, setWorkspace] = useState(initial.workspace), [route, setRoute] = useState(readRoute), [error, setError] = useState(initial.error), [storageError, setStorageError] = useState(initial.error), [blocked, setBlocked] = useState(Boolean(initial.error));
-  const [saved, setSaved] = useState(false), [loading, setLoading] = useState(false), [creating, setCreating] = useState(false), [query, setQuery] = useState(''), [tag, setTag] = useState(''), [page, setPage] = useState(0);
+  const [saved, setSaved] = useState(false), [loading, setLoading] = useState(false), [creating, setCreating] = useState(false);
   const [updatingDescriptions, setUpdatingDescriptions] = useState(() => !initial.error && initial.workspace.systems.some((file) => file.id === 'dnd5e:2014-srd5.1'));
   const [selectedSystem, setSelectedSystem] = useState(systemKey(workspace.systems[0] ?? { id: '', revision: 1 })), [options, setOptions] = useState<Record<string, Value>>({});
   const registry = useMemo(() => createRegistry(workspace.systems), [workspace.systems]);
@@ -76,7 +78,10 @@ export function App() {
         if (!response.ok) throw new Error('Bundled SRD descriptions could not be loaded.');
         const incoming = parseSystemFile(await response.text());
         const updated = updateSystemDescriptions(existing, incoming);
-        if (!cancelled)setWorkspace((current) => applyDescriptionUpdate(current, existing, updated));
+        const templates = await fetch(starterUrl, { signal: controller.signal, cache: 'no-store' });
+        if (!templates.ok) throw new Error('Starter inventory could not be loaded.');
+        const saves: unknown = await templates.json();
+        if (!cancelled)setWorkspace((current) => addStarterInventory(applyDescriptionUpdate(current, existing, updated), saves));
       } catch (e) {
         if (!cancelled)setError(`Automatic SRD description update failed. ${errorMessage(e)} Retry with Systems → Update bundled descriptions.`);
       } finally {
@@ -91,9 +96,6 @@ export function App() {
   useEffect(() => {
     const onHash = () => {
       setRoute(readRoute());
-      setQuery('');
-      setTag('');
-      setPage(0);
     };
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
@@ -176,7 +178,21 @@ export function App() {
       setError(errorMessage(e));
     }
   };
-  const openFeature = (id: string) => go('features', id, engine);
+  const query = route.query ?? '', tag = route.tag ?? '', sort = route.sort ?? 'name', page = route.listPage ?? 0;
+  const browse = (key: string, value: string) => {
+    const [path, search] = window.location.hash.split('?');
+    const params = new URLSearchParams(search);
+    if (value) params.set(key, value);
+    else params.delete(key);
+    window.history.replaceState(null, '', `${path}?${params}`);
+    setRoute(readRoute());
+  };
+  const setQuery = (value: string) => browse('q', value);
+  const setTag = (value: string) => browse('tag', value);
+  const setPage = (value: number) => browse('page', String(value));
+  const openFeature = (id: string) => {
+    if (engine) window.location.hash = featureHref(id, engine);
+  };
   const loadStarterParty = async () => {
     setLoading(true);
     setError('');
@@ -195,7 +211,7 @@ export function App() {
   };
   const feature = engine?.catalogue.features.find((f) => f.id === route.id);
   const cls = engine?.catalogue.classes.find((c) => c.id === route.id);
-  const list = engine?.catalogue.features.filter((f) => `${featureName(f)} ${f.name} ${featureDescription(f, engine!) ?? ''} ${f.source ?? ''}`.toLowerCase().includes(query.toLowerCase()) && (!tag || f.tags?.includes(tag))) ?? [];
+  const list = engine?.catalogue.features.filter((f) => `${featureName(f)} ${f.name} ${featureDescription(f, engine!) ?? ''} ${f.source ?? ''}`.toLowerCase().includes(query.toLowerCase()) && (!tag || f.tags?.includes(tag))).sort((a, b) => sort === 'level' ? (a.contentLevel ?? 0) - (b.contentLevel ?? 0) || featureName(a).localeCompare(featureName(b)) : featureName(a).localeCompare(featureName(b)) * (sort === 'name-desc' ? -1 : 1)) ?? [];
   return (
     <div className="app-shell">
       <a
@@ -485,6 +501,22 @@ export function App() {
                         </details>
                       )}
                       <div className="toolbar browser-filters">
+                        {route.page === 'features' && (
+                          <label>
+                            Sort
+                            <select
+                              value={sort}
+                              onChange={(event) => {
+                                browse('sort', event.target.value);
+                                setPage(0);
+                              }}
+                            >
+                              <option value="name">Name A–Z</option>
+                              <option value="name-desc">Name Z–A</option>
+                              <option value="level">Level, then name</option>
+                            </select>
+                          </label>
+                        )}
                         <label>
                           Search
                           <input
@@ -548,7 +580,7 @@ export function App() {
                                       {f.tags?.[0] ? tagName(engine.catalogue.system, f.tags[0]) : 'Feature'}
                                       {f.contentLevel !== undefined ? ` · level ${f.contentLevel}` : ''}
                                     </span>
-                                    <button className="link feature-card-title" onClick={() => openFeature(f.id)}>{featureName(f)}</button>
+                                    <FeatureLink className="link feature-card-title" id={f.id} engine={engine}>{featureName(f)}</FeatureLink>
                                     <RulesText text={descriptionPreview(featureDescription(f, engine))} engine={engine} openFeature={openFeature} exclude={[f.id]} />
                                     <span className="muted small">
                                       {f.components.length}
@@ -588,7 +620,10 @@ export function App() {
           {route.page === 'features' && route.id && engine && (feature
             ? (
                 <>
-                  <button className="quiet" onClick={() => go('features', undefined, engine)}>← Features</button>
+                  <a className="button quiet" href={route.returnTo ?? featureHref('', engine).replace('#features/', '#features').split('&returnTo=')[0]}>
+                    {'← '}
+                    {route.returnTo?.startsWith('#classes/') ? 'Back to Class Features' : route.returnTo?.startsWith('#characters/') ? 'Back to character' : 'Features'}
+                  </a>
                   <FeatureDetail feature={feature} engine={engine} openFeature={openFeature} />
                 </>
               )
@@ -629,7 +664,9 @@ export function App() {
     </div>
   );
 }
-function PageTitle({ eyebrow, title, description }: { eyebrow: string; title: string; description: string }) {
+function PageTitle({ eyebrow, title, description }: { eyebrow: string;
+  title: string;
+  description: string; }) {
   return (
     <div className="page-title">
       <p className="eyebrow">{eyebrow}</p>
@@ -638,7 +675,9 @@ function PageTitle({ eyebrow, title, description }: { eyebrow: string; title: st
     </div>
   );
 }
-function CreateForm({ files, initial, create }: { files: SystemFile[]; initial: SystemFile; create: (file: SystemFile, options: Record<string, Value>, name: string, classId: string, level: number) => void }) {
+function CreateForm({ files, initial, create }: { files: SystemFile[];
+  initial: SystemFile;
+  create: (file: SystemFile, options: Record<string, Value>, name: string, classId: string, level: number) => void; }) {
   const [key, setKey] = useState(systemKey(initial)), [settings, setSettings] = useState<Record<string, Value>>({}), [name, setName] = useState(''), [classId, setClassId] = useState(''), [level, setLevel] = useState(1);
   const file = files.find((f) => systemKey(f) === key)!;
   const registry = useMemo(() => createRegistry([file]), [file]);

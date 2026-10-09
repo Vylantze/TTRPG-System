@@ -37,7 +37,7 @@ test('2014 System JSON contains all twelve option configurations and matches bun
   registry.load(file);
   for (const c of file.configurations) {
     const engine = registry.createEngine(file.id, file.revision, c.options);
-    assert.deepEqual(engine.catalogue, compileBlocks({ id: c.id, revision: c.revision, system: c.system, classes: c.classes, features: file.features, blocks: file.blocks }));
+    assert.deepEqual(engine.catalogue, compileBlocks({ id: c.id, revision: c.revision, system: c.system, classes: c.classes, features: file.features, blocks: file.blocks, items: file.items, itemFeatures: file.itemFeatures }));
   }
 });
 test('registry loads independent Systems, isolates input and list data, and rejects duplicates', () => {

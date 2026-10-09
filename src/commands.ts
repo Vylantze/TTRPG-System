@@ -4,10 +4,42 @@ import type { Character, Edit, EditPreview, EvaluationResult } from '@/src/model
 import type { UseOptions } from '@/src/types/UseOptions.js';
 import { checkCharacter } from '@/src/validation.js';
 import { storeTrackers } from '@/src/resource-trackers.js';
+import { checkInventory } from '@/src/items.js';
+import type { InventoryEntry } from '@/src/model/InventoryEntry.js';
 export type { UseOptions } from '@/src/types/UseOptions.js';
+
+export function updateInventory(engine: Engine, input: Character, inventory: InventoryEntry[], eventId: string): Character {
+  checkCharacter(input);
+  const character = clone(input);
+  if (!stamp(character, eventId, { kind: 'inventory', inventory })) return character;
+  const before = engine.evaluate(input);
+  storeTrackers(character, before.resources);
+  character.inventory = clone(inventory);
+  checkInventory(character, engine.catalogue);
+  const after = engine.evaluate(character);
+  if (before.status === 'valid') requireValid(after);
+  storeTrackers(character, after.resources);
+  return character;
+}
 
 function requireValid(result: EvaluationResult): void {
   if (result.status !== 'valid') throw new RuleError('INVALID_BUILD', 'This command requires a valid, complete character.');
+}
+/** Explicit manual tracking adjustment. Reservations cannot be spent twice. */
+export function adjustResource(engine: Engine, input: Character, poolId: string, delta: number, eventId: string): Character {
+  checkCharacter(input);
+  if (input.buildState === 'draft') throw new RuleError('DRAFT', 'Finalize the character before adjusting resources.');
+  const character = clone(input);
+  if (!stamp(character, eventId, { kind: 'adjustResource', poolId, delta })) return character;
+  const result = engine.evaluate(input);
+  requireValid(result);
+  const pool = result.resources[poolId];
+  if (!pool) throw new RuleError('MISSING_RESOURCE', 'This character does not have that resource.');
+  constrain(number(delta), { integer: pool.integer });
+  const current = constrain((pool.current ?? pool.capacity - pool.spent) + delta, { minimum: (pool.minimum ?? 0) + pool.reserved, maximum: pool.capacity, integer: pool.integer });
+  storeTrackers(character, result.resources);
+  character.resources[poolId] = { ...character.resources[poolId], spent: Number.isFinite(pool.capacity) ? pool.capacity - current : 0, ...(pool.tracking ? { current } : {}) };
+  return character;
 }
 function stamp(character: Character, id: string, payload: unknown): boolean {
   if (!id) throw new RuleError('EVENT_ID', 'An event ID is required.');
@@ -225,7 +257,7 @@ export function deserializeCharacter(text: string, engine?: Engine): Character {
   checkCharacter(parsed);
   if (engine) {
     const result = engine.evaluate(parsed);
-    const errors = result.diagnostics.filter((d) => ['REVISION', 'HISTORY', 'UNKNOWN_INPUT', 'UNKNOWN_CLASS', 'UNKNOWN_SELECTION'].includes(d.code));
+    const errors = result.diagnostics.filter((d) => ['INVENTORY', 'REVISION', 'HISTORY', 'UNKNOWN_INPUT', 'UNKNOWN_CLASS', 'UNKNOWN_SELECTION'].includes(d.code));
     if (errors.length) throw new RuleError(errors[0].code, errors[0].message);
   }
   return parsed;

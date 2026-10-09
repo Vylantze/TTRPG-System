@@ -39,3 +39,6 @@ Each ruleset is a **System**. Its canonical document is:
 - [PF2e System](docs/systems/pf2e-system.md)
 
 The specification uses Anime5e as its design reference, with official D&D rules and SRDs authorized for the [DnD5e System comparison](docs/systems/dnd5e-system-comparison.md). Implement separate 2014 and 2024 5e systems before PF2e. Dungeons and Dragons 5e, DnD5e, and 5e are interchangeable project terms; Pathfinder2e and PF2e are also interchangeable.
+
+
+Character sheets now use System-authored ability, skill, and calculated-stat sections, with readable character details and a separate inventory. Starter Set equipment is represented by Items composed from item-only Features; armor and shields affect AC while equipped. Resource tracking supports manual increments/decrements and only exposes abilities the character owns. Feature anchors support new tabs and preserve Class locations and catalogue filters when returning. See [inventory commands](docs/engine.md#inventory-and-manual-resource-tracking) and [sheet presentation JSON](docs/json-systems.md#item-catalogues-and-sheet-presentation).

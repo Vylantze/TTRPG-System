@@ -79,8 +79,8 @@ export function updateSystemDescriptions(existing: SystemFile, incoming: SystemF
     const mechanicalTags = tags?.filter((tag) => ruleTags.has(tag));
     return { ...rules, ...(mechanicalTags?.length ? { tags: mechanicalTags } : {}) };
   };
-  const rules = (file: SystemFile) => ({ ...file, features: file.features.map(featureRules), configurations: file.configurations.map((c) => {
-    const { tagDisplayNames, ...system } = c.system;
+  const rules = (file: SystemFile) => ({ ...file, ...(!existing.items && !existing.itemFeatures ? { items: undefined, itemFeatures: undefined } : {}), features: file.features.map(featureRules), configurations: file.configurations.map((c) => {
+    const { tagDisplayNames, sheetSections, featureCategories, ...system } = c.system;
     return { ...c, system, classes: c.classes.map(strip) };
   }) });
   const canonical = (value: unknown): unknown => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, item]) => [key, canonical(item)])) : value;

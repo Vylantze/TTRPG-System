@@ -1,3 +1,4 @@
+import { FeatureLink } from '@/ui/src/FeatureLink';
 import { featureName, tagName } from '@/ui/src/display';
 import type { Engine, FeatureDefinition, Grant, Choice } from '@/src/index';
 import { labelFromId } from '@/ui/src/workspace';
@@ -40,7 +41,7 @@ export function FeatureDetail({ feature, engine, openFeature }: { feature: Featu
           {feature.components.filter((c): c is Grant => c.kind === 'grantFeature').map((component) => (
             <p key={component.id}>
               {'Grants '}
-              <button className="link" onClick={() => openFeature(component.feature)}>{featureName(engine.getFeature(component.feature))}</button>
+              <FeatureLink className="link" id={component.feature} engine={engine}>{featureName(engine.getFeature(component.feature))}</FeatureLink>
             </p>
           ))}
           {feature.components.filter((c): c is Choice => c.kind === 'chooseFeatures').map((component) => (
@@ -97,11 +98,11 @@ export function FeatureDetail({ feature, engine, openFeature }: { feature: Featu
             </div>
             {c.kind === 'grantFeature'
               ? (
-                  <button className="link" onClick={() => openFeature(c.feature)}>
+                  <FeatureLink className="link" id={c.feature} engine={engine}>
                     {featureName(engine.catalogue.features.find((f) => f.id === c.feature))}
                     {' '}
                     →
-                  </button>
+                  </FeatureLink>
                 )
               : c.kind === 'grantCapability' ? <p>{c.name}</p> : null}
             <details>
