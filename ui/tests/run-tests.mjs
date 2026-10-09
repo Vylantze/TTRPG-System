@@ -80,7 +80,7 @@ test('Class and Feature detail pages display source rules and shared spell effec
   assert.match(spell, /8d6 fire damage/);
   assert.match(spell, /At Higher Levels/);
   assert.match(spell, /View Fireball Feature/);
-  assert.match(render(data(), '#systems'), /Update bundled descriptions/);
+  assert.match(render(data(), '#systems'), /Reload System/);
 });
 test('stored workspaces deduplicate repeated configuration data and read older saves', () => {
   const store = storage(), workspace = { ...data(), characters: [exampleCharacter().character] };
@@ -463,6 +463,32 @@ test('money migration removes coins and old starting-money notes without double 
   const changed = structuredClone(file);
   changed.configurations[0].system.currency.denominations[0].value = 2;
   assert.throws(() => model.updateSystemDescriptions(file, changed), /rules differ/);
+});
+
+test('Systems offer a dropdown and an accessible refresh control', () => {
+  const html = render(data(), '#systems');
+  assert.match(html, /System to load/);
+  assert.match(html, /Other System from JSON/);
+  assert.match(html, /aria-label="Reload DnD5e 2014"/);
+  assert.match(html, /<svg aria-hidden="true"/);
+});
+
+test('System reload is atomic and preserves characters while rejecting incompatible replacements', () => {
+  const workspace = { ...data(), characters: [starterSaves[0]] };
+  const refreshed = structuredClone(file);
+  refreshed.configurations[0].system.name = 'Refreshed DnD5e 2014';
+  const next = model.reloadSystem(workspace, file, refreshed);
+  assert.equal(next.characters, workspace.characters);
+  assert.equal(next.systems[0].configurations[0].system.name, 'Refreshed DnD5e 2014');
+  assert.equal(workspace.systems[0], file);
+  assert.throws(() => model.reloadSystem(next, file, refreshed), /changed or was unloaded/);
+  const wrong = structuredClone(file);
+  wrong.revision++;
+  wrong.configurations.forEach((config) => config.system.revision++);
+  assert.throws(() => model.reloadSystem(workspace, file, wrong), /same System ID and revision/);
+  const incompatible = structuredClone(file);
+  incompatible.features[0].revision++;
+  assert.throws(() => model.reloadSystem(workspace, file, incompatible), /revision/i);
 });
 
 await server.close();

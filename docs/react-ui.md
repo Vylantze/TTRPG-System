@@ -106,3 +106,9 @@ Character detail fields expose inline Edit buttons with fixed-height, bounded-wi
 Every `skills` layout (including Saving Throws) defaults to name sorting and provides ascending/descending controls on all column headers. An arrow beside each bonus expands its formula, contributing stat values and applied modifiers. Every `abilities` layout includes a score/modifier primary-value toggle; number tooltips identify the value type. Other stat sections preserve the System-authored row order.
 
 Resource cards group current/maximum values, adjustment controls, recovery conditions and associated abilities. Abilities costing multiple resources appear with their first cost pool and list all costs; the engine checks every pool. Selected-recovery allocation is grouped with its owning resource. The UI has no turn budget or action/bonus-action counters.
+
+## System loading and content containment
+
+The Systems page provides a source dropdown for bundled DnD5e 2014 or another System JSON file. Each loaded System has an accessible refresh-icon button. Bundled reloads fetch without caching; imported Systems request a replacement JSON file. Reload replaces the same ID and revision atomically, keeps character saves, and rejects missing catalogue/content revisions or changes that invalidate a previously valid character. A concurrent workspace change cancels replacement. Other revisions can be loaded separately.
+
+Responsive content wraps within shrinking grid and flex children. Cards grow vertically with their prose; constrained editors, dialogs and large tables retain internal scrolling. Skill calculation disclosures wrap within their cells. Mobile layouts stack controls and columns rather than allowing labels to escape their boxes.

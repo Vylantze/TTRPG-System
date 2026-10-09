@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T18:41:09.095Z
+Export refreshed UTC: 2026-10-09T18:52:30.599Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -1782,5 +1782,58 @@ All 221 engine tests pass. In the browser, using Second Wind consumes its resour
 
 [2026-10-09T18:40:51.222Z] ASSISTANT
 The production build passes, and coin edits update the total while leaving the other denominations unchanged. The UI test process stalled while files were being updated, so I’ve stopped it and will rerun against the settled code before committing.
+
+----------------------------------------
+
+[2026-10-09T18:42:14.266Z] ASSISTANT
+Final lint and the production build pass. Browser checks cover editing, sorting, calculation expansion, money changes, and resource controls. I’m waiting for the UI regression suite to finish before committing and pushing.
+
+----------------------------------------
+
+[2026-10-09T18:43:39.605Z] ASSISTANT
+All checks pass: 221 engine tests, 29 UI tests, lint, and the production build. I’m committing the changes and pushing them to `develop`.
+
+----------------------------------------
+
+[2026-10-09T18:44:25.275Z] ASSISTANT
+Implemented and pushed to `develop` (`6a301a7`).
+
+- Inline detail editing with Save/Cancel.
+- Dedicated Money section with all five DnD denominations and legacy coin migration.
+- Improved resource controls with associated ability buttons.
+- Removed turn-budget tracking.
+- Sortable skills/saves with expandable calculations.
+- Score/modifier toggle with tooltips.
+
+Passed 221 engine tests, 29 UI tests, lint, production build, and browser checks.
+
+![Money section](<D:/User/Workspace/TTRPG System/.reference-cache/sheet-money-controls.png>)
+
+----------------------------------------
+
+[2026-10-09T18:46:44.014Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-09T18:46:44.031Z] USER
+- Add a dropdown list for systems to load.&#x20;
+- Add a button with a refresh icon to reload the system.
+- Ensure that all text content fit within their content boxes and do not exceed both horizontally and vertically.
+
+----------------------------------------
+
+[2026-10-09T18:46:47.734Z] ASSISTANT
+I’ll add a System dropdown and reload button, then check the layouts for text overflow at narrow and wide widths.
+
+----------------------------------------
+
+[2026-10-09T18:48:18.149Z] ASSISTANT
+The System picker now offers bundled DnD5e 2014 and a JSON-file option. Each loaded System has a refresh-icon button: bundled Systems reload from the app, while imported Systems ask for a replacement JSON file. Reloading preserves characters and rejects incompatible replacements.
+
+----------------------------------------
+
+[2026-10-09T18:50:17.121Z] ASSISTANT
+I’m checking the layouts at mobile and desktop widths. Long labels now wrap, grid columns can shrink to the available width, and fixed-height editors and large tables scroll within their own containers instead of spilling over their borders.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

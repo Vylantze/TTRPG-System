@@ -87,3 +87,44 @@
 .resource-ability .row { flex-wrap:wrap; gap:.5rem; }
 .resource-ability summary { font-size:.8rem; padding:.5rem 0; }
 .sheet-stat .stat-value, .sheet-stat .ability-modifier { cursor:help; }
+/* Contain long labels and prose without clipping readable content. */
+:where(main, section, article, aside, nav, header, footer, div, dl, dt, dd, label, details, summary) { min-width:0; }
+:where(h1,h2,h3,h4,p,li,dt,dd,span,strong,small,a,button,summary,label,th,td) { overflow-wrap:anywhere; }
+button,.button { gap:.5rem; white-space:normal; max-width:100%; height:auto; flex-shrink:0; }
+button svg { flex:none; }
+input,select,textarea { max-width:100%; min-width:0; }
+select { text-overflow:ellipsis; }
+textarea { overflow:auto; }
+.row,.character-title,footer,.subnav { flex-wrap:wrap; }
+.row > *, .toolbar > *, .candidate > *, .character-title > * { min-width:0; max-width:100%; }
+.topbar { height:auto; min-height:88px; padding-top:12px; padding-bottom:12px; flex-wrap:wrap; }
+.sidebar { overflow-y:auto; }
+.cards { grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr)); }
+.stat-grid { grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr)); }
+.character-facts { grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr)); }
+.sheet-stat-grid { grid-template-columns:repeat(auto-fit,minmax(min(115px,100%),1fr)); }
+.money-grid { grid-template-columns:repeat(auto-fit,minmax(min(110px,100%),1fr)); }
+.skill-list { table-layout:fixed; }
+.skill-list th,.skill-list td { vertical-align:top; }
+.sort-heading { white-space:normal; }
+.calculation-box { min-width:0; width:100%; }
+.sheet-table-wrap,.progression-table-wrap { max-width:100%; }
+pre { max-width:100%; overflow:auto; white-space:pre-wrap; overflow-wrap:anywhere; }
+.badge,.tag { white-space:normal; max-width:100%; height:auto; }
+.system-loader { align-items:flex-end; }
+.system-loader label { flex:1 1 220px; max-width:32rem; margin:0; }
+.system-loader select { margin-bottom:0; }
+.system-card .toolbar { align-items:stretch; }
+.system-card button { flex:1 1 130px; }
+@media(max-width:480px) {
+  .panel,.system-card,.class-card { padding:16px; }
+  .builder-setup,.input-grid,.catalogue-grid { grid-template-columns:minmax(0,1fr); }
+  .candidate { flex-wrap:wrap; }
+  .sidebar nav { flex-wrap:wrap; }
+  .sidebar nav a { flex:1 1 auto; }
+  .subnav { gap:12px; }
+  .compact { flex-wrap:wrap; }
+  .topbar { min-height:65px; }
+}
+[hidden] { display:none !important; }
+.disclosure-arrow { display:inline-flex; align-items:center; justify-content:center; width:1.4em; height:1.4em; flex:none; }
