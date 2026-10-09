@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { spellGroups, featureRollExpression, featureRollInstances, rollCapability, rollFeature, applyFeatureRoll, type Engine, type FeatureDefinition } from '@/src/index';
+import { clearFeatureRolls, spellGroups, featureRollExpression, featureRollInstances, rollCapability, rollFeature, applyFeatureRoll, type Engine, type FeatureDefinition } from '@/src/index';
 import { CharacterRuleContext } from '@/ui/src/character-rule-context';
 import { Tooltip } from '@/ui/src/Tooltip';
 
@@ -19,6 +19,7 @@ export function FeatureRolls({ feature, engine, instanceId, castingCapability, r
   };
   return (
     <div className="feature-rolls">
+      {character.rollResults?.some((record) => instances.some((instance) => instance.id === record.instance)) && <button className="quiet" onClick={() => update(clearFeatureRolls(character, instances.map((instance) => instance.id)))}>Clear rolls</button>}
       {instances.map((instance) => {
         const roll = engine.getFeature(instance.feature)!.roll!;
         const modes = roll.spell ? spellGroups(engine, result).filter((group) => group.feature === roll.spell).flatMap((group) => group.modes) : [];

@@ -104,7 +104,7 @@ test('description refresh preserves pinned rules and rejects mechanical changes'
     delete f.description;
     delete f.textReferences;
     delete f.textAliases;
-    delete f.processDescription;
+    delete f.processDescriptionAutomatically;
     delete f.descriptionOverride;
     delete f.textLinkContext;
     delete f.source;
@@ -558,6 +558,8 @@ test('spell results expose separate application and casting level after spending
   const pending = show(rolled);
   assert.match(pending, /Level 3 slot spent/);
   assert.match(pending, /Mark applied/);
+  assert.match(pending, /Clear rolls/);
+  assert.match(pending, /Clear all rolls/);
   assert.doesNotMatch(pending, /Reroll/);
   const applied = show(applyFeatureRoll(engine, rolled, 'spell-roll', 'apply').character);
   assert.match(applied, /disabled="">Applied/);
@@ -581,7 +583,8 @@ test('spell levels collapse and free utility spells have no use control', () => 
   assert.ok(utility);
   assert.doesNotMatch(utility, /Use Spell/);
   const fire = cards.find((card) => card.includes('Ray of Frost'));
-  assert.match(fire, /Use Spell ·/);
+  assert.match(fire, />Use Spell<\/button>/);
+  assert.doesNotMatch(html, /Rolling spends the ability use and saves the result/);
   assert.ok(html.indexOf('>Long rest</button>') < html.indexOf('<h2>Abilities</h2>'));
   const sheet = render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=stats`);
   assert.match(sheet, /Copper \(cp\)/);
@@ -595,7 +598,7 @@ test('description flags and replacement arrays separate automatic prose from exp
     const rules = createElement(FeatureRules, { engine, feature });
     return renderToStaticMarkup(contextual ? createElement(CharacterRuleContext.Provider, { value: { character, result, update: () => {}, report: () => {} } }, rules) : rules);
   };
-  const feature = { id: 'example', revision: 1, name: 'Example', components: [], description: 'your Constitution modifier per wizard level. EXTRA', processDescription: false };
+  const feature = { id: 'example', revision: 1, name: 'Example', components: [], description: 'your Constitution modifier per wizard level. EXTRA', processDescriptionAutomatically: false };
   assert.doesNotMatch(show(feature), /resolved-value/);
   const override = { ...feature, descriptionOverride: [
     { originalString: 'your Constitution modifier', overrideString: '{{stat:modifier.constitution}} Constitution modifier' },
@@ -607,7 +610,7 @@ test('description flags and replacement arrays separate automatic prose from exp
   assert.match(html, /per wizard level/);
   assert.match(html, /{{UNKNOWN}}/);
   assert.doesNotMatch(html, /<script>/);
-  assert.equal((show({ ...override, processDescription: true }).match(/resolved-value/g) ?? []).length, 3);
+  assert.equal((show({ ...override, processDescriptionAutomatically: true }).match(/resolved-value/g) ?? []).length, 3);
   assert.match(show(override, false), /your Constitution modifier per wizard level/);
   assert.doesNotMatch(show({ ...feature, descriptionOverride: [{ originalString: feature.description, overrideString: '' }] }), /wizard level/);
   assert.match(show({ ...feature, description: 'Example\nOriginal', descriptionOverride: [{ originalString: 'Example\nOriginal', overrideString: 'Whole source replaced' }] }), /Whole source replaced/);
@@ -628,6 +631,16 @@ test('saved full-string overrides migrate to arrays without losing characters', 
   const converted = upgraded.systems[0].features.find((feature) => feature.id === hp.id).descriptionOverride;
   assert.equal(converted[0].originalString, hp.description);
   assert.match(converted[0].overrideString, /{{stat:modifier.constitution}}/);
+});
+
+test('System reload safely retires generated Roll Features while retaining character balances', () => {
+  const old = structuredClone(file);
+  old.features.push({ id: 'test:retired-roll', revision: 1, name: 'Old roll', roll: { id: 'old', label: 'Old roll', dice: '1d6' }, components: [] });
+  const { character } = exampleCharacter();
+  const saved = { ...character, contentRevisions: { ...character.contentRevisions, 'test:retired-roll': 1 } };
+  const next = model.reloadSystem({ ...data(), systems: [old], characters: [saved] }, old, file);
+  assert.equal(next.characters[0].contentRevisions['test:retired-roll'], undefined);
+  assert.deepEqual(next.characters[0].resources, saved.resources);
 });
 
 await server.close();

@@ -24,7 +24,7 @@ export type { FeatureAdvancement } from '@/src/types/FeatureAdvancement.js';
 export type { FeatureRoll } from '@/src/model/FeatureRoll.js';
 
 export { rollDice } from '@/src/dice.js';
-export { featureRollExpression, rollFeature, applyFeatureRoll, rollCapability, featureRollInstances } from '@/src/feature-rolls.js';
+export { clearFeatureRolls, featureRollExpression, rollFeature, applyFeatureRoll, rollCapability, featureRollInstances } from '@/src/feature-rolls.js';
 
 export type { RolledFeature } from '@/src/model/RolledFeature.js';
 

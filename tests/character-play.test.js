@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { SystemRegistry, reopenCharacter, applyEdit, finalizeCharacter, adjustResource, rollDice, rollFeature, applyFeatureRoll, serializeCharacter, deserializeCharacter } from '@/dist/index.js';
+import { clearFeatureRolls, SystemRegistry, reopenCharacter, applyEdit, finalizeCharacter, adjustResource, rollDice, rollFeature, applyFeatureRoll, serializeCharacter, deserializeCharacter } from '@/dist/index.js';
 import { exampleCharacter } from '@/examples/dnd2014-character.js';
 
 const file = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
@@ -76,4 +76,27 @@ test('Roll Features are atomic children and full-health application still comple
   const applied = applyFeatureRoll(engine, rolled.character, 'full-health-roll', 'full-health-apply');
   assert.equal(applied.applied, 0);
   assert.throws(() => applyFeatureRoll(engine, applied.character, 'full-health-roll', 'repeat'), /already applied/);
+});
+
+test('clearing rolls preserves spent resources and replay protection', () => {
+  const { engine, character } = exampleCharacter({ classes: [{ class: 'fighter', level: 2 }] });
+  const ready = finalizeCharacter(engine, character, 'finalize');
+  const instance = engine.evaluate(ready).instances.find((entry) => entry.feature === 'dnd5e:2014:fighter.second-wind.roll.healing');
+  const rolled = rollFeature(engine, ready, instance.id, 'roll-to-clear', () => 0).character;
+  assert.equal(clearFeatureRolls(rolled, ['unrelated']).rollResults.length, 1);
+  for (const cleared of [clearFeatureRolls(rolled), clearFeatureRolls(rolled, [instance.id])]) {
+    assert.deepEqual(cleared.rollResults, []);
+    assert.deepEqual(cleared.resources, rolled.resources);
+    assert.deepEqual(cleared.events, rolled.events);
+    assert.throws(() => rollFeature(engine, cleared, instance.id, 'roll-to-clear'), /already recorded/);
+    assert.throws(() => applyFeatureRoll(engine, cleared, 'roll-to-clear', 'apply'), /missing/);
+  }
+  assert.equal(rolled.rollResults.length, 1);
+});
+
+test('spell roll children exclude At Higher Levels dice but retain base dice', () => {
+  const fireball = file.features.find((feature) => feature.id === 'dnd5e:2014:spell.fireball');
+  const rolls = fireball.components.filter((component) => component.kind === 'grantFeature').map((component) => file.features.find((feature) => feature.id === component.feature)?.roll).filter(Boolean);
+  assert.deepEqual(rolls.map((roll) => roll.dice), ['8d6']);
+  assert.match(fireball.description, /At Higher Levels/);
 });

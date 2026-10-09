@@ -8,6 +8,8 @@ export function migrateDescriptionOverrides(input: unknown): unknown {
     for (const [name, stat] of Object.entries(config?.system?.descriptionTokens ?? {})) if (typeof stat === 'string') aliases[name] = stat;
   }
   for (const feature of file.features) {
+    if (typeof feature?.processDescription === 'boolean' && feature.processDescriptionAutomatically === undefined) feature.processDescriptionAutomatically = feature.processDescription;
+    delete feature.processDescription;
     if (typeof feature?.descriptionOverride !== 'string') continue;
     const override = feature.descriptionOverride.replace(/\{\{\s*([^{}]+?)\s*\}\}/g, (token: string, name: string) => Object.hasOwn(aliases, name) ? `{{stat:${aliases[name]}}}` : token);
     feature.descriptionOverride = typeof feature.description === 'string' && feature.description.length ? [{ originalString: feature.description, overrideString: override }] : [];

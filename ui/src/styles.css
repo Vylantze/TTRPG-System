@@ -194,3 +194,6 @@ button.resource-adjust-button { box-sizing: border-box; flex: 0 0 2rem; width: 2
 .spell-action small { max-width:28rem; overflow-wrap:anywhere; }
 
 .character-title { gap:1rem; flex-wrap:nowrap; }
+
+.brand-icon { width:48px; height:48px; flex-shrink:0; object-fit:contain; }
+@media(max-width:760px) { .brand-icon { width:36px; height:36px; } }

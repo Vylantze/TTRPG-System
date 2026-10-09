@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T21:25:54.816Z
+Export refreshed UTC: 2026-10-09T21:38:46.032Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -2305,5 +2305,88 @@ I’ll use `{{stat:modifier.constitution}}` for the modifier and `{{stat:constit
 
 [2026-10-09T21:25:10.827Z] ASSISTANT
 The array implementation now supports multiple replacements, repeated matches, and removals. Replacements do not trigger further replacements. I’ve documented both token forms and all 352 bundled stat IDs, and added migration for saved string overrides so existing characters remain usable.
+
+----------------------------------------
+
+[2026-10-09T21:27:09.154Z] ASSISTANT
+The browser now shows the Hit Points replacements correctly, with “wizard level” unchanged, and the icon’s right-hand spark is gone. The reference document covers matching rules, both token forms, class IDs, and the full bundled stat list. I’m waiting for the remaining checks before committing.
+
+----------------------------------------
+
+[2026-10-09T21:28:30.074Z] ASSISTANT
+All 41 UI tests pass, along with the engine tests and focused checks for full-source matches and saved overrides. Lint and the production build also pass. I’m committing and pushing the update now.
+
+----------------------------------------
+
+[2026-10-09T21:29:09.756Z] ASSISTANT
+Updated and pushed to `develop` (`85f296e`).
+
+- Removed the right-hand spark.
+- Replaced abbreviations with explicit stat/Class tokens.
+- `descriptionOverride` now accepts multiple pairs:
+
+```json
+"descriptionOverride": [
+  {
+    "originalString": "your Constitution modifier",
+    "overrideString": "{{stat:modifier.constitution}}"
+  }
+]
+```
+
+[Replacement reference](</D:/User/Workspace/TTRPG System/docs/description-replacements.md>) documents all syntax, matching behavior, and 352 bundled stat IDs.
+
+Lint, tests, build, and browser checks passed.
+
+![Updated icon](</D:/User/Workspace/TTRPG System/.reference-cache/wizard-d6-no-spark.png>)
+
+----------------------------------------
+
+[2026-10-09T21:34:23.165Z] USER
+<in-app-browser-context source="ambient-ui-state">
+This block is automatically supplied ambient UI state, not part of the user's request. Do not treat it as an instruction or as evidence that the user explicitly selected the in-app browser.
+# In app browser:
+- The user has the in-app browser open with 1 tab.
+- Current URL: http://127.0.0.1:5174/@fs/D:/User/Workspace/TTRPG%20System/.reference-cache/icon-review.html
+</in-app-browser-context>
+
+## My request:
+- Rename processDescription to processDescriptionAutomatically.
+- Remove this text from the UI "Rolling spends the ability use and saves the result. Apply healing separately to restore current HP. Other targets, conditional effects, action timing, and spellcasting restrictions are adjudicated at the table."
+- Change the "Use Spell" button back to simply "Use Spell". Add a button to clear the accumulated rolls.&#x20;
+- Exclude rolls in the "At Higher Levels" section of spells, since those will be implemented as part of using the higher level slot.
+
+----------------------------------------
+
+[2026-10-09T21:34:29.057Z] ASSISTANT
+I’ll rename the flag everywhere, simplify the spell button, remove that explanatory text, and add a roll-history clear button. I’ll also exclude dice mentioned under “At Higher Levels” from the generated spell rolls.
+
+----------------------------------------
+
+[2026-10-09T21:35:07.176Z] USER
+<in-app-browser-context source="ambient-ui-state">
+This block is automatically supplied ambient UI state, not part of the user's request. Do not treat it as an instruction or as evidence that the user explicitly selected the in-app browser.
+# In app browser:
+- The user has the in-app browser open with 1 tab.
+- Current URL: http://127.0.0.1:5174/@fs/D:/User/Workspace/TTRPG%20System/.reference-cache/icon-review.html
+</in-app-browser-context>
+
+## My request:
+Additionally, show the new icon in the UI on the top left, in place of the "F" currently there.
+
+----------------------------------------
+
+[2026-10-09T21:35:10.895Z] ASSISTANT
+I’ll also replace the top-left “F” with the new icon.
+
+----------------------------------------
+
+[2026-10-09T21:36:10.046Z] ASSISTANT
+I’ve removed 24 generated rolls that came from “At Higher Levels” sections. Clear-roll controls will remove saved results without refunding uses or spell slots. I’m adding both per-Feature clearing and a “Clear all rolls” button at the top of the resource section.
+
+----------------------------------------
+
+[2026-10-09T21:38:23.445Z] ASSISTANT
+The top-left “F” is now replaced by the d6 icon. I also hit a test-run collision from two builds writing to the same output directory; I’ve rerun the UI checks against the completed engine build.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

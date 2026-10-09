@@ -14,8 +14,8 @@ export function reloadSystem(workspace: Workspace, existing: SystemFile, incomin
     if (character.system.id !== existing.id || character.system.revision !== existing.revision) return character;
     const engine = after.engineForCharacter(character);
     const manifest = Object.fromEntries([...engine.catalogue.features, ...engine.catalogue.classes].map((definition) => [definition.id, definition.revision]));
-    if (Object.entries(character.contentRevisions).some(([id, revision]) => manifest[id] !== revision)) throw new Error('Reload cannot remove or change pinned content revisions.');
-    const updated = Object.keys(manifest).length === Object.keys(character.contentRevisions).length ? character : { ...character, contentRevisions: manifest };
+    if (Object.entries(character.contentRevisions).some(([id, revision]) => manifest[id] !== revision && !(manifest[id] === undefined && existing.features.find((feature) => feature.id === id)?.roll))) throw new Error('Reload cannot remove or change pinned content revisions.');
+    const updated = Object.keys(manifest).length === Object.keys(character.contentRevisions).length && Object.entries(manifest).every(([id, revision]) => character.contentRevisions[id] === revision) ? character : { ...character, contentRevisions: manifest };
     deserializeCharacter(serializeCharacter(updated), engine);
     if (before.engineForCharacter(character).evaluate(character).status === 'valid' && engine.evaluate(updated).status !== 'valid') throw new Error(`Reload would invalidate ${character.name}. The existing System has been kept.`);
     return updated;
@@ -107,8 +107,8 @@ export function updateSystemDescriptions(existing: SystemFile, incoming: SystemF
   };
   visit(existing);
   visit(validated);
-  const strip = (definition: { description?: string; source?: string; textReferences?: string[]; textAliases?: string[]; textLinkContext?: unknown; processDescription?: boolean; descriptionOverride?: unknown; preserveValuePhrases?: string[]; displayName?: string }) => {
-    const { description, source, textReferences, textAliases, textLinkContext, processDescription, descriptionOverride, preserveValuePhrases, displayName, ...rules } = definition;
+  const strip = (definition: { description?: string; source?: string; textReferences?: string[]; textAliases?: string[]; textLinkContext?: unknown; processDescriptionAutomatically?: boolean; processDescription?: boolean; descriptionOverride?: unknown; preserveValuePhrases?: string[]; displayName?: string }) => {
+    const { description, source, textReferences, textAliases, textLinkContext, processDescription, processDescriptionAutomatically, descriptionOverride, preserveValuePhrases, displayName, ...rules } = definition;
     return rules;
   };
   const featureRules = (feature: SystemFile['features'][number]) => {

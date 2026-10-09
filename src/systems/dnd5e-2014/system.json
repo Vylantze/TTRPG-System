@@ -5533,7 +5533,7 @@
         "class-feature"
       ],
       "description": "Hit Points\nHit Dice: 1d10 per fighter level\n\nHit Points at 1st Level: 10 + your Constitution modifier\n\nHit Points at Higher Levels: 1d10 (or 6) + your Constitution modifier per fighter level after 1st",
-      "processDescription": false,
+      "processDescriptionAutomatically": false,
       "descriptionOverride": [
         {
           "originalString": "your Constitution modifier",
@@ -5717,7 +5717,7 @@
         "class-feature"
       ],
       "description": "Hit Points\nHit Dice: 1d8 per rogue level\n\nHit Points at 1st Level: 8 + your Constitution modifier\n\nHit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per rogue level after 1st",
-      "processDescription": false,
+      "processDescriptionAutomatically": false,
       "descriptionOverride": [
         {
           "originalString": "your Constitution modifier",
@@ -5872,7 +5872,7 @@
         "class-feature"
       ],
       "description": "Hit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st",
-      "processDescription": false,
+      "processDescriptionAutomatically": false,
       "descriptionOverride": [
         {
           "originalString": "your Constitution modifier",
@@ -7496,11 +7496,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.burning-hands.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.burning-hands.roll.reference-2"
         }
       ],
       "tags": [
@@ -7552,11 +7547,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.color-spray.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.color-spray.roll.reference-2"
         }
       ],
       "tags": [
@@ -8111,11 +8101,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.sleep.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.sleep.roll.reference-2"
         }
       ],
       "tags": [
@@ -8158,11 +8143,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.thunderwave.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.thunderwave.roll.reference-2"
         }
       ],
       "tags": [
@@ -8219,11 +8199,6 @@
           "id": "roll-feature-2",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.acid-arrow.roll.reference-2"
-        },
-        {
-          "id": "roll-feature-3",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.acid-arrow.roll.reference-3"
         }
       ],
       "tags": [
@@ -8534,11 +8509,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.flaming-sphere.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.flaming-sphere.roll.reference-2"
         }
       ],
       "tags": [
@@ -8936,11 +8906,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.shatter.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.shatter.roll.reference-2"
         }
       ],
       "tags": [
@@ -9256,11 +9221,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.fireball.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.fireball.roll.reference-2"
         }
       ],
       "tags": [
@@ -9349,11 +9309,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.glyph-of-warding.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.glyph-of-warding.roll.reference-2"
         }
       ],
       "tags": [
@@ -9442,11 +9397,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.lightning-bolt.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.lightning-bolt.roll.reference-2"
         }
       ],
       "tags": [
@@ -9770,11 +9720,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.vampiric-touch.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.vampiric-touch.roll.reference-2"
         }
       ],
       "tags": [
@@ -9900,11 +9845,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.blight.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.blight.roll.reference-2"
         }
       ],
       "tags": [
@@ -10175,11 +10115,6 @@
           "id": "roll-feature-2",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.ice-storm.roll.reference-2"
-        },
-        {
-          "id": "roll-feature-3",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.ice-storm.roll.reference-3"
         }
       ],
       "tags": [
@@ -10231,11 +10166,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.phantasmal-killer.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.phantasmal-killer.roll.reference-2"
         }
       ],
       "tags": [
@@ -10402,11 +10332,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.wall-of-fire.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.wall-of-fire.roll.reference-2"
         }
       ],
       "tags": [
@@ -10488,11 +10413,6 @@
           "id": "roll-feature-2",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.arcane-hand.roll.reference-2"
-        },
-        {
-          "id": "roll-feature-3",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.arcane-hand.roll.reference-3"
         }
       ],
       "tags": [
@@ -10521,11 +10441,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.cloudkill.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.cloudkill.roll.reference-2"
         }
       ],
       "tags": [
@@ -10554,11 +10469,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.cone-of-cold.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.cone-of-cold.roll.reference-2"
         }
       ],
       "tags": [
@@ -11067,11 +10977,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.circle-of-death.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.circle-of-death.roll.reference-2"
         }
       ],
       "tags": [
@@ -11146,11 +11051,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.disintegrate.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.disintegrate.roll.reference-2"
         }
       ],
       "tags": [
@@ -11225,11 +11125,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.freezing-sphere.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.freezing-sphere.roll.reference-2"
         }
       ],
       "tags": [
@@ -11498,16 +11393,6 @@
           "id": "roll-feature-2",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.wall-of-ice.roll.reference-2"
-        },
-        {
-          "id": "roll-feature-3",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.wall-of-ice.roll.reference-3"
-        },
-        {
-          "id": "roll-feature-4",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.wall-of-ice.roll.reference-4"
         }
       ],
       "tags": [
@@ -103517,7 +103402,7 @@
         "class-feature"
       ],
       "description": "Hit Points\nHit Dice: 1d8 per cleric level\n\nHit Points at 1st Level: 8 + your Constitution modifier\n\nHit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st",
-      "processDescription": false,
+      "processDescriptionAutomatically": false,
       "descriptionOverride": [
         {
           "originalString": "your Constitution modifier",
@@ -104128,11 +104013,6 @@
           "id": "roll-feature-1",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:spell.guiding-bolt.roll.reference-1"
-        },
-        {
-          "id": "roll-feature-2",
-          "kind": "grantFeature",
-          "feature": "dnd5e:2014:spell.guiding-bolt.roll.reference-2"
         }
       ],
       "description": "1st-level evocation\nCasting Time: 1 action\nRange: 120 feet\nComponents: V, S\nDuration: 1 round\n\nA flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then. \n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.",
@@ -104457,7 +104337,7 @@
       ],
       "description": "Hit points represent a combination of physical and mental durability, the will to live, and luck. Creatures with more hit points are more difficult to kill. Those with fewer hit points are more fragile.",
       "source": "SRD 5.1, Hit Points, https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=96",
-      "processDescription": false,
+      "processDescriptionAutomatically": false,
       "descriptionOverride": [
         {
           "originalString": "your Constitution modifier",
@@ -106313,30 +106193,6 @@
       "components": []
     },
     {
-      "id": "dnd5e:2014:spell.burning-hands.roll.reference-2",
-      "revision": 1,
-      "name": "Burning Hands: 1d6",
-      "displayName": "Burning Hands: 1d6",
-      "source": "SRD 5.1 p. 123 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=123",
-      "textReferences": [
-        "dnd5e:2014:spell.burning-hands"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Burning Hands: 1d6",
-        "dice": "1d6",
-        "spell": "dnd5e:2014:spell.burning-hands"
-      },
-      "components": []
-    },
-    {
       "id": "dnd5e:2014:spell.color-spray.roll.reference-1",
       "revision": 1,
       "name": "Color Spray: 6d10",
@@ -106356,30 +106212,6 @@
         "id": "reference-1",
         "label": "Color Spray: 6d10",
         "dice": "6d10",
-        "spell": "dnd5e:2014:spell.color-spray"
-      },
-      "components": []
-    },
-    {
-      "id": "dnd5e:2014:spell.color-spray.roll.reference-2",
-      "revision": 1,
-      "name": "Color Spray: 2d10",
-      "displayName": "Color Spray: 2d10",
-      "source": "SRD 5.1 p. 125 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=125",
-      "textReferences": [
-        "dnd5e:2014:spell.color-spray"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Color Spray: 2d10",
-        "dice": "2d10",
         "spell": "dnd5e:2014:spell.color-spray"
       },
       "components": []
@@ -106457,30 +106289,6 @@
       "components": []
     },
     {
-      "id": "dnd5e:2014:spell.sleep.roll.reference-2",
-      "revision": 1,
-      "name": "Sleep: 2d8",
-      "displayName": "Sleep: 2d8",
-      "source": "SRD 5.1 p. 180 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=180",
-      "textReferences": [
-        "dnd5e:2014:spell.sleep"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Sleep: 2d8",
-        "dice": "2d8",
-        "spell": "dnd5e:2014:spell.sleep"
-      },
-      "components": []
-    },
-    {
       "id": "dnd5e:2014:spell.thunderwave.roll.reference-1",
       "revision": 1,
       "name": "Thunderwave: 2d8",
@@ -106500,30 +106308,6 @@
         "id": "reference-1",
         "label": "Thunderwave: 2d8",
         "dice": "2d8",
-        "spell": "dnd5e:2014:spell.thunderwave"
-      },
-      "components": []
-    },
-    {
-      "id": "dnd5e:2014:spell.thunderwave.roll.reference-2",
-      "revision": 1,
-      "name": "Thunderwave: 1d8",
-      "displayName": "Thunderwave: 1d8",
-      "source": "SRD 5.1 p. 187 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=187",
-      "textReferences": [
-        "dnd5e:2014:spell.thunderwave"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Thunderwave: 1d8",
-        "dice": "1d8",
         "spell": "dnd5e:2014:spell.thunderwave"
       },
       "components": []
@@ -106572,30 +106356,6 @@
         "id": "reference-2",
         "label": "Acid Arrow: 2d4",
         "dice": "2d4",
-        "spell": "dnd5e:2014:spell.acid-arrow"
-      },
-      "components": []
-    },
-    {
-      "id": "dnd5e:2014:spell.acid-arrow.roll.reference-3",
-      "revision": 1,
-      "name": "Acid Arrow: 1d4",
-      "displayName": "Acid Arrow: 1d4",
-      "source": "SRD 5.1 p. 114 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=114",
-      "textReferences": [
-        "dnd5e:2014:spell.acid-arrow"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-3",
-        "label": "Acid Arrow: 1d4",
-        "dice": "1d4",
         "spell": "dnd5e:2014:spell.acid-arrow"
       },
       "components": []
@@ -106673,30 +106433,6 @@
       "components": []
     },
     {
-      "id": "dnd5e:2014:spell.flaming-sphere.roll.reference-2",
-      "revision": 1,
-      "name": "Flaming Sphere: 1d6",
-      "displayName": "Flaming Sphere: 1d6",
-      "source": "SRD 5.1 p. 145 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=145",
-      "textReferences": [
-        "dnd5e:2014:spell.flaming-sphere"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Flaming Sphere: 1d6",
-        "dice": "1d6",
-        "spell": "dnd5e:2014:spell.flaming-sphere"
-      },
-      "components": []
-    },
-    {
       "id": "dnd5e:2014:spell.mirror-image.roll.reference-1",
       "revision": 1,
       "name": "Mirror Image: d20",
@@ -106764,30 +106500,6 @@
         "id": "reference-1",
         "label": "Shatter: 3d8",
         "dice": "3d8",
-        "spell": "dnd5e:2014:spell.shatter"
-      },
-      "components": []
-    },
-    {
-      "id": "dnd5e:2014:spell.shatter.roll.reference-2",
-      "revision": 1,
-      "name": "Shatter: 1d8",
-      "displayName": "Shatter: 1d8",
-      "source": "SRD 5.1 pp. 178–179 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=178",
-      "textReferences": [
-        "dnd5e:2014:spell.shatter"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Shatter: 1d8",
-        "dice": "1d8",
         "spell": "dnd5e:2014:spell.shatter"
       },
       "components": []
@@ -106889,30 +106601,6 @@
       "components": []
     },
     {
-      "id": "dnd5e:2014:spell.fireball.roll.reference-2",
-      "revision": 1,
-      "name": "Fireball: 1d6",
-      "displayName": "Fireball: 1d6",
-      "source": "SRD 5.1 p. 144 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=144",
-      "textReferences": [
-        "dnd5e:2014:spell.fireball"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Fireball: 1d6",
-        "dice": "1d6",
-        "spell": "dnd5e:2014:spell.fireball"
-      },
-      "components": []
-    },
-    {
       "id": "dnd5e:2014:spell.glyph-of-warding.roll.reference-1",
       "revision": 1,
       "name": "Glyph of Warding: 5d8",
@@ -106937,30 +106625,6 @@
       "components": []
     },
     {
-      "id": "dnd5e:2014:spell.glyph-of-warding.roll.reference-2",
-      "revision": 1,
-      "name": "Glyph of Warding: 1d8",
-      "displayName": "Glyph of Warding: 1d8",
-      "source": "SRD 5.1 pp. 149–150 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=149",
-      "textReferences": [
-        "dnd5e:2014:spell.glyph-of-warding"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Glyph of Warding: 1d8",
-        "dice": "1d8",
-        "spell": "dnd5e:2014:spell.glyph-of-warding"
-      },
-      "components": []
-    },
-    {
       "id": "dnd5e:2014:spell.lightning-bolt.roll.reference-1",
       "revision": 1,
       "name": "Lightning Bolt: 8d6",
@@ -106980,30 +106644,6 @@
         "id": "reference-1",
         "label": "Lightning Bolt: 8d6",
         "dice": "8d6",
-        "spell": "dnd5e:2014:spell.lightning-bolt"
-      },
-      "components": []
-    },
-    {
-      "id": "dnd5e:2014:spell.lightning-bolt.roll.reference-2",
-      "revision": 1,
-      "name": "Lightning Bolt: 1d6",
-      "displayName": "Lightning Bolt: 1d6",
-      "source": "SRD 5.1 p. 159 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=159",
-      "textReferences": [
-        "dnd5e:2014:spell.lightning-bolt"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Lightning Bolt: 1d6",
-        "dice": "1d6",
         "spell": "dnd5e:2014:spell.lightning-bolt"
       },
       "components": []
@@ -107057,30 +106697,6 @@
       "components": []
     },
     {
-      "id": "dnd5e:2014:spell.vampiric-touch.roll.reference-2",
-      "revision": 1,
-      "name": "Vampiric Touch: 1d6",
-      "displayName": "Vampiric Touch: 1d6",
-      "source": "SRD 5.1 p. 189 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=189",
-      "textReferences": [
-        "dnd5e:2014:spell.vampiric-touch"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Vampiric Touch: 1d6",
-        "dice": "1d6",
-        "spell": "dnd5e:2014:spell.vampiric-touch"
-      },
-      "components": []
-    },
-    {
       "id": "dnd5e:2014:spell.black-tentacles.roll.reference-1",
       "revision": 1,
       "name": "Black Tentacles: 3d6",
@@ -107124,30 +106740,6 @@
         "id": "reference-1",
         "label": "Blight: 8d8",
         "dice": "8d8",
-        "spell": "dnd5e:2014:spell.blight"
-      },
-      "components": []
-    },
-    {
-      "id": "dnd5e:2014:spell.blight.roll.reference-2",
-      "revision": 1,
-      "name": "Blight: 1d8",
-      "displayName": "Blight: 1d8",
-      "source": "SRD 5.1 p. 122 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=122",
-      "textReferences": [
-        "dnd5e:2014:spell.blight"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Blight: 1d8",
-        "dice": "1d8",
         "spell": "dnd5e:2014:spell.blight"
       },
       "components": []
@@ -107345,30 +106937,6 @@
       "components": []
     },
     {
-      "id": "dnd5e:2014:spell.ice-storm.roll.reference-3",
-      "revision": 1,
-      "name": "Ice Storm: 1d8",
-      "displayName": "Ice Storm: 1d8",
-      "source": "SRD 5.1 p. 155 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=155",
-      "textReferences": [
-        "dnd5e:2014:spell.ice-storm"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-3",
-        "label": "Ice Storm: 1d8",
-        "dice": "1d8",
-        "spell": "dnd5e:2014:spell.ice-storm"
-      },
-      "components": []
-    },
-    {
       "id": "dnd5e:2014:spell.phantasmal-killer.roll.reference-1",
       "revision": 1,
       "name": "Phantasmal Killer: 4d10",
@@ -107393,30 +106961,6 @@
       "components": []
     },
     {
-      "id": "dnd5e:2014:spell.phantasmal-killer.roll.reference-2",
-      "revision": 1,
-      "name": "Phantasmal Killer: 1d10",
-      "displayName": "Phantasmal Killer: 1d10",
-      "source": "SRD 5.1 p. 167 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=167",
-      "textReferences": [
-        "dnd5e:2014:spell.phantasmal-killer"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Phantasmal Killer: 1d10",
-        "dice": "1d10",
-        "spell": "dnd5e:2014:spell.phantasmal-killer"
-      },
-      "components": []
-    },
-    {
       "id": "dnd5e:2014:spell.wall-of-fire.roll.reference-1",
       "revision": 1,
       "name": "Wall of Fire: 5d8",
@@ -107436,30 +106980,6 @@
         "id": "reference-1",
         "label": "Wall of Fire: 5d8",
         "dice": "5d8",
-        "spell": "dnd5e:2014:spell.wall-of-fire"
-      },
-      "components": []
-    },
-    {
-      "id": "dnd5e:2014:spell.wall-of-fire.roll.reference-2",
-      "revision": 1,
-      "name": "Wall of Fire: 1d8",
-      "displayName": "Wall of Fire: 1d8",
-      "source": "SRD 5.1 p. 190 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=190",
-      "textReferences": [
-        "dnd5e:2014:spell.wall-of-fire"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Wall of Fire: 1d8",
-        "dice": "1d8",
         "spell": "dnd5e:2014:spell.wall-of-fire"
       },
       "components": []
@@ -107633,30 +107153,6 @@
       "components": []
     },
     {
-      "id": "dnd5e:2014:spell.arcane-hand.roll.reference-3",
-      "revision": 1,
-      "name": "Arcane Hand: 2d8",
-      "displayName": "Arcane Hand: 2d8",
-      "source": "SRD 5.1 p. 118 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=118",
-      "textReferences": [
-        "dnd5e:2014:spell.arcane-hand"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-3",
-        "label": "Arcane Hand: 2d8",
-        "dice": "2d8",
-        "spell": "dnd5e:2014:spell.arcane-hand"
-      },
-      "components": []
-    },
-    {
       "id": "dnd5e:2014:spell.cloudkill.roll.reference-1",
       "revision": 1,
       "name": "Cloudkill: 5d8",
@@ -107681,30 +107177,6 @@
       "components": []
     },
     {
-      "id": "dnd5e:2014:spell.cloudkill.roll.reference-2",
-      "revision": 1,
-      "name": "Cloudkill: 1d8",
-      "displayName": "Cloudkill: 1d8",
-      "source": "SRD 5.1 p. 125 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=125",
-      "textReferences": [
-        "dnd5e:2014:spell.cloudkill"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Cloudkill: 1d8",
-        "dice": "1d8",
-        "spell": "dnd5e:2014:spell.cloudkill"
-      },
-      "components": []
-    },
-    {
       "id": "dnd5e:2014:spell.cone-of-cold.roll.reference-1",
       "revision": 1,
       "name": "Cone of Cold: 8d8",
@@ -107724,30 +107196,6 @@
         "id": "reference-1",
         "label": "Cone of Cold: 8d8",
         "dice": "8d8",
-        "spell": "dnd5e:2014:spell.cone-of-cold"
-      },
-      "components": []
-    },
-    {
-      "id": "dnd5e:2014:spell.cone-of-cold.roll.reference-2",
-      "revision": 1,
-      "name": "Cone of Cold: 1d8",
-      "displayName": "Cone of Cold: 1d8",
-      "source": "SRD 5.1 p. 127 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=127",
-      "textReferences": [
-        "dnd5e:2014:spell.cone-of-cold"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Cone of Cold: 1d8",
-        "dice": "1d8",
         "spell": "dnd5e:2014:spell.cone-of-cold"
       },
       "components": []
@@ -107873,30 +107321,6 @@
       "components": []
     },
     {
-      "id": "dnd5e:2014:spell.circle-of-death.roll.reference-2",
-      "revision": 1,
-      "name": "Circle of Death: 2d6",
-      "displayName": "Circle of Death: 2d6",
-      "source": "SRD 5.1 p. 124 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=124",
-      "textReferences": [
-        "dnd5e:2014:spell.circle-of-death"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Circle of Death: 2d6",
-        "dice": "2d6",
-        "spell": "dnd5e:2014:spell.circle-of-death"
-      },
-      "components": []
-    },
-    {
       "id": "dnd5e:2014:spell.disintegrate.roll.reference-1",
       "revision": 1,
       "name": "Disintegrate: 10d6 + 40",
@@ -107921,30 +107345,6 @@
       "components": []
     },
     {
-      "id": "dnd5e:2014:spell.disintegrate.roll.reference-2",
-      "revision": 1,
-      "name": "Disintegrate: 3d6",
-      "displayName": "Disintegrate: 3d6",
-      "source": "SRD 5.1 pp. 135–136 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=135",
-      "textReferences": [
-        "dnd5e:2014:spell.disintegrate"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Disintegrate: 3d6",
-        "dice": "3d6",
-        "spell": "dnd5e:2014:spell.disintegrate"
-      },
-      "components": []
-    },
-    {
       "id": "dnd5e:2014:spell.freezing-sphere.roll.reference-1",
       "revision": 1,
       "name": "Freezing Sphere: 10d6",
@@ -107964,30 +107364,6 @@
         "id": "reference-1",
         "label": "Freezing Sphere: 10d6",
         "dice": "10d6",
-        "spell": "dnd5e:2014:spell.freezing-sphere"
-      },
-      "components": []
-    },
-    {
-      "id": "dnd5e:2014:spell.freezing-sphere.roll.reference-2",
-      "revision": 1,
-      "name": "Freezing Sphere: 1d6",
-      "displayName": "Freezing Sphere: 1d6",
-      "source": "SRD 5.1 pp. 147–148 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=147",
-      "textReferences": [
-        "dnd5e:2014:spell.freezing-sphere"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Freezing Sphere: 1d6",
-        "dice": "1d6",
         "spell": "dnd5e:2014:spell.freezing-sphere"
       },
       "components": []
@@ -108060,54 +107436,6 @@
         "id": "reference-2",
         "label": "Wall of Ice: 5d6",
         "dice": "5d6",
-        "spell": "dnd5e:2014:spell.wall-of-ice"
-      },
-      "components": []
-    },
-    {
-      "id": "dnd5e:2014:spell.wall-of-ice.roll.reference-3",
-      "revision": 1,
-      "name": "Wall of Ice: 2d6",
-      "displayName": "Wall of Ice: 2d6",
-      "source": "SRD 5.1 p. 190 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=190",
-      "textReferences": [
-        "dnd5e:2014:spell.wall-of-ice"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-3",
-        "label": "Wall of Ice: 2d6",
-        "dice": "2d6",
-        "spell": "dnd5e:2014:spell.wall-of-ice"
-      },
-      "components": []
-    },
-    {
-      "id": "dnd5e:2014:spell.wall-of-ice.roll.reference-4",
-      "revision": 1,
-      "name": "Wall of Ice: 1d6",
-      "displayName": "Wall of Ice: 1d6",
-      "source": "SRD 5.1 p. 190 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=190",
-      "textReferences": [
-        "dnd5e:2014:spell.wall-of-ice"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-4",
-        "label": "Wall of Ice: 1d6",
-        "dice": "1d6",
         "spell": "dnd5e:2014:spell.wall-of-ice"
       },
       "components": []
@@ -108827,30 +108155,6 @@
         "id": "reference-1",
         "label": "Guiding Bolt: 4d6",
         "dice": "4d6",
-        "spell": "dnd5e:2014:spell.guiding-bolt"
-      },
-      "components": []
-    },
-    {
-      "id": "dnd5e:2014:spell.guiding-bolt.roll.reference-2",
-      "revision": 1,
-      "name": "Guiding Bolt: 1d6",
-      "displayName": "Guiding Bolt: 1d6",
-      "source": "SRD 5.1 p. 151 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=151",
-      "textReferences": [
-        "dnd5e:2014:spell.guiding-bolt"
-      ],
-      "tags": [
-        "roll-feature"
-      ],
-      "repeat": {
-        "maximum": 1,
-        "scope": "parent"
-      },
-      "roll": {
-        "id": "reference-2",
-        "label": "Guiding Bolt: 1d6",
-        "dice": "1d6",
         "spell": "dnd5e:2014:spell.guiding-bolt"
       },
       "components": []

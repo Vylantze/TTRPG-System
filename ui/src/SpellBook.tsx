@@ -1,7 +1,7 @@
 import { expressionText } from '@/ui/src/feature-requirements';
 import { labelFromId } from '@/ui/src/workspace';
 import { useState } from 'react';
-import { featureRollExpression, featureRollInstances, adjustResource, spellGroups, spellSlotPools, useAbility as activateAbility, type Character, type Engine, type EvaluationResult, type SpellGroup } from '@/src/index';
+import { featureRollInstances, adjustResource, spellGroups, spellSlotPools, useAbility as activateAbility, type Character, type Engine, type EvaluationResult, type SpellGroup } from '@/src/index';
 import { FeatureLink } from '@/ui/src/FeatureLink';
 import { FeatureRules } from '@/ui/src/RulesText';
 import { FeatureRolls } from '@/ui/src/FeatureRolls';
@@ -30,8 +30,7 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
     setCasting(undefined);
   });
   const label = (option: SpellGroup['modes'][number]) => option.ritual ? 'Ritual — no spell slot' : option.slotLevel === 0 ? 'Cantrip — no spell slot' : `Level ${option.slotLevel} slot${option.available ? '' : ' — none remaining'}`;
-  const expressions = (spell: SpellGroup) => [...new Set(featureRollInstances(engine, result, spell.feature).map((instance) => featureRollExpression(engine.getFeature(instance.feature)!.roll!, character, result)))];
-  const actionable = (spell: SpellGroup) => expressions(spell).length > 0 || spell.modes.some((option) => Object.values(option.capability.costs).some((amount) => amount > 0));
+  const actionable = (spell: SpellGroup) => featureRollInstances(engine, result, spell.feature).length > 0 || spell.modes.some((option) => Object.values(option.capability.costs).some((amount) => amount > 0));
   const notification = (spell: SpellGroup) => {
     const latest = character.rollResults?.filter((record) => record.casting?.spell === spell.feature && spell.modes.some((option) => option.capability.id === record.casting?.capability)).at(-1);
     return spent[spell.id] ?? (latest?.casting ? latest.casting.ritual ? 'Ritual · no spell slot spent' : latest.casting.slotLevel ? `1 level ${latest.casting.slotLevel} spell slot spent` : 'Cantrip · no spell slot spent' : undefined);
@@ -88,7 +87,7 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
                         }
                       }}
                     >
-                      {`Use Spell${expressions(spell).length ? ` · ${expressions(spell).join(' / ')}` : ''}`}
+                      Use Spell
                     </button>
                   )}
                   {notification(spell) && <small role="status">{notification(spell)}</small>}

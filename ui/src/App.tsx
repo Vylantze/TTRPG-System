@@ -260,7 +260,7 @@ export function App() {
       </a>
       <aside className="sidebar">
         <a href="#characters" className="brand">
-          <span className="brand-mark">F</span>
+          <img className="brand-icon" src={`${import.meta.env.BASE_URL}wizard-die.svg`} alt="Wizard die" width="48" height="48" />
           <span>
             Feature Forge
             <small>TTRPG SYSTEM</small>

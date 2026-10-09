@@ -84,3 +84,8 @@ export function applyFeatureRoll(engine: Engine, character: Character, rollId: s
   next.rollResults = next.rollResults!.map((item) => item.id === rollId ? { ...item, applied } : item);
   return { character: next, applied };
 }
+
+/** Clear displayed results only. Spent resources and event IDs remain unchanged. */
+export function clearFeatureRolls(character: Character, instanceIds?: string[]): Character {
+  return { ...character, rollResults: instanceIds ? character.rollResults?.filter((roll) => !instanceIds.includes(roll.instance)) ?? [] : [] };
+}
