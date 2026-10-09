@@ -527,7 +527,7 @@ test('character rule text resolves Fighter level and offers the declared healing
   const html = renderToStaticMarkup(createElement(CharacterRuleContext.Provider, { value: { character, result, update: () => {}, report: () => {} } }, createElement(FeatureRules, { engine, feature: engine.getFeature('dnd5e:2014:fighter.second-wind') })));
   assert.match(html, /resolved-value">2/);
   assert.match(html, /your fighter level<\/span>/);
-  assert.match(html, /Roll 1d10 \+ 2 &amp; apply/);
+  assert.match(html, /Roll 1d10 \+ 2/);
 });
 
 test('explicit reload accepts additive definitions and preserves character choices and balances', () => {

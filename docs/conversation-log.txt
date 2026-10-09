@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T20:06:00.007Z
+Export refreshed UTC: 2026-10-09T20:23:49.118Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -2021,5 +2021,71 @@ All 226 engine tests pass. The multiclass sample can be reopened, edited, and fi
 
 [2026-10-09T20:05:35.638Z] ASSISTANT
 The browser checks now confirm Noble’s children stay under Noble, and Second Wind’s text, roll button, and resource appear together with the calculated Fighter-level bonus. The remaining reload test is fixed and passes. I’m finishing the documentation, then committing and pushing the changes.
+
+----------------------------------------
+
+[2026-10-09T20:07:30.054Z] ASSISTANT
+Implemented and pushed to `develop` (`8bac917`).
+
+- Samples editable through **Edit build**.
+- Name, race, and class levels shown on the sheet.
+- Added **Arden**, a tested Fighter 2 / Wizard 3 sample.
+- Race Features now grant speed.
+- Child Features and resources consolidated under their parents.
+- Consistent resource ± controls.
+- Calculated values replace modifier names, with hover explanations.
+- Roll buttons show breakdowns; Second Wind spends its use and heals HP.
+- Loading indicators and faster engine/navigation handling.
+
+Verified: 226 engine tests, UI regression checks, lint, and production build.
+
+![Multiclass character sheet](</D:/User/Workspace/TTRPG System/.reference-cache/multiclass-sheet.png>)
+
+----------------------------------------
+
+[2026-10-09T20:10:28.274Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-09T20:10:28.292Z] USER
+- The of the increment decrement buttons should be universally the same size as the one for spell slots
+- Make any feature that gives rolls into a separate feature, similar to Resource features.&#x20;
+- Make the roll of the Roll Feature separate from the application. For example, Second Wind can roll the 1d10 + CON, but the user can choose to apply it to heal the character's health or to reroll it.
+
+----------------------------------------
+
+[2026-10-09T20:10:33.723Z] ASSISTANT
+I’ll make resource adjustment buttons share the spell-slot sizing, move roll definitions into reusable child Features, and separate rolling from applying the result. Second Wind will keep its 2014 formula of 1d10 + Fighter level; rerolling won’t spend the use, and applying the healing will.
+
+----------------------------------------
+
+[2026-10-09T20:11:16.994Z] USER
+No, rolling it should spend the use. The application should be separate is all. Remove the reroll part of it.
+
+----------------------------------------
+
+[2026-10-09T20:11:21.224Z] ASSISTANT
+Understood. Rolling will spend the use immediately. Applying the saved result will be a separate action that spends nothing further, and there will be no reroll control.
+
+----------------------------------------
+
+[2026-10-09T20:13:48.288Z] ASSISTANT
+I’ll save spent rolls on the character, so you can leave the page and apply a result later. Applying it will use that exact total once. Roll Features will remain grouped under their parent abilities, like Resource Features.
+
+----------------------------------------
+
+[2026-10-09T20:20:10.585Z] ASSISTANT
+The engine now spends the use when rolling and saves the result without healing. Applying that result later heals once and spends nothing further. I’m checking saved results, the shared button sizing, and the updated Roll Feature definitions.
+
+----------------------------------------
+
+[2026-10-09T20:21:51.610Z] ASSISTANT
+The roll-and-apply tests pass, including save/load and preventing a second application. One description test counted the new Roll Features as spells; I’ve corrected that filter. The updated System also reloads successfully while preserving the existing characters.
+
+----------------------------------------
+
+[2026-10-09T20:23:48.386Z] ASSISTANT
+Browser checks confirm that rolling Second Wind reduces its uses to zero and leaves HP unchanged, with a separate Apply healing button. All resource increment/decrement buttons now have identical dimensions. The 36 UI tests and production build pass.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

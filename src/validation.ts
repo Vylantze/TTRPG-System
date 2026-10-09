@@ -348,26 +348,24 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     }
     const created = new Map<string, Catalogue['system']['stats'][number]>();
     for (const f of compiled.features) {
-      if (f.rolls !== undefined) {
-        list(f.rolls);
-        unique(f.rolls.map((roll) => roll.id), 'Feature roll');
-        for (const roll of f.rolls) {
-          record(roll);
-          text(roll.id);
-          text(roll.label);
-          text(roll.dice);
-          rollDice(roll.dice, () => 0);
-          if (roll.capability !== undefined) text(roll.capability);
-          if (roll.restoreResource !== undefined) {
-            text(roll.restoreResource);
-            text(roll.capability);
-          }
-          if (roll.bonus !== undefined && typeof roll.bonus !== 'number') {
-            record(roll.bonus);
-            if ('stat' in roll.bonus) text(roll.bonus.stat);
-            else text(roll.bonus.class);
-          } else if (typeof roll.bonus === 'number' && !Number.isSafeInteger(roll.bonus)) throw new RuleError('SCHEMA', 'Roll bonus must be an integer.');
+      if (f.roll !== undefined) {
+        const roll = f.roll;
+        record(roll);
+        text(roll.id);
+        text(roll.label);
+        text(roll.dice);
+        rollDice(roll.dice, () => 0);
+        if (f.components.length) throw new RuleError('SCHEMA', 'A Roll Feature cannot contain other building blocks.');
+        if (roll.capability !== undefined) text(roll.capability);
+        if (roll.restoreResource !== undefined) {
+          text(roll.restoreResource);
+          text(roll.capability);
         }
+        if (roll.bonus !== undefined && typeof roll.bonus !== 'number') {
+          record(roll.bonus);
+          if ('stat' in roll.bonus) text(roll.bonus.stat);
+          else text(roll.bonus.class);
+        } else if (typeof roll.bonus === 'number' && !Number.isSafeInteger(roll.bonus)) throw new RuleError('SCHEMA', 'Roll bonus must be an integer.');
       }
       list(f.components);
       const trackers = f.components.filter((v) => v.kind === 'trackResource');
@@ -763,6 +761,17 @@ export function checkCharacter(v: unknown): asserts v is Character {
     });
     list(p.spendOnOutcomes);
     p.spendOnOutcomes.forEach(text);
+  }
+  if (v.rollResults !== undefined) {
+    list(v.rollResults);
+    for (const roll of v.rollResults) {
+      record(roll);
+      for (const key of ['id', 'instance', 'feature', 'definition', 'expression', 'breakdown']) text(roll[key]);
+      number(roll.total);
+      if (!Number.isSafeInteger(roll.total)) throw new RuleError('SCHEMA', 'Invalid rolled total.');
+      if (roll.applied !== undefined) integer(roll.applied);
+    }
+    unique((v.rollResults as Character['rollResults'])!.map((roll) => roll.id), 'roll');
   }
   list(v.events);
   v.events.forEach((e) => {

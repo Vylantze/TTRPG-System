@@ -61,7 +61,7 @@ test('supporting Features use source passages and spell wrappers only share orig
 });
 
 test('spell descriptions retain complete effects and share canonical text across wrappers', () => {
-  const spells = file.features.filter((f) => f.id.startsWith('dnd5e:2014:spell.'));
+  const spells = file.features.filter((f) => f.id.startsWith('dnd5e:2014:spell.') && !f.roll);
   assert.equal(spells.length, 211);
   for (const spell of spells) {
     assert.match(spell.description, /Casting Time:/);

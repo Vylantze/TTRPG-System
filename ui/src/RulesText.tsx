@@ -108,11 +108,11 @@ export function ReferencePopup({ reference, engine, openFeature, onClose }: { re
   );
 }
 
-export function FeatureRules({ feature, engine, openFeature, onPreview }: { feature: FeatureDefinition; engine: Engine; openFeature?: (id: string) => void; onPreview?: (reference: Preview) => void }) {
+export function FeatureRules({ feature, engine, openFeature, onPreview, instanceId, showRolls = true }: { feature: FeatureDefinition; engine: Engine; instanceId?: string; showRolls?: boolean; openFeature?: (id: string) => void; onPreview?: (reference: Preview) => void }) {
   return (
     <>
       <RulesText text={descriptionBody(feature)} source={feature.source} engine={engine} openFeature={openFeature} exclude={[feature.id]} onPreview={onPreview} />
-      <FeatureRolls feature={feature} engine={engine} />
+      {showRolls && <FeatureRolls feature={feature} engine={engine} instanceId={instanceId} />}
       {feature.textReferences?.map((id) => {
         const reference = engine.catalogue.features.find((f) => f.id === id);
         return reference
@@ -120,7 +120,7 @@ export function FeatureRules({ feature, engine, openFeature, onPreview }: { feat
               <section className="shared-rules" key={id}>
                 <h3>{featureName(reference)}</h3>
                 <RulesText text={descriptionBody(reference)} source={reference.source} engine={engine} openFeature={openFeature} exclude={[feature.id, id]} onPreview={onPreview} />
-                <FeatureRolls feature={reference} engine={engine} />
+                {showRolls && !feature.roll && <FeatureRolls feature={reference} engine={engine} />}
                 <FeatureLink id={id} engine={engine}>
                   {'View '}
                   {featureName(reference)}
