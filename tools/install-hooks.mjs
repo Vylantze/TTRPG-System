@@ -3,7 +3,7 @@ import { dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const cwd = dirname(dirname(fileURLToPath(import.meta.url)));
-const git = args => spawnSync('git', args, { cwd, encoding: 'utf8' });
+const git = (args) => spawnSync('git', args, { cwd, encoding: 'utf8' });
 const repository = git(['rev-parse', '--show-toplevel']);
 if (repository.error) throw repository.error;
 if (repository.status !== 0 || relative(cwd, repository.stdout.trim()) !== '') {

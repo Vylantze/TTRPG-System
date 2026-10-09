@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T04:24:26.238Z
+Export refreshed UTC: 2026-10-09T15:00:11.353Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -1010,5 +1010,97 @@ All 196 engine tests pass. The UI tests caught two outdated expectations: the Fe
 
 [2026-10-09T04:24:18.246Z] ASSISTANT
 All 19 UI tests and the production build now pass. I’m committing the improvements, including the design-study notes and links to the pages reviewed.
+
+----------------------------------------
+
+[2026-10-09T04:24:50.155Z] ASSISTANT
+Implemented improvements informed by [D&D Beyond](https://www.dndbeyond.com/classes/2190879-fighter) and [Demiplane](https://app.demiplane.com/nexus/pathfinder2e/classes/fighter-rm):
+
+- Class progression tables, level navigation, and Feature previews.
+- Rules-first Feature pages with collapsed technical details.
+- Searchable acquired Features showing their source and acquisition level.
+- Shared engine queries for progression and selection pools.
+
+Original rules text and eligibility checks remain intact.
+
+Verified: 196 engine tests, 19 UI tests, lint, and production build. Live visual verification was blocked by localhost browser restrictions.
+
+Committed as `dfb5f3e`; not pushed.
+
+----------------------------------------
+
+[2026-10-09T14:36:06.953Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-09T14:36:07.007Z] USER
+Update the global Codex/ChatGPT setting to always use Mira Dev account for commits and pushes, and for all projecst that have a git to push after committing
+
+----------------------------------------
+
+[2026-10-09T14:36:14.525Z] ASSISTANT
+I’ll check the global Codex instructions and Git settings, then add the account and automatic-push rules for all Git projects. I’m using the OpenAI documentation skill to confirm how these global instructions apply.
+
+----------------------------------------
+
+[2026-10-09T14:37:16.000Z] ASSISTANT
+Updated [global Codex instructions](C:/Users/digi9/.codex/AGENTS.md) to:
+
+- Use **Mira-Dev-Agent** for pushes and **Codex Agent <mira.dev.agent@gmail.com>** for commits.
+- Automatically push after successful task commits across Git projects.
+- Report failures without switching accounts.
+
+Your global Git defaults already match. The updated instructions are active in this chat. This changes local Codex guidance; separate ChatGPT account-wide settings were not modified. [Scope documentation](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
+
+----------------------------------------
+
+[2026-10-09T14:42:01.279Z] USER
+Update the eslint settings to follow a standard coding standard for the project.
+
+----------------------------------------
+
+[2026-10-09T14:42:05.259Z] ASSISTANT
+I’ll review the ESLint configuration, choose a consistent TypeScript/React convention, and apply it across the project. Then I’ll run the checks, commit, and push the changes.
+
+----------------------------------------
+
+[2026-10-09T14:42:59.242Z] ASSISTANT
+I’ll use ESLint and TypeScript’s recommended rules with ESLint Stylistic’s shared preset: two-space indentation, single quotes, semicolons, trailing commas, and consistent spacing. I’ll also extend linting to JavaScript tests and tools, with separate Node and browser environments.
+
+----------------------------------------
+
+[2026-10-09T14:45:00.865Z] ASSISTANT
+The shared preset also covers JSX layout, object and type-member spacing, and one statement per line. I’m applying those conventions to the existing code, so this will include a broad formatting pass. The React checks, single-definition rule, and pre-commit lint hook will remain in place.
+
+----------------------------------------
+
+[2026-10-09T14:48:24.362Z] ASSISTANT
+The preset is applied. I’ve also added editor settings and Git attributes for consistent indentation and LF line endings. I’m now checking the formatted code and testing that JavaScript tools are linted with the correct environment.
+
+----------------------------------------
+
+[2026-10-09T14:52:59.771Z] ASSISTANT
+The UI tests caught a formatting issue: some spaces between labels and values disappeared when JSX was expanded across lines. I’m restoring those spaces and checking for the same issue throughout the UI before committing.
+
+----------------------------------------
+
+[2026-10-09T14:55:30.426Z] ASSISTANT
+Lint and all 197 engine/configuration tests pass. The standard now covers TypeScript, React, JavaScript tests, and tools. The existing one-definition-per-file rule and pre-commit lint hook remain in place; the UI tests and production build are still running.
+
+----------------------------------------
+
+[2026-10-09T14:57:50.169Z] ASSISTANT
+The formatting changes are complete. I’m checking the final UI output for missing or doubled spaces around dynamic text, then I’ll commit and push to `develop`.
+
+----------------------------------------
+
+[2026-10-09T14:59:19.692Z] ASSISTANT
+The UI regression run is still in progress. The engine and lint checks have passed; I’m waiting for the UI results before publishing.
+
+----------------------------------------
+
+[2026-10-09T15:00:02.904Z] ASSISTANT
+All 197 engine/configuration tests and 19 UI tests pass, and the production build succeeds. I’m committing the changes and pushing `develop`.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

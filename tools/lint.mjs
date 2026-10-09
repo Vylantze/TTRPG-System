@@ -7,7 +7,7 @@ import { lintSource } from './lint-rules.mjs';
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const excluded = new Set(['node_modules', 'dist', 'coverage']);
 function sources(directory) {
-  return readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     if (entry.name.startsWith('.') || excluded.has(entry.name)) return [];
     const filename = join(directory, entry.name);
     if (entry.isDirectory()) return sources(filename);
@@ -15,7 +15,7 @@ function sources(directory) {
   });
 }
 const files = sources(root);
-const problems = files.flatMap(file => lintSource(relative(root, file), readFileSync(file, 'utf8')));
+const problems = files.flatMap((file) => lintSource(relative(root, file), readFileSync(file, 'utf8')));
 if (problems.length) {
   console.error(problems.join('\n'));
   process.exit(1);

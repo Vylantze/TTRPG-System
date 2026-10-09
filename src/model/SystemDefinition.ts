@@ -22,6 +22,6 @@ export interface SystemDefinition {
   commandRules?: {
     spellTurn?: { castingAbilityKey: string; levelKey: string; timeKey: string; ritualKey: string; bonusTime: string; actionTime: string };
     selectedRecovery?: { eventKind?: string; capabilityName: string; requiredEvent: string; boundaryEvent?: string; budgetStat: string;
-      targets: Record<string, { key: string; scope: Scope; weight: number }> };
+      targets: Record<string, { key: string; scope: Scope; weight: number }>; };
   };
 }

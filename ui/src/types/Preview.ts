@@ -1,1 +1,1 @@
-export type Preview = { ids:string[]; text:string };
+export type Preview = { ids: string[]; text: string };
