@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { spellGroups, spellSlotPools, useAbility, adjustResource } from '@/dist/index.js';
+import { spellGroups, spellSlotPools, useAbility, adjustResource, finalizeCharacter, featureRollInstances, rollFeature, applyFeatureRoll, serializeCharacter, deserializeCharacter } from '@/dist/index.js';
 import { exampleCharacter } from '@/examples/dnd2014-character.js';
 
 test('spells group casting modes at their original level and upcasting spends only the chosen slot', () => {
@@ -25,4 +25,44 @@ test('spells group casting modes at their original level and upcasting spends on
   assert.equal(unavailable.available, false);
   assert.throws(() => useAbility(engine, empty, mode.capability.id, 'invalid-cast', { actionTracking: 'manual' }), /Insufficient/);
   assert(spells.some((entry) => entry.level === 0 && entry.modes.every((option) => Object.keys(option.capability.costs).length === 0)));
+});
+
+test('spell rolls spend only the selected slot and saved application cannot spend or roll again', () => {
+  const { engine, character } = exampleCharacter({ classes: [{ class: 'wizard', level: 5 }] });
+  const ready = finalizeCharacter(engine, character, 'finalize');
+  const result = engine.evaluate(ready);
+  const spells = spellGroups(engine, result);
+  const spell = spells.find((entry) => entry.level === 1 && featureRollInstances(engine, result, entry.feature).length && entry.modes.some((mode) => mode.slotLevel === 3 && !mode.ritual));
+  assert(spell);
+  const instance = featureRollInstances(engine, result, spell.feature)[0];
+  const mode = spell.modes.find((entry) => entry.slotLevel === 3 && !entry.ritual);
+  const slots = spellSlotPools(engine, result);
+  const third = slots.find((entry) => entry.level === 3).pool;
+  const first = slots.find((entry) => entry.level === 1).pool;
+  assert.throws(() => rollFeature(engine, ready, instance.id, 'missing-mode'), /casting mode/);
+  const unrelated = spells.find((entry) => entry.feature !== spell.feature).modes[0];
+  assert.throws(() => rollFeature(engine, ready, instance.id, 'wrong-mode', undefined, unrelated.capability.id), /casting mode/);
+  const rolled = rollFeature(engine, ready, instance.id, 'upcast-roll', () => 0, mode.capability.id);
+  const after = engine.evaluate(rolled.character);
+  assert.equal(after.resources[third.id].current, third.current - 1);
+  assert.equal(after.resources[first.id].current, first.current);
+  assert.equal(rolled.outcome.casting.slotLevel, 3);
+  assert.equal(rolled.outcome.applied, undefined);
+  assert.throws(() => rollFeature(engine, rolled.character, instance.id, 'upcast-roll', undefined, mode.capability.id), /already recorded/);
+  const restored = deserializeCharacter(serializeCharacter(rolled.character), engine);
+  const applied = applyFeatureRoll(engine, restored, 'upcast-roll', 'apply-spell');
+  assert.deepEqual(applied.character.resources, restored.resources);
+  assert.equal(applied.character.rollResults[0].total, rolled.outcome.total);
+  assert.equal(applied.character.rollResults[0].applied, rolled.outcome.total);
+  assert.throws(() => applyFeatureRoll(engine, applied.character, 'upcast-roll', 'twice'), /already applied/);
+  const empty = adjustResource(engine, ready, third.id, -third.current, 'empty');
+  assert.throws(() => rollFeature(engine, empty, instance.id, 'empty-roll', undefined, mode.capability.id), /Insufficient/);
+  const base = spell.modes.find((entry) => entry.slotLevel === 1 && !entry.ritual);
+  const baseRoll = rollFeature(engine, ready, instance.id, 'base-roll', () => 0, base.capability.id);
+  assert.equal(engine.evaluate(baseRoll.character).resources[first.id].current, first.current - 1);
+  assert.equal(engine.evaluate(baseRoll.character).resources[third.id].current, third.current);
+  const cantrip = spells.find((entry) => entry.level === 0 && featureRollInstances(engine, result, entry.feature).length);
+  const free = rollFeature(engine, ready, featureRollInstances(engine, result, cantrip.feature)[0].id, 'cantrip-roll', () => 0, cantrip.modes[0].capability.id);
+  assert.deepEqual(free.character.resources, ready.resources);
+  assert.equal(free.outcome.casting.slotLevel, 0);
 });

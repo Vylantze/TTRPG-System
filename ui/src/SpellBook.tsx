@@ -1,9 +1,10 @@
 import { expressionText } from '@/ui/src/feature-requirements';
 import { labelFromId } from '@/ui/src/workspace';
 import { useState } from 'react';
-import { adjustResource, spellGroups, spellSlotPools, useAbility as activateAbility, type Character, type Engine, type EvaluationResult, type SpellGroup } from '@/src/index';
+import { featureRollInstances, adjustResource, spellGroups, spellSlotPools, useAbility as activateAbility, type Character, type Engine, type EvaluationResult, type SpellGroup } from '@/src/index';
 import { FeatureLink } from '@/ui/src/FeatureLink';
 import { FeatureRules } from '@/ui/src/RulesText';
+import { FeatureRolls } from '@/ui/src/FeatureRolls';
 import { Modal } from '@/ui/src/Modal';
 
 export function SpellBook({ engine, character, result, ready, update, report }: { engine: Engine; character: Character; result: EvaluationResult; ready: boolean; update: (character: Character) => void; report: (message: string) => void }) {
@@ -67,7 +68,7 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
                   disabled={!ready || !spell.modes.some((option) => option.available)}
                   onClick={() => {
                     const available = spell.modes.filter((option) => option.available);
-                    if (spell.modes.length === 1) cast(available[0].capability.id);
+                    if (spell.modes.length === 1 && !featureRollInstances(engine, result, spell.feature).length) cast(available[0].capability.id);
                     else {
                       setMode(available[0].capability.id);
                       setCasting(spell.id);
@@ -79,8 +80,9 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
               </div>
               <details>
                 <summary>Spell description</summary>
-                {engine.getFeature(spell.feature) && <FeatureRules feature={engine.getFeature(spell.feature)!} engine={engine} />}
+                {engine.getFeature(spell.feature) && <FeatureRules feature={engine.getFeature(spell.feature)!} engine={engine} showRolls={false} />}
               </details>
+              {engine.getFeature(spell.feature) && <FeatureRolls feature={engine.getFeature(spell.feature)!} engine={engine} resultsOnly />}
             </article>
           ))}
         </section>
@@ -92,7 +94,14 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
             Cast using
             <select value={mode} onChange={(event) => setMode(event.target.value)}>{selected.modes.map((option) => <option key={option.capability.id} value={option.capability.id} disabled={!option.available}>{label(option)}</option>)}</select>
           </label>
-          <button disabled={!ready || !selected.modes.some((option) => option.capability.id === mode && option.available)} onClick={() => cast(mode)}>Use Spell</button>
+          {featureRollInstances(engine, result, selected.feature).length
+            ? (
+                <>
+                  <p>Rolling spends the selected casting cost immediately. Apply the saved result separately.</p>
+                  <FeatureRolls feature={engine.getFeature(selected.feature)!} engine={engine} castingCapability={mode} />
+                </>
+              )
+            : <button disabled={!ready || !selected.modes.some((option) => option.capability.id === mode && option.available)} onClick={() => cast(mode)}>Use Spell</button>}
         </Modal>
       )}
     </section>

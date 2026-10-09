@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T20:23:49.118Z
+Export refreshed UTC: 2026-10-09T20:30:19.564Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -2087,5 +2087,50 @@ The roll-and-apply tests pass, including save/load and preventing a second appli
 
 [2026-10-09T20:23:48.386Z] ASSISTANT
 Browser checks confirm that rolling Second Wind reduces its uses to zero and leaves HP unchanged, with a separate Apply healing button. All resource increment/decrement buttons now have identical dimensions. The 36 UI tests and production build pass.
+
+----------------------------------------
+
+[2026-10-09T20:24:13.742Z] ASSISTANT
+The browser also preserved the spent roll after reload. Applying it restored only the missing HP and disabled further application. I’m committing and publishing the changes now.
+
+----------------------------------------
+
+[2026-10-09T20:24:51.980Z] ASSISTANT
+Implemented and pushed to `develop` (`6220d5b`).
+
+- Rolling immediately spends the use.
+- Apply healing uses the saved result once, separately.
+- No reroll control.
+- Rolls are separate child Features.
+- Resource +/- buttons share identical sizing.
+
+Verified lint, build, automated tests, and browser behavior.
+
+![Separate roll application](</D:/User/Workspace/TTRPG System/.reference-cache/roll-apply.png>)
+
+----------------------------------------
+
+[2026-10-09T20:25:19.305Z] USER
+Apply the same behavior to spells. Rolling should spend the selected spell slot, including when casting at a higher level, while applying the result should remain a separate action.
+
+----------------------------------------
+
+[2026-10-09T20:25:23.055Z] ASSISTANT
+I’ll connect spell rolls to the selected casting level so rolling spends that slot immediately, while applying the saved result remains separate.
+
+----------------------------------------
+
+[2026-10-09T20:26:15.669Z] ASSISTANT
+I’ll use each spell’s existing casting options, so the selected level controls which slot is spent. Cantrips and rituals will remain slot-free. Spell results will stay saved for separate application; damage to targets will remain a manual action because the sheet doesn’t yet model spell targets.
+
+----------------------------------------
+
+[2026-10-09T20:28:04.260Z] ASSISTANT
+The engine now rejects spell rolls without a matching casting option, preventing the generic roll control from bypassing slot costs. Each saved result records its casting level, and applying it neither rolls again nor spends another slot.
+
+----------------------------------------
+
+[2026-10-09T20:29:38.129Z] ASSISTANT
+The engine tests pass for normal casting, higher-level slots, exhausted slots, cantrips, save/load, and one-time application. I’m checking the browser flow now, including that opening the casting dialog doesn’t spend a slot.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

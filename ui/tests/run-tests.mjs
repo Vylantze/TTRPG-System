@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { createServer } from 'vite';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+import { finalizeCharacter, spellGroups, featureRollInstances, rollFeature, applyFeatureRoll } from '@/dist/index.js';
 import { exampleCharacter } from '@/examples/dnd2014-character.js';
 
 const server = await createServer({ server: { middlewareMode: true }, appType: 'custom' });
@@ -539,6 +540,24 @@ test('explicit reload accepts additive definitions and preserves character choic
   assert.deepEqual(next.characters[0].selections, character.selections);
   assert.deepEqual(next.characters[0].resources, character.resources);
   assert.equal(model.createRegistry(next.systems).engineForCharacter(next.characters[0]).evaluate(next.characters[0]).status, 'valid');
+});
+
+test('spell results expose separate application and casting level after spending the slot', () => {
+  const { engine, character } = exampleCharacter({ classes: [{ class: 'wizard', level: 5 }] });
+  const ready = finalizeCharacter(engine, character, 'finalize');
+  const result = engine.evaluate(ready);
+  const spell = spellGroups(engine, result).find((entry) => entry.level === 1 && featureRollInstances(engine, result, entry.feature).length && entry.modes.some((mode) => mode.slotLevel === 3));
+  const mode = spell.modes.find((entry) => entry.slotLevel === 3);
+  const instance = featureRollInstances(engine, result, spell.feature)[0];
+  const rolled = rollFeature(engine, ready, instance.id, 'spell-roll', () => 0, mode.capability.id).character;
+  const show = (saved) => render({ ...data(), characters: [saved] }, `#characters/${saved.id}?view=resources`);
+  const pending = show(rolled);
+  assert.match(pending, /Level 3 slot spent/);
+  assert.match(pending, /Mark applied/);
+  assert.doesNotMatch(pending, /Reroll/);
+  const applied = show(applyFeatureRoll(engine, rolled, 'spell-roll', 'apply').character);
+  assert.match(applied, /disabled="">Applied/);
+  assert.doesNotMatch(applied, />Mark applied</);
 });
 
 await server.close();
