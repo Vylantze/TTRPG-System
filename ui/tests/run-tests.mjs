@@ -11,6 +11,7 @@ const model=await server.ssrLoadModule('/src/workspace.ts');
 const {App}=await server.ssrLoadModule('/src/App.tsx');
 const {RulesText,FeatureRules,ReferencePopup}=await server.ssrLoadModule('/src/RulesText.tsx');
 const {FeatureRequirements}=await server.ssrLoadModule('/src/FeatureRequirements.tsx');
+const {CharacterFeatures}=await server.ssrLoadModule('/src/CharacterFeatures.tsx');
 const {advancementLabels}=await server.ssrLoadModule('/src/feature-requirements.ts');
 const file=JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/system.json',import.meta.url),'utf8'));
 function storage(){const values=new Map();return {getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value)};}
@@ -106,7 +107,7 @@ test('React uses Feature and tag display names while retaining internal filter i
   custom.configurations.forEach(c=>{c.system.tagDisplayNames['skill-proficiency']='Trained Skill';});
   const workspace={version:1,systems:[custom],characters:[]};
   const browse=render(workspace,'#features');assert.match(browse,/Graceful Movement/);assert.match(browse,/value="skill-proficiency">Trained Skill/);assert.doesNotMatch(browse,/internal_feature_name/);
-  const detail=render(workspace,'#features/dnd5e%3A2014%3Askill.acrobatics');assert.match(detail,/<h2>Graceful Movement<\/h2>/);assert.match(detail,/class="tag">Trained Skill/);
+  const detail=render(workspace,'#features/dnd5e%3A2014%3Askill.acrobatics');assert.match(detail,/<h1>Graceful Movement<\/h1>/);assert.match(detail,/class="tag">Trained Skill/);
   const legacy=structuredClone(file);delete legacy.features[1].displayName;legacy.configurations.forEach(c=>{delete c.system.tagDisplayNames;});assert.match(render({version:1,systems:[legacy],characters:[]},'#features'),/Proficiency: acrobatics/);
 });
 test('imported descriptions render as text and shared references do not recurse',()=>{
@@ -145,6 +146,31 @@ test('unloaded Systems keep characters exportable and display an explicit reload
 test('bad persisted data is displayed as a recoverable error rather than silently discarded',()=>{
   globalThis.localStorage=storage();localStorage.setItem(model.STORAGE_KEY,'invalid JSON');globalThis.window={location:{hash:''}};
   const html=renderToStaticMarkup(createElement(App));assert.match(html,/role="alert"/);assert.match(html,/Export stored data/);
+});
+
+test('class guide has a progression table, jump controls, and expanded source descriptions',()=>{
+  const html=render(data(),'#classes/dnd5e%3A2014%3Afighter');
+  assert.match(html,/aria-label="Fighter contents"/);
+  assert.match(html,/<caption>Fighter Features by level<\/caption>/);
+  assert.match(html,/Jump to level 20/);
+  assert.match(html,/1d10 \+ your fighter level/);
+  assert.match(html,/class="level-row reference-section"/);
+});
+
+test('Feature pages put rules first and keep authoring details collapsed',()=>{
+  const html=render(data(),'#features/dnd5e%3A2014%3Afighter.second-wind');
+  assert.match(html,/<h2>Rules<\/h2>/);
+  assert.match(html,/<h2>At a glance<\/h2>/);
+  assert.match(html,/<details class="panel technical-details"><summary>Builder &amp; engine details/);
+});
+
+test('acquired Feature library exposes search, origins and acquisition levels',()=>{
+  const {engine,character}=exampleCharacter({classes:[{class:'fighter',level:3},{class:'rogue',level:2}],settings:{multiclass:true}});
+  const result=engine.evaluate(character);
+  const html=renderToStaticMarkup(createElement(CharacterFeatures,{engine,character,result,openFeature:()=>{}}));
+  assert.match(html,/Search acquired Features/);assert.match(html,/Acquired from/);
+  assert.match(html,/Fighter · class level/);assert.match(html,/Rogue · class level/);
+  assert.match(html,/Show inactive Features/);assert.match(html,/View Feature/);
 });
 
 await server.close();

@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T04:09:12.188Z
+Export refreshed UTC: 2026-10-09T04:24:26.238Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -948,5 +948,67 @@ All 193 engine and lint tests pass. The browser check also confirms that descrip
 
 [2026-10-09T04:08:48.820Z] ASSISTANT
 Everything passes: lint, 193 engine/lint tests, 16 UI tests, the production build, and the browser refresh check. The hook also rejects single-definition violations. I’m committing the fixes now.
+
+----------------------------------------
+
+[2026-10-09T04:09:34.181Z] ASSISTANT
+Fixed in commit `d6fb25c`.
+
+- `npm run lint` passes without modifying files.
+- `npm run lint:fix` applies automatic fixes.
+- Resolved React lint errors, memo dependencies, and Vite aliases.
+- Pre-commit linting and single-definition checks remain enforced.
+
+Verified: 193 engine/lint tests, 16 UI tests, production build, and browser checks. Working tree is clean.
+
+----------------------------------------
+
+[2026-10-09T04:12:07.661Z] USER
+Push the current changes to the develop branch, and ensure that the correct account is used for the push.
+
+----------------------------------------
+
+[2026-10-09T04:12:11.207Z] ASSISTANT
+I’ll check the branch, remote, and authenticated account, then push to `develop`.
+
+----------------------------------------
+
+[2026-10-09T04:12:59.636Z] ASSISTANT
+Pushed commit `d6fb25c` to `origin/develop`. Verified the push used **Mira-Dev-Agent**.
+
+----------------------------------------
+
+[2026-10-09T04:14:33.792Z] USER
+Study DnDBeyond's and demiplane's UI designs as well as how they display their classes and features. Improve the engine and UI design based on that.
+
+----------------------------------------
+
+[2026-10-09T04:14:37.988Z] ASSISTANT
+I’ll study D&D Beyond and Demiplane’s public character, class, and feature views, then use those findings to improve this project’s browsing and character UI. I’ll keep rules handling in the engine and presentation in React.
+
+----------------------------------------
+
+[2026-10-09T04:15:40.240Z] ASSISTANT
+Both sites make long rules pages easier to scan with progression tables, clear level labels, section navigation, and linked rules text. D&D Beyond also separates acquired Features from actions and limited-use resources. I’ll apply those patterns here: a class guide with a level index, clearer Feature pages, and a searchable character Features section. The engine will supply catalogue lookups and class/selection relationships so React doesn’t duplicate that logic.
+
+----------------------------------------
+
+[2026-10-09T04:19:41.695Z] ASSISTANT
+The class guide and Feature layouts are in place, along with a separate character Features tab. The engine now supplies sorted progression data and selection pools, including tag-based choices that the old class view missed. Full source descriptions remain visible by default at each class level, and progression-table entries open a preview without leaving the guide.
+
+----------------------------------------
+
+[2026-10-09T04:21:48.321Z] ASSISTANT
+The new views are being regression-tested now. The character Features section shows where each Feature came from and when it was acquired; engine details are tucked away on the reading pages. The browser tool blocked localhost previews, so I’m verifying rendering through the React tests and production build rather than claiming a visual check.
+
+----------------------------------------
+
+[2026-10-09T04:23:43.000Z] ASSISTANT
+All 196 engine tests pass. The UI tests caught two outdated expectations: the Feature title is now a page heading, and the provenance test needed a real multiclass character. Those tests are corrected and rerunning; lint already passes.
+
+----------------------------------------
+
+[2026-10-09T04:24:18.246Z] ASSISTANT
+All 19 UI tests and the production build now pass. I’m committing the improvements, including the design-study notes and links to the pages reviewed.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

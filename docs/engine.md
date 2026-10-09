@@ -100,3 +100,10 @@ The 2014 content ships as JSON; its TypeScript entry point is an optional compat
 ## Construction drafts
 
 Create an initial build with `engine.createCharacter(id, name, progressions, roots, { draft: true })`. Draft selections can be changed without invoking final-character retraining, but resource use and recovery remain blocked. `finalizeCharacter(engine, character, eventId)` requires a valid build and records finalization idempotently. Saves without `buildState` retain the previous behavior. `getCandidates` accepts an optional fourth argument `{ features: ids }` to evaluate one UI page while enforcing the same candidate rules.
+## Catalogue reference queries
+
+`engine.getFeature(id)` returns the frozen definition or `undefined`. `engine.getClassLevels(classId)` returns numerically ordered `{level, entries}` rows; unknown classes return an empty array and the returned arrays can be rearranged without changing the catalogue.
+
+`engine.getSelectionFeatures(choice)` returns the structural pool, intersecting explicit IDs with all required tags. It deliberately does not evaluate dynamic content-level limits, conditions, prerequisites, or resource contracts without a character. Use `getCandidates` for character eligibility; it consumes the same structural query before its existing validation.
+
+`engine.getFeatureAdvancement(featureId)` returns direct Class grants and selection-pool membership as `{classId, className, levels}`. It is a catalogue reference, not an acquisition requirement or a trace through nested grants. Character Feature provenance continues to come from evaluated instances (`progression`, `parent`, and acquisition levels).
