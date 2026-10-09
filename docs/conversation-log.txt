@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T20:30:19.564Z
+Export refreshed UTC: 2026-10-09T20:46:28.261Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -2132,5 +2132,59 @@ The engine now rejects spell rolls without a matching casting option, preventing
 
 [2026-10-09T20:29:38.129Z] ASSISTANT
 The engine tests pass for normal casting, higher-level slots, exhausted slots, cantrips, save/load, and one-time application. I’m checking the browser flow now, including that opening the casting dialog doesn’t spend a slot.
+
+----------------------------------------
+
+[2026-10-09T20:31:02.738Z] ASSISTANT
+The browser check passed: rolling Magic Missile with a level 2 slot reduced level 2 slots from 2 to 1 and left level 1 slots at 4. Marking the result applied changed neither balance. Higher-level effects still follow the authored spell rules; selecting a slot does not automatically infer extra dice from the description.
+
+----------------------------------------
+
+[2026-10-09T20:32:05.323Z] ASSISTANT
+The casting flow is working in the browser, including a separate, one-time application action on the spell card. The final test run is still running; after it finishes, I’ll commit and push the change.
+
+----------------------------------------
+
+[2026-10-09T20:33:03.018Z] ASSISTANT
+Implemented and pushed to `develop` (`27dfe0d`).
+
+- Rolling spends the selected slot, including higher-level slots.
+- Results persist and can be marked applied separately, once.
+- Target effects remain manual; upcast dice aren’t inferred automatically.
+
+Verified 228 engine tests, 37 UI tests, lint, build, and browser behavior.
+
+![Spell result](</D:/User/Workspace/TTRPG System/.reference-cache/spell-roll-apply.png>)
+
+----------------------------------------
+
+[2026-10-09T20:41:53.816Z] USER
+- Create a dice wearing a wizard hat as the site icon and let me review it.&#x20;
+- The character's name's edit bar should extend as far as possible without intruding on the active tag at the end.&#x20;
+- The Long Rest and other resource reset buttons should be at the top of the resource section.&#x20;
+- The CP, SP and other indicators should just be in the header. Something like "Copper (cp)"
+- Spell levels should be collapsible for easy viewing.
+- Use Spell should only appear if the spell had a roll to make or resource to spend. Otherwise, it should not be there. Additionally, "Use Spell" should be updated with the roll that would be made if the spell was cast. Additionally, after "Use Spell", there should be a notification somewhere near the button what is the resource that has been consumed.&#x20;
+- In "Hit Points" feature, the "wizard level" part should not be replaced with the actual level. Suggest methods to handle exceptions to the automatic replacement.&#x20;
+- There needs to be spacing between the "View feature" and the Hit Points component in the "Hit Points" feature. In general, all boxes should have some margins from other content.
+
+----------------------------------------
+
+[2026-10-09T20:41:58.107Z] ASSISTANT
+I’ll update the sheet layout and spell controls, and create a wizard-hat die icon for your review. I’ll also check how to exempt specific phrases from automatic value replacement without changing the source descriptions.
+
+----------------------------------------
+
+[2026-10-09T20:43:04.712Z] ASSISTANT
+For the Hit Points exception, I’m adding a per-Feature list of phrases to leave unchanged. That preserves “wizard level” while still resolving values such as Constitution modifier. Other options are opting an entire description out, or replacing only explicitly marked values; the phrase list is the smallest change for this case.
+
+The icon will be a simple vector design so it stays crisp at favicon size.
+
+----------------------------------------
+
+[2026-10-09T20:45:49.824Z] ASSISTANT
+The layout changes are in place: recovery buttons are at the top, currency symbols are in the labels, and spell levels can collapse. Free utility spells such as Mage Hand no longer show Use Spell. Spells with rolls show their dice on the button, with a consumption notice nearby after casting.
+
+The icon preview is ready; I’m checking it at small sizes alongside the sheet changes.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

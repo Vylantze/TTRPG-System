@@ -5532,7 +5532,13 @@
       "tags": [
         "class-feature"
       ],
-      "description": "Hit Points\nHit Dice: 1d10 per fighter level\n\nHit Points at 1st Level: 10 + your Constitution modifier\n\nHit Points at Higher Levels: 1d10 (or 6) + your Constitution modifier per fighter level after 1st"
+      "description": "Hit Points\nHit Dice: 1d10 per fighter level\n\nHit Points at 1st Level: 10 + your Constitution modifier\n\nHit Points at Higher Levels: 1d10 (or 6) + your Constitution modifier per fighter level after 1st",
+      "preserveValuePhrases": [
+        "fighter level",
+        "wizard level",
+        "rogue level",
+        "cleric level"
+      ]
     },
     {
       "id": "dnd5e:2014:rogue.entry",
@@ -5709,7 +5715,13 @@
       "tags": [
         "class-feature"
       ],
-      "description": "Hit Points\nHit Dice: 1d8 per rogue level\n\nHit Points at 1st Level: 8 + your Constitution modifier\n\nHit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per rogue level after 1st"
+      "description": "Hit Points\nHit Dice: 1d8 per rogue level\n\nHit Points at 1st Level: 8 + your Constitution modifier\n\nHit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per rogue level after 1st",
+      "preserveValuePhrases": [
+        "fighter level",
+        "wizard level",
+        "rogue level",
+        "cleric level"
+      ]
     },
     {
       "id": "dnd5e:2014:wizard.entry",
@@ -5857,7 +5869,13 @@
       "tags": [
         "class-feature"
       ],
-      "description": "Hit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st"
+      "description": "Hit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st",
+      "preserveValuePhrases": [
+        "fighter level",
+        "wizard level",
+        "rogue level",
+        "cleric level"
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.second-wind",
@@ -103495,7 +103513,13 @@
       "tags": [
         "class-feature"
       ],
-      "description": "Hit Points\nHit Dice: 1d8 per cleric level\n\nHit Points at 1st Level: 8 + your Constitution modifier\n\nHit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st"
+      "description": "Hit Points\nHit Dice: 1d8 per cleric level\n\nHit Points at 1st Level: 8 + your Constitution modifier\n\nHit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st",
+      "preserveValuePhrases": [
+        "fighter level",
+        "wizard level",
+        "rogue level",
+        "cleric level"
+      ]
     },
     {
       "id": "dnd5e:2014:cleric.disciple-of-life",
@@ -104428,7 +104452,13 @@
         }
       ],
       "description": "Hit points represent a combination of physical and mental durability, the will to live, and luck. Creatures with more hit points are more difficult to kill. Those with fewer hit points are more fragile.",
-      "source": "SRD 5.1, Hit Points, https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=96"
+      "source": "SRD 5.1, Hit Points, https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=96",
+      "preserveValuePhrases": [
+        "fighter level",
+        "wizard level",
+        "rogue level",
+        "cleric level"
+      ]
     },
     {
       "id": "dnd5e:2014:race.lightfoot-halfling.roll.reference-1",

@@ -18,7 +18,7 @@ export function MoneySection({ engine, character, update, report }: { engine: En
       <div className="money-grid">
         {currency.denominations.map((unit) => (
           <label key={unit.id}>
-            {unit.name}
+            {`${unit.name} (${unit.symbol})`}
             <span className="money-input">
               <input
                 aria-label={`${unit.name} balance`}
@@ -38,7 +38,6 @@ export function MoneySection({ engine, character, update, report }: { engine: En
                   }
                 }}
               />
-              <span>{unit.symbol}</span>
             </span>
           </label>
         ))}

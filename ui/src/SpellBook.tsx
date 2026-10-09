@@ -1,7 +1,7 @@
 import { expressionText } from '@/ui/src/feature-requirements';
 import { labelFromId } from '@/ui/src/workspace';
 import { useState } from 'react';
-import { featureRollInstances, adjustResource, spellGroups, spellSlotPools, useAbility as activateAbility, type Character, type Engine, type EvaluationResult, type SpellGroup } from '@/src/index';
+import { featureRollExpression, featureRollInstances, adjustResource, spellGroups, spellSlotPools, useAbility as activateAbility, type Character, type Engine, type EvaluationResult, type SpellGroup } from '@/src/index';
 import { FeatureLink } from '@/ui/src/FeatureLink';
 import { FeatureRules } from '@/ui/src/RulesText';
 import { FeatureRolls } from '@/ui/src/FeatureRolls';
@@ -11,6 +11,7 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
   const [showEmpty, setShowEmpty] = useState(false);
   const [casting, setCasting] = useState<string>();
   const [mode, setMode] = useState('');
+  const [spent, setSpent] = useState<Record<string, string>>({});
   const spells = spellGroups(engine, result), slots = spellSlotPools(engine, result);
   const selected = spells.find((spell) => spell.id === casting);
   const attempt = (action: () => void) => {
@@ -21,10 +22,20 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
     }
   };
   const cast = (id: string) => attempt(() => {
+    const spell = spells.find((entry) => entry.modes.some((option) => option.capability.id === id))!;
+    const option = spell.modes.find((entry) => entry.capability.id === id)!;
+    const costs = Object.entries(option.capability.costs).filter(([, amount]) => amount > 0).map(([pool, amount]) => `${amount} ${result.resources[pool].name} spent`).join(' · ');
     update(activateAbility(engine, character, id, crypto.randomUUID(), { actionTracking: 'manual' }).character);
+    setSpent({ ...spent, [spell.id]: costs });
     setCasting(undefined);
   });
   const label = (option: SpellGroup['modes'][number]) => option.ritual ? 'Ritual — no spell slot' : option.slotLevel === 0 ? 'Cantrip — no spell slot' : `Level ${option.slotLevel} slot${option.available ? '' : ' — none remaining'}`;
+  const expressions = (spell: SpellGroup) => [...new Set(featureRollInstances(engine, result, spell.feature).map((instance) => featureRollExpression(engine.getFeature(instance.feature)!.roll!, character, result)))];
+  const actionable = (spell: SpellGroup) => expressions(spell).length > 0 || spell.modes.some((option) => Object.values(option.capability.costs).some((amount) => amount > 0));
+  const notification = (spell: SpellGroup) => {
+    const latest = character.rollResults?.filter((record) => record.casting?.spell === spell.feature && spell.modes.some((option) => option.capability.id === record.casting?.capability)).at(-1);
+    return spent[spell.id] ?? (latest?.casting ? latest.casting.ritual ? 'Ritual · no spell slot spent' : latest.casting.slotLevel ? `1 level ${latest.casting.slotLevel} spell slot spent` : 'Cantrip · no spell slot spent' : undefined);
+  };
   if (!spells.length && !slots.length) return null;
   return (
     <section className="spellbook">
@@ -52,8 +63,8 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
       {!showEmpty && !slots.some(({ pool }) => (pool.current ?? pool.capacity - pool.spent) > 0) && <p className="muted">No spell slots remaining. Show all spell slots to adjust or inspect them.</p>}
       <h2>Spells</h2>
       {[...new Set(spells.map((spell) => spell.level))].map((level) => (
-        <section className="spell-level" key={level}>
-          <h3>{level === 0 ? 'Cantrips' : `Level ${level} spells`}</h3>
+        <details className="spell-level" key={level} open>
+          <summary>{level === 0 ? 'Cantrips' : `Level ${level} spells`}</summary>
           {spells.filter((spell) => spell.level === level).map((spell) => (
             <article className="panel spell-row" key={spell.id}>
               <div className="row">
@@ -64,19 +75,24 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
                     {spell.modes.every((mode) => mode.ritual) ? ' · Ritual only' : ''}
                   </small>
                 </div>
-                <button
-                  disabled={!ready || !spell.modes.some((option) => option.available)}
-                  onClick={() => {
-                    const available = spell.modes.filter((option) => option.available);
-                    if (spell.modes.length === 1 && !featureRollInstances(engine, result, spell.feature).length) cast(available[0].capability.id);
-                    else {
-                      setMode(available[0].capability.id);
-                      setCasting(spell.id);
-                    }
-                  }}
-                >
-                  Use Spell
-                </button>
+                <div className="spell-action">
+                  {actionable(spell) && (
+                    <button
+                      disabled={!ready || !spell.modes.some((option) => option.available)}
+                      onClick={() => {
+                        const available = spell.modes.filter((option) => option.available);
+                        if (spell.modes.length === 1 && !featureRollInstances(engine, result, spell.feature).length) cast(available[0].capability.id);
+                        else {
+                          setMode(available[0].capability.id);
+                          setCasting(spell.id);
+                        }
+                      }}
+                    >
+                      {`Use Spell${expressions(spell).length ? ` · ${expressions(spell).join(' / ')}` : ''}`}
+                    </button>
+                  )}
+                  {notification(spell) && <small role="status">{notification(spell)}</small>}
+                </div>
               </div>
               <details>
                 <summary>Spell description</summary>
@@ -85,7 +101,7 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
               {engine.getFeature(spell.feature) && <FeatureRolls feature={engine.getFeature(spell.feature)!} engine={engine} resultsOnly />}
             </article>
           ))}
-        </section>
+        </details>
       ))}
       {selected && (
         <Modal title={`Cast ${selected.name}`} onClose={() => setCasting(undefined)}>

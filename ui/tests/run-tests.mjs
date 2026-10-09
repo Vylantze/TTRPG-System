@@ -104,6 +104,7 @@ test('description refresh preserves pinned rules and rejects mechanical changes'
     delete f.description;
     delete f.textReferences;
     delete f.textAliases;
+    delete f.preserveValuePhrases;
     delete f.textLinkContext;
     delete f.source;
     delete f.displayName;
@@ -558,6 +559,30 @@ test('spell results expose separate application and casting level after spending
   const applied = show(applyFeatureRoll(engine, rolled, 'spell-roll', 'apply').character);
   assert.match(applied, /disabled="">Applied/);
   assert.doesNotMatch(applied, />Mark applied</);
+});
+
+test('sheet display keeps Hit Point class levels literal and resolves modifiers', () => {
+  const { engine, character } = exampleCharacter({ classes: [{ class: 'wizard', level: 3 }] });
+  const result = engine.evaluate(character);
+  const html = renderToStaticMarkup(createElement(CharacterRuleContext.Provider, { value: { character, result, update: () => {}, report: () => {} } }, createElement(FeatureRules, { engine, feature: engine.getFeature('dnd5e:2014:wizard.hit-points') })));
+  assert.match(html, /per wizard level/);
+  assert.doesNotMatch(html, /text-tooltip[^>]*>wizard level/);
+  assert.match(html, /resolved-value/);
+});
+
+test('spell levels collapse and free utility spells have no use control', () => {
+  const html = render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=resources`);
+  assert.match(html, /<details class="spell-level" open=""><summary>Cantrips/);
+  const cards = [...html.matchAll(/<article class="panel spell-row">([\s\S]*?)<\/article>/g)].map((match) => match[1]);
+  const utility = cards.find((card) => card.includes('Mage Hand'));
+  assert.ok(utility);
+  assert.doesNotMatch(utility, /Use Spell/);
+  const fire = cards.find((card) => card.includes('Ray of Frost'));
+  assert.match(fire, /Use Spell ·/);
+  assert.ok(html.indexOf('>Long rest</button>') < html.indexOf('<h2>Abilities</h2>'));
+  const sheet = render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=stats`);
+  assert.match(sheet, /Copper \(cp\)/);
+  assert.doesNotMatch(sheet, /<span>cp<\/span>/);
 });
 
 await server.close();

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title"><title id="title">A twenty-sided die wearing a wizard hat</title>
+<path d="M30 69 64 53 99 72 99 105 65 123 30 105Z" fill="#f4dfab" stroke="#193b35" stroke-width="5" stroke-linejoin="round"/>
+<path d="m30 69 35 13 34-10M30 105l35-23 34 23M65 82v41" fill="none" stroke="#193b35" stroke-width="3" stroke-linejoin="round"/>
+<path d="m30 69 35 36 34-33M30 105h69" fill="none" stroke="#193b35" stroke-width="2" opacity=".5"/>
+<path d="M36 65C42 45 47 17 68 5c8 10 22 10 32 7-10 10-19 14-25 14 6 12 12 24 15 40Z" fill="#665099" stroke="#193b35" stroke-width="5" stroke-linejoin="round"/>
+<path d="m40 51 45 2 5 13-54-1Z" fill="#bc9352" stroke="#193b35" stroke-width="3"/>
+<path d="M19 70c5-8 27-11 46-9 23 1 42 6 44 13-2 8-24 10-47 7-25-2-42-5-43-11Z" fill="#665099" stroke="#193b35" stroke-width="5"/>
+<path d="m59 28 2 6 6 2-6 2-2 6-2-6-6-2 6-2Z" fill="#f4dfab"/>
+<path d="m101 35 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z" fill="#bc9352"/>
+</svg>

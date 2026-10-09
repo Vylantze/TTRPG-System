@@ -348,6 +348,10 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     }
     const created = new Map<string, Catalogue['system']['stats'][number]>();
     for (const f of compiled.features) {
+      if (f.preserveValuePhrases !== undefined) {
+        list(f.preserveValuePhrases);
+        f.preserveValuePhrases.forEach(text);
+      }
       if (f.roll !== undefined) {
         const roll = f.roll;
         record(roll);

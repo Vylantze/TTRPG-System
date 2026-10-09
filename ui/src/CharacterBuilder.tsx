@@ -277,11 +277,11 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
       {tab === 'features' && <CharacterFeatures engine={engine} character={character} result={result} openFeature={openFeature} />}
       {tab === 'resources' && (
         <>
+          <div className="toolbar">{[...new Set([...Object.values(result.resources).flatMap((p) => p.recovery.map((r) => r.event)), ...(abilities.some((ability) => ability.definition.name === engine.catalogue.system.commandRules?.selectedRecovery?.capabilityName) ? [engine.catalogue.system.commandRules!.selectedRecovery!.requiredEvent] : [])])].map((event) => <button className="quiet" key={event} disabled={!ready} onClick={() => attempt(() => update(recoverResources(engine, character, event, crypto.randomUUID())))}>{labelFromId(event)}</button>)}</div>
           <h2>Abilities</h2>
           <div className="ability-list">{abilities.map(ability)}</div>
           {Object.values(result.resources).filter((pool) => !slotIds.has(pool.id) && !abilities.some((capability) => Object.hasOwn(capability.costs, pool.id))).map((pool) => <div className="standalone-resource" key={pool.id}>{resource(pool.id)}</div>)}
           <SpellBook engine={engine} character={character} result={result} ready={ready} update={update} report={report} />
-          <div className="toolbar">{[...new Set([...Object.values(result.resources).flatMap((p) => p.recovery.map((r) => r.event)), ...(abilities.some((ability) => ability.definition.name === engine.catalogue.system.commandRules?.selectedRecovery?.capabilityName) ? [engine.catalogue.system.commandRules!.selectedRecovery!.requiredEvent] : [])])].map((event) => <button className="quiet" key={event} disabled={!ready} onClick={() => attempt(() => update(recoverResources(engine, character, event, crypto.randomUUID())))}>{labelFromId(event)}</button>)}</div>
           {Object.entries(character.pending).map(([id, pending]) => (
             <section className="panel" key={id}>
               <h3>Resolve reserved ability use</h3>
