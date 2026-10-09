@@ -1,3 +1,4 @@
+import { rollDice } from '@/src/dice.js';
 import { checkMoney } from '@/src/currency.js';
 import { checkInventory, itemFeatures } from '@/src/items.js';
 import type { Catalogue, Character, Diagnostic, Expression, Predicate, Component, FunctionRegistry } from '@/src/model.js';
@@ -347,6 +348,27 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     }
     const created = new Map<string, Catalogue['system']['stats'][number]>();
     for (const f of compiled.features) {
+      if (f.rolls !== undefined) {
+        list(f.rolls);
+        unique(f.rolls.map((roll) => roll.id), 'Feature roll');
+        for (const roll of f.rolls) {
+          record(roll);
+          text(roll.id);
+          text(roll.label);
+          text(roll.dice);
+          rollDice(roll.dice, () => 0);
+          if (roll.capability !== undefined) text(roll.capability);
+          if (roll.restoreResource !== undefined) {
+            text(roll.restoreResource);
+            text(roll.capability);
+          }
+          if (roll.bonus !== undefined && typeof roll.bonus !== 'number') {
+            record(roll.bonus);
+            if ('stat' in roll.bonus) text(roll.bonus.stat);
+            else text(roll.bonus.class);
+          } else if (typeof roll.bonus === 'number' && !Number.isSafeInteger(roll.bonus)) throw new RuleError('SCHEMA', 'Roll bonus must be an integer.');
+        }
+      }
       list(f.components);
       const trackers = f.components.filter((v) => v.kind === 'trackResource');
       if (trackers.length > 1 || (trackers.length && f.components.some((v) => v.kind === 'defineResource'))) throw new RuleError('RESOURCE_TRACKER', 'A Feature can track only one resource; grant sub-Features for more.');

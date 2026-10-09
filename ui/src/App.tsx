@@ -1,8 +1,9 @@
+import multiclassUrl from '@/src/systems/dnd5e-2014/multiclass-sample.json?url';
 import { SystemLoader } from '@/ui/src/SystemLoader';
 import { ReloadSystemButton } from '@/ui/src/ReloadSystemButton';
 import { safeReturn } from '@/ui/src/feature-origin';
 import { FeatureLink } from '@/ui/src/FeatureLink';
-import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, useTransition, type FormEvent } from 'react';
 import noticeUrl from '@/NOTICE.md?url';
 import { deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type Engine, type SystemFile, type Value } from '@/src/index';
 import bundledUrl from '@/src/systems/dnd5e-2014/system.json?url';
@@ -44,6 +45,7 @@ export function App() {
     }
   });
   const [workspace, setWorkspace] = useState(initial.workspace), [route, setRoute] = useState(readRoute), [error, setError] = useState(initial.error), [storageError, setStorageError] = useState(initial.error), [blocked, setBlocked] = useState(Boolean(initial.error));
+  const [navigating, startNavigation] = useTransition();
   const [reloadMessage, setReloadMessage] = useState('');
   const [saved, setSaved] = useState(false), [loading, setLoading] = useState(false), [creating, setCreating] = useState(false);
   const [updatingDescriptions, setUpdatingDescriptions] = useState(() => !initial.error && initial.workspace.systems.some((file) => file.id === 'dnd5e:2014-srd5.1'));
@@ -98,7 +100,7 @@ export function App() {
   }, [initial]);
   useEffect(() => {
     const onHash = () => {
-      setRoute(readRoute());
+      startNavigation(() => setRoute(readRoute()));
     };
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
@@ -223,9 +225,27 @@ export function App() {
       setLoading(false);
     }
   };
+  const loadMulticlassSample = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch(multiclassUrl);
+      if (!response.ok) throw new Error('Multiclass sample could not be loaded.');
+      const character = deserializeCharacter(await response.text());
+      const result = registry.engineForCharacter(character).evaluate(character);
+      if (result.status !== 'valid') throw new Error('Reload the bundled System before adding this sample.');
+      character.id = crypto.randomUUID();
+      change((current) => ({ ...current, characters: [...current.characters, character] }));
+      go('characters', character.id);
+    } catch (error) {
+      setError(errorMessage(error));
+    } finally {
+      setLoading(false);
+    }
+  };
   const feature = engine?.catalogue.features.find((f) => f.id === route.id);
   const cls = engine?.catalogue.classes.find((c) => c.id === route.id);
-  const list = engine?.catalogue.features.filter((f) => `${featureName(f)} ${f.name} ${featureDescription(f, engine!) ?? ''} ${f.source ?? ''}`.toLowerCase().includes(query.toLowerCase()) && (!tag || f.tags?.includes(tag))).sort((a, b) => sort === 'level' ? (a.contentLevel ?? 0) - (b.contentLevel ?? 0) || featureName(a).localeCompare(featureName(b)) : featureName(a).localeCompare(featureName(b)) * (sort === 'name-desc' ? -1 : 1)) ?? [];
+  const list = useMemo(() => route.page === 'features' && !route.id ? engine?.catalogue.features.filter((f) => `${featureName(f)} ${f.name} ${featureDescription(f, engine!) ?? ''} ${f.source ?? ''}`.toLowerCase().includes(query.toLowerCase()) && (!tag || f.tags?.includes(tag))).sort((a, b) => sort === 'level' ? (a.contentLevel ?? 0) - (b.contentLevel ?? 0) || featureName(a).localeCompare(featureName(b)) : featureName(a).localeCompare(featureName(b)) * (sort === 'name-desc' ? -1 : 1)) ?? [] : [], [engine, query, tag, sort, route.page, route.id]);
   return (
     <div className="app-shell">
       <a
@@ -306,7 +326,8 @@ export function App() {
             <button onClick={() => setCreating(true)} disabled={!selected}>+ New character</button>
           </div>
         </header>
-        <main id="main-content" tabIndex={-1}>
+        <main id="main-content" tabIndex={-1} aria-busy={loading || navigating}>
+          {(loading || navigating) && <div className="loading-banner" role="status">Loading…</div>}
           {updatingDescriptions && <p role="status" className="muted">Updating bundled SRD descriptions…</p>}
           {error && (
             <div role="alert" className="alert row">
@@ -408,6 +429,7 @@ export function App() {
                   <PageTitle eyebrow="A character is a collection of choices" title="Every adventure starts with a Feature." description="Build your character one choice at a time. Explore what makes them different, and let the System handle the numbers." />
                   <div className="toolbar">
                     <button disabled={!selected} onClick={() => setCreating(true)}>Create a character →</button>
+                    <button className="quiet" disabled={loading || blocked || !selected} onClick={() => void loadMulticlassSample()}>Add multiclass sample</button>
                     <button className="quiet" disabled={loading || blocked} onClick={() => void loadStarterParty()}>{loading ? 'Loading…' : 'Add 2014 Starter Set party'}</button>
                     <label className="button quiet">
                       Import character

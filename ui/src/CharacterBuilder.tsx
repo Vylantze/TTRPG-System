@@ -1,10 +1,12 @@
+import { CharacterRuleContext } from '@/ui/src/character-rule-context';
+import { FeatureRolls } from '@/ui/src/FeatureRolls';
 import { SpellBook } from '@/ui/src/SpellBook';
 import { CharacterSheet } from '@/ui/src/CharacterSheet';
 import { FeatureLink } from '@/ui/src/FeatureLink';
 import { CharacterFeatures } from '@/ui/src/CharacterFeatures';
 import { featureName } from '@/ui/src/display';
-import { useMemo, useState } from 'react';
-import { spellGroups, spellSlotPools, adjustResource, applyEdit, previewEdit, finalizeCharacter, recoverResources, recoverSelectedResources, settleAbility, useAbility as activateAbility, type Engine, type Character, type Edit, type EditPreview } from '@/src/index';
+import { useMemo, useState, useTransition } from 'react';
+import { reopenCharacter, spellGroups, spellSlotPools, adjustResource, applyEdit, previewEdit, finalizeCharacter, recoverResources, recoverSelectedResources, settleAbility, useAbility as activateAbility, type Engine, type Character, type Edit, type EditPreview } from '@/src/index';
 import { labelFromId } from '@/ui/src/workspace';
 import { SelectionCard } from '@/ui/src/SelectionCard';
 import { Modal } from '@/ui/src/Modal';
@@ -12,6 +14,7 @@ import { FeatureRules, RulesText } from '@/ui/src/RulesText';
 import { ResourceSummary } from '@/ui/src/ResourceSummary';
 
 export function CharacterBuilder({ engine, character, update, openFeature, report }: { engine: Engine; character: Character; update: (c: Character) => void; openFeature: (id: string) => void; report: (message: string) => void }) {
+  const [changingTab, startTabChange] = useTransition();
   const result = useMemo(() => engine.evaluate(character), [engine, character]);
   const [tab, setTab] = useState(() => {
       const requested = typeof window !== 'undefined' ? new URLSearchParams(window.location.hash.split('?')[1]).get('view') : null;
@@ -41,6 +44,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
   const abilities = result.capabilities.filter((capability) => !spellIds.has(capability.id));
   const resource = (id: string) => result.resources[id] && <ResourceSummary key={id} pool={result.resources[id]} engine={engine} result={result} ready={ready} adjust={(delta) => attempt(() => update(adjustResource(engine, character, id, delta, crypto.randomUUID())))} />;
   const ability = (c: (typeof result.capabilities)[number]) => {
+    const sourceFeature = engine.getFeature(result.instances.find((instance) => instance.id === c.source)!.feature)!;
     const recovery = c.definition.name === engine.catalogue.system.commandRules?.selectedRecovery?.capabilityName;
     return (
       <article className="panel ability-row" key={c.id}>
@@ -56,7 +60,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
           </div>
           <div className="ability-controls">
             {Object.keys(c.costs).map(resource)}
-            <button disabled={!ready || Object.entries(c.costs).some(([id, amount]) => (result.resources[id]?.available ?? 0) < amount)} onClick={() => recovery ? setRecoveryOpen(!recoveryOpen) : attempt(() => update(activateAbility(engine, character, c.id, crypto.randomUUID(), { actionTracking: 'manual' }).character))}>Use Ability</button>
+            {sourceFeature.rolls?.some((roll) => roll.capability === c.definition.name) ? <FeatureRolls feature={sourceFeature} engine={engine} /> : <button disabled={!ready || Object.entries(c.costs).some(([id, amount]) => (result.resources[id]?.available ?? 0) < amount)} onClick={() => recovery ? setRecoveryOpen(!recoveryOpen) : attempt(() => update(activateAbility(engine, character, c.id, crypto.randomUUID(), { actionTracking: 'manual' }).character))}>Use Ability</button>}
           </div>
         </div>
         {recovery && recoveryOpen && <SelectedRecovery engine={engine} character={character} ready={ready} update={update} report={report} />}
@@ -64,7 +68,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
     );
   };
   return (
-    <>
+    <CharacterRuleContext.Provider value={{ character, result, update, report }}>
       <div className="character-title">
         <div>
           <p className="eyebrow">Character workspace</p>
@@ -107,13 +111,14 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
           <strong>{Object.keys(result.resources).length}</strong>
         </div>
       </div>
+      {changingTab && <p className="loading-banner" role="status">Loading character section…</p>}
       <nav className="subnav" aria-label="Character sections">
         {[['choices', 'Build & choices'], ['stats', 'Character sheet'], ['features', 'Features & traits'], ['resources', 'Abilities & resources']].map(([id, name]) => (
           <button
             key={id}
             className={tab === id ? 'active' : ''}
             onClick={() => {
-              setTab(id);
+              startTabChange(() => setTab(id));
               const [path, search] = window.location.hash.split('?');
               const params = new URLSearchParams(search);
               params.set('view', id);
@@ -258,6 +263,17 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
         </div>
       )}
       {tab === 'stats' && <CharacterSheet engine={engine} character={character} result={result} update={update} report={report} />}
+      {character.buildState !== 'draft' && (
+        <button
+          className="quiet"
+          onClick={() => attempt(() => {
+            update(reopenCharacter(engine, character, crypto.randomUUID()));
+            setTab('choices');
+          })}
+        >
+          Edit build
+        </button>
+      )}
       {tab === 'features' && <CharacterFeatures engine={engine} character={character} result={result} openFeature={openFeature} />}
       {tab === 'resources' && (
         <>
@@ -291,7 +307,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
               </div>
             </section>
           ))}
-          <p className="muted">Ability effects, targets, dice, and triggers require adjudication. Action timing and spellcasting restrictions are adjudicated at the table.</p>
+          <p className="muted">Declared self-healing rolls spend their ability use and restore current HP. Other targets, conditional effects, action timing, and spellcasting restrictions are adjudicated at the table.</p>
         </>
       )}
       {preview && (
@@ -330,7 +346,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
           </div>
         </Modal>
       )}
-    </>
+    </CharacterRuleContext.Provider>
   );
 }
 function SelectedRecovery({ engine, character, ready, update, report }: { engine: Engine; character: Character; ready: boolean; update: (c: Character) => void; report: (message: string) => void }) {

@@ -143,3 +143,10 @@ The five Starter Set templates now carry their printed equipment and gold. Chain
 
 
 Systems may declare optional `spellDisplay` metadata keys for spell identity, original level, slot level, ritual status and casting ability, plus scoped slot pool keys. `spellGroups` and `spellSlotPools` query only evaluated capabilities and owned resources. These presentation queries do not grant spells or bypass prerequisites; casting uses the existing ability command and resource validation. The DnD5e 2014 JSON declares this mapping.
+
+
+`reopenCharacter` explicitly returns a finalized save to construction while preserving resource balances. Pending uses must be resolved first. The 2014 walking-speed Feature takes a feet parameter and is granted by each race; the System baseline is zero. All class HP grants share a single hit-points tracker whose maximum derives from calculated hitPoints.
+
+Features may declare validated `rolls` (ID, label, bounded dice notation, optional stat or Class-level bonus, capability name, and optional resource to restore). `rollFeature` checks ownership and readiness, spends the originating capability, and applies capped self-recovery atomically. It returns the total, dice breakdown and applied amount; event IDs prevent replay. Arbitrary prose rolls use `rollDice` and never infer targets or state changes. Second Wind is the first configured healing effect.
+
+SystemRegistry reuses frozen Engines for repeated identical configuration requests and clears its cache on unload. Feature advancement lookup checks direct membership in each class selection rather than enumerating its entire candidate pool.

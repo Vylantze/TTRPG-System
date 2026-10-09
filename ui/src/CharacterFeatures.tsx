@@ -1,8 +1,6 @@
-import { FeatureLink } from '@/ui/src/FeatureLink';
+import { AcquiredFeature } from '@/ui/src/AcquiredFeature';
 import { useMemo, useState } from 'react';
 import type { Character, Engine, EvaluationResult } from '@/src/index';
-import { FeatureRules } from '@/ui/src/RulesText';
-import { FeatureRequirements } from '@/ui/src/FeatureRequirements';
 import { featureName, tagName } from '@/ui/src/display';
 
 export function CharacterFeatures({ engine, character, result, openFeature }: { engine: Engine; character: Character; result: EvaluationResult; openFeature: (id: string) => void }) {
@@ -13,6 +11,15 @@ export function CharacterFeatures({ engine, character, result, openFeature }: { 
     return (!group || group.tags.some((tag) => feature?.tags?.includes(tag))) && (showInactive || instance.active) && (origin === 'all' || (origin === 'other' ? !instance.progression : instance.progression === origin))
       && `${featureName(feature)} ${feature?.tags?.map((tag) => tagName(engine.catalogue.system, tag)).join(' ') ?? ''}`.toLowerCase().includes(query.toLowerCase());
   }), [engine, result, origin, query, showInactive, category]);
+  const visible = new Set(instances.map((instance) => instance.id));
+  for (const instance of instances) {
+    let parent = result.instances.find((item) => item.id === instance.parent);
+    while (parent && !visible.has(parent.id)) {
+      visible.add(parent.id);
+      parent = result.instances.find((item) => item.id === parent!.parent);
+    }
+  }
+  const roots = result.instances.filter((instance) => visible.has(instance.id) && (!instance.parent || !visible.has(instance.parent)));
   return (
     <section>
       <p className="eyebrow">Your character's rules reference</p>
@@ -56,30 +63,7 @@ export function CharacterFeatures({ engine, character, result, openFeature }: { 
         acquired Feature instances
       </p>
       <div className="acquired-library">
-        {instances.map((instance) => {
-          const feature = engine.getFeature(instance.feature);
-          if (!feature) return null;
-          const progression = character.progressions.find((item) => item.id === instance.progression);
-          const cls = engine.catalogue.classes.find((item) => item.id === progression?.class);
-          const parent = result.instances.find((item) => item.id === instance.parent);
-          return (
-            <details className="acquired-feature panel" key={instance.id}>
-              <summary>
-                <span>
-                  {featureName(feature)}
-                  <small>
-                    {cls ? `${cls.name} · class level ${instance.acquiredClassLevel}` : `Character level ${instance.acquiredCharacterLevel}`}
-                    {parent ? ` · via ${featureName(engine.getFeature(parent.feature))}` : ''}
-                  </small>
-                </span>
-                <span className={`badge ${!instance.active ? 'incomplete' : instance.eligible ? 'valid' : 'invalid'}`}>{!instance.active ? 'Inactive' : instance.eligible ? 'Active' : 'Unmet requirements'}</span>
-              </summary>
-              <FeatureRequirements feature={feature} engine={engine} />
-              <FeatureRules feature={feature} engine={engine} openFeature={openFeature} />
-              <FeatureLink className="link" id={feature.id} engine={engine}>View Feature →</FeatureLink>
-            </details>
-          );
-        })}
+        {roots.map((instance) => <AcquiredFeature key={instance.id} instance={instance} engine={engine} result={result} visible={visible} openFeature={openFeature} />)}
       </div>
       {!instances.length && <p className="panel">No acquired Features match these filters.</p>}
     </section>

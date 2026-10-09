@@ -73,6 +73,7 @@ function selectCatalogue(file: SystemFile, settings: Record<string, Value>): Cat
 /** Registry ownership controls availability; unloading never edits character saves. */
 export class SystemRegistry {
   private files = new Map<string, SystemFile>();
+  private engines = new Map<string, Engine>();
   private key(id: string, revision: number): string {
     return JSON.stringify([id, revision]);
   }
@@ -86,6 +87,7 @@ export class SystemRegistry {
   }
 
   unload(id: string, revision: number): boolean {
+    this.engines.clear();
     return this.files.delete(this.key(id, revision));
   }
 
@@ -96,7 +98,13 @@ export class SystemRegistry {
   createEngine(id: string, revision: number, options: Record<string, Value> = {}): Engine {
     const file = this.files.get(this.key(id, revision));
     if (!file) throw new RuleError('SYSTEM_UNAVAILABLE', 'Required System revision is not loaded.');
-    return new Engine(selectCatalogue(file, options));
+    const key = JSON.stringify([id, revision, Object.entries(options).sort(([a], [b]) => a.localeCompare(b))]);
+    let engine = this.engines.get(key);
+    if (!engine) {
+      engine = new Engine(selectCatalogue(file, options));
+      this.engines.set(key, engine);
+    }
+    return engine;
   }
 
   engineForCharacter(character: Character): Engine {
@@ -104,7 +112,7 @@ export class SystemRegistry {
     const file = this.files.get(this.key(character.system.id, character.system.revision));
     const config = file?.configurations.find((c) => c.id === character.catalogue.id && c.revision === character.catalogue.revision);
     if (!file || !config) throw new RuleError('SYSTEM_UNAVAILABLE', 'The saved System and catalogue revisions must be loaded.');
-    return new Engine(selectCatalogue(file, config.options));
+    return this.createEngine(file.id, file.revision, config.options);
   }
 }
 
