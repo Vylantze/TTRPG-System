@@ -3,15 +3,15 @@ import type { Environment } from './types/Environment.js';
 import { RuleError } from './types/RuleError.js';
 export type { Environment } from './types/Environment.js';
 export { RuleError } from './types/RuleError.js';
-export function number(value: unknown): number {
+export function number (value: unknown): number {
   if (typeof value !== 'number' || !Number.isFinite(value)) throw new RuleError('INVALID_NUMBER', 'Expected a finite number.');
   return value;
 }
-export function boolean(value: unknown): boolean {
+export function boolean (value: unknown): boolean {
   if (typeof value !== 'boolean') throw new RuleError('INVALID_BOOLEAN', 'Expected a boolean.');
   return value;
 }
-export function constrain(value: number, rules: NumericConstraints, input = false): number {
+export function constrain (value: number, rules: NumericConstraints, input = false): number {
   number(value);
   if (!input && rules.rounding) value = Math[rules.rounding](value);
   if (rules.integer && !Number.isInteger(value)) throw new RuleError('INVALID_INTEGER', 'Expected an integer.');
@@ -19,7 +19,7 @@ export function constrain(value: number, rules: NumericConstraints, input = fals
   if (value < (rules.minimum ?? -Infinity) || value > (rules.maximum ?? Infinity)) throw new RuleError('OUT_OF_BOUNDS', `Value ${value} is outside its bounds.`);
   return value;
 }
-function lookup(table: ScalingTable, input: number): number {
+function lookup (table: ScalingTable, input: number): number {
   const rows = [...table.rows].sort((a, b) => a.key - b.key);
   const boundary = (policy: ScalingTable['below'], value: number): number => {
     if (policy === 'boundary') return value;
@@ -33,7 +33,7 @@ function lookup(table: ScalingTable, input: number): number {
   if (table.missing && table.missing !== 'error') return table.missing.fallback;
   throw new RuleError('TABLE_KEY', `No exact table row for ${input}.`);
 }
-export function evaluateExpression(expr: Expression, env: Environment, depth = 0): number | boolean {
+export function evaluateExpression (expr: Expression, env: Environment, depth = 0): number | boolean {
   if (depth > 64) throw new RuleError('EXPRESSION_DEPTH', 'Expression nesting exceeds 64.');
   if (typeof expr === 'number') return number(expr);
   if (typeof expr === 'boolean') return expr;

@@ -7,7 +7,7 @@ import { checkCharacter, record } from './validation.js';
 export type { SpellTurn } from './types/SpellTurn.js';
 
 /** The caller owns turn boundaries and supplies fresh turn state each turn. */
-export function castSpell(engine: Engine, character: Character, capability: string, eventId: string, turn: SpellTurn, options: { actions?: Record<string, number>; runtime?: Record<string, Value> } = {}): { character: Character; turn: SpellTurn; actions?: Record<string, number> } {
+export function castSpell (engine: Engine, character: Character, capability: string, eventId: string, turn: SpellTurn, options: { actions?: Record<string, number>; runtime?: Record<string, Value> } = {}): { character: Character; turn: SpellTurn; actions?: Record<string, number> } {
   const policy = engine.catalogue.system.commandRules?.spellTurn;
   if (!policy) throw new RuleError('SYSTEM', 'This System has no spell turn policy.');
   record(turn);
@@ -26,7 +26,7 @@ export function castSpell(engine: Engine, character: Character, capability: stri
 export const castWizardSpell = castSpell;
 
 /** Selected recovery, unlike a rest, never restores all slot levels at once. */
-export function recoverSelectedResources(engine: Engine, input: Character, slots: Record<string, number>, restEventId: string, eventId: string): Character {
+export function recoverSelectedResources (engine: Engine, input: Character, slots: Record<string, number>, restEventId: string, eventId: string): Character {
   checkCharacter(input); record(slots);
   const policy = engine.catalogue.system.commandRules?.selectedRecovery;
   if (!policy) throw new RuleError('SYSTEM', 'This System has no selected recovery policy.');

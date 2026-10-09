@@ -2,9 +2,10 @@ import { featureName, tagName } from './display';
 import type { Engine, FeatureDefinition } from '../../src/index';
 import { labelFromId } from './workspace';
 import { FeatureRules } from './RulesText';
+
 import { FeatureRequirements } from './FeatureRequirements';
 
-export function FeatureDetail({feature,engine,openFeature}:{feature:FeatureDefinition;engine:Engine;openFeature:(id:string)=>void}) {
+export function FeatureDetail ({feature,engine,openFeature}:{feature:FeatureDefinition;engine:Engine;openFeature:(id:string)=>void}) {
   return <article className="feature-detail">
     <p className="eyebrow">Feature · revision {feature.revision}</p><h2>{featureName(feature)}</h2>
     <FeatureRequirements feature={feature} engine={engine} />
@@ -17,7 +18,7 @@ export function FeatureDetail({feature,engine,openFeature}:{feature:FeatureDefin
     <h3>Building blocks</h3>
     {feature.components.map(c=><section className="component" key={c.id}>
       <div className="row"><strong>{labelFromId(c.id)}</strong><span className="tag">{labelFromId(c.kind)}</span></div>
-      {c.kind==='grantFeature' ? <button className="link" onClick={()=>openFeature(c.feature)}>{featureName(engine.catalogue.features.find(f=>f.id===c.feature))} →</button> : c.kind==='grantCapability' ? <p>{c.name}</p> : null}
+      {c.kind === 'grantFeature' ? <button className="link" onClick={()=>openFeature(c.feature)}>{featureName(engine.catalogue.features.find(f=>f.id === c.feature))} →</button> : c.kind === 'grantCapability' ? <p>{c.name}</p> : null}
       <details><summary>Engine definition</summary><pre>{JSON.stringify(c,null,2)}</pre></details>
     </section>)}
     {feature.parameters && <details><summary>Parameters</summary><pre>{JSON.stringify(feature.parameters,null,2)}</pre></details>}

@@ -4,18 +4,16 @@ import type { Catalogue, Character, Value } from './model.js';
 import type { SystemFile } from './types/SystemFile.js';
 import { checkCharacter, record } from './validation.js';
 export type { SystemFile } from './types/SystemFile.js';
-function safe(value: unknown, depth = 0): void {
+function safe (value: unknown, depth = 0): void {
   if (depth > 96) throw new RuleError('SYSTEM_JSON', 'System data is too deep.');
-  if (Array.isArray(value)) { if (value.length > 10000) throw new RuleError('SYSTEM_JSON', 'Array exceeds limit.'); value.forEach(v => safe(v, depth + 1)); }
-  else if (value && typeof value === 'object') { record(value); Object.values(value).forEach(v => safe(v, depth + 1)); }
-  else if (!['string','number','boolean'].includes(typeof value) && value !== null) throw new RuleError('SYSTEM_JSON', 'System data must contain only JSON values.');
+  if (Array.isArray(value)) { if (value.length > 10000) throw new RuleError('SYSTEM_JSON', 'Array exceeds limit.'); value.forEach(v => safe(v, depth + 1)); } else if (value && typeof value === 'object') { record(value); Object.values(value).forEach(v => safe(v, depth + 1)); } else if (!['string','number','boolean'].includes(typeof value) && value !== null) throw new RuleError('SYSTEM_JSON', 'System data must contain only JSON values.');
   if (typeof value === 'number' && !Number.isFinite(value)) throw new RuleError('SYSTEM_JSON', 'Nonfinite number.');
 }
 const scalar = (v: unknown): v is Value => typeof v === 'string' || typeof v === 'boolean' || (typeof v === 'number' && Number.isFinite(v));
 const signature = (options: Record<string, Value>): string => JSON.stringify(Object.entries(options).sort(([a],[b]) => a.localeCompare(b)));
 
 /** Browser-safe parsing: no fetch, filesystem access, imports, or executable JSON. */
-export function parseSystemFile(input: string | unknown): SystemFile {
+export function parseSystemFile (input: string | unknown): SystemFile {
   let parsed: unknown = input;
   if (typeof input === 'string') {
     if (new TextEncoder().encode(input).length > 10_000_000) throw new RuleError('SYSTEM_SIZE', 'System file exceeds 10 MB.');
@@ -46,10 +44,10 @@ export function parseSystemFile(input: string | unknown): SystemFile {
   return clone(file);
 }
 /** Select a declarative configuration; saves retain its existing catalogue identity. */
-export function catalogueFromSystemFile(input: unknown, settings: Record<string, Value> = {}): Catalogue {
+export function catalogueFromSystemFile (input: unknown, settings: Record<string, Value> = {}): Catalogue {
   return selectCatalogue(parseSystemFile(input), settings);
 }
-function selectCatalogue(file: SystemFile, settings: Record<string, Value>): Catalogue {
+function selectCatalogue (file: SystemFile, settings: Record<string, Value>): Catalogue {
   record(settings);
   if (Object.values(settings).some(v => !scalar(v)) || Object.keys(settings).some(k => !Object.hasOwn(file.options,k))) throw new RuleError('SYSTEM_OPTIONS', 'Unknown System option.');
   const options = Object.fromEntries(Object.entries(file.options).map(([key, domain]) => [key, settings[key] ?? domain.default]));
@@ -61,23 +59,23 @@ function selectCatalogue(file: SystemFile, settings: Record<string, Value>): Cat
 /** Registry ownership controls availability; unloading never edits character saves. */
 export class SystemRegistry {
   private files = new Map<string, SystemFile>();
-  private key(id: string, revision: number): string { return JSON.stringify([id, revision]); }
-  load(input: unknown): { id: string; revision: number } {
+  private key (id: string, revision: number): string { return JSON.stringify([id, revision]); }
+  load (input: unknown): { id: string; revision: number } {
     const file = parseSystemFile(input), key = this.key(file.id,file.revision);
     if (this.files.has(key)) throw new RuleError('SYSTEM_LOADED', 'System revision is already loaded; unload it before replacement.');
     for (const loaded of this.files.values()) for (const config of file.configurations) if (loaded.configurations.some(c => c.id === config.id && c.revision === config.revision)) throw new RuleError('CATALOGUE_CONFLICT', 'Catalogue identity is already supplied by another loaded System.');
     this.files.set(key,file); return { id: file.id, revision: file.revision };
   }
-  unload(id: string, revision: number): boolean { return this.files.delete(this.key(id,revision)); }
-  list(): { id: string; revision: number; name: string; options: SystemFile['options'] }[] {
+  unload (id: string, revision: number): boolean { return this.files.delete(this.key(id,revision)); }
+  list (): { id: string; revision: number; name: string; options: SystemFile['options'] }[] {
     return [...this.files.values()].map(f => ({ id: f.id, revision: f.revision, name: f.configurations[0].system.name, options: clone(f.options) }));
   }
-  createEngine(id: string, revision: number, options: Record<string, Value> = {}): Engine {
+  createEngine (id: string, revision: number, options: Record<string, Value> = {}): Engine {
     const file = this.files.get(this.key(id,revision));
     if (!file) throw new RuleError('SYSTEM_UNAVAILABLE', 'Required System revision is not loaded.');
     return new Engine(selectCatalogue(file,options));
   }
-  engineForCharacter(character: Character): Engine {
+  engineForCharacter (character: Character): Engine {
     checkCharacter(character);
     const file = this.files.get(this.key(character.system.id,character.system.revision));
     const config = file?.configurations.find(c => c.id === character.catalogue.id && c.revision === character.catalogue.revision);
@@ -86,7 +84,7 @@ export class SystemRegistry {
   }
 }
 
-export function getFeatureCoverage(catalogue: Catalogue) {
+export function getFeatureCoverage (catalogue: Catalogue) {
   return catalogue.features.map(f => ({ feature: f.id, name: f.name, source: f.source, clauses: f.components.map(c => ({
     component: c.id, kind: c.kind,
     status: c.kind === 'describe' ? 'descriptive' : c.kind === 'grantCapability' ? 'partial' : 'automated',

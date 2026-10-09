@@ -16,7 +16,9 @@
     "./systems/dnd5e-2014/metadata.json": "./dist/systems/dnd5e-2014/metadata.json"
   },
   "scripts": {
-    "lint": "node tools/lint.mjs",
+    "start": "npm run ui:dev",
+    "lint": "eslint . --max-warnings 0 && node tools/lint.mjs",
+    "lint:fix": "eslint . --fix --max-warnings 0 && node tools/lint.mjs",
     "lint:test": "node tests/lint.test.js",
     "hooks:install": "node tools/install-hooks.mjs",
     "prepare": "npm run hooks:install",
@@ -29,9 +31,15 @@
     "test:ui": "npm run build && npm run test --prefix ui"
   },
   "devDependencies": {
-    "typescript": "5.4.5"
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint": "^10.12.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "typescript": "5.4.5",
+    "typescript-eslint": "^8.71.1"
   },
   "engines": {
-    "node": ">=22"
+    "node": "^22.13.0 || >=24"
   }
 }

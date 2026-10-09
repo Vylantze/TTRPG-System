@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-08T19:12:26.050Z
+Export refreshed UTC: 2026-10-09T04:09:12.188Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -901,5 +901,52 @@ All 191 engine and lint-rule tests pass. The React checks are still running. I�
 
 [2026-10-08T19:12:13.052Z] ASSISTANT
 The 16 UI tests and production build also pass. I’m committing the refactor now; the installed hook will run lint automatically as part of the commit.
+
+----------------------------------------
+
+[2026-10-08T19:13:09.813Z] ASSISTANT
+Implemented in commit `e576650`.
+
+- Split named classes and types into individual files, preserving existing imports.
+- Added `npm run lint` to enforce the rule and check engine/UI types.
+- Installed automatic pre-commit linting; failures block commits.
+- Verified 191 engine/lint tests, 16 UI tests, and the production build.
+
+Your pre-existing package changes remain untouched.
+
+----------------------------------------
+
+[2026-10-09T04:03:57.184Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-09T04:03:57.212Z] USER
+Fix and resolve the issues caused by the new "npm run lint" command
+
+----------------------------------------
+
+[2026-10-09T04:04:00.624Z] ASSISTANT
+I’ll run lint to reproduce the failures, then fix the checks or code responsible and verify the commit hook still works.
+
+----------------------------------------
+
+[2026-10-09T04:04:28.685Z] ASSISTANT
+The new command uses ESLint with automatic fixes. It found a mix of false positives—such as treating the engine’s `useAbility` command as a React hook—and UI issues involving exports, effect state, and memo dependencies. I’ll fix those and separate checking from autofixing so the commit hook doesn’t rewrite files.
+
+----------------------------------------
+
+[2026-10-09T04:06:10.826Z] ASSISTANT
+Lint now passes with zero warnings. React rules are scoped to the UI, display helpers are separated from components, and the original single-definition and type checks still run. I also fixed undefined variables in the staged Vite aliases that would have prevented the UI from starting.
+
+----------------------------------------
+
+[2026-10-09T04:07:57.038Z] ASSISTANT
+All 193 engine and lint tests pass. The browser check also confirms that description refresh and saving still work without changing the character. I’m finishing the UI tests and checking that the commit hook still enforces the single-definition rule.
+
+----------------------------------------
+
+[2026-10-09T04:08:48.820Z] ASSISTANT
+Everything passes: lint, 193 engine/lint tests, 16 UI tests, the production build, and the browser refresh check. The hook also rejects single-definition violations. I’m committing the fixes now.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
