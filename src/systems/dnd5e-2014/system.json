@@ -3971,6 +3971,11 @@
           "parameters": {
             "feet": 25
           }
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:race.lightfoot-halfling.roll.reference-1"
         }
       ],
       "tags": [
@@ -4046,6 +4051,26 @@
           "parameters": {
             "feet": 30
           }
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:race.dragonborn.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:race.dragonborn.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:race.dragonborn.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:race.dragonborn.roll.reference-4"
         }
       ],
       "tags": [
@@ -4112,6 +4137,26 @@
             "save": "dexterity",
             "dcStat": "breathWeaponDC"
           }
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.black.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.black.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.black.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.black.roll.reference-4"
         }
       ],
       "resources": [
@@ -4159,6 +4204,26 @@
             "save": "dexterity",
             "dcStat": "breathWeaponDC"
           }
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.blue.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.blue.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.blue.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.blue.roll.reference-4"
         }
       ],
       "resources": [
@@ -4206,6 +4271,26 @@
             "save": "dexterity",
             "dcStat": "breathWeaponDC"
           }
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.brass.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.brass.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.brass.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.brass.roll.reference-4"
         }
       ],
       "resources": [
@@ -4253,6 +4338,26 @@
             "save": "dexterity",
             "dcStat": "breathWeaponDC"
           }
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.bronze.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.bronze.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.bronze.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.bronze.roll.reference-4"
         }
       ],
       "resources": [
@@ -4300,6 +4405,26 @@
             "save": "dexterity",
             "dcStat": "breathWeaponDC"
           }
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.copper.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.copper.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.copper.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.copper.roll.reference-4"
         }
       ],
       "resources": [
@@ -4347,6 +4472,26 @@
             "save": "dexterity",
             "dcStat": "breathWeaponDC"
           }
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.gold.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.gold.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.gold.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.gold.roll.reference-4"
         }
       ],
       "resources": [
@@ -4394,6 +4539,26 @@
             "save": "constitution",
             "dcStat": "breathWeaponDC"
           }
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.green.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.green.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.green.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.green.roll.reference-4"
         }
       ],
       "resources": [
@@ -4441,6 +4606,26 @@
             "save": "dexterity",
             "dcStat": "breathWeaponDC"
           }
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.red.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.red.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.red.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.red.roll.reference-4"
         }
       ],
       "resources": [
@@ -4488,6 +4673,26 @@
             "save": "constitution",
             "dcStat": "breathWeaponDC"
           }
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.silver.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.silver.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.silver.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.silver.roll.reference-4"
         }
       ],
       "resources": [
@@ -4535,6 +4740,26 @@
             "save": "constitution",
             "dcStat": "breathWeaponDC"
           }
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.white.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.white.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.white.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:dragon-ancestry.white.roll.reference-4"
         }
       ],
       "resources": [
@@ -5283,6 +5508,11 @@
           "id": "hp-tracker",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:resource.hit-points"
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:fighter.hit-points.roll.reference-1"
         }
       ],
       "repeat": {
@@ -5455,6 +5685,11 @@
           "id": "hp-tracker",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:resource.hit-points"
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:rogue.hit-points.roll.reference-1"
         }
       ],
       "repeat": {
@@ -5598,6 +5833,11 @@
           "id": "hp-tracker",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:resource.hit-points"
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:wizard.hit-points.roll.reference-1"
         }
       ],
       "repeat": {
@@ -5645,25 +5885,18 @@
             "amount": 1
           },
           "description": "Regain 1d10 + Fighter level hit points; one use per short or long rest."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:fighter.second-wind.roll.healing"
         }
       ],
       "displayName": "Second Wind",
       "tags": [
         "class-feature"
       ],
-      "description": "Second Wind\nYou have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again.",
-      "rolls": [
-        {
-          "id": "healing",
-          "dice": "1d10",
-          "bonus": {
-            "class": "dnd5e:2014:fighter"
-          },
-          "capability": "Second Wind",
-          "restoreResource": "hit-points",
-          "label": "Second Wind healing"
-        }
-      ]
+      "description": "Second Wind\nYou have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again."
     },
     {
       "id": "dnd5e:2014:fighter.action-surge",
@@ -6228,6 +6461,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Once per turn, add sneakAttackDice d6 to a finesse or ranged weapon hit with advantage, or with another non-incapacitated enemy of the target within 5 feet and no disadvantage."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:rogue.sneak-attack.roll.reference-1"
         }
       ],
       "displayName": "Sneak Attack",
@@ -6400,6 +6638,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Treat a d20 result of 9 or lower as 10 on an ability check that adds your proficiency bonus."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:rogue.reliable-talent.roll.reference-1"
         }
       ],
       "displayName": "Reliable Talent",
@@ -6528,6 +6771,11 @@
             }
           ],
           "description": "Turn a miss against a target within range into a hit, or treat the d20 of a failed ability check as 20."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:rogue.stroke-of-luck.roll.reference-1"
         }
       ],
       "displayName": "Stroke of Luck",
@@ -6612,6 +6860,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Maximize damage of a Wizard spell of levels 1–5. First use before a long rest is free; further uses inflict increasing d12 necrotic damage per spell level, ignoring resistance and immunity. Track repeated uses and resulting HP changes manually."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:wizard.overchannel.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:wizard.overchannel.roll.reference-2"
         }
       ],
       "prerequisites": {
@@ -6705,6 +6963,26 @@
           "id": "rules",
           "kind": "describe",
           "text": "Cantrip conjuration. Casting time: 1 action. Range: 60 feet. Components: V, S. Effects and duration: SRD 5.1 p. 114."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.acid-splash.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.acid-splash.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.acid-splash.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.acid-splash.roll.reference-4"
         }
       ],
       "tags": [
@@ -6728,6 +7006,26 @@
           "id": "rules",
           "kind": "describe",
           "text": "Cantrip necromancy. Casting time: 1 action. Range: 120 feet. Components: V, S. Effects and duration: SRD 5.1 p. 124."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.chill-touch.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.chill-touch.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.chill-touch.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.chill-touch.roll.reference-4"
         }
       ],
       "tags": [
@@ -6774,6 +7072,26 @@
           "id": "rules",
           "kind": "describe",
           "text": "Cantrip evocation. Casting time: 1 action. Range: 120 feet. Components: V, S. Effects and duration: SRD 5.1 p. 144."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.fire-bolt.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.fire-bolt.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.fire-bolt.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.fire-bolt.roll.reference-4"
         }
       ],
       "tags": [
@@ -6940,6 +7258,26 @@
           "id": "rules",
           "kind": "describe",
           "text": "Cantrip conjuration. Casting time: 1 action. Range: 10 feet. Components: V, S. Effects and duration: SRD 5.1 p. 169."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.poison-spray.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.poison-spray.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.poison-spray.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.poison-spray.roll.reference-4"
         }
       ],
       "tags": [
@@ -6986,6 +7324,26 @@
           "id": "rules",
           "kind": "describe",
           "text": "Cantrip evocation. Casting time: 1 action. Range: 60 feet. Components: V, S. Effects and duration: SRD 5.1 p. 174."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.ray-of-frost.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.ray-of-frost.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.ray-of-frost.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.ray-of-frost.roll.reference-4"
         }
       ],
       "tags": [
@@ -7009,6 +7367,26 @@
           "id": "rules",
           "kind": "describe",
           "text": "Cantrip evocation. Casting time: 1 action. Range: Touch. Components: V, S. Effects and duration: SRD 5.1 p. 179."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.shocking-grasp.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.shocking-grasp.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.shocking-grasp.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.shocking-grasp.roll.reference-4"
         }
       ],
       "tags": [
@@ -7092,6 +7470,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 1 evocation. Casting time: 1 action. Range: Self (15-­‐‑foot cone). Components: V, S. Effects and duration: SRD 5.1 p. 123."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.burning-hands.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.burning-hands.roll.reference-2"
         }
       ],
       "tags": [
@@ -7138,6 +7526,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 1 illusion. Casting time: 1 action. Range: Self (15-­‐‑foot cone). Components: V, S, M (a pinch of powder or sand that is colored red, yellow, and blue). Effects and duration: SRD 5.1 p. 125."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.color-spray.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.color-spray.roll.reference-2"
         }
       ],
       "tags": [
@@ -7253,6 +7651,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 1 necromancy. Casting time: 1 action. Range: Self. Components: V, S, M (a small amount of alcohol or distilled spirits). Effects and duration: SRD 5.1 p. 142."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.false-life.roll.reference-1"
         }
       ],
       "tags": [
@@ -7571,6 +7974,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 1 evocation. Casting time: 1 action. Range: 120 feet. Components: V, S. Effects and duration: SRD 5.1 p. 161."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.magic-missile.roll.reference-1"
         }
       ],
       "tags": [
@@ -7677,6 +8085,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 1 enchantment. Casting time: 1 action. Range: 90 feet. Components: V, S, M (a pinch of fine sand, rose petals, or a cricket). Effects and duration: SRD 5.1 p. 180."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.sleep.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.sleep.roll.reference-2"
         }
       ],
       "tags": [
@@ -7714,6 +8132,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 1 evocation. Casting time: 1 action. Range: Self (15-­‐‑foot cube). Components: V, S. Effects and duration: SRD 5.1 p. 187."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.thunderwave.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.thunderwave.roll.reference-2"
         }
       ],
       "tags": [
@@ -7760,6 +8188,21 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 2 evocation. Casting time: 1 action. Range: 90 feet. Components: V, S, M (powdered rhubarb leaf and an adder’s stomach). Effects and duration: SRD 5.1 p. 114."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.acid-arrow.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.acid-arrow.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.acid-arrow.roll.reference-3"
         }
       ],
       "tags": [
@@ -7783,6 +8226,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 2 transmutation. Casting time: 1 action. Range: Self. Components: V, S. Effects and duration: SRD 5.1 p. 114."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.alter-self.roll.reference-1"
         }
       ],
       "tags": [
@@ -8032,6 +8480,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 2 transmutation. Casting time: 1 action. Range: 30 feet. Components: V, S, M (a pinch of powdered iron). Effects and duration: SRD 5.1 p. 140."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.enlarge-reduce.roll.reference-1"
         }
       ],
       "tags": [
@@ -8055,6 +8508,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 2 conjuration. Casting time: 1 action. Range: 60 feet. Components: V, S, M (a bit of tallow, a pinch of brimstone, and a dusting of powdered iron). Effects and duration: SRD 5.1 p. 145."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.flaming-sphere.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.flaming-sphere.roll.reference-2"
         }
       ],
       "tags": [
@@ -8299,6 +8762,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 2 illusion. Casting time: 1 action. Range: Self. Components: V, S. Effects and duration: SRD 5.1 p. 165."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.mirror-image.roll.reference-1"
         }
       ],
       "tags": [
@@ -8391,6 +8859,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 2 evocation. Casting time: 1 action. Range: 120 feet. Components: V, S. Effects and duration: SRD 5.1 p. 176."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.scorching-ray.roll.reference-1"
         }
       ],
       "tags": [
@@ -8437,6 +8910,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 2 evocation. Casting time: 1 action. Range: 60 feet. Components: V, S, M (a chip of mica). Effects and duration: SRD 5.1 p. 178."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.shatter.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.shatter.roll.reference-2"
         }
       ],
       "tags": [
@@ -8520,6 +9003,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 2 conjuration. Casting time: 1 action. Range: 60 feet. Components: V, S, M (a bit of spiderweb). Effects and duration: SRD 5.1 p. 192."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.web.roll.reference-1"
         }
       ],
       "tags": [
@@ -8580,6 +9068,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 3 necromancy. Casting time: 1 action. Range: Touch. Components: V, S. Effects and duration: SRD 5.1 p. 121."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.bestow-curse.roll.reference-1"
         }
       ],
       "tags": [
@@ -8603,6 +9096,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 3 transmutation. Casting time: 1 action. Range: Self. Components: V, S. Effects and duration: SRD 5.1 p. 122."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.blink.roll.reference-1"
         }
       ],
       "tags": [
@@ -8732,6 +9230,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 3 evocation. Casting time: 1 action. Range: 150 feet. Components: V, S, M (a tiny ball of bat guano and sulfur). Effects and duration: SRD 5.1 p. 144."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.fireball.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.fireball.roll.reference-2"
         }
       ],
       "tags": [
@@ -8815,6 +9323,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 3 abjuration. Casting time: 1 hour. Range: Touch. Components: V, S, M (incense and powdered diamond worth at least 200 gp, which the spell consumes). Effects and duration: SRD 5.1 p. 149."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.glyph-of-warding.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.glyph-of-warding.roll.reference-2"
         }
       ],
       "tags": [
@@ -8898,6 +9416,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 3 evocation. Casting time: 1 action. Range: Self (100-­‐‑foot line). Components: V, S, M (a bit of fur and a rod of amber, crystal, or glass). Effects and duration: SRD 5.1 p. 159."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.lightning-bolt.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.lightning-bolt.roll.reference-2"
         }
       ],
       "tags": [
@@ -9105,6 +9633,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 3 transmutation. Casting time: 1 action. Range: 120 feet. Components: V, S, M (a drop of molasses). Effects and duration: SRD 5.1 p. 180."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.slow.roll.reference-1"
         }
       ],
       "tags": [
@@ -9211,6 +9744,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 3 necromancy. Casting time: 1 action. Range: Self. Components: V, S. Effects and duration: SRD 5.1 p. 189."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.vampiric-touch.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.vampiric-touch.roll.reference-2"
         }
       ],
       "tags": [
@@ -9303,6 +9846,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 4 conjuration. Casting time: 1 action. Range: 90 feet. Components: V, S, M (a piece of tentacle from a giant octopus or a giant squid). Effects and duration: SRD 5.1 p. 121."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.black-tentacles.roll.reference-1"
         }
       ],
       "tags": [
@@ -9326,6 +9874,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 4 necromancy. Casting time: 1 action. Range: 30 feet. Components: V, S. Effects and duration: SRD 5.1 p. 122."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.blight.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.blight.roll.reference-2"
         }
       ],
       "tags": [
@@ -9349,6 +9907,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 4 enchantment. Casting time: 1 action. Range: 90 feet. Components: V, S, M (three nut shells). Effects and duration: SRD 5.1 p. 127."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.confusion.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.confusion.roll.reference-2"
         }
       ],
       "tags": [
@@ -9395,6 +9963,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 4 transmutation. Casting time: 1 action. Range: 300 feet. Components: V, S, M (a drop of water and a pinch of dust). Effects and duration: SRD 5.1 p. 130."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.control-water.roll.reference-1"
         }
       ],
       "tags": [
@@ -9418,6 +9991,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 4 conjuration. Casting time: 1 action. Range: 500 feet. Components: V. Effects and duration: SRD 5.1 p. 135."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.dimension-door.roll.reference-1"
         }
       ],
       "tags": [
@@ -9464,6 +10042,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 4 conjuration. Casting time: 1 action. Range: 30 feet. Components: V, S, M (a tiny silver whistle, a piece of bone, and a thread). Effects and duration: SRD 5.1 p. 142."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.faithful-hound.roll.reference-1"
         }
       ],
       "tags": [
@@ -9487,6 +10070,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 4 evocation. Casting time: 1 action. Range: Self. Components: V, S, M (a bit of phosphorus or a firefly). Effects and duration: SRD 5.1 p. 144."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.fire-shield.roll.reference-1"
         }
       ],
       "tags": [
@@ -9556,6 +10144,21 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 4 evocation. Casting time: 1 action. Range: 300 feet. Components: V, S, M (a pinch of dust and a few drops of water). Effects and duration: SRD 5.1 p. 155."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.ice-storm.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.ice-storm.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.ice-storm.roll.reference-3"
         }
       ],
       "tags": [
@@ -9602,6 +10205,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 4 illusion. Casting time: 1 action. Range: 120 feet. Components: V, S. Effects and duration: SRD 5.1 p. 167."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.phantasmal-killer.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.phantasmal-killer.roll.reference-2"
         }
       ],
       "tags": [
@@ -9763,6 +10376,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 4 evocation. Casting time: 1 action. Range: 120 feet. Components: V, S, M (a small piece of phosphorus). Effects and duration: SRD 5.1 p. 190."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.wall-of-fire.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.wall-of-fire.roll.reference-2"
         }
       ],
       "tags": [
@@ -9786,6 +10409,31 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 5 transmutation. Casting time: 1 action. Range: 120 feet. Components: V, S. Effects and duration: SRD 5.1 p. 116."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.animate-objects.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.animate-objects.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.animate-objects.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.animate-objects.roll.reference-4"
+        },
+        {
+          "id": "roll-feature-5",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.animate-objects.roll.reference-5"
         }
       ],
       "tags": [
@@ -9809,6 +10457,21 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 5 evocation. Casting time: 1 action. Range: 120 feet. Components: V, S, M (an eggshell and a snakeskin glove). Effects and duration: SRD 5.1 p. 118."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.arcane-hand.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.arcane-hand.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.arcane-hand.roll.reference-3"
         }
       ],
       "tags": [
@@ -9832,6 +10495,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 5 conjuration. Casting time: 1 action. Range: 120 feet. Components: V, S. Effects and duration: SRD 5.1 p. 125."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.cloudkill.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.cloudkill.roll.reference-2"
         }
       ],
       "tags": [
@@ -9855,6 +10528,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 5 evocation. Casting time: 1 action. Range: Self (60-­‐‑foot cone). Components: V, S, M (a small crystal or glass cone). Effects and duration: SRD 5.1 p. 127."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.cone-of-cold.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.cone-of-cold.roll.reference-2"
         }
       ],
       "tags": [
@@ -9901,6 +10584,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 5 divination (ritual). Casting time: 1 minute. Range: Self. Components: V. Effects and duration: SRD 5.1 p. 129."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.contact-other-plane.roll.reference-1"
         }
       ],
       "tags": [
@@ -9970,6 +10658,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 5 illusion. Casting time: 1 minute. Range: Special. Components: V, S, M (a handful of sand, a dab of ink, and a writing quill plucked from a sleeping bird). Effects and duration: SRD 5.1 p. 138."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.dream.roll.reference-1"
         }
       ],
       "tags": [
@@ -9993,6 +10686,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 5 enchantment. Casting time: 1 minute. Range: 60 feet. Components: V. Effects and duration: SRD 5.1 p. 148."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.geas.roll.reference-1"
         }
       ],
       "tags": [
@@ -10315,6 +11013,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 6 evocation. Casting time: 1 action. Range: 150 feet. Components: V, S, M (a bit of fur; a piece of amber, glass, or a crystal rod; and three silver pins). Effects and duration: SRD 5.1 p. 124."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.chain-lightning.roll.reference-1"
         }
       ],
       "tags": [
@@ -10338,6 +11041,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 6 necromancy. Casting time: 1 action. Range: 150 feet. Components: V, S, M (the powder of a crushed black pearl worth at least 500 gp). Effects and duration: SRD 5.1 p. 124."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.circle-of-death.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.circle-of-death.roll.reference-2"
         }
       ],
       "tags": [
@@ -10407,6 +11120,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 6 transmutation. Casting time: 1 action. Range: 60 feet. Components: V, S, M (a lodestone and a pinch of dust). Effects and duration: SRD 5.1 p. 135."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.disintegrate.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.disintegrate.roll.reference-2"
         }
       ],
       "tags": [
@@ -10476,6 +11199,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 6 evocation. Casting time: 1 action. Range: 300 feet. Components: V, S, M (a small crystal sphere). Effects and duration: SRD 5.1 p. 147."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.freezing-sphere.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.freezing-sphere.roll.reference-2"
         }
       ],
       "tags": [
@@ -10683,6 +11416,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 6 evocation. Casting time: 1 action. Range: Self (60-­‐‑foot line). Components: V, S, M (a magnifying glass). Effects and duration: SRD 5.1 p. 184."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.sunbeam.roll.reference-1"
         }
       ],
       "tags": [
@@ -10729,6 +11467,26 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 6 evocation. Casting time: 1 action. Range: 120 feet. Components: V, S, M (a small piece of quartz). Effects and duration: SRD 5.1 p. 190."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.wall-of-ice.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.wall-of-ice.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.wall-of-ice.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.wall-of-ice.roll.reference-4"
         }
       ],
       "tags": [
@@ -10752,6 +11510,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 7 evocation. Casting time: 1 action. Range: 60 feet. Components: V, S, M (a miniature platinum sword with a grip and pommel of copper and zinc, worth 250 gp). Effects and duration: SRD 5.1 p. 119."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.arcane-sword.roll.reference-1"
         }
       ],
       "tags": [
@@ -10775,6 +11538,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 7 evocation. Casting time: 1 action. Range: 150 feet. Components: V, S, M (a tiny ball of bat guano and sulfur). Effects and duration: SRD 5.1 p. 133."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.delayed-blast-fireball.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.delayed-blast-fireball.roll.reference-2"
         }
       ],
       "tags": [
@@ -10821,6 +11594,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 7 necromancy. Casting time: 1 action. Range: 60 feet. Components: V, S. Effects and duration: SRD 5.1 p. 144."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.finger-of-death.roll.reference-1"
         }
       ],
       "tags": [
@@ -10936,6 +11714,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 7 evocation. Casting time: 1 action. Range: Self (60-­‐‑foot cone). Components: V, S. Effects and duration: SRD 5.1 p. 170."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.prismatic-spray.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.prismatic-spray.roll.reference-2"
         }
       ],
       "tags": [
@@ -11051,6 +11839,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 7 abjuration. Casting time: 1 minute. Range: Touch. Components: V, S, M (mercury, phosphorus, and powdered diamond and opal with a total value of at least 1,000 gp, which the spell consumes). Effects and duration: SRD 5.1 p. 184."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.symbol.roll.reference-1"
         }
       ],
       "tags": [
@@ -11074,6 +11867,31 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 7 conjuration. Casting time: 1 action. Range: 10 feet. Components: V. Effects and duration: SRD 5.1 p. 185."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.teleport.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.teleport.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.teleport.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.teleport.roll.reference-4"
+        },
+        {
+          "id": "roll-feature-5",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.teleport.roll.reference-5"
         }
       ],
       "tags": [
@@ -11166,6 +11984,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 8 transmutation. Casting time: 10 minutes. Range: Self (5-­‐‑mile radius). Components: V, S, M (burning incense and bits of earth and wood mixed in water). Effects and duration: SRD 5.1 p. 131."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.control-weather.roll.reference-1"
         }
       ],
       "tags": [
@@ -11235,6 +12058,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 8 enchantment. Casting time: 1 action. Range: 150 feet. Components: V, S, M (a handful of clay, crystal, glass, or mineral spheres). Effects and duration: SRD 5.1 p. 142."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.feeblemind.roll.reference-1"
         }
       ],
       "tags": [
@@ -11258,6 +12086,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 8 conjuration. Casting time: 1 action. Range: 150 feet. Components: V, S. Effects and duration: SRD 5.1 p. 157."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.incendiary-cloud.roll.reference-1"
         }
       ],
       "tags": [
@@ -11350,6 +12183,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 8 evocation. Casting time: 1 action. Range: 150 feet. Components: V, S, M (fire and a piece of sunstone). Effects and duration: SRD 5.1 p. 184."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.sunburst.roll.reference-1"
         }
       ],
       "tags": [
@@ -11479,6 +12317,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 9 evocation. Casting time: 1 action. Range: 1 mile. Components: V, S. Effects and duration: SRD 5.1 p. 164."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.meteor-swarm.roll.reference-1"
         }
       ],
       "tags": [
@@ -11525,6 +12368,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 9 abjuration. Casting time: 1 action. Range: 60 feet. Components: V, S. Effects and duration: SRD 5.1 p. 171."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.prismatic-wall.roll.reference-1"
         }
       ],
       "tags": [
@@ -11571,6 +12419,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 9 transmutation. Casting time: 1 action. Range: Self. Components: V. Effects and duration: SRD 5.1 p. 187."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.time-stop.roll.reference-1"
         }
       ],
       "tags": [
@@ -11617,6 +12470,11 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 9 illusion. Casting time: 1 action. Range: 120 feet. Components: V, S. Effects and duration: SRD 5.1 p. 192."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.weird.roll.reference-1"
         }
       ],
       "tags": [
@@ -11640,6 +12498,16 @@
           "id": "rules",
           "kind": "describe",
           "text": "Level 9 conjuration. Casting time: 1 action. Range: Self. Components: V. Effects and duration: SRD 5.1 p. 193."
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.wish.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.wish.roll.reference-2"
         }
       ],
       "tags": [
@@ -102603,6 +103471,11 @@
           "id": "hp-tracker",
           "kind": "grantFeature",
           "feature": "dnd5e:2014:resource.hit-points"
+        },
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:cleric.hit-points.roll.reference-1"
         }
       ],
       "repeat": {
@@ -102732,7 +103605,28 @@
       "revision": 1,
       "name": "Sacred Flame",
       "displayName": "Sacred Flame",
-      "components": [],
+      "components": [
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.sacred-flame.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.sacred-flame.roll.reference-2"
+        },
+        {
+          "id": "roll-feature-3",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.sacred-flame.roll.reference-3"
+        },
+        {
+          "id": "roll-feature-4",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.sacred-flame.roll.reference-4"
+        }
+      ],
       "description": "Evocation cantrip\nCasting Time:  1 action\nRange:  60 feet\nComponents:  V, S\nDuration:  Instantaneous Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw. The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",
       "source": "SRD 5.1 p. 176 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=176",
       "tags": [
@@ -102870,7 +103764,13 @@
       "revision": 1,
       "name": "Bless",
       "displayName": "Bless",
-      "components": [],
+      "components": [
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.bless.roll.reference-1"
+        }
+      ],
       "description": "1st-level enchantment\nCasting Time:  1 action\nRange:  30 feet\nComponents:  V, S, M (a sprinkling of holy water)\nDuration:  Concentration, up to 1 minute You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll a d4 and add the number rolled to the attack roll or saving throw. \n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.",
       "source": "SRD 5.1 p. 122 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=122",
       "tags": [
@@ -102953,7 +103853,13 @@
       "revision": 1,
       "name": "Cure Wounds",
       "displayName": "Cure Wounds",
-      "components": [],
+      "components": [
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.cure-wounds.roll.reference-1"
+        }
+      ],
       "description": "1st-level evocation\nCasting Time: 1 action\nRange: Touch\nComponents: V, S\nDuration: Instantaneous\n\nA creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs. \n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.",
       "source": "SRD 5.1 p. 132 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=132",
       "tags": [
@@ -103189,7 +104095,18 @@
       "revision": 1,
       "name": "Guiding Bolt",
       "displayName": "Guiding Bolt",
-      "components": [],
+      "components": [
+        {
+          "id": "roll-feature-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.guiding-bolt.roll.reference-1"
+        },
+        {
+          "id": "roll-feature-2",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.guiding-bolt.roll.reference-2"
+        }
+      ],
       "description": "1st-level evocation\nCasting Time: 1 action\nRange: 120 feet\nComponents: V, S\nDuration: 1 round\n\nA flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then. \n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.",
       "source": "SRD 5.1 p. 151 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=151",
       "tags": [
@@ -103512,6 +104429,4266 @@
       ],
       "description": "Hit points represent a combination of physical and mental durability, the will to live, and luck. Creatures with more hit points are more difficult to kill. Those with fewer hit points are more fragile.",
       "source": "SRD 5.1, Hit Points, https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=96"
+    },
+    {
+      "id": "dnd5e:2014:race.lightfoot-halfling.roll.reference-1",
+      "revision": 1,
+      "name": "Lightfoot Halfling: d20",
+      "displayName": "Lightfoot Halfling: d20",
+      "source": "SRD 5.1 pp. 4–5 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=4",
+      "textReferences": [
+        "dnd5e:2014:race.lightfoot-halfling"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Lightfoot Halfling: d20",
+        "dice": "1d20"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:race.dragonborn.roll.reference-1",
+      "revision": 1,
+      "name": "Dragonborn: 2d6",
+      "displayName": "Dragonborn: 2d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:race.dragonborn"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Dragonborn: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:race.dragonborn.roll.reference-2",
+      "revision": 1,
+      "name": "Dragonborn: 3d6",
+      "displayName": "Dragonborn: 3d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:race.dragonborn"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Dragonborn: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:race.dragonborn.roll.reference-3",
+      "revision": 1,
+      "name": "Dragonborn: 4d6",
+      "displayName": "Dragonborn: 4d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:race.dragonborn"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Dragonborn: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:race.dragonborn.roll.reference-4",
+      "revision": 1,
+      "name": "Dragonborn: 5d6",
+      "displayName": "Dragonborn: 5d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:race.dragonborn"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Dragonborn: 5d6",
+        "dice": "5d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.black.roll.reference-1",
+      "revision": 1,
+      "name": "Black Dragon Ancestry: 2d6",
+      "displayName": "Black Dragon Ancestry: 2d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.black"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Black Dragon Ancestry: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.black.roll.reference-2",
+      "revision": 1,
+      "name": "Black Dragon Ancestry: 3d6",
+      "displayName": "Black Dragon Ancestry: 3d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.black"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Black Dragon Ancestry: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.black.roll.reference-3",
+      "revision": 1,
+      "name": "Black Dragon Ancestry: 4d6",
+      "displayName": "Black Dragon Ancestry: 4d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.black"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Black Dragon Ancestry: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.black.roll.reference-4",
+      "revision": 1,
+      "name": "Black Dragon Ancestry: 5d6",
+      "displayName": "Black Dragon Ancestry: 5d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.black"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Black Dragon Ancestry: 5d6",
+        "dice": "5d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.blue.roll.reference-1",
+      "revision": 1,
+      "name": "Blue Dragon Ancestry: 2d6",
+      "displayName": "Blue Dragon Ancestry: 2d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.blue"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Blue Dragon Ancestry: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.blue.roll.reference-2",
+      "revision": 1,
+      "name": "Blue Dragon Ancestry: 3d6",
+      "displayName": "Blue Dragon Ancestry: 3d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.blue"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Blue Dragon Ancestry: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.blue.roll.reference-3",
+      "revision": 1,
+      "name": "Blue Dragon Ancestry: 4d6",
+      "displayName": "Blue Dragon Ancestry: 4d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.blue"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Blue Dragon Ancestry: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.blue.roll.reference-4",
+      "revision": 1,
+      "name": "Blue Dragon Ancestry: 5d6",
+      "displayName": "Blue Dragon Ancestry: 5d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.blue"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Blue Dragon Ancestry: 5d6",
+        "dice": "5d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.brass.roll.reference-1",
+      "revision": 1,
+      "name": "Brass Dragon Ancestry: 2d6",
+      "displayName": "Brass Dragon Ancestry: 2d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.brass"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Brass Dragon Ancestry: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.brass.roll.reference-2",
+      "revision": 1,
+      "name": "Brass Dragon Ancestry: 3d6",
+      "displayName": "Brass Dragon Ancestry: 3d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.brass"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Brass Dragon Ancestry: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.brass.roll.reference-3",
+      "revision": 1,
+      "name": "Brass Dragon Ancestry: 4d6",
+      "displayName": "Brass Dragon Ancestry: 4d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.brass"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Brass Dragon Ancestry: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.brass.roll.reference-4",
+      "revision": 1,
+      "name": "Brass Dragon Ancestry: 5d6",
+      "displayName": "Brass Dragon Ancestry: 5d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.brass"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Brass Dragon Ancestry: 5d6",
+        "dice": "5d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.bronze.roll.reference-1",
+      "revision": 1,
+      "name": "Bronze Dragon Ancestry: 2d6",
+      "displayName": "Bronze Dragon Ancestry: 2d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.bronze"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Bronze Dragon Ancestry: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.bronze.roll.reference-2",
+      "revision": 1,
+      "name": "Bronze Dragon Ancestry: 3d6",
+      "displayName": "Bronze Dragon Ancestry: 3d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.bronze"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Bronze Dragon Ancestry: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.bronze.roll.reference-3",
+      "revision": 1,
+      "name": "Bronze Dragon Ancestry: 4d6",
+      "displayName": "Bronze Dragon Ancestry: 4d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.bronze"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Bronze Dragon Ancestry: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.bronze.roll.reference-4",
+      "revision": 1,
+      "name": "Bronze Dragon Ancestry: 5d6",
+      "displayName": "Bronze Dragon Ancestry: 5d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.bronze"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Bronze Dragon Ancestry: 5d6",
+        "dice": "5d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.copper.roll.reference-1",
+      "revision": 1,
+      "name": "Copper Dragon Ancestry: 2d6",
+      "displayName": "Copper Dragon Ancestry: 2d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.copper"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Copper Dragon Ancestry: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.copper.roll.reference-2",
+      "revision": 1,
+      "name": "Copper Dragon Ancestry: 3d6",
+      "displayName": "Copper Dragon Ancestry: 3d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.copper"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Copper Dragon Ancestry: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.copper.roll.reference-3",
+      "revision": 1,
+      "name": "Copper Dragon Ancestry: 4d6",
+      "displayName": "Copper Dragon Ancestry: 4d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.copper"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Copper Dragon Ancestry: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.copper.roll.reference-4",
+      "revision": 1,
+      "name": "Copper Dragon Ancestry: 5d6",
+      "displayName": "Copper Dragon Ancestry: 5d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.copper"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Copper Dragon Ancestry: 5d6",
+        "dice": "5d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.gold.roll.reference-1",
+      "revision": 1,
+      "name": "Gold Dragon Ancestry: 2d6",
+      "displayName": "Gold Dragon Ancestry: 2d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.gold"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Gold Dragon Ancestry: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.gold.roll.reference-2",
+      "revision": 1,
+      "name": "Gold Dragon Ancestry: 3d6",
+      "displayName": "Gold Dragon Ancestry: 3d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.gold"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Gold Dragon Ancestry: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.gold.roll.reference-3",
+      "revision": 1,
+      "name": "Gold Dragon Ancestry: 4d6",
+      "displayName": "Gold Dragon Ancestry: 4d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.gold"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Gold Dragon Ancestry: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.gold.roll.reference-4",
+      "revision": 1,
+      "name": "Gold Dragon Ancestry: 5d6",
+      "displayName": "Gold Dragon Ancestry: 5d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.gold"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Gold Dragon Ancestry: 5d6",
+        "dice": "5d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.green.roll.reference-1",
+      "revision": 1,
+      "name": "Green Dragon Ancestry: 2d6",
+      "displayName": "Green Dragon Ancestry: 2d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.green"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Green Dragon Ancestry: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.green.roll.reference-2",
+      "revision": 1,
+      "name": "Green Dragon Ancestry: 3d6",
+      "displayName": "Green Dragon Ancestry: 3d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.green"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Green Dragon Ancestry: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.green.roll.reference-3",
+      "revision": 1,
+      "name": "Green Dragon Ancestry: 4d6",
+      "displayName": "Green Dragon Ancestry: 4d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.green"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Green Dragon Ancestry: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.green.roll.reference-4",
+      "revision": 1,
+      "name": "Green Dragon Ancestry: 5d6",
+      "displayName": "Green Dragon Ancestry: 5d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.green"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Green Dragon Ancestry: 5d6",
+        "dice": "5d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.red.roll.reference-1",
+      "revision": 1,
+      "name": "Red Dragon Ancestry: 2d6",
+      "displayName": "Red Dragon Ancestry: 2d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.red"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Red Dragon Ancestry: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.red.roll.reference-2",
+      "revision": 1,
+      "name": "Red Dragon Ancestry: 3d6",
+      "displayName": "Red Dragon Ancestry: 3d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.red"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Red Dragon Ancestry: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.red.roll.reference-3",
+      "revision": 1,
+      "name": "Red Dragon Ancestry: 4d6",
+      "displayName": "Red Dragon Ancestry: 4d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.red"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Red Dragon Ancestry: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.red.roll.reference-4",
+      "revision": 1,
+      "name": "Red Dragon Ancestry: 5d6",
+      "displayName": "Red Dragon Ancestry: 5d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.red"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Red Dragon Ancestry: 5d6",
+        "dice": "5d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.silver.roll.reference-1",
+      "revision": 1,
+      "name": "Silver Dragon Ancestry: 2d6",
+      "displayName": "Silver Dragon Ancestry: 2d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.silver"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Silver Dragon Ancestry: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.silver.roll.reference-2",
+      "revision": 1,
+      "name": "Silver Dragon Ancestry: 3d6",
+      "displayName": "Silver Dragon Ancestry: 3d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.silver"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Silver Dragon Ancestry: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.silver.roll.reference-3",
+      "revision": 1,
+      "name": "Silver Dragon Ancestry: 4d6",
+      "displayName": "Silver Dragon Ancestry: 4d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.silver"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Silver Dragon Ancestry: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.silver.roll.reference-4",
+      "revision": 1,
+      "name": "Silver Dragon Ancestry: 5d6",
+      "displayName": "Silver Dragon Ancestry: 5d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.silver"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Silver Dragon Ancestry: 5d6",
+        "dice": "5d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.white.roll.reference-1",
+      "revision": 1,
+      "name": "White Dragon Ancestry: 2d6",
+      "displayName": "White Dragon Ancestry: 2d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.white"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "White Dragon Ancestry: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.white.roll.reference-2",
+      "revision": 1,
+      "name": "White Dragon Ancestry: 3d6",
+      "displayName": "White Dragon Ancestry: 3d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.white"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "White Dragon Ancestry: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.white.roll.reference-3",
+      "revision": 1,
+      "name": "White Dragon Ancestry: 4d6",
+      "displayName": "White Dragon Ancestry: 4d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.white"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "White Dragon Ancestry: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:dragon-ancestry.white.roll.reference-4",
+      "revision": 1,
+      "name": "White Dragon Ancestry: 5d6",
+      "displayName": "White Dragon Ancestry: 5d6",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:dragon-ancestry.white"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "White Dragon Ancestry: 5d6",
+        "dice": "5d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:fighter.hit-points.roll.reference-1",
+      "revision": 1,
+      "name": "Fighter Hit Points: 1d10",
+      "displayName": "Fighter Hit Points: 1d10",
+      "source": "SRD 5.1 p. 24 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=24",
+      "textReferences": [
+        "dnd5e:2014:fighter.hit-points"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Fighter Hit Points: 1d10",
+        "dice": "1d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:rogue.hit-points.roll.reference-1",
+      "revision": 1,
+      "name": "Rogue Hit Points: 1d8",
+      "displayName": "Rogue Hit Points: 1d8",
+      "source": "SRD 5.1 p. 39 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=39",
+      "textReferences": [
+        "dnd5e:2014:rogue.hit-points"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Rogue Hit Points: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:wizard.hit-points.roll.reference-1",
+      "revision": 1,
+      "name": "Wizard Hit Points: 1d6",
+      "displayName": "Wizard Hit Points: 1d6",
+      "source": "SRD 5.1 p. 52 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52",
+      "textReferences": [
+        "dnd5e:2014:wizard.hit-points"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Wizard Hit Points: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:fighter.second-wind.roll.healing",
+      "revision": 1,
+      "name": "Second Wind healing",
+      "displayName": "Second Wind healing",
+      "source": "SRD 5.1 p. 24 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=24",
+      "textReferences": [
+        "dnd5e:2014:fighter.second-wind"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "healing",
+        "dice": "1d10",
+        "bonus": {
+          "class": "dnd5e:2014:fighter"
+        },
+        "capability": "Second Wind",
+        "restoreResource": "hit-points",
+        "label": "Second Wind healing"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:rogue.sneak-attack.roll.reference-1",
+      "revision": 1,
+      "name": "Sneak Attack: 1d6",
+      "displayName": "Sneak Attack: 1d6",
+      "source": "SRD 5.1 p. 39 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=39",
+      "textReferences": [
+        "dnd5e:2014:rogue.sneak-attack"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Sneak Attack: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:rogue.reliable-talent.roll.reference-1",
+      "revision": 1,
+      "name": "Reliable Talent: d20",
+      "displayName": "Reliable Talent: d20",
+      "source": "SRD 5.1 p. 40 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=40",
+      "textReferences": [
+        "dnd5e:2014:rogue.reliable-talent"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Reliable Talent: d20",
+        "dice": "1d20"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:rogue.stroke-of-luck.roll.reference-1",
+      "revision": 1,
+      "name": "Stroke of Luck: d20",
+      "displayName": "Stroke of Luck: d20",
+      "source": "SRD 5.1 p. 40 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=40",
+      "textReferences": [
+        "dnd5e:2014:rogue.stroke-of-luck"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Stroke of Luck: d20",
+        "dice": "1d20"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:wizard.overchannel.roll.reference-1",
+      "revision": 1,
+      "name": "Overchannel: 2d12",
+      "displayName": "Overchannel: 2d12",
+      "source": "SRD 5.1 p. 54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=54",
+      "textReferences": [
+        "dnd5e:2014:wizard.overchannel"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Overchannel: 2d12",
+        "dice": "2d12"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:wizard.overchannel.roll.reference-2",
+      "revision": 1,
+      "name": "Overchannel: 1d12",
+      "displayName": "Overchannel: 1d12",
+      "source": "SRD 5.1 p. 54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=54",
+      "textReferences": [
+        "dnd5e:2014:wizard.overchannel"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Overchannel: 1d12",
+        "dice": "1d12"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.acid-splash.roll.reference-1",
+      "revision": 1,
+      "name": "Acid Splash: 1d6",
+      "displayName": "Acid Splash: 1d6",
+      "source": "SRD 5.1 p. 114 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=114",
+      "textReferences": [
+        "dnd5e:2014:spell.acid-splash"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Acid Splash: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.acid-splash.roll.reference-2",
+      "revision": 1,
+      "name": "Acid Splash: 2d6",
+      "displayName": "Acid Splash: 2d6",
+      "source": "SRD 5.1 p. 114 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=114",
+      "textReferences": [
+        "dnd5e:2014:spell.acid-splash"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Acid Splash: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.acid-splash.roll.reference-3",
+      "revision": 1,
+      "name": "Acid Splash: 3d6",
+      "displayName": "Acid Splash: 3d6",
+      "source": "SRD 5.1 p. 114 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=114",
+      "textReferences": [
+        "dnd5e:2014:spell.acid-splash"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Acid Splash: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.acid-splash.roll.reference-4",
+      "revision": 1,
+      "name": "Acid Splash: 4d6",
+      "displayName": "Acid Splash: 4d6",
+      "source": "SRD 5.1 p. 114 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=114",
+      "textReferences": [
+        "dnd5e:2014:spell.acid-splash"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Acid Splash: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.chill-touch.roll.reference-1",
+      "revision": 1,
+      "name": "Chill Touch: 1d8",
+      "displayName": "Chill Touch: 1d8",
+      "source": "SRD 5.1 p. 124 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=124",
+      "textReferences": [
+        "dnd5e:2014:spell.chill-touch"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Chill Touch: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.chill-touch.roll.reference-2",
+      "revision": 1,
+      "name": "Chill Touch: 2d8",
+      "displayName": "Chill Touch: 2d8",
+      "source": "SRD 5.1 p. 124 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=124",
+      "textReferences": [
+        "dnd5e:2014:spell.chill-touch"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Chill Touch: 2d8",
+        "dice": "2d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.chill-touch.roll.reference-3",
+      "revision": 1,
+      "name": "Chill Touch: 3d8",
+      "displayName": "Chill Touch: 3d8",
+      "source": "SRD 5.1 p. 124 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=124",
+      "textReferences": [
+        "dnd5e:2014:spell.chill-touch"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Chill Touch: 3d8",
+        "dice": "3d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.chill-touch.roll.reference-4",
+      "revision": 1,
+      "name": "Chill Touch: 4d8",
+      "displayName": "Chill Touch: 4d8",
+      "source": "SRD 5.1 p. 124 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=124",
+      "textReferences": [
+        "dnd5e:2014:spell.chill-touch"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Chill Touch: 4d8",
+        "dice": "4d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.fire-bolt.roll.reference-1",
+      "revision": 1,
+      "name": "Fire Bolt: 1d10",
+      "displayName": "Fire Bolt: 1d10",
+      "source": "SRD 5.1 p. 144 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=144",
+      "textReferences": [
+        "dnd5e:2014:spell.fire-bolt"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Fire Bolt: 1d10",
+        "dice": "1d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.fire-bolt.roll.reference-2",
+      "revision": 1,
+      "name": "Fire Bolt: 2d10",
+      "displayName": "Fire Bolt: 2d10",
+      "source": "SRD 5.1 p. 144 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=144",
+      "textReferences": [
+        "dnd5e:2014:spell.fire-bolt"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Fire Bolt: 2d10",
+        "dice": "2d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.fire-bolt.roll.reference-3",
+      "revision": 1,
+      "name": "Fire Bolt: 3d10",
+      "displayName": "Fire Bolt: 3d10",
+      "source": "SRD 5.1 p. 144 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=144",
+      "textReferences": [
+        "dnd5e:2014:spell.fire-bolt"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Fire Bolt: 3d10",
+        "dice": "3d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.fire-bolt.roll.reference-4",
+      "revision": 1,
+      "name": "Fire Bolt: 4d10",
+      "displayName": "Fire Bolt: 4d10",
+      "source": "SRD 5.1 p. 144 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=144",
+      "textReferences": [
+        "dnd5e:2014:spell.fire-bolt"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Fire Bolt: 4d10",
+        "dice": "4d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.poison-spray.roll.reference-1",
+      "revision": 1,
+      "name": "Poison Spray: 1d12",
+      "displayName": "Poison Spray: 1d12",
+      "source": "SRD 5.1 p. 169 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=169",
+      "textReferences": [
+        "dnd5e:2014:spell.poison-spray"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Poison Spray: 1d12",
+        "dice": "1d12"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.poison-spray.roll.reference-2",
+      "revision": 1,
+      "name": "Poison Spray: 2d12",
+      "displayName": "Poison Spray: 2d12",
+      "source": "SRD 5.1 p. 169 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=169",
+      "textReferences": [
+        "dnd5e:2014:spell.poison-spray"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Poison Spray: 2d12",
+        "dice": "2d12"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.poison-spray.roll.reference-3",
+      "revision": 1,
+      "name": "Poison Spray: 3d12",
+      "displayName": "Poison Spray: 3d12",
+      "source": "SRD 5.1 p. 169 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=169",
+      "textReferences": [
+        "dnd5e:2014:spell.poison-spray"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Poison Spray: 3d12",
+        "dice": "3d12"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.poison-spray.roll.reference-4",
+      "revision": 1,
+      "name": "Poison Spray: 4d12",
+      "displayName": "Poison Spray: 4d12",
+      "source": "SRD 5.1 p. 169 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=169",
+      "textReferences": [
+        "dnd5e:2014:spell.poison-spray"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Poison Spray: 4d12",
+        "dice": "4d12"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.ray-of-frost.roll.reference-1",
+      "revision": 1,
+      "name": "Ray of Frost: 1d8",
+      "displayName": "Ray of Frost: 1d8",
+      "source": "SRD 5.1 p. 174 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=174",
+      "textReferences": [
+        "dnd5e:2014:spell.ray-of-frost"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Ray of Frost: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.ray-of-frost.roll.reference-2",
+      "revision": 1,
+      "name": "Ray of Frost: 2d8",
+      "displayName": "Ray of Frost: 2d8",
+      "source": "SRD 5.1 p. 174 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=174",
+      "textReferences": [
+        "dnd5e:2014:spell.ray-of-frost"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Ray of Frost: 2d8",
+        "dice": "2d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.ray-of-frost.roll.reference-3",
+      "revision": 1,
+      "name": "Ray of Frost: 3d8",
+      "displayName": "Ray of Frost: 3d8",
+      "source": "SRD 5.1 p. 174 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=174",
+      "textReferences": [
+        "dnd5e:2014:spell.ray-of-frost"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Ray of Frost: 3d8",
+        "dice": "3d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.ray-of-frost.roll.reference-4",
+      "revision": 1,
+      "name": "Ray of Frost: 4d8",
+      "displayName": "Ray of Frost: 4d8",
+      "source": "SRD 5.1 p. 174 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=174",
+      "textReferences": [
+        "dnd5e:2014:spell.ray-of-frost"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Ray of Frost: 4d8",
+        "dice": "4d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.shocking-grasp.roll.reference-1",
+      "revision": 1,
+      "name": "Shocking Grasp: 1d8",
+      "displayName": "Shocking Grasp: 1d8",
+      "source": "SRD 5.1 p. 179 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=179",
+      "textReferences": [
+        "dnd5e:2014:spell.shocking-grasp"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Shocking Grasp: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.shocking-grasp.roll.reference-2",
+      "revision": 1,
+      "name": "Shocking Grasp: 2d8",
+      "displayName": "Shocking Grasp: 2d8",
+      "source": "SRD 5.1 p. 179 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=179",
+      "textReferences": [
+        "dnd5e:2014:spell.shocking-grasp"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Shocking Grasp: 2d8",
+        "dice": "2d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.shocking-grasp.roll.reference-3",
+      "revision": 1,
+      "name": "Shocking Grasp: 3d8",
+      "displayName": "Shocking Grasp: 3d8",
+      "source": "SRD 5.1 p. 179 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=179",
+      "textReferences": [
+        "dnd5e:2014:spell.shocking-grasp"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Shocking Grasp: 3d8",
+        "dice": "3d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.shocking-grasp.roll.reference-4",
+      "revision": 1,
+      "name": "Shocking Grasp: 4d8",
+      "displayName": "Shocking Grasp: 4d8",
+      "source": "SRD 5.1 p. 179 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=179",
+      "textReferences": [
+        "dnd5e:2014:spell.shocking-grasp"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Shocking Grasp: 4d8",
+        "dice": "4d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.burning-hands.roll.reference-1",
+      "revision": 1,
+      "name": "Burning Hands: 3d6",
+      "displayName": "Burning Hands: 3d6",
+      "source": "SRD 5.1 p. 123 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=123",
+      "textReferences": [
+        "dnd5e:2014:spell.burning-hands"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Burning Hands: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.burning-hands.roll.reference-2",
+      "revision": 1,
+      "name": "Burning Hands: 1d6",
+      "displayName": "Burning Hands: 1d6",
+      "source": "SRD 5.1 p. 123 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=123",
+      "textReferences": [
+        "dnd5e:2014:spell.burning-hands"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Burning Hands: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.color-spray.roll.reference-1",
+      "revision": 1,
+      "name": "Color Spray: 6d10",
+      "displayName": "Color Spray: 6d10",
+      "source": "SRD 5.1 p. 125 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=125",
+      "textReferences": [
+        "dnd5e:2014:spell.color-spray"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Color Spray: 6d10",
+        "dice": "6d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.color-spray.roll.reference-2",
+      "revision": 1,
+      "name": "Color Spray: 2d10",
+      "displayName": "Color Spray: 2d10",
+      "source": "SRD 5.1 p. 125 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=125",
+      "textReferences": [
+        "dnd5e:2014:spell.color-spray"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Color Spray: 2d10",
+        "dice": "2d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.false-life.roll.reference-1",
+      "revision": 1,
+      "name": "False Life: 1d4 + 4",
+      "displayName": "False Life: 1d4 + 4",
+      "source": "SRD 5.1 p. 142 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=142",
+      "textReferences": [
+        "dnd5e:2014:spell.false-life"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "False Life: 1d4 + 4",
+        "dice": "1d4 + 4"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.magic-missile.roll.reference-1",
+      "revision": 1,
+      "name": "Magic Missile: 1d4 + 1",
+      "displayName": "Magic Missile: 1d4 + 1",
+      "source": "SRD 5.1 p. 161 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=161",
+      "textReferences": [
+        "dnd5e:2014:spell.magic-missile"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Magic Missile: 1d4 + 1",
+        "dice": "1d4 + 1"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.sleep.roll.reference-1",
+      "revision": 1,
+      "name": "Sleep: 5d8",
+      "displayName": "Sleep: 5d8",
+      "source": "SRD 5.1 p. 180 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=180",
+      "textReferences": [
+        "dnd5e:2014:spell.sleep"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Sleep: 5d8",
+        "dice": "5d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.sleep.roll.reference-2",
+      "revision": 1,
+      "name": "Sleep: 2d8",
+      "displayName": "Sleep: 2d8",
+      "source": "SRD 5.1 p. 180 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=180",
+      "textReferences": [
+        "dnd5e:2014:spell.sleep"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Sleep: 2d8",
+        "dice": "2d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.thunderwave.roll.reference-1",
+      "revision": 1,
+      "name": "Thunderwave: 2d8",
+      "displayName": "Thunderwave: 2d8",
+      "source": "SRD 5.1 p. 187 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=187",
+      "textReferences": [
+        "dnd5e:2014:spell.thunderwave"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Thunderwave: 2d8",
+        "dice": "2d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.thunderwave.roll.reference-2",
+      "revision": 1,
+      "name": "Thunderwave: 1d8",
+      "displayName": "Thunderwave: 1d8",
+      "source": "SRD 5.1 p. 187 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=187",
+      "textReferences": [
+        "dnd5e:2014:spell.thunderwave"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Thunderwave: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.acid-arrow.roll.reference-1",
+      "revision": 1,
+      "name": "Acid Arrow: 4d4",
+      "displayName": "Acid Arrow: 4d4",
+      "source": "SRD 5.1 p. 114 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=114",
+      "textReferences": [
+        "dnd5e:2014:spell.acid-arrow"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Acid Arrow: 4d4",
+        "dice": "4d4"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.acid-arrow.roll.reference-2",
+      "revision": 1,
+      "name": "Acid Arrow: 2d4",
+      "displayName": "Acid Arrow: 2d4",
+      "source": "SRD 5.1 p. 114 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=114",
+      "textReferences": [
+        "dnd5e:2014:spell.acid-arrow"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Acid Arrow: 2d4",
+        "dice": "2d4"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.acid-arrow.roll.reference-3",
+      "revision": 1,
+      "name": "Acid Arrow: 1d4",
+      "displayName": "Acid Arrow: 1d4",
+      "source": "SRD 5.1 p. 114 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=114",
+      "textReferences": [
+        "dnd5e:2014:spell.acid-arrow"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Acid Arrow: 1d4",
+        "dice": "1d4"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.alter-self.roll.reference-1",
+      "revision": 1,
+      "name": "Alter Self: 1d6",
+      "displayName": "Alter Self: 1d6",
+      "source": "SRD 5.1 pp. 114–115 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=114",
+      "textReferences": [
+        "dnd5e:2014:spell.alter-self"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Alter Self: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.enlarge-reduce.roll.reference-1",
+      "revision": 1,
+      "name": "Enlarge/Reduce: 1d4",
+      "displayName": "Enlarge/Reduce: 1d4",
+      "source": "SRD 5.1 p. 140 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=140",
+      "textReferences": [
+        "dnd5e:2014:spell.enlarge-reduce"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Enlarge/Reduce: 1d4",
+        "dice": "1d4"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.flaming-sphere.roll.reference-1",
+      "revision": 1,
+      "name": "Flaming Sphere: 2d6",
+      "displayName": "Flaming Sphere: 2d6",
+      "source": "SRD 5.1 p. 145 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=145",
+      "textReferences": [
+        "dnd5e:2014:spell.flaming-sphere"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Flaming Sphere: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.flaming-sphere.roll.reference-2",
+      "revision": 1,
+      "name": "Flaming Sphere: 1d6",
+      "displayName": "Flaming Sphere: 1d6",
+      "source": "SRD 5.1 p. 145 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=145",
+      "textReferences": [
+        "dnd5e:2014:spell.flaming-sphere"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Flaming Sphere: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.mirror-image.roll.reference-1",
+      "revision": 1,
+      "name": "Mirror Image: d20",
+      "displayName": "Mirror Image: d20",
+      "source": "SRD 5.1 p. 165 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=165",
+      "textReferences": [
+        "dnd5e:2014:spell.mirror-image"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Mirror Image: d20",
+        "dice": "1d20"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.scorching-ray.roll.reference-1",
+      "revision": 1,
+      "name": "Scorching Ray: 2d6",
+      "displayName": "Scorching Ray: 2d6",
+      "source": "SRD 5.1 p. 176 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=176",
+      "textReferences": [
+        "dnd5e:2014:spell.scorching-ray"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Scorching Ray: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.shatter.roll.reference-1",
+      "revision": 1,
+      "name": "Shatter: 3d8",
+      "displayName": "Shatter: 3d8",
+      "source": "SRD 5.1 pp. 178–179 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=178",
+      "textReferences": [
+        "dnd5e:2014:spell.shatter"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Shatter: 3d8",
+        "dice": "3d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.shatter.roll.reference-2",
+      "revision": 1,
+      "name": "Shatter: 1d8",
+      "displayName": "Shatter: 1d8",
+      "source": "SRD 5.1 pp. 178–179 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=178",
+      "textReferences": [
+        "dnd5e:2014:spell.shatter"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Shatter: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.web.roll.reference-1",
+      "revision": 1,
+      "name": "Web: 2d4",
+      "displayName": "Web: 2d4",
+      "source": "SRD 5.1 p. 192 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=192",
+      "textReferences": [
+        "dnd5e:2014:spell.web"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Web: 2d4",
+        "dice": "2d4"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.bestow-curse.roll.reference-1",
+      "revision": 1,
+      "name": "Bestow Curse: 1d8",
+      "displayName": "Bestow Curse: 1d8",
+      "source": "SRD 5.1 p. 121 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=121",
+      "textReferences": [
+        "dnd5e:2014:spell.bestow-curse"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Bestow Curse: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.blink.roll.reference-1",
+      "revision": 1,
+      "name": "Blink: d20",
+      "displayName": "Blink: d20",
+      "source": "SRD 5.1 pp. 122–123 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=122",
+      "textReferences": [
+        "dnd5e:2014:spell.blink"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Blink: d20",
+        "dice": "1d20"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.fireball.roll.reference-1",
+      "revision": 1,
+      "name": "Fireball: 8d6",
+      "displayName": "Fireball: 8d6",
+      "source": "SRD 5.1 p. 144 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=144",
+      "textReferences": [
+        "dnd5e:2014:spell.fireball"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Fireball: 8d6",
+        "dice": "8d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.fireball.roll.reference-2",
+      "revision": 1,
+      "name": "Fireball: 1d6",
+      "displayName": "Fireball: 1d6",
+      "source": "SRD 5.1 p. 144 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=144",
+      "textReferences": [
+        "dnd5e:2014:spell.fireball"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Fireball: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.glyph-of-warding.roll.reference-1",
+      "revision": 1,
+      "name": "Glyph of Warding: 5d8",
+      "displayName": "Glyph of Warding: 5d8",
+      "source": "SRD 5.1 pp. 149–150 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=149",
+      "textReferences": [
+        "dnd5e:2014:spell.glyph-of-warding"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Glyph of Warding: 5d8",
+        "dice": "5d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.glyph-of-warding.roll.reference-2",
+      "revision": 1,
+      "name": "Glyph of Warding: 1d8",
+      "displayName": "Glyph of Warding: 1d8",
+      "source": "SRD 5.1 pp. 149–150 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=149",
+      "textReferences": [
+        "dnd5e:2014:spell.glyph-of-warding"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Glyph of Warding: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.lightning-bolt.roll.reference-1",
+      "revision": 1,
+      "name": "Lightning Bolt: 8d6",
+      "displayName": "Lightning Bolt: 8d6",
+      "source": "SRD 5.1 p. 159 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=159",
+      "textReferences": [
+        "dnd5e:2014:spell.lightning-bolt"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Lightning Bolt: 8d6",
+        "dice": "8d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.lightning-bolt.roll.reference-2",
+      "revision": 1,
+      "name": "Lightning Bolt: 1d6",
+      "displayName": "Lightning Bolt: 1d6",
+      "source": "SRD 5.1 p. 159 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=159",
+      "textReferences": [
+        "dnd5e:2014:spell.lightning-bolt"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Lightning Bolt: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.slow.roll.reference-1",
+      "revision": 1,
+      "name": "Slow: d20",
+      "displayName": "Slow: d20",
+      "source": "SRD 5.1 pp. 180–181 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=180",
+      "textReferences": [
+        "dnd5e:2014:spell.slow"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Slow: d20",
+        "dice": "1d20"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.vampiric-touch.roll.reference-1",
+      "revision": 1,
+      "name": "Vampiric Touch: 3d6",
+      "displayName": "Vampiric Touch: 3d6",
+      "source": "SRD 5.1 p. 189 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=189",
+      "textReferences": [
+        "dnd5e:2014:spell.vampiric-touch"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Vampiric Touch: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.vampiric-touch.roll.reference-2",
+      "revision": 1,
+      "name": "Vampiric Touch: 1d6",
+      "displayName": "Vampiric Touch: 1d6",
+      "source": "SRD 5.1 p. 189 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=189",
+      "textReferences": [
+        "dnd5e:2014:spell.vampiric-touch"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Vampiric Touch: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.black-tentacles.roll.reference-1",
+      "revision": 1,
+      "name": "Black Tentacles: 3d6",
+      "displayName": "Black Tentacles: 3d6",
+      "source": "SRD 5.1 p. 121 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=121",
+      "textReferences": [
+        "dnd5e:2014:spell.black-tentacles"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Black Tentacles: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.blight.roll.reference-1",
+      "revision": 1,
+      "name": "Blight: 8d8",
+      "displayName": "Blight: 8d8",
+      "source": "SRD 5.1 p. 122 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=122",
+      "textReferences": [
+        "dnd5e:2014:spell.blight"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Blight: 8d8",
+        "dice": "8d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.blight.roll.reference-2",
+      "revision": 1,
+      "name": "Blight: 1d8",
+      "displayName": "Blight: 1d8",
+      "source": "SRD 5.1 p. 122 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=122",
+      "textReferences": [
+        "dnd5e:2014:spell.blight"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Blight: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.confusion.roll.reference-1",
+      "revision": 1,
+      "name": "Confusion: d10",
+      "displayName": "Confusion: d10",
+      "source": "SRD 5.1 p. 127 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=127",
+      "textReferences": [
+        "dnd5e:2014:spell.confusion"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Confusion: d10",
+        "dice": "1d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.confusion.roll.reference-2",
+      "revision": 1,
+      "name": "Confusion: d8",
+      "displayName": "Confusion: d8",
+      "source": "SRD 5.1 p. 127 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=127",
+      "textReferences": [
+        "dnd5e:2014:spell.confusion"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Confusion: d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.control-water.roll.reference-1",
+      "revision": 1,
+      "name": "Control Water: 2d8",
+      "displayName": "Control Water: 2d8",
+      "source": "SRD 5.1 pp. 130–131 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=130",
+      "textReferences": [
+        "dnd5e:2014:spell.control-water"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Control Water: 2d8",
+        "dice": "2d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.dimension-door.roll.reference-1",
+      "revision": 1,
+      "name": "Dimension Door: 4d6",
+      "displayName": "Dimension Door: 4d6",
+      "source": "SRD 5.1 p. 135 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=135",
+      "textReferences": [
+        "dnd5e:2014:spell.dimension-door"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Dimension Door: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.faithful-hound.roll.reference-1",
+      "revision": 1,
+      "name": "Faithful Hound: 4d8",
+      "displayName": "Faithful Hound: 4d8",
+      "source": "SRD 5.1 p. 142 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=142",
+      "textReferences": [
+        "dnd5e:2014:spell.faithful-hound"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Faithful Hound: 4d8",
+        "dice": "4d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.fire-shield.roll.reference-1",
+      "revision": 1,
+      "name": "Fire Shield: 2d8",
+      "displayName": "Fire Shield: 2d8",
+      "source": "SRD 5.1 p. 144 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=144",
+      "textReferences": [
+        "dnd5e:2014:spell.fire-shield"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Fire Shield: 2d8",
+        "dice": "2d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.ice-storm.roll.reference-1",
+      "revision": 1,
+      "name": "Ice Storm: 2d8",
+      "displayName": "Ice Storm: 2d8",
+      "source": "SRD 5.1 p. 155 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=155",
+      "textReferences": [
+        "dnd5e:2014:spell.ice-storm"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Ice Storm: 2d8",
+        "dice": "2d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.ice-storm.roll.reference-2",
+      "revision": 1,
+      "name": "Ice Storm: 4d6",
+      "displayName": "Ice Storm: 4d6",
+      "source": "SRD 5.1 p. 155 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=155",
+      "textReferences": [
+        "dnd5e:2014:spell.ice-storm"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Ice Storm: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.ice-storm.roll.reference-3",
+      "revision": 1,
+      "name": "Ice Storm: 1d8",
+      "displayName": "Ice Storm: 1d8",
+      "source": "SRD 5.1 p. 155 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=155",
+      "textReferences": [
+        "dnd5e:2014:spell.ice-storm"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Ice Storm: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.phantasmal-killer.roll.reference-1",
+      "revision": 1,
+      "name": "Phantasmal Killer: 4d10",
+      "displayName": "Phantasmal Killer: 4d10",
+      "source": "SRD 5.1 p. 167 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=167",
+      "textReferences": [
+        "dnd5e:2014:spell.phantasmal-killer"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Phantasmal Killer: 4d10",
+        "dice": "4d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.phantasmal-killer.roll.reference-2",
+      "revision": 1,
+      "name": "Phantasmal Killer: 1d10",
+      "displayName": "Phantasmal Killer: 1d10",
+      "source": "SRD 5.1 p. 167 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=167",
+      "textReferences": [
+        "dnd5e:2014:spell.phantasmal-killer"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Phantasmal Killer: 1d10",
+        "dice": "1d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.wall-of-fire.roll.reference-1",
+      "revision": 1,
+      "name": "Wall of Fire: 5d8",
+      "displayName": "Wall of Fire: 5d8",
+      "source": "SRD 5.1 p. 190 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=190",
+      "textReferences": [
+        "dnd5e:2014:spell.wall-of-fire"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Wall of Fire: 5d8",
+        "dice": "5d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.wall-of-fire.roll.reference-2",
+      "revision": 1,
+      "name": "Wall of Fire: 1d8",
+      "displayName": "Wall of Fire: 1d8",
+      "source": "SRD 5.1 p. 190 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=190",
+      "textReferences": [
+        "dnd5e:2014:spell.wall-of-fire"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Wall of Fire: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.animate-objects.roll.reference-1",
+      "revision": 1,
+      "name": "Animate Objects: 1d4 + 4",
+      "displayName": "Animate Objects: 1d4 + 4",
+      "source": "SRD 5.1 p. 116 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=116",
+      "textReferences": [
+        "dnd5e:2014:spell.animate-objects"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Animate Objects: 1d4 + 4",
+        "dice": "1d4 + 4"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.animate-objects.roll.reference-2",
+      "revision": 1,
+      "name": "Animate Objects: 1d8 + 2",
+      "displayName": "Animate Objects: 1d8 + 2",
+      "source": "SRD 5.1 p. 116 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=116",
+      "textReferences": [
+        "dnd5e:2014:spell.animate-objects"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Animate Objects: 1d8 + 2",
+        "dice": "1d8 + 2"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.animate-objects.roll.reference-3",
+      "revision": 1,
+      "name": "Animate Objects: 2d6 + 1",
+      "displayName": "Animate Objects: 2d6 + 1",
+      "source": "SRD 5.1 p. 116 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=116",
+      "textReferences": [
+        "dnd5e:2014:spell.animate-objects"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Animate Objects: 2d6 + 1",
+        "dice": "2d6 + 1"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.animate-objects.roll.reference-4",
+      "revision": 1,
+      "name": "Animate Objects: 2d10 + 2",
+      "displayName": "Animate Objects: 2d10 + 2",
+      "source": "SRD 5.1 p. 116 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=116",
+      "textReferences": [
+        "dnd5e:2014:spell.animate-objects"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Animate Objects: 2d10 + 2",
+        "dice": "2d10 + 2"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.animate-objects.roll.reference-5",
+      "revision": 1,
+      "name": "Animate Objects: 2d12 + 4",
+      "displayName": "Animate Objects: 2d12 + 4",
+      "source": "SRD 5.1 p. 116 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=116",
+      "textReferences": [
+        "dnd5e:2014:spell.animate-objects"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-5",
+        "label": "Animate Objects: 2d12 + 4",
+        "dice": "2d12 + 4"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.arcane-hand.roll.reference-1",
+      "revision": 1,
+      "name": "Arcane Hand: 4d8",
+      "displayName": "Arcane Hand: 4d8",
+      "source": "SRD 5.1 p. 118 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=118",
+      "textReferences": [
+        "dnd5e:2014:spell.arcane-hand"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Arcane Hand: 4d8",
+        "dice": "4d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.arcane-hand.roll.reference-2",
+      "revision": 1,
+      "name": "Arcane Hand: 2d6",
+      "displayName": "Arcane Hand: 2d6",
+      "source": "SRD 5.1 p. 118 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=118",
+      "textReferences": [
+        "dnd5e:2014:spell.arcane-hand"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Arcane Hand: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.arcane-hand.roll.reference-3",
+      "revision": 1,
+      "name": "Arcane Hand: 2d8",
+      "displayName": "Arcane Hand: 2d8",
+      "source": "SRD 5.1 p. 118 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=118",
+      "textReferences": [
+        "dnd5e:2014:spell.arcane-hand"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Arcane Hand: 2d8",
+        "dice": "2d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.cloudkill.roll.reference-1",
+      "revision": 1,
+      "name": "Cloudkill: 5d8",
+      "displayName": "Cloudkill: 5d8",
+      "source": "SRD 5.1 p. 125 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=125",
+      "textReferences": [
+        "dnd5e:2014:spell.cloudkill"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Cloudkill: 5d8",
+        "dice": "5d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.cloudkill.roll.reference-2",
+      "revision": 1,
+      "name": "Cloudkill: 1d8",
+      "displayName": "Cloudkill: 1d8",
+      "source": "SRD 5.1 p. 125 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=125",
+      "textReferences": [
+        "dnd5e:2014:spell.cloudkill"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Cloudkill: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.cone-of-cold.roll.reference-1",
+      "revision": 1,
+      "name": "Cone of Cold: 8d8",
+      "displayName": "Cone of Cold: 8d8",
+      "source": "SRD 5.1 p. 127 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=127",
+      "textReferences": [
+        "dnd5e:2014:spell.cone-of-cold"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Cone of Cold: 8d8",
+        "dice": "8d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.cone-of-cold.roll.reference-2",
+      "revision": 1,
+      "name": "Cone of Cold: 1d8",
+      "displayName": "Cone of Cold: 1d8",
+      "source": "SRD 5.1 p. 127 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=127",
+      "textReferences": [
+        "dnd5e:2014:spell.cone-of-cold"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Cone of Cold: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.contact-other-plane.roll.reference-1",
+      "revision": 1,
+      "name": "Contact Other Plane: 6d6",
+      "displayName": "Contact Other Plane: 6d6",
+      "source": "SRD 5.1 p. 129 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=129",
+      "textReferences": [
+        "dnd5e:2014:spell.contact-other-plane"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Contact Other Plane: 6d6",
+        "dice": "6d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.dream.roll.reference-1",
+      "revision": 1,
+      "name": "Dream: 3d6",
+      "displayName": "Dream: 3d6",
+      "source": "SRD 5.1 p. 138 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=138",
+      "textReferences": [
+        "dnd5e:2014:spell.dream"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Dream: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.geas.roll.reference-1",
+      "revision": 1,
+      "name": "Geas: 5d10",
+      "displayName": "Geas: 5d10",
+      "source": "SRD 5.1 p. 148 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=148",
+      "textReferences": [
+        "dnd5e:2014:spell.geas"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Geas: 5d10",
+        "dice": "5d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.chain-lightning.roll.reference-1",
+      "revision": 1,
+      "name": "Chain Lightning: 10d8",
+      "displayName": "Chain Lightning: 10d8",
+      "source": "SRD 5.1 p. 124 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=124",
+      "textReferences": [
+        "dnd5e:2014:spell.chain-lightning"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Chain Lightning: 10d8",
+        "dice": "10d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.circle-of-death.roll.reference-1",
+      "revision": 1,
+      "name": "Circle of Death: 8d6",
+      "displayName": "Circle of Death: 8d6",
+      "source": "SRD 5.1 p. 124 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=124",
+      "textReferences": [
+        "dnd5e:2014:spell.circle-of-death"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Circle of Death: 8d6",
+        "dice": "8d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.circle-of-death.roll.reference-2",
+      "revision": 1,
+      "name": "Circle of Death: 2d6",
+      "displayName": "Circle of Death: 2d6",
+      "source": "SRD 5.1 p. 124 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=124",
+      "textReferences": [
+        "dnd5e:2014:spell.circle-of-death"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Circle of Death: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.disintegrate.roll.reference-1",
+      "revision": 1,
+      "name": "Disintegrate: 10d6 + 40",
+      "displayName": "Disintegrate: 10d6 + 40",
+      "source": "SRD 5.1 pp. 135–136 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=135",
+      "textReferences": [
+        "dnd5e:2014:spell.disintegrate"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Disintegrate: 10d6 + 40",
+        "dice": "10d6 + 40"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.disintegrate.roll.reference-2",
+      "revision": 1,
+      "name": "Disintegrate: 3d6",
+      "displayName": "Disintegrate: 3d6",
+      "source": "SRD 5.1 pp. 135–136 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=135",
+      "textReferences": [
+        "dnd5e:2014:spell.disintegrate"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Disintegrate: 3d6",
+        "dice": "3d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.freezing-sphere.roll.reference-1",
+      "revision": 1,
+      "name": "Freezing Sphere: 10d6",
+      "displayName": "Freezing Sphere: 10d6",
+      "source": "SRD 5.1 pp. 147–148 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=147",
+      "textReferences": [
+        "dnd5e:2014:spell.freezing-sphere"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Freezing Sphere: 10d6",
+        "dice": "10d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.freezing-sphere.roll.reference-2",
+      "revision": 1,
+      "name": "Freezing Sphere: 1d6",
+      "displayName": "Freezing Sphere: 1d6",
+      "source": "SRD 5.1 pp. 147–148 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=147",
+      "textReferences": [
+        "dnd5e:2014:spell.freezing-sphere"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Freezing Sphere: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.sunbeam.roll.reference-1",
+      "revision": 1,
+      "name": "Sunbeam: 6d8",
+      "displayName": "Sunbeam: 6d8",
+      "source": "SRD 5.1 p. 184 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=184",
+      "textReferences": [
+        "dnd5e:2014:spell.sunbeam"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Sunbeam: 6d8",
+        "dice": "6d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.wall-of-ice.roll.reference-1",
+      "revision": 1,
+      "name": "Wall of Ice: 10d6",
+      "displayName": "Wall of Ice: 10d6",
+      "source": "SRD 5.1 p. 190 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=190",
+      "textReferences": [
+        "dnd5e:2014:spell.wall-of-ice"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Wall of Ice: 10d6",
+        "dice": "10d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.wall-of-ice.roll.reference-2",
+      "revision": 1,
+      "name": "Wall of Ice: 5d6",
+      "displayName": "Wall of Ice: 5d6",
+      "source": "SRD 5.1 p. 190 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=190",
+      "textReferences": [
+        "dnd5e:2014:spell.wall-of-ice"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Wall of Ice: 5d6",
+        "dice": "5d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.wall-of-ice.roll.reference-3",
+      "revision": 1,
+      "name": "Wall of Ice: 2d6",
+      "displayName": "Wall of Ice: 2d6",
+      "source": "SRD 5.1 p. 190 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=190",
+      "textReferences": [
+        "dnd5e:2014:spell.wall-of-ice"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Wall of Ice: 2d6",
+        "dice": "2d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.wall-of-ice.roll.reference-4",
+      "revision": 1,
+      "name": "Wall of Ice: 1d6",
+      "displayName": "Wall of Ice: 1d6",
+      "source": "SRD 5.1 p. 190 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=190",
+      "textReferences": [
+        "dnd5e:2014:spell.wall-of-ice"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Wall of Ice: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.arcane-sword.roll.reference-1",
+      "revision": 1,
+      "name": "Arcane Sword: 3d10",
+      "displayName": "Arcane Sword: 3d10",
+      "source": "SRD 5.1 p. 119 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=119",
+      "textReferences": [
+        "dnd5e:2014:spell.arcane-sword"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Arcane Sword: 3d10",
+        "dice": "3d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.delayed-blast-fireball.roll.reference-1",
+      "revision": 1,
+      "name": "Delayed Blast Fireball: 12d6",
+      "displayName": "Delayed Blast Fireball: 12d6",
+      "source": "SRD 5.1 pp. 133–134 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=133",
+      "textReferences": [
+        "dnd5e:2014:spell.delayed-blast-fireball"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Delayed Blast Fireball: 12d6",
+        "dice": "12d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.delayed-blast-fireball.roll.reference-2",
+      "revision": 1,
+      "name": "Delayed Blast Fireball: 1d6",
+      "displayName": "Delayed Blast Fireball: 1d6",
+      "source": "SRD 5.1 pp. 133–134 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=133",
+      "textReferences": [
+        "dnd5e:2014:spell.delayed-blast-fireball"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Delayed Blast Fireball: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.finger-of-death.roll.reference-1",
+      "revision": 1,
+      "name": "Finger of Death: 7d8 + 30",
+      "displayName": "Finger of Death: 7d8 + 30",
+      "source": "SRD 5.1 p. 144 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=144",
+      "textReferences": [
+        "dnd5e:2014:spell.finger-of-death"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Finger of Death: 7d8 + 30",
+        "dice": "7d8 + 30"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.prismatic-spray.roll.reference-1",
+      "revision": 1,
+      "name": "Prismatic Spray: d8",
+      "displayName": "Prismatic Spray: d8",
+      "source": "SRD 5.1 pp. 170–171 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=170",
+      "textReferences": [
+        "dnd5e:2014:spell.prismatic-spray"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Prismatic Spray: d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.prismatic-spray.roll.reference-2",
+      "revision": 1,
+      "name": "Prismatic Spray: 10d6",
+      "displayName": "Prismatic Spray: 10d6",
+      "source": "SRD 5.1 pp. 170–171 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=170",
+      "textReferences": [
+        "dnd5e:2014:spell.prismatic-spray"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Prismatic Spray: 10d6",
+        "dice": "10d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.symbol.roll.reference-1",
+      "revision": 1,
+      "name": "Symbol: 10d10",
+      "displayName": "Symbol: 10d10",
+      "source": "SRD 5.1 pp. 184–185 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=184",
+      "textReferences": [
+        "dnd5e:2014:spell.symbol"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Symbol: 10d10",
+        "dice": "10d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.teleport.roll.reference-1",
+      "revision": 1,
+      "name": "Teleport: d100",
+      "displayName": "Teleport: d100",
+      "source": "SRD 5.1 pp. 185–186 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=185",
+      "textReferences": [
+        "dnd5e:2014:spell.teleport"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Teleport: d100",
+        "dice": "1d100"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.teleport.roll.reference-2",
+      "revision": 1,
+      "name": "Teleport: 1d10",
+      "displayName": "Teleport: 1d10",
+      "source": "SRD 5.1 pp. 185–186 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=185",
+      "textReferences": [
+        "dnd5e:2014:spell.teleport"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Teleport: 1d10",
+        "dice": "1d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.teleport.roll.reference-3",
+      "revision": 1,
+      "name": "Teleport: d10",
+      "displayName": "Teleport: d10",
+      "source": "SRD 5.1 pp. 185–186 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=185",
+      "textReferences": [
+        "dnd5e:2014:spell.teleport"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Teleport: d10",
+        "dice": "1d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.teleport.roll.reference-4",
+      "revision": 1,
+      "name": "Teleport: d8",
+      "displayName": "Teleport: d8",
+      "source": "SRD 5.1 pp. 185–186 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=185",
+      "textReferences": [
+        "dnd5e:2014:spell.teleport"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Teleport: d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.teleport.roll.reference-5",
+      "revision": 1,
+      "name": "Teleport: 3d10",
+      "displayName": "Teleport: 3d10",
+      "source": "SRD 5.1 pp. 185–186 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=185",
+      "textReferences": [
+        "dnd5e:2014:spell.teleport"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-5",
+        "label": "Teleport: 3d10",
+        "dice": "3d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.control-weather.roll.reference-1",
+      "revision": 1,
+      "name": "Control Weather: 1d4",
+      "displayName": "Control Weather: 1d4",
+      "source": "SRD 5.1 p. 131 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=131",
+      "textReferences": [
+        "dnd5e:2014:spell.control-weather"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Control Weather: 1d4",
+        "dice": "1d4"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.feeblemind.roll.reference-1",
+      "revision": 1,
+      "name": "Feeblemind: 4d6",
+      "displayName": "Feeblemind: 4d6",
+      "source": "SRD 5.1 p. 142 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=142",
+      "textReferences": [
+        "dnd5e:2014:spell.feeblemind"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Feeblemind: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.incendiary-cloud.roll.reference-1",
+      "revision": 1,
+      "name": "Incendiary Cloud: 10d8",
+      "displayName": "Incendiary Cloud: 10d8",
+      "source": "SRD 5.1 p. 157 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=157",
+      "textReferences": [
+        "dnd5e:2014:spell.incendiary-cloud"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Incendiary Cloud: 10d8",
+        "dice": "10d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.sunburst.roll.reference-1",
+      "revision": 1,
+      "name": "Sunburst: 12d6",
+      "displayName": "Sunburst: 12d6",
+      "source": "SRD 5.1 p. 184 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=184",
+      "textReferences": [
+        "dnd5e:2014:spell.sunburst"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Sunburst: 12d6",
+        "dice": "12d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.meteor-swarm.roll.reference-1",
+      "revision": 1,
+      "name": "Meteor Swarm: 20d6",
+      "displayName": "Meteor Swarm: 20d6",
+      "source": "SRD 5.1 p. 164 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=164",
+      "textReferences": [
+        "dnd5e:2014:spell.meteor-swarm"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Meteor Swarm: 20d6",
+        "dice": "20d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.prismatic-wall.roll.reference-1",
+      "revision": 1,
+      "name": "Prismatic Wall: 10d6",
+      "displayName": "Prismatic Wall: 10d6",
+      "source": "SRD 5.1 p. 171 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=171",
+      "textReferences": [
+        "dnd5e:2014:spell.prismatic-wall"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Prismatic Wall: 10d6",
+        "dice": "10d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.time-stop.roll.reference-1",
+      "revision": 1,
+      "name": "Time Stop: 1d4 + 1",
+      "displayName": "Time Stop: 1d4 + 1",
+      "source": "SRD 5.1 p. 187 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=187",
+      "textReferences": [
+        "dnd5e:2014:spell.time-stop"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Time Stop: 1d4 + 1",
+        "dice": "1d4 + 1"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.weird.roll.reference-1",
+      "revision": 1,
+      "name": "Weird: 4d10",
+      "displayName": "Weird: 4d10",
+      "source": "SRD 5.1 p. 192 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=192",
+      "textReferences": [
+        "dnd5e:2014:spell.weird"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Weird: 4d10",
+        "dice": "4d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.wish.roll.reference-1",
+      "revision": 1,
+      "name": "Wish: 1d10",
+      "displayName": "Wish: 1d10",
+      "source": "SRD 5.1 p. 193 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=193",
+      "textReferences": [
+        "dnd5e:2014:spell.wish"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Wish: 1d10",
+        "dice": "1d10"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.wish.roll.reference-2",
+      "revision": 1,
+      "name": "Wish: 2d4",
+      "displayName": "Wish: 2d4",
+      "source": "SRD 5.1 p. 193 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=193",
+      "textReferences": [
+        "dnd5e:2014:spell.wish"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Wish: 2d4",
+        "dice": "2d4"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:cleric.hit-points.roll.reference-1",
+      "revision": 1,
+      "name": "Cleric Hit Points: 1d8",
+      "displayName": "Cleric Hit Points: 1d8",
+      "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+      "textReferences": [
+        "dnd5e:2014:cleric.hit-points"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Cleric Hit Points: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.sacred-flame.roll.reference-1",
+      "revision": 1,
+      "name": "Sacred Flame: 1d8",
+      "displayName": "Sacred Flame: 1d8",
+      "source": "SRD 5.1 p. 176 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=176",
+      "textReferences": [
+        "dnd5e:2014:spell.sacred-flame"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Sacred Flame: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.sacred-flame.roll.reference-2",
+      "revision": 1,
+      "name": "Sacred Flame: 2d8",
+      "displayName": "Sacred Flame: 2d8",
+      "source": "SRD 5.1 p. 176 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=176",
+      "textReferences": [
+        "dnd5e:2014:spell.sacred-flame"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Sacred Flame: 2d8",
+        "dice": "2d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.sacred-flame.roll.reference-3",
+      "revision": 1,
+      "name": "Sacred Flame: 3d8",
+      "displayName": "Sacred Flame: 3d8",
+      "source": "SRD 5.1 p. 176 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=176",
+      "textReferences": [
+        "dnd5e:2014:spell.sacred-flame"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-3",
+        "label": "Sacred Flame: 3d8",
+        "dice": "3d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.sacred-flame.roll.reference-4",
+      "revision": 1,
+      "name": "Sacred Flame: 4d8",
+      "displayName": "Sacred Flame: 4d8",
+      "source": "SRD 5.1 p. 176 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=176",
+      "textReferences": [
+        "dnd5e:2014:spell.sacred-flame"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-4",
+        "label": "Sacred Flame: 4d8",
+        "dice": "4d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.bless.roll.reference-1",
+      "revision": 1,
+      "name": "Bless: d4",
+      "displayName": "Bless: d4",
+      "source": "SRD 5.1 p. 122 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=122",
+      "textReferences": [
+        "dnd5e:2014:spell.bless"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Bless: d4",
+        "dice": "1d4"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.cure-wounds.roll.reference-1",
+      "revision": 1,
+      "name": "Cure Wounds: 1d8",
+      "displayName": "Cure Wounds: 1d8",
+      "source": "SRD 5.1 p. 132 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=132",
+      "textReferences": [
+        "dnd5e:2014:spell.cure-wounds"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Cure Wounds: 1d8",
+        "dice": "1d8"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.guiding-bolt.roll.reference-1",
+      "revision": 1,
+      "name": "Guiding Bolt: 4d6",
+      "displayName": "Guiding Bolt: 4d6",
+      "source": "SRD 5.1 p. 151 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=151",
+      "textReferences": [
+        "dnd5e:2014:spell.guiding-bolt"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-1",
+        "label": "Guiding Bolt: 4d6",
+        "dice": "4d6"
+      },
+      "components": []
+    },
+    {
+      "id": "dnd5e:2014:spell.guiding-bolt.roll.reference-2",
+      "revision": 1,
+      "name": "Guiding Bolt: 1d6",
+      "displayName": "Guiding Bolt: 1d6",
+      "source": "SRD 5.1 p. 151 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=151",
+      "textReferences": [
+        "dnd5e:2014:spell.guiding-bolt"
+      ],
+      "tags": [
+        "roll-feature"
+      ],
+      "repeat": {
+        "maximum": 1,
+        "scope": "parent"
+      },
+      "roll": {
+        "id": "reference-2",
+        "label": "Guiding Bolt: 1d6",
+        "dice": "1d6"
+      },
+      "components": []
     }
   ],
   "configurations": [
@@ -107107,7 +112284,8 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip",
-          "racial-trait": "Racial Trait"
+          "racial-trait": "Racial Trait",
+          "roll-feature": "Roll Feature"
         },
         "sheetSections": [
           {
@@ -112869,7 +118047,8 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip",
-          "racial-trait": "Racial Trait"
+          "racial-trait": "Racial Trait",
+          "roll-feature": "Roll Feature"
         },
         "sheetSections": [
           {
@@ -118658,7 +123837,8 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip",
-          "racial-trait": "Racial Trait"
+          "racial-trait": "Racial Trait",
+          "roll-feature": "Roll Feature"
         },
         "sheetSections": [
           {
@@ -124420,7 +129600,8 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip",
-          "racial-trait": "Racial Trait"
+          "racial-trait": "Racial Trait",
+          "roll-feature": "Roll Feature"
         },
         "sheetSections": [
           {
@@ -129866,7 +135047,8 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip",
-          "racial-trait": "Racial Trait"
+          "racial-trait": "Racial Trait",
+          "roll-feature": "Roll Feature"
         },
         "sheetSections": [
           {
@@ -135285,7 +140467,8 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip",
-          "racial-trait": "Racial Trait"
+          "racial-trait": "Racial Trait",
+          "roll-feature": "Roll Feature"
         },
         "sheetSections": [
           {
@@ -140731,7 +145914,8 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip",
-          "racial-trait": "Racial Trait"
+          "racial-trait": "Racial Trait",
+          "roll-feature": "Roll Feature"
         },
         "sheetSections": [
           {
@@ -146150,7 +151334,8 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip",
-          "racial-trait": "Racial Trait"
+          "racial-trait": "Racial Trait",
+          "roll-feature": "Roll Feature"
         },
         "sheetSections": [
           {
@@ -151394,7 +156579,8 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip",
-          "racial-trait": "Racial Trait"
+          "racial-trait": "Racial Trait",
+          "roll-feature": "Roll Feature"
         },
         "sheetSections": [
           {
@@ -156611,7 +161797,8 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip",
-          "racial-trait": "Racial Trait"
+          "racial-trait": "Racial Trait",
+          "roll-feature": "Roll Feature"
         },
         "sheetSections": [
           {
@@ -161855,7 +167042,8 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip",
-          "racial-trait": "Racial Trait"
+          "racial-trait": "Racial Trait",
+          "roll-feature": "Roll Feature"
         },
         "sheetSections": [
           {
@@ -167072,7 +172260,8 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip",
-          "racial-trait": "Racial Trait"
+          "racial-trait": "Racial Trait",
+          "roll-feature": "Roll Feature"
         },
         "sheetSections": [
           {

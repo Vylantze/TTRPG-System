@@ -14,8 +14,8 @@ export function ResourceSummary({ pool, engine, result, ready = false, adjust, c
       <strong aria-label="Current / maximum">{`${pool.current ?? pool.capacity - pool.spent} / ${Number.isFinite(pool.capacity) ? pool.capacity : 'No maximum'}`}</strong>
       {adjust && (
         <div className="toolbar resource-adjust">
-          <button className="quiet" aria-label={`Decrease ${pool.name ?? pool.key}`} disabled={!ready || !validAmount || pool.available < amount} onClick={() => adjust(-amount)}>−</button>
-          <button className="quiet" aria-label={`Increase ${pool.name ?? pool.key}`} disabled={!ready || !validAmount || (pool.current ?? pool.capacity - pool.spent) + amount > pool.capacity} onClick={() => adjust(amount)}>+</button>
+          <button className="quiet resource-adjust-button" aria-label={`Decrease ${pool.name ?? pool.key}`} disabled={!ready || !validAmount || pool.available < amount} onClick={() => adjust(-amount)}>−</button>
+          <button className="quiet resource-adjust-button" aria-label={`Increase ${pool.name ?? pool.key}`} disabled={!ready || !validAmount || (pool.current ?? pool.capacity - pool.spent) + amount > pool.capacity} onClick={() => adjust(amount)}>+</button>
         </div>
       )}
       <p className="muted small">{`${pool.available} available · ${pool.reserved} reserved · ${pool.units}`}</p>

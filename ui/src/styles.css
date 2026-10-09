@@ -162,7 +162,7 @@ pre { max-width:100%; overflow:auto; white-space:pre-wrap; overflow-wrap:anywher
 .slot-pips span { width:10px; height:10px; border:1px solid var(--green); border-radius:50%; }
 .slot-pips .filled { background:var(--green); }
 .spell-slot .toolbar { margin-bottom:0; }
-.spell-slot button { padding:.2rem .65rem; }
+
 .spell-row { margin-block:.75rem; }
 .spell-row h3 { margin-bottom:.4rem; }
 .spell-level { margin-block:1.5rem; }
@@ -180,3 +180,7 @@ pre { max-width:100%; overflow:auto; white-space:pre-wrap; overflow-wrap:anywher
 .feature-rolls small { max-width: 25rem; }
 .acquired-feature .acquired-feature { margin: .75rem 0 0 1rem; }
 .resource-adjust { margin-block: .6rem; }
+
+button.resource-adjust-button { box-sizing: border-box; flex: 0 0 2rem; width: 2rem; height: 2rem; min-width: 2rem; min-height: 2rem; max-width: 2rem; max-height: 2rem; padding: 0; margin: 0; line-height: 1; font-size: .875rem; display: inline-flex; align-items: center; justify-content: center; }
+.roll-control { min-width: 0; }
+.roll-result { padding: .5rem .75rem; border: 1px solid var(--line); border-radius: .5rem; }

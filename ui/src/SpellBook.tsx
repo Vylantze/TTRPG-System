@@ -42,8 +42,8 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
             <p className="muted small">{pool.recovery.map((recovery) => `${labelFromId(recovery.event)}: ${recovery.amount === 'full' ? 'restore to maximum' : expressionText(recovery.amount, engine)}`).join(' · ')}</p>
             <div className="slot-pips" aria-hidden="true">{Array.from({ length: Math.min(12, pool.capacity) }, (_, index) => <span className={index < pool.available ? 'filled' : ''} key={index} />)}</div>
             <div className="toolbar">
-              <button className="quiet" aria-label={`Decrease ${pool.name}`} disabled={!ready || pool.available < 1} onClick={() => attempt(() => update(adjustResource(engine, character, pool.id, -1, crypto.randomUUID())))}>−</button>
-              <button className="quiet" aria-label={`Increase ${pool.name}`} disabled={!ready || (pool.current ?? pool.capacity - pool.spent) >= pool.capacity} onClick={() => attempt(() => update(adjustResource(engine, character, pool.id, 1, crypto.randomUUID())))}>+</button>
+              <button className="quiet resource-adjust-button" aria-label={`Decrease ${pool.name}`} disabled={!ready || pool.available < 1} onClick={() => attempt(() => update(adjustResource(engine, character, pool.id, -1, crypto.randomUUID())))}>−</button>
+              <button className="quiet resource-adjust-button" aria-label={`Increase ${pool.name}`} disabled={!ready || (pool.current ?? pool.capacity - pool.spent) >= pool.capacity} onClick={() => attempt(() => update(adjustResource(engine, character, pool.id, 1, crypto.randomUUID())))}>+</button>
             </div>
           </article>
         ))}

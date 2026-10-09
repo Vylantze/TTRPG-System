@@ -29,7 +29,7 @@ export function AcquiredFeature({ instance, engine, result, visible, openFeature
       {open && (
         <>
           <FeatureRequirements feature={feature} engine={engine} />
-          <FeatureRules feature={feature} engine={engine} openFeature={openFeature} />
+          <FeatureRules instanceId={instance.id} feature={feature} engine={engine} openFeature={openFeature} />
           <FeatureLink id={feature.id} engine={engine}>View Feature →</FeatureLink>
           {context && pools.map((pool) => (
             <ResourceSummary
@@ -47,7 +47,7 @@ export function AcquiredFeature({ instance, engine, result, visible, openFeature
               }}
             />
           ))}
-          {children.filter((child) => !context || !resourceChildren.includes(child)).map((child) => <AcquiredFeature key={child.id} instance={child} engine={engine} result={result} visible={visible} openFeature={openFeature} />)}
+          {children.filter((child) => !context || (!resourceChildren.includes(child) && !engine.getFeature(child.feature)?.roll)).map((child) => <AcquiredFeature key={child.id} instance={child} engine={engine} result={result} visible={visible} openFeature={openFeature} />)}
         </>
       )}
     </details>

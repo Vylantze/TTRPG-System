@@ -6,7 +6,7 @@ import { FeatureLink } from '@/ui/src/FeatureLink';
 import { CharacterFeatures } from '@/ui/src/CharacterFeatures';
 import { featureName } from '@/ui/src/display';
 import { useMemo, useState, useTransition } from 'react';
-import { reopenCharacter, spellGroups, spellSlotPools, adjustResource, applyEdit, previewEdit, finalizeCharacter, recoverResources, recoverSelectedResources, settleAbility, useAbility as activateAbility, type Engine, type Character, type Edit, type EditPreview } from '@/src/index';
+import { featureRollInstances, reopenCharacter, spellGroups, spellSlotPools, adjustResource, applyEdit, previewEdit, finalizeCharacter, recoverResources, recoverSelectedResources, settleAbility, useAbility as activateAbility, type Engine, type Character, type Edit, type EditPreview } from '@/src/index';
 import { labelFromId } from '@/ui/src/workspace';
 import { SelectionCard } from '@/ui/src/SelectionCard';
 import { Modal } from '@/ui/src/Modal';
@@ -54,13 +54,13 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
             <p className="muted small">{c.definition.action ? `${c.definition.action.amount} ${labelFromId(c.definition.action.kind)}` : 'No action cost'}</p>
             <details>
               <summary>Read source rules</summary>
-              <FeatureRules feature={engine.getFeature(result.instances.find((instance) => instance.id === c.source)!.feature)!} engine={engine} openFeature={openFeature} />
+              <FeatureRules showRolls={false} feature={engine.getFeature(result.instances.find((instance) => instance.id === c.source)!.feature)!} engine={engine} openFeature={openFeature} />
             </details>
             <FeatureLink id={result.instances.find((instance) => instance.id === c.source)!.feature} engine={engine}>View source Feature →</FeatureLink>
           </div>
           <div className="ability-controls">
             {Object.keys(c.costs).map(resource)}
-            {sourceFeature.rolls?.some((roll) => roll.capability === c.definition.name) ? <FeatureRolls feature={sourceFeature} engine={engine} /> : <button disabled={!ready || Object.entries(c.costs).some(([id, amount]) => (result.resources[id]?.available ?? 0) < amount)} onClick={() => recovery ? setRecoveryOpen(!recoveryOpen) : attempt(() => update(activateAbility(engine, character, c.id, crypto.randomUUID(), { actionTracking: 'manual' }).character))}>Use Ability</button>}
+            {featureRollInstances(engine, result, sourceFeature.id).some((instance) => engine.getFeature(instance.feature)?.roll?.capability === c.definition.name) ? <FeatureRolls instanceId={c.source} feature={sourceFeature} engine={engine} /> : <button disabled={!ready || Object.entries(c.costs).some(([id, amount]) => (result.resources[id]?.available ?? 0) < amount)} onClick={() => recovery ? setRecoveryOpen(!recoveryOpen) : attempt(() => update(activateAbility(engine, character, c.id, crypto.randomUUID(), { actionTracking: 'manual' }).character))}>Use Ability</button>}
           </div>
         </div>
         {recovery && recoveryOpen && <SelectedRecovery engine={engine} character={character} ready={ready} update={update} report={report} />}
@@ -307,7 +307,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
               </div>
             </section>
           ))}
-          <p className="muted">Declared self-healing rolls spend their ability use and restore current HP. Other targets, conditional effects, action timing, and spellcasting restrictions are adjudicated at the table.</p>
+          <p className="muted">Rolling spends the ability use and saves the result. Apply healing separately to restore current HP. Other targets, conditional effects, action timing, and spellcasting restrictions are adjudicated at the table.</p>
         </>
       )}
       {preview && (

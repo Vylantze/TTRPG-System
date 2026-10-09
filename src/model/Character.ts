@@ -1,3 +1,4 @@
+import type { RolledFeature } from '@/src/model/RolledFeature.js';
 import type { Progression } from '@/src/model/Progression.js';
 import type { Pick } from '@/src/model/Pick.js';
 import type { RootAcquisition } from '@/src/model/RootAcquisition.js';
@@ -5,6 +6,7 @@ import type { PendingUse } from '@/src/model/PendingUse.js';
 import type { InventoryEntry } from '@/src/model/InventoryEntry.js';
 
 export interface Character {
+  rollResults?: RolledFeature[];
   money?: Record<string, number>;
   inventory?: InventoryEntry[];
   /** Player-facing sheet notes, independent of calculated rules. */

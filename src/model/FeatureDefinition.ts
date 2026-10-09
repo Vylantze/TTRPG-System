@@ -6,7 +6,8 @@ import type { ResourceRequirement } from '@/src/model/ResourceRequirement.js';
 import type { Component } from '@/src/model/Component.js';
 
 export interface FeatureDefinition {
-  rolls?: FeatureRoll[];
+  /** A Roll Feature owns one roll; other Features grant it as a child. */
+  roll?: FeatureRoll;
   id: string; revision: number; name: string; displayName?: string; description?: string; source?: string; tags?: string[]; contentLevel?: number;
   /** Display-only references to shared Feature descriptions; these grant no rules or ownership. */
   textReferences?: string[];
