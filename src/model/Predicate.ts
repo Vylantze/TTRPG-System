@@ -1,5 +1,5 @@
-import type { Value } from './Value.js';
-import type { Expression } from './Expression.js';
+import type { Value } from '@/src/model/Value.js';
+import type { Expression } from '@/src/model/Expression.js';
 
 export type Predicate = { level: number; kind?: 'character' | 'class' }
   | { feature: string; parameters?: Record<string, Value> } | { tag: string }

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { FeatureTextIndex } from '../dist/index.js';
+import { FeatureTextIndex } from '@/dist/index.js';
 import { readFileSync } from 'node:fs';
 const definition = (id, name, extra = {}) => ({ id, name, revision: 1, components: [], ...extra });
 

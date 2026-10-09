@@ -1,5 +1,5 @@
-import type { Expression } from './Expression.js';
-import type { ComponentBase } from './ComponentBase.js';
+import type { Expression } from '@/src/model/Expression.js';
+import type { ComponentBase } from '@/src/model/ComponentBase.js';
 
 export interface Choice extends ComponentBase {
   kind: 'chooseFeatures'; minimum: Expression; maximum: Expression;

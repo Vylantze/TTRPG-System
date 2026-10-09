@@ -1,9 +1,9 @@
-import { featureName, tagName } from './display';
-import type { Engine, FeatureDefinition, Grant, Choice } from '../../src/index';
-import { labelFromId } from './workspace';
-import { FeatureRules } from './RulesText';
+import { featureName, tagName } from '@/ui/src/display';
+import type { Engine, FeatureDefinition, Grant, Choice } from '@/src/index';
+import { labelFromId } from '@/ui/src/workspace';
+import { FeatureRules } from '@/ui/src/RulesText';
 
-import { FeatureRequirements } from './FeatureRequirements';
+import { FeatureRequirements } from '@/ui/src/FeatureRequirements';
 
 export function FeatureDetail({ feature, engine, openFeature }: { feature: FeatureDefinition; engine: Engine; openFeature: (id: string) => void }) {
   return (

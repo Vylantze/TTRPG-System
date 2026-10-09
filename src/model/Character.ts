@@ -1,7 +1,7 @@
-import type { Progression } from './Progression.js';
-import type { Pick } from './Pick.js';
-import type { RootAcquisition } from './RootAcquisition.js';
-import type { PendingUse } from './PendingUse.js';
+import type { Progression } from '@/src/model/Progression.js';
+import type { Pick } from '@/src/model/Pick.js';
+import type { RootAcquisition } from '@/src/model/RootAcquisition.js';
+import type { PendingUse } from '@/src/model/PendingUse.js';
 
 export interface Character {
   /** Omitted on older saves: normal retraining rules apply. Construction drafts cannot spend resources. */

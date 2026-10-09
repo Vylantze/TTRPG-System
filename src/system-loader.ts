@@ -1,10 +1,10 @@
-import { Engine, clone } from './engine.js';
-import { RuleError } from './expression.js';
-import type { Catalogue, Character, Value } from './model.js';
-import type { SystemFile } from './types/SystemFile.js';
-import { checkCharacter, record } from './validation.js';
-import { compileBlocks } from './blocks.js';
-export type { SystemFile } from './types/SystemFile.js';
+import { Engine, clone } from '@/src/engine.js';
+import { RuleError } from '@/src/expression.js';
+import type { Catalogue, Character, Value } from '@/src/model.js';
+import type { SystemFile } from '@/src/types/SystemFile.js';
+import { checkCharacter, record } from '@/src/validation.js';
+import { compileBlocks } from '@/src/blocks.js';
+export type { SystemFile } from '@/src/types/SystemFile.js';
 function safe(value: unknown, depth = 0): void {
   if (depth > 96) throw new RuleError('SYSTEM_JSON', 'System data is too deep.');
   if (Array.isArray(value)) {

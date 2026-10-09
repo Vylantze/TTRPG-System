@@ -1,6 +1,6 @@
-import type { Expression } from './Expression.js';
-import type { StackingPolicy } from './StackingPolicy.js';
-import type { ComponentBase } from './ComponentBase.js';
+import type { Expression } from '@/src/model/Expression.js';
+import type { StackingPolicy } from '@/src/model/StackingPolicy.js';
+import type { ComponentBase } from '@/src/model/ComponentBase.js';
 
 export interface Modifier extends ComponentBase {
   kind: 'modifyStat'; stat: string; operation: 'add' | 'multiply' | 'floor' | 'ceiling' | 'override';

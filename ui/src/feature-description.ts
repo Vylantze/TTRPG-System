@@ -1,5 +1,5 @@
-import type { Engine, FeatureDefinition } from '../../src/index';
-import { featureName } from './display';
+import type { Engine, FeatureDefinition } from '@/src/index';
+import { featureName } from '@/ui/src/display';
 
 export function featureHref(id: string, engine: Engine) {
   return `#features/${encodeURIComponent(id)}?${new URLSearchParams({ system: engine.catalogue.system.id, revision: String(engine.catalogue.system.revision), catalogue: engine.catalogue.id })}`;

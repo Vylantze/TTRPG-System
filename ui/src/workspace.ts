@@ -1,6 +1,6 @@
-import { SystemRegistry, deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type SystemFile } from '../../src/index';
-import type { Workspace } from './types/Workspace';
-export type { Workspace } from './types/Workspace';
+import { SystemRegistry, deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type SystemFile } from '@/src/index';
+import type { Workspace } from '@/ui/src/types/Workspace';
+export type { Workspace } from '@/ui/src/types/Workspace';
 
 // Prototype reset: old expenditure-based saves are intentionally not loaded.
 export const STORAGE_KEY = 'ttrpg-feature-forge:v2';

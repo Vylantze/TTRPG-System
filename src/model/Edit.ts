@@ -1,6 +1,6 @@
-import type { Progression } from './Progression.js';
-import type { Pick } from './Pick.js';
-import type { RootAcquisition } from './RootAcquisition.js';
+import type { Progression } from '@/src/model/Progression.js';
+import type { Pick } from '@/src/model/Pick.js';
+import type { RootAcquisition } from '@/src/model/RootAcquisition.js';
 
 export type Edit = { kind: 'input'; stat: string; value: number }
   | { kind: 'removeProgression'; progression: string }

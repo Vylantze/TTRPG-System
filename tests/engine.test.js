@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Engine, applyEdit, previewEdit, useAbility, settleAbility, recoverResources, serializeCharacter, deserializeCharacter,
-  classEntryPath, selectionPath, rootPath, pickPath, validateCatalogue, evaluateExpression, migrateCharacter } from '../dist/index.js';
-import { catalogue as fixture } from '../examples/catalogue.js';
+  classEntryPath, selectionPath, rootPath, pickPath, validateCatalogue, evaluateExpression, migrateCharacter } from '@/dist/index.js';
+import { catalogue as fixture } from '@/examples/catalogue.js';
 const copy = (value) => structuredClone(value);
 function setup(level = 1, source = fixture, functions = {}) {
   const engine = new Engine(source, functions);

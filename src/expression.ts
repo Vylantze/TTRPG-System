@@ -1,8 +1,8 @@
-import type { Expression, NumericConstraints, ScalingTable } from './model.js';
-import type { Environment } from './types/Environment.js';
-import { RuleError } from './types/RuleError.js';
-export type { Environment } from './types/Environment.js';
-export { RuleError } from './types/RuleError.js';
+import type { Expression, NumericConstraints, ScalingTable } from '@/src/model.js';
+import type { Environment } from '@/src/types/Environment.js';
+import { RuleError } from '@/src/types/RuleError.js';
+export type { Environment } from '@/src/types/Environment.js';
+export { RuleError } from '@/src/types/RuleError.js';
 export function number(value: unknown): number {
   if (typeof value !== 'number' || !Number.isFinite(value)) throw new RuleError('INVALID_NUMBER', 'Expected a finite number.');
   return value;

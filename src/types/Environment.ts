@@ -1,4 +1,4 @@
-import type { FeatureDefinition, FunctionRegistry, Value } from '../model.js';
+import type { FeatureDefinition, FunctionRegistry, Value } from '@/src/model.js';
 
 export interface Environment {
   stats: (id: string) => number; context: Record<string, Value>; parameters: Record<string, Value>;

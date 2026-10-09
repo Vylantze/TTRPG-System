@@ -1,5 +1,5 @@
-import type { ComponentBase } from './ComponentBase.js';
-import type { Expression } from './Expression.js';
+import type { ComponentBase } from '@/src/model/ComponentBase.js';
+import type { Expression } from '@/src/model/Expression.js';
 
 export interface TrackResource extends ComponentBase {
   kind: 'trackResource'; key: string; name: string; units: string; contract?: string;

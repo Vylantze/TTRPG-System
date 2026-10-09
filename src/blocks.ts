@@ -1,5 +1,5 @@
-import type { Catalogue, Component, Value } from './model.js';
-import { RuleError } from './expression.js';
+import type { Catalogue, Component, Value } from '@/src/model.js';
+import { RuleError } from '@/src/expression.js';
 
 const object = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
 const safeName = (v: unknown): v is string => typeof v === 'string' && !!v && !['__proto__', 'constructor', 'prototype'].includes(v);

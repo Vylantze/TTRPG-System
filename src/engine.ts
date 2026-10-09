@@ -1,13 +1,13 @@
-import { RuleError, boolean, constrain, evaluateExpression, number, type Environment } from './expression.js';
+import { RuleError, boolean, constrain, evaluateExpression, number, type Environment } from '@/src/expression.js';
 import type { Catalogue, Character, Choice, Diagnostic, Expression, FunctionRegistry, Instance, Value,
   Predicate, EvaluationResult, StatResult, Modifier, ModifierExplanation, PoolResult, Resource,
-  ResourceRequirement, Candidate, Pick, Progression, RootAcquisition } from './model.js';
-import type { StatView } from './types/StatView.js';
-import type { ClassLevel } from './types/ClassLevel.js';
-import type { FeatureAdvancement } from './types/FeatureAdvancement.js';
-import { checkCharacter, validateCatalogue } from './validation.js';
-import { compileBlocks } from './blocks.js';
-import { trackerPools, storeTrackers } from './resource-trackers.js';
+  ResourceRequirement, Candidate, Pick, Progression, RootAcquisition } from '@/src/model.js';
+import type { StatView } from '@/src/types/StatView.js';
+import type { ClassLevel } from '@/src/types/ClassLevel.js';
+import type { FeatureAdvancement } from '@/src/types/FeatureAdvancement.js';
+import { checkCharacter, validateCatalogue } from '@/src/validation.js';
+import { compileBlocks } from '@/src/blocks.js';
+import { trackerPools, storeTrackers } from '@/src/resource-trackers.js';
 
 export const segment = (id: string): string => encodeURIComponent(id);
 export const rootPath = (id: string): string => `root/${segment(id)}`;

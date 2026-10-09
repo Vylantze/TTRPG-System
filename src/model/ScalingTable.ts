@@ -1,4 +1,4 @@
-import type { BoundaryPolicy } from './BoundaryPolicy.js';
+import type { BoundaryPolicy } from '@/src/model/BoundaryPolicy.js';
 
 export interface ScalingTable {
   mode: 'exact' | 'threshold'; rows: { key: number; value: number }[];

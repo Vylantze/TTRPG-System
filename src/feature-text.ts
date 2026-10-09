@@ -1,7 +1,7 @@
-import type { FeatureDefinition } from './model.js';
-import type { FeatureTextSpan } from './types/FeatureTextSpan.js';
-import type { Node } from './types/Node.js';
-export type { FeatureTextSpan } from './types/FeatureTextSpan.js';
+import type { FeatureDefinition } from '@/src/model.js';
+import type { FeatureTextSpan } from '@/src/types/FeatureTextSpan.js';
+import type { Node } from '@/src/types/Node.js';
+export type { FeatureTextSpan } from '@/src/types/FeatureTextSpan.js';
 const node = (): Node => ({ children: new Map(), ids: new Set() });
 const word = (value: string | undefined) => !!value && /[\p{L}\p{N}_]/u.test(value);
 

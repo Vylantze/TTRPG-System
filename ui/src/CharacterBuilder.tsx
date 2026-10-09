@@ -1,12 +1,12 @@
-import { CharacterFeatures } from './CharacterFeatures';
-import { featureName } from './display';
+import { CharacterFeatures } from '@/ui/src/CharacterFeatures';
+import { featureName } from '@/ui/src/display';
 import { useMemo, useState } from 'react';
-import { applyEdit, previewEdit, finalizeCharacter, recoverResources, recoverSelectedResources, settleAbility, useAbility as activateAbility, castSpell, type Engine, type Character, type Edit, type EditPreview, type SpellTurn } from '../../src/index';
-import { labelFromId } from './workspace';
-import { SelectionCard } from './SelectionCard';
-import { Modal } from './Modal';
-import { FeatureRules, RulesText } from './RulesText';
-import { ResourceSummary } from './ResourceSummary';
+import { applyEdit, previewEdit, finalizeCharacter, recoverResources, recoverSelectedResources, settleAbility, useAbility as activateAbility, castSpell, type Engine, type Character, type Edit, type EditPreview, type SpellTurn } from '@/src/index';
+import { labelFromId } from '@/ui/src/workspace';
+import { SelectionCard } from '@/ui/src/SelectionCard';
+import { Modal } from '@/ui/src/Modal';
+import { FeatureRules, RulesText } from '@/ui/src/RulesText';
+import { ResourceSummary } from '@/ui/src/ResourceSummary';
 
 export function CharacterBuilder({ engine, character, update, openFeature, report }: { engine: Engine; character: Character; update: (c: Character) => void; openFeature: (id: string) => void; report: (message: string) => void }) {
   const result = useMemo(() => engine.evaluate(character), [engine, character]);

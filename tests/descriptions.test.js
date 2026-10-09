@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { Engine, parseSystemFile, validateCatalogue } from '../dist/index.js';
-import { catalogue as fixture } from '../examples/catalogue.js';
+import { Engine, parseSystemFile, validateCatalogue } from '@/dist/index.js';
+import { catalogue as fixture } from '@/examples/catalogue.js';
 
 const file = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
 const feature = (name) => file.features.find((f) => f.id === `dnd5e:2014:${name}`);

@@ -1,10 +1,10 @@
-import { featureHref, descriptionBody } from './feature-description';
+import { featureHref, descriptionBody } from '@/ui/src/feature-description';
 import { useMemo, useState, type ReactNode } from 'react';
-import { FeatureTextIndex, type Engine, type FeatureDefinition } from '../../src/index';
-import { Modal } from './Modal';
-import { featureName } from './display';
-import type { Preview } from './types/Preview';
-import type { References } from './types/References';
+import { FeatureTextIndex, type Engine, type FeatureDefinition } from '@/src/index';
+import { Modal } from '@/ui/src/Modal';
+import { featureName } from '@/ui/src/display';
+import type { Preview } from '@/ui/src/types/Preview';
+import type { References } from '@/ui/src/types/References';
 const indexes = new WeakMap<Engine, FeatureTextIndex>();
 function textIndex(engine: Engine) {
   let index = indexes.get(engine);

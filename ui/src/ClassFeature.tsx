@@ -1,6 +1,6 @@
-import type { Engine } from '../../src/index';
-import { featureName } from './display';
-import { FeatureRules } from './RulesText';
+import type { Engine } from '@/src/index';
+import { featureName } from '@/ui/src/display';
+import { FeatureRules } from '@/ui/src/RulesText';
 
 export function ClassFeature({ id, engine, openFeature }: { id: string; engine: Engine; openFeature: (id: string) => void }) {
   const feature = engine.getFeature(id);

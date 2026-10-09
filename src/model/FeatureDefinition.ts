@@ -1,8 +1,8 @@
-import type { ScalingTable } from './ScalingTable.js';
-import type { Predicate } from './Predicate.js';
-import type { ParameterDefinition } from './ParameterDefinition.js';
-import type { ResourceRequirement } from './ResourceRequirement.js';
-import type { Component } from './Component.js';
+import type { ScalingTable } from '@/src/model/ScalingTable.js';
+import type { Predicate } from '@/src/model/Predicate.js';
+import type { ParameterDefinition } from '@/src/model/ParameterDefinition.js';
+import type { ResourceRequirement } from '@/src/model/ResourceRequirement.js';
+import type { Component } from '@/src/model/Component.js';
 
 export interface FeatureDefinition {
   id: string; revision: number; name: string; displayName?: string; description?: string; source?: string; tags?: string[]; contentLevel?: number;

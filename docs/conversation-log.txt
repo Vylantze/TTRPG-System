@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T16:58:30.301Z
+Export refreshed UTC: 2026-10-09T17:10:36.075Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -1501,5 +1501,60 @@ I also caught a storage issue: keeping the old workspace alongside the new one c
 
 [2026-10-09T16:58:23.258Z] ASSISTANT
 All 208 engine tests and 21 UI tests pass. A final review found that the old resource matcher assumed a nonnegative maximum, which would reject a tracker whose entire range is negative. I’ve removed that assumption and added a focused regression check; it’s running before I commit.
+
+----------------------------------------
+
+[2026-10-09T16:59:50.826Z] ASSISTANT
+The negative-range check and pre-commit lint passed. The changes are committed, and I’m pushing to `develop` now. The Pages workflow will then validate and deploy the updated prototype.
+
+----------------------------------------
+
+[2026-10-09T17:00:38.747Z] ASSISTANT
+Implemented and pushed as `16583ec` to `develop`.
+
+- Single-stat creation and modification primitives.
+- Parameterized, recursively reusable blocks with cycle validation.
+- Feature-created stats disappear when their last active provider is removed.
+- Shared resource pools with separate current amounts and maximums.
+- Explicit assignment grants and recovery; capacity increases do not refill pools.
+- Resource sheet shows balances, maximums, recovery conditions, and providers.
+- Old prototype workspace saves are cleared on startup.
+
+The 2014 System now shares one training block across 37 proficiency/Expertise Features and uses 46 resource-tracker sub-Features.
+
+Validation: **208 engine tests, 21 UI tests, lint, and production build passed**, plus the final negative-range regression check.
+
+[Pages deployment is running](https://github.com/Vylantze/TTRPG-System/actions/runs/37963135053).
+
+----------------------------------------
+
+[2026-10-09T17:01:37.610Z] USER
+- Modify all references to use an '@/' alias for imports. If the '@/' alias isn't properly defined for build and editor handling, inform me and suggest solutions.&#x20;
+- Hitpoints are not chosen at every level. They are given by default. Redefine the feature to always give it without needing a selection. Feature selection should default be a dropdown that can be changed to the current list via a toggle.
+
+----------------------------------------
+
+[2026-10-09T17:01:42.366Z] ASSISTANT
+I’ll check alias support across TypeScript, Vite, and the tests, then update imports. I’ll also make level-up hit points automatic and make dropdowns the default for Feature selection, with a toggle for the existing list view.
+
+----------------------------------------
+
+[2026-10-09T17:04:44.075Z] ASSISTANT
+The alias currently works only in Vite; TypeScript/editor configuration and Node scripts don’t support it yet. I’m aligning those around a repository-root `@/` alias and ensuring the compiled engine still runs in ordinary Node. Hit points will be granted automatically at each level, using the existing fixed-average defaults after the starting level.
+
+----------------------------------------
+
+[2026-10-09T17:07:31.315Z] ASSISTANT
+Hit-point choices have been replaced with automatic grants throughout the 2014 System. The picker now defaults to a dropdown, with a toggle for the existing searchable list. I’m checking that level-based totals, prerequisite feedback, and both build paths still work.
+
+----------------------------------------
+
+[2026-10-09T17:09:11.218Z] ASSISTANT
+The compiled engine imports successfully in plain Node without an alias loader. One detail for existing characters: browser workspaces retain their loaded System JSON, so they’ll need the updated System loaded to receive automatic hit-point grants. The regression suites are still running.
+
+----------------------------------------
+
+[2026-10-09T17:10:33.101Z] ASSISTANT
+All 208 engine tests and the 21 existing UI tests passed. The new dropdown regression also passed, as did lint and the production UI build. I’m reviewing the final diff and preparing the commit and push.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

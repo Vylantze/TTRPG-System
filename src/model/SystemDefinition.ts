@@ -1,10 +1,10 @@
-import type { Value } from './Value.js';
-import type { Expression } from './Expression.js';
-import type { Predicate } from './Predicate.js';
-import type { StatDefinition } from './StatDefinition.js';
-import type { Grant } from './Grant.js';
-import type { Choice } from './Choice.js';
-import type { Scope } from './Scope.js';
+import type { Value } from '@/src/model/Value.js';
+import type { Expression } from '@/src/model/Expression.js';
+import type { Predicate } from '@/src/model/Predicate.js';
+import type { StatDefinition } from '@/src/model/StatDefinition.js';
+import type { Grant } from '@/src/model/Grant.js';
+import type { Choice } from '@/src/model/Choice.js';
+import type { Scope } from '@/src/model/Scope.js';
 
 export interface SystemDefinition {
   id: string; revision: number; name: string; stats: StatDefinition[]; classes?: string[];

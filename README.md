@@ -14,6 +14,10 @@ For a new repository, select **Settings → Pages → Build and deployment → S
 
 Run `npm run build`, `npm test`, or `npm run demo` after installing the TypeScript development dependency. The engine has no runtime dependencies.
 
+Project-local imports use `@/` for the repository root (for example, `@/src/index.js` and `@/ui/src/display`). Root/UI TypeScript paths, JavaScript editor configuration, and Vite resolve the same alias. npm scripts preload `tools/register-alias.mjs` for Node tests and examples; direct execution of those source scripts requires `node --import ./tools/register-alias.mjs <script>`. The engine build rewrites emitted imports to relative paths, so consumers of `dist` need no alias loader. Package and Node built-in imports retain their normal names.
+
+The 2014 System grants hit points automatically at each Class level: the starting Class receives its maximum Hit Die at level one, and subsequent levels use the fixed average, with Constitution applied at every level. Feature selection defaults to a dropdown; use **Use list** to browse the searchable, paginated cards. Existing browser workspaces keep their loaded System JSON; reload the updated bundled System to use revised rules.
+
 Install development dependencies with `npm install` and `npm install --prefix ui`. The root install automatically sets up the tracked Git hooks; existing checkouts can also run `npm run hooks:install`. The pre-commit hook runs `npm run lint` and blocks the commit if linting fails. Both projects' dependencies must be installed before committing.
 
 `npm run lint` runs ESLint, the single-definition checks, and engine/UI type checking without modifying files or emitting build output. Warnings also fail the check. Run `npm run lint:fix` explicitly to apply ESLint's automatic fixes. React rules apply only to UI source; non-component display helpers live in separate modules for Fast Refresh. Deliberately omitted properties in object-rest expressions are allowed.

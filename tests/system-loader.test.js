@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { parseSystemFile, catalogueFromSystemFile, compileBlocks, SystemRegistry, Engine, castSpell, recoverSelectedResources, recoverResources, useAbility, serializeCharacter } from '../dist/index.js';
-import { exampleCharacter } from '../examples/dnd2014-character.js';
+import { parseSystemFile, catalogueFromSystemFile, compileBlocks, SystemRegistry, Engine, castSpell, recoverSelectedResources, recoverResources, useAbility, serializeCharacter } from '@/dist/index.js';
+import { exampleCharacter } from '@/examples/dnd2014-character.js';
 
 const text = readFileSync(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8');
 const raw = JSON.parse(text);
