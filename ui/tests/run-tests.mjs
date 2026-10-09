@@ -12,6 +12,7 @@ const { App } = await server.ssrLoadModule('/src/App.tsx');
 const { RulesText, FeatureRules, ReferencePopup } = await server.ssrLoadModule('/src/RulesText.tsx');
 const { FeatureRequirements } = await server.ssrLoadModule('/src/FeatureRequirements.tsx');
 const { CharacterFeatures } = await server.ssrLoadModule('/src/CharacterFeatures.tsx');
+const { ResourceSummary } = await server.ssrLoadModule('/src/ResourceSummary.tsx');
 const { advancementLabels } = await server.ssrLoadModule('/src/feature-requirements.ts');
 const file = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
 function storage() {
@@ -296,6 +297,31 @@ test('acquired Feature library exposes search, origins and acquisition levels', 
   assert.match(html, /Rogue · class level/);
   assert.match(html, /Show inactive Features/);
   assert.match(html, /View Feature/);
+});
+
+test('resource summaries expose actual balance, maximum, recovery and shared providers', () => {
+  const { engine, character } = exampleCharacter();
+  const result = engine.evaluate(character);
+  const pool = Object.values(result.resources).find((p) => p.key === 'second-wind');
+  assert.equal(pool.tracking, true);
+  const html = renderToStaticMarkup(createElement(ResourceSummary, { engine, result, pool: { ...pool, current: 0, available: 0 } }));
+  assert.match(html, /Current \/ maximum/);
+  assert.match(html, /0 \/ 1/);
+  assert.match(html, /Short Rest: restore to maximum/i);
+  assert.match(html, /Provided by: Second Wind Resource/);
+  const unlimited = renderToStaticMarkup(createElement(ResourceSummary, { engine, result, pool: { ...pool, capacity: Infinity, recovery: [{ event: 'turn', amount: 2 }] } }));
+  assert.match(unlimited, /No maximum/);
+  assert.match(unlimited, /Turn: recover 2/);
+});
+
+test('prototype reset discards the old workspace before loading the new storage key', () => {
+  const removed = [];
+  const fresh = model.readWorkspace({ removeItem: (key) => removed.push(key), getItem: (key) => {
+    assert.equal(key, model.STORAGE_KEY);
+    return null;
+  } });
+  assert.deepEqual(removed, ['ttrpg-feature-forge:v1']);
+  assert.deepEqual(fresh, { version: 1, systems: [], characters: [] });
 });
 
 await server.close();

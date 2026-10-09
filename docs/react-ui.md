@@ -1,5 +1,7 @@
 # React character workspace
 
+The atomic-block prototype starts a fresh workspace under `ttrpg-feature-forge:v2`; old prototype saves are intentionally not loaded or migrated. The resource sheet lists shared resources supplied by active Features, including current amount, maximum (or no maximum), reservations, available amount, recovery event and amount, and provider names. Feature-created stats appear alongside System stats only while active providers exist. Raising a tracked maximum does not refill its current balance.
+
 The first React UI is implemented before additional Systems. It uses the existing DnD5e 2014 JSON milestone and accepts other engine-compatible System files. The UI source lives in `ui/`; the generic engine remains in `src/`. UI components call engine commands rather than duplicating calculation, eligibility, resource, or retraining rules.
 
 ## Run
@@ -34,7 +36,7 @@ Changes to a finalized character show an engine edit preview before application,
 
 ## Persistence and accessibility
 
-The application stores loaded JSON Systems and character saves in browser `localStorage`, under `ttrpg-feature-forge:v1`. No backend or account is required. This storage belongs to the app's origin: development and preview URLs may have separate workspaces. Use JSON exports to transfer characters and Systems between origins or devices.
+The application stores loaded JSON Systems and character saves in browser `localStorage`, under `ttrpg-feature-forge:v2`. No backend or account is required. This storage belongs to the app's origin: development and preview URLs may have separate workspaces. Use JSON exports to transfer characters and Systems between origins or devices.
 
 Storage failures remain visible and changes remain in memory. Export before closing when persistence fails. Malformed existing workspace data is not overwritten automatically; a recovery control exports the original stored text before starting afresh. Browser storage limits may be reached with several large Systems. IndexedDB is a suitable later persistence upgrade.
 

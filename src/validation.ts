@@ -1,5 +1,6 @@
 import type { Catalogue, Character, Diagnostic, Expression, Predicate, Component, FunctionRegistry } from './model.js';
 import { RuleError, number } from './expression.js';
+import { compileBlocks } from './blocks.js';
 
 const unsafe = new Set(['__proto__', 'constructor', 'prototype']);
 export function record(v: unknown): asserts v is Record<string, unknown> {
@@ -157,6 +158,37 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
       if (v.priority !== undefined) number(v.priority);
       if (v.group !== undefined) text(v.group);
       break;
+    case 'defineStat':
+      record(v.stat);
+      text(v.stat.id);
+      text(v.stat.name);
+      if (v.stat.kind !== 'derived') throw new RuleError('SCHEMA', 'Feature-created stats must be derived.');
+      if (v.condition !== undefined) throw new RuleError('SCHEMA', 'A stat follows its owning Feature lifetime; use conditional expressions for its value.');
+      constraints(v.stat);
+      expr(v.stat.expression);
+      break;
+    case 'trackResource':
+      text(v.key);
+      text(v.name);
+      text(v.units);
+      if (v.contract !== undefined) text(v.contract);
+      if (v.minimum !== undefined) number(v.minimum);
+      if (v.integer !== undefined && typeof v.integer !== 'boolean') throw new RuleError('SCHEMA', 'Invalid resource integer flag.');
+      if (v.maximum !== undefined) expr(v.maximum);
+      expr(v.initialAmount);
+      list(v.recovery);
+      for (const r of v.recovery) {
+        record(r);
+        text(r.event);
+        if (r.amount === 'full') {
+          if (v.maximum === undefined) throw new RuleError('SCHEMA', 'An unbounded resource cannot recover to full.');
+        } else expr(r.amount);
+      }
+      break;
+    case 'grantResource':
+      text(v.key);
+      expr(v.amount);
+      break;
     case 'defineResource':
       text(v.key);
       text(v.units);
@@ -207,7 +239,22 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     record(input.system);
     list(input.features);
     list(input.classes);
-    const c = input as unknown as Catalogue;
+    if (input.blocks !== undefined) list(input.blocks);
+    const compiled = compileBlocks(input as unknown as Catalogue);
+    const created = new Map<string, Catalogue['system']['stats'][number]>();
+    for (const f of compiled.features) {
+      list(f.components);
+      const trackers = f.components.filter((v) => v.kind === 'trackResource');
+      if (trackers.length > 1 || (trackers.length && f.components.some((v) => v.kind === 'defineResource'))) throw new RuleError('RESOURCE_TRACKER', 'A Feature can track only one resource; grant sub-Features for more.');
+      for (const component of f.components) if (component.kind === 'defineStat') {
+        record(component.stat);
+        const stat = component.stat;
+        const prior = created.get(stat.id);
+        if (compiled.system.stats.some((s) => s.id === stat.id) || (prior && JSON.stringify(prior) !== JSON.stringify(stat))) throw new RuleError('STAT_CONFLICT', `Conflicting definition of ${stat.id}.`);
+        created.set(stat.id, stat);
+      }
+    }
+    const c = { ...compiled, system: { ...compiled.system, stats: [...compiled.system.stats, ...created.values()] } };
     text(c.system.id);
     integer(c.system.revision, 1);
     text(c.system.name);
@@ -379,7 +426,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
           record(r);
           text(r.id);
           text(r.key);
-          if (r.minimumCapacity !== undefined && number(r.minimumCapacity) < 0) throw new RuleError('SCHEMA', 'Negative required capacity.');
+          if (r.minimumCapacity !== undefined) number(r.minimumCapacity);
           if (r.scope && !['character', 'progression', 'parent', 'instance'].includes(r.scope)) throw new RuleError('SCHEMA', 'Invalid required scope.');
         }
       }
@@ -568,6 +615,12 @@ export function checkCharacter(v: unknown): asserts v is Character {
   for (const r of Object.values(v.resources)) {
     record(r);
     if (number(r.spent) < 0) throw new RuleError('SCHEMA', 'Negative expenditure.');
+    if (r.current !== undefined) number(r.current);
+    if (r.grants !== undefined) {
+      list(r.grants);
+      r.grants.forEach(text);
+      unique(r.grants as string[], 'resource grant');
+    }
   }
   for (const p of Object.values(v.pending)) {
     record(p);

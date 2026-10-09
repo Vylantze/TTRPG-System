@@ -88,6 +88,8 @@ Every applied, suppressed, or inactive modifier records its source instance, com
 
 ## Features and their components
 
+The implemented atomic/composite model and resource semantics in [Atomic blocks and shared trackers](engine.md#atomic-blocks-and-shared-trackers-prototype-revision) supersede the legacy resource-scope/expenditure model below. Atomic numeric blocks create one derived stat or modify one stat. Reusable parameterized blocks compose recursively. Each Feature owns at most one tracker, composite Features grant tracker sub-Features, and resource keys identify character-wide shared pools. Current amounts are independent of capacity and change only through explicit grants, spending, or recovery (apart from clamping when bounds shrink).
+
 A FeatureDefinition contains `id`, `revision`, `name`, `description`, source metadata, tags, acquisition prerequisites, nonwaivable resource requirements, optional maintenance requirements, repeat policy, parameter definitions, optional local scaling tables, and an ordered list of components. Components have stable local IDs. Component order is for presentation and stable identity, not a hidden stat-calculation order.
 
 `displayName` supplies a Feature's user-facing label independently of its internal name. Systems map tag IDs to user-facing labels through `tagDisplayNames`. Descriptions and source text travel with JSON; optional `textReferences` share another Feature's description without granting that Feature or supplying its prerequisites. Classes also retain descriptive text and source metadata. These fields have no mechanical effect.
@@ -95,10 +97,14 @@ A FeatureDefinition contains `id`, `revision`, `name`, `description`, source met
 | Component | Purpose |
 | --- | --- |
 | `modifyStat` | Applies one numeric modifier |
+| `defineStat` | Creates one derived stat for its active providers' lifetime |
+| `useBlock` | Expands a reusable parameterized component or composition |
 | `grantFeature` | Automatically acquires another Feature |
 | `chooseFeatures` | Offers a constrained selection of other Features |
 | `grantCapability` | Adds an action, permission, resistance description, or other structured capability |
-| `defineResource` | Defines a limited-use pool and recovery rules |
+| `trackResource` | Tracks one shared resource identity, range, initial amount, and recovery rules |
+| `grantResource` | Applies one explicit assignment-time resource amount grant |
+| `defineResource` | Legacy expenditure-based API compatibility only |
 | `describe` | Preserves narrative or rules text with no automated stat effect |
 
 A Feature may contain zero or many components. A purely descriptive Feature is valid. There is no special engine type for feat, subclass, class feature, spell, or ancestry benefit; these are tags and content conventions. A component can include a condition, but permanent acquisition and temporary activation are different operations.
@@ -187,7 +193,7 @@ Keep an acquisition and revision history sufficient to reconstruct prerequisite 
 
 A `grantCapability` component can declare an ability with action cost, trigger, requirements, targets, range, duration, traits, resource costs, and descriptive resolution. A reaction and a free action are distinct action-cost kinds. Systems supply their own permitted action kinds and units. Unsupported automation stays descriptive rather than being replaced with guessed effects.
 
-A resource definition includes a pool ID, capacity expression, initial state, sharing scope, recovery events, and usage costs. Instance-owned pools remain separate; a character-wide pool intentionally combines contributions under a declared policy. Two unrelated limited-use abilities must not share a pool because they have the same display name.
+A tracker belongs to one Feature and defines one resource key, optional maximum, minimum, explicit initial amount, and recovery events. Multiple sub-Features with the same key share one pool without duplicating capacity or refilling it. Independent pools require different keys; names are display-only. A Feature needing several resources grants separate tracker sub-Features.
 
 ### Capacity scaling and Feature tables
 
@@ -207,9 +213,9 @@ For example, Energy Reserve can use the following authored capacity table indexe
 
 With threshold lookup, below-range error, and above-range boundary value, training 4 yields 3 and training 8 yields 6. A combined capacity formula `tableValue + max(0, attribute.insight)` yields 5 at training 4 and insight 2. An alternative formula can omit the table entirely. These are invented authoring examples, not PF2e resource rules.
 
-Capacity dependencies join the calculation graph. Declared rounding and bounds apply to the final expression; negative or nonfinite capacity is invalid, and an integer-use pool requires an integer result after explicit rounding. The builder must reject self-referential capacity or stat-resource dependency cycles. Resource requirements that inspect capacity are checked after the independently eligible provider's capacity is calculated; they cannot validate a provider using bonuses from its not-yet-eligible consumer.
+Capacity dependencies join the calculation graph. Declared rounding and bounds apply to the final expression; a supplied maximum must be finite and at least the minimum, and an integer-use pool requires an integer result after explicit rounding. The builder must reject self-referential capacity or stat-resource dependency cycles. Resource requirements that inspect capacity are checked after the independently eligible provider's capacity is calculated; they cannot validate a provider using bonuses from its not-yet-eligible consumer.
 
-Persist expenditure separately from computed capacity: `available = max(0, capacity - spent)`. If capacity falls below expenditure, preserve that expenditure. Recalculating or increasing capacity does not clear expenditure, though higher capacity can legitimately increase available uses. For example, capacity 5 with 4 spent has 1 available; lowering capacity to 2 gives 0; returning to 5 gives 1, not 5. New acquisition uses the system's explicit initialization rule. Retraining preserves expenditure for equivalent pools, and a new pool may initialize empty or inherit expenditure according to the system; replacement must not provide free recovery by default.
+Persist the current resource amount separately from computed maximum. Available spending equals `max(0, current - minimum - reserved)`. Raising maximum does not raise current amount. Feature assignment grants and recovery explicitly add amounts; lowering maximum clamps current. Removing the last provider hides the pool and invalidates dependents, while retaining its balance and grant receipts prevents free recovery through removal and re-addition.
 
 Recovery happens only through explicit events, such as daily preparation, rest, or a recharge activity. Recovery never occurs as a side effect of evaluation or loading. Each event records its identity, affected pools, and effect; replaying the same event is idempotent. Timers and elapsed time are recorded game state, not wall-clock assumptions.
 
@@ -219,7 +225,7 @@ For an ability with outcome-dependent expenditure, an explicit pending-use event
 
 ## Character state and calculation
 
-Persist system and content revisions, character identity, base stat inputs, class progressions, root Feature acquisitions, nested choices, parameter values, advancement history, resource expenditure and recovery events, and explicit active context. Do not persist calculated totals as authoritative inputs.
+Persist system and content revisions, character identity, base stat inputs, class progressions, root Feature acquisitions, nested choices, parameter values, advancement history, resource current amounts, assignment receipts, and recovery events, and explicit active context. Do not persist calculated totals as authoritative inputs.
 
 Evaluation is pure and deterministic for the same content, character, and context. It does not mutate saved choices or consume resources.
 

@@ -6,6 +6,7 @@ import { labelFromId } from './workspace';
 import { SelectionCard } from './SelectionCard';
 import { Modal } from './Modal';
 import { FeatureRules, RulesText } from './RulesText';
+import { ResourceSummary } from './ResourceSummary';
 
 export function CharacterBuilder({ engine, character, update, openFeature, report }: { engine: Engine; character: Character; update: (c: Character) => void; openFeature: (id: string) => void; report: (message: string) => void }) {
   const result = useMemo(() => engine.evaluate(character), [engine, character]);
@@ -216,7 +217,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
             {result.provisional ? 'These totals are provisional.' : ''}
           </p>
           <div className="stat-grid">
-            {engine.catalogue.system.stats.map((s) => (
+            {Object.keys(result.stats).map((id) => engine.getStatDefinition(id)!).map((s) => (
               <details className="stat-tile" key={s.id}>
                 <summary>
                   <span>{s.name}</span>
@@ -251,31 +252,10 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
       {tab === 'resources' && (
         <>
           <h2>Resources</h2>
-          <p className="muted">Finalize a valid character to use these controls. Resource expenditure is preserved when the build changes.</p>
+          <p className="muted">Finalize a valid character to use these controls. Maximum changes do not refill tracked resources; Features explicitly grant amounts and recovery.</p>
           <div className="stat-grid">
             {Object.values(result.resources).map((p) => (
-              <article className="stat-tile" key={p.id}>
-                <span>{labelFromId(p.key)}</span>
-                <strong>
-                  {p.available}
-                  {' '}
-                  {'/ '}
-                  {' '}
-                  {p.capacity}
-                </strong>
-                <p className="muted small">
-                  {p.spent}
-                  {' '}
-                  {'spent · '}
-                  {' '}
-                  {p.reserved}
-                  {' '}
-                  {'reserved · '}
-                  {' '}
-                  {p.units}
-                </p>
-                <p className="muted small">{p.recovery.map((r) => labelFromId(r.event)).join(' · ') || 'No automatic recovery'}</p>
-              </article>
+              <ResourceSummary key={p.id} pool={p} engine={engine} result={result} />
             ))}
           </div>
           <div className="toolbar">{[...new Set(Object.values(result.resources).flatMap((p) => p.recovery.map((r) => r.event)))].map((event) => <button className="quiet" key={event} disabled={!ready} onClick={() => attempt(() => update(recoverResources(engine, character, event, crypto.randomUUID())))}>{labelFromId(event)}</button>)}</div>

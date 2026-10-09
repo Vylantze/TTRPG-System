@@ -2,10 +2,10 @@ import type { Engine, Expression, FeatureDefinition, Predicate } from '../../src
 import { featureName, tagName } from './display';
 import { labelFromId } from './workspace';
 
-function expressionText(expression: Expression, engine: Engine): string {
+export function expressionText(expression: Expression, engine: Engine): string {
   if (typeof expression !== 'object') return String(expression);
   if ('literal' in expression) return String(expression.literal);
-  if ('stat' in expression) return engine.catalogue.system.stats.find((s) => s.id === expression.stat)?.name ?? labelFromId(expression.stat);
+  if ('stat' in expression) return engine.getStatDefinition(expression.stat)?.name ?? labelFromId(expression.stat);
   if ('context' in expression) {
     const cls = expression.context.startsWith('level.') ? engine.catalogue.classes.find((c) => c.id === expression.context.slice(6)) : undefined;
     return cls ? `${cls.name} level` : labelFromId(expression.context);

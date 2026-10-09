@@ -1155,10 +1155,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.acrobatics",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.acrobatics",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1188,10 +1190,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.animal-handling",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.animal-handling",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1221,10 +1225,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.arcana",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.arcana",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1254,10 +1260,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.athletics",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.athletics",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1287,10 +1295,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.deception",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.deception",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1320,10 +1330,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.history",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.history",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1353,10 +1365,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.insight",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.insight",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1386,10 +1400,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.intimidation",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.intimidation",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1419,10 +1435,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.investigation",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.investigation",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1452,10 +1470,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.medicine",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.medicine",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1485,10 +1505,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.nature",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.nature",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1518,10 +1540,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.perception",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.perception",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1551,10 +1575,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.performance",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.performance",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1584,10 +1610,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.persuasion",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.persuasion",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1617,10 +1645,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.religion",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.religion",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1650,10 +1680,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.sleight-of-hand",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.sleight-of-hand",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1683,10 +1715,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.stealth",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.stealth",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1716,10 +1750,12 @@
       "components": [
         {
           "id": "training",
-          "kind": "modifyStat",
-          "stat": "training.skill.survival",
-          "operation": "floor",
-          "value": 1
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.survival",
+            "rank": 1
+          }
         }
       ],
       "tags": [
@@ -1749,10 +1785,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.acrobatics",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.acrobatics",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -1777,10 +1815,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.animal-handling",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.animal-handling",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -1805,10 +1845,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.arcana",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.arcana",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -1833,10 +1875,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.athletics",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.athletics",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -1861,10 +1905,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.deception",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.deception",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -1889,10 +1935,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.history",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.history",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -1917,10 +1965,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.insight",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.insight",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -1945,10 +1995,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.intimidation",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.intimidation",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -1973,10 +2025,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.investigation",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.investigation",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -2001,10 +2055,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.medicine",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.medicine",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -2029,10 +2085,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.nature",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.nature",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -2057,10 +2115,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.perception",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.perception",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -2085,10 +2145,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.performance",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.performance",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -2113,10 +2175,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.persuasion",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.persuasion",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -2141,10 +2205,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.religion",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.religion",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -2169,10 +2235,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.sleight-of-hand",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.sleight-of-hand",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -2197,10 +2265,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.stealth",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.stealth",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -2225,10 +2295,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.skill.survival",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.skill.survival",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -2253,10 +2325,12 @@
       "components": [
         {
           "id": "expertise",
-          "kind": "modifyStat",
-          "stat": "training.tool.thieves-tools",
-          "operation": "floor",
-          "value": 2
+          "kind": "useBlock",
+          "block": "core:training",
+          "arguments": {
+            "stat": "training.tool.thieves-tools",
+            "rank": 2
+          }
         }
       ],
       "tags": [
@@ -3921,22 +3995,8 @@
         },
         {
           "id": "breath",
-          "kind": "defineResource",
-          "key": "dragonborn-breath",
-          "scope": "character",
-          "units": "uses",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.dragonborn-breath"
         },
         {
           "id": "ancestry",
@@ -4787,18 +4847,8 @@
         },
         {
           "id": "endurance",
-          "kind": "defineResource",
-          "key": "relentless-endurance",
-          "scope": "character",
-          "units": "uses",
-          "integer": true,
-          "capacity": 1,
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.relentless-endurance"
         },
         {
           "id": "survive",
@@ -4902,30 +4952,8 @@
         },
         {
           "id": "infernal-rebuke",
-          "kind": "defineResource",
-          "key": "infernal-rebuke",
-          "scope": "character",
-          "units": "uses",
-          "integer": true,
-          "capacity": {
-            "if": {
-              "op": "gte",
-              "args": [
-                {
-                  "context": "characterLevel"
-                },
-                3
-              ]
-            },
-            "then": 1,
-            "else": 0
-          },
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.infernal-rebuke"
         },
         {
           "id": "infernal-rebuke-cast",
@@ -4977,30 +5005,8 @@
         },
         {
           "id": "infernal-darkness",
-          "kind": "defineResource",
-          "key": "infernal-darkness",
-          "scope": "character",
-          "units": "uses",
-          "integer": true,
-          "capacity": {
-            "if": {
-              "op": "gte",
-              "args": [
-                {
-                  "context": "characterLevel"
-                },
-                5
-              ]
-            },
-            "then": 1,
-            "else": 0
-          },
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.infernal-darkness"
         },
         {
           "id": "infernal-darkness-cast",
@@ -5555,22 +5561,8 @@
       "components": [
         {
           "id": "pool.second-wind",
-          "kind": "defineResource",
-          "key": "second-wind",
-          "capacity": 1,
-          "scope": "progression",
-          "units": "uses",
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.second-wind"
         },
         {
           "id": "second-wind",
@@ -5603,27 +5595,8 @@
       "components": [
         {
           "id": "pool.action-surge",
-          "kind": "defineResource",
-          "key": "action-surge",
-          "capacity": {
-            "table": "uses",
-            "input": {
-              "context": "classLevel"
-            }
-          },
-          "scope": "progression",
-          "units": "uses",
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.action-surge"
         },
         {
           "id": "action-surge",
@@ -5719,23 +5692,8 @@
       "components": [
         {
           "id": "pool.indomitable",
-          "kind": "defineResource",
-          "key": "indomitable",
-          "capacity": {
-            "table": "uses",
-            "input": {
-              "context": "classLevel"
-            }
-          },
-          "scope": "progression",
-          "units": "uses",
-          "integer": true,
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.indomitable"
         },
         {
           "id": "indomitable",
@@ -6478,22 +6436,8 @@
       "components": [
         {
           "id": "pool.stroke-of-luck",
-          "kind": "defineResource",
-          "key": "stroke-of-luck",
-          "capacity": 1,
-          "scope": "progression",
-          "units": "uses",
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.stroke-of-luck"
         },
         {
           "id": "stroke-of-luck",
@@ -11653,156 +11597,48 @@
       "components": [
         {
           "id": "slot-1",
-          "kind": "defineResource",
-          "key": "spell-slot.1",
-          "units": "slots",
-          "scope": "character",
-          "integer": true,
-          "capacity": {
-            "stat": "spellSlots.1"
-          },
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.spell-slot.1"
         },
         {
           "id": "slot-2",
-          "kind": "defineResource",
-          "key": "spell-slot.2",
-          "units": "slots",
-          "scope": "character",
-          "integer": true,
-          "capacity": {
-            "stat": "spellSlots.2"
-          },
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.spell-slot.2"
         },
         {
           "id": "slot-3",
-          "kind": "defineResource",
-          "key": "spell-slot.3",
-          "units": "slots",
-          "scope": "character",
-          "integer": true,
-          "capacity": {
-            "stat": "spellSlots.3"
-          },
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.spell-slot.3"
         },
         {
           "id": "slot-4",
-          "kind": "defineResource",
-          "key": "spell-slot.4",
-          "units": "slots",
-          "scope": "character",
-          "integer": true,
-          "capacity": {
-            "stat": "spellSlots.4"
-          },
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.spell-slot.4"
         },
         {
           "id": "slot-5",
-          "kind": "defineResource",
-          "key": "spell-slot.5",
-          "units": "slots",
-          "scope": "character",
-          "integer": true,
-          "capacity": {
-            "stat": "spellSlots.5"
-          },
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.spell-slot.5"
         },
         {
           "id": "slot-6",
-          "kind": "defineResource",
-          "key": "spell-slot.6",
-          "units": "slots",
-          "scope": "character",
-          "integer": true,
-          "capacity": {
-            "stat": "spellSlots.6"
-          },
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.spell-slot.6"
         },
         {
           "id": "slot-7",
-          "kind": "defineResource",
-          "key": "spell-slot.7",
-          "units": "slots",
-          "scope": "character",
-          "integer": true,
-          "capacity": {
-            "stat": "spellSlots.7"
-          },
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.spell-slot.7"
         },
         {
           "id": "slot-8",
-          "kind": "defineResource",
-          "key": "spell-slot.8",
-          "units": "slots",
-          "scope": "character",
-          "integer": true,
-          "capacity": {
-            "stat": "spellSlots.8"
-          },
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.spell-slot.8"
         },
         {
           "id": "slot-9",
-          "kind": "defineResource",
-          "key": "spell-slot.9",
-          "units": "slots",
-          "scope": "character",
-          "integer": true,
-          "capacity": {
-            "stat": "spellSlots.9"
-          },
-          "recovery": [
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.spell-slot.9"
         },
         {
           "id": "prepared",
@@ -11848,18 +11684,8 @@
       "components": [
         {
           "id": "use",
-          "kind": "defineResource",
-          "key": "arcane-recovery",
-          "scope": "progression",
-          "units": "uses",
-          "integer": true,
-          "capacity": 1,
-          "recovery": [
-            {
-              "event": "new-day",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.arcane-recovery"
         },
         {
           "id": "recover",
@@ -52411,22 +52237,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.animate-dead",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.animate-dead"
         },
         {
           "id": "signature",
@@ -52990,22 +52802,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.bestow-curse",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.bestow-curse"
         },
         {
           "id": "signature",
@@ -53573,22 +53371,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.blink",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.blink"
         },
         {
           "id": "signature",
@@ -54128,22 +53912,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.clairvoyance",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.clairvoyance"
         },
         {
           "id": "signature",
@@ -54707,22 +54477,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.counterspell",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.counterspell"
         },
         {
           "id": "signature",
@@ -55290,22 +55046,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.dispel-magic",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.dispel-magic"
         },
         {
           "id": "signature",
@@ -55873,22 +55615,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.fear",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.fear"
         },
         {
           "id": "signature",
@@ -56456,22 +56184,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.fireball",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.fireball"
         },
         {
           "id": "signature",
@@ -57039,22 +56753,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.fly",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.fly"
         },
         {
           "id": "signature",
@@ -57622,22 +57322,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.gaseous-form",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.gaseous-form"
         },
         {
           "id": "signature",
@@ -58177,22 +57863,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.glyph-of-warding",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.glyph-of-warding"
         },
         {
           "id": "signature",
@@ -58756,22 +58428,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.haste",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.haste"
         },
         {
           "id": "signature",
@@ -59339,22 +58997,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.hypnotic-pattern",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.hypnotic-pattern"
         },
         {
           "id": "signature",
@@ -59922,22 +59566,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.lightning-bolt",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.lightning-bolt"
         },
         {
           "id": "signature",
@@ -60477,22 +60107,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.magic-circle",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.magic-circle"
         },
         {
           "id": "signature",
@@ -61056,22 +60672,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.major-image",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.major-image"
         },
         {
           "id": "signature",
@@ -61639,22 +61241,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.nondetection",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.nondetection"
         },
         {
           "id": "signature",
@@ -62231,22 +61819,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.phantom-steed",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.phantom-steed"
         },
         {
           "id": "signature",
@@ -62810,22 +62384,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.protection-from-energy",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.protection-from-energy"
         },
         {
           "id": "signature",
@@ -63393,22 +62953,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.remove-curse",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.remove-curse"
         },
         {
           "id": "signature",
@@ -63976,22 +63522,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.sending",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.sending"
         },
         {
           "id": "signature",
@@ -64559,22 +64091,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.sleet-storm",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.sleet-storm"
         },
         {
           "id": "signature",
@@ -65142,22 +64660,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.slow",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.slow"
         },
         {
           "id": "signature",
@@ -65725,22 +65229,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.stinking-cloud",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.stinking-cloud"
         },
         {
           "id": "signature",
@@ -66317,22 +65807,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.tiny-hut",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.tiny-hut"
         },
         {
           "id": "signature",
@@ -66896,22 +66372,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.tongues",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.tongues"
         },
         {
           "id": "signature",
@@ -67479,22 +66941,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.vampiric-touch",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.vampiric-touch"
         },
         {
           "id": "signature",
@@ -68099,22 +67547,8 @@
       "components": [
         {
           "id": "daily-cast",
-          "kind": "defineResource",
-          "key": "signature.water-breathing",
-          "units": "uses",
-          "scope": "progression",
-          "capacity": 1,
-          "integer": true,
-          "recovery": [
-            {
-              "event": "short-rest",
-              "amount": "full"
-            },
-            {
-              "event": "long-rest",
-              "amount": "full"
-            }
-          ]
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.signature.water-breathing"
         },
         {
           "id": "signature",
@@ -100352,6 +99786,2350 @@
       "textReferences": [
         "dnd5e:2014:spell.wish"
       ]
+    },
+    {
+      "id": "dnd5e:2014:resource.dragonborn-breath",
+      "revision": 1,
+      "name": "Dragonborn Breath Resource",
+      "displayName": "Dragonborn Breath Resource",
+      "source": "SRD 5.1 pp. 5–6 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=5",
+      "textReferences": [
+        "dnd5e:2014:race.dragonborn"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.dragonborn-breath",
+            "name": "Dragonborn Breath Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "dragonborn-breath",
+          "name": "Dragonborn Breath",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.dragonborn-breath"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.dragonborn-breath"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.relentless-endurance",
+      "revision": 1,
+      "name": "Relentless Endurance Resource",
+      "displayName": "Relentless Endurance Resource",
+      "source": "SRD 5.1 p. 7 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=7",
+      "textReferences": [
+        "dnd5e:2014:race.half-orc"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.relentless-endurance",
+            "name": "Relentless Endurance Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "relentless-endurance",
+          "name": "Relentless Endurance",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.relentless-endurance"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.relentless-endurance"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.infernal-rebuke",
+      "revision": 1,
+      "name": "Infernal Rebuke Resource",
+      "displayName": "Infernal Rebuke Resource",
+      "source": "SRD 5.1 p. 7 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=7",
+      "textReferences": [
+        "dnd5e:2014:race.tiefling"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.infernal-rebuke",
+            "name": "Infernal Rebuke Maximum",
+            "kind": "derived",
+            "expression": {
+              "if": {
+                "op": "gte",
+                "args": [
+                  {
+                    "context": "characterLevel"
+                  },
+                  3
+                ]
+              },
+              "then": 1,
+              "else": 0
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "infernal-rebuke",
+          "name": "Infernal Rebuke",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.infernal-rebuke"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.infernal-rebuke"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.infernal-darkness",
+      "revision": 1,
+      "name": "Infernal Darkness Resource",
+      "displayName": "Infernal Darkness Resource",
+      "source": "SRD 5.1 p. 7 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=7",
+      "textReferences": [
+        "dnd5e:2014:race.tiefling"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.infernal-darkness",
+            "name": "Infernal Darkness Maximum",
+            "kind": "derived",
+            "expression": {
+              "if": {
+                "op": "gte",
+                "args": [
+                  {
+                    "context": "characterLevel"
+                  },
+                  5
+                ]
+              },
+              "then": 1,
+              "else": 0
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "infernal-darkness",
+          "name": "Infernal Darkness",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.infernal-darkness"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.infernal-darkness"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.second-wind",
+      "revision": 1,
+      "name": "Second Wind Resource",
+      "displayName": "Second Wind Resource",
+      "source": "SRD 5.1 p. 24 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=24",
+      "textReferences": [
+        "dnd5e:2014:fighter.second-wind"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.second-wind",
+            "name": "Second Wind Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "second-wind",
+          "name": "Second Wind",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.second-wind"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.second-wind"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.action-surge",
+      "revision": 1,
+      "name": "Action Surge Resource",
+      "displayName": "Action Surge Resource",
+      "source": "SRD 5.1 p. 25 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=25",
+      "textReferences": [
+        "dnd5e:2014:fighter.action-surge"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.action-surge",
+            "name": "Action Surge Maximum",
+            "kind": "derived",
+            "expression": {
+              "table": "uses",
+              "input": {
+                "context": "classLevel"
+              },
+              "owner": "dnd5e:2014:fighter.action-surge"
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "action-surge",
+          "name": "Action Surge",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.action-surge"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.action-surge"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.indomitable",
+      "revision": 1,
+      "name": "Indomitable Resource",
+      "displayName": "Indomitable Resource",
+      "source": "SRD 5.1 p. 25 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=25",
+      "textReferences": [
+        "dnd5e:2014:fighter.indomitable"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.indomitable",
+            "name": "Indomitable Maximum",
+            "kind": "derived",
+            "expression": {
+              "table": "uses",
+              "input": {
+                "context": "classLevel"
+              },
+              "owner": "dnd5e:2014:fighter.indomitable"
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "indomitable",
+          "name": "Indomitable",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.indomitable"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.indomitable"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.stroke-of-luck",
+      "revision": 1,
+      "name": "Stroke Of Luck Resource",
+      "displayName": "Stroke Of Luck Resource",
+      "source": "SRD 5.1 p. 40 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=40",
+      "textReferences": [
+        "dnd5e:2014:rogue.stroke-of-luck"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.stroke-of-luck",
+            "name": "Stroke Of Luck Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "stroke-of-luck",
+          "name": "Stroke Of Luck",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.stroke-of-luck"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.stroke-of-luck"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.spell-slot.1",
+      "revision": 1,
+      "name": "Spell Slot 1 Resource",
+      "displayName": "Spell Slot 1 Resource",
+      "source": "SRD 5.1 pp. 52–59 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52",
+      "textReferences": [
+        "dnd5e:2014:wizard.spellcasting"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.spell-slot.1",
+            "name": "Spell Slot 1 Maximum",
+            "kind": "derived",
+            "expression": {
+              "stat": "spellSlots.1"
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "spell-slot.1",
+          "name": "Spell Slot 1",
+          "units": "slots",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.spell-slot.1"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.spell-slot.1"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.spell-slot.2",
+      "revision": 1,
+      "name": "Spell Slot 2 Resource",
+      "displayName": "Spell Slot 2 Resource",
+      "source": "SRD 5.1 pp. 52–59 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52",
+      "textReferences": [
+        "dnd5e:2014:wizard.spellcasting"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.spell-slot.2",
+            "name": "Spell Slot 2 Maximum",
+            "kind": "derived",
+            "expression": {
+              "stat": "spellSlots.2"
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "spell-slot.2",
+          "name": "Spell Slot 2",
+          "units": "slots",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.spell-slot.2"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.spell-slot.2"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.spell-slot.3",
+      "revision": 1,
+      "name": "Spell Slot 3 Resource",
+      "displayName": "Spell Slot 3 Resource",
+      "source": "SRD 5.1 pp. 52–59 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52",
+      "textReferences": [
+        "dnd5e:2014:wizard.spellcasting"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.spell-slot.3",
+            "name": "Spell Slot 3 Maximum",
+            "kind": "derived",
+            "expression": {
+              "stat": "spellSlots.3"
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "spell-slot.3",
+          "name": "Spell Slot 3",
+          "units": "slots",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.spell-slot.3"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.spell-slot.3"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.spell-slot.4",
+      "revision": 1,
+      "name": "Spell Slot 4 Resource",
+      "displayName": "Spell Slot 4 Resource",
+      "source": "SRD 5.1 pp. 52–59 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52",
+      "textReferences": [
+        "dnd5e:2014:wizard.spellcasting"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.spell-slot.4",
+            "name": "Spell Slot 4 Maximum",
+            "kind": "derived",
+            "expression": {
+              "stat": "spellSlots.4"
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "spell-slot.4",
+          "name": "Spell Slot 4",
+          "units": "slots",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.spell-slot.4"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.spell-slot.4"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.spell-slot.5",
+      "revision": 1,
+      "name": "Spell Slot 5 Resource",
+      "displayName": "Spell Slot 5 Resource",
+      "source": "SRD 5.1 pp. 52–59 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52",
+      "textReferences": [
+        "dnd5e:2014:wizard.spellcasting"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.spell-slot.5",
+            "name": "Spell Slot 5 Maximum",
+            "kind": "derived",
+            "expression": {
+              "stat": "spellSlots.5"
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "spell-slot.5",
+          "name": "Spell Slot 5",
+          "units": "slots",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.spell-slot.5"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.spell-slot.5"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.spell-slot.6",
+      "revision": 1,
+      "name": "Spell Slot 6 Resource",
+      "displayName": "Spell Slot 6 Resource",
+      "source": "SRD 5.1 pp. 52–59 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52",
+      "textReferences": [
+        "dnd5e:2014:wizard.spellcasting"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.spell-slot.6",
+            "name": "Spell Slot 6 Maximum",
+            "kind": "derived",
+            "expression": {
+              "stat": "spellSlots.6"
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "spell-slot.6",
+          "name": "Spell Slot 6",
+          "units": "slots",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.spell-slot.6"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.spell-slot.6"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.spell-slot.7",
+      "revision": 1,
+      "name": "Spell Slot 7 Resource",
+      "displayName": "Spell Slot 7 Resource",
+      "source": "SRD 5.1 pp. 52–59 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52",
+      "textReferences": [
+        "dnd5e:2014:wizard.spellcasting"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.spell-slot.7",
+            "name": "Spell Slot 7 Maximum",
+            "kind": "derived",
+            "expression": {
+              "stat": "spellSlots.7"
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "spell-slot.7",
+          "name": "Spell Slot 7",
+          "units": "slots",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.spell-slot.7"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.spell-slot.7"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.spell-slot.8",
+      "revision": 1,
+      "name": "Spell Slot 8 Resource",
+      "displayName": "Spell Slot 8 Resource",
+      "source": "SRD 5.1 pp. 52–59 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52",
+      "textReferences": [
+        "dnd5e:2014:wizard.spellcasting"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.spell-slot.8",
+            "name": "Spell Slot 8 Maximum",
+            "kind": "derived",
+            "expression": {
+              "stat": "spellSlots.8"
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "spell-slot.8",
+          "name": "Spell Slot 8",
+          "units": "slots",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.spell-slot.8"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.spell-slot.8"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.spell-slot.9",
+      "revision": 1,
+      "name": "Spell Slot 9 Resource",
+      "displayName": "Spell Slot 9 Resource",
+      "source": "SRD 5.1 pp. 52–59 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52",
+      "textReferences": [
+        "dnd5e:2014:wizard.spellcasting"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.spell-slot.9",
+            "name": "Spell Slot 9 Maximum",
+            "kind": "derived",
+            "expression": {
+              "stat": "spellSlots.9"
+            },
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "spell-slot.9",
+          "name": "Spell Slot 9",
+          "units": "slots",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.spell-slot.9"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.spell-slot.9"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.arcane-recovery",
+      "revision": 1,
+      "name": "Arcane Recovery Resource",
+      "displayName": "Arcane Recovery Resource",
+      "source": "SRD 5.1 p. 53 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=53",
+      "textReferences": [
+        "dnd5e:2014:wizard.arcane-recovery"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.arcane-recovery",
+            "name": "Arcane Recovery Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "arcane-recovery",
+          "name": "Arcane Recovery",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.arcane-recovery"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.arcane-recovery"
+          },
+          "recovery": [
+            {
+              "event": "new-day",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.animate-dead",
+      "revision": 1,
+      "name": "Signature Animate Dead Resource",
+      "displayName": "Signature Animate Dead Resource",
+      "source": "SRD 5.1 pp. 115–116 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=115",
+      "textReferences": [
+        "dnd5e:2014:signature.animate-dead"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.animate-dead",
+            "name": "Signature Animate Dead Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.animate-dead",
+          "name": "Signature Animate Dead",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.animate-dead"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.animate-dead"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.bestow-curse",
+      "revision": 1,
+      "name": "Signature Bestow Curse Resource",
+      "displayName": "Signature Bestow Curse Resource",
+      "source": "SRD 5.1 p. 121 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=121",
+      "textReferences": [
+        "dnd5e:2014:signature.bestow-curse"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.bestow-curse",
+            "name": "Signature Bestow Curse Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.bestow-curse",
+          "name": "Signature Bestow Curse",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.bestow-curse"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.bestow-curse"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.blink",
+      "revision": 1,
+      "name": "Signature Blink Resource",
+      "displayName": "Signature Blink Resource",
+      "source": "SRD 5.1 pp. 122–123 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=122",
+      "textReferences": [
+        "dnd5e:2014:signature.blink"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.blink",
+            "name": "Signature Blink Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.blink",
+          "name": "Signature Blink",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.blink"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.blink"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.clairvoyance",
+      "revision": 1,
+      "name": "Signature Clairvoyance Resource",
+      "displayName": "Signature Clairvoyance Resource",
+      "source": "SRD 5.1 pp. 124–125 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=124",
+      "textReferences": [
+        "dnd5e:2014:signature.clairvoyance"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.clairvoyance",
+            "name": "Signature Clairvoyance Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.clairvoyance",
+          "name": "Signature Clairvoyance",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.clairvoyance"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.clairvoyance"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.counterspell",
+      "revision": 1,
+      "name": "Signature Counterspell Resource",
+      "displayName": "Signature Counterspell Resource",
+      "source": "SRD 5.1 p. 131 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=131",
+      "textReferences": [
+        "dnd5e:2014:signature.counterspell"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.counterspell",
+            "name": "Signature Counterspell Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.counterspell",
+          "name": "Signature Counterspell",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.counterspell"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.counterspell"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.dispel-magic",
+      "revision": 1,
+      "name": "Signature Dispel Magic Resource",
+      "displayName": "Signature Dispel Magic Resource",
+      "source": "SRD 5.1 p. 136 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=136",
+      "textReferences": [
+        "dnd5e:2014:signature.dispel-magic"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.dispel-magic",
+            "name": "Signature Dispel Magic Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.dispel-magic",
+          "name": "Signature Dispel Magic",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.dispel-magic"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.dispel-magic"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.fear",
+      "revision": 1,
+      "name": "Signature Fear Resource",
+      "displayName": "Signature Fear Resource",
+      "source": "SRD 5.1 p. 142 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=142",
+      "textReferences": [
+        "dnd5e:2014:signature.fear"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.fear",
+            "name": "Signature Fear Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.fear",
+          "name": "Signature Fear",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.fear"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.fear"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.fireball",
+      "revision": 1,
+      "name": "Signature Fireball Resource",
+      "displayName": "Signature Fireball Resource",
+      "source": "SRD 5.1 p. 144 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=144",
+      "textReferences": [
+        "dnd5e:2014:signature.fireball"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.fireball",
+            "name": "Signature Fireball Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.fireball",
+          "name": "Signature Fireball",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.fireball"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.fireball"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.fly",
+      "revision": 1,
+      "name": "Signature Fly Resource",
+      "displayName": "Signature Fly Resource",
+      "source": "SRD 5.1 p. 146 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=146",
+      "textReferences": [
+        "dnd5e:2014:signature.fly"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.fly",
+            "name": "Signature Fly Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.fly",
+          "name": "Signature Fly",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.fly"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.fly"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.gaseous-form",
+      "revision": 1,
+      "name": "Signature Gaseous Form Resource",
+      "displayName": "Signature Gaseous Form Resource",
+      "source": "SRD 5.1 p. 148 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=148",
+      "textReferences": [
+        "dnd5e:2014:signature.gaseous-form"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.gaseous-form",
+            "name": "Signature Gaseous Form Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.gaseous-form",
+          "name": "Signature Gaseous Form",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.gaseous-form"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.gaseous-form"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.glyph-of-warding",
+      "revision": 1,
+      "name": "Signature Glyph Of Warding Resource",
+      "displayName": "Signature Glyph Of Warding Resource",
+      "source": "SRD 5.1 pp. 149–150 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=149",
+      "textReferences": [
+        "dnd5e:2014:signature.glyph-of-warding"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.glyph-of-warding",
+            "name": "Signature Glyph Of Warding Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.glyph-of-warding",
+          "name": "Signature Glyph Of Warding",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.glyph-of-warding"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.glyph-of-warding"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.haste",
+      "revision": 1,
+      "name": "Signature Haste Resource",
+      "displayName": "Signature Haste Resource",
+      "source": "SRD 5.1 p. 153 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=153",
+      "textReferences": [
+        "dnd5e:2014:signature.haste"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.haste",
+            "name": "Signature Haste Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.haste",
+          "name": "Signature Haste",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.haste"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.haste"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.hypnotic-pattern",
+      "revision": 1,
+      "name": "Signature Hypnotic Pattern Resource",
+      "displayName": "Signature Hypnotic Pattern Resource",
+      "source": "SRD 5.1 p. 155 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=155",
+      "textReferences": [
+        "dnd5e:2014:signature.hypnotic-pattern"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.hypnotic-pattern",
+            "name": "Signature Hypnotic Pattern Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.hypnotic-pattern",
+          "name": "Signature Hypnotic Pattern",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.hypnotic-pattern"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.hypnotic-pattern"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.lightning-bolt",
+      "revision": 1,
+      "name": "Signature Lightning Bolt Resource",
+      "displayName": "Signature Lightning Bolt Resource",
+      "source": "SRD 5.1 p. 159 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=159",
+      "textReferences": [
+        "dnd5e:2014:signature.lightning-bolt"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.lightning-bolt",
+            "name": "Signature Lightning Bolt Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.lightning-bolt",
+          "name": "Signature Lightning Bolt",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.lightning-bolt"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.lightning-bolt"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.magic-circle",
+      "revision": 1,
+      "name": "Signature Magic Circle Resource",
+      "displayName": "Signature Magic Circle Resource",
+      "source": "SRD 5.1 p. 160 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=160",
+      "textReferences": [
+        "dnd5e:2014:signature.magic-circle"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.magic-circle",
+            "name": "Signature Magic Circle Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.magic-circle",
+          "name": "Signature Magic Circle",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.magic-circle"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.magic-circle"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.major-image",
+      "revision": 1,
+      "name": "Signature Major Image Resource",
+      "displayName": "Signature Major Image Resource",
+      "source": "SRD 5.1 p. 162 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=162",
+      "textReferences": [
+        "dnd5e:2014:signature.major-image"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.major-image",
+            "name": "Signature Major Image Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.major-image",
+          "name": "Signature Major Image",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.major-image"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.major-image"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.nondetection",
+      "revision": 1,
+      "name": "Signature Nondetection Resource",
+      "displayName": "Signature Nondetection Resource",
+      "source": "SRD 5.1 p. 167 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=167",
+      "textReferences": [
+        "dnd5e:2014:signature.nondetection"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.nondetection",
+            "name": "Signature Nondetection Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.nondetection",
+          "name": "Signature Nondetection",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.nondetection"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.nondetection"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.phantom-steed",
+      "revision": 1,
+      "name": "Signature Phantom Steed Resource",
+      "displayName": "Signature Phantom Steed Resource",
+      "source": "SRD 5.1 pp. 167–168 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=167",
+      "textReferences": [
+        "dnd5e:2014:signature.phantom-steed"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.phantom-steed",
+            "name": "Signature Phantom Steed Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.phantom-steed",
+          "name": "Signature Phantom Steed",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.phantom-steed"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.phantom-steed"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.protection-from-energy",
+      "revision": 1,
+      "name": "Signature Protection From Energy Resource",
+      "displayName": "Signature Protection From Energy Resource",
+      "source": "SRD 5.1 p. 173 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=173",
+      "textReferences": [
+        "dnd5e:2014:signature.protection-from-energy"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.protection-from-energy",
+            "name": "Signature Protection From Energy Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.protection-from-energy",
+          "name": "Signature Protection From Energy",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.protection-from-energy"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.protection-from-energy"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.remove-curse",
+      "revision": 1,
+      "name": "Signature Remove Curse Resource",
+      "displayName": "Signature Remove Curse Resource",
+      "source": "SRD 5.1 pp. 174–175 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=174",
+      "textReferences": [
+        "dnd5e:2014:signature.remove-curse"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.remove-curse",
+            "name": "Signature Remove Curse Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.remove-curse",
+          "name": "Signature Remove Curse",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.remove-curse"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.remove-curse"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.sending",
+      "revision": 1,
+      "name": "Signature Sending Resource",
+      "displayName": "Signature Sending Resource",
+      "source": "SRD 5.1 pp. 177–178 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=177",
+      "textReferences": [
+        "dnd5e:2014:signature.sending"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.sending",
+            "name": "Signature Sending Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.sending",
+          "name": "Signature Sending",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.sending"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.sending"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.sleet-storm",
+      "revision": 1,
+      "name": "Signature Sleet Storm Resource",
+      "displayName": "Signature Sleet Storm Resource",
+      "source": "SRD 5.1 p. 180 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=180",
+      "textReferences": [
+        "dnd5e:2014:signature.sleet-storm"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.sleet-storm",
+            "name": "Signature Sleet Storm Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.sleet-storm",
+          "name": "Signature Sleet Storm",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.sleet-storm"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.sleet-storm"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.slow",
+      "revision": 1,
+      "name": "Signature Slow Resource",
+      "displayName": "Signature Slow Resource",
+      "source": "SRD 5.1 pp. 180–181 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=180",
+      "textReferences": [
+        "dnd5e:2014:signature.slow"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.slow",
+            "name": "Signature Slow Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.slow",
+          "name": "Signature Slow",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.slow"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.slow"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.stinking-cloud",
+      "revision": 1,
+      "name": "Signature Stinking Cloud Resource",
+      "displayName": "Signature Stinking Cloud Resource",
+      "source": "SRD 5.1 pp. 182–183 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=182",
+      "textReferences": [
+        "dnd5e:2014:signature.stinking-cloud"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.stinking-cloud",
+            "name": "Signature Stinking Cloud Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.stinking-cloud",
+          "name": "Signature Stinking Cloud",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.stinking-cloud"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.stinking-cloud"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.tiny-hut",
+      "revision": 1,
+      "name": "Signature Tiny Hut Resource",
+      "displayName": "Signature Tiny Hut Resource",
+      "source": "SRD 5.1 p. 187 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=187",
+      "textReferences": [
+        "dnd5e:2014:signature.tiny-hut"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.tiny-hut",
+            "name": "Signature Tiny Hut Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.tiny-hut",
+          "name": "Signature Tiny Hut",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.tiny-hut"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.tiny-hut"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.tongues",
+      "revision": 1,
+      "name": "Signature Tongues Resource",
+      "displayName": "Signature Tongues Resource",
+      "source": "SRD 5.1 pp. 187–188 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=187",
+      "textReferences": [
+        "dnd5e:2014:signature.tongues"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.tongues",
+            "name": "Signature Tongues Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.tongues",
+          "name": "Signature Tongues",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.tongues"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.tongues"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.vampiric-touch",
+      "revision": 1,
+      "name": "Signature Vampiric Touch Resource",
+      "displayName": "Signature Vampiric Touch Resource",
+      "source": "SRD 5.1 p. 189 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=189",
+      "textReferences": [
+        "dnd5e:2014:signature.vampiric-touch"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.vampiric-touch",
+            "name": "Signature Vampiric Touch Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.vampiric-touch",
+          "name": "Signature Vampiric Touch",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.vampiric-touch"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.vampiric-touch"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.signature.water-breathing",
+      "revision": 1,
+      "name": "Signature Water Breathing Resource",
+      "displayName": "Signature Water Breathing Resource",
+      "source": "SRD 5.1 p. 191 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=191",
+      "textReferences": [
+        "dnd5e:2014:signature.water-breathing"
+      ],
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "capacity",
+          "kind": "defineStat",
+          "stat": {
+            "id": "resource.capacity.signature.water-breathing",
+            "name": "Signature Water Breathing Maximum",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        },
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "signature.water-breathing",
+          "name": "Signature Water Breathing",
+          "units": "uses",
+          "integer": true,
+          "maximum": {
+            "stat": "resource.capacity.signature.water-breathing"
+          },
+          "initialAmount": {
+            "stat": "resource.capacity.signature.water-breathing"
+          },
+          "recovery": [
+            {
+              "event": "short-rest",
+              "amount": "full"
+            },
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ]
     }
   ],
   "configurations": [
@@ -103897,7 +105675,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "resource-tracker": "Resource Tracker"
         }
       },
       "classes": [
@@ -109734,7 +111513,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "resource-tracker": "Resource Tracker"
         }
       },
       "classes": [
@@ -115598,7 +117378,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "resource-tracker": "Resource Tracker"
         }
       },
       "classes": [
@@ -121435,7 +123216,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "resource-tracker": "Resource Tracker"
         }
       },
       "classes": [
@@ -126956,7 +128738,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "resource-tracker": "Resource Tracker"
         }
       },
       "classes": [
@@ -132450,7 +134233,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "resource-tracker": "Resource Tracker"
         }
       },
       "classes": [
@@ -137971,7 +139755,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "resource-tracker": "Resource Tracker"
         }
       },
       "classes": [
@@ -143465,7 +145250,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "resource-tracker": "Resource Tracker"
         }
       },
       "classes": [
@@ -148784,7 +150570,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "resource-tracker": "Resource Tracker"
         }
       },
       "classes": [
@@ -154076,7 +155863,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "resource-tracker": "Resource Tracker"
         }
       },
       "classes": [
@@ -159395,7 +161183,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "resource-tracker": "Resource Tracker"
         }
       },
       "classes": [
@@ -164687,7 +166476,8 @@
           "wizard-caster": "Wizard Spellcasting",
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
-          "wizard-subclass": "Wizard Subclass"
+          "wizard-subclass": "Wizard Subclass",
+          "resource-tracker": "Resource Tracker"
         }
       },
       "classes": [
@@ -167006,6 +168796,34 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "id": "core:training",
+      "parameters": {
+        "stat": {
+          "kind": "string"
+        },
+        "rank": {
+          "kind": "number",
+          "minimum": 0,
+          "integer": true
+        }
+      },
+      "components": [
+        {
+          "id": "training",
+          "kind": "modifyStat",
+          "stat": {
+            "argument": "stat"
+          },
+          "operation": "floor",
+          "value": {
+            "argument": "rank"
+          }
         }
       ]
     }

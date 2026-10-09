@@ -6,6 +6,8 @@ import type { StatView } from './types/StatView.js';
 import type { ClassLevel } from './types/ClassLevel.js';
 import type { FeatureAdvancement } from './types/FeatureAdvancement.js';
 import { checkCharacter, validateCatalogue } from './validation.js';
+import { compileBlocks } from './blocks.js';
+import { trackerPools, storeTrackers } from './resource-trackers.js';
 
 export const segment = (id: string): string => encodeURIComponent(id);
 export const rootPath = (id: string): string => `root/${segment(id)}`;
@@ -29,6 +31,10 @@ export class Engine {
   /** Catalogue lookup; definitions are frozen with the engine's catalogue. */
   getFeature(id: string): Catalogue['features'][number] | undefined {
     return this.features.get(id);
+  }
+
+  getStatDefinition(id: string): Catalogue['system']['stats'][number] | undefined {
+    return this.catalogue.system.stats.find((s) => s.id === id) ?? this.catalogue.features.flatMap((f) => f.components.flatMap((c) => c.kind === 'defineStat' ? [c.stat] : [])).find((s) => s.id === id);
   }
 
   /** Authored levels, in numerical order. No character state or rules are changed. */
@@ -59,6 +65,7 @@ export class Engine {
   readonly catalogue: Catalogue;
   private readonly features: Map<string, Catalogue['features'][number]>;
   constructor(catalogue: Catalogue, private functions: FunctionRegistry = {}) {
+    catalogue = compileBlocks(catalogue);
     const errors = validateCatalogue(catalogue, functions);
     if (errors.length) throw new RuleError(errors[0].code, errors[0].message, errors[0].path);
     this.catalogue = freeze(clone(catalogue));
@@ -93,6 +100,7 @@ export class Engine {
     checkCharacter(character);
     const result = this.evaluate(character);
     for (const pool of Object.values(result.resources)) character.resources[pool.id] = { spent: pool.initial === 'empty' ? pool.capacity : 0 };
+    storeTrackers(character, result.resources);
     return character;
   }
 
@@ -136,12 +144,16 @@ export class Engine {
     const get = (id: string): number => {
       if (Object.hasOwn(results, id)) return results[id].value;
       if (visiting.includes(id)) throw new RuleError('STAT_CYCLE', `Stat dependency cycle: ${[...visiting, id].join(' -> ')}.`);
-      const definition = this.catalogue.system.stats.find((s) => s.id === id);
+      const providers = instances.filter((i) => i.active && i.eligible).flatMap((instance) => this.features.get(instance.feature)!.components.flatMap((component) => component.kind === 'defineStat' && component.stat.id === id ? [{ instance, definition: component.stat }] : []));
+      const definition = this.catalogue.system.stats.find((s) => s.id === id) ?? providers[0]?.definition;
       if (!definition) throw new RuleError('UNKNOWN_STAT', `Unknown stat ${id}.`);
       visiting.push(id);
       try {
         const globalEnv = this.environment(this.context(character, levels, runtime), get);
-        let base = definition.kind === 'input' ? constrain(number(character.inputs[id] ?? definition.default), definition, true) : number(evaluateExpression(definition.expression, globalEnv));
+        const provider = providers[0]?.instance;
+        const definitionEnv = provider ? this.environment(this.context(character, levels, runtime, provider), get, provider) : globalEnv;
+        let base = definition.kind === 'input' ? constrain(number(character.inputs[id] ?? definition.default), definition, true) : number(evaluateExpression(definition.expression, definitionEnv));
+        for (const other of providers.slice(1)) if (number(evaluateExpression(other.definition.expression, this.environment(this.context(character, levels, runtime, other.instance), get, other.instance))) !== base) throw new RuleError('STAT_CONFLICT', `Active providers disagree on ${id}.`);
         const alternatives = this.catalogue.system.alternatives?.[id];
         if (character.alternatives[id]) {
           const alternative = alternatives?.find((a) => a.id === character.alternatives[id]);
@@ -247,6 +259,11 @@ export class Engine {
       constrain(pool.reserved, { integer: pool.integer, minimum: 0 });
       pool.available = Math.max(0, pool.capacity - pool.spent - pool.reserved);
     }
+    const trackers = trackerPools(character, instances, this.features, (expression, instance) => evaluateExpression(expression, this.environment(this.context(character, levels, runtime, instance), stats.get, instance)));
+    for (const [id, pool] of Object.entries(trackers)) {
+      if (pools[id]) throw new RuleError('RESOURCE_CONFLICT', `Legacy pool and tracker share ${pool.key}.`);
+      pools[id] = pool;
+    }
     return pools;
   }
 
@@ -260,7 +277,7 @@ export class Engine {
     });
     const candidates = Object.values(pools).filter((p) => p.key === requirement.key && (!requirement.scope || p.scope === requirement.scope)
       && (!requirement.units || p.units === requirement.units) && (!requirement.contract || p.contract === requirement.contract)
-      && p.capacity >= (requirement.minimumCapacity ?? 0) && visible(p));
+      && (requirement.minimumCapacity === undefined || p.capacity >= requirement.minimumCapacity) && visible(p));
     const binding = character.bindings[`${instance.id}/${segment(requirement.id)}`];
     if (binding) {
       const match = candidates.find((p) => p.id === binding);
@@ -443,7 +460,9 @@ export class Engine {
       }
       const repeats = new Map<string, Instance[]>();
       for (const i of result.instances.filter((i) => i.active && i.eligible)) {
-        const repeat = this.features.get(i.feature)!.repeat ?? { maximum: 1, scope: 'character' as const };
+        const definition = this.features.get(i.feature)!;
+        const sharedTracker = definition.components.some((c) => c.kind === 'trackResource') && definition.components.every((c) => ['trackResource', 'defineStat', 'describe'].includes(c.kind));
+        const repeat = definition.repeat ?? { maximum: sharedTracker ? 10000 : 1, scope: 'character' as const };
         const key = JSON.stringify([i.feature, repeat.scope === 'parent' ? i.parent ?? i.id : repeat.scope === 'progression' ? i.progression : '', ...(repeat.uniqueBy ?? []).map((k) => i.parameters[k])]);
         const group = [...repeats.get(key) ?? [], i];
         repeats.set(key, group);
@@ -490,6 +509,15 @@ export class Engine {
       } catch (e) {
         report(e, `stat/${stat.id}`);
       }
+      for (const instance of result.instances.filter((i) => i.active && i.eligible)) for (const component of this.features.get(instance.feature)!.components) {
+        if (component.kind !== 'defineStat' && component.kind !== 'modifyStat') continue;
+        const id = component.kind === 'defineStat' ? component.stat.id : component.stat;
+        try {
+          view.get(id);
+        } catch (e) {
+          report(e, `stat/${id}`);
+        }
+      }
       result.stats = view.results;
       try {
         result.resources = this.pools(character, result.instances, view, undefined, runtime);
@@ -517,6 +545,7 @@ export class Engine {
         const f = this.features.get(i.feature)!;
         try {
           const env = this.environment(this.context(character, undefined, runtime, i), view.get, i);
+          for (const component of f.components) if (component.kind === 'grantResource' && (!component.condition || boolean(evaluateExpression(component.condition, env)))) this.matchPool(character, i, { id: component.id, key: component.key }, result.resources, result.instances);
           for (const req of f.resources ?? []) result.bindings[`${i.id}/${segment(req.id)}`] = this.matchPool(character, i, req, result.resources, result.instances).id;
           for (const component of f.components) if (component.kind === 'grantCapability') {
             if ((component.condition && !boolean(evaluateExpression(component.condition, env))) || !this.satisfies(component.requirements, i, result.instances, view.get, env.context)) continue;
@@ -556,7 +585,7 @@ export class Engine {
       const requiredKeys = evaluation.instances.filter((i) => i.id === path || i.id.startsWith(path + '/')).flatMap((i) => this.features.get(i.feature)?.resources?.map((r) => r.key) ?? []);
       const provides = (id: string, keys: string[]): boolean => {
         const feature = this.features.get(id)!;
-        return feature.components.some((c) => (c.kind === 'defineResource' && keys.includes(c.key)) || (c.kind === 'grantFeature' && provides(c.feature, keys)));
+        return feature.components.some((c) => ((c.kind === 'defineResource' || c.kind === 'trackResource') && keys.includes(c.key)) || (c.kind === 'grantFeature' && provides(c.feature, keys)));
       };
       const pendingResource = diagnostics.some((d) => d.code === 'MISSING_RESOURCE') && evaluation.selections.some((s) => s.id !== selection
         && (slot.owner ? s.owner === slot.owner : !s.owner && s.id.split('/').slice(0, 3).join('/') === slot.id.split('/').slice(0, 3).join('/'))
