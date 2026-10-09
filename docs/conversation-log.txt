@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T19:27:48.924Z
+Export refreshed UTC: 2026-10-09T20:06:00.007Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -1924,5 +1924,102 @@ The description check found that some SRD text stores bullet points on a single 
 
 [2026-10-09T19:26:19.109Z] ASSISTANT
 The casting picker correctly spends the selected higher-level slot, and exhausted slots disappear while the spells remain visible. One UI test still expects the old “Ability scores” heading; I’m updating that assertion and running the final checks.
+
+----------------------------------------
+
+[2026-10-09T19:27:54.203Z] ASSISTANT
+Lint and the production build pass. The UI now groups spells by their original level, keeps resource controls beside their abilities, and renders source-text lists and paragraphs. The final UI test run is still in progress before I commit and push.
+
+----------------------------------------
+
+[2026-10-09T19:29:59.470Z] ASSISTANT
+The final run found one more outdated assertion: it required an exact CSS class string, but the table now has a conditional class for expanded calculations. The other 32 UI tests passed. I’ve corrected the assertion and am rerunning that sheet test.
+
+----------------------------------------
+
+[2026-10-09T19:30:49.872Z] ASSISTANT
+Implemented and pushed to `develop` (`a0da4a0`).
+
+- Separate spell slots and spells, with upcasting choices.
+- Exhausted slots hidden by default; toggle reveals all.
+- Resources beside abilities and their Use Ability buttons.
+- Swap icon, immediate tooltips, separate calculation column, improved spacing.
+- Descriptions render bullets and paragraphs.
+
+Verified: lint, production build, 222 engine tests, and UI checks—including the corrected test rerun.
+
+![Updated abilities and spell slots](</D:/User/Workspace/TTRPG System/.reference-cache/abilities-spells.png>)
+
+----------------------------------------
+
+[2026-10-09T19:43:38.332Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-09T19:43:38.354Z] USER
+- The whole point of template characters is to use them as a sample. They should be allowed to be edited after being added as characters.&#x20;
+- Add a name section for characters.&#x20;
+- Race and current class level(s) should be shown on the character sheet details. There should be a test for multi-class and create a custom sample character for a multi-class testing.&#x20;
+- Speed should be a feature in race, rather than a fixed value.&#x20;
+- In Features and Traits, Noble's sub features should be consolidated into Noble. Additionally, Second Wind resources should be consolidated into Second Wind. Spell resources should be consolidated into Spell.
+- Use the same increment decrement UI for Second Wind type resources as Spells.&#x20;
+- There is a noticeable lag while loading new pages. Show some loading, and optimize the load times.
+- In the Features and Trait section and the Resources section, the abilities when shown should replace the modifier with the number directly and on hover preview the name of the value it was replaced with. Like for Second Wind, 1d10 + Constitution Modifier should become 1d10 + 2.&#x20;
+- Any form of roll shown in the abilities should have a second where it is able to roll. For example, Second Wind is a 1d10 + 2, so an option to roll that should be given.&#x20;
+- Optimize the UI so that loading time is reduced.
+
+----------------------------------------
+
+[2026-10-09T19:43:46.189Z] ASSISTANT
+I’ll inspect character editing, Feature grouping, and page loading first, then update the sheet and add a multiclass sample and tests. I’ll also check how the rules text exposes calculated values and rolls so those displays stay accurate.
+
+----------------------------------------
+
+[2026-10-09T19:43:59.262Z] ASSISTANT QUESTIONS
+Second Wind in 2014 uses 1d10 + Fighter level, rather than Constitution modifier. I’ll preserve each ability’s actual rule when substituting values. Should rolls just show the result, or also apply effects such as healing?
+Options: Show roll results only (Recommended); Apply supported effects automatically
+
+----------------------------------------
+
+[2026-10-09T19:44:49.856Z] ASSISTANT
+The main causes are clear: imported samples are finalized, so construction choices remain locked; navigation repeatedly rebuilds the rules engine; and Features & Traits lists child Features as separate entries. I’ll add an explicit “Edit build” mode, reuse engines safely, and nest child Features under their parent while keeping them searchable.
+
+----------------------------------------
+
+[2026-10-09T19:45:01.815Z] USER
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_b91a799227db4763af8530db0dc53192\",0]","question":"Second Wind in 2014 uses 1d10 + Fighter level, rather than Constitution modifier. I’ll preserve each ability’s actual rule when substituting values. Should rolls just show the result, or also apply effects such as healing?","answer":"Apply the supported effects, but show the breakdown on hover. Something like if a \"1d10 + 2\" is rolled, it would show \"4\" and on hover it will say \"2 (1d10) + 2\""}]
+</send_user_message_question_reply>
+
+----------------------------------------
+
+[2026-10-09T19:46:07.910Z] ASSISTANT
+I’ll make supported rolls apply their effects and show the dice breakdown on hover. For Second Wind, that means spending its use and restoring the rolled amount to current hit points, capped at maximum HP. Other dice expressions will remain rollable, but effects requiring a target or table decision will not be applied automatically.
+
+----------------------------------------
+
+[2026-10-09T19:50:11.230Z] ASSISTANT
+The custom Fighter 2 / Wizard 3 sample now validates. Race Features grant walking speed through a reusable Feature, and Second Wind has a declared healing roll that uses Fighter level. I’m now testing build editing, shared hit points across classes, healing limits, and the new page-loading behavior.
+
+----------------------------------------
+
+[2026-10-09T19:54:12.495Z] ASSISTANT
+The first checks are running. The UI now reuses loaded engines, avoids building the Feature search list on unrelated pages, and loads nested Feature descriptions only when expanded. I’m checking the browser workflows next, especially that a healing roll updates HP and its resource together.
+
+----------------------------------------
+
+[2026-10-09T19:58:46.766Z] ASSISTANT
+Browser testing confirmed that Second Wind spends one use, caps healing at maximum HP, and shows a breakdown such as `8 (1d10) + 2` on hover. I also found and fixed a reload issue: existing saves can now accept newly added Feature definitions without losing their character data.
+
+----------------------------------------
+
+[2026-10-09T20:02:12.277Z] ASSISTANT
+All 226 engine tests pass. The multiclass sample can be reopened, edited, and finalized, and its name editor works in the sheet. A local timing check measured cached engine lookup at about 0.28 ms versus 164 ms for first creation; I also removed repeated full-catalogue scans from Feature requirement lookup.
+
+----------------------------------------
+
+[2026-10-09T20:05:35.638Z] ASSISTANT
+The browser checks now confirm Noble’s children stay under Noble, and Second Wind’s text, roll button, and resource appear together with the calculated Fighter-level bonus. The remaining reload test is fixed and passes. I’m finishing the documentation, then committing and pushing the changes.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

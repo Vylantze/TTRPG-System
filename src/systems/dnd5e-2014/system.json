@@ -3694,6 +3694,14 @@
           "retraining": {
             "allowed": false
           }
+        },
+        {
+          "id": "walking-speed",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:walking-speed",
+          "parameters": {
+            "feet": 30
+          }
         }
       ],
       "tags": [
@@ -3728,13 +3736,6 @@
           "stat": "darkvision",
           "operation": "floor",
           "value": 60
-        },
-        {
-          "id": "speed",
-          "kind": "modifyStat",
-          "stat": "walkingSpeed",
-          "operation": "override",
-          "value": 25
         },
         {
           "id": "strength-exemption",
@@ -3784,6 +3785,14 @@
           "id": "rules",
           "kind": "describe",
           "text": "Dwarven Resilience gives advantage on saves against poison and resistance to poison damage. Stonecunning doubles proficiency on Intelligence (History) checks about the origin of stonework. Dwarven Combat Training grants battleaxe, handaxe, light hammer, and warhammer proficiency."
+        },
+        {
+          "id": "walking-speed",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:walking-speed",
+          "parameters": {
+            "feet": 25
+          }
         }
       ],
       "tags": [
@@ -3895,6 +3904,14 @@
           "id": "rules",
           "kind": "describe",
           "text": "Fey Ancestry gives advantage against charm and immunity to magical sleep. Trance replaces sleep with four hours of meditation. Elf Weapon Training grants longsword, shortsword, shortbow, and longbow proficiency."
+        },
+        {
+          "id": "walking-speed",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:walking-speed",
+          "parameters": {
+            "feet": 30
+          }
         }
       ],
       "tags": [
@@ -3924,13 +3941,6 @@
           "value": 1
         },
         {
-          "id": "speed",
-          "kind": "modifyStat",
-          "stat": "walkingSpeed",
-          "operation": "override",
-          "value": 25
-        },
-        {
           "id": "size",
           "kind": "modifyStat",
           "stat": "sizeCategory",
@@ -3953,6 +3963,14 @@
           "id": "rules",
           "kind": "describe",
           "text": "Lucky rerolls a natural 1 on an attack, ability check, or save. Brave gives advantage against fear. Halfling Nimbleness permits moving through larger creatures. Naturally Stealthy permits hiding behind a creature at least one size larger."
+        },
+        {
+          "id": "walking-speed",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:walking-speed",
+          "parameters": {
+            "feet": 25
+          }
         }
       ],
       "tags": [
@@ -4019,6 +4037,14 @@
           },
           "retraining": {
             "allowed": false
+          }
+        },
+        {
+          "id": "walking-speed",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:walking-speed",
+          "parameters": {
+            "feet": 30
           }
         }
       ],
@@ -4563,13 +4589,6 @@
           "ignorePrerequisites": true
         },
         {
-          "id": "speed",
-          "kind": "modifyStat",
-          "stat": "walkingSpeed",
-          "operation": "override",
-          "value": 25
-        },
-        {
           "id": "size",
           "kind": "modifyStat",
           "stat": "sizeCategory",
@@ -4580,6 +4599,14 @@
           "id": "rules",
           "kind": "describe",
           "text": "Gnome Cunning gives advantage on Intelligence, Wisdom, and Charisma saves against magic. Artificer’s Lore doubles proficiency on History checks about magic items, alchemical objects, or technological devices. Tinker grants tinkers’ tools proficiency and permits maintaining up to three Tiny clockwork devices; construction costs one hour and 10 gp. Device lifetimes and gold are tracked manually."
+        },
+        {
+          "id": "walking-speed",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:walking-speed",
+          "parameters": {
+            "feet": 25
+          }
         }
       ],
       "tags": [
@@ -4727,6 +4754,14 @@
           "id": "rules",
           "kind": "describe",
           "text": "Fey Ancestry gives advantage against charm and immunity to magical sleep."
+        },
+        {
+          "id": "walking-speed",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:walking-speed",
+          "parameters": {
+            "feet": 30
+          }
         }
       ],
       "tags": [
@@ -4866,6 +4901,14 @@
           "id": "rules",
           "kind": "describe",
           "text": "Savage Attacks adds one weapon damage die to the extra damage of a critical hit with a melee weapon."
+        },
+        {
+          "id": "walking-speed",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:walking-speed",
+          "parameters": {
+            "feet": 30
+          }
         }
       ],
       "tags": [
@@ -5055,6 +5098,14 @@
             "castingTime": "1 action",
             "dcStat": "infernalSpellDC"
           }
+        },
+        {
+          "id": "walking-speed",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:walking-speed",
+          "parameters": {
+            "feet": 30
+          }
         }
       ],
       "tags": [
@@ -5227,6 +5278,11 @@
               }
             ]
           }
+        },
+        {
+          "id": "hp-tracker",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.hit-points"
         }
       ],
       "repeat": {
@@ -5394,6 +5450,11 @@
               }
             ]
           }
+        },
+        {
+          "id": "hp-tracker",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.hit-points"
         }
       ],
       "repeat": {
@@ -5532,6 +5593,11 @@
               }
             ]
           }
+        },
+        {
+          "id": "hp-tracker",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.hit-points"
         }
       ],
       "repeat": {
@@ -5585,7 +5651,19 @@
       "tags": [
         "class-feature"
       ],
-      "description": "Second Wind\nYou have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again."
+      "description": "Second Wind\nYou have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points equal to 1d10 + your fighter level. Once you use this feature, you must finish a short or long rest before you can use it again.",
+      "rolls": [
+        {
+          "id": "healing",
+          "dice": "1d10",
+          "bonus": {
+            "class": "dnd5e:2014:fighter"
+          },
+          "capability": "Second Wind",
+          "restoreResource": "hit-points",
+          "label": "Second Wind healing"
+        }
+      ]
     },
     {
       "id": "dnd5e:2014:fighter.action-surge",
@@ -102520,6 +102598,11 @@
               }
             ]
           }
+        },
+        {
+          "id": "hp-tracker",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.hit-points"
         }
       ],
       "repeat": {
@@ -103367,6 +103450,68 @@
       ],
       "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
       "description": "Spellcasting\nAs a conduit for divine power, you can cast cleric spells.\n\nCantrips\nAt 1st level, you know three cantrips of your choice from the cleric spell list. You learn additional cleric cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Cleric table.\n\nPreparing and Casting Spells\nThe Cleric table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell’s level or higher. You regain all expended spell slots when you finish a long rest. You prepare the list of cleric spells that are available for you to cast, choosing from the cleric spell list. When you do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots. For example, if you are a 3rd--level cleric, you have four 1st--level and two 2nd--level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st--level spell cure wounds, you can cast it using a 1st--level or 2nd--level slot. Casting the spell doesn’t remove it from your list of prepared spells. You can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.\n\nSpellcasting Ability\nWisdom is your spellcasting ability for your cleric spells. The power of your spells comes from your devotion to your deity. You use your Wisdom whenever a cleric spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a cleric spell you cast and when making an attack roll with one. Spell save DC = 8 + your proficiency bonus + your Wisdom modifier Spell attack modifier = your proficiency bonus + your Wisdom modifier\n\nRitual Casting\nYou can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.\n\nSpellcasting Focus\nYou can use a holy symbol (see “Equipment”) as a spellcasting focus for your cleric spells."
+    },
+    {
+      "id": "dnd5e:2014:walking-speed",
+      "revision": 1,
+      "name": "Walking Speed",
+      "displayName": "Walking Speed",
+      "tags": [
+        "racial-trait"
+      ],
+      "parameters": {
+        "feet": {
+          "kind": "number",
+          "default": 30,
+          "minimum": 0
+        }
+      },
+      "components": [
+        {
+          "id": "speed",
+          "kind": "modifyStat",
+          "stat": "walkingSpeed",
+          "operation": "override",
+          "value": {
+            "parameter": "feet"
+          }
+        }
+      ],
+      "description": "Every character and monster has a speed, which is the distance in feet that the character or monster can walk in 1 round.",
+      "source": "SRD 5.1, Movement, https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=84"
+    },
+    {
+      "id": "dnd5e:2014:resource.hit-points",
+      "revision": 1,
+      "name": "Hit Points",
+      "displayName": "Hit Points",
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "hit-points",
+          "name": "Hit Points",
+          "units": "HP",
+          "integer": true,
+          "maximum": {
+            "stat": "hitPoints"
+          },
+          "initialAmount": {
+            "stat": "hitPoints"
+          },
+          "recovery": [
+            {
+              "event": "long-rest",
+              "amount": "full"
+            }
+          ]
+        }
+      ],
+      "description": "Hit points represent a combination of physical and mental durability, the will to live, and luck. Creatures with more hit points are more difficult to kill. Those with fewer hit points are more fragile.",
+      "source": "SRD 5.1, Hit Points, https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=96"
     }
   ],
   "configurations": [
@@ -104532,7 +104677,7 @@
             "id": "walkingSpeed",
             "name": "walkingSpeed",
             "kind": "derived",
-            "expression": 30
+            "expression": 0
           },
           {
             "id": "speed",
@@ -106961,7 +107106,8 @@
           "wizard-subclass": "Wizard Subclass",
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
-          "cleric-cantrip": "Cleric Cantrip"
+          "cleric-cantrip": "Cleric Cantrip",
+          "racial-trait": "Racial Trait"
         },
         "sheetSections": [
           {
@@ -110302,7 +110448,7 @@
             "id": "walkingSpeed",
             "name": "walkingSpeed",
             "kind": "derived",
-            "expression": 30
+            "expression": 0
           },
           {
             "id": "speed",
@@ -112722,7 +112868,8 @@
           "wizard-subclass": "Wizard Subclass",
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
-          "cleric-cantrip": "Cleric Cantrip"
+          "cleric-cantrip": "Cleric Cantrip",
+          "racial-trait": "Racial Trait"
         },
         "sheetSections": [
           {
@@ -116081,7 +116228,7 @@
             "id": "walkingSpeed",
             "name": "walkingSpeed",
             "kind": "derived",
-            "expression": 30
+            "expression": 0
           },
           {
             "id": "speed",
@@ -118510,7 +118657,8 @@
           "wizard-subclass": "Wizard Subclass",
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
-          "cleric-cantrip": "Cleric Cantrip"
+          "cleric-cantrip": "Cleric Cantrip",
+          "racial-trait": "Racial Trait"
         },
         "sheetSections": [
           {
@@ -121851,7 +121999,7 @@
             "id": "walkingSpeed",
             "name": "walkingSpeed",
             "kind": "derived",
-            "expression": 30
+            "expression": 0
           },
           {
             "id": "speed",
@@ -124271,7 +124419,8 @@
           "wizard-subclass": "Wizard Subclass",
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
-          "cleric-cantrip": "Cleric Cantrip"
+          "cleric-cantrip": "Cleric Cantrip",
+          "racial-trait": "Racial Trait"
         },
         "sheetSections": [
           {
@@ -127630,7 +127779,7 @@
             "id": "walkingSpeed",
             "name": "walkingSpeed",
             "kind": "derived",
-            "expression": 30
+            "expression": 0
           },
           {
             "id": "speed",
@@ -129716,7 +129865,8 @@
           "wizard-subclass": "Wizard Subclass",
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
-          "cleric-cantrip": "Cleric Cantrip"
+          "cleric-cantrip": "Cleric Cantrip",
+          "racial-trait": "Racial Trait"
         },
         "sheetSections": [
           {
@@ -133057,7 +133207,7 @@
             "id": "walkingSpeed",
             "name": "walkingSpeed",
             "kind": "derived",
-            "expression": 30
+            "expression": 0
           },
           {
             "id": "speed",
@@ -135134,7 +135284,8 @@
           "wizard-subclass": "Wizard Subclass",
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
-          "cleric-cantrip": "Cleric Cantrip"
+          "cleric-cantrip": "Cleric Cantrip",
+          "racial-trait": "Racial Trait"
         },
         "sheetSections": [
           {
@@ -138493,7 +138644,7 @@
             "id": "walkingSpeed",
             "name": "walkingSpeed",
             "kind": "derived",
-            "expression": 30
+            "expression": 0
           },
           {
             "id": "speed",
@@ -140579,7 +140730,8 @@
           "wizard-subclass": "Wizard Subclass",
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
-          "cleric-cantrip": "Cleric Cantrip"
+          "cleric-cantrip": "Cleric Cantrip",
+          "racial-trait": "Racial Trait"
         },
         "sheetSections": [
           {
@@ -143920,7 +144072,7 @@
             "id": "walkingSpeed",
             "name": "walkingSpeed",
             "kind": "derived",
-            "expression": 30
+            "expression": 0
           },
           {
             "id": "speed",
@@ -145997,7 +146149,8 @@
           "wizard-subclass": "Wizard Subclass",
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
-          "cleric-cantrip": "Cleric Cantrip"
+          "cleric-cantrip": "Cleric Cantrip",
+          "racial-trait": "Racial Trait"
         },
         "sheetSections": [
           {
@@ -149356,7 +149509,7 @@
             "id": "walkingSpeed",
             "name": "walkingSpeed",
             "kind": "derived",
-            "expression": 30
+            "expression": 0
           },
           {
             "id": "speed",
@@ -151240,7 +151393,8 @@
           "wizard-subclass": "Wizard Subclass",
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
-          "cleric-cantrip": "Cleric Cantrip"
+          "cleric-cantrip": "Cleric Cantrip",
+          "racial-trait": "Racial Trait"
         },
         "sheetSections": [
           {
@@ -154581,7 +154735,7 @@
             "id": "walkingSpeed",
             "name": "walkingSpeed",
             "kind": "derived",
-            "expression": 30
+            "expression": 0
           },
           {
             "id": "speed",
@@ -156456,7 +156610,8 @@
           "wizard-subclass": "Wizard Subclass",
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
-          "cleric-cantrip": "Cleric Cantrip"
+          "cleric-cantrip": "Cleric Cantrip",
+          "racial-trait": "Racial Trait"
         },
         "sheetSections": [
           {
@@ -159815,7 +159970,7 @@
             "id": "walkingSpeed",
             "name": "walkingSpeed",
             "kind": "derived",
-            "expression": 30
+            "expression": 0
           },
           {
             "id": "speed",
@@ -161699,7 +161854,8 @@
           "wizard-subclass": "Wizard Subclass",
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
-          "cleric-cantrip": "Cleric Cantrip"
+          "cleric-cantrip": "Cleric Cantrip",
+          "racial-trait": "Racial Trait"
         },
         "sheetSections": [
           {
@@ -165040,7 +165196,7 @@
             "id": "walkingSpeed",
             "name": "walkingSpeed",
             "kind": "derived",
-            "expression": 30
+            "expression": 0
           },
           {
             "id": "speed",
@@ -166915,7 +167071,8 @@
           "wizard-subclass": "Wizard Subclass",
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
-          "cleric-cantrip": "Cleric Cantrip"
+          "cleric-cantrip": "Cleric Cantrip",
+          "racial-trait": "Racial Trait"
         },
         "sheetSections": [
           {

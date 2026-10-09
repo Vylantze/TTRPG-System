@@ -55,7 +55,7 @@ test('manual action timing still enforces ability ownership and resource costs',
   assert.throws(() => useAbility(engine, fighter, ability.id, 'budget-required'), /actions/);
   const used = useAbility(engine, fighter, ability.id, 'use', { actionTracking: 'manual' });
   assert.equal(used.actions, undefined);
-  assert.equal(Object.values(engine.evaluate(used.character).resources)[0].current, 0);
+  assert.equal(Object.values(engine.evaluate(used.character).resources).find((pool) => pool.key === 'second-wind').current, 0);
   assert.throws(() => useAbility(engine, used.character, ability.id, 'empty', { actionTracking: 'manual' }), /Insufficient/);
   assert.throws(() => useAbility(engine, fighter, 'unowned', 'unknown', { actionTracking: 'manual' }), /unavailable/);
   assert.throws(() => useAbility(engine, fighter, ability.id, 'ambiguous', { actionTracking: 'manual', actions: {} }), /cannot include/);

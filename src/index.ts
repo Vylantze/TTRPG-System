@@ -20,3 +20,8 @@ export type { InventoryEntry } from '@/src/model/InventoryEntry.js';
 export type { SheetSection } from '@/src/model/SheetSection.js';
 export type { ClassLevel } from '@/src/types/ClassLevel.js';
 export type { FeatureAdvancement } from '@/src/types/FeatureAdvancement.js';
+
+export type { FeatureRoll } from '@/src/model/FeatureRoll.js';
+
+export { rollDice } from '@/src/dice.js';
+export { featureRollExpression, rollFeature } from '@/src/feature-rolls.js';

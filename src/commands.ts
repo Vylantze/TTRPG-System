@@ -175,6 +175,16 @@ export function applyEdit(engine: Engine, input: Character, edits: Edit[], event
   checkCharacter(preview.character);
   return preview.character;
 }
+/** Explicitly reopen construction; preserve balances and reject unresolved reservations. */
+export function reopenCharacter(engine: Engine, input: Character, eventId: string): Character {
+  checkCharacter(input);
+  if (Object.keys(input.pending).length) throw new RuleError('PENDING', 'Resolve reserved abilities before editing the build.');
+  const character = clone(input);
+  if (!stamp(character, eventId, { kind: 'reopen' })) return character;
+  storeTrackers(character, engine.evaluate(character).resources);
+  character.buildState = 'draft';
+  return character;
+}
 export function finalizeCharacter(engine: Engine, input: Character, eventId: string): Character {
   checkCharacter(input);
   const character = clone(input);

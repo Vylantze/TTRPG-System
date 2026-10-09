@@ -55,11 +55,12 @@ export class Engine {
 
   /** Direct Class grants and selection pools, not a promise of character eligibility. */
   getFeatureAdvancement(featureId: string): FeatureAdvancement[] {
-    if (!this.getFeature(featureId)) return [];
+    const feature = this.getFeature(featureId);
+    if (!feature) return [];
     return this.catalogue.classes.flatMap((cls) => {
       const levels = this.getClassLevels(cls.id).filter((row) => row.entries.some((entry) => entry.kind === 'grantFeature'
         ? entry.feature === featureId
-        : this.getSelectionFeatures(entry).some((feature) => feature.id === featureId))).map((row) => row.level);
+        : (!entry.candidates.ids || entry.candidates.ids.includes(featureId)) && (!entry.candidates.tags || entry.candidates.tags.every((tag) => feature.tags?.includes(tag))))).map((row) => row.level);
       return levels.length ? [{ classId: cls.id, className: cls.name, levels }] : [];
     });
   }

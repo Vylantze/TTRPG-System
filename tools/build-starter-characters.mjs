@@ -51,7 +51,7 @@ const characters = templates.map((t) => {
   const result = engine.evaluate(c);
   if (result.status !== 'valid') throw new Error(`${t.key}: ${JSON.stringify(result.diagnostics)}`);
   c.buildState = 'finalized';
-  for (const pool of Object.values(result.resources)) c.resources[pool.id] = { spent: 0, ...(pool.tracking ? { current: pool.current } : {}) };
+  for (const pool of Object.values(result.resources)) c.resources[pool.id] = { spent: 0, ...(pool.tracking ? { current: pool.key === 'hit-points' ? pool.capacity : pool.current } : {}) };
   serializeCharacter(c);
   return c;
 });

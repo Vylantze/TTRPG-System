@@ -15,6 +15,7 @@ const { CharacterFeatures } = await server.ssrLoadModule('/src/CharacterFeatures
 const { ResourceSummary } = await server.ssrLoadModule('/src/ResourceSummary.tsx');
 const { SelectionCard } = await server.ssrLoadModule('/src/SelectionCard.tsx');
 const { addStarterCharacters, addStarterInventory, migrateMoney } = await server.ssrLoadModule('/src/starter-characters.ts');
+const { CharacterRuleContext } = await server.ssrLoadModule('/src/character-rule-context.ts');
 const starterSaves = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8'));
 const { featureHref } = await server.ssrLoadModule('/src/feature-description.ts');
 const { safeReturn } = await server.ssrLoadModule('/src/feature-origin.ts');
@@ -71,7 +72,7 @@ test('React Class and Feature browsers render directly from the loaded JSON', ()
 });
 test('Class and Feature detail pages display source rules and shared spell effects', () => {
   const cls = render(data(), '#classes/dnd5e%3A2014%3Afighter');
-  assert.match(cls, /Hit Points at 1st Level/);
+  assert.match(cls.replace(/<[^>]+>/g, ''), /Hit Points at 1st Level/);
   assert.match(cls, /martial weapons/);
   assert.match(cls, /SRD 5.1 pp. 24/);
   const secondWind = render(data(), '#features/dnd5e%3A2014%3Afighter.second-wind');
@@ -298,10 +299,10 @@ test('acquired Feature library exposes search, origins and acquisition levels', 
   const html = renderToStaticMarkup(createElement(CharacterFeatures, { engine, character, result, openFeature: () => {} }));
   assert.match(html, /Search acquired Features/);
   assert.match(html, /Acquired from/);
-  assert.match(html, /Fighter · class level/);
-  assert.match(html, /Rogue · class level/);
+  assert.match(html, /Fighter/);
+  assert.match(html, /Rogue/);
   assert.match(html, /Show inactive Features/);
-  assert.match(html, /View Feature/);
+  assert.match(html, /included Features/);
 });
 
 test('resource summaries expose actual balance, maximum, recovery and shared providers', () => {
@@ -445,7 +446,7 @@ test('sheet controls expose inline editing, five coin balances, sortable columns
   assert.match(html, /role="tooltip"[^>]*>Strength modifier/);
   const resources = render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=resources`);
   assert.doesNotMatch(resources, /Turn budget|Start new turn/);
-  assert.match(resources, /ability-row[\s\S]*resource-card[\s\S]*Use Ability/);
+  assert.match(resources, /ability-row[\s\S]*resource-card[\s\S]*Roll 1d10/);
 });
 
 test('money migration removes coins and old starting-money notes without double counting', () => {
@@ -509,6 +510,35 @@ test('Wizard spells are separate from slots and empty slot levels are initially 
   assert.match(html, /Decrease Spell Slot 1/);
   assert.doesNotMatch(html, /Decrease Spell Slot 2/);
   assert.match(html, /ability-row[\s\S]*Arcane Recovery/);
+});
+
+test('multiclass sheet names race and both class levels and exposes build editing', () => {
+  const sample = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/multiclass-sample.json', import.meta.url), 'utf8'));
+  const html = render({ ...data(), characters: [sample] }, `#characters/${sample.id}`);
+  assert.match(html, /Classes &amp; levels/);
+  assert.match(html, /Fighter 2 \/ Wizard 3/);
+  assert.match(html, /<dt>Race<\/dt><dd>Human/);
+  assert.match(html, /Edit Name/);
+  assert.match(html, /Edit build/);
+});
+test('character rule text resolves Fighter level and offers the declared healing roll', () => {
+  const { engine, character } = exampleCharacter({ classes: [{ class: 'fighter', level: 2 }] });
+  const result = engine.evaluate(character);
+  const html = renderToStaticMarkup(createElement(CharacterRuleContext.Provider, { value: { character, result, update: () => {}, report: () => {} } }, createElement(FeatureRules, { engine, feature: engine.getFeature('dnd5e:2014:fighter.second-wind') })));
+  assert.match(html, /resolved-value">2/);
+  assert.match(html, /your fighter level<\/span>/);
+  assert.match(html, /Roll 1d10 \+ 2 &amp; apply/);
+});
+
+test('explicit reload accepts additive definitions and preserves character choices and balances', () => {
+  const { character } = exampleCharacter();
+  const incoming = structuredClone(file);
+  incoming.features.push({ id: 'test:additive', revision: 1, name: 'Additive', components: [] });
+  const next = model.reloadSystem({ ...data(), characters: [character] }, file, incoming);
+  assert.equal(next.characters[0].contentRevisions['test:additive'], 1);
+  assert.deepEqual(next.characters[0].selections, character.selections);
+  assert.deepEqual(next.characters[0].resources, character.resources);
+  assert.equal(model.createRegistry(next.systems).engineForCharacter(next.characters[0]).evaluate(next.characters[0]).status, 'valid');
 });
 
 await server.close();

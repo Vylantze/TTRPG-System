@@ -915,6 +915,8 @@
       "dnd5e:2014:spell.shield-of-faith": 1,
       "dnd5e:2014:cleric.prepared.shield-of-faith": 1,
       "dnd5e:2014:cleric.spellcasting": 1,
+      "dnd5e:2014:walking-speed": 1,
+      "dnd5e:2014:resource.hit-points": 1,
       "dnd5e:2014:fighter": 1,
       "dnd5e:2014:rogue": 1,
       "dnd5e:2014:wizard": 1,
@@ -989,6 +991,10 @@
     "bindings": {},
     "alternatives": {},
     "resources": {
+      "pool/character/character/hit-points": {
+        "spent": 0,
+        "current": 12
+      },
       "pool/character/character/second-wind": {
         "spent": 0,
         "current": 1
@@ -1991,6 +1997,8 @@
       "dnd5e:2014:spell.shield-of-faith": 1,
       "dnd5e:2014:cleric.prepared.shield-of-faith": 1,
       "dnd5e:2014:cleric.spellcasting": 1,
+      "dnd5e:2014:walking-speed": 1,
+      "dnd5e:2014:resource.hit-points": 1,
       "dnd5e:2014:fighter": 1,
       "dnd5e:2014:rogue": 1,
       "dnd5e:2014:wizard": 1,
@@ -2085,6 +2093,10 @@
     "bindings": {},
     "alternatives": {},
     "resources": {
+      "pool/character/character/hit-points": {
+        "spent": 0,
+        "current": 11
+      },
       "pool/character/character/spell-slot.1": {
         "spent": 0,
         "current": 2
@@ -3143,6 +3155,8 @@
       "dnd5e:2014:spell.shield-of-faith": 1,
       "dnd5e:2014:cleric.prepared.shield-of-faith": 1,
       "dnd5e:2014:cleric.spellcasting": 1,
+      "dnd5e:2014:walking-speed": 1,
+      "dnd5e:2014:resource.hit-points": 1,
       "dnd5e:2014:fighter": 1,
       "dnd5e:2014:rogue": 1,
       "dnd5e:2014:wizard": 1,
@@ -3216,7 +3230,12 @@
     },
     "bindings": {},
     "alternatives": {},
-    "resources": {},
+    "resources": {
+      "pool/character/character/hit-points": {
+        "spent": 0,
+        "current": 9
+      }
+    },
     "pending": {},
     "events": [],
     "money": {
@@ -4262,6 +4281,8 @@
       "dnd5e:2014:spell.shield-of-faith": 1,
       "dnd5e:2014:cleric.prepared.shield-of-faith": 1,
       "dnd5e:2014:cleric.spellcasting": 1,
+      "dnd5e:2014:walking-speed": 1,
+      "dnd5e:2014:resource.hit-points": 1,
       "dnd5e:2014:fighter": 1,
       "dnd5e:2014:rogue": 1,
       "dnd5e:2014:wizard": 1,
@@ -4410,6 +4431,10 @@
     "bindings": {},
     "alternatives": {},
     "resources": {
+      "pool/character/character/hit-points": {
+        "spent": 0,
+        "current": 8
+      },
       "pool/character/character/spell-slot.1": {
         "spent": 0,
         "current": 2
@@ -5461,6 +5486,8 @@
       "dnd5e:2014:spell.shield-of-faith": 1,
       "dnd5e:2014:cleric.prepared.shield-of-faith": 1,
       "dnd5e:2014:cleric.spellcasting": 1,
+      "dnd5e:2014:walking-speed": 1,
+      "dnd5e:2014:resource.hit-points": 1,
       "dnd5e:2014:fighter": 1,
       "dnd5e:2014:rogue": 1,
       "dnd5e:2014:wizard": 1,
@@ -5529,6 +5556,10 @@
     "bindings": {},
     "alternatives": {},
     "resources": {
+      "pool/character/character/hit-points": {
+        "spent": 0,
+        "current": 12
+      },
       "pool/character/character/second-wind": {
         "spent": 0,
         "current": 1

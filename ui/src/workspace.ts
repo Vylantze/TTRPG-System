@@ -9,19 +9,33 @@ export function reloadSystem(workspace: Workspace, existing: SystemFile, incomin
   if (systemKey(replacement) !== systemKey(existing)) throw new Error('Reload requires the same System ID and revision. Load a different revision separately.');
   const systems = workspace.systems.map((file) => file === existing ? replacement : file);
   const before = createRegistry(workspace.systems), after = createRegistry(systems);
-  for (const character of workspace.characters.filter((saved) => saved.system.id === existing.id && saved.system.revision === existing.revision)) {
+  const characters = workspace.characters.map((character) => {
+    if (character.system.id !== existing.id || character.system.revision !== existing.revision) return character;
     const engine = after.engineForCharacter(character);
-    deserializeCharacter(serializeCharacter(character), engine);
-    if (before.engineForCharacter(character).evaluate(character).status === 'valid' && engine.evaluate(character).status !== 'valid') throw new Error(`Reload would invalidate ${character.name}. The existing System has been kept.`);
-  }
-  return { ...workspace, systems };
+    const manifest = Object.fromEntries([...engine.catalogue.features, ...engine.catalogue.classes].map((definition) => [definition.id, definition.revision]));
+    if (Object.entries(character.contentRevisions).some(([id, revision]) => manifest[id] !== revision)) throw new Error('Reload cannot remove or change pinned content revisions.');
+    const updated = Object.keys(manifest).length === Object.keys(character.contentRevisions).length ? character : { ...character, contentRevisions: manifest };
+    deserializeCharacter(serializeCharacter(updated), engine);
+    if (before.engineForCharacter(character).evaluate(character).status === 'valid' && engine.evaluate(updated).status !== 'valid') throw new Error(`Reload would invalidate ${character.name}. The existing System has been kept.`);
+    return updated;
+  });
+  return { ...workspace, systems, characters: characters.every((character, index) => character === workspace.characters[index]) ? workspace.characters : characters };
 }
 
 // Prototype reset: old expenditure-based saves are intentionally not loaded.
 export const STORAGE_KEY = 'ttrpg-feature-forge:v2';
 
 /** Storage-only deduplication; imported/exported System JSON retains its engine format. */
+const packedSystems = new WeakMap<SystemFile, ReturnType<typeof buildPackedSystem>>();
 function packSystem(file: SystemFile) {
+  let packed = packedSystems.get(file);
+  if (!packed) {
+    packed = buildPackedSystem(file);
+    packedSystems.set(file, packed);
+  }
+  return packed;
+}
+function buildPackedSystem(file: SystemFile) {
   const classes: SystemFile['configurations'][number]['classes'][] = [], stats: SystemFile['configurations'][number]['system']['stats'][] = [];
   const classKeys: string[] = [], statKeys: string[] = [];
   const intern = <T>(value: T, values: T[], keys: string[]) => {
@@ -48,10 +62,17 @@ export function readWorkspace(storage: Pick<Storage, 'getItem'> & Partial<Pick<S
   if (!raw) return { version: 1, systems: [], characters: [] };
   const value = JSON.parse(raw);
   if (![1, 2].includes(value.version) || !Array.isArray(value.systems) || !Array.isArray(value.characters)) throw new Error('Stored workspace has an unsupported format. Export or repair it before replacing it.');
-  const registry = new SystemRegistry();
+  const systemIds = new Set<string>(), catalogueIds = new Set<string>();
   const systems = value.systems.map((s: unknown) => {
     const file = parseSystemFile(value.version === 2 ? unpackSystem(s as ReturnType<typeof packSystem>) : s);
-    registry.load(file);
+    const key = systemKey(file);
+    if (systemIds.has(key)) throw new Error('Stored System revisions are duplicated.');
+    systemIds.add(key);
+    for (const config of file.configurations) {
+      const id = JSON.stringify([config.id, config.revision]);
+      if (catalogueIds.has(id)) throw new Error('Stored catalogue revisions are duplicated.');
+      catalogueIds.add(id);
+    }
     return file;
   });
   const characters = value.characters.map((c: unknown) => deserializeCharacter(JSON.stringify(c)));
