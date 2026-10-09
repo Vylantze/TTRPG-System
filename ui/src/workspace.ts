@@ -1,3 +1,4 @@
+import LZString from 'lz-string';
 import { migrateDescriptionOverrides } from '@/ui/src/migrate-description-overrides';
 import { SystemRegistry, deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type SystemFile } from '@/src/index';
 import type { Workspace } from '@/ui/src/types/Workspace';
@@ -27,11 +28,11 @@ export function reloadSystem(workspace: Workspace, existing: SystemFile, incomin
 export const STORAGE_KEY = 'ttrpg-feature-forge:v2';
 
 /** Storage-only deduplication; imported/exported System JSON retains its engine format. */
-const packedSystems = new WeakMap<SystemFile, ReturnType<typeof buildPackedSystem>>();
+const packedSystems = new WeakMap<SystemFile, string>();
 function packSystem(file: SystemFile) {
   let packed = packedSystems.get(file);
   if (!packed) {
-    packed = buildPackedSystem(file);
+    packed = LZString.compressToUTF16(JSON.stringify(buildPackedSystem(file)));
     packedSystems.set(file, packed);
   }
   return packed;
@@ -48,7 +49,7 @@ function buildPackedSystem(file: SystemFile) {
   };
   return { definition: { ...file, configurations: undefined }, classes, stats, configurations: file.configurations.map((c) => ({ ...c, classes: intern(c.classes, classes, classKeys), system: { ...c.system, stats: intern(c.system.stats, stats, statKeys) } })) };
 }
-function unpackSystem(packed: ReturnType<typeof packSystem>): SystemFile {
+function unpackSystem(packed: ReturnType<typeof buildPackedSystem>): SystemFile {
   if (!packed || !Array.isArray(packed.classes) || !Array.isArray(packed.stats) || !Array.isArray(packed.configurations)) throw new Error('Stored System data is malformed.');
   const item = <T>(values: T[], index: number) => {
     if (!Number.isInteger(index) || index < 0 || index >= values.length) throw new Error('Stored System has an invalid shared-data reference.');
@@ -62,10 +63,16 @@ export function readWorkspace(storage: Pick<Storage, 'getItem'> & Partial<Pick<S
   const raw = storage.getItem(STORAGE_KEY);
   if (!raw) return { version: 1, systems: [], characters: [] };
   const value = JSON.parse(raw);
-  if (![1, 2].includes(value.version) || !Array.isArray(value.systems) || !Array.isArray(value.characters)) throw new Error('Stored workspace has an unsupported format. Export or repair it before replacing it.');
+  if (![1, 2, 3].includes(value.version) || !Array.isArray(value.systems) || !Array.isArray(value.characters)) throw new Error('Stored workspace has an unsupported format. Export or repair it before replacing it.');
   const systemIds = new Set<string>(), catalogueIds = new Set<string>();
   const systems = value.systems.map((s: unknown) => {
-    const file = parseSystemFile(migrateDescriptionOverrides(value.version === 2 ? unpackSystem(s as ReturnType<typeof packSystem>) : s));
+    if (value.version === 3) {
+      if (typeof s !== 'string') throw new Error('Compressed System data is malformed.');
+      const json = LZString.decompressFromUTF16(s);
+      if (!json) throw new Error('Compressed System data could not be read.');
+      s = JSON.parse(json);
+    }
+    const file = parseSystemFile(migrateDescriptionOverrides(value.version >= 2 ? unpackSystem(s as ReturnType<typeof buildPackedSystem>) : s));
     const key = systemKey(file);
     if (systemIds.has(key)) throw new Error('Stored System revisions are duplicated.');
     systemIds.add(key);
@@ -83,7 +90,7 @@ export function readWorkspace(storage: Pick<Storage, 'getItem'> & Partial<Pick<S
 export function writeWorkspace(storage: Pick<Storage, 'setItem'>, workspace: Workspace): void {
   // Serialization validates saves; errors propagate so the UI never claims success.
   workspace.characters.forEach(serializeCharacter);
-  storage.setItem(STORAGE_KEY, JSON.stringify({ ...workspace, version: 2, systems: workspace.systems.map(packSystem) }));
+  storage.setItem(STORAGE_KEY, JSON.stringify({ ...workspace, version: 3, systems: workspace.systems.map(packSystem) }));
 }
 
 /** A display-only refresh must not silently replace a character's pinned rules. */
@@ -117,7 +124,7 @@ export function updateSystemDescriptions(existing: SystemFile, incoming: SystemF
     return { ...rules, ...(mechanicalTags?.length ? { tags: mechanicalTags } : {}) };
   };
   const rules = (file: SystemFile) => ({ ...file, ...(!existing.items && !existing.itemFeatures ? { items: undefined, itemFeatures: undefined } : {}), features: file.features.map(featureRules), configurations: file.configurations.map((c) => {
-    const { tagDisplayNames, sheetSections, sheetTabs, importantDetails, featureCategories, spellDisplay, descriptionTokens, ...system } = c.system as typeof c.system & { descriptionTokens?: unknown };
+    const { tagDisplayNames, sheetSections, sheetTabs, importantDetails, terminology, featureCategories, spellDisplay, descriptionTokens, ...system } = c.system as typeof c.system & { descriptionTokens?: unknown };
     return { ...c, system: { ...system, ...(!existing.configurations.find((old) => old.id === c.id)?.system.currency ? { currency: undefined } : {}) }, classes: c.classes.map(strip) };
   }) });
   const canonical = (value: unknown): unknown => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, item]) => [key, canonical(item)])) : value;

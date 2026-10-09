@@ -2,7 +2,7 @@ import { Engine, clone } from '@/src/engine.js';
 import { RuleError } from '@/src/expression.js';
 import type { Catalogue, Character, Value } from '@/src/model.js';
 import type { SystemFile } from '@/src/types/SystemFile.js';
-import { checkCharacter, record } from '@/src/validation.js';
+import { checkCharacter, record, validateCatalogue } from '@/src/validation.js';
 import { compileBlocks } from '@/src/blocks.js';
 export type { SystemFile } from '@/src/types/SystemFile.js';
 function safe(value: unknown, depth = 0): void {
@@ -18,12 +18,21 @@ function safe(value: unknown, depth = 0): void {
 }
 const scalar = (v: unknown): v is Value => typeof v === 'string' || typeof v === 'boolean' || (typeof v === 'number' && Number.isFinite(v));
 const signature = (options: Record<string, Value>): string => JSON.stringify(Object.entries(options).sort(([a], [b]) => a.localeCompare(b)));
+const validatedFiles = new WeakMap<object, string>();
+// Bounded reuse also covers equivalent JSON parsed again from browser storage.
+const validatedJson = new Set<string>();
+function rememberValidation(file: object, fingerprint: string): void {
+  validatedFiles.set(file, fingerprint);
+  validatedJson.delete(fingerprint);
+  validatedJson.add(fingerprint);
+  if (validatedJson.size > 3) validatedJson.delete(validatedJson.values().next().value!);
+}
 
 /** Browser-safe parsing: no fetch, filesystem access, imports, or executable JSON. */
 export function parseSystemFile(input: string | unknown): SystemFile {
   let parsed: unknown = input;
   if (typeof input === 'string') {
-    if (new TextEncoder().encode(input).length > 10_000_000) throw new RuleError('SYSTEM_SIZE', 'System file exceeds 10 MB.');
+    if (new TextEncoder().encode(input).length > 20_000_000) throw new RuleError('SYSTEM_SIZE', 'System file exceeds 20 MB.');
     try {
       parsed = JSON.parse(input);
     } catch {
@@ -32,6 +41,14 @@ export function parseSystemFile(input: string | unknown): SystemFile {
   }
   safe(parsed);
   record(parsed);
+  // Public files remain editable. Reuse validation only when their complete JSON
+  // is unchanged; mutations and non-JSON additions must still be rejected.
+  const fingerprint = JSON.stringify(parsed);
+  if (validatedFiles.get(parsed) === fingerprint || validatedJson.has(fingerprint)) {
+    const copy = clone(parsed) as unknown as SystemFile;
+    rememberValidation(copy, fingerprint);
+    return copy;
+  }
   if (parsed.format !== 'ttrpg-system' || parsed.version !== 1 || typeof parsed.id !== 'string' || !parsed.id || !Number.isInteger(parsed.revision) || Number(parsed.revision) < 1) throw new RuleError('SYSTEM_VERSION', 'Invalid or unsupported System file.');
   record(parsed.options);
   for (const option of Object.values(parsed.options)) {
@@ -51,11 +68,15 @@ export function parseSystemFile(input: string | unknown): SystemFile {
     record(config.system);
     if (config.system.id !== file.id || config.system.revision !== file.revision) throw new RuleError('SYSTEM_ID', 'Configuration System identity differs from file identity.');
     // Validate every configuration before publishing any of the file.
-    new Engine({ id: config.id, revision: config.revision, system: config.system, classes: config.classes, features: file.features, blocks: file.blocks, items: file.items, itemFeatures: file.itemFeatures });
+    const errors = validateCatalogue({ id: config.id, revision: config.revision, system: config.system, classes: config.classes, features: file.features, blocks: file.blocks, items: file.items, itemFeatures: file.itemFeatures });
+    if (errors.length) throw new RuleError(errors[0].code, errors[0].message, errors[0].path);
   }
   const combinations = Object.values(file.options).reduce((n, d) => n * d.values.length, 1);
   if (seen.size !== combinations) throw new RuleError('SYSTEM_OPTIONS', 'Missing option configurations.');
-  return clone(file);
+  const copy = clone(file);
+  rememberValidation(file, fingerprint);
+  rememberValidation(copy, fingerprint);
+  return copy;
 }
 /** Select a declarative configuration; saves retain its existing catalogue identity. */
 export function catalogueFromSystemFile(input: unknown, settings: Record<string, Value> = {}): Catalogue {

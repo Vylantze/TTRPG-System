@@ -3,8 +3,6 @@ import type { Character, Engine, EvaluationResult } from '@/src/index';
 import { CharacterDetails } from '@/ui/src/CharacterDetails';
 import { SheetSectionView } from '@/ui/src/SheetSectionView';
 import { StatCalculation } from '@/ui/src/StatCalculation';
-import { MoneySection } from '@/ui/src/MoneySection';
-import { Inventory } from '@/ui/src/Inventory';
 
 export function CharacterSheet({ engine, character, result, update, report, sectionIds }: { engine: Engine; character: Character; result: EvaluationResult; update: (character: Character) => void; report: (message: string) => void; sectionIds?: string[] }) {
   const sections = (engine.catalogue.system.sheetSections ?? []).filter((section) => !sectionIds || sectionIds.includes(section.id));
@@ -16,8 +14,6 @@ export function CharacterSheet({ engine, character, result, update, report, sect
       <div className="sheet-sections">
         {sections.map((section) => <SheetSectionView key={section.id} section={section} engine={engine} character={character} result={result} update={update} />)}
       </div>
-      <MoneySection engine={engine} character={character} update={update} report={report} />
-      <Inventory engine={engine} character={character} update={update} report={report} />
       <details className="panel" open={!sections.length}>
         <summary>All calculated stats</summary>
         <p className="muted small">Includes internal rules values and proficiency markers.</p>

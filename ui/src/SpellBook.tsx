@@ -29,7 +29,7 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
     setSpent({ ...spent, [spell.id]: costs });
     setCasting(undefined);
   });
-  const label = (option: SpellGroup['modes'][number]) => option.ritual ? 'Ritual — no spell slot' : option.slotLevel === 0 ? 'Cantrip — no spell slot' : `Level ${option.slotLevel} slot${option.available ? '' : ' — none remaining'}`;
+  const label = (option: SpellGroup['modes'][number]) => option.ritual ? 'Ritual — no spell slot' : option.slotLevel === 0 ? 'Cantrip — no spell slot' : `Level ${option.slotLevel} · ${Object.keys(option.capability.costs).map((id) => result.resources[id]?.name ?? 'Spell slot').join(', ')}${option.available ? '' : ' — none remaining'}`;
   const actionable = (spell: SpellGroup) => featureRollInstances(engine, result, spell.feature).length > 0 || spell.modes.some((option) => Object.values(option.capability.costs).some((amount) => amount > 0));
   const notification = (spell: SpellGroup) => {
     const latest = character.rollResults?.filter((record) => record.casting?.spell === spell.feature && spell.modes.some((option) => option.capability.id === record.casting?.capability)).at(-1);
@@ -48,7 +48,7 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
       <div className="spell-slots">
         {slots.filter(({ pool }) => showEmpty || (pool.current ?? pool.capacity - pool.spent) > 0).map(({ level, pool }) => (
           <article className="spell-slot" key={pool.id}>
-            <h3>{`Level ${level}`}</h3>
+            <h3>{`${pool.name ?? 'Spell slots'} · Level ${level}`}</h3>
             <strong>{`${pool.current ?? pool.capacity - pool.spent} / ${pool.capacity}`}</strong>
             <p className="muted small">{pool.recovery.map((recovery) => `${labelFromId(recovery.event)}: ${recovery.amount === 'full' ? 'restore to maximum' : expressionText(recovery.amount, engine)}`).join(' · ')}</p>
             <div className="slot-pips" aria-hidden="true">{Array.from({ length: Math.min(12, pool.capacity) }, (_, index) => <span className={index < pool.available ? 'filled' : ''} key={index} />)}</div>

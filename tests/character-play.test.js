@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { clearFeatureRolls, SystemRegistry, reopenCharacter, applyEdit, finalizeCharacter, adjustResource, rollDice, rollFeature, applyFeatureRoll, serializeCharacter, deserializeCharacter } from '@/dist/index.js';
+import { Engine, clearFeatureRolls, SystemRegistry, reopenCharacter, applyEdit, finalizeCharacter, adjustResource, rollDice, rollFeature, applyFeatureRoll, serializeCharacter, deserializeCharacter } from '@/dist/index.js';
 import { exampleCharacter } from '@/examples/dnd2014-character.js';
 
 const file = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
@@ -113,6 +113,22 @@ test('manual base abilities enforce 3–18 without capping Feature bonuses at 18
     const result = engine.evaluate({ ...character, inputs: { ...character.inputs, 'base.strength': value } });
     assert.equal(result.status, 'invalid');
   }
+});
+
+test('final ability scores clamp Feature modifiers to 1–30 independently of base inputs', () => {
+  const { engine, character } = exampleCharacter({ settings: { abilityMethod: 'manual' } });
+  const catalogue = structuredClone(engine.catalogue);
+  catalogue.features.find((feature) => feature.id === 'dnd5e:2014:race.human').components.push(
+    { id: 'test-high', kind: 'modifyStat', stat: 'strength', operation: 'add', value: 100 },
+    { id: 'test-low', kind: 'modifyStat', stat: 'dexterity', operation: 'add', value: -100 },
+  );
+  const result = new Engine(catalogue).evaluate(character);
+  assert.equal(result.status, 'valid', JSON.stringify(result.diagnostics));
+  assert.equal(result.stats.strength.value, 30);
+  assert.equal(result.stats.dexterity.value, 1);
+  assert.equal(result.stats['modifier.strength'].value, 10);
+  assert.equal(result.stats['modifier.dexterity'].value, -5);
+  assert.equal(result.stats['base.strength'].value, character.inputs['base.strength']);
 });
 
 test('System tab schema rejects duplicate IDs and unknown sections', () => {

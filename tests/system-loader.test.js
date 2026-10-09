@@ -74,6 +74,16 @@ test('invalid hidden configurations fail atomically before registry publication'
   assert.throws(() => registry.load(broken));
   assert.equal(registry.list().length, 1);
 });
+
+test('validation reuse detects mutations and rejects non-JSON additions', () => {
+  const file = parseSystemFile(fixture());
+  assert.deepEqual(parseSystemFile(file), file);
+  file.configurations[0].classes.push({ id: 'bad' });
+  assert.throws(() => parseSystemFile(file));
+  const valid = parseSystemFile(fixture());
+  valid.callback = () => {};
+  assert.throws(() => parseSystemFile(valid), /JSON/);
+});
 test('JSON loader rejects malformed versions, unsafe keys, non-JSON values, and incomplete options', () => {
   assert.throws(() => parseSystemFile('{'));
   assert.throws(() => parseSystemFile('{"__proto__":{}}'));

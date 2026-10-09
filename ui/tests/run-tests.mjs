@@ -20,6 +20,7 @@ const { CharacterRuleContext } = await server.ssrLoadModule('/src/character-rule
 const starterSaves = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8'));
 const { featureHref } = await server.ssrLoadModule('/src/feature-description.ts');
 const { safeReturn } = await server.ssrLoadModule('/src/feature-origin.ts');
+const { orderedSheetTabs, moveSheetTab } = await server.ssrLoadModule('/src/sheet-tabs.ts');
 const { advancementLabels } = await server.ssrLoadModule('/src/feature-requirements.ts');
 const file = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
 function storage() {
@@ -33,6 +34,35 @@ function render(workspace, hash = '') {
   globalThis.window = { location: { hash } };
   return renderToStaticMarkup(createElement(App));
 }
+
+test('Items follows Skills by default, puts money first, and saved tab order survives loading', () => {
+  const character = { ...starterSaves[0], tabOrder: ['items', 'stats', 'skills'] };
+  const tabs = file.configurations[0].system.sheetTabs;
+  assert.equal(tabs[tabs.findIndex((tab) => tab.id === 'skills') + 1].id, 'items');
+  assert.deepEqual(orderedSheetTabs(tabs, ['retired', 'items']).map((tab) => tab.id), ['items', ...tabs.filter((tab) => tab.id !== 'items').map((tab) => tab.id)]);
+  assert.deepEqual(moveSheetTab(['stats', 'skills', 'items'], 'items', -1), ['stats', 'items', 'skills']);
+  assert.deepEqual(moveSheetTab(['stats', 'skills'], 'stats', -1), ['stats', 'skills']);
+  const store = storage();
+  model.writeWorkspace(store, { ...data(), characters: [character] });
+  const restored = model.readWorkspace(store);
+  assert.deepEqual(restored.characters[0].tabOrder, character.tabOrder);
+  const html = render(restored, `#characters/${character.id}?view=items`);
+  const nav = html.match(/<nav class="subnav"[^>]*>([\s\S]*?)<\/nav>/)[1];
+  assert.ok(nav.indexOf('Items') < nav.indexOf('Character sheet'));
+  assert.ok(html.indexOf('Copper (cp)') < html.indexOf('Chain mail'));
+  assert.match(html, /Rearrange tabs/);
+});
+
+test('Races catalogue and class labels use System terminology', () => {
+  const renamed = structuredClone(file);
+  for (const configuration of renamed.configurations) configuration.system.terminology = { classSingular: 'Profession', classPlural: 'Professions', creatureSingular: 'Ancestry', creaturePlural: 'Ancestries', creatureTag: 'race' };
+  const html = render({ ...data(), systems: [renamed] }, '#races');
+  assert.match(html, /Ancestries found/);
+  assert.match(html, /Professions/);
+  assert.match(html, /Human/);
+  assert.doesNotMatch(html, /feature-card-title[^>]*>Second Wind/);
+  assert.equal(safeReturn('#races?q=elf&sort=name-desc'), '#races?q=elf&sort=name-desc');
+});
 
 test('System tabs partition skills and notes, persist ability preferences, and lead with HP', () => {
   const character = { ...starterSaves[0], displayPreferences: { 'modifierFirst:abilities': true }, notes: { ...starterSaves[0].notes, 'Note 1': 'A long custom note\n'.repeat(1000) } };
@@ -117,9 +147,9 @@ test('stored workspaces deduplicate repeated configuration data and read older s
   store.setItem(model.STORAGE_KEY, JSON.stringify(workspace));
   assert.deepEqual(model.readWorkspace(store).systems, workspace.systems);
   const broken = JSON.parse(packed);
-  broken.systems[0].configurations[0].classes = 999;
+  broken.systems[0] = null;
   store.setItem(model.STORAGE_KEY, JSON.stringify(broken));
-  assert.throws(() => model.readWorkspace(store), /invalid shared-data reference/);
+  assert.throws(() => model.readWorkspace(store), /Compressed System data is malformed/);
 });
 test('description refresh preserves pinned rules and rejects mechanical changes', () => {
   const older = structuredClone(file);
@@ -428,7 +458,8 @@ test('Fighter resource UI omits Arcane Recovery, while Wizard recovery and adjus
   assert.match(sheet, /<h2>Abilities<\/h2>/);
   assert.match(sheet, /Combat &amp; exploration/);
   assert.match(sheet, /class="sheet-table skill-list\s*"/);
-  assert.match(sheet, /Chain mail/);
+  assert.doesNotMatch(sheet, /<h2>Inventory<\/h2>/);
+  assert.match(render(workspace, `#characters/${starterSaves[0].id}?view=items`), /Chain mail/);
   assert.match(sheet, /class="character-facts"/);
 });
 
@@ -467,8 +498,9 @@ test('sheet controls expose inline editing, five coin balances, sortable columns
   const html = render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=stats`);
   assert.match(html, /Edit Alignment/);
   assert.doesNotMatch(html, /Edit character details/);
-  for (const coin of ['Copper', 'Silver', 'Electrum', 'Gold', 'Platinum']) assert.match(html, new RegExp(`${coin} balance`));
-  assert.match(html, /25 gp total/);
+  const items = render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=items`);
+  for (const coin of ['Copper', 'Silver', 'Electrum', 'Gold', 'Platinum']) assert.match(items, new RegExp(`${coin} balance`));
+  assert.match(items, /25 gp total/);
   assert.match(html, /aria-sort="ascending"/);
   assert.doesNotMatch(html, /Calculation for Athletics/);
   assert.match(render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=skills`), /Calculation for Athletics/);
@@ -612,7 +644,7 @@ test('spell levels collapse and free utility spells have no use control', () => 
   assert.match(fire, />Use Spell<\/button>/);
   assert.doesNotMatch(html, /Rolling spends the ability use and saves the result/);
   assert.ok(html.indexOf('>Long rest</button>') < html.indexOf('<h2>Abilities</h2>'));
-  const sheet = render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=stats`);
+  const sheet = render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=items`);
   assert.match(sheet, /Copper \(cp\)/);
   assert.doesNotMatch(sheet, /<span>cp<\/span>/);
 });

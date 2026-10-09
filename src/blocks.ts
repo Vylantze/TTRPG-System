@@ -28,7 +28,7 @@ export function compileBlocks(input: Catalogue): Catalogue {
   };
   let expanded = 0;
   const expand = (component: Record<string, unknown>, path: string[] = []): Component[] => {
-    if (++expanded > 10000) throw new RuleError('BLOCK_LIMIT', 'Block expansion exceeds 10000 components.');
+    if (++expanded > 50000) throw new RuleError('BLOCK_LIMIT', 'Block expansion exceeds 50000 components.');
     if (!object(component) || !safeName(component.id)) throw new RuleError('BLOCK_SCHEMA', 'Invalid block component.');
     if (component.kind !== 'useBlock') return [component as unknown as Component];
     if (component.condition !== undefined) throw new RuleError('BLOCK_SCHEMA', 'Put conditions on atomic blocks.');

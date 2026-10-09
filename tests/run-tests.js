@@ -15,3 +15,5 @@ import '@/tests/spell-display.test.js';
 import '@/tests/character-play.test.js';
 
 import '@/tests/description-tokens.test.js';
+
+import '@/tests/expanded-classes.test.js';

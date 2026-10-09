@@ -6,6 +6,7 @@ import type { PendingUse } from '@/src/model/PendingUse.js';
 import type { InventoryEntry } from '@/src/model/InventoryEntry.js';
 
 export interface Character {
+  tabOrder?: string[];
   displayPreferences?: Record<string, boolean>;
   rollResults?: RolledFeature[];
   money?: Record<string, number>;

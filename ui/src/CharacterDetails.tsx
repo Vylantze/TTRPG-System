@@ -11,11 +11,11 @@ export function CharacterDetails({ character, engine, result, update, notes = fa
         {!notes && (
           <>
             <div>
-              <dt>Race</dt>
-              <dd>{result.instances.filter((instance) => instance.active && engine.getFeature(instance.feature)?.tags?.includes('race')).map((instance) => engine.getFeature(instance.feature)?.displayName ?? engine.getFeature(instance.feature)?.name).join(', ') || 'Not selected'}</dd>
+              <dt>{engine.catalogue.system.terminology?.creatureSingular ?? 'Race'}</dt>
+              <dd>{result.instances.filter((instance) => instance.active && engine.getFeature(instance.feature)?.tags?.includes(engine.catalogue.system.terminology?.creatureTag ?? 'race')).map((instance) => engine.getFeature(instance.feature)?.displayName ?? engine.getFeature(instance.feature)?.name).join(', ') || 'Not selected'}</dd>
             </div>
             <div>
-              <dt>Classes & levels</dt>
+              <dt>{`${engine.catalogue.system.terminology?.classPlural ?? 'Classes'} & levels`}</dt>
               <dd>{character.progressions.filter((progression) => progression.level > 0).map((progression) => `${engine.catalogue.classes.find((cls) => cls.id === progression.class)?.name ?? progression.class} ${progression.level}`).join(' / ') || 'No class selected'}</dd>
             </div>
           </>

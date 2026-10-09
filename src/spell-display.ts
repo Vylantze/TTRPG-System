@@ -20,5 +20,5 @@ export function spellGroups(engine: Engine, result: EvaluationResult): SpellGrou
 }
 
 export function spellSlotPools(engine: Engine, result: EvaluationResult) {
-  return (engine.catalogue.system.spellDisplay?.slots ?? []).flatMap((slot) => Object.values(result.resources).filter((pool) => pool.key === slot.key && pool.scope === slot.scope).map((pool) => ({ level: slot.level, pool }))).sort((a, b) => a.level - b.level);
+  return (engine.catalogue.system.spellDisplay?.slots ?? []).flatMap((slot) => Object.values(result.resources).filter((pool) => pool.key === slot.key && pool.scope === slot.scope).map((pool) => ({ level: slot.levelStat ? result.stats[slot.levelStat]?.value ?? 0 : slot.level!, pool }))).sort((a, b) => a.level - b.level);
 }
