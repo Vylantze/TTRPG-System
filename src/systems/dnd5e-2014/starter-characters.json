@@ -927,7 +927,7 @@
       "base.intelligence": 10,
       "base.wisdom": 12,
       "base.charisma": 13,
-      "armorIndex": 10,
+      "armorIndex": 0,
       "shield": 0
     },
     "progressions": [
@@ -996,11 +996,83 @@
     },
     "pending": {},
     "events": [],
+    "inventory": [
+      {
+        "id": "starting-0",
+        "item": "dnd5e:2014:item.greataxe",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-1",
+        "item": "dnd5e:2014:item.javelin",
+        "quantity": 3,
+        "equipped": false
+      },
+      {
+        "id": "starting-2",
+        "item": "dnd5e:2014:item.chain-mail",
+        "quantity": 1,
+        "equipped": true
+      },
+      {
+        "id": "starting-3",
+        "item": "dnd5e:2014:item.backpack",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-4",
+        "item": "dnd5e:2014:item.blanket",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-5",
+        "item": "dnd5e:2014:item.tinderbox",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-6",
+        "item": "dnd5e:2014:item.rations",
+        "quantity": 2,
+        "equipped": false
+      },
+      {
+        "id": "starting-7",
+        "item": "dnd5e:2014:item.waterskin",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-8",
+        "item": "dnd5e:2014:item.fine-clothing",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-9",
+        "item": "dnd5e:2014:item.signet-ring",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-10",
+        "item": "dnd5e:2014:item.pedigree-scroll",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-11",
+        "item": "dnd5e:2014:item.gold-piece",
+        "quantity": 25,
+        "equipped": false
+      }
+    ],
     "notes": {
       "Source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=1",
       "Alignment": "Lawful neutral",
-      "Equipment": "Weapons: greataxe; javelins ×3. Armor: chain mail. Supplies: backpack, blanket, tinderbox, rations ×2 days, waterskin. Personal items: fine clothing, signet ring, pedigree scroll.",
-      "Starting money": "25 gp",
       "Starting attacks (reference only)": "Greataxe +5, 1d12+3 slashing; javelin +5, 1d6+3 piercing, range 30/120 ft. These printed starting values do not recalculate when you edit the build.",
       "Template scope": "Level 1. The source leaves the character name blank; this descriptive name is editable. See the linked original for personality, history, and background Feature text."
     },
@@ -1934,8 +2006,8 @@
       "base.intelligence": 10,
       "base.wisdom": 15,
       "base.charisma": 12,
-      "armorIndex": 10,
-      "shield": 1
+      "armorIndex": 0,
+      "shield": 0
     },
     "progressions": [
       {
@@ -2023,11 +2095,137 @@
     },
     "pending": {},
     "events": [],
+    "inventory": [
+      {
+        "id": "starting-0",
+        "item": "dnd5e:2014:item.warhammer",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-1",
+        "item": "dnd5e:2014:item.handaxe",
+        "quantity": 2,
+        "equipped": false
+      },
+      {
+        "id": "starting-2",
+        "item": "dnd5e:2014:item.trophy-dagger",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-3",
+        "item": "dnd5e:2014:item.chain-mail",
+        "quantity": 1,
+        "equipped": true
+      },
+      {
+        "id": "starting-4",
+        "item": "dnd5e:2014:item.shield",
+        "quantity": 1,
+        "equipped": true
+      },
+      {
+        "id": "starting-5",
+        "item": "dnd5e:2014:item.masons-tools",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-6",
+        "item": "dnd5e:2014:item.playing-cards",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-7",
+        "item": "dnd5e:2014:item.holy-symbol",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-8",
+        "item": "dnd5e:2014:item.backpack",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-9",
+        "item": "dnd5e:2014:item.crowbar",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-10",
+        "item": "dnd5e:2014:item.hammer",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-11",
+        "item": "dnd5e:2014:item.piton",
+        "quantity": 10,
+        "equipped": false
+      },
+      {
+        "id": "starting-12",
+        "item": "dnd5e:2014:item.torch",
+        "quantity": 10,
+        "equipped": false
+      },
+      {
+        "id": "starting-13",
+        "item": "dnd5e:2014:item.tinderbox",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-14",
+        "item": "dnd5e:2014:item.rations",
+        "quantity": 10,
+        "equipped": false
+      },
+      {
+        "id": "starting-15",
+        "item": "dnd5e:2014:item.waterskin",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-16",
+        "item": "dnd5e:2014:item.hemp-rope",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-17",
+        "item": "dnd5e:2014:item.common-clothing",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-18",
+        "item": "dnd5e:2014:item.pouch",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-19",
+        "item": "dnd5e:2014:item.sergeants-insignia",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-20",
+        "item": "dnd5e:2014:item.gold-piece",
+        "quantity": 10,
+        "equipped": false
+      }
+    ],
     "notes": {
       "Source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=3",
       "Alignment": "Neutral good",
-      "Equipment": "Weapons: warhammer; handaxes ×2; trophy dagger. Armor: chain mail and shield. Tools: mason’s tools and playing cards. Supplies: holy symbol, backpack, crowbar, hammer, pitons ×10, torches ×10, tinderbox, rations ×10 days, waterskin, hemp rope (50 ft). Personal items: common clothing, pouch, sergeant’s insignia.",
-      "Starting money": "10 gp",
       "Starting attacks (reference only)": "Warhammer +4, 1d8+2 bludgeoning; handaxe +4, 1d6+2 slashing, range 20/60 ft. These printed starting values do not recalculate when you edit the build.",
       "Template scope": "Level 1. The source leaves the character name blank; this descriptive name is editable. See the linked original for personality, history, and background Feature text.",
       "Prepared spells": "The source leaves daily preparation to the player. The selected prepared spells are editable application defaults, not printed selections.",
@@ -2963,7 +3161,7 @@
       "base.intelligence": 13,
       "base.wisdom": 10,
       "base.charisma": 15,
-      "armorIndex": 2,
+      "armorIndex": 0,
       "shield": 0
     },
     "progressions": [
@@ -3027,11 +3225,131 @@
     "resources": {},
     "pending": {},
     "events": [],
+    "inventory": [
+      {
+        "id": "starting-0",
+        "item": "dnd5e:2014:item.shortsword",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-1",
+        "item": "dnd5e:2014:item.shortbow",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-2",
+        "item": "dnd5e:2014:item.arrow",
+        "quantity": 20,
+        "equipped": false
+      },
+      {
+        "id": "starting-3",
+        "item": "dnd5e:2014:item.leather-armor",
+        "quantity": 1,
+        "equipped": true
+      },
+      {
+        "id": "starting-4",
+        "item": "dnd5e:2014:item.thieves-tools",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-5",
+        "item": "dnd5e:2014:item.crowbar",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-6",
+        "item": "dnd5e:2014:item.backpack",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-7",
+        "item": "dnd5e:2014:item.bell",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-8",
+        "item": "dnd5e:2014:item.candle",
+        "quantity": 5,
+        "equipped": false
+      },
+      {
+        "id": "starting-9",
+        "item": "dnd5e:2014:item.hammer",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-10",
+        "item": "dnd5e:2014:item.piton",
+        "quantity": 10,
+        "equipped": false
+      },
+      {
+        "id": "starting-11",
+        "item": "dnd5e:2014:item.hemp-rope",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-12",
+        "item": "dnd5e:2014:item.hooded-lantern",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-13",
+        "item": "dnd5e:2014:item.oil",
+        "quantity": 2,
+        "equipped": false
+      },
+      {
+        "id": "starting-14",
+        "item": "dnd5e:2014:item.rations",
+        "quantity": 5,
+        "equipped": false
+      },
+      {
+        "id": "starting-15",
+        "item": "dnd5e:2014:item.tinderbox",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-16",
+        "item": "dnd5e:2014:item.waterskin",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-17",
+        "item": "dnd5e:2014:item.dark-clothing",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-18",
+        "item": "dnd5e:2014:item.pouch",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-19",
+        "item": "dnd5e:2014:item.gold-piece",
+        "quantity": 15,
+        "equipped": false
+      }
+    ],
     "notes": {
       "Source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=5",
       "Alignment": "Neutral",
-      "Equipment": "Weapons: shortsword; shortbow; arrows ×20. Armor: leather. Tools: thieves’ tools and crowbar. Supplies: backpack, bell, candles ×5, hammer, pitons ×10, hemp rope (50 ft), hooded lantern, oil ×2 flasks, rations ×5 days, tinderbox, waterskin. Personal items: dark clothing with hood, pouch.",
-      "Starting money": "15 gp",
       "Starting attacks (reference only)": "Shortsword +5, 1d6+3 piercing; shortbow +5, 1d6+3 piercing, range 80/320 ft. Sneak Attack: +1d6 when eligible. These printed starting values do not recalculate when you edit the build.",
       "Template scope": "Level 1. The source leaves the character name blank; this descriptive name is editable. See the linked original for personality, history, and background Feature text."
     },
@@ -4144,11 +4462,95 @@
     },
     "pending": {},
     "events": [],
+    "inventory": [
+      {
+        "id": "starting-0",
+        "item": "dnd5e:2014:item.shortsword",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-1",
+        "item": "dnd5e:2014:item.component-pouch",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-2",
+        "item": "dnd5e:2014:item.spellbook",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-3",
+        "item": "dnd5e:2014:item.backpack",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-4",
+        "item": "dnd5e:2014:item.ink",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-5",
+        "item": "dnd5e:2014:item.pen",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-6",
+        "item": "dnd5e:2014:item.parchment",
+        "quantity": 10,
+        "equipped": false
+      },
+      {
+        "id": "starting-7",
+        "item": "dnd5e:2014:item.small-knife",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-8",
+        "item": "dnd5e:2014:item.historical-tome",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-9",
+        "item": "dnd5e:2014:item.holy-symbol",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-10",
+        "item": "dnd5e:2014:item.prayer-book",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-11",
+        "item": "dnd5e:2014:item.common-clothing",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-12",
+        "item": "dnd5e:2014:item.pouch",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-13",
+        "item": "dnd5e:2014:item.gold-piece",
+        "quantity": 5,
+        "equipped": false
+      }
+    ],
     "notes": {
       "Source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=7",
       "Alignment": "Chaotic good",
-      "Equipment": "Weapon: shortsword. Spell supplies: component pouch, spellbook. Other supplies: backpack, ink bottle, pen, parchment ×10 sheets, small knife. Personal items: historical tome, holy symbol, prayer book, common clothing, pouch.",
-      "Starting money": "5 gp",
       "Starting attacks (reference only)": "Shortsword +4, 1d6+2 piercing. These printed starting values do not recalculate when you edit the build.",
       "Template scope": "Level 1. The source leaves the character name blank; this descriptive name is editable. See the linked original for personality, history, and background Feature text.",
       "Prepared spells": "The source leaves daily preparation to the player. The selected prepared spells are editable application defaults, not printed selections."
@@ -5083,7 +5485,7 @@
       "base.intelligence": 10,
       "base.wisdom": 12,
       "base.charisma": 8,
-      "armorIndex": 2,
+      "armorIndex": 0,
       "shield": 0
     },
     "progressions": [
@@ -5146,11 +5548,119 @@
     },
     "pending": {},
     "events": [],
+    "inventory": [
+      {
+        "id": "starting-0",
+        "item": "dnd5e:2014:item.longbow",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-1",
+        "item": "dnd5e:2014:item.arrow",
+        "quantity": 20,
+        "equipped": false
+      },
+      {
+        "id": "starting-2",
+        "item": "dnd5e:2014:item.greatsword",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-3",
+        "item": "dnd5e:2014:item.leather-armor",
+        "quantity": 1,
+        "equipped": true
+      },
+      {
+        "id": "starting-4",
+        "item": "dnd5e:2014:item.carpenters-tools",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-5",
+        "item": "dnd5e:2014:item.backpack",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-6",
+        "item": "dnd5e:2014:item.bedroll",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-7",
+        "item": "dnd5e:2014:item.mess-kit",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-8",
+        "item": "dnd5e:2014:item.tinderbox",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-9",
+        "item": "dnd5e:2014:item.torch",
+        "quantity": 10,
+        "equipped": false
+      },
+      {
+        "id": "starting-10",
+        "item": "dnd5e:2014:item.rations",
+        "quantity": 10,
+        "equipped": false
+      },
+      {
+        "id": "starting-11",
+        "item": "dnd5e:2014:item.waterskin",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-12",
+        "item": "dnd5e:2014:item.hemp-rope",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-13",
+        "item": "dnd5e:2014:item.shovel",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-14",
+        "item": "dnd5e:2014:item.iron-pot",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-15",
+        "item": "dnd5e:2014:item.common-clothing",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-16",
+        "item": "dnd5e:2014:item.pouch",
+        "quantity": 1,
+        "equipped": false
+      },
+      {
+        "id": "starting-17",
+        "item": "dnd5e:2014:item.gold-piece",
+        "quantity": 10,
+        "equipped": false
+      }
+    ],
     "notes": {
       "Source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=9",
       "Alignment": "Lawful good",
-      "Equipment": "Weapons: longbow; arrows ×20; greatsword. Armor: leather. Tools: carpenter’s tools. Supplies: backpack, bedroll, mess kit, tinderbox, torches ×10, rations ×10 days, waterskin, hemp rope (50 ft), shovel, iron pot. Personal items: common clothing, pouch.",
-      "Starting money": "10 gp",
       "Starting attacks (reference only)": "Greatsword +4, 2d6+2 slashing; longbow +7, 1d8+3 piercing, range 150/600 ft. These printed starting values do not recalculate when you edit the build.",
       "Template scope": "Level 1. The source leaves the character name blank; this descriptive name is editable. See the linked original for personality, history, and background Feature text."
     },

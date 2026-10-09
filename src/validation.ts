@@ -1,3 +1,4 @@
+import { checkInventory, itemFeatures } from '@/src/items.js';
 import type { Catalogue, Character, Diagnostic, Expression, Predicate, Component, FunctionRegistry } from '@/src/model.js';
 import { RuleError, number } from '@/src/expression.js';
 import { compileBlocks } from '@/src/blocks.js';
@@ -241,6 +242,69 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     list(input.classes);
     if (input.blocks !== undefined) list(input.blocks);
     const compiled = compileBlocks(input as unknown as Catalogue);
+    if (compiled.items !== undefined) list(compiled.items);
+    if (compiled.itemFeatures !== undefined) list(compiled.itemFeatures);
+    unique((compiled.items ?? []).map((i) => i.id), 'item');
+    unique((compiled.itemFeatures ?? []).map((i) => i.id), 'item Feature');
+    for (const f of compiled.itemFeatures ?? []) {
+      text(f.id);
+      text(f.name);
+      if (f.features !== undefined) {
+        list(f.features);
+        f.features.forEach(text);
+      }
+      if (f.properties !== undefined) {
+        record(f.properties);
+        Object.values(f.properties).forEach(value);
+      }
+      if (f.modifiers !== undefined) {
+        list(f.modifiers);
+        if (f.modifiers.some((m) => m.kind !== 'modifyStat')) throw new RuleError('ITEM_FEATURE', 'Item modifiers must modify one stat.');
+      }
+      itemFeatures({ ...compiled, items: [{ id: '__validation', revision: 1, name: 'Validation', category: 'Validation', features: [f.id] }] }, '__validation');
+    }
+    if (compiled.itemFeatures?.length) {
+      const errors = validateCatalogue({ ...compiled, items: undefined, itemFeatures: undefined, features: [...compiled.features, ...compiled.itemFeatures.map((feature, index) => ({ id: `item-validation:${index}`, revision: 1, name: feature.name, components: feature.modifiers ?? [] }))] }, functions);
+      if (errors.length) throw new RuleError(errors[0].code, errors[0].message);
+    }
+    for (const item of compiled.items ?? []) {
+      text(item.id);
+      text(item.name);
+      text(item.category);
+      integer(item.revision, 1);
+      list(item.features);
+      item.features.forEach(text);
+      if (item.slot !== undefined) text(item.slot);
+      if (item.source !== undefined) text(item.source);
+      itemFeatures(compiled, item.id);
+    }
+    if (compiled.system.sheetSections !== undefined) {
+      list(compiled.system.sheetSections);
+      unique(compiled.system.sheetSections.map((section) => section.id), 'sheet section');
+      const stats = new Set([...compiled.system.stats.map((stat) => stat.id), ...compiled.features.flatMap((feature) => feature.components.flatMap((component) => component.kind === 'defineStat' ? [component.stat.id] : []))]);
+      for (const section of compiled.system.sheetSections) {
+        text(section.id);
+        text(section.name);
+        list(section.rows);
+        if (!['abilities', 'skills', 'stats'].includes(section.layout)) throw new RuleError('PRESENTATION', 'Unknown sheet layout.');
+        for (const row of section.rows) {
+          for (const id of [row.stat, row.secondaryStat, row.proficiencyStat].filter((id) => id !== undefined)) if (!stats.has(id!)) throw new RuleError('PRESENTATION', `Unknown displayed stat ${id}.`);
+          text(row.stat);
+          for (const label of [row.name, row.ability].filter((label) => label !== undefined)) text(label);
+          if (row.feature !== undefined && !compiled.features.some((feature) => feature.id === row.feature)) throw new RuleError('PRESENTATION', 'Unknown displayed Feature.');
+        }
+      }
+    }
+    if (compiled.system.featureCategories !== undefined) {
+      list(compiled.system.featureCategories);
+      unique(compiled.system.featureCategories.map((category) => category.id), 'Feature category');
+      for (const category of compiled.system.featureCategories) {
+        text(category.id);
+        text(category.name);
+        list(category.tags);
+        category.tags.forEach(text);
+      }
+    }
     const created = new Map<string, Catalogue['system']['stats'][number]>();
     for (const f of compiled.features) {
       list(f.components);
@@ -554,6 +618,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
 }
 
 export function checkCharacter(v: unknown): asserts v is Character {
+  if (v && typeof v === 'object') checkInventory(v as Character);
   record(v);
   if (v.notes !== undefined) {
     record(v.notes);

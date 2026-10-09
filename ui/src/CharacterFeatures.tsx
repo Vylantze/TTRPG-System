@@ -1,3 +1,4 @@
+import { FeatureLink } from '@/ui/src/FeatureLink';
 import { useMemo, useState } from 'react';
 import type { Character, Engine, EvaluationResult } from '@/src/index';
 import { FeatureRules } from '@/ui/src/RulesText';
@@ -5,12 +6,13 @@ import { FeatureRequirements } from '@/ui/src/FeatureRequirements';
 import { featureName, tagName } from '@/ui/src/display';
 
 export function CharacterFeatures({ engine, character, result, openFeature }: { engine: Engine; character: Character; result: EvaluationResult; openFeature: (id: string) => void }) {
-  const [query, setQuery] = useState(''), [origin, setOrigin] = useState('all'), [showInactive, setShowInactive] = useState(false);
+  const [query, setQuery] = useState(''), [origin, setOrigin] = useState('all'), [showInactive, setShowInactive] = useState(false), [category, setCategory] = useState('all');
   const instances = useMemo(() => result.instances.filter((instance) => {
     const feature = engine.getFeature(instance.feature);
-    return (showInactive || instance.active) && (origin === 'all' || (origin === 'other' ? !instance.progression : instance.progression === origin))
+    const group = engine.catalogue.system.featureCategories?.find((item) => item.id === category);
+    return (!group || group.tags.some((tag) => feature?.tags?.includes(tag))) && (showInactive || instance.active) && (origin === 'all' || (origin === 'other' ? !instance.progression : instance.progression === origin))
       && `${featureName(feature)} ${feature?.tags?.map((tag) => tagName(engine.catalogue.system, tag)).join(' ') ?? ''}`.toLowerCase().includes(query.toLowerCase());
-  }), [engine, result, origin, query, showInactive]);
+  }), [engine, result, origin, query, showInactive, category]);
   return (
     <section>
       <p className="eyebrow">Your character's rules reference</p>
@@ -34,6 +36,13 @@ export function CharacterFeatures({ engine, character, result, openFeature }: { 
               </option>
             ))}
             <option value="other">Origins & additional Features</option>
+          </select>
+        </label>
+        <label>
+          Category
+          <select value={category} onChange={(event) => setCategory(event.target.value)}>
+            <option value="all">All categories</option>
+            {engine.catalogue.system.featureCategories?.map((group) => <option key={group.id} value={group.id}>{group.name}</option>)}
           </select>
         </label>
         <label className="checkbox-label">
@@ -67,7 +76,7 @@ export function CharacterFeatures({ engine, character, result, openFeature }: { 
               </summary>
               <FeatureRequirements feature={feature} engine={engine} />
               <FeatureRules feature={feature} engine={engine} openFeature={openFeature} />
-              <button className="link" onClick={() => openFeature(feature.id)}>View Feature →</button>
+              <FeatureLink className="link" id={feature.id} engine={engine}>View Feature →</FeatureLink>
             </details>
           );
         })}

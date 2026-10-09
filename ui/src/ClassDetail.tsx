@@ -1,4 +1,7 @@
-import { useId, useState } from 'react';
+import { FeatureOrigin } from '@/ui/src/feature-origin';
+import { FeatureLink } from '@/ui/src/FeatureLink';
+import { featureHref } from '@/ui/src/feature-description';
+import { useEffect, useState } from 'react';
 import type { ClassDefinition, Engine } from '@/src/index';
 import { ClassFeature } from '@/ui/src/ClassFeature';
 import { FeatureRules, RulesText } from '@/ui/src/RulesText';
@@ -7,7 +10,17 @@ import { featureName } from '@/ui/src/display';
 import { labelFromId } from '@/ui/src/workspace';
 
 export function ClassDetail({ cls, engine, openFeature }: { cls: ClassDefinition; engine: Engine; openFeature: (id: string) => void }) {
-  const prefix = useId();
+  const prefix = `class-${cls.id}`;
+  useEffect(() => {
+    const restore = () => {
+      const section = new URLSearchParams(window.location.hash.split('?')[1]).get('section');
+      if (section) document.getElementById(section)?.scrollIntoView({ block: 'start' });
+    };
+    restore();
+    window.addEventListener('hashchange', restore);
+    return () => window.removeEventListener('hashchange', restore);
+  }, [cls.id]);
+  const origin = (section: string) => `#classes/${encodeURIComponent(cls.id)}?${new URLSearchParams({ system: engine.catalogue.system.id, revision: String(engine.catalogue.system.revision), catalogue: engine.catalogue.id, section })}`;
   const [preview, setPreview] = useState<string>();
   const levels = engine.getClassLevels(cls.id);
   const jump = (target: string) => {
@@ -73,7 +86,22 @@ export function ClassDetail({ cls, engine, openFeature }: { cls: ClassDefinition
                     <tr key={row.level}>
                       <th scope="row"><button className="link" onClick={() => jump(`level-${row.level}`)}>{row.level}</button></th>
                       <td>
-                        {row.entries.map((entry) => <button className="progression-token" key={entry.id} onClick={() => entry.kind === 'grantFeature' ? setPreview(entry.feature) : jump(`level-${row.level}`)}>{entry.kind === 'grantFeature' ? featureName(engine.getFeature(entry.feature)) : `Choose · ${labelFromId(entry.id)}`}</button>)}
+                        {row.entries.map((entry) => entry.kind === 'grantFeature'
+                          ? (
+                              <a
+                                className="progression-token"
+                                key={entry.id}
+                                href={featureHref(entry.feature, engine, origin(`${prefix}-level-${row.level}-${entry.id}`))}
+                                onClick={(event) => {
+                                  if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+                                  event.preventDefault();
+                                  setPreview(entry.feature);
+                                }}
+                              >
+                                {featureName(engine.getFeature(entry.feature))}
+                              </a>
+                            )
+                          : <button className="progression-token" key={entry.id} onClick={() => jump(`level-${row.level}`)}>{`Choose · ${labelFromId(entry.id)}`}</button>)}
                         {!row.entries.length && <span className="muted">No additional Features</span>}
                       </td>
                     </tr>
@@ -95,26 +123,28 @@ export function ClassDetail({ cls, engine, openFeature }: { cls: ClassDefinition
                   {level}
                 </h2>
                 {entries.map((entry) => (
-                  <div className="component" key={entry.id}>
-                    {entry.kind === 'grantFeature'
-                      ? <ClassFeature id={entry.feature} engine={engine} openFeature={openFeature} />
-                      : (
-                          <>
-                            <p className="eyebrow">Independent selection</p>
-                            <h3>{labelFromId(entry.id)}</h3>
-                            <p className="muted small">
-                              {typeof entry.minimum === 'number' && typeof entry.maximum === 'number' ? `Choose ${entry.minimum === entry.maximum ? entry.minimum : `${entry.minimum}–${entry.maximum}`} from this pool.` : 'The number of choices scales with your character.'}
-                              {' '}
-                              Eligibility is checked when building a character.
-                            </p>
-                            {engine.getSelectionFeatures(entry).map((feature) => <ClassFeature key={feature.id} id={feature.id} engine={engine} openFeature={openFeature} />)}
-                          </>
-                        )}
-                    <details className="technical-details">
-                      <summary>Selection definition</summary>
-                      <pre>{JSON.stringify(entry, null, 2)}</pre>
-                    </details>
-                  </div>
+                  <FeatureOrigin.Provider key={entry.id} value={origin(`${prefix}-level-${level}-${entry.id}`)}>
+                    <div className="component reference-section" tabIndex={-1} id={`${prefix}-level-${level}-${entry.id}`}>
+                      {entry.kind === 'grantFeature'
+                        ? <ClassFeature id={entry.feature} engine={engine} openFeature={openFeature} />
+                        : (
+                            <>
+                              <p className="eyebrow">Independent selection</p>
+                              <h3>{labelFromId(entry.id)}</h3>
+                              <p className="muted small">
+                                {typeof entry.minimum === 'number' && typeof entry.maximum === 'number' ? `Choose ${entry.minimum === entry.maximum ? entry.minimum : `${entry.minimum}–${entry.maximum}`} from this pool.` : 'The number of choices scales with your character.'}
+                                {' '}
+                                Eligibility is checked when building a character.
+                              </p>
+                              {engine.getSelectionFeatures(entry).map((feature) => <ClassFeature key={feature.id} id={feature.id} engine={engine} openFeature={openFeature} />)}
+                            </>
+                          )}
+                      <details className="technical-details">
+                        <summary>Selection definition</summary>
+                        <pre>{JSON.stringify(entry, null, 2)}</pre>
+                      </details>
+                    </div>
+                  </FeatureOrigin.Provider>
                 ))}
                 {!entries.length && <p>No additional Features at this level.</p>}
               </div>
@@ -122,7 +152,7 @@ export function ClassDetail({ cls, engine, openFeature }: { cls: ClassDefinition
           ))}
         </div>
       </div>
-      {preview && <ClassPreview id={preview} engine={engine} openFeature={openFeature} close={() => setPreview(undefined)} />}
+      {preview && <FeatureOrigin.Provider value={origin(`${prefix}-progression`)}><ClassPreview id={preview} engine={engine} openFeature={openFeature} close={() => setPreview(undefined)} /></FeatureOrigin.Provider>}
     </article>
   );
 }
@@ -141,15 +171,7 @@ function ClassPreview({ id, engine, openFeature, close }: { id: string; engine: 
           }}
         />
       )}
-      <button
-        className="quiet"
-        onClick={() => {
-          close();
-          openFeature(id);
-        }}
-      >
-        Open full Feature
-      </button>
+      <FeatureLink className="button quiet" id={id} engine={engine}>Open full Feature</FeatureLink>
     </Modal>
   );
 }

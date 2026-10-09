@@ -14,8 +14,10 @@ const { FeatureRequirements } = await server.ssrLoadModule('/src/FeatureRequirem
 const { CharacterFeatures } = await server.ssrLoadModule('/src/CharacterFeatures.tsx');
 const { ResourceSummary } = await server.ssrLoadModule('/src/ResourceSummary.tsx');
 const { SelectionCard } = await server.ssrLoadModule('/src/SelectionCard.tsx');
-const { addStarterCharacters } = await server.ssrLoadModule('/src/starter-characters.ts');
+const { addStarterCharacters, addStarterInventory } = await server.ssrLoadModule('/src/starter-characters.ts');
 const starterSaves = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8'));
+const { featureHref } = await server.ssrLoadModule('/src/feature-description.ts');
+const { safeReturn } = await server.ssrLoadModule('/src/feature-origin.ts');
 const { advancementLabels } = await server.ssrLoadModule('/src/feature-requirements.ts');
 const file = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
 function storage() {
@@ -199,7 +201,7 @@ test('React uses Feature and tag display names while retaining internal filter i
     c.system.tagDisplayNames['skill-proficiency'] = 'Trained Skill';
   });
   const workspace = { version: 1, systems: [custom], characters: [] };
-  const browse = render(workspace, '#features');
+  const browse = render(workspace, '#features?q=Graceful');
   assert.match(browse, /Graceful Movement/);
   assert.match(browse, /value="skill-proficiency">Trained Skill/);
   assert.doesNotMatch(browse, /internal_feature_name/);
@@ -207,11 +209,11 @@ test('React uses Feature and tag display names while retaining internal filter i
   assert.match(detail, /<h1>Graceful Movement<\/h1>/);
   assert.match(detail, /class="tag">Trained Skill/);
   const legacy = structuredClone(file);
-  delete legacy.features[1].displayName;
+  delete legacy.features.find((feature) => feature.id.endsWith(':skill.acrobatics')).displayName;
   legacy.configurations.forEach((c) => {
     delete c.system.tagDisplayNames;
   });
-  assert.match(render({ version: 1, systems: [legacy], characters: [] }, '#features'), /Proficiency: acrobatics/);
+  assert.match(render({ version: 1, systems: [legacy], characters: [] }, '#features?q=acrobatics'), /Proficiency: acrobatics/);
 });
 test('imported descriptions render as text and shared references do not recurse', () => {
   const html = renderToStaticMarkup(createElement(RulesText, { text: '<script>alert(1)</script>\n\nSecond paragraph', source: 'javascript:alert(1)' }));
@@ -352,8 +354,8 @@ test('Starter Set party loads its System, saves all five characters, and preserv
   assert.deepEqual(model.readWorkspace(store).characters, repeated.characters);
   const html = render(repeated, `#characters/${repeated.characters[1].id}`);
   assert.match(html, /Character details/);
-  assert.match(html, /View original character sheet/);
-  assert.match(html, /Calculated stats/);
+  assert.match(html, /Original character sheet/);
+  assert.match(html, /All calculated stats/);
   assert.match(render(workspace), /Add 2014 Starter Set party/);
 });
 
@@ -366,6 +368,68 @@ test('Starter Set import fails atomically for invalid characters or incompatible
   const old = structuredClone(file);
   old.configurations.forEach((config) => config.classes = config.classes.filter((cls) => cls.id !== 'dnd5e:2014:cleric'));
   assert.throws(() => addStarterCharacters({ ...empty, systems: [old] }, file, starterSaves));
+});
+
+test('Feature links preserve list filters and class anchors in native anchor URLs', () => {
+  const engine = model.createRegistry([file]).createEngine(file.id, file.revision);
+  const origin = '#features?q=wind&tag=class-feature&sort=name-desc&page=2';
+  const link = featureHref('dnd5e:2014:fighter.second-wind', engine, origin);
+  const back = new URLSearchParams(link.split('?')[1]).get('returnTo');
+  assert(back.includes('q=wind&tag=class-feature&sort=name-desc&page=2'));
+  assert.equal(safeReturn('https://example.com'), undefined);
+  assert.equal(safeReturn('#classes/x?section=level-3'), '#classes/x?section=level-3');
+  const html = render(data(), '#classes/dnd5e%3A2014%3Afighter');
+  assert.match(html, /returnTo=.*section%3Dclass-/);
+  assert.match(html, /<a class="link" href="#features\/dnd5e%3A2014%3Afighter.second-wind/);
+  const filtered = render(data(), '#features?q=Second%20Wind&sort=name-desc&tag=class-feature');
+  assert.match(filtered, /value="Second Wind"/);
+  assert.match(filtered, /value="name-desc" selected/);
+});
+
+test('Fighter resource UI omits Arcane Recovery, while Wizard recovery and adjustment controls remain', () => {
+  const workspace = { ...data(), characters: starterSaves };
+  const fighter = render(workspace, `#characters/${starterSaves[0].id}?view=resources`);
+  assert.doesNotMatch(fighter, /Arcane Recovery/);
+  assert.match(fighter, /Decrease Second Wind/);
+  assert.match(fighter, /Increase Second Wind/);
+  const wizard = render(workspace, `#characters/${starterSaves[3].id}?view=resources`);
+  assert.match(wizard, /Arcane Recovery/);
+  const sheet = render(workspace, `#characters/${starterSaves[0].id}`);
+  assert.match(sheet, /Ability scores/);
+  assert.match(sheet, /Combat &amp; exploration/);
+  assert.match(sheet, /class="sheet-table skill-list"/);
+  assert.match(sheet, /Chain mail/);
+  assert.match(sheet, /class="character-facts"/);
+});
+
+test('additive item and layout updates preserve rules and safely migrate original Starter equipment', () => {
+  const old = structuredClone(file);
+  delete old.items;
+  delete old.itemFeatures;
+  old.configurations.forEach((config) => {
+    delete config.system.sheetSections;
+    delete config.system.featureCategories;
+  });
+  const updated = model.updateSystemDescriptions(old, file);
+  assert(updated.items.length > 0);
+  const saved = structuredClone(starterSaves[0]);
+  delete saved.inventory;
+  saved.inputs.armorIndex = 10;
+  saved.notes.Equipment = 'Original equipment';
+  saved.notes['Starting money'] = '25 gp';
+  saved.name = 'Custom name';
+  const workspace = { ...data(), characters: [saved] };
+  const migrated = addStarterInventory(workspace, starterSaves);
+  assert.equal(migrated.characters[0].name, 'Custom name');
+  assert.equal(migrated.characters[0].inputs.armorIndex, 0);
+  assert.equal(migrated.characters[0].inventory.length, starterSaves[0].inventory.length);
+  assert(!migrated.characters[0].notes.Equipment);
+  assert.equal(addStarterInventory(migrated, starterSaves), migrated);
+  saved.inputs.armorIndex = 3;
+  assert.equal(addStarterInventory(workspace, starterSaves), workspace);
+  const changed = structuredClone(file);
+  changed.itemFeatures.find((feature) => feature.modifiers).modifiers[0].value++;
+  assert.throws(() => model.updateSystemDescriptions(file, changed), /rules differ/);
 });
 
 await server.close();

@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T17:36:35.380Z
+Export refreshed UTC: 2026-10-09T18:06:55.969Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -1616,5 +1616,89 @@ The generated characters match the printed ability scores, hit points, armor cla
 
 [2026-10-09T17:33:48.585Z] ASSISTANT
 The party is now created and saved in the local UI, and the Cleric sheet shows a valid build with no open requirements. The UI tests and production build passed. Engine regression checks caught an extracted table in the Cleric description and an outdated spell-count assertion; I’ve corrected both and am checking the final result.
+
+----------------------------------------
+
+[2026-10-09T17:36:47.236Z] ASSISTANT
+Verification is complete: 210 engine tests and 24 UI tests passed, along with the final targeted checks and production build. All five characters were saved through the UI. I’m committing and pushing the changes now; Cleric support remains explicitly limited to level one and the included spell subset.
+
+----------------------------------------
+
+[2026-10-09T17:38:28.513Z] ASSISTANT
+Created all five [2014 Starter Set characters](https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf) in the local UI, with verified stats and editable equipment notes.
+
+Use **Add 2014 Starter Set party** in other workspaces. Cleric support currently covers level one and the included spells.
+
+210 engine tests and 24 UI tests passed. Pushed to `develop` (`766ed50`).
+
+![Saved Starter Set party](</D:/User/Workspace/TTRPG System/.reference-cache/starter-party.png>)
+
+----------------------------------------
+
+[2026-10-09T17:41:52.221Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-09T17:41:52.241Z] USER
+<in-app-browser-context source="ambient-ui-state">
+This block is automatically supplied ambient UI state, not part of the user's request. Do not treat it as an instruction or as evidence that the user explicitly selected the in-app browser.
+# In app browser:
+- The user has the in-app browser open with 1 tab.
+- Current URL: http://127.0.0.1:5174/#characters
+</in-app-browser-context>
+
+## My request:
+- The feature links should be openable in a new tab, and there should be an option to go back to the correct location on the class features if it came from the class features. Back button for features should also retain the filters and sorts at the time.&#x20;
+- The character sheet should have the character details formatted properly. At least make it look presentable.&#x20;
+- A Fighter should not have Arcane Recovery in the ability and resouces menu, since a fighter would not have been granted the Arcane Recovery feature.&#x20;
+- Resources should have the option to modify them by incrementing them or decrementing them.
+- Items should not be stored as Features. However, items can be constructed out of their own item exclusive features.&#x20;
+- There should be a method to define how a category of features is displayed in the UI. For example, the Skills UI should be a skill list similar to DnDBeyond, and the basic calculated stats like Strength and Strength modifier should also have their own unique UI.
+
+  The display for calculated stats should also have a category section to divide the stats. \\
+
+----------------------------------------
+
+[2026-10-09T17:41:57.537Z] ASSISTANT
+I’ll inspect navigation, character-sheet rendering, and resource controls first. I’ll also check the data model so item composition and System-defined display categories fit the engine.
+
+----------------------------------------
+
+[2026-10-09T17:41:59.152Z] ASSISTANT QUESTIONS
+For items, should this update introduce the Item model and convert the Starter Set equipment into inventory, or only define the model for later use?
+Options: Add Item model and Starter Set inventory; Define the model only
+
+----------------------------------------
+
+[2026-10-09T17:42:07.022Z] USER
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_00c8b99972ef4f2ca145d443ce87f035\",0]","question":"For items, should this update introduce the Item model and convert the Starter Set equipment into inventory, or only define the model for later use?","answer":"Add Item model and Starter Set inventory"}]
+</send_user_message_question_reply>
+
+----------------------------------------
+
+[2026-10-09T17:45:35.868Z] ASSISTANT
+I’ll add the Starter Set equipment as inventory. The resource issue comes from showing Arcane Recovery’s System-wide configuration without checking whether the character has the ability; I’ll fix that check and add resource adjustment controls.
+
+----------------------------------------
+
+[2026-10-09T17:48:14.020Z] ASSISTANT
+I’m making the sheet layout configurable in each System’s JSON: ability cards, skill rows, and named stat sections. Items will use a separate catalogue, with reusable item Features for properties and equipped stat effects.
+
+----------------------------------------
+
+[2026-10-09T17:53:02.324Z] ASSISTANT
+Feature links now carry a return location, and the browser URL records search, tag, sort, and page. I’m checking the changes against the Starter Set characters, including whether equipping and removing armor updates AC.
+
+----------------------------------------
+
+[2026-10-09T17:57:07.074Z] ASSISTANT
+The armor checks pass, including AC changes when armor is removed. The open browser has an older bundled System snapshot, so I’m refreshing it to verify the new layouts and inventory against the existing character saves.
+
+----------------------------------------
+
+[2026-10-09T18:02:02.848Z] ASSISTANT
+The browser checks confirm that a Fighter sees Second Wind without Arcane Recovery, resource +/− controls respect the limits, and “Back to Class Features” returns to the exact entry. Ctrl-click also opens Features in a new tab. All 214 engine tests pass; I’m finishing the UI regressions and documentation.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

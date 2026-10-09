@@ -106962,7 +106962,277 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip"
-        }
+        },
+        "sheetSections": [
+          {
+            "id": "abilities",
+            "name": "Ability scores",
+            "layout": "abilities",
+            "rows": [
+              {
+                "stat": "strength",
+                "secondaryStat": "modifier.strength",
+                "name": "Strength"
+              },
+              {
+                "stat": "dexterity",
+                "secondaryStat": "modifier.dexterity",
+                "name": "Dexterity"
+              },
+              {
+                "stat": "constitution",
+                "secondaryStat": "modifier.constitution",
+                "name": "Constitution"
+              },
+              {
+                "stat": "intelligence",
+                "secondaryStat": "modifier.intelligence",
+                "name": "Intelligence"
+              },
+              {
+                "stat": "wisdom",
+                "secondaryStat": "modifier.wisdom",
+                "name": "Wisdom"
+              },
+              {
+                "stat": "charisma",
+                "secondaryStat": "modifier.charisma",
+                "name": "Charisma"
+              }
+            ]
+          },
+          {
+            "id": "combat",
+            "name": "Combat & exploration",
+            "layout": "stats",
+            "rows": [
+              {
+                "stat": "hitPoints",
+                "name": "Hit points"
+              },
+              {
+                "stat": "armorClass",
+                "name": "Armor class"
+              },
+              {
+                "stat": "initiative",
+                "name": "Initiative"
+              },
+              {
+                "stat": "speed",
+                "name": "Speed (ft)"
+              },
+              {
+                "stat": "proficiencyBonus",
+                "name": "Proficiency bonus"
+              },
+              {
+                "stat": "passivePerception",
+                "name": "Passive Perception"
+              }
+            ]
+          },
+          {
+            "id": "saves",
+            "name": "Saving throws",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "save.strength",
+                "name": "Strength",
+                "proficiencyStat": "training.save.strength"
+              },
+              {
+                "stat": "save.dexterity",
+                "name": "Dexterity",
+                "proficiencyStat": "training.save.dexterity"
+              },
+              {
+                "stat": "save.constitution",
+                "name": "Constitution",
+                "proficiencyStat": "training.save.constitution"
+              },
+              {
+                "stat": "save.intelligence",
+                "name": "Intelligence",
+                "proficiencyStat": "training.save.intelligence"
+              },
+              {
+                "stat": "save.wisdom",
+                "name": "Wisdom",
+                "proficiencyStat": "training.save.wisdom"
+              },
+              {
+                "stat": "save.charisma",
+                "name": "Charisma",
+                "proficiencyStat": "training.save.charisma"
+              }
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "skill.acrobatics",
+                "name": "Acrobatics",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.acrobatics",
+                "feature": "dnd5e:2014:skill.acrobatics"
+              },
+              {
+                "stat": "skill.animal-handling",
+                "name": "Animal Handling",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.animal-handling",
+                "feature": "dnd5e:2014:skill.animal-handling"
+              },
+              {
+                "stat": "skill.arcana",
+                "name": "Arcana",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.arcana",
+                "feature": "dnd5e:2014:skill.arcana"
+              },
+              {
+                "stat": "skill.athletics",
+                "name": "Athletics",
+                "ability": "STR",
+                "proficiencyStat": "training.skill.athletics",
+                "feature": "dnd5e:2014:skill.athletics"
+              },
+              {
+                "stat": "skill.deception",
+                "name": "Deception",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.deception",
+                "feature": "dnd5e:2014:skill.deception"
+              },
+              {
+                "stat": "skill.history",
+                "name": "History",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.history",
+                "feature": "dnd5e:2014:skill.history"
+              },
+              {
+                "stat": "skill.insight",
+                "name": "Insight",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.insight",
+                "feature": "dnd5e:2014:skill.insight"
+              },
+              {
+                "stat": "skill.intimidation",
+                "name": "Intimidation",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.intimidation",
+                "feature": "dnd5e:2014:skill.intimidation"
+              },
+              {
+                "stat": "skill.investigation",
+                "name": "Investigation",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.investigation",
+                "feature": "dnd5e:2014:skill.investigation"
+              },
+              {
+                "stat": "skill.medicine",
+                "name": "Medicine",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.medicine",
+                "feature": "dnd5e:2014:skill.medicine"
+              },
+              {
+                "stat": "skill.nature",
+                "name": "Nature",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.nature",
+                "feature": "dnd5e:2014:skill.nature"
+              },
+              {
+                "stat": "skill.perception",
+                "name": "Perception",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.perception",
+                "feature": "dnd5e:2014:skill.perception"
+              },
+              {
+                "stat": "skill.performance",
+                "name": "Performance",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.performance",
+                "feature": "dnd5e:2014:skill.performance"
+              },
+              {
+                "stat": "skill.persuasion",
+                "name": "Persuasion",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.persuasion",
+                "feature": "dnd5e:2014:skill.persuasion"
+              },
+              {
+                "stat": "skill.religion",
+                "name": "Religion",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.religion",
+                "feature": "dnd5e:2014:skill.religion"
+              },
+              {
+                "stat": "skill.sleight-of-hand",
+                "name": "Sleight Of Hand",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.sleight-of-hand",
+                "feature": "dnd5e:2014:skill.sleight-of-hand"
+              },
+              {
+                "stat": "skill.stealth",
+                "name": "Stealth",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.stealth",
+                "feature": "dnd5e:2014:skill.stealth"
+              },
+              {
+                "stat": "skill.survival",
+                "name": "Survival",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.survival",
+                "feature": "dnd5e:2014:skill.survival"
+              }
+            ]
+          }
+        ],
+        "featureCategories": [
+          {
+            "id": "class",
+            "name": "Class Features",
+            "tags": [
+              "class-feature"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skill proficiencies",
+            "tags": [
+              "skill-proficiency"
+            ]
+          },
+          {
+            "id": "spells",
+            "name": "Spells",
+            "tags": [
+              "spell"
+            ]
+          },
+          {
+            "id": "ancestry",
+            "name": "Ancestry",
+            "tags": [
+              "race"
+            ]
+          }
+        ]
       },
       "classes": [
         {
@@ -112359,7 +112629,277 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip"
-        }
+        },
+        "sheetSections": [
+          {
+            "id": "abilities",
+            "name": "Ability scores",
+            "layout": "abilities",
+            "rows": [
+              {
+                "stat": "strength",
+                "secondaryStat": "modifier.strength",
+                "name": "Strength"
+              },
+              {
+                "stat": "dexterity",
+                "secondaryStat": "modifier.dexterity",
+                "name": "Dexterity"
+              },
+              {
+                "stat": "constitution",
+                "secondaryStat": "modifier.constitution",
+                "name": "Constitution"
+              },
+              {
+                "stat": "intelligence",
+                "secondaryStat": "modifier.intelligence",
+                "name": "Intelligence"
+              },
+              {
+                "stat": "wisdom",
+                "secondaryStat": "modifier.wisdom",
+                "name": "Wisdom"
+              },
+              {
+                "stat": "charisma",
+                "secondaryStat": "modifier.charisma",
+                "name": "Charisma"
+              }
+            ]
+          },
+          {
+            "id": "combat",
+            "name": "Combat & exploration",
+            "layout": "stats",
+            "rows": [
+              {
+                "stat": "hitPoints",
+                "name": "Hit points"
+              },
+              {
+                "stat": "armorClass",
+                "name": "Armor class"
+              },
+              {
+                "stat": "initiative",
+                "name": "Initiative"
+              },
+              {
+                "stat": "speed",
+                "name": "Speed (ft)"
+              },
+              {
+                "stat": "proficiencyBonus",
+                "name": "Proficiency bonus"
+              },
+              {
+                "stat": "passivePerception",
+                "name": "Passive Perception"
+              }
+            ]
+          },
+          {
+            "id": "saves",
+            "name": "Saving throws",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "save.strength",
+                "name": "Strength",
+                "proficiencyStat": "training.save.strength"
+              },
+              {
+                "stat": "save.dexterity",
+                "name": "Dexterity",
+                "proficiencyStat": "training.save.dexterity"
+              },
+              {
+                "stat": "save.constitution",
+                "name": "Constitution",
+                "proficiencyStat": "training.save.constitution"
+              },
+              {
+                "stat": "save.intelligence",
+                "name": "Intelligence",
+                "proficiencyStat": "training.save.intelligence"
+              },
+              {
+                "stat": "save.wisdom",
+                "name": "Wisdom",
+                "proficiencyStat": "training.save.wisdom"
+              },
+              {
+                "stat": "save.charisma",
+                "name": "Charisma",
+                "proficiencyStat": "training.save.charisma"
+              }
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "skill.acrobatics",
+                "name": "Acrobatics",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.acrobatics",
+                "feature": "dnd5e:2014:skill.acrobatics"
+              },
+              {
+                "stat": "skill.animal-handling",
+                "name": "Animal Handling",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.animal-handling",
+                "feature": "dnd5e:2014:skill.animal-handling"
+              },
+              {
+                "stat": "skill.arcana",
+                "name": "Arcana",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.arcana",
+                "feature": "dnd5e:2014:skill.arcana"
+              },
+              {
+                "stat": "skill.athletics",
+                "name": "Athletics",
+                "ability": "STR",
+                "proficiencyStat": "training.skill.athletics",
+                "feature": "dnd5e:2014:skill.athletics"
+              },
+              {
+                "stat": "skill.deception",
+                "name": "Deception",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.deception",
+                "feature": "dnd5e:2014:skill.deception"
+              },
+              {
+                "stat": "skill.history",
+                "name": "History",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.history",
+                "feature": "dnd5e:2014:skill.history"
+              },
+              {
+                "stat": "skill.insight",
+                "name": "Insight",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.insight",
+                "feature": "dnd5e:2014:skill.insight"
+              },
+              {
+                "stat": "skill.intimidation",
+                "name": "Intimidation",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.intimidation",
+                "feature": "dnd5e:2014:skill.intimidation"
+              },
+              {
+                "stat": "skill.investigation",
+                "name": "Investigation",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.investigation",
+                "feature": "dnd5e:2014:skill.investigation"
+              },
+              {
+                "stat": "skill.medicine",
+                "name": "Medicine",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.medicine",
+                "feature": "dnd5e:2014:skill.medicine"
+              },
+              {
+                "stat": "skill.nature",
+                "name": "Nature",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.nature",
+                "feature": "dnd5e:2014:skill.nature"
+              },
+              {
+                "stat": "skill.perception",
+                "name": "Perception",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.perception",
+                "feature": "dnd5e:2014:skill.perception"
+              },
+              {
+                "stat": "skill.performance",
+                "name": "Performance",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.performance",
+                "feature": "dnd5e:2014:skill.performance"
+              },
+              {
+                "stat": "skill.persuasion",
+                "name": "Persuasion",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.persuasion",
+                "feature": "dnd5e:2014:skill.persuasion"
+              },
+              {
+                "stat": "skill.religion",
+                "name": "Religion",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.religion",
+                "feature": "dnd5e:2014:skill.religion"
+              },
+              {
+                "stat": "skill.sleight-of-hand",
+                "name": "Sleight Of Hand",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.sleight-of-hand",
+                "feature": "dnd5e:2014:skill.sleight-of-hand"
+              },
+              {
+                "stat": "skill.stealth",
+                "name": "Stealth",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.stealth",
+                "feature": "dnd5e:2014:skill.stealth"
+              },
+              {
+                "stat": "skill.survival",
+                "name": "Survival",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.survival",
+                "feature": "dnd5e:2014:skill.survival"
+              }
+            ]
+          }
+        ],
+        "featureCategories": [
+          {
+            "id": "class",
+            "name": "Class Features",
+            "tags": [
+              "class-feature"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skill proficiencies",
+            "tags": [
+              "skill-proficiency"
+            ]
+          },
+          {
+            "id": "spells",
+            "name": "Spells",
+            "tags": [
+              "spell"
+            ]
+          },
+          {
+            "id": "ancestry",
+            "name": "Ancestry",
+            "tags": [
+              "race"
+            ]
+          }
+        ]
       },
       "classes": [
         {
@@ -117783,7 +118323,277 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip"
-        }
+        },
+        "sheetSections": [
+          {
+            "id": "abilities",
+            "name": "Ability scores",
+            "layout": "abilities",
+            "rows": [
+              {
+                "stat": "strength",
+                "secondaryStat": "modifier.strength",
+                "name": "Strength"
+              },
+              {
+                "stat": "dexterity",
+                "secondaryStat": "modifier.dexterity",
+                "name": "Dexterity"
+              },
+              {
+                "stat": "constitution",
+                "secondaryStat": "modifier.constitution",
+                "name": "Constitution"
+              },
+              {
+                "stat": "intelligence",
+                "secondaryStat": "modifier.intelligence",
+                "name": "Intelligence"
+              },
+              {
+                "stat": "wisdom",
+                "secondaryStat": "modifier.wisdom",
+                "name": "Wisdom"
+              },
+              {
+                "stat": "charisma",
+                "secondaryStat": "modifier.charisma",
+                "name": "Charisma"
+              }
+            ]
+          },
+          {
+            "id": "combat",
+            "name": "Combat & exploration",
+            "layout": "stats",
+            "rows": [
+              {
+                "stat": "hitPoints",
+                "name": "Hit points"
+              },
+              {
+                "stat": "armorClass",
+                "name": "Armor class"
+              },
+              {
+                "stat": "initiative",
+                "name": "Initiative"
+              },
+              {
+                "stat": "speed",
+                "name": "Speed (ft)"
+              },
+              {
+                "stat": "proficiencyBonus",
+                "name": "Proficiency bonus"
+              },
+              {
+                "stat": "passivePerception",
+                "name": "Passive Perception"
+              }
+            ]
+          },
+          {
+            "id": "saves",
+            "name": "Saving throws",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "save.strength",
+                "name": "Strength",
+                "proficiencyStat": "training.save.strength"
+              },
+              {
+                "stat": "save.dexterity",
+                "name": "Dexterity",
+                "proficiencyStat": "training.save.dexterity"
+              },
+              {
+                "stat": "save.constitution",
+                "name": "Constitution",
+                "proficiencyStat": "training.save.constitution"
+              },
+              {
+                "stat": "save.intelligence",
+                "name": "Intelligence",
+                "proficiencyStat": "training.save.intelligence"
+              },
+              {
+                "stat": "save.wisdom",
+                "name": "Wisdom",
+                "proficiencyStat": "training.save.wisdom"
+              },
+              {
+                "stat": "save.charisma",
+                "name": "Charisma",
+                "proficiencyStat": "training.save.charisma"
+              }
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "skill.acrobatics",
+                "name": "Acrobatics",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.acrobatics",
+                "feature": "dnd5e:2014:skill.acrobatics"
+              },
+              {
+                "stat": "skill.animal-handling",
+                "name": "Animal Handling",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.animal-handling",
+                "feature": "dnd5e:2014:skill.animal-handling"
+              },
+              {
+                "stat": "skill.arcana",
+                "name": "Arcana",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.arcana",
+                "feature": "dnd5e:2014:skill.arcana"
+              },
+              {
+                "stat": "skill.athletics",
+                "name": "Athletics",
+                "ability": "STR",
+                "proficiencyStat": "training.skill.athletics",
+                "feature": "dnd5e:2014:skill.athletics"
+              },
+              {
+                "stat": "skill.deception",
+                "name": "Deception",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.deception",
+                "feature": "dnd5e:2014:skill.deception"
+              },
+              {
+                "stat": "skill.history",
+                "name": "History",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.history",
+                "feature": "dnd5e:2014:skill.history"
+              },
+              {
+                "stat": "skill.insight",
+                "name": "Insight",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.insight",
+                "feature": "dnd5e:2014:skill.insight"
+              },
+              {
+                "stat": "skill.intimidation",
+                "name": "Intimidation",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.intimidation",
+                "feature": "dnd5e:2014:skill.intimidation"
+              },
+              {
+                "stat": "skill.investigation",
+                "name": "Investigation",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.investigation",
+                "feature": "dnd5e:2014:skill.investigation"
+              },
+              {
+                "stat": "skill.medicine",
+                "name": "Medicine",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.medicine",
+                "feature": "dnd5e:2014:skill.medicine"
+              },
+              {
+                "stat": "skill.nature",
+                "name": "Nature",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.nature",
+                "feature": "dnd5e:2014:skill.nature"
+              },
+              {
+                "stat": "skill.perception",
+                "name": "Perception",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.perception",
+                "feature": "dnd5e:2014:skill.perception"
+              },
+              {
+                "stat": "skill.performance",
+                "name": "Performance",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.performance",
+                "feature": "dnd5e:2014:skill.performance"
+              },
+              {
+                "stat": "skill.persuasion",
+                "name": "Persuasion",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.persuasion",
+                "feature": "dnd5e:2014:skill.persuasion"
+              },
+              {
+                "stat": "skill.religion",
+                "name": "Religion",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.religion",
+                "feature": "dnd5e:2014:skill.religion"
+              },
+              {
+                "stat": "skill.sleight-of-hand",
+                "name": "Sleight Of Hand",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.sleight-of-hand",
+                "feature": "dnd5e:2014:skill.sleight-of-hand"
+              },
+              {
+                "stat": "skill.stealth",
+                "name": "Stealth",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.stealth",
+                "feature": "dnd5e:2014:skill.stealth"
+              },
+              {
+                "stat": "skill.survival",
+                "name": "Survival",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.survival",
+                "feature": "dnd5e:2014:skill.survival"
+              }
+            ]
+          }
+        ],
+        "featureCategories": [
+          {
+            "id": "class",
+            "name": "Class Features",
+            "tags": [
+              "class-feature"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skill proficiencies",
+            "tags": [
+              "skill-proficiency"
+            ]
+          },
+          {
+            "id": "spells",
+            "name": "Spells",
+            "tags": [
+              "spell"
+            ]
+          },
+          {
+            "id": "ancestry",
+            "name": "Ancestry",
+            "tags": [
+              "race"
+            ]
+          }
+        ]
       },
       "classes": [
         {
@@ -123180,7 +123990,277 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip"
-        }
+        },
+        "sheetSections": [
+          {
+            "id": "abilities",
+            "name": "Ability scores",
+            "layout": "abilities",
+            "rows": [
+              {
+                "stat": "strength",
+                "secondaryStat": "modifier.strength",
+                "name": "Strength"
+              },
+              {
+                "stat": "dexterity",
+                "secondaryStat": "modifier.dexterity",
+                "name": "Dexterity"
+              },
+              {
+                "stat": "constitution",
+                "secondaryStat": "modifier.constitution",
+                "name": "Constitution"
+              },
+              {
+                "stat": "intelligence",
+                "secondaryStat": "modifier.intelligence",
+                "name": "Intelligence"
+              },
+              {
+                "stat": "wisdom",
+                "secondaryStat": "modifier.wisdom",
+                "name": "Wisdom"
+              },
+              {
+                "stat": "charisma",
+                "secondaryStat": "modifier.charisma",
+                "name": "Charisma"
+              }
+            ]
+          },
+          {
+            "id": "combat",
+            "name": "Combat & exploration",
+            "layout": "stats",
+            "rows": [
+              {
+                "stat": "hitPoints",
+                "name": "Hit points"
+              },
+              {
+                "stat": "armorClass",
+                "name": "Armor class"
+              },
+              {
+                "stat": "initiative",
+                "name": "Initiative"
+              },
+              {
+                "stat": "speed",
+                "name": "Speed (ft)"
+              },
+              {
+                "stat": "proficiencyBonus",
+                "name": "Proficiency bonus"
+              },
+              {
+                "stat": "passivePerception",
+                "name": "Passive Perception"
+              }
+            ]
+          },
+          {
+            "id": "saves",
+            "name": "Saving throws",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "save.strength",
+                "name": "Strength",
+                "proficiencyStat": "training.save.strength"
+              },
+              {
+                "stat": "save.dexterity",
+                "name": "Dexterity",
+                "proficiencyStat": "training.save.dexterity"
+              },
+              {
+                "stat": "save.constitution",
+                "name": "Constitution",
+                "proficiencyStat": "training.save.constitution"
+              },
+              {
+                "stat": "save.intelligence",
+                "name": "Intelligence",
+                "proficiencyStat": "training.save.intelligence"
+              },
+              {
+                "stat": "save.wisdom",
+                "name": "Wisdom",
+                "proficiencyStat": "training.save.wisdom"
+              },
+              {
+                "stat": "save.charisma",
+                "name": "Charisma",
+                "proficiencyStat": "training.save.charisma"
+              }
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "skill.acrobatics",
+                "name": "Acrobatics",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.acrobatics",
+                "feature": "dnd5e:2014:skill.acrobatics"
+              },
+              {
+                "stat": "skill.animal-handling",
+                "name": "Animal Handling",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.animal-handling",
+                "feature": "dnd5e:2014:skill.animal-handling"
+              },
+              {
+                "stat": "skill.arcana",
+                "name": "Arcana",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.arcana",
+                "feature": "dnd5e:2014:skill.arcana"
+              },
+              {
+                "stat": "skill.athletics",
+                "name": "Athletics",
+                "ability": "STR",
+                "proficiencyStat": "training.skill.athletics",
+                "feature": "dnd5e:2014:skill.athletics"
+              },
+              {
+                "stat": "skill.deception",
+                "name": "Deception",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.deception",
+                "feature": "dnd5e:2014:skill.deception"
+              },
+              {
+                "stat": "skill.history",
+                "name": "History",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.history",
+                "feature": "dnd5e:2014:skill.history"
+              },
+              {
+                "stat": "skill.insight",
+                "name": "Insight",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.insight",
+                "feature": "dnd5e:2014:skill.insight"
+              },
+              {
+                "stat": "skill.intimidation",
+                "name": "Intimidation",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.intimidation",
+                "feature": "dnd5e:2014:skill.intimidation"
+              },
+              {
+                "stat": "skill.investigation",
+                "name": "Investigation",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.investigation",
+                "feature": "dnd5e:2014:skill.investigation"
+              },
+              {
+                "stat": "skill.medicine",
+                "name": "Medicine",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.medicine",
+                "feature": "dnd5e:2014:skill.medicine"
+              },
+              {
+                "stat": "skill.nature",
+                "name": "Nature",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.nature",
+                "feature": "dnd5e:2014:skill.nature"
+              },
+              {
+                "stat": "skill.perception",
+                "name": "Perception",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.perception",
+                "feature": "dnd5e:2014:skill.perception"
+              },
+              {
+                "stat": "skill.performance",
+                "name": "Performance",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.performance",
+                "feature": "dnd5e:2014:skill.performance"
+              },
+              {
+                "stat": "skill.persuasion",
+                "name": "Persuasion",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.persuasion",
+                "feature": "dnd5e:2014:skill.persuasion"
+              },
+              {
+                "stat": "skill.religion",
+                "name": "Religion",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.religion",
+                "feature": "dnd5e:2014:skill.religion"
+              },
+              {
+                "stat": "skill.sleight-of-hand",
+                "name": "Sleight Of Hand",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.sleight-of-hand",
+                "feature": "dnd5e:2014:skill.sleight-of-hand"
+              },
+              {
+                "stat": "skill.stealth",
+                "name": "Stealth",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.stealth",
+                "feature": "dnd5e:2014:skill.stealth"
+              },
+              {
+                "stat": "skill.survival",
+                "name": "Survival",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.survival",
+                "feature": "dnd5e:2014:skill.survival"
+              }
+            ]
+          }
+        ],
+        "featureCategories": [
+          {
+            "id": "class",
+            "name": "Class Features",
+            "tags": [
+              "class-feature"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skill proficiencies",
+            "tags": [
+              "skill-proficiency"
+            ]
+          },
+          {
+            "id": "spells",
+            "name": "Spells",
+            "tags": [
+              "spell"
+            ]
+          },
+          {
+            "id": "ancestry",
+            "name": "Ancestry",
+            "tags": [
+              "race"
+            ]
+          }
+        ]
       },
       "classes": [
         {
@@ -128261,7 +129341,277 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip"
-        }
+        },
+        "sheetSections": [
+          {
+            "id": "abilities",
+            "name": "Ability scores",
+            "layout": "abilities",
+            "rows": [
+              {
+                "stat": "strength",
+                "secondaryStat": "modifier.strength",
+                "name": "Strength"
+              },
+              {
+                "stat": "dexterity",
+                "secondaryStat": "modifier.dexterity",
+                "name": "Dexterity"
+              },
+              {
+                "stat": "constitution",
+                "secondaryStat": "modifier.constitution",
+                "name": "Constitution"
+              },
+              {
+                "stat": "intelligence",
+                "secondaryStat": "modifier.intelligence",
+                "name": "Intelligence"
+              },
+              {
+                "stat": "wisdom",
+                "secondaryStat": "modifier.wisdom",
+                "name": "Wisdom"
+              },
+              {
+                "stat": "charisma",
+                "secondaryStat": "modifier.charisma",
+                "name": "Charisma"
+              }
+            ]
+          },
+          {
+            "id": "combat",
+            "name": "Combat & exploration",
+            "layout": "stats",
+            "rows": [
+              {
+                "stat": "hitPoints",
+                "name": "Hit points"
+              },
+              {
+                "stat": "armorClass",
+                "name": "Armor class"
+              },
+              {
+                "stat": "initiative",
+                "name": "Initiative"
+              },
+              {
+                "stat": "speed",
+                "name": "Speed (ft)"
+              },
+              {
+                "stat": "proficiencyBonus",
+                "name": "Proficiency bonus"
+              },
+              {
+                "stat": "passivePerception",
+                "name": "Passive Perception"
+              }
+            ]
+          },
+          {
+            "id": "saves",
+            "name": "Saving throws",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "save.strength",
+                "name": "Strength",
+                "proficiencyStat": "training.save.strength"
+              },
+              {
+                "stat": "save.dexterity",
+                "name": "Dexterity",
+                "proficiencyStat": "training.save.dexterity"
+              },
+              {
+                "stat": "save.constitution",
+                "name": "Constitution",
+                "proficiencyStat": "training.save.constitution"
+              },
+              {
+                "stat": "save.intelligence",
+                "name": "Intelligence",
+                "proficiencyStat": "training.save.intelligence"
+              },
+              {
+                "stat": "save.wisdom",
+                "name": "Wisdom",
+                "proficiencyStat": "training.save.wisdom"
+              },
+              {
+                "stat": "save.charisma",
+                "name": "Charisma",
+                "proficiencyStat": "training.save.charisma"
+              }
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "skill.acrobatics",
+                "name": "Acrobatics",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.acrobatics",
+                "feature": "dnd5e:2014:skill.acrobatics"
+              },
+              {
+                "stat": "skill.animal-handling",
+                "name": "Animal Handling",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.animal-handling",
+                "feature": "dnd5e:2014:skill.animal-handling"
+              },
+              {
+                "stat": "skill.arcana",
+                "name": "Arcana",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.arcana",
+                "feature": "dnd5e:2014:skill.arcana"
+              },
+              {
+                "stat": "skill.athletics",
+                "name": "Athletics",
+                "ability": "STR",
+                "proficiencyStat": "training.skill.athletics",
+                "feature": "dnd5e:2014:skill.athletics"
+              },
+              {
+                "stat": "skill.deception",
+                "name": "Deception",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.deception",
+                "feature": "dnd5e:2014:skill.deception"
+              },
+              {
+                "stat": "skill.history",
+                "name": "History",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.history",
+                "feature": "dnd5e:2014:skill.history"
+              },
+              {
+                "stat": "skill.insight",
+                "name": "Insight",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.insight",
+                "feature": "dnd5e:2014:skill.insight"
+              },
+              {
+                "stat": "skill.intimidation",
+                "name": "Intimidation",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.intimidation",
+                "feature": "dnd5e:2014:skill.intimidation"
+              },
+              {
+                "stat": "skill.investigation",
+                "name": "Investigation",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.investigation",
+                "feature": "dnd5e:2014:skill.investigation"
+              },
+              {
+                "stat": "skill.medicine",
+                "name": "Medicine",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.medicine",
+                "feature": "dnd5e:2014:skill.medicine"
+              },
+              {
+                "stat": "skill.nature",
+                "name": "Nature",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.nature",
+                "feature": "dnd5e:2014:skill.nature"
+              },
+              {
+                "stat": "skill.perception",
+                "name": "Perception",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.perception",
+                "feature": "dnd5e:2014:skill.perception"
+              },
+              {
+                "stat": "skill.performance",
+                "name": "Performance",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.performance",
+                "feature": "dnd5e:2014:skill.performance"
+              },
+              {
+                "stat": "skill.persuasion",
+                "name": "Persuasion",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.persuasion",
+                "feature": "dnd5e:2014:skill.persuasion"
+              },
+              {
+                "stat": "skill.religion",
+                "name": "Religion",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.religion",
+                "feature": "dnd5e:2014:skill.religion"
+              },
+              {
+                "stat": "skill.sleight-of-hand",
+                "name": "Sleight Of Hand",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.sleight-of-hand",
+                "feature": "dnd5e:2014:skill.sleight-of-hand"
+              },
+              {
+                "stat": "skill.stealth",
+                "name": "Stealth",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.stealth",
+                "feature": "dnd5e:2014:skill.stealth"
+              },
+              {
+                "stat": "skill.survival",
+                "name": "Survival",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.survival",
+                "feature": "dnd5e:2014:skill.survival"
+              }
+            ]
+          }
+        ],
+        "featureCategories": [
+          {
+            "id": "class",
+            "name": "Class Features",
+            "tags": [
+              "class-feature"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skill proficiencies",
+            "tags": [
+              "skill-proficiency"
+            ]
+          },
+          {
+            "id": "spells",
+            "name": "Spells",
+            "tags": [
+              "spell"
+            ]
+          },
+          {
+            "id": "ancestry",
+            "name": "Ancestry",
+            "tags": [
+              "race"
+            ]
+          }
+        ]
       },
       "classes": [
         {
@@ -133315,7 +134665,277 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip"
-        }
+        },
+        "sheetSections": [
+          {
+            "id": "abilities",
+            "name": "Ability scores",
+            "layout": "abilities",
+            "rows": [
+              {
+                "stat": "strength",
+                "secondaryStat": "modifier.strength",
+                "name": "Strength"
+              },
+              {
+                "stat": "dexterity",
+                "secondaryStat": "modifier.dexterity",
+                "name": "Dexterity"
+              },
+              {
+                "stat": "constitution",
+                "secondaryStat": "modifier.constitution",
+                "name": "Constitution"
+              },
+              {
+                "stat": "intelligence",
+                "secondaryStat": "modifier.intelligence",
+                "name": "Intelligence"
+              },
+              {
+                "stat": "wisdom",
+                "secondaryStat": "modifier.wisdom",
+                "name": "Wisdom"
+              },
+              {
+                "stat": "charisma",
+                "secondaryStat": "modifier.charisma",
+                "name": "Charisma"
+              }
+            ]
+          },
+          {
+            "id": "combat",
+            "name": "Combat & exploration",
+            "layout": "stats",
+            "rows": [
+              {
+                "stat": "hitPoints",
+                "name": "Hit points"
+              },
+              {
+                "stat": "armorClass",
+                "name": "Armor class"
+              },
+              {
+                "stat": "initiative",
+                "name": "Initiative"
+              },
+              {
+                "stat": "speed",
+                "name": "Speed (ft)"
+              },
+              {
+                "stat": "proficiencyBonus",
+                "name": "Proficiency bonus"
+              },
+              {
+                "stat": "passivePerception",
+                "name": "Passive Perception"
+              }
+            ]
+          },
+          {
+            "id": "saves",
+            "name": "Saving throws",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "save.strength",
+                "name": "Strength",
+                "proficiencyStat": "training.save.strength"
+              },
+              {
+                "stat": "save.dexterity",
+                "name": "Dexterity",
+                "proficiencyStat": "training.save.dexterity"
+              },
+              {
+                "stat": "save.constitution",
+                "name": "Constitution",
+                "proficiencyStat": "training.save.constitution"
+              },
+              {
+                "stat": "save.intelligence",
+                "name": "Intelligence",
+                "proficiencyStat": "training.save.intelligence"
+              },
+              {
+                "stat": "save.wisdom",
+                "name": "Wisdom",
+                "proficiencyStat": "training.save.wisdom"
+              },
+              {
+                "stat": "save.charisma",
+                "name": "Charisma",
+                "proficiencyStat": "training.save.charisma"
+              }
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "skill.acrobatics",
+                "name": "Acrobatics",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.acrobatics",
+                "feature": "dnd5e:2014:skill.acrobatics"
+              },
+              {
+                "stat": "skill.animal-handling",
+                "name": "Animal Handling",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.animal-handling",
+                "feature": "dnd5e:2014:skill.animal-handling"
+              },
+              {
+                "stat": "skill.arcana",
+                "name": "Arcana",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.arcana",
+                "feature": "dnd5e:2014:skill.arcana"
+              },
+              {
+                "stat": "skill.athletics",
+                "name": "Athletics",
+                "ability": "STR",
+                "proficiencyStat": "training.skill.athletics",
+                "feature": "dnd5e:2014:skill.athletics"
+              },
+              {
+                "stat": "skill.deception",
+                "name": "Deception",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.deception",
+                "feature": "dnd5e:2014:skill.deception"
+              },
+              {
+                "stat": "skill.history",
+                "name": "History",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.history",
+                "feature": "dnd5e:2014:skill.history"
+              },
+              {
+                "stat": "skill.insight",
+                "name": "Insight",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.insight",
+                "feature": "dnd5e:2014:skill.insight"
+              },
+              {
+                "stat": "skill.intimidation",
+                "name": "Intimidation",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.intimidation",
+                "feature": "dnd5e:2014:skill.intimidation"
+              },
+              {
+                "stat": "skill.investigation",
+                "name": "Investigation",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.investigation",
+                "feature": "dnd5e:2014:skill.investigation"
+              },
+              {
+                "stat": "skill.medicine",
+                "name": "Medicine",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.medicine",
+                "feature": "dnd5e:2014:skill.medicine"
+              },
+              {
+                "stat": "skill.nature",
+                "name": "Nature",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.nature",
+                "feature": "dnd5e:2014:skill.nature"
+              },
+              {
+                "stat": "skill.perception",
+                "name": "Perception",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.perception",
+                "feature": "dnd5e:2014:skill.perception"
+              },
+              {
+                "stat": "skill.performance",
+                "name": "Performance",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.performance",
+                "feature": "dnd5e:2014:skill.performance"
+              },
+              {
+                "stat": "skill.persuasion",
+                "name": "Persuasion",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.persuasion",
+                "feature": "dnd5e:2014:skill.persuasion"
+              },
+              {
+                "stat": "skill.religion",
+                "name": "Religion",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.religion",
+                "feature": "dnd5e:2014:skill.religion"
+              },
+              {
+                "stat": "skill.sleight-of-hand",
+                "name": "Sleight Of Hand",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.sleight-of-hand",
+                "feature": "dnd5e:2014:skill.sleight-of-hand"
+              },
+              {
+                "stat": "skill.stealth",
+                "name": "Stealth",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.stealth",
+                "feature": "dnd5e:2014:skill.stealth"
+              },
+              {
+                "stat": "skill.survival",
+                "name": "Survival",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.survival",
+                "feature": "dnd5e:2014:skill.survival"
+              }
+            ]
+          }
+        ],
+        "featureCategories": [
+          {
+            "id": "class",
+            "name": "Class Features",
+            "tags": [
+              "class-feature"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skill proficiencies",
+            "tags": [
+              "skill-proficiency"
+            ]
+          },
+          {
+            "id": "spells",
+            "name": "Spells",
+            "tags": [
+              "spell"
+            ]
+          },
+          {
+            "id": "ancestry",
+            "name": "Ancestry",
+            "tags": [
+              "race"
+            ]
+          }
+        ]
       },
       "classes": [
         {
@@ -138396,7 +140016,277 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip"
-        }
+        },
+        "sheetSections": [
+          {
+            "id": "abilities",
+            "name": "Ability scores",
+            "layout": "abilities",
+            "rows": [
+              {
+                "stat": "strength",
+                "secondaryStat": "modifier.strength",
+                "name": "Strength"
+              },
+              {
+                "stat": "dexterity",
+                "secondaryStat": "modifier.dexterity",
+                "name": "Dexterity"
+              },
+              {
+                "stat": "constitution",
+                "secondaryStat": "modifier.constitution",
+                "name": "Constitution"
+              },
+              {
+                "stat": "intelligence",
+                "secondaryStat": "modifier.intelligence",
+                "name": "Intelligence"
+              },
+              {
+                "stat": "wisdom",
+                "secondaryStat": "modifier.wisdom",
+                "name": "Wisdom"
+              },
+              {
+                "stat": "charisma",
+                "secondaryStat": "modifier.charisma",
+                "name": "Charisma"
+              }
+            ]
+          },
+          {
+            "id": "combat",
+            "name": "Combat & exploration",
+            "layout": "stats",
+            "rows": [
+              {
+                "stat": "hitPoints",
+                "name": "Hit points"
+              },
+              {
+                "stat": "armorClass",
+                "name": "Armor class"
+              },
+              {
+                "stat": "initiative",
+                "name": "Initiative"
+              },
+              {
+                "stat": "speed",
+                "name": "Speed (ft)"
+              },
+              {
+                "stat": "proficiencyBonus",
+                "name": "Proficiency bonus"
+              },
+              {
+                "stat": "passivePerception",
+                "name": "Passive Perception"
+              }
+            ]
+          },
+          {
+            "id": "saves",
+            "name": "Saving throws",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "save.strength",
+                "name": "Strength",
+                "proficiencyStat": "training.save.strength"
+              },
+              {
+                "stat": "save.dexterity",
+                "name": "Dexterity",
+                "proficiencyStat": "training.save.dexterity"
+              },
+              {
+                "stat": "save.constitution",
+                "name": "Constitution",
+                "proficiencyStat": "training.save.constitution"
+              },
+              {
+                "stat": "save.intelligence",
+                "name": "Intelligence",
+                "proficiencyStat": "training.save.intelligence"
+              },
+              {
+                "stat": "save.wisdom",
+                "name": "Wisdom",
+                "proficiencyStat": "training.save.wisdom"
+              },
+              {
+                "stat": "save.charisma",
+                "name": "Charisma",
+                "proficiencyStat": "training.save.charisma"
+              }
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "skill.acrobatics",
+                "name": "Acrobatics",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.acrobatics",
+                "feature": "dnd5e:2014:skill.acrobatics"
+              },
+              {
+                "stat": "skill.animal-handling",
+                "name": "Animal Handling",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.animal-handling",
+                "feature": "dnd5e:2014:skill.animal-handling"
+              },
+              {
+                "stat": "skill.arcana",
+                "name": "Arcana",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.arcana",
+                "feature": "dnd5e:2014:skill.arcana"
+              },
+              {
+                "stat": "skill.athletics",
+                "name": "Athletics",
+                "ability": "STR",
+                "proficiencyStat": "training.skill.athletics",
+                "feature": "dnd5e:2014:skill.athletics"
+              },
+              {
+                "stat": "skill.deception",
+                "name": "Deception",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.deception",
+                "feature": "dnd5e:2014:skill.deception"
+              },
+              {
+                "stat": "skill.history",
+                "name": "History",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.history",
+                "feature": "dnd5e:2014:skill.history"
+              },
+              {
+                "stat": "skill.insight",
+                "name": "Insight",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.insight",
+                "feature": "dnd5e:2014:skill.insight"
+              },
+              {
+                "stat": "skill.intimidation",
+                "name": "Intimidation",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.intimidation",
+                "feature": "dnd5e:2014:skill.intimidation"
+              },
+              {
+                "stat": "skill.investigation",
+                "name": "Investigation",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.investigation",
+                "feature": "dnd5e:2014:skill.investigation"
+              },
+              {
+                "stat": "skill.medicine",
+                "name": "Medicine",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.medicine",
+                "feature": "dnd5e:2014:skill.medicine"
+              },
+              {
+                "stat": "skill.nature",
+                "name": "Nature",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.nature",
+                "feature": "dnd5e:2014:skill.nature"
+              },
+              {
+                "stat": "skill.perception",
+                "name": "Perception",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.perception",
+                "feature": "dnd5e:2014:skill.perception"
+              },
+              {
+                "stat": "skill.performance",
+                "name": "Performance",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.performance",
+                "feature": "dnd5e:2014:skill.performance"
+              },
+              {
+                "stat": "skill.persuasion",
+                "name": "Persuasion",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.persuasion",
+                "feature": "dnd5e:2014:skill.persuasion"
+              },
+              {
+                "stat": "skill.religion",
+                "name": "Religion",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.religion",
+                "feature": "dnd5e:2014:skill.religion"
+              },
+              {
+                "stat": "skill.sleight-of-hand",
+                "name": "Sleight Of Hand",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.sleight-of-hand",
+                "feature": "dnd5e:2014:skill.sleight-of-hand"
+              },
+              {
+                "stat": "skill.stealth",
+                "name": "Stealth",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.stealth",
+                "feature": "dnd5e:2014:skill.stealth"
+              },
+              {
+                "stat": "skill.survival",
+                "name": "Survival",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.survival",
+                "feature": "dnd5e:2014:skill.survival"
+              }
+            ]
+          }
+        ],
+        "featureCategories": [
+          {
+            "id": "class",
+            "name": "Class Features",
+            "tags": [
+              "class-feature"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skill proficiencies",
+            "tags": [
+              "skill-proficiency"
+            ]
+          },
+          {
+            "id": "spells",
+            "name": "Spells",
+            "tags": [
+              "spell"
+            ]
+          },
+          {
+            "id": "ancestry",
+            "name": "Ancestry",
+            "tags": [
+              "race"
+            ]
+          }
+        ]
       },
       "classes": [
         {
@@ -143450,7 +145340,277 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip"
-        }
+        },
+        "sheetSections": [
+          {
+            "id": "abilities",
+            "name": "Ability scores",
+            "layout": "abilities",
+            "rows": [
+              {
+                "stat": "strength",
+                "secondaryStat": "modifier.strength",
+                "name": "Strength"
+              },
+              {
+                "stat": "dexterity",
+                "secondaryStat": "modifier.dexterity",
+                "name": "Dexterity"
+              },
+              {
+                "stat": "constitution",
+                "secondaryStat": "modifier.constitution",
+                "name": "Constitution"
+              },
+              {
+                "stat": "intelligence",
+                "secondaryStat": "modifier.intelligence",
+                "name": "Intelligence"
+              },
+              {
+                "stat": "wisdom",
+                "secondaryStat": "modifier.wisdom",
+                "name": "Wisdom"
+              },
+              {
+                "stat": "charisma",
+                "secondaryStat": "modifier.charisma",
+                "name": "Charisma"
+              }
+            ]
+          },
+          {
+            "id": "combat",
+            "name": "Combat & exploration",
+            "layout": "stats",
+            "rows": [
+              {
+                "stat": "hitPoints",
+                "name": "Hit points"
+              },
+              {
+                "stat": "armorClass",
+                "name": "Armor class"
+              },
+              {
+                "stat": "initiative",
+                "name": "Initiative"
+              },
+              {
+                "stat": "speed",
+                "name": "Speed (ft)"
+              },
+              {
+                "stat": "proficiencyBonus",
+                "name": "Proficiency bonus"
+              },
+              {
+                "stat": "passivePerception",
+                "name": "Passive Perception"
+              }
+            ]
+          },
+          {
+            "id": "saves",
+            "name": "Saving throws",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "save.strength",
+                "name": "Strength",
+                "proficiencyStat": "training.save.strength"
+              },
+              {
+                "stat": "save.dexterity",
+                "name": "Dexterity",
+                "proficiencyStat": "training.save.dexterity"
+              },
+              {
+                "stat": "save.constitution",
+                "name": "Constitution",
+                "proficiencyStat": "training.save.constitution"
+              },
+              {
+                "stat": "save.intelligence",
+                "name": "Intelligence",
+                "proficiencyStat": "training.save.intelligence"
+              },
+              {
+                "stat": "save.wisdom",
+                "name": "Wisdom",
+                "proficiencyStat": "training.save.wisdom"
+              },
+              {
+                "stat": "save.charisma",
+                "name": "Charisma",
+                "proficiencyStat": "training.save.charisma"
+              }
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "skill.acrobatics",
+                "name": "Acrobatics",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.acrobatics",
+                "feature": "dnd5e:2014:skill.acrobatics"
+              },
+              {
+                "stat": "skill.animal-handling",
+                "name": "Animal Handling",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.animal-handling",
+                "feature": "dnd5e:2014:skill.animal-handling"
+              },
+              {
+                "stat": "skill.arcana",
+                "name": "Arcana",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.arcana",
+                "feature": "dnd5e:2014:skill.arcana"
+              },
+              {
+                "stat": "skill.athletics",
+                "name": "Athletics",
+                "ability": "STR",
+                "proficiencyStat": "training.skill.athletics",
+                "feature": "dnd5e:2014:skill.athletics"
+              },
+              {
+                "stat": "skill.deception",
+                "name": "Deception",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.deception",
+                "feature": "dnd5e:2014:skill.deception"
+              },
+              {
+                "stat": "skill.history",
+                "name": "History",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.history",
+                "feature": "dnd5e:2014:skill.history"
+              },
+              {
+                "stat": "skill.insight",
+                "name": "Insight",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.insight",
+                "feature": "dnd5e:2014:skill.insight"
+              },
+              {
+                "stat": "skill.intimidation",
+                "name": "Intimidation",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.intimidation",
+                "feature": "dnd5e:2014:skill.intimidation"
+              },
+              {
+                "stat": "skill.investigation",
+                "name": "Investigation",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.investigation",
+                "feature": "dnd5e:2014:skill.investigation"
+              },
+              {
+                "stat": "skill.medicine",
+                "name": "Medicine",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.medicine",
+                "feature": "dnd5e:2014:skill.medicine"
+              },
+              {
+                "stat": "skill.nature",
+                "name": "Nature",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.nature",
+                "feature": "dnd5e:2014:skill.nature"
+              },
+              {
+                "stat": "skill.perception",
+                "name": "Perception",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.perception",
+                "feature": "dnd5e:2014:skill.perception"
+              },
+              {
+                "stat": "skill.performance",
+                "name": "Performance",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.performance",
+                "feature": "dnd5e:2014:skill.performance"
+              },
+              {
+                "stat": "skill.persuasion",
+                "name": "Persuasion",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.persuasion",
+                "feature": "dnd5e:2014:skill.persuasion"
+              },
+              {
+                "stat": "skill.religion",
+                "name": "Religion",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.religion",
+                "feature": "dnd5e:2014:skill.religion"
+              },
+              {
+                "stat": "skill.sleight-of-hand",
+                "name": "Sleight Of Hand",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.sleight-of-hand",
+                "feature": "dnd5e:2014:skill.sleight-of-hand"
+              },
+              {
+                "stat": "skill.stealth",
+                "name": "Stealth",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.stealth",
+                "feature": "dnd5e:2014:skill.stealth"
+              },
+              {
+                "stat": "skill.survival",
+                "name": "Survival",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.survival",
+                "feature": "dnd5e:2014:skill.survival"
+              }
+            ]
+          }
+        ],
+        "featureCategories": [
+          {
+            "id": "class",
+            "name": "Class Features",
+            "tags": [
+              "class-feature"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skill proficiencies",
+            "tags": [
+              "skill-proficiency"
+            ]
+          },
+          {
+            "id": "spells",
+            "name": "Spells",
+            "tags": [
+              "spell"
+            ]
+          },
+          {
+            "id": "ancestry",
+            "name": "Ancestry",
+            "tags": [
+              "race"
+            ]
+          }
+        ]
       },
       "classes": [
         {
@@ -148329,7 +150489,277 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip"
-        }
+        },
+        "sheetSections": [
+          {
+            "id": "abilities",
+            "name": "Ability scores",
+            "layout": "abilities",
+            "rows": [
+              {
+                "stat": "strength",
+                "secondaryStat": "modifier.strength",
+                "name": "Strength"
+              },
+              {
+                "stat": "dexterity",
+                "secondaryStat": "modifier.dexterity",
+                "name": "Dexterity"
+              },
+              {
+                "stat": "constitution",
+                "secondaryStat": "modifier.constitution",
+                "name": "Constitution"
+              },
+              {
+                "stat": "intelligence",
+                "secondaryStat": "modifier.intelligence",
+                "name": "Intelligence"
+              },
+              {
+                "stat": "wisdom",
+                "secondaryStat": "modifier.wisdom",
+                "name": "Wisdom"
+              },
+              {
+                "stat": "charisma",
+                "secondaryStat": "modifier.charisma",
+                "name": "Charisma"
+              }
+            ]
+          },
+          {
+            "id": "combat",
+            "name": "Combat & exploration",
+            "layout": "stats",
+            "rows": [
+              {
+                "stat": "hitPoints",
+                "name": "Hit points"
+              },
+              {
+                "stat": "armorClass",
+                "name": "Armor class"
+              },
+              {
+                "stat": "initiative",
+                "name": "Initiative"
+              },
+              {
+                "stat": "speed",
+                "name": "Speed (ft)"
+              },
+              {
+                "stat": "proficiencyBonus",
+                "name": "Proficiency bonus"
+              },
+              {
+                "stat": "passivePerception",
+                "name": "Passive Perception"
+              }
+            ]
+          },
+          {
+            "id": "saves",
+            "name": "Saving throws",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "save.strength",
+                "name": "Strength",
+                "proficiencyStat": "training.save.strength"
+              },
+              {
+                "stat": "save.dexterity",
+                "name": "Dexterity",
+                "proficiencyStat": "training.save.dexterity"
+              },
+              {
+                "stat": "save.constitution",
+                "name": "Constitution",
+                "proficiencyStat": "training.save.constitution"
+              },
+              {
+                "stat": "save.intelligence",
+                "name": "Intelligence",
+                "proficiencyStat": "training.save.intelligence"
+              },
+              {
+                "stat": "save.wisdom",
+                "name": "Wisdom",
+                "proficiencyStat": "training.save.wisdom"
+              },
+              {
+                "stat": "save.charisma",
+                "name": "Charisma",
+                "proficiencyStat": "training.save.charisma"
+              }
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "skill.acrobatics",
+                "name": "Acrobatics",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.acrobatics",
+                "feature": "dnd5e:2014:skill.acrobatics"
+              },
+              {
+                "stat": "skill.animal-handling",
+                "name": "Animal Handling",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.animal-handling",
+                "feature": "dnd5e:2014:skill.animal-handling"
+              },
+              {
+                "stat": "skill.arcana",
+                "name": "Arcana",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.arcana",
+                "feature": "dnd5e:2014:skill.arcana"
+              },
+              {
+                "stat": "skill.athletics",
+                "name": "Athletics",
+                "ability": "STR",
+                "proficiencyStat": "training.skill.athletics",
+                "feature": "dnd5e:2014:skill.athletics"
+              },
+              {
+                "stat": "skill.deception",
+                "name": "Deception",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.deception",
+                "feature": "dnd5e:2014:skill.deception"
+              },
+              {
+                "stat": "skill.history",
+                "name": "History",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.history",
+                "feature": "dnd5e:2014:skill.history"
+              },
+              {
+                "stat": "skill.insight",
+                "name": "Insight",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.insight",
+                "feature": "dnd5e:2014:skill.insight"
+              },
+              {
+                "stat": "skill.intimidation",
+                "name": "Intimidation",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.intimidation",
+                "feature": "dnd5e:2014:skill.intimidation"
+              },
+              {
+                "stat": "skill.investigation",
+                "name": "Investigation",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.investigation",
+                "feature": "dnd5e:2014:skill.investigation"
+              },
+              {
+                "stat": "skill.medicine",
+                "name": "Medicine",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.medicine",
+                "feature": "dnd5e:2014:skill.medicine"
+              },
+              {
+                "stat": "skill.nature",
+                "name": "Nature",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.nature",
+                "feature": "dnd5e:2014:skill.nature"
+              },
+              {
+                "stat": "skill.perception",
+                "name": "Perception",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.perception",
+                "feature": "dnd5e:2014:skill.perception"
+              },
+              {
+                "stat": "skill.performance",
+                "name": "Performance",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.performance",
+                "feature": "dnd5e:2014:skill.performance"
+              },
+              {
+                "stat": "skill.persuasion",
+                "name": "Persuasion",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.persuasion",
+                "feature": "dnd5e:2014:skill.persuasion"
+              },
+              {
+                "stat": "skill.religion",
+                "name": "Religion",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.religion",
+                "feature": "dnd5e:2014:skill.religion"
+              },
+              {
+                "stat": "skill.sleight-of-hand",
+                "name": "Sleight Of Hand",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.sleight-of-hand",
+                "feature": "dnd5e:2014:skill.sleight-of-hand"
+              },
+              {
+                "stat": "skill.stealth",
+                "name": "Stealth",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.stealth",
+                "feature": "dnd5e:2014:skill.stealth"
+              },
+              {
+                "stat": "skill.survival",
+                "name": "Survival",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.survival",
+                "feature": "dnd5e:2014:skill.survival"
+              }
+            ]
+          }
+        ],
+        "featureCategories": [
+          {
+            "id": "class",
+            "name": "Class Features",
+            "tags": [
+              "class-feature"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skill proficiencies",
+            "tags": [
+              "skill-proficiency"
+            ]
+          },
+          {
+            "id": "spells",
+            "name": "Spells",
+            "tags": [
+              "spell"
+            ]
+          },
+          {
+            "id": "ancestry",
+            "name": "Ancestry",
+            "tags": [
+              "race"
+            ]
+          }
+        ]
       },
       "classes": [
         {
@@ -153181,7 +155611,277 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip"
-        }
+        },
+        "sheetSections": [
+          {
+            "id": "abilities",
+            "name": "Ability scores",
+            "layout": "abilities",
+            "rows": [
+              {
+                "stat": "strength",
+                "secondaryStat": "modifier.strength",
+                "name": "Strength"
+              },
+              {
+                "stat": "dexterity",
+                "secondaryStat": "modifier.dexterity",
+                "name": "Dexterity"
+              },
+              {
+                "stat": "constitution",
+                "secondaryStat": "modifier.constitution",
+                "name": "Constitution"
+              },
+              {
+                "stat": "intelligence",
+                "secondaryStat": "modifier.intelligence",
+                "name": "Intelligence"
+              },
+              {
+                "stat": "wisdom",
+                "secondaryStat": "modifier.wisdom",
+                "name": "Wisdom"
+              },
+              {
+                "stat": "charisma",
+                "secondaryStat": "modifier.charisma",
+                "name": "Charisma"
+              }
+            ]
+          },
+          {
+            "id": "combat",
+            "name": "Combat & exploration",
+            "layout": "stats",
+            "rows": [
+              {
+                "stat": "hitPoints",
+                "name": "Hit points"
+              },
+              {
+                "stat": "armorClass",
+                "name": "Armor class"
+              },
+              {
+                "stat": "initiative",
+                "name": "Initiative"
+              },
+              {
+                "stat": "speed",
+                "name": "Speed (ft)"
+              },
+              {
+                "stat": "proficiencyBonus",
+                "name": "Proficiency bonus"
+              },
+              {
+                "stat": "passivePerception",
+                "name": "Passive Perception"
+              }
+            ]
+          },
+          {
+            "id": "saves",
+            "name": "Saving throws",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "save.strength",
+                "name": "Strength",
+                "proficiencyStat": "training.save.strength"
+              },
+              {
+                "stat": "save.dexterity",
+                "name": "Dexterity",
+                "proficiencyStat": "training.save.dexterity"
+              },
+              {
+                "stat": "save.constitution",
+                "name": "Constitution",
+                "proficiencyStat": "training.save.constitution"
+              },
+              {
+                "stat": "save.intelligence",
+                "name": "Intelligence",
+                "proficiencyStat": "training.save.intelligence"
+              },
+              {
+                "stat": "save.wisdom",
+                "name": "Wisdom",
+                "proficiencyStat": "training.save.wisdom"
+              },
+              {
+                "stat": "save.charisma",
+                "name": "Charisma",
+                "proficiencyStat": "training.save.charisma"
+              }
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "skill.acrobatics",
+                "name": "Acrobatics",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.acrobatics",
+                "feature": "dnd5e:2014:skill.acrobatics"
+              },
+              {
+                "stat": "skill.animal-handling",
+                "name": "Animal Handling",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.animal-handling",
+                "feature": "dnd5e:2014:skill.animal-handling"
+              },
+              {
+                "stat": "skill.arcana",
+                "name": "Arcana",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.arcana",
+                "feature": "dnd5e:2014:skill.arcana"
+              },
+              {
+                "stat": "skill.athletics",
+                "name": "Athletics",
+                "ability": "STR",
+                "proficiencyStat": "training.skill.athletics",
+                "feature": "dnd5e:2014:skill.athletics"
+              },
+              {
+                "stat": "skill.deception",
+                "name": "Deception",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.deception",
+                "feature": "dnd5e:2014:skill.deception"
+              },
+              {
+                "stat": "skill.history",
+                "name": "History",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.history",
+                "feature": "dnd5e:2014:skill.history"
+              },
+              {
+                "stat": "skill.insight",
+                "name": "Insight",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.insight",
+                "feature": "dnd5e:2014:skill.insight"
+              },
+              {
+                "stat": "skill.intimidation",
+                "name": "Intimidation",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.intimidation",
+                "feature": "dnd5e:2014:skill.intimidation"
+              },
+              {
+                "stat": "skill.investigation",
+                "name": "Investigation",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.investigation",
+                "feature": "dnd5e:2014:skill.investigation"
+              },
+              {
+                "stat": "skill.medicine",
+                "name": "Medicine",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.medicine",
+                "feature": "dnd5e:2014:skill.medicine"
+              },
+              {
+                "stat": "skill.nature",
+                "name": "Nature",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.nature",
+                "feature": "dnd5e:2014:skill.nature"
+              },
+              {
+                "stat": "skill.perception",
+                "name": "Perception",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.perception",
+                "feature": "dnd5e:2014:skill.perception"
+              },
+              {
+                "stat": "skill.performance",
+                "name": "Performance",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.performance",
+                "feature": "dnd5e:2014:skill.performance"
+              },
+              {
+                "stat": "skill.persuasion",
+                "name": "Persuasion",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.persuasion",
+                "feature": "dnd5e:2014:skill.persuasion"
+              },
+              {
+                "stat": "skill.religion",
+                "name": "Religion",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.religion",
+                "feature": "dnd5e:2014:skill.religion"
+              },
+              {
+                "stat": "skill.sleight-of-hand",
+                "name": "Sleight Of Hand",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.sleight-of-hand",
+                "feature": "dnd5e:2014:skill.sleight-of-hand"
+              },
+              {
+                "stat": "skill.stealth",
+                "name": "Stealth",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.stealth",
+                "feature": "dnd5e:2014:skill.stealth"
+              },
+              {
+                "stat": "skill.survival",
+                "name": "Survival",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.survival",
+                "feature": "dnd5e:2014:skill.survival"
+              }
+            ]
+          }
+        ],
+        "featureCategories": [
+          {
+            "id": "class",
+            "name": "Class Features",
+            "tags": [
+              "class-feature"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skill proficiencies",
+            "tags": [
+              "skill-proficiency"
+            ]
+          },
+          {
+            "id": "spells",
+            "name": "Spells",
+            "tags": [
+              "spell"
+            ]
+          },
+          {
+            "id": "ancestry",
+            "name": "Ancestry",
+            "tags": [
+              "race"
+            ]
+          }
+        ]
       },
       "classes": [
         {
@@ -158060,7 +160760,277 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip"
-        }
+        },
+        "sheetSections": [
+          {
+            "id": "abilities",
+            "name": "Ability scores",
+            "layout": "abilities",
+            "rows": [
+              {
+                "stat": "strength",
+                "secondaryStat": "modifier.strength",
+                "name": "Strength"
+              },
+              {
+                "stat": "dexterity",
+                "secondaryStat": "modifier.dexterity",
+                "name": "Dexterity"
+              },
+              {
+                "stat": "constitution",
+                "secondaryStat": "modifier.constitution",
+                "name": "Constitution"
+              },
+              {
+                "stat": "intelligence",
+                "secondaryStat": "modifier.intelligence",
+                "name": "Intelligence"
+              },
+              {
+                "stat": "wisdom",
+                "secondaryStat": "modifier.wisdom",
+                "name": "Wisdom"
+              },
+              {
+                "stat": "charisma",
+                "secondaryStat": "modifier.charisma",
+                "name": "Charisma"
+              }
+            ]
+          },
+          {
+            "id": "combat",
+            "name": "Combat & exploration",
+            "layout": "stats",
+            "rows": [
+              {
+                "stat": "hitPoints",
+                "name": "Hit points"
+              },
+              {
+                "stat": "armorClass",
+                "name": "Armor class"
+              },
+              {
+                "stat": "initiative",
+                "name": "Initiative"
+              },
+              {
+                "stat": "speed",
+                "name": "Speed (ft)"
+              },
+              {
+                "stat": "proficiencyBonus",
+                "name": "Proficiency bonus"
+              },
+              {
+                "stat": "passivePerception",
+                "name": "Passive Perception"
+              }
+            ]
+          },
+          {
+            "id": "saves",
+            "name": "Saving throws",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "save.strength",
+                "name": "Strength",
+                "proficiencyStat": "training.save.strength"
+              },
+              {
+                "stat": "save.dexterity",
+                "name": "Dexterity",
+                "proficiencyStat": "training.save.dexterity"
+              },
+              {
+                "stat": "save.constitution",
+                "name": "Constitution",
+                "proficiencyStat": "training.save.constitution"
+              },
+              {
+                "stat": "save.intelligence",
+                "name": "Intelligence",
+                "proficiencyStat": "training.save.intelligence"
+              },
+              {
+                "stat": "save.wisdom",
+                "name": "Wisdom",
+                "proficiencyStat": "training.save.wisdom"
+              },
+              {
+                "stat": "save.charisma",
+                "name": "Charisma",
+                "proficiencyStat": "training.save.charisma"
+              }
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "skill.acrobatics",
+                "name": "Acrobatics",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.acrobatics",
+                "feature": "dnd5e:2014:skill.acrobatics"
+              },
+              {
+                "stat": "skill.animal-handling",
+                "name": "Animal Handling",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.animal-handling",
+                "feature": "dnd5e:2014:skill.animal-handling"
+              },
+              {
+                "stat": "skill.arcana",
+                "name": "Arcana",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.arcana",
+                "feature": "dnd5e:2014:skill.arcana"
+              },
+              {
+                "stat": "skill.athletics",
+                "name": "Athletics",
+                "ability": "STR",
+                "proficiencyStat": "training.skill.athletics",
+                "feature": "dnd5e:2014:skill.athletics"
+              },
+              {
+                "stat": "skill.deception",
+                "name": "Deception",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.deception",
+                "feature": "dnd5e:2014:skill.deception"
+              },
+              {
+                "stat": "skill.history",
+                "name": "History",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.history",
+                "feature": "dnd5e:2014:skill.history"
+              },
+              {
+                "stat": "skill.insight",
+                "name": "Insight",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.insight",
+                "feature": "dnd5e:2014:skill.insight"
+              },
+              {
+                "stat": "skill.intimidation",
+                "name": "Intimidation",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.intimidation",
+                "feature": "dnd5e:2014:skill.intimidation"
+              },
+              {
+                "stat": "skill.investigation",
+                "name": "Investigation",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.investigation",
+                "feature": "dnd5e:2014:skill.investigation"
+              },
+              {
+                "stat": "skill.medicine",
+                "name": "Medicine",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.medicine",
+                "feature": "dnd5e:2014:skill.medicine"
+              },
+              {
+                "stat": "skill.nature",
+                "name": "Nature",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.nature",
+                "feature": "dnd5e:2014:skill.nature"
+              },
+              {
+                "stat": "skill.perception",
+                "name": "Perception",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.perception",
+                "feature": "dnd5e:2014:skill.perception"
+              },
+              {
+                "stat": "skill.performance",
+                "name": "Performance",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.performance",
+                "feature": "dnd5e:2014:skill.performance"
+              },
+              {
+                "stat": "skill.persuasion",
+                "name": "Persuasion",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.persuasion",
+                "feature": "dnd5e:2014:skill.persuasion"
+              },
+              {
+                "stat": "skill.religion",
+                "name": "Religion",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.religion",
+                "feature": "dnd5e:2014:skill.religion"
+              },
+              {
+                "stat": "skill.sleight-of-hand",
+                "name": "Sleight Of Hand",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.sleight-of-hand",
+                "feature": "dnd5e:2014:skill.sleight-of-hand"
+              },
+              {
+                "stat": "skill.stealth",
+                "name": "Stealth",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.stealth",
+                "feature": "dnd5e:2014:skill.stealth"
+              },
+              {
+                "stat": "skill.survival",
+                "name": "Survival",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.survival",
+                "feature": "dnd5e:2014:skill.survival"
+              }
+            ]
+          }
+        ],
+        "featureCategories": [
+          {
+            "id": "class",
+            "name": "Class Features",
+            "tags": [
+              "class-feature"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skill proficiencies",
+            "tags": [
+              "skill-proficiency"
+            ]
+          },
+          {
+            "id": "spells",
+            "name": "Spells",
+            "tags": [
+              "spell"
+            ]
+          },
+          {
+            "id": "ancestry",
+            "name": "Ancestry",
+            "tags": [
+              "race"
+            ]
+          }
+        ]
       },
       "classes": [
         {
@@ -162912,7 +165882,277 @@
           "resource-tracker": "Resource Tracker",
           "cleric-prepared": "Cleric Prepared Spell",
           "cleric-cantrip": "Cleric Cantrip"
-        }
+        },
+        "sheetSections": [
+          {
+            "id": "abilities",
+            "name": "Ability scores",
+            "layout": "abilities",
+            "rows": [
+              {
+                "stat": "strength",
+                "secondaryStat": "modifier.strength",
+                "name": "Strength"
+              },
+              {
+                "stat": "dexterity",
+                "secondaryStat": "modifier.dexterity",
+                "name": "Dexterity"
+              },
+              {
+                "stat": "constitution",
+                "secondaryStat": "modifier.constitution",
+                "name": "Constitution"
+              },
+              {
+                "stat": "intelligence",
+                "secondaryStat": "modifier.intelligence",
+                "name": "Intelligence"
+              },
+              {
+                "stat": "wisdom",
+                "secondaryStat": "modifier.wisdom",
+                "name": "Wisdom"
+              },
+              {
+                "stat": "charisma",
+                "secondaryStat": "modifier.charisma",
+                "name": "Charisma"
+              }
+            ]
+          },
+          {
+            "id": "combat",
+            "name": "Combat & exploration",
+            "layout": "stats",
+            "rows": [
+              {
+                "stat": "hitPoints",
+                "name": "Hit points"
+              },
+              {
+                "stat": "armorClass",
+                "name": "Armor class"
+              },
+              {
+                "stat": "initiative",
+                "name": "Initiative"
+              },
+              {
+                "stat": "speed",
+                "name": "Speed (ft)"
+              },
+              {
+                "stat": "proficiencyBonus",
+                "name": "Proficiency bonus"
+              },
+              {
+                "stat": "passivePerception",
+                "name": "Passive Perception"
+              }
+            ]
+          },
+          {
+            "id": "saves",
+            "name": "Saving throws",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "save.strength",
+                "name": "Strength",
+                "proficiencyStat": "training.save.strength"
+              },
+              {
+                "stat": "save.dexterity",
+                "name": "Dexterity",
+                "proficiencyStat": "training.save.dexterity"
+              },
+              {
+                "stat": "save.constitution",
+                "name": "Constitution",
+                "proficiencyStat": "training.save.constitution"
+              },
+              {
+                "stat": "save.intelligence",
+                "name": "Intelligence",
+                "proficiencyStat": "training.save.intelligence"
+              },
+              {
+                "stat": "save.wisdom",
+                "name": "Wisdom",
+                "proficiencyStat": "training.save.wisdom"
+              },
+              {
+                "stat": "save.charisma",
+                "name": "Charisma",
+                "proficiencyStat": "training.save.charisma"
+              }
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skills",
+            "layout": "skills",
+            "rows": [
+              {
+                "stat": "skill.acrobatics",
+                "name": "Acrobatics",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.acrobatics",
+                "feature": "dnd5e:2014:skill.acrobatics"
+              },
+              {
+                "stat": "skill.animal-handling",
+                "name": "Animal Handling",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.animal-handling",
+                "feature": "dnd5e:2014:skill.animal-handling"
+              },
+              {
+                "stat": "skill.arcana",
+                "name": "Arcana",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.arcana",
+                "feature": "dnd5e:2014:skill.arcana"
+              },
+              {
+                "stat": "skill.athletics",
+                "name": "Athletics",
+                "ability": "STR",
+                "proficiencyStat": "training.skill.athletics",
+                "feature": "dnd5e:2014:skill.athletics"
+              },
+              {
+                "stat": "skill.deception",
+                "name": "Deception",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.deception",
+                "feature": "dnd5e:2014:skill.deception"
+              },
+              {
+                "stat": "skill.history",
+                "name": "History",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.history",
+                "feature": "dnd5e:2014:skill.history"
+              },
+              {
+                "stat": "skill.insight",
+                "name": "Insight",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.insight",
+                "feature": "dnd5e:2014:skill.insight"
+              },
+              {
+                "stat": "skill.intimidation",
+                "name": "Intimidation",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.intimidation",
+                "feature": "dnd5e:2014:skill.intimidation"
+              },
+              {
+                "stat": "skill.investigation",
+                "name": "Investigation",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.investigation",
+                "feature": "dnd5e:2014:skill.investigation"
+              },
+              {
+                "stat": "skill.medicine",
+                "name": "Medicine",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.medicine",
+                "feature": "dnd5e:2014:skill.medicine"
+              },
+              {
+                "stat": "skill.nature",
+                "name": "Nature",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.nature",
+                "feature": "dnd5e:2014:skill.nature"
+              },
+              {
+                "stat": "skill.perception",
+                "name": "Perception",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.perception",
+                "feature": "dnd5e:2014:skill.perception"
+              },
+              {
+                "stat": "skill.performance",
+                "name": "Performance",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.performance",
+                "feature": "dnd5e:2014:skill.performance"
+              },
+              {
+                "stat": "skill.persuasion",
+                "name": "Persuasion",
+                "ability": "CHA",
+                "proficiencyStat": "training.skill.persuasion",
+                "feature": "dnd5e:2014:skill.persuasion"
+              },
+              {
+                "stat": "skill.religion",
+                "name": "Religion",
+                "ability": "INT",
+                "proficiencyStat": "training.skill.religion",
+                "feature": "dnd5e:2014:skill.religion"
+              },
+              {
+                "stat": "skill.sleight-of-hand",
+                "name": "Sleight Of Hand",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.sleight-of-hand",
+                "feature": "dnd5e:2014:skill.sleight-of-hand"
+              },
+              {
+                "stat": "skill.stealth",
+                "name": "Stealth",
+                "ability": "DEX",
+                "proficiencyStat": "training.skill.stealth",
+                "feature": "dnd5e:2014:skill.stealth"
+              },
+              {
+                "stat": "skill.survival",
+                "name": "Survival",
+                "ability": "WIS",
+                "proficiencyStat": "training.skill.survival",
+                "feature": "dnd5e:2014:skill.survival"
+              }
+            ]
+          }
+        ],
+        "featureCategories": [
+          {
+            "id": "class",
+            "name": "Class Features",
+            "tags": [
+              "class-feature"
+            ]
+          },
+          {
+            "id": "skills",
+            "name": "Skill proficiencies",
+            "tags": [
+              "skill-proficiency"
+            ]
+          },
+          {
+            "id": "spells",
+            "name": "Spells",
+            "tags": [
+              "spell"
+            ]
+          },
+          {
+            "id": "ancestry",
+            "name": "Ancestry",
+            "tags": [
+              "race"
+            ]
+          }
+        ]
       },
       "classes": [
         {
@@ -164771,6 +168011,603 @@
           }
         }
       ]
+    }
+  ],
+  "items": [
+    {
+      "id": "dnd5e:2014:item.arrow",
+      "revision": 1,
+      "name": "Arrow",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.backpack",
+      "revision": 1,
+      "name": "Backpack",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.bedroll",
+      "revision": 1,
+      "name": "Bedroll",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.bell",
+      "revision": 1,
+      "name": "Bell",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.blanket",
+      "revision": 1,
+      "name": "Blanket",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.candle",
+      "revision": 1,
+      "name": "Candle",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.carpenters-tools",
+      "revision": 1,
+      "name": "Carpenter’s tools",
+      "category": "Tools",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.chain-mail",
+      "revision": 1,
+      "name": "Chain mail",
+      "category": "Armor",
+      "features": [
+        "armor.chain-mail"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf",
+      "slot": "armor"
+    },
+    {
+      "id": "dnd5e:2014:item.common-clothing",
+      "revision": 1,
+      "name": "Common clothing",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.component-pouch",
+      "revision": 1,
+      "name": "Component pouch",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.crowbar",
+      "revision": 1,
+      "name": "Crowbar",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.dark-clothing",
+      "revision": 1,
+      "name": "Dark clothing with hood",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.fine-clothing",
+      "revision": 1,
+      "name": "Fine clothing",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.gold-piece",
+      "revision": 1,
+      "name": "Gold piece",
+      "category": "Currency",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.greataxe",
+      "revision": 1,
+      "name": "Greataxe",
+      "category": "Weapons",
+      "features": [
+        "weapon.greataxe"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.greatsword",
+      "revision": 1,
+      "name": "Greatsword",
+      "category": "Weapons",
+      "features": [
+        "weapon.greatsword"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.hammer",
+      "revision": 1,
+      "name": "Hammer",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.handaxe",
+      "revision": 1,
+      "name": "Handaxe",
+      "category": "Weapons",
+      "features": [
+        "weapon.handaxe"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.hemp-rope",
+      "revision": 1,
+      "name": "Hemp rope (50 ft)",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.historical-tome",
+      "revision": 1,
+      "name": "Historical tome",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.holy-symbol",
+      "revision": 1,
+      "name": "Holy symbol",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.hooded-lantern",
+      "revision": 1,
+      "name": "Hooded lantern",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.ink",
+      "revision": 1,
+      "name": "Ink (bottle)",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.iron-pot",
+      "revision": 1,
+      "name": "Iron pot",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.javelin",
+      "revision": 1,
+      "name": "Javelin",
+      "category": "Weapons",
+      "features": [
+        "weapon.javelin"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.leather-armor",
+      "revision": 1,
+      "name": "Leather armor",
+      "category": "Armor",
+      "features": [
+        "armor.leather-armor"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf",
+      "slot": "armor"
+    },
+    {
+      "id": "dnd5e:2014:item.longbow",
+      "revision": 1,
+      "name": "Longbow",
+      "category": "Weapons",
+      "features": [
+        "weapon.longbow"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.masons-tools",
+      "revision": 1,
+      "name": "Mason’s tools",
+      "category": "Tools",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.mess-kit",
+      "revision": 1,
+      "name": "Mess kit",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.oil",
+      "revision": 1,
+      "name": "Oil (flask)",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.parchment",
+      "revision": 1,
+      "name": "Parchment (sheet)",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.pedigree-scroll",
+      "revision": 1,
+      "name": "Pedigree scroll",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.pen",
+      "revision": 1,
+      "name": "Pen",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.piton",
+      "revision": 1,
+      "name": "Piton",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.playing-cards",
+      "revision": 1,
+      "name": "Playing cards",
+      "category": "Tools",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.pouch",
+      "revision": 1,
+      "name": "Pouch",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.prayer-book",
+      "revision": 1,
+      "name": "Prayer book",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.rations",
+      "revision": 1,
+      "name": "Rations (1 day)",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.sergeants-insignia",
+      "revision": 1,
+      "name": "Sergeant’s insignia",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.shield",
+      "revision": 1,
+      "name": "Shield",
+      "category": "Armor",
+      "features": [
+        "armor.shield"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf",
+      "slot": "shield"
+    },
+    {
+      "id": "dnd5e:2014:item.shortbow",
+      "revision": 1,
+      "name": "Shortbow",
+      "category": "Weapons",
+      "features": [
+        "weapon.shortbow"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.shortsword",
+      "revision": 1,
+      "name": "Shortsword",
+      "category": "Weapons",
+      "features": [
+        "weapon.shortsword"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.shovel",
+      "revision": 1,
+      "name": "Shovel",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.signet-ring",
+      "revision": 1,
+      "name": "Signet ring",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.small-knife",
+      "revision": 1,
+      "name": "Small knife",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.spellbook",
+      "revision": 1,
+      "name": "Spellbook",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.thieves-tools",
+      "revision": 1,
+      "name": "Thieves’ tools",
+      "category": "Tools",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.tinderbox",
+      "revision": 1,
+      "name": "Tinderbox",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.torch",
+      "revision": 1,
+      "name": "Torch",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.trophy-dagger",
+      "revision": 1,
+      "name": "Trophy dagger",
+      "category": "Weapons",
+      "features": [
+        "weapon.trophy-dagger"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.warhammer",
+      "revision": 1,
+      "name": "Warhammer",
+      "category": "Weapons",
+      "features": [
+        "weapon.warhammer"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    },
+    {
+      "id": "dnd5e:2014:item.waterskin",
+      "revision": 1,
+      "name": "Waterskin",
+      "category": "Adventuring gear",
+      "features": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+    }
+  ],
+  "itemFeatures": [
+    {
+      "id": "damage.slashing",
+      "name": "Slashing damage",
+      "properties": {
+        "Damage type": "Slashing"
+      }
+    },
+    {
+      "id": "damage.piercing",
+      "name": "Piercing damage",
+      "properties": {
+        "Damage type": "Piercing"
+      }
+    },
+    {
+      "id": "damage.bludgeoning",
+      "name": "Bludgeoning damage",
+      "properties": {
+        "Damage type": "Bludgeoning"
+      }
+    },
+    {
+      "id": "armor.chain-mail",
+      "name": "Chain mail",
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "id": "weapon.greataxe",
+      "name": "Greataxe",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "1d12"
+      }
+    },
+    {
+      "id": "weapon.greatsword",
+      "name": "Greatsword",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "2d6"
+      }
+    },
+    {
+      "id": "weapon.handaxe",
+      "name": "Handaxe",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "1d6"
+      }
+    },
+    {
+      "id": "weapon.javelin",
+      "name": "Javelin",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d6"
+      }
+    },
+    {
+      "id": "armor.leather-armor",
+      "name": "Leather armor",
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "id": "weapon.longbow",
+      "name": "Longbow",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d8"
+      }
+    },
+    {
+      "id": "armor.shield",
+      "name": "Shield",
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "shield",
+          "operation": "override",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": "weapon.shortbow",
+      "name": "Shortbow",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d6"
+      }
+    },
+    {
+      "id": "weapon.shortsword",
+      "name": "Shortsword",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d6"
+      }
+    },
+    {
+      "id": "weapon.trophy-dagger",
+      "name": "Trophy dagger",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d4"
+      }
+    },
+    {
+      "id": "weapon.warhammer",
+      "name": "Warhammer",
+      "features": [
+        "damage.bludgeoning"
+      ],
+      "properties": {
+        "Damage dice": "1d8"
+      }
     }
   ]
 }

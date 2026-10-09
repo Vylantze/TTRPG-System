@@ -5,8 +5,11 @@ import type { StatDefinition } from '@/src/model/StatDefinition.js';
 import type { Grant } from '@/src/model/Grant.js';
 import type { Choice } from '@/src/model/Choice.js';
 import type { Scope } from '@/src/model/Scope.js';
+import type { SheetSection } from '@/src/model/SheetSection.js';
 
 export interface SystemDefinition {
+  sheetSections?: SheetSection[];
+  featureCategories?: { id: string; name: string; tags: string[] }[];
   id: string; revision: number; name: string; stats: StatDefinition[]; classes?: string[];
   /** Tag identities remain stable; Systems supply their user-facing labels separately. */
   tagDisplayNames?: Record<string, string>;

@@ -1,5 +1,7 @@
+import { FeatureOrigin } from '@/ui/src/feature-origin';
+import { FeatureLink } from '@/ui/src/FeatureLink';
 import { featureHref, descriptionBody } from '@/ui/src/feature-description';
-import { useMemo, useState, type ReactNode } from 'react';
+import { useContext, useMemo, useState, type ReactNode } from 'react';
 import { FeatureTextIndex, type Engine, type FeatureDefinition } from '@/src/index';
 import { Modal } from '@/ui/src/Modal';
 import { featureName } from '@/ui/src/display';
@@ -17,6 +19,7 @@ function textIndex(engine: Engine) {
 /** Link matching preserves source characters; imported HTML/Markdown stays inert. */
 export function RulesText({ text, source, engine, openFeature, exclude = [], onPreview }: { text?: string; source?: string } & References) {
   const [preview, setPreview] = useState<Preview>();
+  const origin = useContext(FeatureOrigin);
   const index = useMemo(() => engine ? textIndex(engine) : undefined, [engine]);
   if (!text) return null;
   const paragraphs = text.split(/\n\s*\n/).filter(Boolean).map((paragraph, key) => {
@@ -24,7 +27,7 @@ export function RulesText({ text, source, engine, openFeature, exclude = [], onP
     let offset = 0;
     for (const span of index?.resolve(paragraph, exclude) ?? []) {
       children.push(paragraph.slice(offset, span.start));
-      const href = span.features.length === 1 ? featureHref(span.features[0], engine!) : featureHref('', engine!).replace('#features/', '#features');
+      const href = span.features.length === 1 ? featureHref(span.features[0], engine!, origin) : featureHref('', engine!, origin).replace('#features/', '#features');
       children.push(
         <a
           className="feature-mention"
@@ -69,19 +72,12 @@ export function ReferencePopup({ reference, engine, openFeature, onClose }: { re
         ? (
             <>
               <FeatureRules feature={feature} engine={engine} openFeature={openFeature} onPreview={setCurrent} />
-              <a
-                className="button quiet"
-                href={featureHref(feature.id, engine)}
-                onClick={() => {
-                  onClose();
-                  openFeature?.(feature.id);
-                }}
-              >
+              <FeatureLink className="button quiet" id={feature.id} engine={engine}>
                 {'Open '}
                 {featureName(feature)}
                 {' '}
                 Feature →
-              </a>
+              </FeatureLink>
             </>
           )
         : (
@@ -116,12 +112,12 @@ export function FeatureRules({ feature, engine, openFeature, onPreview }: { feat
               <section className="shared-rules" key={id}>
                 <h3>{featureName(reference)}</h3>
                 <RulesText text={descriptionBody(reference)} source={reference.source} engine={engine} openFeature={openFeature} exclude={[feature.id, id]} onPreview={onPreview} />
-                <a className="link" href={featureHref(id, engine)} onClick={() => openFeature?.(id)}>
+                <FeatureLink id={id} engine={engine}>
                   {'View '}
                   {featureName(reference)}
                   {' '}
                   Feature →
-                </a>
+                </FeatureLink>
               </section>
             )
           : null;

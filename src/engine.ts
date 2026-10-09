@@ -1,3 +1,4 @@
+import { inventoryModifiers, checkInventory } from '@/src/items.js';
 import { RuleError, boolean, constrain, evaluateExpression, number, type Environment } from '@/src/expression.js';
 import type { Catalogue, Character, Choice, Diagnostic, Expression, FunctionRegistry, Instance, Value,
   Predicate, EvaluationResult, StatResult, Modifier, ModifierExplanation, PoolResult, Resource,
@@ -141,6 +142,7 @@ export class Engine {
 
   private statView(character: Character, instances: Instance[], levels?: Record<string, number>, runtime: Record<string, Value> = {}): StatView {
     const results: Record<string, StatResult> = {}, visiting: string[] = [];
+    const modifierSources = [...instances.map((instance) => ({ instance, components: this.features.get(instance.feature)!.components })), ...inventoryModifiers(character, this.catalogue)];
     const get = (id: string): number => {
       if (Object.hasOwn(results, id)) return results[id].value;
       if (visiting.includes(id)) throw new RuleError('STAT_CYCLE', `Stat dependency cycle: ${[...visiting, id].join(' -> ')}.`);
@@ -162,7 +164,7 @@ export class Engine {
           base = number(evaluateExpression(alternative.expression, globalEnv));
         }
         const explanations: ModifierExplanation[] = [], modifiers: { definition: Modifier; explanation: ModifierExplanation; amount: number }[] = [];
-        for (const instance of instances) for (const component of this.features.get(instance.feature)!.components) {
+        for (const { instance, components } of modifierSources) for (const component of components) {
           if (component.kind !== 'modifyStat' || component.stat !== id) continue;
           const explanation: ModifierExplanation = { source: instance.id, component: component.id, operation: component.operation, applied: false, reason: 'Inactive Feature.' };
           explanations.push(explanation);
@@ -294,6 +296,7 @@ export class Engine {
     const character = input;
     try {
       checkCharacter(character);
+      checkInventory(character, this.catalogue);
       if (character.system.id !== this.catalogue.system.id || character.system.revision !== this.catalogue.system.revision || character.catalogue.id !== this.catalogue.id || character.catalogue.revision !== this.catalogue.revision) throw new RuleError('REVISION', 'System or catalogue revision mismatch.');
       const revisions = Object.fromEntries([...this.catalogue.features, ...this.catalogue.classes].map((f) => [f.id, f.revision]));
       if (Object.keys(revisions).length !== Object.keys(character.contentRevisions).length || Object.entries(revisions).some(([id, revision]) => character.contentRevisions[id] !== revision)) throw new RuleError('REVISION', 'Content revision manifest mismatch.');

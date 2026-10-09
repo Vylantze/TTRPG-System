@@ -1,7 +1,9 @@
+import { CharacterSheet } from '@/ui/src/CharacterSheet';
+import { FeatureLink } from '@/ui/src/FeatureLink';
 import { CharacterFeatures } from '@/ui/src/CharacterFeatures';
 import { featureName } from '@/ui/src/display';
 import { useMemo, useState } from 'react';
-import { applyEdit, previewEdit, finalizeCharacter, recoverResources, recoverSelectedResources, settleAbility, useAbility as activateAbility, castSpell, type Engine, type Character, type Edit, type EditPreview, type SpellTurn } from '@/src/index';
+import { adjustResource, applyEdit, previewEdit, finalizeCharacter, recoverResources, recoverSelectedResources, settleAbility, useAbility as activateAbility, castSpell, type Engine, type Character, type Edit, type EditPreview, type SpellTurn } from '@/src/index';
 import { labelFromId } from '@/ui/src/workspace';
 import { SelectionCard } from '@/ui/src/SelectionCard';
 import { Modal } from '@/ui/src/Modal';
@@ -10,7 +12,10 @@ import { ResourceSummary } from '@/ui/src/ResourceSummary';
 
 export function CharacterBuilder({ engine, character, update, openFeature, report }: { engine: Engine; character: Character; update: (c: Character) => void; openFeature: (id: string) => void; report: (message: string) => void }) {
   const result = useMemo(() => engine.evaluate(character), [engine, character]);
-  const [tab, setTab] = useState(character.buildState === 'finalized' ? 'stats' : 'choices'), [level, setLevel] = useState('all'), [classId, setClassId] = useState(engine.catalogue.classes[0]?.id ?? '');
+  const [tab, setTab] = useState(() => {
+      const requested = typeof window !== 'undefined' ? new URLSearchParams(window.location.hash.split('?')[1]).get('view') : null;
+      return requested && ['stats', 'choices', 'features', 'resources'].includes(requested) ? requested : character.buildState === 'finalized' ? 'stats' : 'choices';
+    }), [level, setLevel] = useState('all'), [classId, setClassId] = useState(engine.catalogue.classes[0]?.id ?? '');
   const [preview, setPreview] = useState<{ edits: Edit[]; result: EditPreview } | null>(null);
   const initialBudget = Object.fromEntries([...new Set(result.capabilities.flatMap((c) => c.definition.action ? [c.definition.action.kind] : []))].map((kind) => [kind, 1]));
   const [budget, setBudget] = useState<Record<string, number>>(initialBudget), [actions, setActions] = useState<Record<string, number>>(initialBudget);
@@ -75,7 +80,23 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
           <strong>{Object.keys(result.resources).length}</strong>
         </div>
       </div>
-      <nav className="subnav" aria-label="Character sections">{[['choices', 'Build & choices'], ['stats', 'Character sheet'], ['features', 'Features & traits'], ['resources', 'Abilities & resources']].map(([id, name]) => <button key={id} className={tab === id ? 'active' : ''} onClick={() => setTab(id)}>{name}</button>)}</nav>
+      <nav className="subnav" aria-label="Character sections">
+        {[['choices', 'Build & choices'], ['stats', 'Character sheet'], ['features', 'Features & traits'], ['resources', 'Abilities & resources']].map(([id, name]) => (
+          <button
+            key={id}
+            className={tab === id ? 'active' : ''}
+            onClick={() => {
+              setTab(id);
+              const [path, search] = window.location.hash.split('?');
+              const params = new URLSearchParams(search);
+              params.set('view', id);
+              window.history.replaceState(null, '', `${path}?${params}`);
+            }}
+          >
+            {name}
+          </button>
+        ))}
+      </nav>
       {result.diagnostics.length > 0 && (
         <details className="diagnostics" open={result.status === 'invalid'}>
           <summary>{result.status === 'invalid' ? 'Build needs repair' : `${incomplete} requirements to finish`}</summary>
@@ -195,7 +216,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
               <RootPicker engine={engine} character={character} edit={edit} level={result.characterLevel} />
               {character.roots.map((root) => (
                 <div className="row" key={root.id}>
-                  <button className="link" onClick={() => openFeature(root.feature)}>{featureName(engine.catalogue.features.find((f) => f.id === root.feature))}</button>
+                  <FeatureLink className="link" id={root.feature} engine={engine}>{featureName(engine.catalogue.features.find((f) => f.id === root.feature))}</FeatureLink>
                   <button className="quiet" onClick={() => edit([{ kind: 'removeRoot', id: root.id }])}>Remove</button>
                 </div>
               ))}
@@ -209,57 +230,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
           </section>
         </div>
       )}
-      {tab === 'stats' && (
-        <>
-          {character.notes && (
-            <section className="panel">
-              <h2>Character details</h2>
-              {character.notes.Source && /^https:\/\/[^\s]+$/.test(character.notes.Source) && <a href={character.notes.Source} target="_blank" rel="noopener noreferrer">View original character sheet</a>}
-              {Object.entries(character.notes).map(([label, text]) => (
-                <label key={label}>
-                  {label}
-                  <textarea value={text} onChange={(e) => update({ ...character, notes: { ...character.notes, [label]: e.target.value } })} />
-                </label>
-              ))}
-            </section>
-          )}
-          <h2>Calculated stats</h2>
-          <p className="muted">
-            {'Open a stat to inspect its base and Feature modifiers. '}
-            {result.provisional ? 'These totals are provisional.' : ''}
-          </p>
-          <div className="stat-grid">
-            {Object.keys(result.stats).map((id) => engine.getStatDefinition(id)!).map((s) => (
-              <details className="stat-tile" key={s.id}>
-                <summary>
-                  <span>{s.name}</span>
-                  <strong>{result.stats[s.id]?.value ?? '—'}</strong>
-                </summary>
-                <p>
-                  {'Base: '}
-                  {result.stats[s.id]?.base ?? '—'}
-                </p>
-                {result.stats[s.id]?.modifiers.map((m, i) => (
-                  <p key={i}>
-                    {featureName(engine.catalogue.features.find((f) => f.id === result.instances.find((i) => i.id === m.source)?.feature))}
-                    {' '}
-                    {'· '}
-                    {' '}
-                    {m.operation}
-                    {' '}
-                    {m.amount}
-                    {' '}
-                    {'· '}
-                    {' '}
-                    {m.applied ? 'Applied' : m.reason}
-                  </p>
-                ))}
-                {s.kind === 'derived' && <pre>{JSON.stringify(s.expression, null, 2)}</pre>}
-              </details>
-            ))}
-          </div>
-        </>
-      )}
+      {tab === 'stats' && <CharacterSheet engine={engine} character={character} result={result} update={update} report={report} />}
       {tab === 'features' && <CharacterFeatures engine={engine} character={character} result={result} openFeature={openFeature} />}
       {tab === 'resources' && (
         <>
@@ -267,11 +238,11 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
           <p className="muted">Finalize a valid character to use these controls. Maximum changes do not refill tracked resources; Features explicitly grant amounts and recovery.</p>
           <div className="stat-grid">
             {Object.values(result.resources).map((p) => (
-              <ResourceSummary key={p.id} pool={p} engine={engine} result={result} />
+              <ResourceSummary key={p.id} pool={p} engine={engine} result={result} ready={ready} adjust={(delta) => attempt(() => update(adjustResource(engine, character, p.id, delta, crypto.randomUUID())))} />
             ))}
           </div>
           <div className="toolbar">{[...new Set(Object.values(result.resources).flatMap((p) => p.recovery.map((r) => r.event)))].map((event) => <button className="quiet" key={event} disabled={!ready} onClick={() => attempt(() => update(recoverResources(engine, character, event, crypto.randomUUID())))}>{labelFromId(event)}</button>)}</div>
-          {engine.catalogue.system.commandRules?.selectedRecovery && <SelectedRecovery engine={engine} character={character} ready={ready} update={update} report={report} />}
+          {result.capabilities.some((capability) => capability.definition.name === engine.catalogue.system.commandRules?.selectedRecovery?.capabilityName) && <SelectedRecovery engine={engine} character={character} ready={ready} update={update} report={report} />}
           {Object.entries(character.pending).map(([id, pending]) => (
             <section className="panel" key={id}>
               <h3>Resolve reserved ability use</h3>
@@ -367,7 +338,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
                 <summary>Read source rules</summary>
                 <FeatureRules feature={engine.catalogue.features.find((f) => f.id === result.instances.find((i) => i.id === c.source)!.feature)!} engine={engine} openFeature={openFeature} />
               </details>
-              <button className="link" onClick={() => openFeature(result.instances.find((i) => i.id === c.source)!.feature)}>View source Feature →</button>
+              <FeatureLink className="link" id={result.instances.find((i) => i.id === c.source)!.feature} engine={engine}>View source Feature →</FeatureLink>
             </article>
           ))}
           <p className="muted">Ability effects, targets, dice, and triggers require adjudication. Long casting times and reactions on other turns require the appropriate turn budget.</p>

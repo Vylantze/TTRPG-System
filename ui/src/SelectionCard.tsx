@@ -1,3 +1,4 @@
+import { FeatureLink } from '@/ui/src/FeatureLink';
 import { featureName, tagName } from '@/ui/src/display';
 import { useMemo, useState } from 'react';
 import { type Engine, type Character, type Edit, type SelectionResult, type Value } from '@/src/index';
@@ -52,7 +53,7 @@ export function SelectionCard({ slot, engine, character, edit, openFeature, owne
         return (
           <div className="picked" key={p.id}>
             <div className="row">
-              <button className="link" onClick={() => openFeature(p.feature)}>{featureName(feature)}</button>
+              <FeatureLink className="link" id={p.feature} engine={engine}>{featureName(feature)}</FeatureLink>
               <button className="quiet" aria-label={`Remove ${featureName(feature)}`} onClick={() => update(picks.filter((x) => x.id !== p.id))}>Remove</button>
             </div>
             {feature
@@ -137,7 +138,7 @@ export function SelectionCard({ slot, engine, character, edit, openFeature, owne
             return (
               <div className="candidate" key={f.id}>
                 <div>
-                  <button className="link" onClick={() => openFeature(f.id)}>{featureName(f)}</button>
+                  <FeatureLink className="link" id={f.id} engine={engine}>{featureName(f)}</FeatureLink>
                   <span className={`badge ${candidate?.status ?? 'incomplete'}`}>{candidate?.status === 'valid' ? 'Eligible' : candidate?.status === 'invalid' ? 'Requirements unmet' : 'Pending'}</span>
                   <RulesText text={descriptionPreview(featureDescription(f, engine))} engine={engine} openFeature={openFeature} exclude={[f.id]} />
                   <FeatureRequirements feature={f} engine={engine} compact />
