@@ -1,3 +1,5 @@
+import { SystemLoader } from '@/ui/src/SystemLoader';
+import { ReloadSystemButton } from '@/ui/src/ReloadSystemButton';
 import { safeReturn } from '@/ui/src/feature-origin';
 import { FeatureLink } from '@/ui/src/FeatureLink';
 import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
@@ -15,7 +17,7 @@ import { descriptionPreview, featureDescription, featureHref } from '@/ui/src/fe
 
 import { featureName, tagName } from '@/ui/src/display';
 import type { Route } from '@/ui/src/types/Route';
-import { applyDescriptionUpdate, createRegistry, download, labelFromId, readWorkspace, systemKey, updateSystemDescriptions, writeWorkspace, type Workspace } from '@/ui/src/workspace';
+import { reloadSystem, applyDescriptionUpdate, createRegistry, download, labelFromId, readWorkspace, systemKey, updateSystemDescriptions, writeWorkspace, type Workspace } from '@/ui/src/workspace';
 function readRoute(): Route {
   const [path, query] = window.location.hash.slice(1).split('?');
   const params = new URLSearchParams(query);
@@ -42,6 +44,7 @@ export function App() {
     }
   });
   const [workspace, setWorkspace] = useState(initial.workspace), [route, setRoute] = useState(readRoute), [error, setError] = useState(initial.error), [storageError, setStorageError] = useState(initial.error), [blocked, setBlocked] = useState(Boolean(initial.error));
+  const [reloadMessage, setReloadMessage] = useState('');
   const [saved, setSaved] = useState(false), [loading, setLoading] = useState(false), [creating, setCreating] = useState(false);
   const [updatingDescriptions, setUpdatingDescriptions] = useState(() => !initial.error && initial.workspace.systems.some((file) => file.id === 'dnd5e:2014-srd5.1'));
   const [selectedSystem, setSelectedSystem] = useState(systemKey(workspace.systems[0] ?? { id: '', revision: 1 })), [options, setOptions] = useState<Record<string, Value>>({});
@@ -83,7 +86,7 @@ export function App() {
         const saves: unknown = await templates.json();
         if (!cancelled)setWorkspace((current) => migrateMoney(addStarterInventory(applyDescriptionUpdate(current, existing, updated), saves)));
       } catch (e) {
-        if (!cancelled)setError(`Automatic SRD description update failed. ${errorMessage(e)} Retry with Systems → Update bundled descriptions.`);
+        if (!cancelled)setError(`Automatic SRD description update failed. ${errorMessage(e)} Retry with Systems → Reload System.`);
       } finally {
         if (!cancelled)setUpdatingDescriptions(false);
       }
@@ -145,17 +148,28 @@ export function App() {
       setLoading(false);
     }
   };
-  const refreshDescriptions = async () => {
+  const reload = async (existing: SystemFile, source?: File) => {
+    setReloadMessage('');
     setLoading(true);
     setError('');
     try {
-      const response = await fetch(bundledUrl, { cache: 'no-store' });
-      if (!response.ok) throw new Error('Bundled System could not be loaded.');
-      const incoming = parseSystemFile(await response.text());
-      const existing = workspace.systems.find((file) => systemKey(file) === systemKey(incoming));
-      if (!existing) throw new Error('Load the bundled System before updating its descriptions.');
-      const updated = updateSystemDescriptions(existing, incoming);
-      change((current) => migrateMoney(applyDescriptionUpdate(current, existing, updated)));
+      let text: string;
+      if (source) text = await source.text();
+      else {
+        const response = await fetch(bundledUrl, { cache: 'no-store' });
+        if (!response.ok) throw new Error('Bundled System could not be reloaded.');
+        text = await response.text();
+      }
+      const incoming = parseSystemFile(text);
+      const next = migrateMoney(reloadSystem(workspace, existing, incoming));
+      change((current) => {
+        if (current !== workspace) {
+          setError('The workspace changed during reload. Try again.');
+          return current;
+        }
+        setReloadMessage(`Reloaded ${incoming.configurations[0].system.name}. Characters preserved.`);
+        return next;
+      });
     } catch (e) {
       setError(errorMessage(e));
     } finally {
@@ -330,23 +344,8 @@ export function App() {
           {route.page === 'systems' && (
             <>
               <PageTitle eyebrow="Your rules, your table" title="Systems" description="Load a System from JSON. Its Classes, Features, options, and calculations become available throughout your workspace." />
-              <div className="toolbar">
-                <label className="button">
-                  Load System JSON
-                  <input
-                    className="file-input"
-                    type="file"
-                    accept=".json,application/json"
-                    disabled={loading}
-                    onChange={(e) => {
-                      const f = e.target.files?.[0];
-                      if (f) void loadFile(f);
-                      e.target.value = '';
-                    }}
-                  />
-                </label>
-                <button className="quiet" disabled={loading || workspace.systems.some((s) => s.id === 'dnd5e:2014-srd5.1')} onClick={() => void loadBundled()}>{loading ? 'Loading…' : 'Load bundled DnD5e 2014'}</button>
-              </div>
+              <SystemLoader loading={loading} bundledLoaded={workspace.systems.some((s) => s.id === 'dnd5e:2014-srd5.1')} loadBundled={() => void loadBundled()} loadFile={(file) => void loadFile(file)} />
+              {reloadMessage && <p role="status">{reloadMessage}</p>}
               <div className="cards">
                 {workspace.systems.map((file) => (
                   <article className="panel system-card" key={systemKey(file)}>
@@ -381,7 +380,7 @@ export function App() {
                       >
                         Unload System
                       </button>
-                      {file.id === 'dnd5e:2014-srd5.1' && <button className="quiet" disabled={loading} onClick={() => void refreshDescriptions()}>Update bundled descriptions</button>}
+                      <ReloadSystemButton name={file.configurations[0].system.name} loading={loading} bundled={file.id === 'dnd5e:2014-srd5.1'} reload={(source) => void reload(file, source)} />
                     </div>
                     <p className="muted small">Unloading preserves characters. Reload the same revision to resume them.</p>
                   </article>

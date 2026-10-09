@@ -2,6 +2,21 @@ import { SystemRegistry, deserializeCharacter, parseSystemFile, serializeCharact
 import type { Workspace } from '@/ui/src/types/Workspace';
 export type { Workspace } from '@/ui/src/types/Workspace';
 
+/** Replace one exact System snapshot atomically, retaining all character saves. */
+export function reloadSystem(workspace: Workspace, existing: SystemFile, incoming: unknown): Workspace {
+  if (!workspace.systems.includes(existing)) throw new Error('The System changed or was unloaded while reloading. Try again.');
+  const replacement = parseSystemFile(incoming);
+  if (systemKey(replacement) !== systemKey(existing)) throw new Error('Reload requires the same System ID and revision. Load a different revision separately.');
+  const systems = workspace.systems.map((file) => file === existing ? replacement : file);
+  const before = createRegistry(workspace.systems), after = createRegistry(systems);
+  for (const character of workspace.characters.filter((saved) => saved.system.id === existing.id && saved.system.revision === existing.revision)) {
+    const engine = after.engineForCharacter(character);
+    deserializeCharacter(serializeCharacter(character), engine);
+    if (before.engineForCharacter(character).evaluate(character).status === 'valid' && engine.evaluate(character).status !== 'valid') throw new Error(`Reload would invalidate ${character.name}. The existing System has been kept.`);
+  }
+  return { ...workspace, systems };
+}
+
 // Prototype reset: old expenditure-based saves are intentionally not loaded.
 export const STORAGE_KEY = 'ttrpg-feature-forge:v2';
 
