@@ -1,22 +1,26 @@
 import { useState } from 'react';
 import type { Character, Engine, EvaluationResult } from '@/src/index';
 
-export function CharacterDetails({ character, engine, result, update }: { character: Character; engine: Engine; result: EvaluationResult; update: (character: Character) => void }) {
+export function CharacterDetails({ character, engine, result, update, notes = false }: { character: Character; engine: Engine; result: EvaluationResult; update: (character: Character) => void; notes?: boolean }) {
   const [editing, setEditing] = useState<string | null>(null);
   const [draft, setDraft] = useState('');
   return (
     <section className="panel character-details">
-      <h2>Character details</h2>
+      <h2>{notes ? 'Notes' : 'Character details'}</h2>
       <dl className="character-facts">
-        <div>
-          <dt>Race</dt>
-          <dd>{result.instances.filter((instance) => instance.active && engine.getFeature(instance.feature)?.tags?.includes('race')).map((instance) => engine.getFeature(instance.feature)?.displayName ?? engine.getFeature(instance.feature)?.name).join(', ') || 'Not selected'}</dd>
-        </div>
-        <div>
-          <dt>Classes & levels</dt>
-          <dd>{character.progressions.filter((progression) => progression.level > 0).map((progression) => `${engine.catalogue.classes.find((cls) => cls.id === progression.class)?.name ?? progression.class} ${progression.level}`).join(' / ') || 'No class selected'}</dd>
-        </div>
-        {Object.entries({ Name: character.name, ...character.notes }).filter(([label]) => !['Starting money', 'Original money note'].includes(label)).map(([label, text]) => (
+        {!notes && (
+          <>
+            <div>
+              <dt>Race</dt>
+              <dd>{result.instances.filter((instance) => instance.active && engine.getFeature(instance.feature)?.tags?.includes('race')).map((instance) => engine.getFeature(instance.feature)?.displayName ?? engine.getFeature(instance.feature)?.name).join(', ') || 'Not selected'}</dd>
+            </div>
+            <div>
+              <dt>Classes & levels</dt>
+              <dd>{character.progressions.filter((progression) => progression.level > 0).map((progression) => `${engine.catalogue.classes.find((cls) => cls.id === progression.class)?.name ?? progression.class} ${progression.level}`).join(' / ') || 'No class selected'}</dd>
+            </div>
+          </>
+        )}
+        {Object.entries({ Name: character.name, ...character.notes }).filter(([label]) => !['Starting money', 'Original money note'].includes(label) && (notes ? !(engine.catalogue.system.importantDetails ?? ['Name', 'Alignment']).includes(label) : (engine.catalogue.system.importantDetails ?? ['Name', 'Alignment']).includes(label))).map(([label, text]) => (
           <div key={label}>
             <dt className="row">
               {label}
@@ -53,6 +57,22 @@ export function CharacterDetails({ character, engine, result, update }: { charac
           </div>
         ))}
       </dl>
+      {notes && (
+        <button
+          className="quiet"
+          onClick={() => {
+            let index = 1;
+            while (Object.hasOwn(character.notes ?? {}, `Note ${index}`)) index++;
+            const label = `Note ${index}`;
+            update({ ...character, notes: { ...character.notes, [label]: '' } });
+            setEditing(label);
+            setDraft('');
+          }}
+        >
+          Add note
+        </button>
+      )}
+
     </section>
   );
 }

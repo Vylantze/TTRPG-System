@@ -319,6 +319,23 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       if (item.source !== undefined) text(item.source);
       itemFeatures(compiled, item.id);
     }
+    if (compiled.system.importantDetails !== undefined) {
+      list(compiled.system.importantDetails);
+      compiled.system.importantDetails.forEach(text);
+    }
+    if (compiled.system.sheetTabs !== undefined) {
+      list(compiled.system.sheetTabs);
+      unique(compiled.system.sheetTabs.map((tab) => tab.id), 'sheet tab');
+      for (const tab of compiled.system.sheetTabs) {
+        text(tab.id);
+        text(tab.name);
+        if (!['choices', 'sheet', 'features', 'resources', 'notes', 'sections'].includes(tab.content)) throw new RuleError('PRESENTATION', 'Unknown sheet tab content.');
+        if (tab.sections !== undefined) {
+          list(tab.sections);
+          for (const id of tab.sections) if (!compiled.system.sheetSections?.some((section) => section.id === id)) throw new RuleError('PRESENTATION', `Unknown sheet section ${id}.`);
+        }
+      }
+    }
     if (compiled.system.sheetSections !== undefined) {
       list(compiled.system.sheetSections);
       unique(compiled.system.sheetSections.map((section) => section.id), 'sheet section');
@@ -691,6 +708,10 @@ export function checkCharacter(v: unknown): asserts v is Character {
   if (v && typeof v === 'object') checkInventory(v as Character);
   record(v);
   checkMoney(v.money);
+  if (v.displayPreferences !== undefined) {
+    record(v.displayPreferences);
+    if (Object.values(v.displayPreferences).some((entry) => typeof entry !== 'boolean')) throw new RuleError('SCHEMA', 'Display preferences must be booleans.');
+  }
   if (v.notes !== undefined) {
     record(v.notes);
     if (Object.values(v.notes).some((note) => typeof note !== 'string')) throw new RuleError('SCHEMA', 'Character notes must be text.');

@@ -1,3 +1,8 @@
+import { LoadingOverlay } from '@/ui/src/LoadingOverlay';
+import { HitPoints } from '@/ui/src/HitPoints';
+import { CharacterDetails } from '@/ui/src/CharacterDetails';
+import { SheetSectionView } from '@/ui/src/SheetSectionView';
+import type { SheetTab } from '@/src/model/SheetTab';
 import { CharacterRuleContext } from '@/ui/src/character-rule-context';
 import { FeatureRolls } from '@/ui/src/FeatureRolls';
 import { SpellBook } from '@/ui/src/SpellBook';
@@ -14,12 +19,21 @@ import { FeatureRules, RulesText } from '@/ui/src/RulesText';
 import { ResourceSummary } from '@/ui/src/ResourceSummary';
 
 export function CharacterBuilder({ engine, character, update, openFeature, report }: { engine: Engine; character: Character; update: (c: Character) => void; openFeature: (id: string) => void; report: (message: string) => void }) {
+  const tabs: SheetTab[] = engine.catalogue.system.sheetTabs ?? [
+    { id: 'choices', name: 'Build & choices', content: 'choices' },
+    { id: 'stats', name: 'Character sheet', content: 'sheet' },
+    { id: 'features', name: 'Features & traits', content: 'features' },
+    { id: 'resources', name: 'Abilities & resources', content: 'resources' },
+    { id: 'notes', name: 'Notes', content: 'notes' },
+  ];
+  const [showSummary, setShowSummary] = useState(false);
   const [changingTab, startTabChange] = useTransition();
   const result = useMemo(() => engine.evaluate(character), [engine, character]);
   const [tab, setTab] = useState(() => {
       const requested = typeof window !== 'undefined' ? new URLSearchParams(window.location.hash.split('?')[1]).get('view') : null;
-      return requested && ['stats', 'choices', 'features', 'resources'].includes(requested) ? requested : character.buildState === 'finalized' ? 'stats' : 'choices';
+      return requested && tabs.some((entry) => entry.id === requested) ? requested : (tabs.find((entry) => entry.content === (character.buildState === 'finalized' ? 'sheet' : 'choices')) ?? tabs[0])?.id;
     }), [level, setLevel] = useState('all'), [classId, setClassId] = useState(engine.catalogue.classes[0]?.id ?? '');
+  const currentTab = tabs.find((entry) => entry.id === tab) ?? tabs[0];
   const [preview, setPreview] = useState<{ edits: Edit[]; result: EditPreview } | null>(null);
   const attempt = (action: () => void) => {
     try {
@@ -91,29 +105,31 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
             {result.characterLevel}
           </p>
         </div>
-        <span role="status" aria-live="polite" className={`badge ${result.status}`}>{result.status === 'valid' && character.buildState === 'draft' ? 'Ready to finalize' : result.status}</span>
+        <button aria-expanded={showSummary || result.status === 'invalid'} aria-controls="build-summary" onClick={() => setShowSummary(!showSummary)} className={`badge ${result.status}`}>{result.status === 'valid' && character.buildState === 'draft' ? 'Ready to finalize' : result.status}</button>
       </div>
-      <div className="summary-strip">
-        <div>
-          <span>Selections</span>
-          <strong>{result.selections.reduce((n, s) => n + s.picks.length, 0)}</strong>
+      {(showSummary || result.status === 'invalid') && (
+        <div id="build-summary" className="summary-strip">
+          <div>
+            <span>Selections</span>
+            <strong>{result.selections.reduce((n, s) => n + s.picks.length, 0)}</strong>
+          </div>
+          <div>
+            <span>Open requirements</span>
+            <strong>{result.diagnostics.length}</strong>
+          </div>
+          <div>
+            <span>Acquired Features</span>
+            <strong>{result.instances.filter((i) => i.active && i.eligible).length}</strong>
+          </div>
+          <div>
+            <span>Resource pools</span>
+            <strong>{Object.keys(result.resources).length}</strong>
+          </div>
         </div>
-        <div>
-          <span>Open requirements</span>
-          <strong>{result.diagnostics.length}</strong>
-        </div>
-        <div>
-          <span>Acquired Features</span>
-          <strong>{result.instances.filter((i) => i.active && i.eligible).length}</strong>
-        </div>
-        <div>
-          <span>Resource pools</span>
-          <strong>{Object.keys(result.resources).length}</strong>
-        </div>
-      </div>
-      {changingTab && <p className="loading-banner" role="status">Loading character section…</p>}
+      )}
+      {changingTab && <LoadingOverlay />}
       <nav className="subnav" aria-label="Character sections">
-        {[['choices', 'Build & choices'], ['stats', 'Character sheet'], ['features', 'Features & traits'], ['resources', 'Abilities & resources']].map(([id, name]) => (
+        {tabs.map(({ id, name }) => (
           <button
             key={id}
             className={tab === id ? 'active' : ''}
@@ -143,7 +159,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
           <p>Totals are provisional until every requirement is satisfied.</p>
         </details>
       )}
-      {tab === 'choices' && (
+      {currentTab?.content === 'choices' && (
         <div className="builder-grid">
           <aside className="builder-setup">
             <section className="panel">
@@ -262,28 +278,20 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
           </section>
         </div>
       )}
-      {tab === 'stats' && <CharacterSheet engine={engine} character={character} result={result} update={update} report={report} />}
-      {character.buildState !== 'draft' && (
-        <button
-          className="quiet"
-          onClick={() => attempt(() => {
-            update(reopenCharacter(engine, character, crypto.randomUUID()));
-            setTab('choices');
-          })}
-        >
-          Edit build
-        </button>
-      )}
-      {tab === 'features' && <CharacterFeatures engine={engine} character={character} result={result} openFeature={openFeature} />}
-      {tab === 'resources' && (
+      {currentTab?.content === 'notes' && <CharacterDetails notes engine={engine} character={character} result={result} update={update} />}
+      {currentTab?.content === 'sections' && (engine.catalogue.system.sheetSections ?? []).filter((section) => currentTab.sections?.includes(section.id)).map((section) => <SheetSectionView key={section.id} section={section} engine={engine} character={character} result={result} update={update} />)}
+      {currentTab?.content === 'sheet' && <CharacterSheet sectionIds={currentTab.sections} engine={engine} character={character} result={result} update={update} report={report} />}
+      {currentTab?.content === 'features' && <CharacterFeatures engine={engine} character={character} result={result} openFeature={openFeature} />}
+      {currentTab?.content === 'resources' && (
         <>
+          <HitPoints engine={engine} character={character} result={result} update={update} report={report} />
           <div className="toolbar">
             {[...new Set([...Object.values(result.resources).flatMap((p) => p.recovery.map((r) => r.event)), ...(abilities.some((ability) => ability.definition.name === engine.catalogue.system.commandRules?.selectedRecovery?.capabilityName) ? [engine.catalogue.system.commandRules!.selectedRecovery!.requiredEvent] : [])])].map((event) => <button className="quiet" key={event} disabled={!ready} onClick={() => attempt(() => update(recoverResources(engine, character, event, crypto.randomUUID())))}>{labelFromId(event)}</button>)}
             {Boolean(character.rollResults?.length) && <button className="quiet" onClick={() => update(clearFeatureRolls(character))}>Clear all rolls</button>}
           </div>
           <h2>Abilities</h2>
           <div className="ability-list">{abilities.map(ability)}</div>
-          {Object.values(result.resources).filter((pool) => !slotIds.has(pool.id) && !abilities.some((capability) => Object.hasOwn(capability.costs, pool.id))).map((pool) => <div className="standalone-resource" key={pool.id}>{resource(pool.id)}</div>)}
+          {Object.values(result.resources).filter((pool) => pool.key !== 'hit-points' && !slotIds.has(pool.id) && !abilities.some((capability) => Object.hasOwn(capability.costs, pool.id))).map((pool) => <div className="standalone-resource" key={pool.id}>{resource(pool.id)}</div>)}
           <SpellBook engine={engine} character={character} result={result} ready={ready} update={update} report={report} />
           {Object.entries(character.pending).map(([id, pending]) => (
             <section className="panel" key={id}>
@@ -311,6 +319,17 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
             </section>
           ))}
         </>
+      )}
+      {character.buildState !== 'draft' && (
+        <button
+          className="quiet"
+          onClick={() => attempt(() => {
+            update(reopenCharacter(engine, character, crypto.randomUUID()));
+            setTab(tabs.find((entry) => entry.content === 'choices')?.id ?? tabs[0]?.id);
+          })}
+        >
+          Edit build
+        </button>
       )}
       {preview && (
         <Modal title="Review build change" onClose={() => setPreview(null)}>

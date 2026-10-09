@@ -1,3 +1,4 @@
+import type { SheetTab } from '@/src/model/SheetTab.js';
 import type { Value } from '@/src/model/Value.js';
 import type { Expression } from '@/src/model/Expression.js';
 import type { Predicate } from '@/src/model/Predicate.js';
@@ -10,6 +11,8 @@ import type { CurrencyDefinition } from '@/src/model/CurrencyDefinition.js';
 import type { SpellDisplay } from '@/src/model/SpellDisplay.js';
 
 export interface SystemDefinition {
+  sheetTabs?: SheetTab[];
+  importantDetails?: string[];
   spellDisplay?: SpellDisplay;
   currency?: CurrencyDefinition;
   sheetSections?: SheetSection[];
