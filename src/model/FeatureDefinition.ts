@@ -10,6 +10,8 @@ export interface FeatureDefinition {
   textReferences?: string[];
   /** Alternate source names for automatic prose links; never grants rules. */
   textAliases?: string[];
+  /** Ambiguous prose names require an adjacent phrase; display-only, case-insensitive. */
+  textLinkContext?: { before?: string[]; after?: string[] };
   prerequisites?: Predicate; maintenance?: Predicate; resources?: ResourceRequirement[];
   repeat?: { maximum: number; scope: 'character' | 'progression' | 'parent'; uniqueBy?: string[] };
   parameters?: Record<string, ParameterDefinition>; tables?: Record<string, ScalingTable>; components: Component[];

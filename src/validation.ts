@@ -267,6 +267,20 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       }
     }
     for (const f of c.features) if (f.displayName !== undefined) text(f.displayName);
+    for (const f of c.features) if (f.textLinkContext !== undefined) {
+      record(f.textLinkContext);
+      if (Object.keys(f.textLinkContext).some((key) => !['before', 'after'].includes(key))) throw new RuleError('SCHEMA', 'Unknown text link context field.');
+      let count = 0;
+      for (const phrases of [f.textLinkContext.before, f.textLinkContext.after]) if (phrases !== undefined) {
+        list(phrases);
+        for (const phrase of phrases) {
+          text(phrase);
+          if (!phrase.trim()) throw new RuleError('SCHEMA', 'Empty text link context phrase.');
+          count++;
+        }
+      }
+      if (!count) throw new RuleError('SCHEMA', 'Text link context requires a phrase.');
+    }
     for (const f of c.features) if (f.textAliases !== undefined) {
       list(f.textAliases);
       unique(f.textAliases, 'text alias');

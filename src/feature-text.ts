@@ -29,8 +29,10 @@ function normalized(text: string) {
 /** A reusable, System-independent index. Ambiguous names retain every target. */
 export class FeatureTextIndex {
   private readonly root = node();
+  private readonly contexts = new Map<string, NonNullable<FeatureDefinition['textLinkContext']>>();
   constructor(features: readonly FeatureDefinition[]) {
     const definitions = new Map(features.map((feature) => [feature.id, feature]));
+    for (const feature of features) if (feature.textLinkContext) this.contexts.set(feature.id, feature.textLinkContext);
     for (const feature of features) for (const name of [feature.displayName ?? feature.name, ...(feature.textAliases ?? [])]) {
       const label = normalized(name).value.trim();
       if (!label) continue;
@@ -55,7 +57,7 @@ export class FeatureTextIndex {
         const next = current.children.get(value[end]);
         if (!next) break;
         current = next;
-        const ids = [...current.ids].filter((id) => !ignored.has(id)).sort();
+        const ids = [...current.ids].filter((id) => !ignored.has(id) && this.matchesContext(id, value, start, end + 1)).sort();
         if (current.ids.size && !word(value[end + 1])) match = { end, ids };
       }
       if (match) {
@@ -65,5 +67,18 @@ export class FeatureTextIndex {
       }
     }
     return spans;
+  }
+
+  private matchesContext(id: string, text: string, start: number, end: number): boolean {
+    const context = this.contexts.get(id);
+    if (!context) return true;
+    const before = text.slice(0, start).trimEnd(), after = text.slice(end).trimStart();
+    return !!context.before?.some((phrase) => {
+      const match = normalized(phrase).value.trim();
+      return before.endsWith(match) && !word(before[before.length - match.length - 1]);
+    }) || !!context.after?.some((phrase) => {
+      const match = normalized(phrase).value.trim();
+      return after.startsWith(match) && !word(after[match.length]);
+    });
   }
 }

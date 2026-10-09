@@ -96,6 +96,7 @@ test('description refresh preserves pinned rules and rejects mechanical changes'
     delete f.description;
     delete f.textReferences;
     delete f.textAliases;
+    delete f.textLinkContext;
     delete f.source;
     delete f.displayName;
   });
