@@ -13,6 +13,8 @@ export interface FeatureDefinition {
   textReferences?: string[];
   /** Alternate source names for automatic prose links; never grants rules. */
   textAliases?: string[];
+  /** Phrases to keep literal when personalizing character-sheet descriptions. */
+  preserveValuePhrases?: string[];
   /** Ambiguous prose names require an adjacent phrase; display-only, case-insensitive. */
   textLinkContext?: { before?: string[]; after?: string[] };
   prerequisites?: Predicate; maintenance?: Predicate; resources?: ResourceRequirement[];

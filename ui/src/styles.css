@@ -184,3 +184,13 @@ pre { max-width:100%; overflow:auto; white-space:pre-wrap; overflow-wrap:anywher
 button.resource-adjust-button { box-sizing: border-box; flex: 0 0 2rem; width: 2rem; height: 2rem; min-width: 2rem; min-height: 2rem; max-width: 2rem; max-height: 2rem; padding: 0; margin: 0; line-height: 1; font-size: .875rem; display: inline-flex; align-items: center; justify-content: center; }
 .roll-control { min-width: 0; }
 .roll-result { padding: .5rem .75rem; border: 1px solid var(--line); border-radius: .5rem; }
+
+.character-title > div:first-child { flex:1; min-width:0; }
+.character-title .name-input { width:100%; max-width:none; box-sizing:border-box; }
+.character-title > .badge { flex-shrink:0; }
+.acquired-feature > .resource-card, .acquired-feature > .panel, .acquired-feature > .feature-rolls:not(:empty) { margin-block:1rem; }
+.spell-level > summary { font-size:1.2rem; font-weight:600; cursor:pointer; margin-block:1rem; }
+.spell-action { display:flex; flex-direction:column; align-items:flex-end; gap:.6rem; max-width:100%; }
+.spell-action small { max-width:28rem; overflow-wrap:anywhere; }
+
+.character-title { gap:1rem; flex-wrap:nowrap; }

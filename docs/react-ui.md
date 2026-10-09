@@ -126,3 +126,9 @@ Features & Traits nests child Features under their owning instance. Resource chi
 Loading indicators cover initial startup, navigation, character tabs, and System loading. Engines are reused per loaded configuration, catalogue search runs only on the Feature list, immutable System packing is cached, and requirement lookup tests a single Feature against selection filters instead of repeatedly scanning every Feature. Explicit System reload accepts additive manifest entries while retaining character choices and balances; removing or changing pinned revisions is rejected.
 
 For spells with Roll Features, Use Spell opens casting options and roll controls without spending a slot. Rolling spends the selected mode and retains the result on the spell card. Mark applied records manual target application once, independently of casting. Spell descriptions do not expose a second free dice control. Feature views also require a matching casting option.
+
+The character-name field fills the space before the status badge. Recovery buttons lead the resource view; currency labels include symbols in their headings. Spell levels are native collapsible sections, initially expanded. Spell use controls appear only for granted rolls or positive resource costs, include available roll expressions, and show casting consumption beside the control.
+
+Feature `preserveValuePhrases` is a display-only list of case-insensitive replacement phrases (for example `wizard level`) to keep literal. Hit Points descriptions preserve class-level phrases while still resolving modifiers. Alternatives for future authoring are a whole-description opt-out or explicit value tokens; explicit tokens offer precise occurrence-level control but require separate display markup instead of changing source prose.
+
+The favicon is an original vector wizard-hat die in `ui/public/wizard-die.svg`, pending visual review.

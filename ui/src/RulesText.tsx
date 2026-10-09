@@ -21,11 +21,11 @@ function textIndex(engine: Engine) {
   return index;
 }
 /** Link matching preserves source characters; imported HTML/Markdown stays inert. */
-export function RulesText({ text, source, engine, openFeature, exclude = [], onPreview }: { text?: string; source?: string } & References) {
+export function RulesText({ text, source, engine, openFeature, exclude = [], onPreview, preserveValuePhrases = [] }: { text?: string; source?: string; preserveValuePhrases?: string[] } & References) {
   const [preview, setPreview] = useState<Preview>();
   const origin = useContext(FeatureOrigin);
   const characterContext = useContext(CharacterRuleContext);
-  const prose = (value: string) => engine && characterContext ? personalizedText(value, engine, characterContext.character, characterContext.result) : value;
+  const prose = (value: string) => engine && characterContext ? personalizedText(value, engine, characterContext.character, characterContext.result, preserveValuePhrases) : value;
   const index = useMemo(() => engine ? textIndex(engine) : undefined, [engine]);
   if (!text) return null;
   const linked = (paragraph: string) => {
@@ -111,7 +111,7 @@ export function ReferencePopup({ reference, engine, openFeature, onClose }: { re
 export function FeatureRules({ feature, engine, openFeature, onPreview, instanceId, showRolls = true }: { feature: FeatureDefinition; engine: Engine; instanceId?: string; showRolls?: boolean; openFeature?: (id: string) => void; onPreview?: (reference: Preview) => void }) {
   return (
     <>
-      <RulesText text={descriptionBody(feature)} source={feature.source} engine={engine} openFeature={openFeature} exclude={[feature.id]} onPreview={onPreview} />
+      <RulesText preserveValuePhrases={feature.preserveValuePhrases} text={descriptionBody(feature)} source={feature.source} engine={engine} openFeature={openFeature} exclude={[feature.id]} onPreview={onPreview} />
       {showRolls && <FeatureRolls feature={feature} engine={engine} instanceId={instanceId} />}
       {feature.textReferences?.map((id) => {
         const reference = engine.catalogue.features.find((f) => f.id === id);
@@ -119,7 +119,7 @@ export function FeatureRules({ feature, engine, openFeature, onPreview, instance
           ? (
               <section className="shared-rules" key={id}>
                 <h3>{featureName(reference)}</h3>
-                <RulesText text={descriptionBody(reference)} source={reference.source} engine={engine} openFeature={openFeature} exclude={[feature.id, id]} onPreview={onPreview} />
+                <RulesText preserveValuePhrases={reference.preserveValuePhrases} text={descriptionBody(reference)} source={reference.source} engine={engine} openFeature={openFeature} exclude={[feature.id, id]} onPreview={onPreview} />
                 {showRolls && !feature.roll && <FeatureRolls feature={reference} engine={engine} />}
                 <FeatureLink id={id} engine={engine}>
                   {'View '}

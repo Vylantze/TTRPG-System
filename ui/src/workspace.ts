@@ -106,8 +106,8 @@ export function updateSystemDescriptions(existing: SystemFile, incoming: SystemF
   };
   visit(existing);
   visit(validated);
-  const strip = (definition: { description?: string; source?: string; textReferences?: string[]; textAliases?: string[]; textLinkContext?: unknown; displayName?: string }) => {
-    const { description, source, textReferences, textAliases, textLinkContext, displayName, ...rules } = definition;
+  const strip = (definition: { description?: string; source?: string; textReferences?: string[]; textAliases?: string[]; textLinkContext?: unknown; preserveValuePhrases?: string[]; displayName?: string }) => {
+    const { description, source, textReferences, textAliases, textLinkContext, preserveValuePhrases, displayName, ...rules } = definition;
     return rules;
   };
   const featureRules = (feature: SystemFile['features'][number]) => {
