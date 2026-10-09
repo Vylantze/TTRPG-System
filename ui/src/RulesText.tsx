@@ -5,7 +5,7 @@ import { descriptionBlocks } from '@/ui/src/description-blocks';
 import { FeatureOrigin } from '@/ui/src/feature-origin';
 import { FeatureLink } from '@/ui/src/FeatureLink';
 import { featureHref, descriptionBody } from '@/ui/src/feature-description';
-import { useContext, useMemo, useState, type ReactNode } from 'react';
+import { Fragment, useContext, useMemo, useState, type ReactNode } from 'react';
 import { FeatureTextIndex, type Engine, type FeatureDefinition } from '@/src/index';
 import { Modal } from '@/ui/src/Modal';
 import { featureName } from '@/ui/src/display';
@@ -21,14 +21,16 @@ function textIndex(engine: Engine) {
   return index;
 }
 /** Link matching preserves source characters; imported HTML/Markdown stays inert. */
-export function RulesText({ text, source, engine, openFeature, exclude = [], onPreview, preserveValuePhrases = [] }: { text?: string; source?: string; preserveValuePhrases?: string[] } & References) {
+export function RulesText({ text, source, engine, openFeature, exclude = [], onPreview, processDescription = true, descriptionOverride }: { text?: string; source?: string; processDescription?: boolean; descriptionOverride?: string } & References) {
   const [preview, setPreview] = useState<Preview>();
   const origin = useContext(FeatureOrigin);
   const characterContext = useContext(CharacterRuleContext);
-  const prose = (value: string) => engine && characterContext ? personalizedText(value, engine, characterContext.character, characterContext.result, preserveValuePhrases) : value;
+  const explicit = Boolean(characterContext && descriptionOverride !== undefined);
+  const displayedText = explicit ? descriptionOverride : text;
+  const prose = (value: string) => engine && characterContext && (explicit || processDescription) ? personalizedText(value, engine, characterContext.character, characterContext.result, explicit) : value;
   const index = useMemo(() => engine ? textIndex(engine) : undefined, [engine]);
-  if (!text) return null;
-  const linked = (paragraph: string) => {
+  if (!displayedText) return null;
+  const linkedProse = (paragraph: string) => {
     const children: ReactNode[] = [];
     let offset = 0;
     for (const span of index?.resolve(paragraph, exclude) ?? []) {
@@ -55,7 +57,8 @@ export function RulesText({ text, source, engine, openFeature, exclude = [], onP
     children.push(prose(paragraph.slice(offset)));
     return children;
   };
-  const paragraphs = descriptionBlocks(text).map((block, key) => block.kind === 'paragraph' ? <p key={key}>{linked(block.lines.join('\n'))}</p> : block.kind === 'ul' ? <ul key={key}>{block.lines.map((line, index) => <li key={index}>{linked(line)}</li>)}</ul> : <ol start={block.start} key={key}>{block.lines.map((line, index) => <li key={index}>{linked(line)}</li>)}</ol>);
+  const linked = (paragraph: string) => explicit ? paragraph.split(/(\{\{[^{}]*\}\})/g).map((part, index) => <Fragment key={index}>{part.startsWith('{{') ? prose(part) : linkedProse(part)}</Fragment>) : linkedProse(paragraph);
+  const paragraphs = descriptionBlocks(displayedText).map((block, key) => block.kind === 'paragraph' ? <p key={key}>{linked(block.lines.join('\n'))}</p> : block.kind === 'ul' ? <ul key={key}>{block.lines.map((line, index) => <li key={index}>{linked(line)}</li>)}</ul> : <ol start={block.start} key={key}>{block.lines.map((line, index) => <li key={index}>{linked(line)}</li>)}</ol>);
   return (
     <div className="rules-text">
       {paragraphs}
@@ -111,7 +114,7 @@ export function ReferencePopup({ reference, engine, openFeature, onClose }: { re
 export function FeatureRules({ feature, engine, openFeature, onPreview, instanceId, showRolls = true }: { feature: FeatureDefinition; engine: Engine; instanceId?: string; showRolls?: boolean; openFeature?: (id: string) => void; onPreview?: (reference: Preview) => void }) {
   return (
     <>
-      <RulesText preserveValuePhrases={feature.preserveValuePhrases} text={descriptionBody(feature)} source={feature.source} engine={engine} openFeature={openFeature} exclude={[feature.id]} onPreview={onPreview} />
+      <RulesText processDescription={feature.processDescription} descriptionOverride={feature.descriptionOverride} text={descriptionBody(feature)} source={feature.source} engine={engine} openFeature={openFeature} exclude={[feature.id]} onPreview={onPreview} />
       {showRolls && <FeatureRolls feature={feature} engine={engine} instanceId={instanceId} />}
       {feature.textReferences?.map((id) => {
         const reference = engine.catalogue.features.find((f) => f.id === id);
@@ -119,7 +122,7 @@ export function FeatureRules({ feature, engine, openFeature, onPreview, instance
           ? (
               <section className="shared-rules" key={id}>
                 <h3>{featureName(reference)}</h3>
-                <RulesText preserveValuePhrases={reference.preserveValuePhrases} text={descriptionBody(reference)} source={reference.source} engine={engine} openFeature={openFeature} exclude={[feature.id, id]} onPreview={onPreview} />
+                <RulesText processDescription={reference.processDescription} descriptionOverride={reference.descriptionOverride} text={descriptionBody(reference)} source={reference.source} engine={engine} openFeature={openFeature} exclude={[feature.id, id]} onPreview={onPreview} />
                 {showRolls && !feature.roll && <FeatureRolls feature={reference} engine={engine} />}
                 <FeatureLink id={id} engine={engine}>
                   {'View '}

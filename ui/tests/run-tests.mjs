@@ -104,13 +104,15 @@ test('description refresh preserves pinned rules and rejects mechanical changes'
     delete f.description;
     delete f.textReferences;
     delete f.textAliases;
-    delete f.preserveValuePhrases;
+    delete f.processDescription;
+    delete f.descriptionOverride;
     delete f.textLinkContext;
     delete f.source;
     delete f.displayName;
   });
   older.configurations.forEach((c) => {
     delete c.system.tagDisplayNames;
+    delete c.system.descriptionTokens;
     c.classes.forEach((cls) => {
       delete cls.description;
       delete cls.source;
@@ -215,6 +217,7 @@ test('React uses Feature and tag display names while retaining internal filter i
   delete legacy.features.find((feature) => feature.id.endsWith(':skill.acrobatics')).displayName;
   legacy.configurations.forEach((c) => {
     delete c.system.tagDisplayNames;
+    delete c.system.descriptionTokens;
   });
   assert.match(render({ version: 1, systems: [legacy], characters: [] }, '#features?q=acrobatics'), /Proficiency: acrobatics/);
 });
@@ -583,6 +586,28 @@ test('spell levels collapse and free utility spells have no use control', () => 
   const sheet = render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=stats`);
   assert.match(sheet, /Copper \(cp\)/);
   assert.doesNotMatch(sheet, /<span>cp<\/span>/);
+});
+
+test('description flags and full overrides use explicit tokens without automatic substitutions', () => {
+  const { engine, character } = exampleCharacter({ classes: [{ class: 'wizard', level: 3 }] });
+  const result = engine.evaluate(character);
+  const show = (feature, contextual = true) => {
+    const rules = createElement(FeatureRules, { engine, feature });
+    return renderToStaticMarkup(contextual ? createElement(CharacterRuleContext.Provider, { value: { character, result, update: () => {}, report: () => {} } }, rules) : rules);
+  };
+  const feature = { id: 'example', revision: 1, name: 'Example', components: [], description: 'your Constitution modifier per wizard level', processDescription: false };
+  assert.match(show(feature), /your Constitution modifier per wizard level/);
+  assert.doesNotMatch(show(feature), /resolved-value/);
+  const override = { ...feature, descriptionOverride: '{{CON}} + {{stat:constitution}} per wizard level; Constitution modifier. {{UNKNOWN}} {{CON}} <script>bad</script>' };
+  const html = show(override);
+  assert.equal((html.match(/resolved-value/g) ?? []).length, 3);
+  assert.match(html, /per wizard level; Constitution modifier/);
+  assert.match(html, /{{UNKNOWN}}/);
+  assert.doesNotMatch(html, /<script>/);
+  assert.equal(show({ ...override, processDescription: true }), html);
+  assert.match(show(override, false), /your Constitution modifier per wizard level/);
+  assert.doesNotMatch(show({ ...override, descriptionOverride: '' }), /wizard level/);
+  assert.match(show({ ...feature, processDescription: true }), /resolved-value/);
 });
 
 await server.close();

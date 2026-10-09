@@ -129,6 +129,8 @@ For spells with Roll Features, Use Spell opens casting options and roll controls
 
 The character-name field fills the space before the status badge. Recovery buttons lead the resource view; currency labels include symbols in their headings. Spell levels are native collapsible sections, initially expanded. Spell use controls appear only for granted rolls or positive resource costs, include available roll expressions, and show casting consumption beside the control.
 
-Feature `preserveValuePhrases` is a display-only list of case-insensitive replacement phrases (for example `wizard level`) to keep literal. Hit Points descriptions preserve class-level phrases while still resolving modifiers. Alternatives for future authoring are a whole-description opt-out or explicit value tokens; explicit tokens offer precise occurrence-level control but require separate display markup instead of changing source prose.
+Feature `processDescription` controls automatic character-value replacement in source prose (default true). `descriptionOverride` supplies the complete character-sheet display text and always uses explicit tokens only, regardless of the flag; ordinary prose is never automatically replaced in an override. The source `description` stays intact for catalogue views. An empty override intentionally hides its prose. Paragraphs, lists, safe text escaping, and Feature links work in both modes.
 
-The favicon is an original vector wizard-hat die in `ui/public/wizard-die.svg`, pending visual review.
+The System's `descriptionTokens` maps aliases to stat IDs. DnD5e defines `{{CON}}` as Constitution modifier and the other five ability abbreviations likewise; `{{PB}}` is proficiency bonus. `{{stat:constitution}}` reads the score directly, and `{{class:dnd5e:2014:wizard}}` reads Wizard level. Unknown or unavailable tokens remain literal. Resolved values retain their descriptive hover labels. No expressions or executable code are evaluated. Hit Points uses `processDescription: false` and a full override with `{{CON}}`, keeping “wizard level” literal.
+
+The favicon is an original vector wizard-hat d6 in `ui/public/wizard-die.svg`, pending visual review.
