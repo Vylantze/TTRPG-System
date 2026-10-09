@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T15:00:11.353Z
+Export refreshed UTC: 2026-10-09T15:06:07.641Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -1102,5 +1102,39 @@ The UI regression run is still in progress. The engine and lint checks have pass
 
 [2026-10-09T15:00:02.904Z] ASSISTANT
 All 197 engine/configuration tests and 19 UI tests pass, and the production build succeeds. I’m committing the changes and pushing `develop`.
+
+----------------------------------------
+
+[2026-10-09T15:01:55.390Z] ASSISTANT
+Updated ESLint to use recommended JavaScript, TypeScript, React, and Stylistic presets.
+
+- Enforces consistent formatting and stricter code checks.
+- Covers source, tools, examples, and tests.
+- Preserves one-definition-per-file checks and automatic pre-commit linting.
+- Adds EditorConfig and consistent line endings.
+
+Validation: 197 engine/configuration tests, 19 UI tests, lint, and production build passed.
+
+Committed as `afc4355` and pushed to `develop`.
+
+----------------------------------------
+
+[2026-10-09T15:03:30.482Z] USER
+Add Github Actions for a Github page for the UI.
+
+----------------------------------------
+
+[2026-10-09T15:03:34.276Z] ASSISTANT
+I’ll add a GitHub Pages deployment workflow for the React UI and check that its asset paths work under the repository’s Pages URL.
+
+----------------------------------------
+
+[2026-10-09T15:04:21.134Z] ASSISTANT
+GitHub Pages is already configured to deploy through Actions. I’ll deploy from `develop`, run lint and both test suites before publishing, and use GitHub’s Pages base path so scripts, styles, and System JSON load correctly.
+
+----------------------------------------
+
+[2026-10-09T15:05:56.576Z] ASSISTANT
+The Pages build passes, including the repository-prefixed asset URLs. I found one deployment blocker: the `github-pages` environment only allows `master`, while the current app is on `develop`. The GitHub account has push access but no admin access to change that restriction. I’ll finish the workflow; a repository admin will need to allow `develop` under Settings → Environments → github-pages.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
