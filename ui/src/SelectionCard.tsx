@@ -11,8 +11,9 @@ const PAGE = 12;
 export function SelectionCard ({slot,engine,character,edit,openFeature,ownerName}:{slot:SelectionResult;engine:Engine;character:Character;edit:(edits:Edit[])=>void;openFeature:(id:string)=>void;ownerName?:string}) {
   const [open,setOpen] = useState(false),[query,setQuery] = useState(''),[page,setPage] = useState(0),[event,setEvent] = useState('');
   const definitions = engine.catalogue.features;
+  const pool = useMemo(()=>engine.getSelectionFeatures(slot.definition),[engine,slot.definition]);
   const title = ownerName ? `${ownerName} · ${labelFromId(slot.definition.id)}` : labelFromId(slot.definition.id);
-  const matches = useMemo(()=>definitions.filter(f=>(!slot.definition.candidates.ids || slot.definition.candidates.ids.includes(f.id)) && (!slot.definition.candidates.tags || slot.definition.candidates.tags.every(t=>f.tags?.includes(t))) && `${featureName(f)} ${f.name} ${f.tags?.map(tag=>tagName(engine.catalogue.system,tag)).join(' ') ?? ''}`.toLowerCase().includes(query.toLowerCase())),[definitions,slot.definition,query,engine.catalogue.system]);
+  const matches = useMemo(()=>pool.filter(f=> `${featureName(f)} ${f.name} ${f.tags?.map(tag=>tagName(engine.catalogue.system,tag)).join(' ') ?? ''}`.toLowerCase().includes(query.toLowerCase())),[pool,query,engine.catalogue.system]);
   const visible = useMemo(()=>matches.slice(page * PAGE,(page + 1) * PAGE),[matches,page]);
   const candidates = useMemo(()=>open ? engine.getCandidates(character,slot.id,{}, {features:visible.map(f=>f.id)}) : [],[engine,character,slot.id,open,visible]);
   const picks = character.selections[slot.id] ?? [];

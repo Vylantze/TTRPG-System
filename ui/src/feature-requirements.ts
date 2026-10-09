@@ -41,8 +41,5 @@ function levelList (levels:number[]):string {
 
 /** Class grants need no redundant level predicate: expose their authored progression timing. */
 export function advancementLabels (feature:FeatureDefinition,engine:Engine):string[] {
-  return engine.catalogue.classes.flatMap(cls=>{
-    const levels = Object.entries(cls.levels).filter(([,entries])=>entries.some(entry=>entry.kind === 'grantFeature' ? entry.feature === feature.id : entry.candidates.ids?.includes(feature.id))).map(([level])=>Number(level));
-    return levels.length ? [`${cls.name} ${levels.length === 1 ? 'level' : 'levels'} ${levelList(levels)}`] : [];
-  });
+  return engine.getFeatureAdvancement(feature.id).map(({className,levels})=>`${className} ${levels.length === 1 ? 'level' : 'levels'} ${levelList(levels)}`);
 }

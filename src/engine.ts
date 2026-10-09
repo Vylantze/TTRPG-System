@@ -3,6 +3,8 @@ import type { Catalogue, Character, Choice, Diagnostic, Expression, FunctionRegi
   Predicate, EvaluationResult, StatResult, Modifier, ModifierExplanation, PoolResult, Resource,
   ResourceRequirement, Candidate, Pick, Progression, RootAcquisition } from './model.js';
 import type { StatView } from './types/StatView.js';
+import type { ClassLevel } from './types/ClassLevel.js';
+import type { FeatureAdvancement } from './types/FeatureAdvancement.js';
 import { checkCharacter, validateCatalogue } from './validation.js';
 
 export const segment = (id: string): string => encodeURIComponent(id);
@@ -18,6 +20,32 @@ function diagnostic (error: unknown, path: string): Diagnostic {
   return { code: e.code, message: e.message, severity: 'invalid', path: e.path || path };
 }
 export class Engine {
+  /** Catalogue lookup; definitions are frozen with the engine's catalogue. */
+  getFeature (id: string): Catalogue['features'][number] | undefined { return this.features.get(id); }
+
+  /** Authored levels, in numerical order. No character state or rules are changed. */
+  getClassLevels (classId: string): ClassLevel[] {
+    const cls = this.catalogue.classes.find(item => item.id === classId);
+    return Object.entries(cls?.levels ?? {}).sort(([a, b]) => Number(a) - Number(b))
+      .map(([level, entries]) => ({ level: Number(level), entries: [...entries] }));
+  }
+
+  /** Structural candidates only. Call getCandidates to check a character's eligibility,
+   * including dynamic level limits, prerequisites, conditions and resource contracts. */
+  getSelectionFeatures (choice: Choice): Catalogue['features'] {
+    return this.catalogue.features.filter(feature => (!choice.candidates.ids || choice.candidates.ids.includes(feature.id))
+      && (!choice.candidates.tags || choice.candidates.tags.every(tag => feature.tags?.includes(tag))));
+  }
+
+  /** Direct Class grants and selection pools, not a promise of character eligibility. */
+  getFeatureAdvancement (featureId: string): FeatureAdvancement[] {
+    if (!this.getFeature(featureId)) return [];
+    return this.catalogue.classes.flatMap(cls => {
+      const levels = this.getClassLevels(cls.id).filter(row => row.entries.some(entry => entry.kind === 'grantFeature'
+        ? entry.feature === featureId : this.getSelectionFeatures(entry).some(feature => feature.id === featureId))).map(row => row.level);
+      return levels.length ? [{ classId: cls.id, className: cls.name, levels }] : [];
+    });
+  }
   readonly catalogue: Catalogue;
   private readonly features: Map<string, Catalogue['features'][number]>;
   constructor (catalogue: Catalogue, private functions: FunctionRegistry = {}) {
@@ -410,7 +438,7 @@ export class Engine {
   getCandidates (character: Character, selection: string, parameters: Record<string, Value> = {}, options: { features?: string[] } = {}): Candidate[] {
     const result = this.evaluate(character), slot = result.selections.find(s => s.id === selection);
     if (!slot) throw new RuleError('UNKNOWN_SELECTION', `Unknown active selection ${selection}.`);
-    return this.catalogue.features.filter(f => (!options.features || options.features.includes(f.id)) && (!slot.definition.candidates.ids || slot.definition.candidates.ids.includes(f.id)) && (!slot.definition.candidates.tags || slot.definition.candidates.tags.every(t => f.tags?.includes(t)))).map(f => {
+    return this.getSelectionFeatures(slot.definition).filter(f => !options.features || options.features.includes(f.id)).map(f => {
       const draft = clone(character), pick: Pick = { id: 'candidate-preview', feature: f.id, parameters };
       draft.selections[selection] = [...(character.selections[selection] ?? []).slice(0, Math.max(0, slot.maximum - 1)), pick];
       const evaluation = this.evaluate(draft), path = pickPath(selection, pick.id);

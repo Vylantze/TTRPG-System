@@ -6,3 +6,5 @@ export { validateCatalogue, checkCharacter } from './validation.js';
 export * from './system-loader.js';
 export * from './policy-commands.js';
 export * from './feature-text.js';
+export type { ClassLevel } from './types/ClassLevel.js';
+export type { FeatureAdvancement } from './types/FeatureAdvancement.js';
