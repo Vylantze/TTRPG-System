@@ -24,3 +24,13 @@ export function descriptionBlocks(text: string) {
   }
   return blocks;
 }
+
+/** Retain source offsets through list-marker removal for explicit replacement ranges. */
+export function positionedDescriptionBlocks(text: string) {
+  let cursor = 0;
+  return descriptionBlocks(text).map((block) => ({ ...block, lines: block.lines.map((line) => line.split('\n').map((part) => {
+    const start = text.indexOf(part, cursor);
+    if (start >= 0) cursor = start + part.length;
+    return { text: part, start };
+  })) }));
+}

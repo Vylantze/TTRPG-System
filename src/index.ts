@@ -29,3 +29,5 @@ export { featureRollExpression, rollFeature, applyFeatureRoll, rollCapability, f
 export type { RolledFeature } from '@/src/model/RolledFeature.js';
 
 export { descriptionTokenValues } from '@/src/description-tokens.js';
+
+export { applyDescriptionOverrides } from '@/src/description-overrides.js';

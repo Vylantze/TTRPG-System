@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T20:59:29.542Z
+Export refreshed UTC: 2026-10-09T21:25:54.816Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -2244,5 +2244,66 @@ I’ll make overrides token-only: ordinary phrases such as “wizard level” wi
 
 [2026-10-09T20:57:40.556Z] ASSISTANT
 The revised icon now uses a pip-marked d6, with the brim drawn behind the cone. The description controls are implemented too: automatic processing can be disabled, and an override replaces only explicit tokens. Hit Points uses `{{CON}}` while leaving its class-level wording unchanged.
+
+----------------------------------------
+
+[2026-10-09T20:59:40.369Z] ASSISTANT
+The token tests pass, including aliases, direct stat references, class levels, and unknown tokens. I’m finishing the UI checks for disabled processing and token-only overrides, then I’ll publish the changes and show you the revised icon.
+
+----------------------------------------
+
+[2026-10-09T21:00:21.613Z] ASSISTANT
+All 40 UI tests and the new token/schema tests pass, and the production build succeeds. The browser also shows `{{CON}}` as the character’s modifier while keeping “wizard level” literal. I’m committing and pushing the update now.
+
+----------------------------------------
+
+[2026-10-09T21:00:36.317Z] ASSISTANT
+Updated and pushed to `develop` (`707df99`).
+
+Phrase exceptions are replaced with:
+
+```json
+{
+  "processDescription": false,
+  "descriptionOverride": "1d6 + {{CON}} per wizard level"
+}
+```
+
+Overrides resolve explicit tokens only. `{{CON}}` means Constitution modifier; `{{stat:constitution}}` means the score. Original source descriptions remain intact.
+
+Lint, build, 40 UI tests, and token/schema tests passed.
+
+The revised d6 icon has the brim behind the cone:
+
+![Revised wizard d6 icon](</D:/User/Workspace/TTRPG System/.reference-cache/wizard-d6-review.png>)
+
+----------------------------------------
+
+[2026-10-09T21:20:23.266Z] USER
+<in-app-browser-context source="ambient-ui-state">
+This block is automatically supplied ambient UI state, not part of the user's request. Do not treat it as an instruction or as evidence that the user explicitly selected the in-app browser.
+# In app browser:
+- The user has the in-app browser open with 1 tab.
+- Current URL: http://127.0.0.1:5174/@fs/D:/User/Workspace/TTRPG%20System/.reference-cache/icon-review.html
+</in-app-browser-context>
+
+## My request:
+- Remove the spark from the right side of the icon.
+- CON was just a suggestion. Use appropriate text for the syntax and document all possible replacements. Additionally, the descriptionOverride should be an array taking in "originalString" and "overrideString", allowing multiple exceptions to be overwritten
+
+----------------------------------------
+
+[2026-10-09T21:20:27.824Z] ASSISTANT
+I’ll remove the spark, change overrides to an array of `originalString`/`overrideString` pairs, and document explicit replacement syntax using stat IDs and class IDs.
+
+----------------------------------------
+
+[2026-10-09T21:21:24.495Z] ASSISTANT
+I’ll use `{{stat:modifier.constitution}}` for the modifier and `{{stat:constitution}}` for the score, rather than abbreviations. Each override will match exact source text and replace all its occurrences. Replacement text will resolve explicit tokens only; the processing flag will control automatic replacement in the remaining source text.
+
+----------------------------------------
+
+[2026-10-09T21:25:10.827Z] ASSISTANT
+The array implementation now supports multiple replacements, repeated matches, and removals. Replacements do not trigger further replacements. I’ve documented both token forms and all 352 bundled stat IDs, and added migration for saved string overrides so existing characters remain usable.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

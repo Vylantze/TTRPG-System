@@ -10,8 +10,6 @@ import type { CurrencyDefinition } from '@/src/model/CurrencyDefinition.js';
 import type { SpellDisplay } from '@/src/model/SpellDisplay.js';
 
 export interface SystemDefinition {
-  /** Display-template token aliases mapped to named stats, such as CON -> modifier.constitution. */
-  descriptionTokens?: Record<string, string>;
   spellDisplay?: SpellDisplay;
   currency?: CurrencyDefinition;
   sheetSections?: SheetSection[];

@@ -1,3 +1,4 @@
+import { migrateDescriptionOverrides } from '@/ui/src/migrate-description-overrides';
 import { SystemRegistry, deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type SystemFile } from '@/src/index';
 import type { Workspace } from '@/ui/src/types/Workspace';
 export type { Workspace } from '@/ui/src/types/Workspace';
@@ -64,7 +65,7 @@ export function readWorkspace(storage: Pick<Storage, 'getItem'> & Partial<Pick<S
   if (![1, 2].includes(value.version) || !Array.isArray(value.systems) || !Array.isArray(value.characters)) throw new Error('Stored workspace has an unsupported format. Export or repair it before replacing it.');
   const systemIds = new Set<string>(), catalogueIds = new Set<string>();
   const systems = value.systems.map((s: unknown) => {
-    const file = parseSystemFile(value.version === 2 ? unpackSystem(s as ReturnType<typeof packSystem>) : s);
+    const file = parseSystemFile(migrateDescriptionOverrides(value.version === 2 ? unpackSystem(s as ReturnType<typeof packSystem>) : s));
     const key = systemKey(file);
     if (systemIds.has(key)) throw new Error('Stored System revisions are duplicated.');
     systemIds.add(key);
@@ -106,7 +107,7 @@ export function updateSystemDescriptions(existing: SystemFile, incoming: SystemF
   };
   visit(existing);
   visit(validated);
-  const strip = (definition: { description?: string; source?: string; textReferences?: string[]; textAliases?: string[]; textLinkContext?: unknown; processDescription?: boolean; descriptionOverride?: string; preserveValuePhrases?: string[]; displayName?: string }) => {
+  const strip = (definition: { description?: string; source?: string; textReferences?: string[]; textAliases?: string[]; textLinkContext?: unknown; processDescription?: boolean; descriptionOverride?: unknown; preserveValuePhrases?: string[]; displayName?: string }) => {
     const { description, source, textReferences, textAliases, textLinkContext, processDescription, descriptionOverride, preserveValuePhrases, displayName, ...rules } = definition;
     return rules;
   };
@@ -116,7 +117,7 @@ export function updateSystemDescriptions(existing: SystemFile, incoming: SystemF
     return { ...rules, ...(mechanicalTags?.length ? { tags: mechanicalTags } : {}) };
   };
   const rules = (file: SystemFile) => ({ ...file, ...(!existing.items && !existing.itemFeatures ? { items: undefined, itemFeatures: undefined } : {}), features: file.features.map(featureRules), configurations: file.configurations.map((c) => {
-    const { tagDisplayNames, sheetSections, featureCategories, spellDisplay, descriptionTokens, ...system } = c.system;
+    const { tagDisplayNames, sheetSections, featureCategories, spellDisplay, descriptionTokens, ...system } = c.system as typeof c.system & { descriptionTokens?: unknown };
     return { ...c, system: { ...system, ...(!existing.configurations.find((old) => old.id === c.id)?.system.currency ? { currency: undefined } : {}) }, classes: c.classes.map(strip) };
   }) });
   const canonical = (value: unknown): unknown => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, item]) => [key, canonical(item)])) : value;

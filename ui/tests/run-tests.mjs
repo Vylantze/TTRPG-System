@@ -588,26 +588,46 @@ test('spell levels collapse and free utility spells have no use control', () => 
   assert.doesNotMatch(sheet, /<span>cp<\/span>/);
 });
 
-test('description flags and full overrides use explicit tokens without automatic substitutions', () => {
+test('description flags and replacement arrays separate automatic prose from explicit exceptions', () => {
   const { engine, character } = exampleCharacter({ classes: [{ class: 'wizard', level: 3 }] });
   const result = engine.evaluate(character);
   const show = (feature, contextual = true) => {
     const rules = createElement(FeatureRules, { engine, feature });
     return renderToStaticMarkup(contextual ? createElement(CharacterRuleContext.Provider, { value: { character, result, update: () => {}, report: () => {} } }, rules) : rules);
   };
-  const feature = { id: 'example', revision: 1, name: 'Example', components: [], description: 'your Constitution modifier per wizard level', processDescription: false };
-  assert.match(show(feature), /your Constitution modifier per wizard level/);
+  const feature = { id: 'example', revision: 1, name: 'Example', components: [], description: 'your Constitution modifier per wizard level. EXTRA', processDescription: false };
   assert.doesNotMatch(show(feature), /resolved-value/);
-  const override = { ...feature, descriptionOverride: '{{CON}} + {{stat:constitution}} per wizard level; Constitution modifier. {{UNKNOWN}} {{CON}} <script>bad</script>' };
+  const override = { ...feature, descriptionOverride: [
+    { originalString: 'your Constitution modifier', overrideString: '{{stat:modifier.constitution}} Constitution modifier' },
+    { originalString: 'EXTRA', overrideString: '{{stat:constitution}} {{UNKNOWN}} <script>bad</script>' },
+  ] };
   const html = show(override);
-  assert.equal((html.match(/resolved-value/g) ?? []).length, 3);
-  assert.match(html, /per wizard level; Constitution modifier/);
+  assert.equal((html.match(/resolved-value/g) ?? []).length, 2);
+  assert.match(html, /Constitution modifier/);
+  assert.match(html, /per wizard level/);
   assert.match(html, /{{UNKNOWN}}/);
   assert.doesNotMatch(html, /<script>/);
-  assert.equal(show({ ...override, processDescription: true }), html);
+  assert.equal((show({ ...override, processDescription: true }).match(/resolved-value/g) ?? []).length, 3);
   assert.match(show(override, false), /your Constitution modifier per wizard level/);
-  assert.doesNotMatch(show({ ...override, descriptionOverride: '' }), /wizard level/);
-  assert.match(show({ ...feature, processDescription: true }), /resolved-value/);
+  assert.doesNotMatch(show({ ...feature, descriptionOverride: [{ originalString: feature.description, overrideString: '' }] }), /wizard level/);
+  assert.match(show({ ...feature, description: 'Example\nOriginal', descriptionOverride: [{ originalString: 'Example\nOriginal', overrideString: 'Whole source replaced' }] }), /Whole source replaced/);
+  const lists = show({ ...feature, descriptionOverride: [{ originalString: feature.description, overrideString: 'First\n\n- {{stat:constitution}}\n- Constitution modifier' }] });
+  assert.match(lists, /<ul>/);
+  assert.equal((lists.match(/resolved-value/g) ?? []).length, 1);
+});
+
+test('saved full-string overrides migrate to arrays without losing characters', () => {
+  const legacy = structuredClone(file);
+  const hp = legacy.features.find((feature) => feature.id === 'dnd5e:2014:wizard.hit-points');
+  hp.descriptionOverride = hp.description.replace('your Constitution modifier', '{{CON}}');
+  for (const configuration of legacy.configurations) configuration.system.descriptionTokens = { CON: 'modifier.constitution' };
+  const store = storage();
+  store.setItem(model.STORAGE_KEY, JSON.stringify({ version: 1, systems: [legacy], characters: [starterSaves[3]] }));
+  const upgraded = model.readWorkspace(store);
+  assert.deepEqual(upgraded.characters[0], starterSaves[3]);
+  const converted = upgraded.systems[0].features.find((feature) => feature.id === hp.id).descriptionOverride;
+  assert.equal(converted[0].originalString, hp.description);
+  assert.match(converted[0].overrideString, /{{stat:modifier.constitution}}/);
 });
 
 await server.close();
