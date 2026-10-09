@@ -395,9 +395,9 @@ test('Fighter resource UI omits Arcane Recovery, while Wizard recovery and adjus
   const wizard = render(workspace, `#characters/${starterSaves[3].id}?view=resources`);
   assert.match(wizard, /Arcane Recovery/);
   const sheet = render(workspace, `#characters/${starterSaves[0].id}`);
-  assert.match(sheet, /Ability scores/);
+  assert.match(sheet, /<h2>Abilities<\/h2>/);
   assert.match(sheet, /Combat &amp; exploration/);
-  assert.match(sheet, /class="sheet-table skill-list"/);
+  assert.match(sheet, /class="sheet-table skill-list\s*"/);
   assert.match(sheet, /Chain mail/);
   assert.match(sheet, /class="character-facts"/);
 });
@@ -441,11 +441,11 @@ test('sheet controls expose inline editing, five coin balances, sortable columns
   assert.match(html, /aria-sort="ascending"/);
   assert.match(html, /Calculation for Athletics/);
   assert.match(html, /Show modifiers first/);
-  assert.match(html, /title="Strength score"/);
-  assert.match(html, /title="Strength modifier"/);
+  assert.match(html, /role="tooltip"[^>]*>Strength score/);
+  assert.match(html, /role="tooltip"[^>]*>Strength modifier/);
   const resources = render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=resources`);
   assert.doesNotMatch(resources, /Turn budget|Start new turn/);
-  assert.match(resources, /resource-card[\s\S]*Use ability[\s\S]*Provided by/);
+  assert.match(resources, /ability-row[\s\S]*resource-card[\s\S]*Use Ability/);
 });
 
 test('money migration removes coins and old starting-money notes without double counting', () => {
@@ -489,6 +489,26 @@ test('System reload is atomic and preserves characters while rejecting incompati
   const incompatible = structuredClone(file);
   incompatible.features[0].revision++;
   assert.throws(() => model.reloadSystem(workspace, file, incompatible), /revision/i);
+});
+
+test('rules descriptions render lists and paragraphs while preserving automatic links and escaping HTML', () => {
+  const engine = model.createRegistry([file]).engineForCharacter(starterSaves[0]);
+  const html = renderToStaticMarkup(createElement(RulesText, { engine, text: 'First paragraph.\n\n• Second Wind • Another point\n\nNext paragraph.\n\n1. First step\n2. <script>unsafe</script>' }));
+  assert.match(html, /<ul><li><a[^>]*>Second Wind<\/a><\/li><li>Another point<\/li><\/ul>/);
+  assert.match(html, /<p>Next paragraph.<\/p>/);
+  assert.match(html, /<ol start="1">/);
+  assert.doesNotMatch(html, /<script>/);
+});
+
+test('Wizard spells are separate from slots and empty slot levels are initially hidden', () => {
+  const html = render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=resources`);
+  assert.match(html, /Show all spell slots/);
+  assert.match(html, /Cantrips/);
+  assert.match(html, /Level 1 spells/);
+  assert.match(html, /Use Spell/);
+  assert.match(html, /Decrease Spell Slot 1/);
+  assert.doesNotMatch(html, /Decrease Spell Slot 2/);
+  assert.match(html, /ability-row[\s\S]*Arcane Recovery/);
 });
 
 await server.close();

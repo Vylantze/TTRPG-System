@@ -1,3 +1,4 @@
+import { Tooltip } from '@/ui/src/Tooltip';
 import { useState } from 'react';
 import type { Character, Engine, EvaluationResult } from '@/src/index';
 import type { SheetSection } from '@/src/model/SheetSection';
@@ -7,6 +8,7 @@ import { StatCalculation } from '@/ui/src/StatCalculation';
 const signed = (value: number) => `${value >= 0 ? '+' : ''}${value}`;
 
 export function SheetSectionView({ section, engine, character, result }: { section: SheetSection; engine: Engine; character: Character; result: EvaluationResult }) {
+  const [expanded, setExpanded] = useState<string[]>([]);
   const [sort, setSort] = useState('Name');
   const [descending, setDescending] = useState(false);
   const [modifierFirst, setModifierFirst] = useState(false);
@@ -21,13 +23,13 @@ export function SheetSectionView({ section, engine, character, result }: { secti
   if (!rows.length) return null;
   return (
     <section className={`panel sheet-section sheet-${section.layout}`}>
-      <div className="row">
-        <h2>{section.name}</h2>
-        {section.layout === 'abilities' && <button className="quiet" aria-pressed={modifierFirst} onClick={() => setModifierFirst(!modifierFirst)}>{modifierFirst ? 'Show scores first' : 'Show modifiers first'}</button>}
+      <div className="section-heading">
+        <h2>{section.layout === 'abilities' ? 'Abilities' : section.name}</h2>
+        {section.layout === 'abilities' && <Tooltip text={modifierFirst ? 'Show scores first' : 'Show modifiers first'}><button className="quiet icon-button" aria-label={modifierFirst ? 'Show scores first' : 'Show modifiers first'} aria-pressed={modifierFirst} onClick={() => setModifierFirst(!modifierFirst)}><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h15l-4-4M20 17H5l4 4M19 7l-4 4M5 17l4-4" /></svg></button></Tooltip>}
       </div>
       {section.layout === 'skills'
         ? (
-            <table className="sheet-table skill-list">
+            <table className={`sheet-table skill-list ${expanded.length ? 'has-calculations' : ''}`}>
               <thead>
                 <tr>
                   {['Training', 'Name', 'Ability', 'Bonus'].map((column) => (
@@ -44,6 +46,7 @@ export function SheetSectionView({ section, engine, character, result }: { secti
                       </button>
                     </th>
                   ))}
+                  {expanded.length > 0 && <th>Calculation</th>}
                 </tr>
               </thead>
               <tbody>
@@ -53,14 +56,12 @@ export function SheetSectionView({ section, engine, character, result }: { secti
                     <th scope="row">{row.feature ? <FeatureLink id={row.feature} engine={engine}>{name(row)}</FeatureLink> : name(row)}</th>
                     <td>{row.ability ?? '—'}</td>
                     <td>
-                      <details className="bonus-disclosure">
-                        <summary aria-label={`Calculation for ${name(row)}`}>
-                          <strong>{signed(result.stats[row.stat].value)}</strong>
-                          <span className="disclosure-arrow">▸</span>
-                        </summary>
-                        <StatCalculation id={row.stat} engine={engine} character={character} result={result} />
-                      </details>
+                      <div className="bonus-control">
+                        <strong>{signed(result.stats[row.stat].value)}</strong>
+                        <button className="link calculation-toggle" aria-label={`Calculation for ${name(row)}`} aria-expanded={expanded.includes(row.stat)} aria-controls={`calculation-${section.id}-${row.stat}`} onClick={() => setExpanded(expanded.includes(row.stat) ? expanded.filter((stat) => stat !== row.stat) : [...expanded, row.stat])}>{expanded.includes(row.stat) ? '▾' : '▸'}</button>
+                      </div>
                     </td>
+                    {expanded.length > 0 && <td id={`calculation-${section.id}-${row.stat}`}>{expanded.includes(row.stat) && <StatCalculation id={row.stat} engine={engine} character={character} result={result} />}</td>}
                   </tr>
                 ))}
               </tbody>
@@ -74,8 +75,8 @@ export function SheetSectionView({ section, engine, character, result }: { secti
                 return (
                   <article className="sheet-stat" key={row.stat}>
                     <h3>{name(row)}</h3>
-                    <strong className="stat-value" title={`${name(row)} ${swapped ? 'modifier' : 'score'}`}>{swapped ? signed(secondary.value) : result.stats[row.stat].value}</strong>
-                    {secondary && <span className="ability-modifier" title={`${name(row)} ${swapped ? 'score' : 'modifier'}`}>{swapped ? result.stats[row.stat].value : signed(secondary.value)}</span>}
+                    <Tooltip text={`${name(row)} ${swapped ? 'modifier' : 'score'}`}><strong className="stat-value">{swapped ? signed(secondary.value) : result.stats[row.stat].value}</strong></Tooltip>
+                    {secondary && <Tooltip text={`${name(row)} ${swapped ? 'score' : 'modifier'}`}><span className="ability-modifier">{swapped ? result.stats[row.stat].value : signed(secondary.value)}</span></Tooltip>}
                     <details>
                       <summary>Calculation</summary>
                       <StatCalculation id={swapped ? row.secondaryStat! : row.stat} engine={engine} character={character} result={result} />
