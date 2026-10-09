@@ -4,6 +4,8 @@ import type { RootAcquisition } from '@/src/model/RootAcquisition.js';
 import type { PendingUse } from '@/src/model/PendingUse.js';
 
 export interface Character {
+  /** Player-facing sheet notes, independent of calculated rules. */
+  notes?: Record<string, string>;
   /** Omitted on older saves: normal retraining rules apply. Construction drafts cannot spend resources. */
   buildState?: 'draft' | 'finalized';
   version: 1; id: string; name: string; system: { id: string; revision: number };

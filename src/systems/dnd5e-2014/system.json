@@ -100220,10 +100220,7 @@
       "revision": 1,
       "name": "Spell Slot 1 Resource",
       "displayName": "Spell Slot 1 Resource",
-      "source": "SRD 5.1 pp. 52–59 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52",
-      "textReferences": [
-        "dnd5e:2014:wizard.spellcasting"
-      ],
+      "source": "SRD 5.1 p. 100 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=100",
       "tags": [
         "resource-tracker"
       ],
@@ -100262,7 +100259,8 @@
             }
           ]
         }
-      ]
+      ],
+      "description": "Regardless of how many spells a caster knows or prepares, he or she can cast only a limited number of spells before resting. Manipulating the fabric of magic and channeling its energy into even a simple spell is physically and mentally taxing, and higher--level spells are even more so. Thus, each spellcasting class’s description (except that of the warlock) includes a table showing how many spell slots of each spell level a character can use at each character level. For example, the 3rd--level wizard Umara has four 1st--level spell slots and two 2nd--level slots.When a character casts a spell, he or she expends a slot of that spell’s level or higher, effectively “filling” a slot with the spell. You can think of a spell slot as a groove of a certain size—small for a 1st--level slot, larger for a spell of higher level. A 1st--level spell fits into a slot of any size, but a 9th--level spell fits only in a 9th--levelslot. So when Umara casts magic missile,a 1st--level spell, she spends one of her four 1st--level slots and has three remaining. Finishing a long rest restores any expended spell slots.Some characters and monsters have special abilities that let them cast spells without using spell slots. For example, a monk who follows the Way of the Four Elements, a warlock who chooses certain eldritch invocations, and a pit fiend from the Nine Hells can all cast spells in such a way."
     },
     {
       "id": "dnd5e:2014:resource.spell-slot.2",
@@ -102130,6 +102128,1245 @@
           ]
         }
       ]
+    },
+    {
+      "id": "dnd5e:2014:tool.playing-cards",
+      "revision": 1,
+      "name": "Playing Cards",
+      "displayName": "Playing Cards",
+      "components": [
+        {
+          "id": "training",
+          "kind": "defineStat",
+          "stat": {
+            "id": "training.tool.playing-cards",
+            "name": "Playing Cards Proficiency",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        }
+      ],
+      "source": "SRD 5.1 p. 70 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=70",
+      "description": "Gaming Set. This item encompasses a wide range of game pieces, including dice and decks of cards (for games such as Three-Dragon Ante). A few common examples appear on the Tools table, but other kinds of gaming sets exist. If you are proficient with a gaming set, you can add your proficiency bonus to ability checks you make to play a game with that set. Each type of gaming set requires a separate proficiency."
+    },
+    {
+      "id": "dnd5e:2014:tool.carpenter",
+      "revision": 1,
+      "name": "Carpenter’s Tools",
+      "displayName": "Carpenter’s Tools",
+      "components": [
+        {
+          "id": "training",
+          "kind": "defineStat",
+          "stat": {
+            "id": "training.tool.carpenter",
+            "name": "Carpenter’s Tools Proficiency",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        }
+      ],
+      "source": "SRD 5.1 p. 70 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=70",
+      "description": "Artisan’s Tools. These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan’s tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan’s tools requires a separate proficiency."
+    },
+    {
+      "id": "dnd5e:2014:tool.land-vehicles",
+      "revision": 1,
+      "name": "Land Vehicles",
+      "displayName": "Land Vehicles",
+      "components": [
+        {
+          "id": "training",
+          "kind": "defineStat",
+          "stat": {
+            "id": "training.tool.land-vehicles",
+            "name": "Land Vehicles Proficiency",
+            "kind": "derived",
+            "expression": 1,
+            "integer": true,
+            "minimum": 0
+          }
+        }
+      ],
+      "source": "SRD 5.1 p. 71 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=71",
+      "description": "Vehicle Proficiency. If you have proficiency with a certain kind of vehicle (land or water), you can add your proficiency bonus to any check you make to control that kind of vehicle in difficult circumstances."
+    },
+    {
+      "id": "dnd5e:2014:background.noble",
+      "revision": 1,
+      "name": "Noble",
+      "displayName": "Noble",
+      "components": [
+        {
+          "id": "history",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:skill.history"
+        },
+        {
+          "id": "persuasion",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:skill.persuasion"
+        },
+        {
+          "id": "playing-cards",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:tool.playing-cards"
+        },
+        {
+          "id": "trait",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:background-trait.noble"
+        },
+        {
+          "id": "language",
+          "kind": "chooseFeatures",
+          "minimum": 1,
+          "maximum": 1,
+          "candidates": {
+            "ids": [
+              "dnd5e:2014:language.common",
+              "dnd5e:2014:language.dwarvish",
+              "dnd5e:2014:language.elvish",
+              "dnd5e:2014:language.giant",
+              "dnd5e:2014:language.gnomish",
+              "dnd5e:2014:language.goblin",
+              "dnd5e:2014:language.halfling",
+              "dnd5e:2014:language.orc",
+              "dnd5e:2014:language.abyssal",
+              "dnd5e:2014:language.celestial",
+              "dnd5e:2014:language.draconic",
+              "dnd5e:2014:language.deep-speech",
+              "dnd5e:2014:language.infernal",
+              "dnd5e:2014:language.primordial",
+              "dnd5e:2014:language.sylvan",
+              "dnd5e:2014:language.undercommon"
+            ]
+          },
+          "retraining": {
+            "allowed": false
+          }
+        }
+      ],
+      "tags": [
+        "background"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=1"
+    },
+    {
+      "id": "dnd5e:2014:background-trait.noble",
+      "revision": 1,
+      "name": "Position of Privilege",
+      "displayName": "Position of Privilege",
+      "components": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=1"
+    },
+    {
+      "id": "dnd5e:2014:background.soldier",
+      "revision": 1,
+      "name": "Soldier",
+      "displayName": "Soldier",
+      "components": [
+        {
+          "id": "athletics",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:skill.athletics"
+        },
+        {
+          "id": "intimidation",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:skill.intimidation"
+        },
+        {
+          "id": "playing-cards",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:tool.playing-cards"
+        },
+        {
+          "id": "land-vehicles",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:tool.land-vehicles"
+        },
+        {
+          "id": "trait",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:background-trait.soldier"
+        }
+      ],
+      "tags": [
+        "background"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=3"
+    },
+    {
+      "id": "dnd5e:2014:background-trait.soldier",
+      "revision": 1,
+      "name": "Mercenary Sergeant",
+      "displayName": "Mercenary Sergeant",
+      "components": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=3"
+    },
+    {
+      "id": "dnd5e:2014:background.criminal",
+      "revision": 1,
+      "name": "Criminal",
+      "displayName": "Criminal",
+      "components": [
+        {
+          "id": "deception",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:skill.deception"
+        },
+        {
+          "id": "stealth",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:skill.stealth"
+        },
+        {
+          "id": "playing-cards",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:tool.playing-cards"
+        },
+        {
+          "id": "carpenter",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:tool.carpenter"
+        },
+        {
+          "id": "trait",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:background-trait.criminal"
+        }
+      ],
+      "tags": [
+        "background"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=5"
+    },
+    {
+      "id": "dnd5e:2014:background-trait.criminal",
+      "revision": 1,
+      "name": "Criminal Contact",
+      "displayName": "Criminal Contact",
+      "components": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=5"
+    },
+    {
+      "id": "dnd5e:2014:background.folk-hero",
+      "revision": 1,
+      "name": "Folk Hero",
+      "displayName": "Folk Hero",
+      "components": [
+        {
+          "id": "animal-handling",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:skill.animal-handling"
+        },
+        {
+          "id": "survival",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:skill.survival"
+        },
+        {
+          "id": "carpenter",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:tool.carpenter"
+        },
+        {
+          "id": "land-vehicles",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:tool.land-vehicles"
+        },
+        {
+          "id": "trait",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:background-trait.folk-hero"
+        }
+      ],
+      "tags": [
+        "background"
+      ],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=9"
+    },
+    {
+      "id": "dnd5e:2014:background-trait.folk-hero",
+      "revision": 1,
+      "name": "Rustic Hospitality",
+      "displayName": "Rustic Hospitality",
+      "components": [],
+      "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf#page=9"
+    },
+    {
+      "id": "dnd5e:2014:cleric.entry",
+      "revision": 1,
+      "name": "Cleric Starting Traits",
+      "displayName": "Cleric Starting Traits",
+      "components": [
+        {
+          "id": "training.save.wisdom",
+          "kind": "modifyStat",
+          "stat": "training.save.wisdom",
+          "operation": "floor",
+          "value": 1
+        },
+        {
+          "id": "training.save.charisma",
+          "kind": "modifyStat",
+          "stat": "training.save.charisma",
+          "operation": "floor",
+          "value": 1
+        },
+        {
+          "id": "training.armor.light",
+          "kind": "modifyStat",
+          "stat": "training.armor.light",
+          "operation": "floor",
+          "value": 1
+        },
+        {
+          "id": "training.armor.medium",
+          "kind": "modifyStat",
+          "stat": "training.armor.medium",
+          "operation": "floor",
+          "value": 1
+        },
+        {
+          "id": "training.armor.shield",
+          "kind": "modifyStat",
+          "stat": "training.armor.shield",
+          "operation": "floor",
+          "value": 1
+        },
+        {
+          "id": "training.weapons.simple",
+          "kind": "modifyStat",
+          "stat": "training.weapons.simple",
+          "operation": "floor",
+          "value": 1
+        },
+        {
+          "id": "skills",
+          "kind": "chooseFeatures",
+          "minimum": 2,
+          "maximum": 2,
+          "candidates": {
+            "ids": [
+              "dnd5e:2014:skill.history",
+              "dnd5e:2014:skill.insight",
+              "dnd5e:2014:skill.medicine",
+              "dnd5e:2014:skill.persuasion",
+              "dnd5e:2014:skill.religion"
+            ]
+          },
+          "retraining": {
+            "allowed": false
+          }
+        }
+      ],
+      "tags": [
+        "class-feature"
+      ],
+      "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+      "description": "Proficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
+    },
+    {
+      "id": "dnd5e:2014:cleric.hit-points",
+      "revision": 1,
+      "name": "Cleric Hit Points",
+      "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+      "components": [
+        {
+          "id": "hit-points",
+          "kind": "modifyStat",
+          "stat": "hitPoints",
+          "operation": "add",
+          "value": {
+            "op": "max",
+            "args": [
+              1,
+              {
+                "op": "add",
+                "args": [
+                  {
+                    "if": {
+                      "op": "and",
+                      "args": [
+                        {
+                          "context": "isStartingClass"
+                        },
+                        {
+                          "op": "eq",
+                          "args": [
+                            {
+                              "context": "acquiredClassLevel"
+                            },
+                            1
+                          ]
+                        }
+                      ]
+                    },
+                    "then": 8,
+                    "else": {
+                      "parameter": "roll"
+                    }
+                  },
+                  {
+                    "stat": "modifier.constitution"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "repeat": {
+        "maximum": 20,
+        "scope": "progression"
+      },
+      "parameters": {
+        "roll": {
+          "kind": "number",
+          "default": 5,
+          "integer": true,
+          "minimum": 1,
+          "maximum": 8
+        }
+      },
+      "displayName": "Cleric Hit Points",
+      "tags": [
+        "class-feature"
+      ],
+      "description": "Hit Points\nHit Dice: 1d8 per cleric level\n\nHit Points at 1st Level: 8 + your Constitution modifier\n\nHit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st"
+    },
+    {
+      "id": "dnd5e:2014:cleric.disciple-of-life",
+      "revision": 1,
+      "name": "Disciple of Life",
+      "displayName": "Disciple of Life",
+      "components": [],
+      "tags": [
+        "class-feature"
+      ],
+      "source": "SRD 5.1 p. 17 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=17",
+      "description": "Also starting at 1st level, your healing spells are more effective. Whenever you use a spell of 1st level or higher to restore hit points to a creature, the creature regains additional hit points equal to 2 + the spell’s level."
+    },
+    {
+      "id": "dnd5e:2014:cleric.life",
+      "revision": 1,
+      "name": "Life Domain",
+      "displayName": "Life Domain",
+      "components": [
+        {
+          "id": "training.armor.heavy",
+          "kind": "modifyStat",
+          "stat": "training.armor.heavy",
+          "operation": "floor",
+          "value": 1
+        },
+        {
+          "id": "healing",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:cleric.disciple-of-life"
+        },
+        {
+          "id": "bless",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:cleric.prepared.bless"
+        },
+        {
+          "id": "cure-wounds",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:cleric.prepared.cure-wounds"
+        }
+      ],
+      "tags": [
+        "class-feature"
+      ],
+      "source": "SRD 5.1 p. 17 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=17",
+      "description": "The Life domain focuses on the vibrant positive energy—one of the fundamental forces of the universe—that sustains all life. The gods of life promote vitality and health through healing the sick and wounded, caring for those in need, and driving away the forces of death and undeath. Almost any non--evil deity can claim influence over this domain, particularly agricultural deities (such as Chauntea, Arawai, and Demeter), sun gods (such as Lathander, Pelor, and Re--Horakhty), gods of healing or endurance (such as Ilmater, Mishakal, Apollo, and Diancecht), and gods of home and community (such as Hestia, Hathor, and Boldrei).Life Domain SpellsCleric Level Spells 1st bless, cure wounds 3rd lesser restoration, spiritual weapon 5th beacon of hope, revivify7th death ward, guardian of faith 9th mass cure wounds, raise dead\n\nBonus Proficiency\nWhen you choose this domain at 1st level, you gain proficiency with heavy armor."
+    },
+    {
+      "id": "dnd5e:2014:cleric.cantrip.light",
+      "revision": 1,
+      "name": "Light (Cleric)",
+      "displayName": "Light (Cleric)",
+      "components": [
+        {
+          "id": "spell-data",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.light"
+        },
+        {
+          "id": "cast",
+          "kind": "grantCapability",
+          "name": "Light",
+          "action": {
+            "kind": "action",
+            "amount": 1
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "armorProficient"
+                  },
+                  1
+                ]
+              },
+              {
+                "context": "spellComponentsAvailable"
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": "dnd5e:2014:spell.light",
+            "spellLevel": 0,
+            "spellSlotLevel": 0,
+            "castingAbility": "wisdom",
+            "castingTime": "1 action",
+            "ritual": false,
+            "castingMode": "cast"
+          }
+        }
+      ],
+      "source": "SRD 5.1 p. 159 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=159",
+      "textReferences": [
+        "dnd5e:2014:spell.light"
+      ],
+      "tags": [
+        "cleric-cantrip"
+      ]
+    },
+    {
+      "id": "dnd5e:2014:spell.sacred-flame",
+      "revision": 1,
+      "name": "Sacred Flame",
+      "displayName": "Sacred Flame",
+      "components": [],
+      "description": "Evocation cantrip\nCasting Time:  1 action\nRange:  60 feet\nComponents:  V, S\nDuration:  Instantaneous Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 radiant damage. The target gains no benefit from cover for this saving throw. The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",
+      "source": "SRD 5.1 p. 176 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=176",
+      "tags": [
+        "spell"
+      ],
+      "contentLevel": 0
+    },
+    {
+      "id": "dnd5e:2014:cleric.cantrip.sacred-flame",
+      "revision": 1,
+      "name": "Sacred Flame (Cleric)",
+      "displayName": "Sacred Flame (Cleric)",
+      "components": [
+        {
+          "id": "spell-data",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.sacred-flame"
+        },
+        {
+          "id": "cast",
+          "kind": "grantCapability",
+          "name": "Sacred Flame",
+          "action": {
+            "kind": "action",
+            "amount": 1
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "armorProficient"
+                  },
+                  1
+                ]
+              },
+              {
+                "context": "spellComponentsAvailable"
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": "dnd5e:2014:spell.sacred-flame",
+            "spellLevel": 0,
+            "spellSlotLevel": 0,
+            "castingAbility": "wisdom",
+            "castingTime": "1 action",
+            "ritual": false,
+            "castingMode": "cast"
+          }
+        }
+      ],
+      "source": "SRD 5.1 p. 176 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=176",
+      "textReferences": [
+        "dnd5e:2014:spell.sacred-flame"
+      ],
+      "tags": [
+        "cleric-cantrip"
+      ]
+    },
+    {
+      "id": "dnd5e:2014:spell.thaumaturgy",
+      "revision": 1,
+      "name": "Thaumaturgy",
+      "displayName": "Thaumaturgy",
+      "components": [],
+      "description": "Transmutation cantrip\nCasting Time:  1 action\nRange:  30 feet\nComponents:  V\nDuration:  Up to 1 minute You manifest a minor wonder, a sign of supernatural power, within range. You create one of the following magical effects within range: \n\n• Your voice booms up to three times as loud as normal for 1 minute.\n\n• You cause flames to flicker, brighten, dim, or change color for 1 minute.\n\n• You cause harmless tremors in the ground for 1 minute. \n\n• You create an instantaneous sound that originates from a point of your choice within range, such as a rumble of thunder, the cry of a raven, or ominous whispers.\n\n• You instantaneously cause an unlocked door or window to fly open or slam shut.\n\n• You alter the appearance of your eyes for 1 minute. If you cast this spell multiple times, you can have up to three of its 1-minute effects active at a time, and you can dismiss such an effect as an action.",
+      "source": "SRD 5.1 p. 187 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=187",
+      "tags": [
+        "spell"
+      ],
+      "contentLevel": 0
+    },
+    {
+      "id": "dnd5e:2014:cleric.cantrip.thaumaturgy",
+      "revision": 1,
+      "name": "Thaumaturgy (Cleric)",
+      "displayName": "Thaumaturgy (Cleric)",
+      "components": [
+        {
+          "id": "spell-data",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.thaumaturgy"
+        },
+        {
+          "id": "cast",
+          "kind": "grantCapability",
+          "name": "Thaumaturgy",
+          "action": {
+            "kind": "action",
+            "amount": 1
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "armorProficient"
+                  },
+                  1
+                ]
+              },
+              {
+                "context": "spellComponentsAvailable"
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": "dnd5e:2014:spell.thaumaturgy",
+            "spellLevel": 0,
+            "spellSlotLevel": 0,
+            "castingAbility": "wisdom",
+            "castingTime": "1 action",
+            "ritual": false,
+            "castingMode": "cast"
+          }
+        }
+      ],
+      "source": "SRD 5.1 p. 187 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=187",
+      "textReferences": [
+        "dnd5e:2014:spell.thaumaturgy"
+      ],
+      "tags": [
+        "cleric-cantrip"
+      ]
+    },
+    {
+      "id": "dnd5e:2014:spell.bless",
+      "revision": 1,
+      "name": "Bless",
+      "displayName": "Bless",
+      "components": [],
+      "description": "1st-level enchantment\nCasting Time:  1 action\nRange:  30 feet\nComponents:  V, S, M (a sprinkling of holy water)\nDuration:  Concentration, up to 1 minute You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll a d4 and add the number rolled to the attack roll or saving throw. \n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.",
+      "source": "SRD 5.1 p. 122 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=122",
+      "tags": [
+        "spell"
+      ],
+      "contentLevel": 1
+    },
+    {
+      "id": "dnd5e:2014:cleric.prepared.bless",
+      "revision": 1,
+      "name": "Bless (Cleric Prepared)",
+      "displayName": "Bless (Cleric Prepared)",
+      "components": [
+        {
+          "id": "spell-data",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.bless"
+        },
+        {
+          "id": "cast",
+          "kind": "grantCapability",
+          "name": "Bless",
+          "action": {
+            "kind": "action",
+            "amount": 1
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "armorProficient"
+                  },
+                  1
+                ]
+              },
+              {
+                "context": "spellComponentsAvailable"
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.1",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": "dnd5e:2014:spell.bless",
+            "spellLevel": 1,
+            "spellSlotLevel": 1,
+            "castingAbility": "wisdom",
+            "castingTime": "1 action",
+            "ritual": false,
+            "castingMode": "cast"
+          }
+        }
+      ],
+      "source": "SRD 5.1 p. 122 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=122",
+      "textReferences": [
+        "dnd5e:2014:spell.bless"
+      ],
+      "tags": [
+        "cleric-prepared"
+      ],
+      "resources": [
+        {
+          "id": "spell-slot",
+          "key": "spell-slot.1",
+          "scope": "character",
+          "units": "slots",
+          "minimumCapacity": 1
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:spell.cure-wounds",
+      "revision": 1,
+      "name": "Cure Wounds",
+      "displayName": "Cure Wounds",
+      "components": [],
+      "description": "1st-level evocation\nCasting Time: 1 action\nRange: Touch\nComponents: V, S\nDuration: Instantaneous\n\nA creature you touch regains a number of hit points equal to 1d8 + your spellcasting ability modifier. This spell has no effect on undead or constructs. \n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st.",
+      "source": "SRD 5.1 p. 132 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=132",
+      "tags": [
+        "spell"
+      ],
+      "contentLevel": 1
+    },
+    {
+      "id": "dnd5e:2014:cleric.prepared.cure-wounds",
+      "revision": 1,
+      "name": "Cure Wounds (Cleric Prepared)",
+      "displayName": "Cure Wounds (Cleric Prepared)",
+      "components": [
+        {
+          "id": "spell-data",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.cure-wounds"
+        },
+        {
+          "id": "cast",
+          "kind": "grantCapability",
+          "name": "Cure Wounds",
+          "action": {
+            "kind": "action",
+            "amount": 1
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "armorProficient"
+                  },
+                  1
+                ]
+              },
+              {
+                "context": "spellComponentsAvailable"
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.1",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": "dnd5e:2014:spell.cure-wounds",
+            "spellLevel": 1,
+            "spellSlotLevel": 1,
+            "castingAbility": "wisdom",
+            "castingTime": "1 action",
+            "ritual": false,
+            "castingMode": "cast"
+          }
+        }
+      ],
+      "source": "SRD 5.1 p. 132 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=132",
+      "textReferences": [
+        "dnd5e:2014:spell.cure-wounds"
+      ],
+      "tags": [
+        "cleric-prepared"
+      ],
+      "resources": [
+        {
+          "id": "spell-slot",
+          "key": "spell-slot.1",
+          "scope": "character",
+          "units": "slots",
+          "minimumCapacity": 1
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:spell.command",
+      "revision": 1,
+      "name": "Command",
+      "displayName": "Command",
+      "components": [],
+      "description": "1st-level enchantment\nCasting Time: 1 action\nRange:  60 feet\nComponents: V\nDuration: 1 round\n\nYou speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn’t understand your language, or if your command is directly harmful to it.Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the GM determines how the target behaves. If the target can’t follow your command, the spell ends. Approach. The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you. Drop. The target drops whatever it is holding and then ends its turn. Flee. The target spends its turn moving away from you by the fastest available means. Grovel. The target falls prone and then ends its turn. Halt. The target doesn’t move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air. \n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.",
+      "source": "SRD 5.1 p. 125 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=125",
+      "tags": [
+        "spell"
+      ],
+      "contentLevel": 1
+    },
+    {
+      "id": "dnd5e:2014:cleric.prepared.command",
+      "revision": 1,
+      "name": "Command (Cleric Prepared)",
+      "displayName": "Command (Cleric Prepared)",
+      "components": [
+        {
+          "id": "spell-data",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.command"
+        },
+        {
+          "id": "cast",
+          "kind": "grantCapability",
+          "name": "Command",
+          "action": {
+            "kind": "action",
+            "amount": 1
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "armorProficient"
+                  },
+                  1
+                ]
+              },
+              {
+                "context": "spellComponentsAvailable"
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.1",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": "dnd5e:2014:spell.command",
+            "spellLevel": 1,
+            "spellSlotLevel": 1,
+            "castingAbility": "wisdom",
+            "castingTime": "1 action",
+            "ritual": false,
+            "castingMode": "cast"
+          }
+        }
+      ],
+      "source": "SRD 5.1 p. 125 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=125",
+      "textReferences": [
+        "dnd5e:2014:spell.command"
+      ],
+      "tags": [
+        "cleric-prepared"
+      ],
+      "resources": [
+        {
+          "id": "spell-slot",
+          "key": "spell-slot.1",
+          "scope": "character",
+          "units": "slots",
+          "minimumCapacity": 1
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:cleric.prepared.detect-magic",
+      "revision": 1,
+      "name": "Detect Magic (Cleric Prepared)",
+      "displayName": "Detect Magic (Cleric Prepared)",
+      "components": [
+        {
+          "id": "spell-data",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.detect-magic"
+        },
+        {
+          "id": "cast",
+          "kind": "grantCapability",
+          "name": "Detect Magic",
+          "action": {
+            "kind": "action",
+            "amount": 1
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "armorProficient"
+                  },
+                  1
+                ]
+              },
+              {
+                "context": "spellComponentsAvailable"
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.1",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": "dnd5e:2014:spell.detect-magic",
+            "spellLevel": 1,
+            "spellSlotLevel": 1,
+            "castingAbility": "wisdom",
+            "castingTime": "1 action",
+            "ritual": false,
+            "castingMode": "cast"
+          }
+        }
+      ],
+      "source": "SRD 5.1 p. 134 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=134",
+      "textReferences": [
+        "dnd5e:2014:spell.detect-magic"
+      ],
+      "tags": [
+        "cleric-prepared"
+      ],
+      "resources": [
+        {
+          "id": "spell-slot",
+          "key": "spell-slot.1",
+          "scope": "character",
+          "units": "slots",
+          "minimumCapacity": 1
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:spell.guiding-bolt",
+      "revision": 1,
+      "name": "Guiding Bolt",
+      "displayName": "Guiding Bolt",
+      "components": [],
+      "description": "1st-level evocation\nCasting Time: 1 action\nRange: 120 feet\nComponents: V, S\nDuration: 1 round\n\nA flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then. \n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.",
+      "source": "SRD 5.1 p. 151 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=151",
+      "tags": [
+        "spell"
+      ],
+      "contentLevel": 1
+    },
+    {
+      "id": "dnd5e:2014:cleric.prepared.guiding-bolt",
+      "revision": 1,
+      "name": "Guiding Bolt (Cleric Prepared)",
+      "displayName": "Guiding Bolt (Cleric Prepared)",
+      "components": [
+        {
+          "id": "spell-data",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.guiding-bolt"
+        },
+        {
+          "id": "cast",
+          "kind": "grantCapability",
+          "name": "Guiding Bolt",
+          "action": {
+            "kind": "action",
+            "amount": 1
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "armorProficient"
+                  },
+                  1
+                ]
+              },
+              {
+                "context": "spellComponentsAvailable"
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.1",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": "dnd5e:2014:spell.guiding-bolt",
+            "spellLevel": 1,
+            "spellSlotLevel": 1,
+            "castingAbility": "wisdom",
+            "castingTime": "1 action",
+            "ritual": false,
+            "castingMode": "cast"
+          }
+        }
+      ],
+      "source": "SRD 5.1 p. 151 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=151",
+      "textReferences": [
+        "dnd5e:2014:spell.guiding-bolt"
+      ],
+      "tags": [
+        "cleric-prepared"
+      ],
+      "resources": [
+        {
+          "id": "spell-slot",
+          "key": "spell-slot.1",
+          "scope": "character",
+          "units": "slots",
+          "minimumCapacity": 1
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:spell.shield-of-faith",
+      "revision": 1,
+      "name": "Shield of Faith",
+      "displayName": "Shield of Faith",
+      "components": [],
+      "description": "1st-level abjuration\nCasting Time:  1 bonus action\nRange:  60 feet\nComponents:  V, S, M (a small parchment with a bit of holy text written on it)\nDuration:  Concentration, up to 10 minutes A shimmering field appears and surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.",
+      "source": "SRD 5.1 p. 179 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=179",
+      "tags": [
+        "spell"
+      ],
+      "contentLevel": 1
+    },
+    {
+      "id": "dnd5e:2014:cleric.prepared.shield-of-faith",
+      "revision": 1,
+      "name": "Shield of Faith (Cleric Prepared)",
+      "displayName": "Shield of Faith (Cleric Prepared)",
+      "components": [
+        {
+          "id": "spell-data",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:spell.shield-of-faith"
+        },
+        {
+          "id": "cast",
+          "kind": "grantCapability",
+          "name": "Shield of Faith",
+          "action": {
+            "kind": "bonus-action",
+            "amount": 1
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "armorProficient"
+                  },
+                  1
+                ]
+              },
+              {
+                "context": "spellComponentsAvailable"
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.1",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": "dnd5e:2014:spell.shield-of-faith",
+            "spellLevel": 1,
+            "spellSlotLevel": 1,
+            "castingAbility": "wisdom",
+            "castingTime": "1 bonus action",
+            "ritual": false,
+            "castingMode": "cast"
+          }
+        }
+      ],
+      "source": "SRD 5.1 p. 179 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=179",
+      "textReferences": [
+        "dnd5e:2014:spell.shield-of-faith"
+      ],
+      "tags": [
+        "cleric-prepared"
+      ],
+      "resources": [
+        {
+          "id": "spell-slot",
+          "key": "spell-slot.1",
+          "scope": "character",
+          "units": "slots",
+          "minimumCapacity": 1
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:cleric.spellcasting",
+      "revision": 1,
+      "name": "Cleric Spellcasting",
+      "displayName": "Cleric Spellcasting",
+      "components": [
+        {
+          "id": "clericSpellAttack",
+          "kind": "defineStat",
+          "stat": {
+            "id": "clericSpellAttack",
+            "name": "Cleric Spell Attack",
+            "kind": "derived",
+            "expression": {
+              "op": "add",
+              "args": [
+                {
+                  "stat": "modifier.wisdom"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "clericSpellDC",
+          "kind": "defineStat",
+          "stat": {
+            "id": "clericSpellDC",
+            "name": "Cleric Spell Save DC",
+            "kind": "derived",
+            "expression": {
+              "op": "add",
+              "args": [
+                8,
+                {
+                  "stat": "clericSpellAttack"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "clericPreparationLimit",
+          "kind": "defineStat",
+          "stat": {
+            "id": "clericPreparationLimit",
+            "name": "Cleric Prepared Spell Limit",
+            "kind": "derived",
+            "expression": {
+              "op": "max",
+              "args": [
+                1,
+                {
+                  "op": "add",
+                  "args": [
+                    {
+                      "context": "level.dnd5e:2014:cleric"
+                    },
+                    {
+                      "stat": "modifier.wisdom"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "slot-1",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:resource.spell-slot.1"
+        },
+        {
+          "id": "prepared",
+          "kind": "chooseFeatures",
+          "minimum": 1,
+          "maximum": {
+            "stat": "clericPreparationLimit"
+          },
+          "candidates": {
+            "ids": [
+              "dnd5e:2014:cleric.prepared.command",
+              "dnd5e:2014:cleric.prepared.detect-magic",
+              "dnd5e:2014:cleric.prepared.guiding-bolt",
+              "dnd5e:2014:cleric.prepared.shield-of-faith"
+            ]
+          },
+          "retraining": {
+            "allowed": false
+          }
+        }
+      ],
+      "tags": [
+        "class-feature"
+      ],
+      "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+      "description": "Spellcasting\nAs a conduit for divine power, you can cast cleric spells.\n\nCantrips\nAt 1st level, you know three cantrips of your choice from the cleric spell list. You learn additional cleric cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Cleric table.\n\nPreparing and Casting Spells\nThe Cleric table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell’s level or higher. You regain all expended spell slots when you finish a long rest. You prepare the list of cleric spells that are available for you to cast, choosing from the cleric spell list. When you do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots. For example, if you are a 3rd--level cleric, you have four 1st--level and two 2nd--level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st--level spell cure wounds, you can cast it using a 1st--level or 2nd--level slot. Casting the spell doesn’t remove it from your list of prepared spells. You can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.\n\nSpellcasting Ability\nWisdom is your spellcasting ability for your cleric spells. The power of your spells comes from your devotion to your deity. You use your Wisdom whenever a cleric spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a cleric spell you cast and when making an attack roll with one. Spell save DC = 8 + your proficiency bonus + your Wisdom modifier Spell attack modifier = your proficiency bonus + your Wisdom modifier\n\nRitual Casting\nYou can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.\n\nSpellcasting Focus\nYou can use a holy symbol (see “Equipment”) as a spellcasting focus for your cleric spells."
     }
   ],
   "configurations": [
@@ -103669,10 +104906,22 @@
             "name": "spellSlots.1",
             "kind": "derived",
             "expression": {
-              "table": "slots1",
-              "owner": "dnd5e:2014:tables",
-              "input": {
-                "context": "level.dnd5e:2014:wizard"
+              "if": {
+                "op": "gt",
+                "args": [
+                  {
+                    "context": "level.dnd5e:2014:cleric"
+                  },
+                  0
+                ]
+              },
+              "then": 2,
+              "else": {
+                "table": "slots1",
+                "owner": "dnd5e:2014:tables",
+                "input": {
+                  "context": "level.dnd5e:2014:wizard"
+                }
               }
             }
           },
@@ -105567,6 +106816,35 @@
               }
             },
             "message": "DnD5e 2014 characters have total level 1–20."
+          },
+          {
+            "id": "cleric-level-one-only",
+            "requirement": {
+              "expression": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "level.dnd5e:2014:cleric"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            },
+            "message": "Cleric support currently covers a single-class Life Cleric at level 1 only."
           }
         ],
         "advancement": {
@@ -105600,7 +106878,11 @@
               "maximum": 1,
               "candidates": {
                 "ids": [
-                  "dnd5e:2014:background.acolyte"
+                  "dnd5e:2014:background.acolyte",
+                  "dnd5e:2014:background.noble",
+                  "dnd5e:2014:background.soldier",
+                  "dnd5e:2014:background.criminal",
+                  "dnd5e:2014:background.folk-hero"
                 ]
               },
               "retraining": {
@@ -105612,7 +106894,8 @@
         "classes": [
           "dnd5e:2014:fighter",
           "dnd5e:2014:rogue",
-          "dnd5e:2014:wizard"
+          "dnd5e:2014:wizard",
+          "dnd5e:2014:cleric"
         ],
         "commandRules": {
           "spellTurn": {
@@ -105676,7 +106959,9 @@
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
           "wizard-subclass": "Wizard Subclass",
-          "resource-tracker": "Resource Tracker"
+          "resource-tracker": "Resource Tracker",
+          "cleric-prepared": "Cleric Prepared Spell",
+          "cleric-cantrip": "Cleric Cantrip"
         }
       },
       "classes": [
@@ -107437,6 +108722,57 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        },
+        {
+          "id": "dnd5e:2014:cleric",
+          "revision": 1,
+          "name": "Cleric (level 1)",
+          "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+          "maximumLevel": 1,
+          "multiclassPrerequisites": {
+            "expression": false
+          },
+          "levels": {
+            "1": [
+              {
+                "id": "hit-points",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.hit-points"
+              },
+              {
+                "id": "entry",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.entry"
+              },
+              {
+                "id": "spellcasting",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.spellcasting"
+              },
+              {
+                "id": "domain",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.life"
+              },
+              {
+                "id": "cantrips",
+                "kind": "chooseFeatures",
+                "minimum": 3,
+                "maximum": 3,
+                "candidates": {
+                  "ids": [
+                    "dnd5e:2014:cleric.cantrip.light",
+                    "dnd5e:2014:cleric.cantrip.sacred-flame",
+                    "dnd5e:2014:cleric.cantrip.thaumaturgy"
+                  ]
+                },
+                "retraining": {
+                  "allowed": false
+                }
+              }
+            ]
+          },
+          "description": "Class Features\nAs a cleric, you gain the following class features.\n\nHit Points\nHit Dice: 1d8 per cleric level Hit Points at 1st Level: 8 + your Constitution modifier Hit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st\n\nProficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
         }
       ]
     },
@@ -108976,10 +110312,22 @@
             "name": "spellSlots.1",
             "kind": "derived",
             "expression": {
-              "table": "slots1",
-              "owner": "dnd5e:2014:tables",
-              "input": {
-                "context": "level.dnd5e:2014:wizard"
+              "if": {
+                "op": "gt",
+                "args": [
+                  {
+                    "context": "level.dnd5e:2014:cleric"
+                  },
+                  0
+                ]
+              },
+              "then": 2,
+              "else": {
+                "table": "slots1",
+                "owner": "dnd5e:2014:tables",
+                "input": {
+                  "context": "level.dnd5e:2014:wizard"
+                }
               }
             }
           },
@@ -110865,6 +112213,35 @@
               }
             },
             "message": "DnD5e 2014 characters have total level 1–20."
+          },
+          {
+            "id": "cleric-level-one-only",
+            "requirement": {
+              "expression": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "level.dnd5e:2014:cleric"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            },
+            "message": "Cleric support currently covers a single-class Life Cleric at level 1 only."
           }
         ],
         "advancement": {
@@ -110898,7 +112275,11 @@
               "maximum": 1,
               "candidates": {
                 "ids": [
-                  "dnd5e:2014:background.acolyte"
+                  "dnd5e:2014:background.acolyte",
+                  "dnd5e:2014:background.noble",
+                  "dnd5e:2014:background.soldier",
+                  "dnd5e:2014:background.criminal",
+                  "dnd5e:2014:background.folk-hero"
                 ]
               },
               "retraining": {
@@ -110910,7 +112291,8 @@
         "classes": [
           "dnd5e:2014:fighter",
           "dnd5e:2014:rogue",
-          "dnd5e:2014:wizard"
+          "dnd5e:2014:wizard",
+          "dnd5e:2014:cleric"
         ],
         "commandRules": {
           "spellTurn": {
@@ -110974,7 +112356,9 @@
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
           "wizard-subclass": "Wizard Subclass",
-          "resource-tracker": "Resource Tracker"
+          "resource-tracker": "Resource Tracker",
+          "cleric-prepared": "Cleric Prepared Spell",
+          "cleric-cantrip": "Cleric Cantrip"
         }
       },
       "classes": [
@@ -112753,6 +114137,57 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        },
+        {
+          "id": "dnd5e:2014:cleric",
+          "revision": 1,
+          "name": "Cleric (level 1)",
+          "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+          "maximumLevel": 1,
+          "multiclassPrerequisites": {
+            "expression": false
+          },
+          "levels": {
+            "1": [
+              {
+                "id": "hit-points",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.hit-points"
+              },
+              {
+                "id": "entry",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.entry"
+              },
+              {
+                "id": "spellcasting",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.spellcasting"
+              },
+              {
+                "id": "domain",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.life"
+              },
+              {
+                "id": "cantrips",
+                "kind": "chooseFeatures",
+                "minimum": 3,
+                "maximum": 3,
+                "candidates": {
+                  "ids": [
+                    "dnd5e:2014:cleric.cantrip.light",
+                    "dnd5e:2014:cleric.cantrip.sacred-flame",
+                    "dnd5e:2014:cleric.cantrip.thaumaturgy"
+                  ]
+                },
+                "retraining": {
+                  "allowed": false
+                }
+              }
+            ]
+          },
+          "description": "Class Features\nAs a cleric, you gain the following class features.\n\nHit Points\nHit Dice: 1d8 per cleric level Hit Points at 1st Level: 8 + your Constitution modifier Hit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st\n\nProficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
         }
       ]
     },
@@ -114292,10 +115727,22 @@
             "name": "spellSlots.1",
             "kind": "derived",
             "expression": {
-              "table": "slots1",
-              "owner": "dnd5e:2014:tables",
-              "input": {
-                "context": "level.dnd5e:2014:wizard"
+              "if": {
+                "op": "gt",
+                "args": [
+                  {
+                    "context": "level.dnd5e:2014:cleric"
+                  },
+                  0
+                ]
+              },
+              "then": 2,
+              "else": {
+                "table": "slots1",
+                "owner": "dnd5e:2014:tables",
+                "input": {
+                  "context": "level.dnd5e:2014:wizard"
+                }
               }
             }
           },
@@ -116190,6 +117637,35 @@
               }
             },
             "message": "DnD5e 2014 characters have total level 1–20."
+          },
+          {
+            "id": "cleric-level-one-only",
+            "requirement": {
+              "expression": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "level.dnd5e:2014:cleric"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            },
+            "message": "Cleric support currently covers a single-class Life Cleric at level 1 only."
           }
         ],
         "advancement": {
@@ -116223,7 +117699,11 @@
               "maximum": 1,
               "candidates": {
                 "ids": [
-                  "dnd5e:2014:background.acolyte"
+                  "dnd5e:2014:background.acolyte",
+                  "dnd5e:2014:background.noble",
+                  "dnd5e:2014:background.soldier",
+                  "dnd5e:2014:background.criminal",
+                  "dnd5e:2014:background.folk-hero"
                 ]
               },
               "retraining": {
@@ -116235,7 +117715,8 @@
         "classes": [
           "dnd5e:2014:fighter",
           "dnd5e:2014:rogue",
-          "dnd5e:2014:wizard"
+          "dnd5e:2014:wizard",
+          "dnd5e:2014:cleric"
         ],
         "commandRules": {
           "spellTurn": {
@@ -116299,7 +117780,9 @@
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
           "wizard-subclass": "Wizard Subclass",
-          "resource-tracker": "Resource Tracker"
+          "resource-tracker": "Resource Tracker",
+          "cleric-prepared": "Cleric Prepared Spell",
+          "cleric-cantrip": "Cleric Cantrip"
         }
       },
       "classes": [
@@ -118060,6 +119543,57 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        },
+        {
+          "id": "dnd5e:2014:cleric",
+          "revision": 1,
+          "name": "Cleric (level 1)",
+          "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+          "maximumLevel": 1,
+          "multiclassPrerequisites": {
+            "expression": false
+          },
+          "levels": {
+            "1": [
+              {
+                "id": "hit-points",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.hit-points"
+              },
+              {
+                "id": "entry",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.entry"
+              },
+              {
+                "id": "spellcasting",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.spellcasting"
+              },
+              {
+                "id": "domain",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.life"
+              },
+              {
+                "id": "cantrips",
+                "kind": "chooseFeatures",
+                "minimum": 3,
+                "maximum": 3,
+                "candidates": {
+                  "ids": [
+                    "dnd5e:2014:cleric.cantrip.light",
+                    "dnd5e:2014:cleric.cantrip.sacred-flame",
+                    "dnd5e:2014:cleric.cantrip.thaumaturgy"
+                  ]
+                },
+                "retraining": {
+                  "allowed": false
+                }
+              }
+            ]
+          },
+          "description": "Class Features\nAs a cleric, you gain the following class features.\n\nHit Points\nHit Dice: 1d8 per cleric level Hit Points at 1st Level: 8 + your Constitution modifier Hit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st\n\nProficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
         }
       ]
     },
@@ -119599,10 +121133,22 @@
             "name": "spellSlots.1",
             "kind": "derived",
             "expression": {
-              "table": "slots1",
-              "owner": "dnd5e:2014:tables",
-              "input": {
-                "context": "level.dnd5e:2014:wizard"
+              "if": {
+                "op": "gt",
+                "args": [
+                  {
+                    "context": "level.dnd5e:2014:cleric"
+                  },
+                  0
+                ]
+              },
+              "then": 2,
+              "else": {
+                "table": "slots1",
+                "owner": "dnd5e:2014:tables",
+                "input": {
+                  "context": "level.dnd5e:2014:wizard"
+                }
               }
             }
           },
@@ -121488,6 +123034,35 @@
               }
             },
             "message": "DnD5e 2014 characters have total level 1–20."
+          },
+          {
+            "id": "cleric-level-one-only",
+            "requirement": {
+              "expression": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "level.dnd5e:2014:cleric"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            },
+            "message": "Cleric support currently covers a single-class Life Cleric at level 1 only."
           }
         ],
         "advancement": {
@@ -121521,7 +123096,11 @@
               "maximum": 1,
               "candidates": {
                 "ids": [
-                  "dnd5e:2014:background.acolyte"
+                  "dnd5e:2014:background.acolyte",
+                  "dnd5e:2014:background.noble",
+                  "dnd5e:2014:background.soldier",
+                  "dnd5e:2014:background.criminal",
+                  "dnd5e:2014:background.folk-hero"
                 ]
               },
               "retraining": {
@@ -121533,7 +123112,8 @@
         "classes": [
           "dnd5e:2014:fighter",
           "dnd5e:2014:rogue",
-          "dnd5e:2014:wizard"
+          "dnd5e:2014:wizard",
+          "dnd5e:2014:cleric"
         ],
         "commandRules": {
           "spellTurn": {
@@ -121597,7 +123177,9 @@
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
           "wizard-subclass": "Wizard Subclass",
-          "resource-tracker": "Resource Tracker"
+          "resource-tracker": "Resource Tracker",
+          "cleric-prepared": "Cleric Prepared Spell",
+          "cleric-cantrip": "Cleric Cantrip"
         }
       },
       "classes": [
@@ -123376,6 +124958,57 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        },
+        {
+          "id": "dnd5e:2014:cleric",
+          "revision": 1,
+          "name": "Cleric (level 1)",
+          "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+          "maximumLevel": 1,
+          "multiclassPrerequisites": {
+            "expression": false
+          },
+          "levels": {
+            "1": [
+              {
+                "id": "hit-points",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.hit-points"
+              },
+              {
+                "id": "entry",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.entry"
+              },
+              {
+                "id": "spellcasting",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.spellcasting"
+              },
+              {
+                "id": "domain",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.life"
+              },
+              {
+                "id": "cantrips",
+                "kind": "chooseFeatures",
+                "minimum": 3,
+                "maximum": 3,
+                "candidates": {
+                  "ids": [
+                    "dnd5e:2014:cleric.cantrip.light",
+                    "dnd5e:2014:cleric.cantrip.sacred-flame",
+                    "dnd5e:2014:cleric.cantrip.thaumaturgy"
+                  ]
+                },
+                "retraining": {
+                  "allowed": false
+                }
+              }
+            ]
+          },
+          "description": "Class Features\nAs a cleric, you gain the following class features.\n\nHit Points\nHit Dice: 1d8 per cleric level Hit Points at 1st Level: 8 + your Constitution modifier Hit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st\n\nProficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
         }
       ]
     },
@@ -124915,10 +126548,22 @@
             "name": "spellSlots.1",
             "kind": "derived",
             "expression": {
-              "table": "slots1",
-              "owner": "dnd5e:2014:tables",
-              "input": {
-                "context": "level.dnd5e:2014:wizard"
+              "if": {
+                "op": "gt",
+                "args": [
+                  {
+                    "context": "level.dnd5e:2014:cleric"
+                  },
+                  0
+                ]
+              },
+              "then": 2,
+              "else": {
+                "table": "slots1",
+                "owner": "dnd5e:2014:tables",
+                "input": {
+                  "context": "level.dnd5e:2014:wizard"
+                }
               }
             }
           },
@@ -126470,6 +128115,35 @@
               }
             },
             "message": "DnD5e 2014 characters have total level 1–20."
+          },
+          {
+            "id": "cleric-level-one-only",
+            "requirement": {
+              "expression": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "level.dnd5e:2014:cleric"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            },
+            "message": "Cleric support currently covers a single-class Life Cleric at level 1 only."
           }
         ],
         "advancement": {
@@ -126503,7 +128177,11 @@
               "maximum": 1,
               "candidates": {
                 "ids": [
-                  "dnd5e:2014:background.acolyte"
+                  "dnd5e:2014:background.acolyte",
+                  "dnd5e:2014:background.noble",
+                  "dnd5e:2014:background.soldier",
+                  "dnd5e:2014:background.criminal",
+                  "dnd5e:2014:background.folk-hero"
                 ]
               },
               "retraining": {
@@ -126515,7 +128193,8 @@
         "classes": [
           "dnd5e:2014:fighter",
           "dnd5e:2014:rogue",
-          "dnd5e:2014:wizard"
+          "dnd5e:2014:wizard",
+          "dnd5e:2014:cleric"
         ],
         "commandRules": {
           "spellTurn": {
@@ -126579,7 +128258,9 @@
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
           "wizard-subclass": "Wizard Subclass",
-          "resource-tracker": "Resource Tracker"
+          "resource-tracker": "Resource Tracker",
+          "cleric-prepared": "Cleric Prepared Spell",
+          "cleric-cantrip": "Cleric Cantrip"
         }
       },
       "classes": [
@@ -128340,6 +130021,57 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        },
+        {
+          "id": "dnd5e:2014:cleric",
+          "revision": 1,
+          "name": "Cleric (level 1)",
+          "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+          "maximumLevel": 1,
+          "multiclassPrerequisites": {
+            "expression": false
+          },
+          "levels": {
+            "1": [
+              {
+                "id": "hit-points",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.hit-points"
+              },
+              {
+                "id": "entry",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.entry"
+              },
+              {
+                "id": "spellcasting",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.spellcasting"
+              },
+              {
+                "id": "domain",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.life"
+              },
+              {
+                "id": "cantrips",
+                "kind": "chooseFeatures",
+                "minimum": 3,
+                "maximum": 3,
+                "candidates": {
+                  "ids": [
+                    "dnd5e:2014:cleric.cantrip.light",
+                    "dnd5e:2014:cleric.cantrip.sacred-flame",
+                    "dnd5e:2014:cleric.cantrip.thaumaturgy"
+                  ]
+                },
+                "retraining": {
+                  "allowed": false
+                }
+              }
+            ]
+          },
+          "description": "Class Features\nAs a cleric, you gain the following class features.\n\nHit Points\nHit Dice: 1d8 per cleric level Hit Points at 1st Level: 8 + your Constitution modifier Hit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st\n\nProficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
         }
       ]
     },
@@ -129879,10 +131611,22 @@
             "name": "spellSlots.1",
             "kind": "derived",
             "expression": {
-              "table": "slots1",
-              "owner": "dnd5e:2014:tables",
-              "input": {
-                "context": "level.dnd5e:2014:wizard"
+              "if": {
+                "op": "gt",
+                "args": [
+                  {
+                    "context": "level.dnd5e:2014:cleric"
+                  },
+                  0
+                ]
+              },
+              "then": 2,
+              "else": {
+                "table": "slots1",
+                "owner": "dnd5e:2014:tables",
+                "input": {
+                  "context": "level.dnd5e:2014:wizard"
+                }
               }
             }
           },
@@ -131425,6 +133169,35 @@
               }
             },
             "message": "DnD5e 2014 characters have total level 1–20."
+          },
+          {
+            "id": "cleric-level-one-only",
+            "requirement": {
+              "expression": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "level.dnd5e:2014:cleric"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            },
+            "message": "Cleric support currently covers a single-class Life Cleric at level 1 only."
           }
         ],
         "advancement": {
@@ -131458,7 +133231,11 @@
               "maximum": 1,
               "candidates": {
                 "ids": [
-                  "dnd5e:2014:background.acolyte"
+                  "dnd5e:2014:background.acolyte",
+                  "dnd5e:2014:background.noble",
+                  "dnd5e:2014:background.soldier",
+                  "dnd5e:2014:background.criminal",
+                  "dnd5e:2014:background.folk-hero"
                 ]
               },
               "retraining": {
@@ -131470,7 +133247,8 @@
         "classes": [
           "dnd5e:2014:fighter",
           "dnd5e:2014:rogue",
-          "dnd5e:2014:wizard"
+          "dnd5e:2014:wizard",
+          "dnd5e:2014:cleric"
         ],
         "commandRules": {
           "spellTurn": {
@@ -131534,7 +133312,9 @@
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
           "wizard-subclass": "Wizard Subclass",
-          "resource-tracker": "Resource Tracker"
+          "resource-tracker": "Resource Tracker",
+          "cleric-prepared": "Cleric Prepared Spell",
+          "cleric-cantrip": "Cleric Cantrip"
         }
       },
       "classes": [
@@ -133313,6 +135093,57 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        },
+        {
+          "id": "dnd5e:2014:cleric",
+          "revision": 1,
+          "name": "Cleric (level 1)",
+          "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+          "maximumLevel": 1,
+          "multiclassPrerequisites": {
+            "expression": false
+          },
+          "levels": {
+            "1": [
+              {
+                "id": "hit-points",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.hit-points"
+              },
+              {
+                "id": "entry",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.entry"
+              },
+              {
+                "id": "spellcasting",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.spellcasting"
+              },
+              {
+                "id": "domain",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.life"
+              },
+              {
+                "id": "cantrips",
+                "kind": "chooseFeatures",
+                "minimum": 3,
+                "maximum": 3,
+                "candidates": {
+                  "ids": [
+                    "dnd5e:2014:cleric.cantrip.light",
+                    "dnd5e:2014:cleric.cantrip.sacred-flame",
+                    "dnd5e:2014:cleric.cantrip.thaumaturgy"
+                  ]
+                },
+                "retraining": {
+                  "allowed": false
+                }
+              }
+            ]
+          },
+          "description": "Class Features\nAs a cleric, you gain the following class features.\n\nHit Points\nHit Dice: 1d8 per cleric level Hit Points at 1st Level: 8 + your Constitution modifier Hit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st\n\nProficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
         }
       ]
     },
@@ -134852,10 +136683,22 @@
             "name": "spellSlots.1",
             "kind": "derived",
             "expression": {
-              "table": "slots1",
-              "owner": "dnd5e:2014:tables",
-              "input": {
-                "context": "level.dnd5e:2014:wizard"
+              "if": {
+                "op": "gt",
+                "args": [
+                  {
+                    "context": "level.dnd5e:2014:cleric"
+                  },
+                  0
+                ]
+              },
+              "then": 2,
+              "else": {
+                "table": "slots1",
+                "owner": "dnd5e:2014:tables",
+                "input": {
+                  "context": "level.dnd5e:2014:wizard"
+                }
               }
             }
           },
@@ -136407,6 +138250,35 @@
               }
             },
             "message": "DnD5e 2014 characters have total level 1–20."
+          },
+          {
+            "id": "cleric-level-one-only",
+            "requirement": {
+              "expression": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "level.dnd5e:2014:cleric"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            },
+            "message": "Cleric support currently covers a single-class Life Cleric at level 1 only."
           }
         ],
         "advancement": {
@@ -136440,7 +138312,11 @@
               "maximum": 1,
               "candidates": {
                 "ids": [
-                  "dnd5e:2014:background.acolyte"
+                  "dnd5e:2014:background.acolyte",
+                  "dnd5e:2014:background.noble",
+                  "dnd5e:2014:background.soldier",
+                  "dnd5e:2014:background.criminal",
+                  "dnd5e:2014:background.folk-hero"
                 ]
               },
               "retraining": {
@@ -136452,7 +138328,8 @@
         "classes": [
           "dnd5e:2014:fighter",
           "dnd5e:2014:rogue",
-          "dnd5e:2014:wizard"
+          "dnd5e:2014:wizard",
+          "dnd5e:2014:cleric"
         ],
         "commandRules": {
           "spellTurn": {
@@ -136516,7 +138393,9 @@
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
           "wizard-subclass": "Wizard Subclass",
-          "resource-tracker": "Resource Tracker"
+          "resource-tracker": "Resource Tracker",
+          "cleric-prepared": "Cleric Prepared Spell",
+          "cleric-cantrip": "Cleric Cantrip"
         }
       },
       "classes": [
@@ -138277,6 +140156,57 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        },
+        {
+          "id": "dnd5e:2014:cleric",
+          "revision": 1,
+          "name": "Cleric (level 1)",
+          "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+          "maximumLevel": 1,
+          "multiclassPrerequisites": {
+            "expression": false
+          },
+          "levels": {
+            "1": [
+              {
+                "id": "hit-points",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.hit-points"
+              },
+              {
+                "id": "entry",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.entry"
+              },
+              {
+                "id": "spellcasting",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.spellcasting"
+              },
+              {
+                "id": "domain",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.life"
+              },
+              {
+                "id": "cantrips",
+                "kind": "chooseFeatures",
+                "minimum": 3,
+                "maximum": 3,
+                "candidates": {
+                  "ids": [
+                    "dnd5e:2014:cleric.cantrip.light",
+                    "dnd5e:2014:cleric.cantrip.sacred-flame",
+                    "dnd5e:2014:cleric.cantrip.thaumaturgy"
+                  ]
+                },
+                "retraining": {
+                  "allowed": false
+                }
+              }
+            ]
+          },
+          "description": "Class Features\nAs a cleric, you gain the following class features.\n\nHit Points\nHit Dice: 1d8 per cleric level Hit Points at 1st Level: 8 + your Constitution modifier Hit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st\n\nProficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
         }
       ]
     },
@@ -139816,10 +141746,22 @@
             "name": "spellSlots.1",
             "kind": "derived",
             "expression": {
-              "table": "slots1",
-              "owner": "dnd5e:2014:tables",
-              "input": {
-                "context": "level.dnd5e:2014:wizard"
+              "if": {
+                "op": "gt",
+                "args": [
+                  {
+                    "context": "level.dnd5e:2014:cleric"
+                  },
+                  0
+                ]
+              },
+              "then": 2,
+              "else": {
+                "table": "slots1",
+                "owner": "dnd5e:2014:tables",
+                "input": {
+                  "context": "level.dnd5e:2014:wizard"
+                }
               }
             }
           },
@@ -141362,6 +143304,35 @@
               }
             },
             "message": "DnD5e 2014 characters have total level 1–20."
+          },
+          {
+            "id": "cleric-level-one-only",
+            "requirement": {
+              "expression": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "level.dnd5e:2014:cleric"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            },
+            "message": "Cleric support currently covers a single-class Life Cleric at level 1 only."
           }
         ],
         "advancement": {
@@ -141395,7 +143366,11 @@
               "maximum": 1,
               "candidates": {
                 "ids": [
-                  "dnd5e:2014:background.acolyte"
+                  "dnd5e:2014:background.acolyte",
+                  "dnd5e:2014:background.noble",
+                  "dnd5e:2014:background.soldier",
+                  "dnd5e:2014:background.criminal",
+                  "dnd5e:2014:background.folk-hero"
                 ]
               },
               "retraining": {
@@ -141407,7 +143382,8 @@
         "classes": [
           "dnd5e:2014:fighter",
           "dnd5e:2014:rogue",
-          "dnd5e:2014:wizard"
+          "dnd5e:2014:wizard",
+          "dnd5e:2014:cleric"
         ],
         "commandRules": {
           "spellTurn": {
@@ -141471,7 +143447,9 @@
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
           "wizard-subclass": "Wizard Subclass",
-          "resource-tracker": "Resource Tracker"
+          "resource-tracker": "Resource Tracker",
+          "cleric-prepared": "Cleric Prepared Spell",
+          "cleric-cantrip": "Cleric Cantrip"
         }
       },
       "classes": [
@@ -143250,6 +145228,57 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        },
+        {
+          "id": "dnd5e:2014:cleric",
+          "revision": 1,
+          "name": "Cleric (level 1)",
+          "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+          "maximumLevel": 1,
+          "multiclassPrerequisites": {
+            "expression": false
+          },
+          "levels": {
+            "1": [
+              {
+                "id": "hit-points",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.hit-points"
+              },
+              {
+                "id": "entry",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.entry"
+              },
+              {
+                "id": "spellcasting",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.spellcasting"
+              },
+              {
+                "id": "domain",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.life"
+              },
+              {
+                "id": "cantrips",
+                "kind": "chooseFeatures",
+                "minimum": 3,
+                "maximum": 3,
+                "candidates": {
+                  "ids": [
+                    "dnd5e:2014:cleric.cantrip.light",
+                    "dnd5e:2014:cleric.cantrip.sacred-flame",
+                    "dnd5e:2014:cleric.cantrip.thaumaturgy"
+                  ]
+                },
+                "retraining": {
+                  "allowed": false
+                }
+              }
+            ]
+          },
+          "description": "Class Features\nAs a cleric, you gain the following class features.\n\nHit Points\nHit Dice: 1d8 per cleric level Hit Points at 1st Level: 8 + your Constitution modifier Hit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st\n\nProficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
         }
       ]
     },
@@ -144789,10 +146818,22 @@
             "name": "spellSlots.1",
             "kind": "derived",
             "expression": {
-              "table": "slots1",
-              "owner": "dnd5e:2014:tables",
-              "input": {
-                "context": "level.dnd5e:2014:wizard"
+              "if": {
+                "op": "gt",
+                "args": [
+                  {
+                    "context": "level.dnd5e:2014:cleric"
+                  },
+                  0
+                ]
+              },
+              "then": 2,
+              "else": {
+                "table": "slots1",
+                "owner": "dnd5e:2014:tables",
+                "input": {
+                  "context": "level.dnd5e:2014:wizard"
+                }
               }
             }
           },
@@ -146142,6 +148183,35 @@
               }
             },
             "message": "DnD5e 2014 characters have total level 1–20."
+          },
+          {
+            "id": "cleric-level-one-only",
+            "requirement": {
+              "expression": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "level.dnd5e:2014:cleric"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            },
+            "message": "Cleric support currently covers a single-class Life Cleric at level 1 only."
           }
         ],
         "advancement": {
@@ -146175,7 +148245,11 @@
               "maximum": 1,
               "candidates": {
                 "ids": [
-                  "dnd5e:2014:background.acolyte"
+                  "dnd5e:2014:background.acolyte",
+                  "dnd5e:2014:background.noble",
+                  "dnd5e:2014:background.soldier",
+                  "dnd5e:2014:background.criminal",
+                  "dnd5e:2014:background.folk-hero"
                 ]
               },
               "retraining": {
@@ -146187,7 +148261,8 @@
         "classes": [
           "dnd5e:2014:fighter",
           "dnd5e:2014:rogue",
-          "dnd5e:2014:wizard"
+          "dnd5e:2014:wizard",
+          "dnd5e:2014:cleric"
         ],
         "commandRules": {
           "spellTurn": {
@@ -146251,7 +148326,9 @@
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
           "wizard-subclass": "Wizard Subclass",
-          "resource-tracker": "Resource Tracker"
+          "resource-tracker": "Resource Tracker",
+          "cleric-prepared": "Cleric Prepared Spell",
+          "cleric-cantrip": "Cleric Cantrip"
         }
       },
       "classes": [
@@ -148012,6 +150089,57 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        },
+        {
+          "id": "dnd5e:2014:cleric",
+          "revision": 1,
+          "name": "Cleric (level 1)",
+          "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+          "maximumLevel": 1,
+          "multiclassPrerequisites": {
+            "expression": false
+          },
+          "levels": {
+            "1": [
+              {
+                "id": "hit-points",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.hit-points"
+              },
+              {
+                "id": "entry",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.entry"
+              },
+              {
+                "id": "spellcasting",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.spellcasting"
+              },
+              {
+                "id": "domain",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.life"
+              },
+              {
+                "id": "cantrips",
+                "kind": "chooseFeatures",
+                "minimum": 3,
+                "maximum": 3,
+                "candidates": {
+                  "ids": [
+                    "dnd5e:2014:cleric.cantrip.light",
+                    "dnd5e:2014:cleric.cantrip.sacred-flame",
+                    "dnd5e:2014:cleric.cantrip.thaumaturgy"
+                  ]
+                },
+                "retraining": {
+                  "allowed": false
+                }
+              }
+            ]
+          },
+          "description": "Class Features\nAs a cleric, you gain the following class features.\n\nHit Points\nHit Dice: 1d8 per cleric level Hit Points at 1st Level: 8 + your Constitution modifier Hit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st\n\nProficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
         }
       ]
     },
@@ -149551,10 +151679,22 @@
             "name": "spellSlots.1",
             "kind": "derived",
             "expression": {
-              "table": "slots1",
-              "owner": "dnd5e:2014:tables",
-              "input": {
-                "context": "level.dnd5e:2014:wizard"
+              "if": {
+                "op": "gt",
+                "args": [
+                  {
+                    "context": "level.dnd5e:2014:cleric"
+                  },
+                  0
+                ]
+              },
+              "then": 2,
+              "else": {
+                "table": "slots1",
+                "owner": "dnd5e:2014:tables",
+                "input": {
+                  "context": "level.dnd5e:2014:wizard"
+                }
               }
             }
           },
@@ -150895,6 +153035,35 @@
               }
             },
             "message": "DnD5e 2014 characters have total level 1–20."
+          },
+          {
+            "id": "cleric-level-one-only",
+            "requirement": {
+              "expression": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "level.dnd5e:2014:cleric"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            },
+            "message": "Cleric support currently covers a single-class Life Cleric at level 1 only."
           }
         ],
         "advancement": {
@@ -150928,7 +153097,11 @@
               "maximum": 1,
               "candidates": {
                 "ids": [
-                  "dnd5e:2014:background.acolyte"
+                  "dnd5e:2014:background.acolyte",
+                  "dnd5e:2014:background.noble",
+                  "dnd5e:2014:background.soldier",
+                  "dnd5e:2014:background.criminal",
+                  "dnd5e:2014:background.folk-hero"
                 ]
               },
               "retraining": {
@@ -150940,7 +153113,8 @@
         "classes": [
           "dnd5e:2014:fighter",
           "dnd5e:2014:rogue",
-          "dnd5e:2014:wizard"
+          "dnd5e:2014:wizard",
+          "dnd5e:2014:cleric"
         ],
         "commandRules": {
           "spellTurn": {
@@ -151004,7 +153178,9 @@
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
           "wizard-subclass": "Wizard Subclass",
-          "resource-tracker": "Resource Tracker"
+          "resource-tracker": "Resource Tracker",
+          "cleric-prepared": "Cleric Prepared Spell",
+          "cleric-cantrip": "Cleric Cantrip"
         }
       },
       "classes": [
@@ -152783,6 +154959,57 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        },
+        {
+          "id": "dnd5e:2014:cleric",
+          "revision": 1,
+          "name": "Cleric (level 1)",
+          "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+          "maximumLevel": 1,
+          "multiclassPrerequisites": {
+            "expression": false
+          },
+          "levels": {
+            "1": [
+              {
+                "id": "hit-points",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.hit-points"
+              },
+              {
+                "id": "entry",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.entry"
+              },
+              {
+                "id": "spellcasting",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.spellcasting"
+              },
+              {
+                "id": "domain",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.life"
+              },
+              {
+                "id": "cantrips",
+                "kind": "chooseFeatures",
+                "minimum": 3,
+                "maximum": 3,
+                "candidates": {
+                  "ids": [
+                    "dnd5e:2014:cleric.cantrip.light",
+                    "dnd5e:2014:cleric.cantrip.sacred-flame",
+                    "dnd5e:2014:cleric.cantrip.thaumaturgy"
+                  ]
+                },
+                "retraining": {
+                  "allowed": false
+                }
+              }
+            ]
+          },
+          "description": "Class Features\nAs a cleric, you gain the following class features.\n\nHit Points\nHit Dice: 1d8 per cleric level Hit Points at 1st Level: 8 + your Constitution modifier Hit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st\n\nProficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
         }
       ]
     },
@@ -154322,10 +156549,22 @@
             "name": "spellSlots.1",
             "kind": "derived",
             "expression": {
-              "table": "slots1",
-              "owner": "dnd5e:2014:tables",
-              "input": {
-                "context": "level.dnd5e:2014:wizard"
+              "if": {
+                "op": "gt",
+                "args": [
+                  {
+                    "context": "level.dnd5e:2014:cleric"
+                  },
+                  0
+                ]
+              },
+              "then": 2,
+              "else": {
+                "table": "slots1",
+                "owner": "dnd5e:2014:tables",
+                "input": {
+                  "context": "level.dnd5e:2014:wizard"
+                }
               }
             }
           },
@@ -155675,6 +157914,35 @@
               }
             },
             "message": "DnD5e 2014 characters have total level 1–20."
+          },
+          {
+            "id": "cleric-level-one-only",
+            "requirement": {
+              "expression": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "level.dnd5e:2014:cleric"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            },
+            "message": "Cleric support currently covers a single-class Life Cleric at level 1 only."
           }
         ],
         "advancement": {
@@ -155708,7 +157976,11 @@
               "maximum": 1,
               "candidates": {
                 "ids": [
-                  "dnd5e:2014:background.acolyte"
+                  "dnd5e:2014:background.acolyte",
+                  "dnd5e:2014:background.noble",
+                  "dnd5e:2014:background.soldier",
+                  "dnd5e:2014:background.criminal",
+                  "dnd5e:2014:background.folk-hero"
                 ]
               },
               "retraining": {
@@ -155720,7 +157992,8 @@
         "classes": [
           "dnd5e:2014:fighter",
           "dnd5e:2014:rogue",
-          "dnd5e:2014:wizard"
+          "dnd5e:2014:wizard",
+          "dnd5e:2014:cleric"
         ],
         "commandRules": {
           "spellTurn": {
@@ -155784,7 +158057,9 @@
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
           "wizard-subclass": "Wizard Subclass",
-          "resource-tracker": "Resource Tracker"
+          "resource-tracker": "Resource Tracker",
+          "cleric-prepared": "Cleric Prepared Spell",
+          "cleric-cantrip": "Cleric Cantrip"
         }
       },
       "classes": [
@@ -157545,6 +159820,57 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        },
+        {
+          "id": "dnd5e:2014:cleric",
+          "revision": 1,
+          "name": "Cleric (level 1)",
+          "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+          "maximumLevel": 1,
+          "multiclassPrerequisites": {
+            "expression": false
+          },
+          "levels": {
+            "1": [
+              {
+                "id": "hit-points",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.hit-points"
+              },
+              {
+                "id": "entry",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.entry"
+              },
+              {
+                "id": "spellcasting",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.spellcasting"
+              },
+              {
+                "id": "domain",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.life"
+              },
+              {
+                "id": "cantrips",
+                "kind": "chooseFeatures",
+                "minimum": 3,
+                "maximum": 3,
+                "candidates": {
+                  "ids": [
+                    "dnd5e:2014:cleric.cantrip.light",
+                    "dnd5e:2014:cleric.cantrip.sacred-flame",
+                    "dnd5e:2014:cleric.cantrip.thaumaturgy"
+                  ]
+                },
+                "retraining": {
+                  "allowed": false
+                }
+              }
+            ]
+          },
+          "description": "Class Features\nAs a cleric, you gain the following class features.\n\nHit Points\nHit Dice: 1d8 per cleric level Hit Points at 1st Level: 8 + your Constitution modifier Hit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st\n\nProficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
         }
       ]
     },
@@ -159084,10 +161410,22 @@
             "name": "spellSlots.1",
             "kind": "derived",
             "expression": {
-              "table": "slots1",
-              "owner": "dnd5e:2014:tables",
-              "input": {
-                "context": "level.dnd5e:2014:wizard"
+              "if": {
+                "op": "gt",
+                "args": [
+                  {
+                    "context": "level.dnd5e:2014:cleric"
+                  },
+                  0
+                ]
+              },
+              "then": 2,
+              "else": {
+                "table": "slots1",
+                "owner": "dnd5e:2014:tables",
+                "input": {
+                  "context": "level.dnd5e:2014:wizard"
+                }
               }
             }
           },
@@ -160428,6 +162766,35 @@
               }
             },
             "message": "DnD5e 2014 characters have total level 1–20."
+          },
+          {
+            "id": "cleric-level-one-only",
+            "requirement": {
+              "expression": {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "level.dnd5e:2014:cleric"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            },
+            "message": "Cleric support currently covers a single-class Life Cleric at level 1 only."
           }
         ],
         "advancement": {
@@ -160461,7 +162828,11 @@
               "maximum": 1,
               "candidates": {
                 "ids": [
-                  "dnd5e:2014:background.acolyte"
+                  "dnd5e:2014:background.acolyte",
+                  "dnd5e:2014:background.noble",
+                  "dnd5e:2014:background.soldier",
+                  "dnd5e:2014:background.criminal",
+                  "dnd5e:2014:background.folk-hero"
                 ]
               },
               "retraining": {
@@ -160473,7 +162844,8 @@
         "classes": [
           "dnd5e:2014:fighter",
           "dnd5e:2014:rogue",
-          "dnd5e:2014:wizard"
+          "dnd5e:2014:wizard",
+          "dnd5e:2014:cleric"
         ],
         "commandRules": {
           "spellTurn": {
@@ -160537,7 +162909,9 @@
           "wizard-prepared": "Prepared Wizard Spell",
           "wizard-spellbook": "Wizard Spellbook",
           "wizard-subclass": "Wizard Subclass",
-          "resource-tracker": "Resource Tracker"
+          "resource-tracker": "Resource Tracker",
+          "cleric-prepared": "Cleric Prepared Spell",
+          "cleric-cantrip": "Cleric Cantrip"
         }
       },
       "classes": [
@@ -162316,6 +164690,57 @@
           },
           "description": "Class Features\nAs a wizard, you gain the following class features.\n\nHit Points\nHit Dice: 1d6 per wizard level\n\nHit Points at 1st Level: 6 + your Constitution modifier\n\nHit Points at Higher Levels: 1d6 (or 4) + your Constitution modifier per wizard level after 1st\n\nProficiencies\nArmor: None\n\nWeapons: Daggers, darts, slings, quarterstaffs, light crossbows\n\nTools: None\n\nSaving Throws: Intelligence, Wisdom\n\nSkills: Choose two from Arcana, History, Insight, Investigation, Medicine, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a quarterstaff or (b) a dagger\n\n• (a) a component pouch or (b) an arcane focus\n\n• (a) a scholar’s pack or (b) an explorer’s pack\n\n• A spellbook",
           "source": "SRD 5.1 pp. 52–54 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=52"
+        },
+        {
+          "id": "dnd5e:2014:cleric",
+          "revision": 1,
+          "name": "Cleric (level 1)",
+          "source": "SRD 5.1 p. 15 (CC BY 4.0), https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf#page=15",
+          "maximumLevel": 1,
+          "multiclassPrerequisites": {
+            "expression": false
+          },
+          "levels": {
+            "1": [
+              {
+                "id": "hit-points",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.hit-points"
+              },
+              {
+                "id": "entry",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.entry"
+              },
+              {
+                "id": "spellcasting",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.spellcasting"
+              },
+              {
+                "id": "domain",
+                "kind": "grantFeature",
+                "feature": "dnd5e:2014:cleric.life"
+              },
+              {
+                "id": "cantrips",
+                "kind": "chooseFeatures",
+                "minimum": 3,
+                "maximum": 3,
+                "candidates": {
+                  "ids": [
+                    "dnd5e:2014:cleric.cantrip.light",
+                    "dnd5e:2014:cleric.cantrip.sacred-flame",
+                    "dnd5e:2014:cleric.cantrip.thaumaturgy"
+                  ]
+                },
+                "retraining": {
+                  "allowed": false
+                }
+              }
+            ]
+          },
+          "description": "Class Features\nAs a cleric, you gain the following class features.\n\nHit Points\nHit Dice: 1d8 per cleric level Hit Points at 1st Level: 8 + your Constitution modifier Hit Points at Higher Levels: 1d8 (or 5) + your Constitution modifier per cleric level after 1st\n\nProficiencies\nArmor: Light armor, medium armor, shields Weapons: Simple weapons Tools: None\n\nSaving Throws: Wisdom, Charisma\n\nSkills: Choose two from History, Insight, Medicine, Persuasion, and Religion\n\nEquipment\nYou start with the following equipment, in addition to the equipment granted by your background:\n\n• (a) a mace or (b) a warhammer (if proficient)\n\n• (a) scale mail, (b) leather armor, or (c) chain mail (if proficient)\n\n• (a) a light crossbow and 20 bolts or (b) any simple weapon\n\n• (a) a priest’s pack or (b) an explorer’s pack\n\n• A shield and a holy symbol"
         }
       ]
     }

@@ -14,6 +14,8 @@ const { FeatureRequirements } = await server.ssrLoadModule('/src/FeatureRequirem
 const { CharacterFeatures } = await server.ssrLoadModule('/src/CharacterFeatures.tsx');
 const { ResourceSummary } = await server.ssrLoadModule('/src/ResourceSummary.tsx');
 const { SelectionCard } = await server.ssrLoadModule('/src/SelectionCard.tsx');
+const { addStarterCharacters } = await server.ssrLoadModule('/src/starter-characters.ts');
+const starterSaves = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8'));
 const { advancementLabels } = await server.ssrLoadModule('/src/feature-requirements.ts');
 const file = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
 function storage() {
@@ -335,6 +337,35 @@ test('Feature selections default to a dropdown with a list toggle and no HP choi
   assert.match(html, /aria-pressed="false">Use list/);
   assert.match(html, /Choose a Feature/);
   assert.doesNotMatch(html, /class="row pagination"/);
+});
+
+test('Starter Set party loads its System, saves all five characters, and preserves edited copies on repeated imports', () => {
+  const workspace = addStarterCharacters({ version: 1, systems: [], characters: [] }, file, starterSaves);
+  assert.equal(workspace.characters.length, 5);
+  assert.equal(workspace.systems.length, 1);
+  workspace.characters[0].name = 'My renamed fighter';
+  const repeated = addStarterCharacters(workspace, file, starterSaves);
+  assert.equal(repeated.characters.length, 5);
+  assert.equal(repeated.characters[0].name, 'My renamed fighter');
+  const store = storage();
+  model.writeWorkspace(store, repeated);
+  assert.deepEqual(model.readWorkspace(store).characters, repeated.characters);
+  const html = render(repeated, `#characters/${repeated.characters[1].id}`);
+  assert.match(html, /Character details/);
+  assert.match(html, /View original character sheet/);
+  assert.match(html, /Calculated stats/);
+  assert.match(render(workspace), /Add 2014 Starter Set party/);
+});
+
+test('Starter Set import fails atomically for invalid characters or incompatible loaded rules', () => {
+  const empty = { version: 1, systems: [], characters: [] };
+  const invalid = structuredClone(starterSaves);
+  invalid[1].inputs['base.wisdom'] = 99;
+  assert.throws(() => addStarterCharacters(empty, file, invalid));
+  assert.equal(empty.characters.length, 0);
+  const old = structuredClone(file);
+  old.configurations.forEach((config) => config.classes = config.classes.filter((cls) => cls.id !== 'dnd5e:2014:cleric'));
+  assert.throws(() => addStarterCharacters({ ...empty, systems: [old] }, file, starterSaves));
 });
 
 await server.close();

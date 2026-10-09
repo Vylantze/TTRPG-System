@@ -18,7 +18,9 @@ test('text link contexts reject malformed metadata', () => {
 test('2014 JSON ships descriptions for every included Class and Feature', () => {
   parseSystemFile(file);
   for (const f of file.features) {
-    assert.ok(f.description?.trim() || f.textReferences?.length, f.id);
+    const externalBackground = /^dnd5e:2014:background(?:-trait)?\.(noble|soldier|criminal|folk-hero)$/.test(f.id);
+    if (externalBackground) assert.match(f.source, /StarterSet_Charactersv2.pdf#page=/);
+    else assert.ok(f.description?.trim() || f.textReferences?.length, f.id);
     assert.ok(f.displayName?.trim(), f.id);
   }
   for (const config of file.configurations) for (const cls of config.classes) {
@@ -60,7 +62,7 @@ test('supporting Features use source passages and spell wrappers only share orig
 
 test('spell descriptions retain complete effects and share canonical text across wrappers', () => {
   const spells = file.features.filter((f) => f.id.startsWith('dnd5e:2014:spell.'));
-  assert.equal(spells.length, 204);
+  assert.equal(spells.length, 211);
   for (const spell of spells) {
     assert.match(spell.description, /Casting Time:/);
     assert.match(spell.description, /Duration:/);

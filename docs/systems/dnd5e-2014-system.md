@@ -1,5 +1,7 @@
 # DnD5e 2014 System
 
+The bundled Starter Set party adds five level-one character saves. The Life Cleric implementation is deliberately limited to level one, the three printed cantrips, two Life domain spells, and four editable preparation options. It rejects Cleric multiclassing and higher levels. Its casting stats exist only while its Spellcasting Feature is active. Noble, Soldier, Criminal, and Folk Hero reproduce the Starter Set proficiencies and link to their original background text; they are not general background customization implementations. Character-sheet notes retain equipment and printed attack references, while computed ability scores, skills, HP, AC, and resources come from Features. Daily prepared spells are application defaults because the source leaves those choices open.
+
 DnD5e 2014 is a System with its own rules, content identities, and revision history. Its implemented baseline is SRD 5.1. The [React UI baseline](../react-ui.md) is implemented before further System work. Complete the remaining 2014 classes and the separate DnD5e 2024 and PF2e Systems afterward.
 
 The [DnD5e System comparison](dnd5e-system-comparison.md) contains the study notes, conversion requirements, and implementation milestones. The [generic Feature specification](../feature-system-specification.md) defines the shared engine contract.

@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T17:10:36.075Z
+Export refreshed UTC: 2026-10-09T17:36:35.380Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -1556,5 +1556,65 @@ The compiled engine imports successfully in plain Node without an alias loader. 
 
 [2026-10-09T17:10:33.101Z] ASSISTANT
 All 208 engine tests and the 21 existing UI tests passed. The new dropdown regression also passed, as did lint and the production UI build. I’m reviewing the final diff and preparing the commit and push.
+
+----------------------------------------
+
+[2026-10-09T17:11:38.294Z] ASSISTANT
+Implemented and pushed to `develop` (`47868da`).
+
+- Converted local imports to `@/`, with matching editor, TypeScript, Vite, and Node support.
+- Hit points now grant automatically each level.
+- Feature selection defaults to a dropdown, with a list toggle.
+- Lint, 208 engine tests, 22 UI checks, and production build passed.
+
+Existing browser workspaces need the updated System JSON loaded to receive the hit-point changes.
+
+----------------------------------------
+
+[2026-10-09T17:20:22.010Z] USER
+Create characters in the character sheets based on the template characters 5e provides.
+
+----------------------------------------
+
+[2026-10-09T17:20:25.351Z] ASSISTANT
+I’ll check how the character sheets load saved characters and look for official 5e pregenerated characters that fit the implemented 2014 System.
+
+----------------------------------------
+
+[2026-10-09T17:20:26.771Z] ASSISTANT QUESTIONS
+By “template characters,” do you mean the official 2014 Starter Set pregenerated characters, or a different set?
+Options: 2014 Starter Set pregenerated characters; Other official 2014 pregenerated characters
+
+----------------------------------------
+
+[2026-10-09T17:20:34.149Z] USER
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_eb12c2ecea0440aa95e7c65075153697\",0]","question":"By “template characters,” do you mean the official 2014 Starter Set pregenerated characters, or a different set?","answer":"2014 Starter Set pregenerated characters"}]
+</send_user_message_question_reply>
+
+----------------------------------------
+
+[2026-10-09T17:21:06.422Z] ASSISTANT
+I found the five official 2014 Starter Set sheets. The current System lacks the Cleric and several of their backgrounds, so I’ll need to add that level-one support to reproduce all five accurately. I’m using the PDF skill to check the sheets’ stat layouts.
+
+----------------------------------------
+
+[2026-10-09T17:23:07.193Z] ASSISTANT
+I’ll create all five at level one, with their printed ability scores, proficiencies, equipment, and calculated stats. The sheets leave daily prepared spells to the player; I’ll supply editable defaults and identify those choices. Cleric support will initially stop at level one so the UI doesn’t imply that later levels are implemented.
+
+----------------------------------------
+
+[2026-10-09T17:27:26.233Z] ASSISTANT
+The five builds now validate successfully against the engine. I’m adding them to the UI as an “Add 2014 Starter Set party” action, with editable equipment and source notes. Repeating the action will preserve existing copies rather than overwrite them. The new background Features will link to the original sheets for their story-specific text.
+
+----------------------------------------
+
+[2026-10-09T17:30:47.419Z] ASSISTANT
+The generated characters match the printed ability scores, hit points, armor class, speed, and trained skill bonuses. Their equipment and source references are saved with each character. Full engine and UI regression checks are now running, including repeated imports and save/load behavior.
+
+----------------------------------------
+
+[2026-10-09T17:33:48.585Z] ASSISTANT
+The party is now created and saved in the local UI, and the Cleric sheet shows a valid build with no open requirements. The UI tests and production build passed. Engine regression checks caught an extracted table in the Cleric description and an outdated spell-count assertion; I’ve corrected both and am checking the final result.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

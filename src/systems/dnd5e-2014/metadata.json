@@ -2470,7 +2470,8 @@
     "classes": [
       "Fighter (Champion)",
       "Rogue (Thief)",
-      "Wizard (Evocation)"
+      "Wizard (Evocation)",
+      "Cleric (Life, level 1 only; Starter Set spell subset)"
     ],
     "classLevels": [
       1,
@@ -2488,7 +2489,11 @@
       "Tiefling"
     ],
     "backgrounds": [
-      "Acolyte"
+      "Acolyte",
+      "Noble (Starter Set)",
+      "Soldier (Starter Set)",
+      "Criminal (Starter Set)",
+      "Folk Hero (Starter Set)"
     ],
     "feats": [
       "Grappler (optional)"
@@ -2517,7 +2522,6 @@
     "unsupportedClasses": [
       "Barbarian",
       "Bard",
-      "Cleric",
       "Druid",
       "Monk",
       "Paladin",
@@ -2525,6 +2529,6 @@
       "Sorcerer",
       "Warlock"
     ],
-    "status": "first character-building milestone; remaining SRD classes are not implemented"
+    "status": "first character-building milestone; remaining SRD classes are not implemented; level-one Starter Set Cleric and background adaptations included"
   }
 }
