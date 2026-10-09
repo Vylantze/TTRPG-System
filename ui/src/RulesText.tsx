@@ -1,3 +1,4 @@
+import { descriptionBlocks } from '@/ui/src/description-blocks';
 import { FeatureOrigin } from '@/ui/src/feature-origin';
 import { FeatureLink } from '@/ui/src/FeatureLink';
 import { featureHref, descriptionBody } from '@/ui/src/feature-description';
@@ -22,7 +23,7 @@ export function RulesText({ text, source, engine, openFeature, exclude = [], onP
   const origin = useContext(FeatureOrigin);
   const index = useMemo(() => engine ? textIndex(engine) : undefined, [engine]);
   if (!text) return null;
-  const paragraphs = text.split(/\n\s*\n/).filter(Boolean).map((paragraph, key) => {
+  const linked = (paragraph: string) => {
     const children: ReactNode[] = [];
     let offset = 0;
     for (const span of index?.resolve(paragraph, exclude) ?? []) {
@@ -47,8 +48,9 @@ export function RulesText({ text, source, engine, openFeature, exclude = [], onP
       offset = span.end;
     }
     children.push(paragraph.slice(offset));
-    return <p key={key}>{children}</p>;
-  });
+    return children;
+  };
+  const paragraphs = descriptionBlocks(text).map((block, key) => block.kind === 'paragraph' ? <p key={key}>{linked(block.lines.join('\n'))}</p> : block.kind === 'ul' ? <ul key={key}>{block.lines.map((line, index) => <li key={index}>{linked(line)}</li>)}</ul> : <ol start={block.start} key={key}>{block.lines.map((line, index) => <li key={index}>{linked(line)}</li>)}</ol>);
   return (
     <div className="rules-text">
       {paragraphs}

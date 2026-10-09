@@ -243,6 +243,18 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     list(input.classes);
     if (input.blocks !== undefined) list(input.blocks);
     const compiled = compileBlocks(input as unknown as Catalogue);
+    if (compiled.system.spellDisplay !== undefined) {
+      const display = compiled.system.spellDisplay;
+      record(display);
+      for (const key of ['spellKey', 'levelKey', 'slotLevelKey', 'ritualKey', 'castingAbilityKey'] as const) text(display[key]);
+      list(display.slots);
+      unique(display.slots.map((slot) => `${slot.scope}/${slot.key}`), 'spell slot');
+      for (const slot of display.slots) {
+        integer(slot.level, 1);
+        text(slot.key);
+        if (!['character', 'progression', 'parent', 'instance'].includes(slot.scope)) throw new RuleError('SCHEMA', 'Invalid spell slot scope.');
+      }
+    }
     if (compiled.system.currency !== undefined) {
       const currency = compiled.system.currency;
       record(currency);

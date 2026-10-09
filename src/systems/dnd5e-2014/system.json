@@ -107272,6 +107272,60 @@
               "value": 1000
             }
           ]
+        },
+        "spellDisplay": {
+          "spellKey": "spell",
+          "levelKey": "spellLevel",
+          "slotLevelKey": "spellSlotLevel",
+          "ritualKey": "ritual",
+          "castingAbilityKey": "castingAbility",
+          "slots": [
+            {
+              "level": 1,
+              "key": "spell-slot.1",
+              "scope": "character"
+            },
+            {
+              "level": 2,
+              "key": "spell-slot.2",
+              "scope": "character"
+            },
+            {
+              "level": 3,
+              "key": "spell-slot.3",
+              "scope": "character"
+            },
+            {
+              "level": 4,
+              "key": "spell-slot.4",
+              "scope": "character"
+            },
+            {
+              "level": 5,
+              "key": "spell-slot.5",
+              "scope": "character"
+            },
+            {
+              "level": 6,
+              "key": "spell-slot.6",
+              "scope": "character"
+            },
+            {
+              "level": 7,
+              "key": "spell-slot.7",
+              "scope": "character"
+            },
+            {
+              "level": 8,
+              "key": "spell-slot.8",
+              "scope": "character"
+            },
+            {
+              "level": 9,
+              "key": "spell-slot.9",
+              "scope": "character"
+            }
+          ]
         }
       },
       "classes": [
@@ -112977,6 +113031,60 @@
               "name": "Platinum",
               "symbol": "pp",
               "value": 1000
+            }
+          ]
+        },
+        "spellDisplay": {
+          "spellKey": "spell",
+          "levelKey": "spellLevel",
+          "slotLevelKey": "spellSlotLevel",
+          "ritualKey": "ritual",
+          "castingAbilityKey": "castingAbility",
+          "slots": [
+            {
+              "level": 1,
+              "key": "spell-slot.1",
+              "scope": "character"
+            },
+            {
+              "level": 2,
+              "key": "spell-slot.2",
+              "scope": "character"
+            },
+            {
+              "level": 3,
+              "key": "spell-slot.3",
+              "scope": "character"
+            },
+            {
+              "level": 4,
+              "key": "spell-slot.4",
+              "scope": "character"
+            },
+            {
+              "level": 5,
+              "key": "spell-slot.5",
+              "scope": "character"
+            },
+            {
+              "level": 6,
+              "key": "spell-slot.6",
+              "scope": "character"
+            },
+            {
+              "level": 7,
+              "key": "spell-slot.7",
+              "scope": "character"
+            },
+            {
+              "level": 8,
+              "key": "spell-slot.8",
+              "scope": "character"
+            },
+            {
+              "level": 9,
+              "key": "spell-slot.9",
+              "scope": "character"
             }
           ]
         }
@@ -118713,6 +118821,60 @@
               "value": 1000
             }
           ]
+        },
+        "spellDisplay": {
+          "spellKey": "spell",
+          "levelKey": "spellLevel",
+          "slotLevelKey": "spellSlotLevel",
+          "ritualKey": "ritual",
+          "castingAbilityKey": "castingAbility",
+          "slots": [
+            {
+              "level": 1,
+              "key": "spell-slot.1",
+              "scope": "character"
+            },
+            {
+              "level": 2,
+              "key": "spell-slot.2",
+              "scope": "character"
+            },
+            {
+              "level": 3,
+              "key": "spell-slot.3",
+              "scope": "character"
+            },
+            {
+              "level": 4,
+              "key": "spell-slot.4",
+              "scope": "character"
+            },
+            {
+              "level": 5,
+              "key": "spell-slot.5",
+              "scope": "character"
+            },
+            {
+              "level": 6,
+              "key": "spell-slot.6",
+              "scope": "character"
+            },
+            {
+              "level": 7,
+              "key": "spell-slot.7",
+              "scope": "character"
+            },
+            {
+              "level": 8,
+              "key": "spell-slot.8",
+              "scope": "character"
+            },
+            {
+              "level": 9,
+              "key": "spell-slot.9",
+              "scope": "character"
+            }
+          ]
         }
       },
       "classes": [
@@ -124420,6 +124582,60 @@
               "value": 1000
             }
           ]
+        },
+        "spellDisplay": {
+          "spellKey": "spell",
+          "levelKey": "spellLevel",
+          "slotLevelKey": "spellSlotLevel",
+          "ritualKey": "ritual",
+          "castingAbilityKey": "castingAbility",
+          "slots": [
+            {
+              "level": 1,
+              "key": "spell-slot.1",
+              "scope": "character"
+            },
+            {
+              "level": 2,
+              "key": "spell-slot.2",
+              "scope": "character"
+            },
+            {
+              "level": 3,
+              "key": "spell-slot.3",
+              "scope": "character"
+            },
+            {
+              "level": 4,
+              "key": "spell-slot.4",
+              "scope": "character"
+            },
+            {
+              "level": 5,
+              "key": "spell-slot.5",
+              "scope": "character"
+            },
+            {
+              "level": 6,
+              "key": "spell-slot.6",
+              "scope": "character"
+            },
+            {
+              "level": 7,
+              "key": "spell-slot.7",
+              "scope": "character"
+            },
+            {
+              "level": 8,
+              "key": "spell-slot.8",
+              "scope": "character"
+            },
+            {
+              "level": 9,
+              "key": "spell-slot.9",
+              "scope": "character"
+            }
+          ]
         }
       },
       "classes": [
@@ -129811,6 +130027,60 @@
               "value": 1000
             }
           ]
+        },
+        "spellDisplay": {
+          "spellKey": "spell",
+          "levelKey": "spellLevel",
+          "slotLevelKey": "spellSlotLevel",
+          "ritualKey": "ritual",
+          "castingAbilityKey": "castingAbility",
+          "slots": [
+            {
+              "level": 1,
+              "key": "spell-slot.1",
+              "scope": "character"
+            },
+            {
+              "level": 2,
+              "key": "spell-slot.2",
+              "scope": "character"
+            },
+            {
+              "level": 3,
+              "key": "spell-slot.3",
+              "scope": "character"
+            },
+            {
+              "level": 4,
+              "key": "spell-slot.4",
+              "scope": "character"
+            },
+            {
+              "level": 5,
+              "key": "spell-slot.5",
+              "scope": "character"
+            },
+            {
+              "level": 6,
+              "key": "spell-slot.6",
+              "scope": "character"
+            },
+            {
+              "level": 7,
+              "key": "spell-slot.7",
+              "scope": "character"
+            },
+            {
+              "level": 8,
+              "key": "spell-slot.8",
+              "scope": "character"
+            },
+            {
+              "level": 9,
+              "key": "spell-slot.9",
+              "scope": "character"
+            }
+          ]
         }
       },
       "classes": [
@@ -135173,6 +135443,60 @@
               "name": "Platinum",
               "symbol": "pp",
               "value": 1000
+            }
+          ]
+        },
+        "spellDisplay": {
+          "spellKey": "spell",
+          "levelKey": "spellLevel",
+          "slotLevelKey": "spellSlotLevel",
+          "ritualKey": "ritual",
+          "castingAbilityKey": "castingAbility",
+          "slots": [
+            {
+              "level": 1,
+              "key": "spell-slot.1",
+              "scope": "character"
+            },
+            {
+              "level": 2,
+              "key": "spell-slot.2",
+              "scope": "character"
+            },
+            {
+              "level": 3,
+              "key": "spell-slot.3",
+              "scope": "character"
+            },
+            {
+              "level": 4,
+              "key": "spell-slot.4",
+              "scope": "character"
+            },
+            {
+              "level": 5,
+              "key": "spell-slot.5",
+              "scope": "character"
+            },
+            {
+              "level": 6,
+              "key": "spell-slot.6",
+              "scope": "character"
+            },
+            {
+              "level": 7,
+              "key": "spell-slot.7",
+              "scope": "character"
+            },
+            {
+              "level": 8,
+              "key": "spell-slot.8",
+              "scope": "character"
+            },
+            {
+              "level": 9,
+              "key": "spell-slot.9",
+              "scope": "character"
             }
           ]
         }
@@ -140566,6 +140890,60 @@
               "value": 1000
             }
           ]
+        },
+        "spellDisplay": {
+          "spellKey": "spell",
+          "levelKey": "spellLevel",
+          "slotLevelKey": "spellSlotLevel",
+          "ritualKey": "ritual",
+          "castingAbilityKey": "castingAbility",
+          "slots": [
+            {
+              "level": 1,
+              "key": "spell-slot.1",
+              "scope": "character"
+            },
+            {
+              "level": 2,
+              "key": "spell-slot.2",
+              "scope": "character"
+            },
+            {
+              "level": 3,
+              "key": "spell-slot.3",
+              "scope": "character"
+            },
+            {
+              "level": 4,
+              "key": "spell-slot.4",
+              "scope": "character"
+            },
+            {
+              "level": 5,
+              "key": "spell-slot.5",
+              "scope": "character"
+            },
+            {
+              "level": 6,
+              "key": "spell-slot.6",
+              "scope": "character"
+            },
+            {
+              "level": 7,
+              "key": "spell-slot.7",
+              "scope": "character"
+            },
+            {
+              "level": 8,
+              "key": "spell-slot.8",
+              "scope": "character"
+            },
+            {
+              "level": 9,
+              "key": "spell-slot.9",
+              "scope": "character"
+            }
+          ]
         }
       },
       "classes": [
@@ -145930,6 +146308,60 @@
               "value": 1000
             }
           ]
+        },
+        "spellDisplay": {
+          "spellKey": "spell",
+          "levelKey": "spellLevel",
+          "slotLevelKey": "spellSlotLevel",
+          "ritualKey": "ritual",
+          "castingAbilityKey": "castingAbility",
+          "slots": [
+            {
+              "level": 1,
+              "key": "spell-slot.1",
+              "scope": "character"
+            },
+            {
+              "level": 2,
+              "key": "spell-slot.2",
+              "scope": "character"
+            },
+            {
+              "level": 3,
+              "key": "spell-slot.3",
+              "scope": "character"
+            },
+            {
+              "level": 4,
+              "key": "spell-slot.4",
+              "scope": "character"
+            },
+            {
+              "level": 5,
+              "key": "spell-slot.5",
+              "scope": "character"
+            },
+            {
+              "level": 6,
+              "key": "spell-slot.6",
+              "scope": "character"
+            },
+            {
+              "level": 7,
+              "key": "spell-slot.7",
+              "scope": "character"
+            },
+            {
+              "level": 8,
+              "key": "spell-slot.8",
+              "scope": "character"
+            },
+            {
+              "level": 9,
+              "key": "spell-slot.9",
+              "scope": "character"
+            }
+          ]
         }
       },
       "classes": [
@@ -151119,6 +151551,60 @@
               "value": 1000
             }
           ]
+        },
+        "spellDisplay": {
+          "spellKey": "spell",
+          "levelKey": "spellLevel",
+          "slotLevelKey": "spellSlotLevel",
+          "ritualKey": "ritual",
+          "castingAbilityKey": "castingAbility",
+          "slots": [
+            {
+              "level": 1,
+              "key": "spell-slot.1",
+              "scope": "character"
+            },
+            {
+              "level": 2,
+              "key": "spell-slot.2",
+              "scope": "character"
+            },
+            {
+              "level": 3,
+              "key": "spell-slot.3",
+              "scope": "character"
+            },
+            {
+              "level": 4,
+              "key": "spell-slot.4",
+              "scope": "character"
+            },
+            {
+              "level": 5,
+              "key": "spell-slot.5",
+              "scope": "character"
+            },
+            {
+              "level": 6,
+              "key": "spell-slot.6",
+              "scope": "character"
+            },
+            {
+              "level": 7,
+              "key": "spell-slot.7",
+              "scope": "character"
+            },
+            {
+              "level": 8,
+              "key": "spell-slot.8",
+              "scope": "character"
+            },
+            {
+              "level": 9,
+              "key": "spell-slot.9",
+              "scope": "character"
+            }
+          ]
         }
       },
       "classes": [
@@ -156279,6 +156765,60 @@
               "name": "Platinum",
               "symbol": "pp",
               "value": 1000
+            }
+          ]
+        },
+        "spellDisplay": {
+          "spellKey": "spell",
+          "levelKey": "spellLevel",
+          "slotLevelKey": "spellSlotLevel",
+          "ritualKey": "ritual",
+          "castingAbilityKey": "castingAbility",
+          "slots": [
+            {
+              "level": 1,
+              "key": "spell-slot.1",
+              "scope": "character"
+            },
+            {
+              "level": 2,
+              "key": "spell-slot.2",
+              "scope": "character"
+            },
+            {
+              "level": 3,
+              "key": "spell-slot.3",
+              "scope": "character"
+            },
+            {
+              "level": 4,
+              "key": "spell-slot.4",
+              "scope": "character"
+            },
+            {
+              "level": 5,
+              "key": "spell-slot.5",
+              "scope": "character"
+            },
+            {
+              "level": 6,
+              "key": "spell-slot.6",
+              "scope": "character"
+            },
+            {
+              "level": 7,
+              "key": "spell-slot.7",
+              "scope": "character"
+            },
+            {
+              "level": 8,
+              "key": "spell-slot.8",
+              "scope": "character"
+            },
+            {
+              "level": 9,
+              "key": "spell-slot.9",
+              "scope": "character"
             }
           ]
         }
@@ -161470,6 +162010,60 @@
               "value": 1000
             }
           ]
+        },
+        "spellDisplay": {
+          "spellKey": "spell",
+          "levelKey": "spellLevel",
+          "slotLevelKey": "spellSlotLevel",
+          "ritualKey": "ritual",
+          "castingAbilityKey": "castingAbility",
+          "slots": [
+            {
+              "level": 1,
+              "key": "spell-slot.1",
+              "scope": "character"
+            },
+            {
+              "level": 2,
+              "key": "spell-slot.2",
+              "scope": "character"
+            },
+            {
+              "level": 3,
+              "key": "spell-slot.3",
+              "scope": "character"
+            },
+            {
+              "level": 4,
+              "key": "spell-slot.4",
+              "scope": "character"
+            },
+            {
+              "level": 5,
+              "key": "spell-slot.5",
+              "scope": "character"
+            },
+            {
+              "level": 6,
+              "key": "spell-slot.6",
+              "scope": "character"
+            },
+            {
+              "level": 7,
+              "key": "spell-slot.7",
+              "scope": "character"
+            },
+            {
+              "level": 8,
+              "key": "spell-slot.8",
+              "scope": "character"
+            },
+            {
+              "level": 9,
+              "key": "spell-slot.9",
+              "scope": "character"
+            }
+          ]
         }
       },
       "classes": [
@@ -166630,6 +167224,60 @@
               "name": "Platinum",
               "symbol": "pp",
               "value": 1000
+            }
+          ]
+        },
+        "spellDisplay": {
+          "spellKey": "spell",
+          "levelKey": "spellLevel",
+          "slotLevelKey": "spellSlotLevel",
+          "ritualKey": "ritual",
+          "castingAbilityKey": "castingAbility",
+          "slots": [
+            {
+              "level": 1,
+              "key": "spell-slot.1",
+              "scope": "character"
+            },
+            {
+              "level": 2,
+              "key": "spell-slot.2",
+              "scope": "character"
+            },
+            {
+              "level": 3,
+              "key": "spell-slot.3",
+              "scope": "character"
+            },
+            {
+              "level": 4,
+              "key": "spell-slot.4",
+              "scope": "character"
+            },
+            {
+              "level": 5,
+              "key": "spell-slot.5",
+              "scope": "character"
+            },
+            {
+              "level": 6,
+              "key": "spell-slot.6",
+              "scope": "character"
+            },
+            {
+              "level": 7,
+              "key": "spell-slot.7",
+              "scope": "character"
+            },
+            {
+              "level": 8,
+              "key": "spell-slot.8",
+              "scope": "character"
+            },
+            {
+              "level": 9,
+              "key": "spell-slot.9",
+              "scope": "character"
             }
           ]
         }

@@ -10,3 +10,4 @@ import '@/tests/building-blocks.test.js';
 import '@/tests/starter-characters.test.js';
 import '@/tests/inventory-resources.test.js';
 import '@/tests/currency.test.js';
+import '@/tests/spell-display.test.js';

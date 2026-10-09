@@ -7,8 +7,10 @@ import type { Choice } from '@/src/model/Choice.js';
 import type { Scope } from '@/src/model/Scope.js';
 import type { SheetSection } from '@/src/model/SheetSection.js';
 import type { CurrencyDefinition } from '@/src/model/CurrencyDefinition.js';
+import type { SpellDisplay } from '@/src/model/SpellDisplay.js';
 
 export interface SystemDefinition {
+  spellDisplay?: SpellDisplay;
   currency?: CurrencyDefinition;
   sheetSections?: SheetSection[];
   featureCategories?: { id: string; name: string; tags: string[] }[];

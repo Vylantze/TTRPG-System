@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T18:52:30.599Z
+Export refreshed UTC: 2026-10-09T19:27:48.924Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -1835,5 +1835,94 @@ The System picker now offers bundled DnD5e 2014 and a JSON-file option. Each loa
 
 [2026-10-09T18:50:17.121Z] ASSISTANT
 I’m checking the layouts at mobile and desktop widths. Long labels now wrap, grid columns can shrink to the available width, and fixed-height editors and large tables scroll within their own containers instead of spilling over their borders.
+
+----------------------------------------
+
+[2026-10-09T18:52:38.127Z] ASSISTANT
+The mobile check caught a small overflow from the rotated calculation arrow; I’ve corrected its sizing. System reload works and confirms that characters were preserved. I’m finishing the layout checks and regression tests.
+
+----------------------------------------
+
+[2026-10-09T18:54:05.496Z] ASSISTANT
+The checked System, character-sheet, expanded-calculation, and class-detail layouts now stay within their containers at 360px and 1440px. The JSON dropdown option works, and lint and the production build pass. The regression suite is still running.
+
+----------------------------------------
+
+[2026-10-09T18:54:59.508Z] ASSISTANT
+The 30 other UI tests passed. The reload test initially hit an inconsistent test fixture; after correcting the fixture, it passed too. The final build and overflow checks pass. I’m committing and pushing the update.
+
+----------------------------------------
+
+[2026-10-09T18:56:01.072Z] ASSISTANT
+Implemented and pushed to `develop` (`720bcd0`).
+
+- Added a System-loading dropdown.
+- Added refresh-icon reload buttons, preserving characters.
+- Fixed wrapping and overflow across responsive layouts.
+
+Verified UI tests, lint, production build, and mobile/desktop layouts.
+
+![System controls](<D:/User/Workspace/TTRPG System/.reference-cache/system-picker-reload.png>)
+
+----------------------------------------
+
+[2026-10-09T19:12:55.621Z] USER
+<external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
+
+----------------------------------------
+
+[2026-10-09T19:12:55.661Z] USER
+- There should be a vertical margin between buttons and other components.&#x20;
+- The abilities section should just have a swap icon button next to the Abilities header. The hover should also show that the text to swap as needed.
+- The hover should have less of a lag before it appears on hover.&#x20;
+- The calculation details should be shown in a new column, rather than being in the same column as the number.
+- There should be handling for bullet points and next paragraphs to automatically show the same on the UI in the descriptions.
+- Spells should have a unique UI for spell slots. Spells should be shown separately, at their individual original levels and show up separate from the spell slots. Use Ability should be Use Spell for spells. When using Spells, if there are Spell Slot resources higher than the original level, then give an option to cast at higher levels at that point. All spell slots at 0 should be automatically hidden, and there should be a toggle between hiding and showing all spell slots available.&#x20;
+- Resources should not be packed like the Wizard, but just be vertically available.&#x20;
+- The ability resource should be to the right of the ability, and the "Use Ability" button should be next to it.&#x20;
+- Resource features should be shown as a part of the ability that uses the ability, rather than as a separate section.
+
+----------------------------------------
+
+[2026-10-09T19:13:05.311Z] ASSISTANT
+I’ll reorganize abilities into vertical rows, give spells their own list and slot controls, and update the stat controls, spacing, and description formatting. I’ll check how the engine represents spell levels and upcasting before wiring up the casting UI.
+
+----------------------------------------
+
+[2026-10-09T19:13:06.580Z] ASSISTANT QUESTIONS
+When hiding spell slots at 0, should that mean no slots remaining, or only spell levels with a maximum of 0?
+Options: Hide slots with none remaining; Hide only levels with a maximum of 0
+
+----------------------------------------
+
+[2026-10-09T19:13:16.606Z] USER
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_2947a70e76324f83b41c8c87b7ed9e3b\",0]","question":"When hiding spell slots at 0, should that mean no slots remaining, or only spell levels with a maximum of 0?","answer":"Hide slots with none remaining"}]
+</send_user_message_question_reply>
+
+----------------------------------------
+
+[2026-10-09T19:13:52.477Z] ASSISTANT
+I’ll hide slot levels with none remaining by default and add “Show all spell slots.” The engine already exposes separate casting options for higher-level slots, so the spell UI can group those under one spell and offer the available casting levels when you click “Use Spell.”
+
+----------------------------------------
+
+[2026-10-09T19:17:18.262Z] ASSISTANT
+The new layout is in place: abilities run vertically, with their resource controls and “Use Ability” button on the right. Spells have a separate list grouped by original level, with slot controls above it. I’m checking casting behavior, list formatting, and the faster tooltips now.
+
+----------------------------------------
+
+[2026-10-09T19:20:43.791Z] ASSISTANT
+Browser checks confirm that casting spends the correct slot, exhausted slot levels hide automatically, and the spell list stays visible. “Show all spell slots” brings the empty levels back. All 222 engine tests pass, including a check that upcasting spends only the selected higher-level slot.
+
+----------------------------------------
+
+[2026-10-09T19:23:35.818Z] ASSISTANT
+The description check found that some SRD text stores bullet points on a single line. The renderer now recognizes those bullets as lists, as well as line-separated bullets and paragraphs, while preserving the stored text and automatic links. I’m also testing the upcasting picker with a level-five Wizard in a separate test workspace.
+
+----------------------------------------
+
+[2026-10-09T19:26:19.109Z] ASSISTANT
+The casting picker correctly spends the selected higher-level slot, and exhausted slots disappear while the spells remain visible. One UI test still expects the old “Ability scores” heading; I’m updating that assertion and running the final checks.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
