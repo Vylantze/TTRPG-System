@@ -9,7 +9,7 @@ export function lintSource(filename, text) {
     problems.push(`${filename}:${location.line + 1}:${location.character + 1}: ${message}`);
   };
   const declarations = [];
-  const visit = node => {
+  const visit = (node) => {
     if (ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node) || ts.isEnumDeclaration(node)
       || ts.isClassDeclaration(node) || ts.isClassExpression(node)) declarations.push(node);
     if (ts.isDebuggerStatement(node)) report(node, 'Remove debugger statements.');

@@ -3,15 +3,15 @@ import type { Environment } from './types/Environment.js';
 import { RuleError } from './types/RuleError.js';
 export type { Environment } from './types/Environment.js';
 export { RuleError } from './types/RuleError.js';
-export function number (value: unknown): number {
+export function number(value: unknown): number {
   if (typeof value !== 'number' || !Number.isFinite(value)) throw new RuleError('INVALID_NUMBER', 'Expected a finite number.');
   return value;
 }
-export function boolean (value: unknown): boolean {
+export function boolean(value: unknown): boolean {
   if (typeof value !== 'boolean') throw new RuleError('INVALID_BOOLEAN', 'Expected a boolean.');
   return value;
 }
-export function constrain (value: number, rules: NumericConstraints, input = false): number {
+export function constrain(value: number, rules: NumericConstraints, input = false): number {
   number(value);
   if (!input && rules.rounding) value = Math[rules.rounding](value);
   if (rules.integer && !Number.isInteger(value)) throw new RuleError('INVALID_INTEGER', 'Expected an integer.');
@@ -19,7 +19,7 @@ export function constrain (value: number, rules: NumericConstraints, input = fal
   if (value < (rules.minimum ?? -Infinity) || value > (rules.maximum ?? Infinity)) throw new RuleError('OUT_OF_BOUNDS', `Value ${value} is outside its bounds.`);
   return value;
 }
-function lookup (table: ScalingTable, input: number): number {
+function lookup(table: ScalingTable, input: number): number {
   const rows = [...table.rows].sort((a, b) => a.key - b.key);
   const boundary = (policy: ScalingTable['below'], value: number): number => {
     if (policy === 'boundary') return value;
@@ -28,12 +28,12 @@ function lookup (table: ScalingTable, input: number): number {
   };
   if (input < rows[0].key) return boundary(table.below, rows[0].value);
   if (input > rows.at(-1)!.key) return boundary(table.above, rows.at(-1)!.value);
-  const row = table.mode === 'exact' ? rows.find(r => r.key === input) : rows.filter(r => r.key <= input).at(-1);
+  const row = table.mode === 'exact' ? rows.find((r) => r.key === input) : rows.filter((r) => r.key <= input).at(-1);
   if (row) return row.value;
   if (table.missing && table.missing !== 'error') return table.missing.fallback;
   throw new RuleError('TABLE_KEY', `No exact table row for ${input}.`);
 }
-export function evaluateExpression (expr: Expression, env: Environment, depth = 0): number | boolean {
+export function evaluateExpression(expr: Expression, env: Environment, depth = 0): number | boolean {
   if (depth > 64) throw new RuleError('EXPRESSION_DEPTH', 'Expression nesting exceeds 64.');
   if (typeof expr === 'number') return number(expr);
   if (typeof expr === 'boolean') return expr;
@@ -66,20 +66,29 @@ export function evaluateExpression (expr: Expression, env: Environment, depth = 
     const result = fn.invoke(...values);
     return fn.result === 'number' ? number(result) : boolean(result);
   }
-  if (expr.op === 'and') return expr.args.every(e => boolean(read(e)));
-  if (expr.op === 'or') return expr.args.some(e => boolean(read(e)));
+  if (expr.op === 'and') return expr.args.every((e) => boolean(read(e)));
+  if (expr.op === 'or') return expr.args.some((e) => boolean(read(e)));
   if (expr.op === 'not') return !boolean(read(expr.args[0]));
-  const args = expr.args.map(e => number(read(e)));
+  const args = expr.args.map((e) => number(read(e)));
   let result: number | boolean;
   switch (expr.op) {
-    case 'add': result = args.reduce((a, b) => a + b, 0); break;
-    case 'subtract': result = args[0] - args[1]; break;
-    case 'multiply': result = args.reduce((a, b) => a * b, 1); break;
-    case 'divide': if (args[1] === 0) throw new RuleError('DIVISION_BY_ZERO', 'Division by zero.'); result = args[0] / args[1]; break;
-    case 'min': result = Math.min(...args); break;
-    case 'max': result = Math.max(...args); break;
-    case 'floor': result = Math.floor(args[0]); break;
-    case 'ceil': result = Math.ceil(args[0]); break;
+    case 'add': result = args.reduce((a, b) => a + b, 0);
+      break;
+    case 'subtract': result = args[0] - args[1];
+      break;
+    case 'multiply': result = args.reduce((a, b) => a * b, 1);
+      break;
+    case 'divide': if (args[1] === 0) throw new RuleError('DIVISION_BY_ZERO', 'Division by zero.');
+      result = args[0] / args[1];
+      break;
+    case 'min': result = Math.min(...args);
+      break;
+    case 'max': result = Math.max(...args);
+      break;
+    case 'floor': result = Math.floor(args[0]);
+      break;
+    case 'ceil': result = Math.ceil(args[0]);
+      break;
     case 'eq': return args[0] === args[1];
     case 'gt': return args[0] > args[1];
     case 'gte': return args[0] >= args[1];

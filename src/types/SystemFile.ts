@@ -5,5 +5,5 @@ export interface SystemFile {
   options: Record<string, { default: Value; values: Value[] }>;
   features: Catalogue['features'];
   configurations: { options: Record<string, Value>; id: string; revision: number;
-    system: Catalogue['system']; classes: Catalogue['classes'] }[];
+    system: Catalogue['system']; classes: Catalogue['classes']; }[];
 }
