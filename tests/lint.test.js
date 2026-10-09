@@ -1,6 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { lintSource } from '../tools/lint-rules.mjs';
+import { ESLint } from 'eslint';
+
+test('React hook rules apply to the UI, not engine commands named useAbility', async () => {
+  const eslint = new ESLint();
+  const [engine] = await eslint.lintText("import { useAbility } from './commands.js';\nexport function activate () { return useAbility(); }\n", { filePath: 'src/lint-probe.ts' });
+  assert.deepEqual(engine.messages, []);
+  const [ui] = await eslint.lintText("import { useState } from 'react';\nexport function Broken () { if (Math.random()) { useState(0); } return null; }\n", { filePath: 'ui/src/LintProbe.tsx' });
+  assert.ok(ui.messages.some(message => message.ruleId === 'react-hooks/rules-of-hooks'));
+});
+
+test('ESLint ignores generated output and permits deliberate rest-property omission', async () => {
+  const eslint = new ESLint();
+  for (const file of ['dist/index.js', 'ui/dist/assets/index.js', '.reference-cache/probe.ts']) assert.equal(await eslint.isPathIgnored(file), true);
+  const [result] = await eslint.lintText('export function strip (value: { description?: string; id: string }) { const { description, ...rules } = value; return rules; }\n', { filePath: 'ui/src/lint-probe.ts' });
+  assert.deepEqual(result.messages, []);
+});
 
 test('one definition with inline object types, imports and re-exports is allowed', () => {
   assert.deepEqual(lintSource('example.ts', "import type { Other } from './Other'; export type { Other }; export interface Example { value: { nested: Other } }"), []);

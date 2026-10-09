@@ -10,7 +10,8 @@ const server=await createServer({server:{middlewareMode:true},appType:'custom'})
 const model=await server.ssrLoadModule('/src/workspace.ts');
 const {App}=await server.ssrLoadModule('/src/App.tsx');
 const {RulesText,FeatureRules,ReferencePopup}=await server.ssrLoadModule('/src/RulesText.tsx');
-const {FeatureRequirements,advancementLabels}=await server.ssrLoadModule('/src/FeatureRequirements.tsx');
+const {FeatureRequirements}=await server.ssrLoadModule('/src/FeatureRequirements.tsx');
+const {advancementLabels}=await server.ssrLoadModule('/src/feature-requirements.ts');
 const file=JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/system.json',import.meta.url),'utf8'));
 function storage(){const values=new Map();return {getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value)};}
 const data=()=>({version:1,systems:[file],characters:[]});

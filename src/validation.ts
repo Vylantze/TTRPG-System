@@ -2,56 +2,44 @@ import type { Catalogue, Character, Diagnostic, Expression, Predicate, Component
 import { RuleError, number } from './expression.js';
 
 const unsafe = new Set(['__proto__', 'constructor', 'prototype']);
-export function record(v: unknown): asserts v is Record<string, unknown> {
+export function record (v: unknown): asserts v is Record<string, unknown> {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw new RuleError('SCHEMA', 'Expected an object.');
   for (const key of Object.keys(v)) if (unsafe.has(key)) throw new RuleError('SCHEMA', `Unsafe key ${key}.`);
 }
-function text(v: unknown): asserts v is string {
+function text (v: unknown): asserts v is string {
   if (typeof v !== 'string' || !v || unsafe.has(v)) throw new RuleError('SCHEMA', 'Expected a nonempty safe string.');
 }
-function integer(v: unknown, min = 0): void { if (!Number.isInteger(number(v)) || number(v) < min) throw new RuleError('SCHEMA', `Expected an integer >= ${min}.`); }
-function list(v: unknown): asserts v is unknown[] { if (!Array.isArray(v) || v.length > 10000) throw new RuleError('SCHEMA', 'Expected an array of at most 10000 items.'); }
-function unique(values: string[], what: string): void { if (new Set(values).size !== values.length) throw new RuleError('DUPLICATE_ID', `Duplicate ${what}.`); }
-function value(v: unknown): void { if (typeof v === 'number') number(v); else if (typeof v !== 'string' && typeof v !== 'boolean') throw new RuleError('SCHEMA', 'Invalid parameter value.'); }
-function constraints(v: Record<string, unknown>): void {
+function integer (v: unknown, min = 0): void { if (!Number.isInteger(number(v)) || number(v) < min) throw new RuleError('SCHEMA', `Expected an integer >= ${min}.`); }
+function list (v: unknown): asserts v is unknown[] { if (!Array.isArray(v) || v.length > 10000) throw new RuleError('SCHEMA', 'Expected an array of at most 10000 items.'); }
+function unique (values: string[], what: string): void { if (new Set(values).size !== values.length) throw new RuleError('DUPLICATE_ID', `Duplicate ${what}.`); }
+function value (v: unknown): void { if (typeof v === 'number') number(v); else if (typeof v !== 'string' && typeof v !== 'boolean') throw new RuleError('SCHEMA', 'Invalid parameter value.'); }
+function constraints (v: Record<string, unknown>): void {
   for (const k of ['minimum', 'maximum']) if (v[k] !== undefined) number(v[k]);
   if (v.minimum !== undefined && v.maximum !== undefined && number(v.minimum) > number(v.maximum)) throw new RuleError('SCHEMA', 'Minimum exceeds maximum.');
   for (const k of ['integer', 'clamp']) if (v[k] !== undefined && typeof v[k] !== 'boolean') throw new RuleError('SCHEMA', `Invalid ${k}.`);
   if (v.rounding !== undefined && !['floor', 'ceil', 'round'].includes(String(v.rounding))) throw new RuleError('SCHEMA', 'Invalid rounding.');
 }
 const arities: Record<string, number | 'many'> = { add: 'many', multiply: 'many', min: 'many', max: 'many', and: 'many', or: 'many', subtract: 2, divide: 2, eq: 2, gt: 2, gte: 2, lt: 2, lte: 2, floor: 1, ceil: 1, not: 1 };
-export function checkExpression(e: unknown, catalogue: Catalogue, functions: FunctionRegistry, depth = 0): asserts e is Expression {
+export function checkExpression (e: unknown, catalogue: Catalogue, functions: FunctionRegistry, depth = 0): asserts e is Expression {
   if (depth > 64) throw new RuleError('EXPRESSION_DEPTH', 'Expression is too deep.');
   if (typeof e === 'number') { number(e); return; }
   if (typeof e === 'boolean') return;
   record(e);
   if (['literal', 'stat', 'context', 'parameter', 'base', 'if', 'table', 'call', 'op'].filter(k => k in e).length !== 1) throw new RuleError('SCHEMA', 'Expression must have exactly one operation.');
   const recurse = (v: unknown) => checkExpression(v, catalogue, functions, depth + 1);
-  if ('literal' in e) { if (typeof e.literal !== 'boolean') number(e.literal); }
-  else if ('stat' in e) { text(e.stat); if (!catalogue.system.stats.some(s => s.id === e.stat)) throw new RuleError('UNKNOWN_STAT', `Unknown stat ${e.stat}.`); }
-  else if ('context' in e) text(e.context);
+  if ('literal' in e) { if (typeof e.literal !== 'boolean') number(e.literal); } else if ('stat' in e) { text(e.stat); if (!catalogue.system.stats.some(s => s.id === e.stat)) throw new RuleError('UNKNOWN_STAT', `Unknown stat ${e.stat}.`); } else if ('context' in e) text(e.context);
   else if ('parameter' in e) text(e.parameter);
-  else if ('base' in e) { if (e.base !== true) throw new RuleError('SCHEMA', 'Invalid base expression.'); }
-  else if ('if' in e) { recurse(e.if); recurse(e.then); recurse(e.else); }
-  else if ('table' in e) { text(e.table); if (e.owner !== undefined) { text(e.owner); if (!catalogue.features.some(f => f.id === e.owner && Object.hasOwn(f.tables ?? {}, String(e.table)))) throw new RuleError('UNKNOWN_TABLE', 'Missing referenced table.'); } recurse(e.input); }
-  else if ('call' in e) { text(e.call); list(e.args); const fn = functions[e.call]; if (!fn || e.args.length !== fn.arguments.length) throw new RuleError('UNKNOWN_FUNCTION', `Unknown function or arity ${e.call}.`); e.args.forEach(recurse); }
-  else if ('op' in e) { text(e.op); list(e.args); const arity = arities[e.op]; if (!arity || (arity === 'many' ? !e.args.length : e.args.length !== arity)) throw new RuleError('SCHEMA', 'Unknown operation or wrong arity.'); e.args.forEach(recurse); }
-  else throw new RuleError('SCHEMA', 'Invalid expression.');
+  else if ('base' in e) { if (e.base !== true) throw new RuleError('SCHEMA', 'Invalid base expression.'); } else if ('if' in e) { recurse(e.if); recurse(e.then); recurse(e.else); } else if ('table' in e) { text(e.table); if (e.owner !== undefined) { text(e.owner); if (!catalogue.features.some(f => f.id === e.owner && Object.hasOwn(f.tables ?? {}, String(e.table)))) throw new RuleError('UNKNOWN_TABLE', 'Missing referenced table.'); } recurse(e.input); } else if ('call' in e) { text(e.call); list(e.args); const fn = functions[e.call]; if (!fn || e.args.length !== fn.arguments.length) throw new RuleError('UNKNOWN_FUNCTION', `Unknown function or arity ${e.call}.`); e.args.forEach(recurse); } else if ('op' in e) { text(e.op); list(e.args); const arity = arities[e.op]; if (!arity || (arity === 'many' ? !e.args.length : e.args.length !== arity)) throw new RuleError('SCHEMA', 'Unknown operation or wrong arity.'); e.args.forEach(recurse); } else throw new RuleError('SCHEMA', 'Invalid expression.');
 }
-function checkPredicate(p: unknown, c: Catalogue, depth = 0, functions: FunctionRegistry = {}): asserts p is Predicate {
+function checkPredicate (p: unknown, c: Catalogue, depth = 0, functions: FunctionRegistry = {}): asserts p is Predicate {
   if (depth > 64) throw new RuleError('SCHEMA', 'Predicate is too deep.');
   record(p);
   if ('expression' in p) checkExpression(p.expression, c, functions);
-  else if ('all' in p || 'any' in p) { const a = p.all ?? p.any; list(a); a.forEach(v => checkPredicate(v, c, depth + 1, functions)); }
-  else if ('not' in p) checkPredicate(p.not, c, depth + 1, functions);
-  else if ('level' in p) { integer(p.level); if (p.kind !== undefined && !['class', 'character'].includes(String(p.kind))) throw new RuleError('SCHEMA', 'Invalid level kind.'); }
-  else if ('feature' in p) { text(p.feature); if (!c.features.some(f => f.id === p.feature)) throw new RuleError('UNKNOWN_FEATURE', `Missing prerequisite ${p.feature}.`); if (p.parameters !== undefined) { record(p.parameters); Object.values(p.parameters).forEach(value); } }
-  else if ('tag' in p) text(p.tag);
-  else if ('stat' in p) { text(p.stat); number(p.minimum); if (!c.system.stats.some(s => s.id === p.stat)) throw new RuleError('UNKNOWN_STAT', 'Unknown prerequisite stat.'); }
-  else if ('parameter' in p) { text(p.parameter); value(p.equals); }
-  else throw new RuleError('SCHEMA', 'Invalid prerequisite.');
+  else if ('all' in p || 'any' in p) { const a = p.all ?? p.any; list(a); a.forEach(v => checkPredicate(v, c, depth + 1, functions)); } else if ('not' in p) checkPredicate(p.not, c, depth + 1, functions);
+  else if ('level' in p) { integer(p.level); if (p.kind !== undefined && !['class', 'character'].includes(String(p.kind))) throw new RuleError('SCHEMA', 'Invalid level kind.'); } else if ('feature' in p) { text(p.feature); if (!c.features.some(f => f.id === p.feature)) throw new RuleError('UNKNOWN_FEATURE', `Missing prerequisite ${p.feature}.`); if (p.parameters !== undefined) { record(p.parameters); Object.values(p.parameters).forEach(value); } } else if ('tag' in p) text(p.tag);
+  else if ('stat' in p) { text(p.stat); number(p.minimum); if (!c.system.stats.some(s => s.id === p.stat)) throw new RuleError('UNKNOWN_STAT', 'Unknown prerequisite stat.'); } else if ('parameter' in p) { text(p.parameter); value(p.equals); } else throw new RuleError('SCHEMA', 'Invalid prerequisite.');
 }
-function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): asserts v is Component {
+function checkComponent (v: unknown, c: Catalogue, functions: FunctionRegistry): asserts v is Component {
   record(v); text(v.id);
   const expr = (e: unknown) => checkExpression(e, c, functions);
   if (v.condition !== undefined) expr(v.condition);
@@ -87,7 +75,7 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
     default: throw new RuleError('SCHEMA', 'Unknown component kind.');
   }
 }
-export function validateCatalogue(input: unknown, functions: FunctionRegistry = {}): Diagnostic[] {
+export function validateCatalogue (input: unknown, functions: FunctionRegistry = {}): Diagnostic[] {
   try {
     record(input); text(input.id); integer(input.revision, 1); record(input.system); list(input.features); list(input.classes);
     const c = input as unknown as Catalogue;
@@ -138,12 +126,14 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       if (f.repeat) { record(f.repeat); integer(f.repeat.maximum, 1); if (!['character', 'progression', 'parent'].includes(f.repeat.scope)) throw new RuleError('SCHEMA', 'Invalid repeat scope.'); if (f.repeat.uniqueBy) { list(f.repeat.uniqueBy); f.repeat.uniqueBy.forEach(text); } }
       if (f.parameters) { record(f.parameters); for (const p of Object.values(f.parameters)) { record(p); if (!['number', 'boolean', 'string'].includes(p.kind)) throw new RuleError('SCHEMA', 'Invalid parameter kind.'); constraints(p); if (p.default !== undefined) value(p.default); if (p.options) { list(p.options); p.options.forEach(value); } } }
       if (f.resources) { list(f.resources); unique(f.resources.map(r => r.id), 'resource requirement'); for (const r of f.resources) { record(r); text(r.id); text(r.key); if (r.minimumCapacity !== undefined && number(r.minimumCapacity) < 0) throw new RuleError('SCHEMA', 'Negative required capacity.'); if (r.scope && !['character', 'progression', 'parent', 'instance'].includes(r.scope)) throw new RuleError('SCHEMA', 'Invalid required scope.'); } }
-      if (f.tables) { record(f.tables); for (const t of Object.values(f.tables)) {
-        record(t); if (!['exact', 'threshold'].includes(t.mode)) throw new RuleError('SCHEMA', 'Invalid table mode.'); list(t.rows); if (!t.rows.length) throw new RuleError('SCHEMA', 'Empty table.');
-        for (const row of t.rows) { record(row); number(row.key); number(row.value); } unique(t.rows.map(r => String(r.key)), 'table key');
-        for (const p of [t.below, t.above]) if (p !== 'boundary' && p !== 'error') { record(p); number(p.fallback); }
-        if (t.missing !== undefined && t.missing !== 'error') { record(t.missing); number(t.missing.fallback); }
-      } }
+      if (f.tables) {
+        record(f.tables); for (const t of Object.values(f.tables)) {
+          record(t); if (!['exact', 'threshold'].includes(t.mode)) throw new RuleError('SCHEMA', 'Invalid table mode.'); list(t.rows); if (!t.rows.length) throw new RuleError('SCHEMA', 'Empty table.');
+          for (const row of t.rows) { record(row); number(row.key); number(row.value); } unique(t.rows.map(r => String(r.key)), 'table key');
+          for (const p of [t.below, t.above]) if (p !== 'boundary' && p !== 'error') { record(p); number(p.fallback); }
+          if (t.missing !== undefined && t.missing !== 'error') { record(t.missing); number(t.missing.fallback); }
+        }
+      }
       unique(f.components.map(v => v.id), 'component'); f.components.forEach(v => checkComponent(v, c, functions));
       // Unqualified table lookups resolve to the owning definition.
       const visitTables = (v: unknown): void => { if (!v || typeof v !== 'object') return; if (Array.isArray(v)) { v.forEach(visitTables); return; } const o = v as Record<string, unknown>; if ('table' in o && !('owner' in o) && !Object.hasOwn(f.tables ?? {}, String(o.table))) throw new RuleError('UNKNOWN_TABLE', `Missing ${f.id}/${o.table}.`); Object.values(o).forEach(visitTables); };
@@ -176,7 +166,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
   } catch (e) { const err = e instanceof RuleError ? e : new RuleError('SCHEMA', e instanceof Error ? e.message : 'Invalid catalogue.'); return [{ code: err.code, path: err.path || 'catalogue', severity: 'invalid', message: err.message }]; }
 }
 
-export function checkCharacter(v: unknown): asserts v is Character {
+export function checkCharacter (v: unknown): asserts v is Character {
   record(v); if (v.buildState !== undefined && v.buildState !== 'draft' && v.buildState !== 'finalized') throw new RuleError('SCHEMA', 'Invalid character build state.');
   record(v); if (v.version !== 1) throw new RuleError('SAVE_VERSION', 'Unsupported character version.'); text(v.id); if (typeof v.name !== 'string') throw new RuleError('SCHEMA', 'Invalid name.');
   for (const k of ['system', 'catalogue']) { const ref = v[k]; record(ref); text(ref.id); integer(ref.revision, 1); }

@@ -12,26 +12,26 @@ export const childPath = (parent: string, component: string): string => `${paren
 export const selectionPath = (parent: string, component: string): string => `${parent}/choice/${segment(component)}`;
 export const pickPath = (selection: string, entry: string): string => `${selection}/pick/${segment(entry)}`;
 export const clone = <T>(v: T): T => structuredClone(v);
-function freeze<T>(v: T): T { if (v && typeof v === 'object') { Object.values(v).forEach(freeze); Object.freeze(v); } return v; }
-function diagnostic(error: unknown, path: string): Diagnostic {
+function freeze<T> (v: T): T { if (v && typeof v === 'object') { Object.values(v).forEach(freeze); Object.freeze(v); } return v; }
+function diagnostic (error: unknown, path: string): Diagnostic {
   const e = error instanceof RuleError ? error : new RuleError('EVALUATION', error instanceof Error ? error.message : String(error));
   return { code: e.code, message: e.message, severity: 'invalid', path: e.path || path };
 }
 export class Engine {
   readonly catalogue: Catalogue;
   private readonly features: Map<string, Catalogue['features'][number]>;
-  constructor(catalogue: Catalogue, private functions: FunctionRegistry = {}) {
+  constructor (catalogue: Catalogue, private functions: FunctionRegistry = {}) {
     const errors = validateCatalogue(catalogue, functions);
     if (errors.length) throw new RuleError(errors[0].code, errors[0].message, errors[0].path);
     this.catalogue = freeze(clone(catalogue));
     this.features = new Map(this.catalogue.features.map(f => [f.id, f]));
   }
-  resolveDefinition(id: string, revision?: number) {
+  resolveDefinition (id: string, revision?: number) {
     const result = this.features.get(id) ?? this.catalogue.classes.find(c => c.id === id) ?? (this.catalogue.system.id === id ? this.catalogue.system : undefined);
     if (!result || (revision !== undefined && result.revision !== revision)) throw new RuleError('REVISION', `Unknown definition or revision ${id}.`);
     return result;
   }
-  evaluateForInstance(character: Character, expression: Expression, instance: Instance, runtime: Record<string, Value> = {}): number | boolean {
+  evaluateForInstance (character: Character, expression: Expression, instance: Instance, runtime: Record<string, Value> = {}): number | boolean {
     const result = this.evaluate(character, runtime);
     if (result.status !== 'valid') throw new RuleError('INVALID_BUILD', 'Expression requires a valid, complete character.');
     return evaluateExpression(expression, this.environment(this.context(character, undefined, runtime, instance), id => {
@@ -39,7 +39,7 @@ export class Engine {
       return result.stats[id].value;
     }, instance));
   }
-  createCharacter(id: string, name: string, progressions: Progression[] = [], roots: RootAcquisition[] = [], options: { draft?: boolean } = {}): Character {
+  createCharacter (id: string, name: string, progressions: Progression[] = [], roots: RootAcquisition[] = [], options: { draft?: boolean } = {}): Character {
     const c = this.catalogue;
     const character: Character = {
       version: 1, id, name, system: { id: c.system.id, revision: c.system.revision }, catalogue: { id: c.id, revision: c.revision },
@@ -54,10 +54,10 @@ export class Engine {
     for (const pool of Object.values(result.resources)) character.resources[pool.id] = { spent: pool.initial === 'empty' ? pool.capacity : 0 };
     return character;
   }
-  private environment(context: Record<string, Value>, stats: (id: string) => number, instance?: Instance): Environment {
+  private environment (context: Record<string, Value>, stats: (id: string) => number, instance?: Instance): Environment {
     return { context, stats, parameters: instance?.parameters ?? {}, owner: instance?.feature, features: this.features, functions: this.functions };
   }
-  private context(character: Character, levels?: Record<string, number>, runtime: Record<string, Value> = {}, instance?: Instance): Record<string, Value> {
+  private context (character: Character, levels?: Record<string, number>, runtime: Record<string, Value> = {}, instance?: Instance): Record<string, Value> {
     const counts = levels ?? Object.fromEntries(character.progressions.map(p => [p.id, p.level]));
     const values = Object.values(counts);
     const context: Record<string, Value> = { ...this.catalogue.system.contextDefaults, ...runtime,
@@ -72,7 +72,7 @@ export class Engine {
     context.characterLevel = constrain(number(evaluateExpression(this.catalogue.system.characterLevel, env)), { integer: true, minimum: 0 });
     return context;
   }
-  private satisfies(p: Predicate | undefined, instance: Instance, instances: Instance[], stats: (id: string) => number, context: Record<string, Value>): boolean {
+  private satisfies (p: Predicate | undefined, instance: Instance, instances: Instance[], stats: (id: string) => number, context: Record<string, Value>): boolean {
     if (!p) return true;
     if ('expression' in p) return boolean(evaluateExpression(p.expression, this.environment(context, stats, instance)));
     if ('all' in p) return p.all.every(x => this.satisfies(x, instance, instances, stats, context));
@@ -84,7 +84,7 @@ export class Engine {
     if ('feature' in p) return instances.some(i => i.eligible && i.feature === p.feature && Object.entries(p.parameters ?? {}).every(([k, v]) => i.parameters[k] === v));
     return instances.some(i => i.eligible && this.features.get(i.feature)?.tags?.includes(p.tag));
   }
-  private statView(character: Character, instances: Instance[], levels?: Record<string, number>, runtime: Record<string, Value> = {}): StatView {
+  private statView (character: Character, instances: Instance[], levels?: Record<string, number>, runtime: Record<string, Value> = {}): StatView {
     const results: Record<string, StatResult> = {}, visiting: string[] = [];
     const get = (id: string): number => {
       if (Object.hasOwn(results, id)) return results[id].value;
@@ -152,7 +152,7 @@ export class Engine {
     };
     return { results, get };
   }
-  private pools(character: Character, instances: Instance[], stats: StatView, levels?: Record<string, number>, runtime: Record<string, Value> = {}): Record<string, PoolResult> {
+  private pools (character: Character, instances: Instance[], stats: StatView, levels?: Record<string, number>, runtime: Record<string, Value> = {}): Record<string, PoolResult> {
     const pools: Record<string, PoolResult> = {}, policies = new Map<string, Resource['combine']>();
     for (const instance of instances.filter(i => i.active && i.eligible)) for (const component of this.features.get(instance.feature)!.components) {
       if (component.kind !== 'defineResource') continue;
@@ -183,7 +183,7 @@ export class Engine {
     }
     return pools;
   }
-  private matchPool(character: Character, instance: Instance, requirement: ResourceRequirement, pools: Record<string, PoolResult>, allInstances: Instance[]): PoolResult {
+  private matchPool (character: Character, instance: Instance, requirement: ResourceRequirement, pools: Record<string, PoolResult>, allInstances: Instance[]): PoolResult {
     const visible = (p: PoolResult): boolean => p.providers.some(id => {
       const provider = allInstances.find(i => i.id === id)!;
       if (p.scope === 'character') return true;
@@ -199,7 +199,7 @@ export class Engine {
     if (candidates.length === 1) return candidates[0];
     throw new RuleError(candidates.length ? 'AMBIGUOUS_RESOURCE' : 'MISSING_RESOURCE', candidates.length ? `Choose a pool for ${requirement.key}.` : `Requires resource ${requirement.key}.`);
   }
-  evaluate(input: Character, runtime: Record<string, Value> = {}): EvaluationResult {
+  evaluate (input: Character, runtime: Record<string, Value> = {}): EvaluationResult {
     const result: EvaluationResult = { status: 'valid', provisional: false, characterLevel: 0, instances: [], selections: [], stats: {}, resources: {}, capabilities: [], bindings: {}, diagnostics: [] };
     const report = (e: unknown, path: string) => result.diagnostics.push(diagnostic(e, path));
     const character = input;
@@ -349,13 +349,11 @@ export class Engine {
       const stub: Instance = { id: 'system', feature: '', parameters: {}, acquiredCharacterLevel: 0, acquiredClassLevel: 0, active: true, eligible: true, waived: false };
       const permanentContext = this.context(character);
       for (const rule of this.catalogue.system.validation ?? []) {
-        try { if (!this.satisfies(rule.requirement, stub, result.instances, permanentView.get, permanentContext)) report(new RuleError('SYSTEM_RULE', rule.message), `system/${rule.id}`); }
-        catch (e) { report(e, `system/${rule.id}`); }
+        try { if (!this.satisfies(rule.requirement, stub, result.instances, permanentView.get, permanentContext)) report(new RuleError('SYSTEM_RULE', rule.message), `system/${rule.id}`); } catch (e) { report(e, `system/${rule.id}`); }
       }
       if (number(permanentContext.classCount) > 1) for (const p of character.progressions.filter(p => p.level > 0)) {
         const cls = this.catalogue.classes.find(c => c.id === p.class)!;
-        try { if (!this.satisfies(cls.multiclassPrerequisites, { ...stub, progression: p.id }, result.instances, permanentView.get, this.context(character, undefined, {}, { ...stub, progression: p.id }))) report(new RuleError('MULTICLASS_PREREQUISITE', `Multiclass prerequisites are not met for ${cls.name}.`), `class/${segment(p.id)}`); }
-        catch (e) { report(e, `class/${segment(p.id)}`); }
+        try { if (!this.satisfies(cls.multiclassPrerequisites, { ...stub, progression: p.id }, result.instances, permanentView.get, this.context(character, undefined, {}, { ...stub, progression: p.id }))) report(new RuleError('MULTICLASS_PREREQUISITE', `Multiclass prerequisites are not met for ${cls.name}.`), `class/${segment(p.id)}`); } catch (e) { report(e, `class/${segment(p.id)}`); }
       }
       // Entry legality also uses its historical stat view: later Features cannot qualify an earlier multiclass entry.
       for (const [event, levels] of eventSnapshots) {
@@ -364,8 +362,7 @@ export class Engine {
         const historicalView = this.statView(character, result.instances.filter(i => (i.acquiredEvent ?? 0) <= event), levels);
         for (const p of character.progressions.filter(p => p.level > 0 && (levels[p.id] ?? 0) > 0)) {
           const cls = this.catalogue.classes.find(c => c.id === p.class)!;
-          try { if (!this.satisfies(cls.multiclassPrerequisites, { ...stub, progression: p.id }, result.instances.filter(i => (i.acquiredEvent ?? 0) <= event), historicalView.get, this.context(character, levels, {}, { ...stub, progression: p.id }))) report(new RuleError('MULTICLASS_PREREQUISITE', `Multiclass prerequisites were not met when entering ${cls.name}.`), `class/${segment(p.id)}/history/${event}`); }
-          catch (e) { report(e, `class/${segment(p.id)}/history/${event}`); }
+          try { if (!this.satisfies(cls.multiclassPrerequisites, { ...stub, progression: p.id }, result.instances.filter(i => (i.acquiredEvent ?? 0) <= event), historicalView.get, this.context(character, levels, {}, { ...stub, progression: p.id }))) report(new RuleError('MULTICLASS_PREREQUISITE', `Multiclass prerequisites were not met when entering ${cls.name}.`), `class/${segment(p.id)}/history/${event}`); } catch (e) { report(e, `class/${segment(p.id)}/history/${event}`); }
         }
       }
       for (const stat of this.catalogue.system.stats) try { view.get(stat.id); } catch (e) { report(e, `stat/${stat.id}`); }
@@ -410,7 +407,7 @@ export class Engine {
     result.provisional = result.status !== 'valid';
     return result;
   }
-  getCandidates(character: Character, selection: string, parameters: Record<string, Value> = {}, options: { features?: string[] } = {}): Candidate[] {
+  getCandidates (character: Character, selection: string, parameters: Record<string, Value> = {}, options: { features?: string[] } = {}): Candidate[] {
     const result = this.evaluate(character), slot = result.selections.find(s => s.id === selection);
     if (!slot) throw new RuleError('UNKNOWN_SELECTION', `Unknown active selection ${selection}.`);
     return this.catalogue.features.filter(f => (!options.features || options.features.includes(f.id)) && (!slot.definition.candidates.ids || slot.definition.candidates.ids.includes(f.id)) && (!slot.definition.candidates.tags || slot.definition.candidates.tags.every(t => f.tags?.includes(t)))).map(f => {

@@ -6,12 +6,12 @@ const node = (): Node => ({ children: new Map(), ids: new Set() });
 const word = (value: string | undefined) => !!value && /[\p{L}\p{N}_]/u.test(value);
 
 /** Normalize matching only. Offsets always refer to the untouched source text. */
-function normalized(text: string) {
+function normalized (text: string) {
   let value = '', offset = 0;
   const starts: number[] = [], ends: number[] = [];
   for (const character of text) {
     const next = offset + character.length;
-    const replacement = character.normalize('NFKC').toLowerCase().replace(/[’‘ʼ]/g, "'").replace(/[‐‑–—]/g, '-').replace(/\s/g, ' ');
+    const replacement = character.normalize('NFKC').toLowerCase().replace(/[’‘ʼ]/g, '\'').replace(/[‐‑–—]/g, '-').replace(/\s/g, ' ');
     for (const unit of replacement.split('')) {
       if (unit === ' ' && value.endsWith(' ')) { ends[ends.length - 1] = next; continue; }
       value += unit; starts.push(offset); ends.push(next);
@@ -24,7 +24,7 @@ function normalized(text: string) {
 /** A reusable, System-independent index. Ambiguous names retain every target. */
 export class FeatureTextIndex {
   private readonly root = node();
-  constructor(features: readonly FeatureDefinition[]) {
+  constructor (features: readonly FeatureDefinition[]) {
     const definitions = new Map(features.map(feature => [feature.id, feature]));
     for (const feature of features) for (const name of [feature.displayName ?? feature.name, ...(feature.textAliases ?? [])]) {
       const label = normalized(name).value.trim();
@@ -37,7 +37,7 @@ export class FeatureTextIndex {
       targets.forEach(id => current.ids.add(id));
     }
   }
-  resolve(text: string, exclude: readonly string[] = []): FeatureTextSpan[] {
+  resolve (text: string, exclude: readonly string[] = []): FeatureTextSpan[] {
     const { value, starts, ends } = normalized(text), ignored = new Set(exclude), spans: FeatureTextSpan[] = [];
     for (let start = 0; start < value.length; start++) {
       if (word(value[start - 1])) continue;

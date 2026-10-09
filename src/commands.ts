@@ -5,17 +5,17 @@ import type { UseOptions } from './types/UseOptions.js';
 import { checkCharacter } from './validation.js';
 export type { UseOptions } from './types/UseOptions.js';
 
-function requireValid(result: EvaluationResult): void {
+function requireValid (result: EvaluationResult): void {
   if (result.status !== 'valid') throw new RuleError('INVALID_BUILD', 'This command requires a valid, complete character.');
 }
-function stamp(character: Character, id: string, payload: unknown): boolean {
+function stamp (character: Character, id: string, payload: unknown): boolean {
   if (!id) throw new RuleError('EVENT_ID', 'An event ID is required.');
   const fingerprint = canonical(payload);
   const prior = character.events.find(e => e.id === id);
   if (prior) { if (prior.fingerprint !== fingerprint) throw new RuleError('EVENT_CONFLICT', 'Event ID was reused with different data.'); return false; }
   character.events.push({ id, fingerprint }); return true;
 }
-function canonical(value: unknown): string {
+function canonical (value: unknown): string {
   const order = (v: unknown): unknown => {
     if (Array.isArray(v)) return v.map(order);
     if (v && typeof v === 'object') return Object.fromEntries(Object.entries(v).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0).map(([k, x]) => [k, order(x)]));
@@ -23,7 +23,7 @@ function canonical(value: unknown): string {
   };
   return JSON.stringify(order(value));
 }
-export function previewEdit(engine: Engine, input: Character, edits: Edit[]): EditPreview {
+export function previewEdit (engine: Engine, input: Character, edits: Edit[]): EditPreview {
   checkCharacter(input);
   const before = engine.evaluate(input), character = clone(input);
   let retraining = false;
@@ -106,7 +106,7 @@ export function previewEdit(engine: Engine, input: Character, edits: Edit[]): Ed
     changedStats: engine.catalogue.system.stats.map(s => s.id).filter(id => before.stats[id]?.value !== after.stats[id]?.value),
     changedResources: [...new Set([...Object.keys(before.resources), ...Object.keys(after.resources)])].filter(id => JSON.stringify(before.resources[id]) !== JSON.stringify(after.resources[id])) };
 }
-export function applyEdit(engine: Engine, input: Character, edits: Edit[], eventId: string, options: { requireValid?: boolean } = {}): Character {
+export function applyEdit (engine: Engine, input: Character, edits: Edit[], eventId: string, options: { requireValid?: boolean } = {}): Character {
   checkCharacter(input);
   const copy = clone(input);
   if (!stamp(copy, eventId, { kind: 'edit', edits })) return copy;
@@ -115,12 +115,12 @@ export function applyEdit(engine: Engine, input: Character, edits: Edit[], event
   checkCharacter(preview.character);
   return preview.character;
 }
-export function finalizeCharacter(engine: Engine, input: Character, eventId: string): Character {
+export function finalizeCharacter (engine: Engine, input: Character, eventId: string): Character {
   checkCharacter(input); const character = clone(input);
   if (!stamp(character, eventId, {kind:'finalize'})) return character;
   requireValid(engine.evaluate(character)); character.buildState = 'finalized'; return character;
 }
-export function useAbility(engine: Engine, input: Character, ability: string, eventId: string, options: UseOptions = {}): { character: Character; actions?: Record<string, number>; pending: boolean } {
+export function useAbility (engine: Engine, input: Character, ability: string, eventId: string, options: UseOptions = {}): { character: Character; actions?: Record<string, number>; pending: boolean } {
   checkCharacter(input);
   if (input.buildState === 'draft') throw new RuleError('DRAFT', 'Finalize the construction draft before using abilities.');
   const character = clone(input), payload = { kind: 'use', ability, options };
@@ -144,14 +144,14 @@ export function useAbility(engine: Engine, input: Character, ability: string, ev
   else for (const [id, amount] of Object.entries(capability.costs)) character.resources[id] = { spent: result.resources[id].spent + amount };
   return { character, actions, pending };
 }
-export function settleAbility(input: Character, pendingId: string, outcome: string, eventId: string): Character {
+export function settleAbility (input: Character, pendingId: string, outcome: string, eventId: string): Character {
   checkCharacter(input); const character = clone(input);
   if (!stamp(character, eventId, { kind: 'settle', pendingId, outcome })) return character;
   const pending = character.pending[pendingId]; if (!pending) throw new RuleError('PENDING_USE', 'Unknown or already settled ability use.');
   if (pending.spendOnOutcomes.includes(outcome)) for (const [id, amount] of Object.entries(pending.costs)) character.resources[id] = { spent: (character.resources[id]?.spent ?? 0) + amount };
   delete character.pending[pendingId]; return character;
 }
-export function recoverResources(engine: Engine, input: Character, recoveryEvent: string, eventId: string): Character {
+export function recoverResources (engine: Engine, input: Character, recoveryEvent: string, eventId: string): Character {
   checkCharacter(input); const character = clone(input);
   if (input.buildState === 'draft') throw new RuleError('DRAFT', 'Finalize the construction draft before recovery.');
   if (!stamp(character, eventId, { kind: 'recover', recoveryEvent })) return character;
@@ -170,8 +170,8 @@ export function recoverResources(engine: Engine, input: Character, recoveryEvent
   }
   return character;
 }
-export function serializeCharacter(character: Character): string { checkCharacter(character); return JSON.stringify(character, null, 2); }
-export function deserializeCharacter(text: string, engine?: Engine): Character {
+export function serializeCharacter (character: Character): string { checkCharacter(character); return JSON.stringify(character, null, 2); }
+export function deserializeCharacter (text: string, engine?: Engine): Character {
   if (text.length > 10_000_000) throw new RuleError('SAVE_SIZE', 'Save exceeds 10 MB.');
   let parsed: unknown;
   try { parsed = JSON.parse(text); } catch { throw new RuleError('SAVE_JSON', 'Invalid character JSON.'); }
@@ -180,8 +180,8 @@ export function deserializeCharacter(text: string, engine?: Engine): Character {
   return parsed;
 }
 /** Content migration is explicit and requires a complete target save, never an implicit rules upgrade. */
-export function previewMigration(engine: Engine, target: Character): EvaluationResult { return engine.evaluate(target); }
-export function migrateCharacter(engine: Engine, source: Character, target: Character, eventId: string): Character {
+export function previewMigration (engine: Engine, target: Character): EvaluationResult { return engine.evaluate(target); }
+export function migrateCharacter (engine: Engine, source: Character, target: Character, eventId: string): Character {
   checkCharacter(source); checkCharacter(target);
   if (source.id !== target.id) throw new RuleError('MIGRATION_ID', 'Migration must retain character identity.');
   if (Object.keys(source.pending).length || Object.keys(target.pending).length) throw new RuleError('PENDING_USE', 'Settle pending uses before migration.');
