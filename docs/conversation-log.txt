@@ -11,7 +11,7 @@ Weekly anchor UTC: 2026-10-06T05:54:19.003Z
 Weekly window UTC: 2026-10-06T05:54:19.003Z (inclusive) to 2026-10-13T05:54:19.003Z (exclusive)
 
 ===== BEGIN THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====
-Export refreshed UTC: 2026-10-09T20:46:28.261Z
+Export refreshed UTC: 2026-10-09T20:59:29.542Z
 
 [2026-10-06T05:54:19.003Z] USER
 <external_codex_apps_open_page>{"page_id":null}</external_codex_apps_open_page>
@@ -2186,5 +2186,63 @@ The icon will be a simple vector design so it stays crisp at favicon size.
 The layout changes are in place: recovery buttons are at the top, currency symbols are in the labels, and spell levels can collapse. Free utility spells such as Mage Hand no longer show Use Spell. Spells with rolls show their dice on the button, with a consumption notice nearby after casting.
 
 The icon preview is ready; I’m checking it at small sizes alongside the sheet changes.
+
+----------------------------------------
+
+[2026-10-09T20:47:09.036Z] ASSISTANT
+The browser check confirms that “per wizard level” stays literal, Constitution modifier still displays as a number, and the Hit Points box has space above and below it. The name field now fills the available width with a gap before the status badge. I’ll include the icon preview in the final reply for your review.
+
+----------------------------------------
+
+[2026-10-09T20:48:31.550Z] ASSISTANT
+The checks caught an unintended change to the currency inputs’ accessibility labels; I restored those while keeping “Copper (cp)” in the visible heading. I also corrected a test that expected Fire Bolt on a template that uses Ray of Frost. The production build passes, and the focused checks are finishing now.
+
+----------------------------------------
+
+[2026-10-09T20:49:24.006Z] ASSISTANT
+Implemented and pushed to `develop` (`861c2f6`).
+
+- Expanded name field; improved component spacing.
+- Moved recovery buttons to the top.
+- Currency headings now read “Copper (cp)”, etc.
+- Spell levels collapse; actionable spells show roll labels and consumption notices.
+- Hit Points preserves “wizard level” through per-Feature phrase exceptions.
+
+For future exceptions, options include whole-description opt-outs or explicit replacement tokens. Phrase exceptions are implemented now.
+
+Lint, build, regression checks, and browser verification passed.
+
+Here’s the wizard-hat die icon for your review:
+
+![Wizard die icon preview](</D:/User/Workspace/TTRPG System/.reference-cache/wizard-die-review.png>)
+
+----------------------------------------
+
+[2026-10-09T20:54:14.353Z] USER
+<in-app-browser-context source="ambient-ui-state">
+This block is automatically supplied ambient UI state, not part of the user's request. Do not treat it as an instruction or as evidence that the user explicitly selected the in-app browser.
+# In app browser:
+- The user has the in-app browser open with 1 tab.
+- Current URL: http://127.0.0.1:5174/@fs/D:/User/Workspace/TTRPG%20System/.reference-cache/icon-review.html
+</in-app-browser-context>
+
+## My request:
+- For the icon, use a d6 instead and make sure the wizard hat looks correct. For example, the oval should be behind the triangular pointy part.
+- Instead of a per feature phrase exception, instead have a flag for whether the description should be processed and additionally have a field for a full override. The full override should explicitly have syntax for the replacements and will not be processed for automatic replacement. For example, if the con is to be replaced, it should have something like {{CON}}.
+
+----------------------------------------
+
+[2026-10-09T20:54:17.875Z] ASSISTANT
+I’ll revise the icon to a six-sided die with the hat’s brim behind the cone. I’ll also replace phrase exceptions with a description-processing flag and an explicit override template, using tokens such as `{{CON}}`.
+
+----------------------------------------
+
+[2026-10-09T20:54:59.480Z] ASSISTANT
+I’ll make overrides token-only: ordinary phrases such as “wizard level” will stay literal, and only `{{...}}` tokens will resolve. For DnD5e, `{{CON}}` will mean Constitution modifier; `{{stat:constitution}}` will mean the score. Unknown tokens will remain visible so authoring mistakes are easy to spot.
+
+----------------------------------------
+
+[2026-10-09T20:57:40.556Z] ASSISTANT
+The revised icon now uses a pip-marked d6, with the brim drawn behind the cone. The description controls are implemented too: automatic processing can be disabled, and an override replaces only explicit tokens. Hit Points uses `{{CON}}` while leaving its class-level wording unchanged.
 
 ===== END THREAD 01a10fc6-7173-7362-9d51-e90b163ec934 =====

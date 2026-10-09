@@ -27,3 +27,5 @@ export { rollDice } from '@/src/dice.js';
 export { featureRollExpression, rollFeature, applyFeatureRoll, rollCapability, featureRollInstances } from '@/src/feature-rolls.js';
 
 export type { RolledFeature } from '@/src/model/RolledFeature.js';
+
+export { descriptionTokenValues } from '@/src/description-tokens.js';

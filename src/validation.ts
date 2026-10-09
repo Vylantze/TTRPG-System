@@ -244,6 +244,13 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     list(input.classes);
     if (input.blocks !== undefined) list(input.blocks);
     const compiled = compileBlocks(input as unknown as Catalogue);
+    if (compiled.system.descriptionTokens !== undefined) {
+      record(compiled.system.descriptionTokens);
+      for (const [key, stat] of Object.entries(compiled.system.descriptionTokens)) {
+        if (!/^[A-Za-z][A-Za-z0-9_]*$/.test(key)) throw new RuleError('SCHEMA', 'Invalid description token alias.');
+        text(stat);
+      }
+    }
     if (compiled.system.spellDisplay !== undefined) {
       const display = compiled.system.spellDisplay;
       record(display);
@@ -348,10 +355,8 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     }
     const created = new Map<string, Catalogue['system']['stats'][number]>();
     for (const f of compiled.features) {
-      if (f.preserveValuePhrases !== undefined) {
-        list(f.preserveValuePhrases);
-        f.preserveValuePhrases.forEach(text);
-      }
+      if (f.processDescription !== undefined && typeof f.processDescription !== 'boolean') throw new RuleError('SCHEMA', 'processDescription must be a boolean.');
+      if (f.descriptionOverride !== undefined && typeof f.descriptionOverride !== 'string') throw new RuleError('SCHEMA', 'descriptionOverride must be text.');
       if (f.roll !== undefined) {
         const roll = f.roll;
         record(roll);

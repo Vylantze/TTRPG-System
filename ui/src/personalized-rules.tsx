@@ -1,7 +1,8 @@
-import type { Character, Engine, EvaluationResult } from '@/src/index';
+import { descriptionTokenValues, type Character, type Engine, type EvaluationResult } from '@/src/index';
 import { Tooltip } from '@/ui/src/Tooltip';
 
-export function ruleValues(text: string, engine: Engine, character: Character, result: EvaluationResult, preserve: string[] = []) {
+export function ruleValues(text: string, engine: Engine, character: Character, result: EvaluationResult, explicit = false) {
+  if (explicit) return descriptionTokenValues(text, engine, character, result);
   const values: { start: number; end: number; label: string; value: number }[] = [];
   const candidates = [
     ...engine.catalogue.system.stats.filter((stat) => stat.id.startsWith('modifier.')).map((stat) => ({ phrase: `${stat.id.slice(9)} modifier`, value: result.stats[stat.id]?.value })),
@@ -9,23 +10,23 @@ export function ruleValues(text: string, engine: Engine, character: Character, r
     { phrase: 'proficiency bonus', value: result.stats.proficiencyBonus?.value },
   ];
   for (const candidate of candidates) {
-    if (!Number.isFinite(candidate.value) || preserve.some((phrase) => phrase.toLowerCase() === candidate.phrase.toLowerCase())) continue;
+    if (!Number.isFinite(candidate.value)) continue;
     const escaped = candidate.phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     for (const match of text.matchAll(new RegExp(`\\b(?:your )?${escaped}\\b`, 'gi'))) values.push({ start: match.index!, end: match.index! + match[0].length, label: match[0], value: candidate.value! });
   }
   return values.sort((a, b) => a.start - b.start);
 }
-export function personalizedText(text: string, engine: Engine, character: Character, result: EvaluationResult, preserve: string[] = []) {
+export function personalizedText(text: string, engine: Engine, character: Character, result: EvaluationResult, explicit = false) {
   let offset = 0;
   const parts = [];
-  for (const value of ruleValues(text, engine, character, result, preserve)) {
+  for (const value of ruleValues(text, engine, character, result, explicit)) {
     parts.push(text.slice(offset, value.start), <Tooltip key={value.start} text={value.label}><span className="resolved-value">{value.value}</span></Tooltip>);
     offset = value.end;
   }
   parts.push(text.slice(offset));
   return parts;
 }
-export function resolvedRuleText(text: string, engine: Engine, character: Character, result: EvaluationResult, preserve: string[] = []) {
-  for (const value of ruleValues(text, engine, character, result, preserve).reverse()) text = text.slice(0, value.start) + value.value + text.slice(value.end);
+export function resolvedRuleText(text: string, engine: Engine, character: Character, result: EvaluationResult, explicit = false) {
+  for (const value of ruleValues(text, engine, character, result, explicit).reverse()) text = text.slice(0, value.start) + value.value + text.slice(value.end);
   return text;
 }

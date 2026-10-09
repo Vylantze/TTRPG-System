@@ -106,8 +106,8 @@ export function updateSystemDescriptions(existing: SystemFile, incoming: SystemF
   };
   visit(existing);
   visit(validated);
-  const strip = (definition: { description?: string; source?: string; textReferences?: string[]; textAliases?: string[]; textLinkContext?: unknown; preserveValuePhrases?: string[]; displayName?: string }) => {
-    const { description, source, textReferences, textAliases, textLinkContext, preserveValuePhrases, displayName, ...rules } = definition;
+  const strip = (definition: { description?: string; source?: string; textReferences?: string[]; textAliases?: string[]; textLinkContext?: unknown; processDescription?: boolean; descriptionOverride?: string; preserveValuePhrases?: string[]; displayName?: string }) => {
+    const { description, source, textReferences, textAliases, textLinkContext, processDescription, descriptionOverride, preserveValuePhrases, displayName, ...rules } = definition;
     return rules;
   };
   const featureRules = (feature: SystemFile['features'][number]) => {
@@ -116,7 +116,7 @@ export function updateSystemDescriptions(existing: SystemFile, incoming: SystemF
     return { ...rules, ...(mechanicalTags?.length ? { tags: mechanicalTags } : {}) };
   };
   const rules = (file: SystemFile) => ({ ...file, ...(!existing.items && !existing.itemFeatures ? { items: undefined, itemFeatures: undefined } : {}), features: file.features.map(featureRules), configurations: file.configurations.map((c) => {
-    const { tagDisplayNames, sheetSections, featureCategories, spellDisplay, ...system } = c.system;
+    const { tagDisplayNames, sheetSections, featureCategories, spellDisplay, descriptionTokens, ...system } = c.system;
     return { ...c, system: { ...system, ...(!existing.configurations.find((old) => old.id === c.id)?.system.currency ? { currency: undefined } : {}) }, classes: c.classes.map(strip) };
   }) });
   const canonical = (value: unknown): unknown => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, item]) => [key, canonical(item)])) : value;
