@@ -21,7 +21,7 @@ function textIndex(engine: Engine) {
   return index;
 }
 /** Link matching preserves source characters; imported HTML/Markdown stays inert. */
-export function RulesText({ text, source, engine, openFeature, exclude = [], onPreview, processDescription = true, descriptionOverride, descriptionTitle }: { text?: string; source?: string; descriptionTitle?: string; processDescription?: boolean; descriptionOverride?: FeatureDefinition['descriptionOverride'] } & References) {
+export function RulesText({ text, source, engine, openFeature, exclude = [], onPreview, processDescriptionAutomatically = true, descriptionOverride, descriptionTitle }: { text?: string; source?: string; descriptionTitle?: string; processDescriptionAutomatically?: boolean; descriptionOverride?: FeatureDefinition['descriptionOverride'] } & References) {
   const [preview, setPreview] = useState<Preview>();
   const origin = useContext(FeatureOrigin);
   const characterContext = useContext(CharacterRuleContext);
@@ -29,7 +29,7 @@ export function RulesText({ text, source, engine, openFeature, exclude = [], onP
   const displayedText = descriptionTitle ? descriptionBody({ name: descriptionTitle, description: replaced.text }) ?? '' : replaced.text;
   const removedPrefix = replaced.text.length - displayedText.length;
   const display = { ranges: replaced.ranges.map((range) => ({ start: range.start - removedPrefix, end: range.end - removedPrefix })) };
-  const prose = (value: string, explicit: boolean) => engine && characterContext && (explicit || processDescription) ? personalizedText(value, engine, characterContext.character, characterContext.result, explicit) : value;
+  const prose = (value: string, explicit: boolean) => engine && characterContext && (explicit || processDescriptionAutomatically) ? personalizedText(value, engine, characterContext.character, characterContext.result, explicit) : value;
   const index = useMemo(() => engine ? textIndex(engine) : undefined, [engine]);
   if (!displayedText) return null;
   const linkedProse = (paragraph: string, explicit = false) => {
@@ -134,7 +134,7 @@ export function ReferencePopup({ reference, engine, openFeature, onClose }: { re
 export function FeatureRules({ feature, engine, openFeature, onPreview, instanceId, showRolls = true }: { feature: FeatureDefinition; engine: Engine; instanceId?: string; showRolls?: boolean; openFeature?: (id: string) => void; onPreview?: (reference: Preview) => void }) {
   return (
     <>
-      <RulesText processDescription={feature.processDescription} descriptionOverride={feature.descriptionOverride} descriptionTitle={featureName(feature)} text={feature.description} source={feature.source} engine={engine} openFeature={openFeature} exclude={[feature.id]} onPreview={onPreview} />
+      <RulesText processDescriptionAutomatically={feature.processDescriptionAutomatically} descriptionOverride={feature.descriptionOverride} descriptionTitle={featureName(feature)} text={feature.description} source={feature.source} engine={engine} openFeature={openFeature} exclude={[feature.id]} onPreview={onPreview} />
       {showRolls && <FeatureRolls feature={feature} engine={engine} instanceId={instanceId} />}
       {feature.textReferences?.map((id) => {
         const reference = engine.catalogue.features.find((f) => f.id === id);
@@ -142,7 +142,7 @@ export function FeatureRules({ feature, engine, openFeature, onPreview, instance
           ? (
               <section className="shared-rules" key={id}>
                 <h3>{featureName(reference)}</h3>
-                <RulesText processDescription={reference.processDescription} descriptionOverride={reference.descriptionOverride} descriptionTitle={featureName(reference)} text={reference.description} source={reference.source} engine={engine} openFeature={openFeature} exclude={[feature.id, id]} onPreview={onPreview} />
+                <RulesText processDescriptionAutomatically={reference.processDescriptionAutomatically} descriptionOverride={reference.descriptionOverride} descriptionTitle={featureName(reference)} text={reference.description} source={reference.source} engine={engine} openFeature={openFeature} exclude={[feature.id, id]} onPreview={onPreview} />
                 {showRolls && !feature.roll && <FeatureRolls feature={reference} engine={engine} />}
                 <FeatureLink id={id} engine={engine}>
                   {'View '}

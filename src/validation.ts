@@ -348,7 +348,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     }
     const created = new Map<string, Catalogue['system']['stats'][number]>();
     for (const f of compiled.features) {
-      if (f.processDescription !== undefined && typeof f.processDescription !== 'boolean') throw new RuleError('SCHEMA', 'processDescription must be a boolean.');
+      if (f.processDescriptionAutomatically !== undefined && typeof f.processDescriptionAutomatically !== 'boolean') throw new RuleError('SCHEMA', 'processDescriptionAutomatically must be a boolean.');
       if (f.descriptionOverride !== undefined) {
         list(f.descriptionOverride);
         for (const entry of f.descriptionOverride) {

@@ -6,7 +6,7 @@ import { FeatureLink } from '@/ui/src/FeatureLink';
 import { CharacterFeatures } from '@/ui/src/CharacterFeatures';
 import { featureName } from '@/ui/src/display';
 import { useMemo, useState, useTransition } from 'react';
-import { featureRollInstances, reopenCharacter, spellGroups, spellSlotPools, adjustResource, applyEdit, previewEdit, finalizeCharacter, recoverResources, recoverSelectedResources, settleAbility, useAbility as activateAbility, type Engine, type Character, type Edit, type EditPreview } from '@/src/index';
+import { clearFeatureRolls, featureRollInstances, reopenCharacter, spellGroups, spellSlotPools, adjustResource, applyEdit, previewEdit, finalizeCharacter, recoverResources, recoverSelectedResources, settleAbility, useAbility as activateAbility, type Engine, type Character, type Edit, type EditPreview } from '@/src/index';
 import { labelFromId } from '@/ui/src/workspace';
 import { SelectionCard } from '@/ui/src/SelectionCard';
 import { Modal } from '@/ui/src/Modal';
@@ -277,7 +277,10 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
       {tab === 'features' && <CharacterFeatures engine={engine} character={character} result={result} openFeature={openFeature} />}
       {tab === 'resources' && (
         <>
-          <div className="toolbar">{[...new Set([...Object.values(result.resources).flatMap((p) => p.recovery.map((r) => r.event)), ...(abilities.some((ability) => ability.definition.name === engine.catalogue.system.commandRules?.selectedRecovery?.capabilityName) ? [engine.catalogue.system.commandRules!.selectedRecovery!.requiredEvent] : [])])].map((event) => <button className="quiet" key={event} disabled={!ready} onClick={() => attempt(() => update(recoverResources(engine, character, event, crypto.randomUUID())))}>{labelFromId(event)}</button>)}</div>
+          <div className="toolbar">
+            {[...new Set([...Object.values(result.resources).flatMap((p) => p.recovery.map((r) => r.event)), ...(abilities.some((ability) => ability.definition.name === engine.catalogue.system.commandRules?.selectedRecovery?.capabilityName) ? [engine.catalogue.system.commandRules!.selectedRecovery!.requiredEvent] : [])])].map((event) => <button className="quiet" key={event} disabled={!ready} onClick={() => attempt(() => update(recoverResources(engine, character, event, crypto.randomUUID())))}>{labelFromId(event)}</button>)}
+            {Boolean(character.rollResults?.length) && <button className="quiet" onClick={() => update(clearFeatureRolls(character))}>Clear all rolls</button>}
+          </div>
           <h2>Abilities</h2>
           <div className="ability-list">{abilities.map(ability)}</div>
           {Object.values(result.resources).filter((pool) => !slotIds.has(pool.id) && !abilities.some((capability) => Object.hasOwn(capability.costs, pool.id))).map((pool) => <div className="standalone-resource" key={pool.id}>{resource(pool.id)}</div>)}
@@ -307,7 +310,6 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
               </div>
             </section>
           ))}
-          <p className="muted">Rolling spends the ability use and saves the result. Apply healing separately to restore current HP. Other targets, conditional effects, action timing, and spellcasting restrictions are adjudicated at the table.</p>
         </>
       )}
       {preview && (

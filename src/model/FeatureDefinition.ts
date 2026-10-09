@@ -14,7 +14,7 @@ export interface FeatureDefinition {
   /** Alternate source names for automatic prose links; never grants rules. */
   textAliases?: string[];
   /** Whether source prose receives automatic character-value replacements; defaults to true. */
-  processDescription?: boolean;
+  processDescriptionAutomatically?: boolean;
   /** Exact source-text replacements. Replacement text resolves explicit tokens only. */
   descriptionOverride?: { originalString: string; overrideString: string }[];
   /** Ambiguous prose names require an adjacent phrase; display-only, case-insensitive. */

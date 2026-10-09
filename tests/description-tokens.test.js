@@ -17,7 +17,7 @@ test('explicit description tokens resolve named stats and class levels only', ()
 
 test('description controls validate their types and override pairs without changing rules', () => {
   const { engine } = exampleCharacter();
-  for (const extra of [{ processDescription: 'false' }, { descriptionOverride: 42 }, { descriptionOverride: 'old string' }, { descriptionOverride: [{ originalString: '', overrideString: 'x' }] }, { descriptionOverride: [{ originalString: 'x', overrideString: 1 }] }]) {
+  for (const extra of [{ processDescriptionAutomatically: 'false' }, { descriptionOverride: 42 }, { descriptionOverride: 'old string' }, { descriptionOverride: [{ originalString: '', overrideString: 'x' }] }, { descriptionOverride: [{ originalString: 'x', overrideString: 1 }] }]) {
     const catalogue = structuredClone(engine.catalogue);
     Object.assign(catalogue.features[0], extra);
     assert.equal(validateCatalogue(catalogue)[0].code, 'SCHEMA');

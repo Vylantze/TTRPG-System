@@ -1,14 +1,14 @@
 # Description replacements
 
-`description` remains the original source text. On character sheets, `processDescription` (default `true`) controls automatic value replacement in text that has not been overridden. Set it to `false` to preserve that text literally.
+`description` remains the original source text. On character sheets, `processDescriptionAutomatically` (default `true`) controls automatic value replacement in text that has not been overridden. Set it to `false` to preserve that text literally.
 
 `descriptionOverride` is an array of exact, case-sensitive string pairs. All occurrences are replaced. Nonmatching entries do nothing. Empty `overrideString` removes the matching text; empty `originalString` is invalid. Matching uses the original description, not the output of an earlier replacement. The earliest match wins; for matches starting at the same position, array order wins. Overlapping matches are not applied twice. Whitespace and punctuation are significant.
 
-Replacement text never receives automatic phrase replacement, regardless of `processDescription`. Only the explicit tokens below resolve there. Other text, including phrases such as “wizard level”, remains literal. Source catalogue views retain the original description. Paragraphs, lists and Feature links remain supported; imported HTML remains inert.
+Replacement text never receives automatic phrase replacement, regardless of `processDescriptionAutomatically`. Only the explicit tokens below resolve there. Other text, including phrases such as “wizard level”, remains literal. Source catalogue views retain the original description. Paragraphs, lists and Feature links remain supported; imported HTML remains inert.
 
 ```json
 {
-  "processDescription": false,
+  "processDescriptionAutomatically": false,
   "descriptionOverride": [
     {
       "originalString": "your Constitution modifier",
