@@ -357,9 +357,10 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
         rollDice(roll.dice, () => 0);
         if (f.components.length) throw new RuleError('SCHEMA', 'A Roll Feature cannot contain other building blocks.');
         if (roll.capability !== undefined) text(roll.capability);
+        if (roll.spell !== undefined) text(roll.spell);
         if (roll.restoreResource !== undefined) {
           text(roll.restoreResource);
-          text(roll.capability);
+          if (roll.spell === undefined) text(roll.capability);
         }
         if (roll.bonus !== undefined && typeof roll.bonus !== 'number') {
           record(roll.bonus);
@@ -769,7 +770,14 @@ export function checkCharacter(v: unknown): asserts v is Character {
       for (const key of ['id', 'instance', 'feature', 'definition', 'expression', 'breakdown']) text(roll[key]);
       number(roll.total);
       if (!Number.isSafeInteger(roll.total)) throw new RuleError('SCHEMA', 'Invalid rolled total.');
-      if (roll.applied !== undefined) integer(roll.applied);
+      if (roll.applied !== undefined) number(roll.applied);
+      if (roll.casting !== undefined) {
+        record(roll.casting);
+        text(roll.casting.capability);
+        text(roll.casting.spell);
+        integer(roll.casting.slotLevel);
+        if (typeof roll.casting.ritual !== 'boolean') throw new RuleError('SCHEMA', 'Invalid spell casting result.');
+      }
     }
     unique((v.rollResults as Character['rollResults'])!.map((roll) => roll.id), 'roll');
   }

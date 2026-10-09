@@ -18,6 +18,7 @@ for (const feature of parents) {
   const authored = file.features.filter((roll) => roll.roll && roll.id.startsWith(`${feature.id}.roll.`));
   for (const [index, definition] of (authored.length ? authored.map((entry) => entry.roll) : declarations).entries()) {
     const id = `${feature.id}.roll.${definition.id}`;
+    if (feature.tags?.includes('spell')) definition.spell = feature.id;
     rolls.push({ id, revision: 1, name: definition.label, displayName: definition.label, source: feature.source, textReferences: [feature.id], tags: ['roll-feature'], repeat: { maximum: 1, scope: 'parent' }, roll: definition, components: [] });
     feature.components.push({ id: `roll-feature-${index + 1}`, kind: 'grantFeature', feature: id });
   }

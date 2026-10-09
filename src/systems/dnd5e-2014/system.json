@@ -105696,7 +105696,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Acid Splash: 1d6",
-        "dice": "1d6"
+        "dice": "1d6",
+        "spell": "dnd5e:2014:spell.acid-splash"
       },
       "components": []
     },
@@ -105719,7 +105720,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Acid Splash: 2d6",
-        "dice": "2d6"
+        "dice": "2d6",
+        "spell": "dnd5e:2014:spell.acid-splash"
       },
       "components": []
     },
@@ -105742,7 +105744,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Acid Splash: 3d6",
-        "dice": "3d6"
+        "dice": "3d6",
+        "spell": "dnd5e:2014:spell.acid-splash"
       },
       "components": []
     },
@@ -105765,7 +105768,8 @@
       "roll": {
         "id": "reference-4",
         "label": "Acid Splash: 4d6",
-        "dice": "4d6"
+        "dice": "4d6",
+        "spell": "dnd5e:2014:spell.acid-splash"
       },
       "components": []
     },
@@ -105788,7 +105792,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Chill Touch: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.chill-touch"
       },
       "components": []
     },
@@ -105811,7 +105816,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Chill Touch: 2d8",
-        "dice": "2d8"
+        "dice": "2d8",
+        "spell": "dnd5e:2014:spell.chill-touch"
       },
       "components": []
     },
@@ -105834,7 +105840,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Chill Touch: 3d8",
-        "dice": "3d8"
+        "dice": "3d8",
+        "spell": "dnd5e:2014:spell.chill-touch"
       },
       "components": []
     },
@@ -105857,7 +105864,8 @@
       "roll": {
         "id": "reference-4",
         "label": "Chill Touch: 4d8",
-        "dice": "4d8"
+        "dice": "4d8",
+        "spell": "dnd5e:2014:spell.chill-touch"
       },
       "components": []
     },
@@ -105880,7 +105888,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Fire Bolt: 1d10",
-        "dice": "1d10"
+        "dice": "1d10",
+        "spell": "dnd5e:2014:spell.fire-bolt"
       },
       "components": []
     },
@@ -105903,7 +105912,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Fire Bolt: 2d10",
-        "dice": "2d10"
+        "dice": "2d10",
+        "spell": "dnd5e:2014:spell.fire-bolt"
       },
       "components": []
     },
@@ -105926,7 +105936,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Fire Bolt: 3d10",
-        "dice": "3d10"
+        "dice": "3d10",
+        "spell": "dnd5e:2014:spell.fire-bolt"
       },
       "components": []
     },
@@ -105949,7 +105960,8 @@
       "roll": {
         "id": "reference-4",
         "label": "Fire Bolt: 4d10",
-        "dice": "4d10"
+        "dice": "4d10",
+        "spell": "dnd5e:2014:spell.fire-bolt"
       },
       "components": []
     },
@@ -105972,7 +105984,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Poison Spray: 1d12",
-        "dice": "1d12"
+        "dice": "1d12",
+        "spell": "dnd5e:2014:spell.poison-spray"
       },
       "components": []
     },
@@ -105995,7 +106008,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Poison Spray: 2d12",
-        "dice": "2d12"
+        "dice": "2d12",
+        "spell": "dnd5e:2014:spell.poison-spray"
       },
       "components": []
     },
@@ -106018,7 +106032,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Poison Spray: 3d12",
-        "dice": "3d12"
+        "dice": "3d12",
+        "spell": "dnd5e:2014:spell.poison-spray"
       },
       "components": []
     },
@@ -106041,7 +106056,8 @@
       "roll": {
         "id": "reference-4",
         "label": "Poison Spray: 4d12",
-        "dice": "4d12"
+        "dice": "4d12",
+        "spell": "dnd5e:2014:spell.poison-spray"
       },
       "components": []
     },
@@ -106064,7 +106080,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Ray of Frost: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.ray-of-frost"
       },
       "components": []
     },
@@ -106087,7 +106104,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Ray of Frost: 2d8",
-        "dice": "2d8"
+        "dice": "2d8",
+        "spell": "dnd5e:2014:spell.ray-of-frost"
       },
       "components": []
     },
@@ -106110,7 +106128,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Ray of Frost: 3d8",
-        "dice": "3d8"
+        "dice": "3d8",
+        "spell": "dnd5e:2014:spell.ray-of-frost"
       },
       "components": []
     },
@@ -106133,7 +106152,8 @@
       "roll": {
         "id": "reference-4",
         "label": "Ray of Frost: 4d8",
-        "dice": "4d8"
+        "dice": "4d8",
+        "spell": "dnd5e:2014:spell.ray-of-frost"
       },
       "components": []
     },
@@ -106156,7 +106176,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Shocking Grasp: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.shocking-grasp"
       },
       "components": []
     },
@@ -106179,7 +106200,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Shocking Grasp: 2d8",
-        "dice": "2d8"
+        "dice": "2d8",
+        "spell": "dnd5e:2014:spell.shocking-grasp"
       },
       "components": []
     },
@@ -106202,7 +106224,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Shocking Grasp: 3d8",
-        "dice": "3d8"
+        "dice": "3d8",
+        "spell": "dnd5e:2014:spell.shocking-grasp"
       },
       "components": []
     },
@@ -106225,7 +106248,8 @@
       "roll": {
         "id": "reference-4",
         "label": "Shocking Grasp: 4d8",
-        "dice": "4d8"
+        "dice": "4d8",
+        "spell": "dnd5e:2014:spell.shocking-grasp"
       },
       "components": []
     },
@@ -106248,7 +106272,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Burning Hands: 3d6",
-        "dice": "3d6"
+        "dice": "3d6",
+        "spell": "dnd5e:2014:spell.burning-hands"
       },
       "components": []
     },
@@ -106271,7 +106296,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Burning Hands: 1d6",
-        "dice": "1d6"
+        "dice": "1d6",
+        "spell": "dnd5e:2014:spell.burning-hands"
       },
       "components": []
     },
@@ -106294,7 +106320,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Color Spray: 6d10",
-        "dice": "6d10"
+        "dice": "6d10",
+        "spell": "dnd5e:2014:spell.color-spray"
       },
       "components": []
     },
@@ -106317,7 +106344,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Color Spray: 2d10",
-        "dice": "2d10"
+        "dice": "2d10",
+        "spell": "dnd5e:2014:spell.color-spray"
       },
       "components": []
     },
@@ -106340,7 +106368,8 @@
       "roll": {
         "id": "reference-1",
         "label": "False Life: 1d4 + 4",
-        "dice": "1d4 + 4"
+        "dice": "1d4 + 4",
+        "spell": "dnd5e:2014:spell.false-life"
       },
       "components": []
     },
@@ -106363,7 +106392,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Magic Missile: 1d4 + 1",
-        "dice": "1d4 + 1"
+        "dice": "1d4 + 1",
+        "spell": "dnd5e:2014:spell.magic-missile"
       },
       "components": []
     },
@@ -106386,7 +106416,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Sleep: 5d8",
-        "dice": "5d8"
+        "dice": "5d8",
+        "spell": "dnd5e:2014:spell.sleep"
       },
       "components": []
     },
@@ -106409,7 +106440,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Sleep: 2d8",
-        "dice": "2d8"
+        "dice": "2d8",
+        "spell": "dnd5e:2014:spell.sleep"
       },
       "components": []
     },
@@ -106432,7 +106464,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Thunderwave: 2d8",
-        "dice": "2d8"
+        "dice": "2d8",
+        "spell": "dnd5e:2014:spell.thunderwave"
       },
       "components": []
     },
@@ -106455,7 +106488,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Thunderwave: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.thunderwave"
       },
       "components": []
     },
@@ -106478,7 +106512,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Acid Arrow: 4d4",
-        "dice": "4d4"
+        "dice": "4d4",
+        "spell": "dnd5e:2014:spell.acid-arrow"
       },
       "components": []
     },
@@ -106501,7 +106536,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Acid Arrow: 2d4",
-        "dice": "2d4"
+        "dice": "2d4",
+        "spell": "dnd5e:2014:spell.acid-arrow"
       },
       "components": []
     },
@@ -106524,7 +106560,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Acid Arrow: 1d4",
-        "dice": "1d4"
+        "dice": "1d4",
+        "spell": "dnd5e:2014:spell.acid-arrow"
       },
       "components": []
     },
@@ -106547,7 +106584,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Alter Self: 1d6",
-        "dice": "1d6"
+        "dice": "1d6",
+        "spell": "dnd5e:2014:spell.alter-self"
       },
       "components": []
     },
@@ -106570,7 +106608,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Enlarge/Reduce: 1d4",
-        "dice": "1d4"
+        "dice": "1d4",
+        "spell": "dnd5e:2014:spell.enlarge-reduce"
       },
       "components": []
     },
@@ -106593,7 +106632,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Flaming Sphere: 2d6",
-        "dice": "2d6"
+        "dice": "2d6",
+        "spell": "dnd5e:2014:spell.flaming-sphere"
       },
       "components": []
     },
@@ -106616,7 +106656,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Flaming Sphere: 1d6",
-        "dice": "1d6"
+        "dice": "1d6",
+        "spell": "dnd5e:2014:spell.flaming-sphere"
       },
       "components": []
     },
@@ -106639,7 +106680,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Mirror Image: d20",
-        "dice": "1d20"
+        "dice": "1d20",
+        "spell": "dnd5e:2014:spell.mirror-image"
       },
       "components": []
     },
@@ -106662,7 +106704,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Scorching Ray: 2d6",
-        "dice": "2d6"
+        "dice": "2d6",
+        "spell": "dnd5e:2014:spell.scorching-ray"
       },
       "components": []
     },
@@ -106685,7 +106728,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Shatter: 3d8",
-        "dice": "3d8"
+        "dice": "3d8",
+        "spell": "dnd5e:2014:spell.shatter"
       },
       "components": []
     },
@@ -106708,7 +106752,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Shatter: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.shatter"
       },
       "components": []
     },
@@ -106731,7 +106776,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Web: 2d4",
-        "dice": "2d4"
+        "dice": "2d4",
+        "spell": "dnd5e:2014:spell.web"
       },
       "components": []
     },
@@ -106754,7 +106800,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Bestow Curse: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.bestow-curse"
       },
       "components": []
     },
@@ -106777,7 +106824,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Blink: d20",
-        "dice": "1d20"
+        "dice": "1d20",
+        "spell": "dnd5e:2014:spell.blink"
       },
       "components": []
     },
@@ -106800,7 +106848,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Fireball: 8d6",
-        "dice": "8d6"
+        "dice": "8d6",
+        "spell": "dnd5e:2014:spell.fireball"
       },
       "components": []
     },
@@ -106823,7 +106872,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Fireball: 1d6",
-        "dice": "1d6"
+        "dice": "1d6",
+        "spell": "dnd5e:2014:spell.fireball"
       },
       "components": []
     },
@@ -106846,7 +106896,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Glyph of Warding: 5d8",
-        "dice": "5d8"
+        "dice": "5d8",
+        "spell": "dnd5e:2014:spell.glyph-of-warding"
       },
       "components": []
     },
@@ -106869,7 +106920,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Glyph of Warding: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.glyph-of-warding"
       },
       "components": []
     },
@@ -106892,7 +106944,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Lightning Bolt: 8d6",
-        "dice": "8d6"
+        "dice": "8d6",
+        "spell": "dnd5e:2014:spell.lightning-bolt"
       },
       "components": []
     },
@@ -106915,7 +106968,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Lightning Bolt: 1d6",
-        "dice": "1d6"
+        "dice": "1d6",
+        "spell": "dnd5e:2014:spell.lightning-bolt"
       },
       "components": []
     },
@@ -106938,7 +106992,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Slow: d20",
-        "dice": "1d20"
+        "dice": "1d20",
+        "spell": "dnd5e:2014:spell.slow"
       },
       "components": []
     },
@@ -106961,7 +107016,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Vampiric Touch: 3d6",
-        "dice": "3d6"
+        "dice": "3d6",
+        "spell": "dnd5e:2014:spell.vampiric-touch"
       },
       "components": []
     },
@@ -106984,7 +107040,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Vampiric Touch: 1d6",
-        "dice": "1d6"
+        "dice": "1d6",
+        "spell": "dnd5e:2014:spell.vampiric-touch"
       },
       "components": []
     },
@@ -107007,7 +107064,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Black Tentacles: 3d6",
-        "dice": "3d6"
+        "dice": "3d6",
+        "spell": "dnd5e:2014:spell.black-tentacles"
       },
       "components": []
     },
@@ -107030,7 +107088,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Blight: 8d8",
-        "dice": "8d8"
+        "dice": "8d8",
+        "spell": "dnd5e:2014:spell.blight"
       },
       "components": []
     },
@@ -107053,7 +107112,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Blight: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.blight"
       },
       "components": []
     },
@@ -107076,7 +107136,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Confusion: d10",
-        "dice": "1d10"
+        "dice": "1d10",
+        "spell": "dnd5e:2014:spell.confusion"
       },
       "components": []
     },
@@ -107099,7 +107160,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Confusion: d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.confusion"
       },
       "components": []
     },
@@ -107122,7 +107184,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Control Water: 2d8",
-        "dice": "2d8"
+        "dice": "2d8",
+        "spell": "dnd5e:2014:spell.control-water"
       },
       "components": []
     },
@@ -107145,7 +107208,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Dimension Door: 4d6",
-        "dice": "4d6"
+        "dice": "4d6",
+        "spell": "dnd5e:2014:spell.dimension-door"
       },
       "components": []
     },
@@ -107168,7 +107232,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Faithful Hound: 4d8",
-        "dice": "4d8"
+        "dice": "4d8",
+        "spell": "dnd5e:2014:spell.faithful-hound"
       },
       "components": []
     },
@@ -107191,7 +107256,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Fire Shield: 2d8",
-        "dice": "2d8"
+        "dice": "2d8",
+        "spell": "dnd5e:2014:spell.fire-shield"
       },
       "components": []
     },
@@ -107214,7 +107280,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Ice Storm: 2d8",
-        "dice": "2d8"
+        "dice": "2d8",
+        "spell": "dnd5e:2014:spell.ice-storm"
       },
       "components": []
     },
@@ -107237,7 +107304,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Ice Storm: 4d6",
-        "dice": "4d6"
+        "dice": "4d6",
+        "spell": "dnd5e:2014:spell.ice-storm"
       },
       "components": []
     },
@@ -107260,7 +107328,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Ice Storm: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.ice-storm"
       },
       "components": []
     },
@@ -107283,7 +107352,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Phantasmal Killer: 4d10",
-        "dice": "4d10"
+        "dice": "4d10",
+        "spell": "dnd5e:2014:spell.phantasmal-killer"
       },
       "components": []
     },
@@ -107306,7 +107376,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Phantasmal Killer: 1d10",
-        "dice": "1d10"
+        "dice": "1d10",
+        "spell": "dnd5e:2014:spell.phantasmal-killer"
       },
       "components": []
     },
@@ -107329,7 +107400,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Wall of Fire: 5d8",
-        "dice": "5d8"
+        "dice": "5d8",
+        "spell": "dnd5e:2014:spell.wall-of-fire"
       },
       "components": []
     },
@@ -107352,7 +107424,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Wall of Fire: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.wall-of-fire"
       },
       "components": []
     },
@@ -107375,7 +107448,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Animate Objects: 1d4 + 4",
-        "dice": "1d4 + 4"
+        "dice": "1d4 + 4",
+        "spell": "dnd5e:2014:spell.animate-objects"
       },
       "components": []
     },
@@ -107398,7 +107472,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Animate Objects: 1d8 + 2",
-        "dice": "1d8 + 2"
+        "dice": "1d8 + 2",
+        "spell": "dnd5e:2014:spell.animate-objects"
       },
       "components": []
     },
@@ -107421,7 +107496,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Animate Objects: 2d6 + 1",
-        "dice": "2d6 + 1"
+        "dice": "2d6 + 1",
+        "spell": "dnd5e:2014:spell.animate-objects"
       },
       "components": []
     },
@@ -107444,7 +107520,8 @@
       "roll": {
         "id": "reference-4",
         "label": "Animate Objects: 2d10 + 2",
-        "dice": "2d10 + 2"
+        "dice": "2d10 + 2",
+        "spell": "dnd5e:2014:spell.animate-objects"
       },
       "components": []
     },
@@ -107467,7 +107544,8 @@
       "roll": {
         "id": "reference-5",
         "label": "Animate Objects: 2d12 + 4",
-        "dice": "2d12 + 4"
+        "dice": "2d12 + 4",
+        "spell": "dnd5e:2014:spell.animate-objects"
       },
       "components": []
     },
@@ -107490,7 +107568,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Arcane Hand: 4d8",
-        "dice": "4d8"
+        "dice": "4d8",
+        "spell": "dnd5e:2014:spell.arcane-hand"
       },
       "components": []
     },
@@ -107513,7 +107592,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Arcane Hand: 2d6",
-        "dice": "2d6"
+        "dice": "2d6",
+        "spell": "dnd5e:2014:spell.arcane-hand"
       },
       "components": []
     },
@@ -107536,7 +107616,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Arcane Hand: 2d8",
-        "dice": "2d8"
+        "dice": "2d8",
+        "spell": "dnd5e:2014:spell.arcane-hand"
       },
       "components": []
     },
@@ -107559,7 +107640,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Cloudkill: 5d8",
-        "dice": "5d8"
+        "dice": "5d8",
+        "spell": "dnd5e:2014:spell.cloudkill"
       },
       "components": []
     },
@@ -107582,7 +107664,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Cloudkill: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.cloudkill"
       },
       "components": []
     },
@@ -107605,7 +107688,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Cone of Cold: 8d8",
-        "dice": "8d8"
+        "dice": "8d8",
+        "spell": "dnd5e:2014:spell.cone-of-cold"
       },
       "components": []
     },
@@ -107628,7 +107712,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Cone of Cold: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.cone-of-cold"
       },
       "components": []
     },
@@ -107651,7 +107736,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Contact Other Plane: 6d6",
-        "dice": "6d6"
+        "dice": "6d6",
+        "spell": "dnd5e:2014:spell.contact-other-plane"
       },
       "components": []
     },
@@ -107674,7 +107760,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Dream: 3d6",
-        "dice": "3d6"
+        "dice": "3d6",
+        "spell": "dnd5e:2014:spell.dream"
       },
       "components": []
     },
@@ -107697,7 +107784,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Geas: 5d10",
-        "dice": "5d10"
+        "dice": "5d10",
+        "spell": "dnd5e:2014:spell.geas"
       },
       "components": []
     },
@@ -107720,7 +107808,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Chain Lightning: 10d8",
-        "dice": "10d8"
+        "dice": "10d8",
+        "spell": "dnd5e:2014:spell.chain-lightning"
       },
       "components": []
     },
@@ -107743,7 +107832,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Circle of Death: 8d6",
-        "dice": "8d6"
+        "dice": "8d6",
+        "spell": "dnd5e:2014:spell.circle-of-death"
       },
       "components": []
     },
@@ -107766,7 +107856,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Circle of Death: 2d6",
-        "dice": "2d6"
+        "dice": "2d6",
+        "spell": "dnd5e:2014:spell.circle-of-death"
       },
       "components": []
     },
@@ -107789,7 +107880,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Disintegrate: 10d6 + 40",
-        "dice": "10d6 + 40"
+        "dice": "10d6 + 40",
+        "spell": "dnd5e:2014:spell.disintegrate"
       },
       "components": []
     },
@@ -107812,7 +107904,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Disintegrate: 3d6",
-        "dice": "3d6"
+        "dice": "3d6",
+        "spell": "dnd5e:2014:spell.disintegrate"
       },
       "components": []
     },
@@ -107835,7 +107928,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Freezing Sphere: 10d6",
-        "dice": "10d6"
+        "dice": "10d6",
+        "spell": "dnd5e:2014:spell.freezing-sphere"
       },
       "components": []
     },
@@ -107858,7 +107952,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Freezing Sphere: 1d6",
-        "dice": "1d6"
+        "dice": "1d6",
+        "spell": "dnd5e:2014:spell.freezing-sphere"
       },
       "components": []
     },
@@ -107881,7 +107976,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Sunbeam: 6d8",
-        "dice": "6d8"
+        "dice": "6d8",
+        "spell": "dnd5e:2014:spell.sunbeam"
       },
       "components": []
     },
@@ -107904,7 +108000,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Wall of Ice: 10d6",
-        "dice": "10d6"
+        "dice": "10d6",
+        "spell": "dnd5e:2014:spell.wall-of-ice"
       },
       "components": []
     },
@@ -107927,7 +108024,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Wall of Ice: 5d6",
-        "dice": "5d6"
+        "dice": "5d6",
+        "spell": "dnd5e:2014:spell.wall-of-ice"
       },
       "components": []
     },
@@ -107950,7 +108048,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Wall of Ice: 2d6",
-        "dice": "2d6"
+        "dice": "2d6",
+        "spell": "dnd5e:2014:spell.wall-of-ice"
       },
       "components": []
     },
@@ -107973,7 +108072,8 @@
       "roll": {
         "id": "reference-4",
         "label": "Wall of Ice: 1d6",
-        "dice": "1d6"
+        "dice": "1d6",
+        "spell": "dnd5e:2014:spell.wall-of-ice"
       },
       "components": []
     },
@@ -107996,7 +108096,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Arcane Sword: 3d10",
-        "dice": "3d10"
+        "dice": "3d10",
+        "spell": "dnd5e:2014:spell.arcane-sword"
       },
       "components": []
     },
@@ -108019,7 +108120,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Delayed Blast Fireball: 12d6",
-        "dice": "12d6"
+        "dice": "12d6",
+        "spell": "dnd5e:2014:spell.delayed-blast-fireball"
       },
       "components": []
     },
@@ -108042,7 +108144,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Delayed Blast Fireball: 1d6",
-        "dice": "1d6"
+        "dice": "1d6",
+        "spell": "dnd5e:2014:spell.delayed-blast-fireball"
       },
       "components": []
     },
@@ -108065,7 +108168,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Finger of Death: 7d8 + 30",
-        "dice": "7d8 + 30"
+        "dice": "7d8 + 30",
+        "spell": "dnd5e:2014:spell.finger-of-death"
       },
       "components": []
     },
@@ -108088,7 +108192,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Prismatic Spray: d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.prismatic-spray"
       },
       "components": []
     },
@@ -108111,7 +108216,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Prismatic Spray: 10d6",
-        "dice": "10d6"
+        "dice": "10d6",
+        "spell": "dnd5e:2014:spell.prismatic-spray"
       },
       "components": []
     },
@@ -108134,7 +108240,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Symbol: 10d10",
-        "dice": "10d10"
+        "dice": "10d10",
+        "spell": "dnd5e:2014:spell.symbol"
       },
       "components": []
     },
@@ -108157,7 +108264,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Teleport: d100",
-        "dice": "1d100"
+        "dice": "1d100",
+        "spell": "dnd5e:2014:spell.teleport"
       },
       "components": []
     },
@@ -108180,7 +108288,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Teleport: 1d10",
-        "dice": "1d10"
+        "dice": "1d10",
+        "spell": "dnd5e:2014:spell.teleport"
       },
       "components": []
     },
@@ -108203,7 +108312,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Teleport: d10",
-        "dice": "1d10"
+        "dice": "1d10",
+        "spell": "dnd5e:2014:spell.teleport"
       },
       "components": []
     },
@@ -108226,7 +108336,8 @@
       "roll": {
         "id": "reference-4",
         "label": "Teleport: d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.teleport"
       },
       "components": []
     },
@@ -108249,7 +108360,8 @@
       "roll": {
         "id": "reference-5",
         "label": "Teleport: 3d10",
-        "dice": "3d10"
+        "dice": "3d10",
+        "spell": "dnd5e:2014:spell.teleport"
       },
       "components": []
     },
@@ -108272,7 +108384,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Control Weather: 1d4",
-        "dice": "1d4"
+        "dice": "1d4",
+        "spell": "dnd5e:2014:spell.control-weather"
       },
       "components": []
     },
@@ -108295,7 +108408,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Feeblemind: 4d6",
-        "dice": "4d6"
+        "dice": "4d6",
+        "spell": "dnd5e:2014:spell.feeblemind"
       },
       "components": []
     },
@@ -108318,7 +108432,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Incendiary Cloud: 10d8",
-        "dice": "10d8"
+        "dice": "10d8",
+        "spell": "dnd5e:2014:spell.incendiary-cloud"
       },
       "components": []
     },
@@ -108341,7 +108456,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Sunburst: 12d6",
-        "dice": "12d6"
+        "dice": "12d6",
+        "spell": "dnd5e:2014:spell.sunburst"
       },
       "components": []
     },
@@ -108364,7 +108480,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Meteor Swarm: 20d6",
-        "dice": "20d6"
+        "dice": "20d6",
+        "spell": "dnd5e:2014:spell.meteor-swarm"
       },
       "components": []
     },
@@ -108387,7 +108504,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Prismatic Wall: 10d6",
-        "dice": "10d6"
+        "dice": "10d6",
+        "spell": "dnd5e:2014:spell.prismatic-wall"
       },
       "components": []
     },
@@ -108410,7 +108528,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Time Stop: 1d4 + 1",
-        "dice": "1d4 + 1"
+        "dice": "1d4 + 1",
+        "spell": "dnd5e:2014:spell.time-stop"
       },
       "components": []
     },
@@ -108433,7 +108552,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Weird: 4d10",
-        "dice": "4d10"
+        "dice": "4d10",
+        "spell": "dnd5e:2014:spell.weird"
       },
       "components": []
     },
@@ -108456,7 +108576,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Wish: 1d10",
-        "dice": "1d10"
+        "dice": "1d10",
+        "spell": "dnd5e:2014:spell.wish"
       },
       "components": []
     },
@@ -108479,7 +108600,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Wish: 2d4",
-        "dice": "2d4"
+        "dice": "2d4",
+        "spell": "dnd5e:2014:spell.wish"
       },
       "components": []
     },
@@ -108525,7 +108647,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Sacred Flame: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.sacred-flame"
       },
       "components": []
     },
@@ -108548,7 +108671,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Sacred Flame: 2d8",
-        "dice": "2d8"
+        "dice": "2d8",
+        "spell": "dnd5e:2014:spell.sacred-flame"
       },
       "components": []
     },
@@ -108571,7 +108695,8 @@
       "roll": {
         "id": "reference-3",
         "label": "Sacred Flame: 3d8",
-        "dice": "3d8"
+        "dice": "3d8",
+        "spell": "dnd5e:2014:spell.sacred-flame"
       },
       "components": []
     },
@@ -108594,7 +108719,8 @@
       "roll": {
         "id": "reference-4",
         "label": "Sacred Flame: 4d8",
-        "dice": "4d8"
+        "dice": "4d8",
+        "spell": "dnd5e:2014:spell.sacred-flame"
       },
       "components": []
     },
@@ -108617,7 +108743,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Bless: d4",
-        "dice": "1d4"
+        "dice": "1d4",
+        "spell": "dnd5e:2014:spell.bless"
       },
       "components": []
     },
@@ -108640,7 +108767,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Cure Wounds: 1d8",
-        "dice": "1d8"
+        "dice": "1d8",
+        "spell": "dnd5e:2014:spell.cure-wounds"
       },
       "components": []
     },
@@ -108663,7 +108791,8 @@
       "roll": {
         "id": "reference-1",
         "label": "Guiding Bolt: 4d6",
-        "dice": "4d6"
+        "dice": "4d6",
+        "spell": "dnd5e:2014:spell.guiding-bolt"
       },
       "components": []
     },
@@ -108686,7 +108815,8 @@
       "roll": {
         "id": "reference-2",
         "label": "Guiding Bolt: 1d6",
-        "dice": "1d6"
+        "dice": "1d6",
+        "spell": "dnd5e:2014:spell.guiding-bolt"
       },
       "components": []
     }

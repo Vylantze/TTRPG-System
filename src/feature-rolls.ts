@@ -2,6 +2,7 @@ import type { Character, EvaluationResult } from '@/src/model.js';
 import type { FeatureRoll } from '@/src/model/FeatureRoll.js';
 import type { Engine } from '@/src/engine.js';
 import { RuleError } from '@/src/expression.js';
+import { spellGroups } from '@/src/spell-display.js';
 import { rollDice } from '@/src/dice.js';
 import { useAbility, adjustResource } from '@/src/commands.js';
 
@@ -37,20 +38,24 @@ export function featureRollInstances(engine: Engine, result: EvaluationResult, f
 }
 
 /** Rolling spends the use now and stores the immutable result; it never applies healing. */
-export function rollFeature(engine: Engine, character: Character, instanceId: string, eventId: string, random?: () => number) {
+export function rollFeature(engine: Engine, character: Character, instanceId: string, eventId: string, random?: () => number, castingCapability?: string) {
   if (!eventId || character.events.some((event) => event.id === eventId) || character.rollResults?.some((roll) => roll.id === eventId)) throw new RuleError('ROLL', 'This roll was already recorded or has an invalid ID.');
   const result = engine.evaluate(character);
   if (character.buildState === 'draft' || result.status !== 'valid') throw new RuleError('ROLL', 'Finalize a valid character before rolling.');
   const instance = result.instances.find((item) => item.id === instanceId && item.active);
   const roll = instance && engine.getFeature(instance.feature)?.roll;
   if (!roll) throw new RuleError('ROLL', 'Roll is not granted by an active Roll Feature.');
-  const capability = rollCapability(engine, result, instanceId);
+  const spell = spellGroups(engine, result).filter((group) => group.feature === roll.spell);
+  const mode = spell.flatMap((group) => group.modes).find((option) => option.capability.id === castingCapability);
+  if (roll.spell && !mode) throw new RuleError('ROLL', 'Select an available casting mode for this spell.');
+  if (castingCapability && !roll.spell) throw new RuleError('ROLL', 'This Roll Feature does not belong to a spell.');
+  const capability = mode?.capability ?? rollCapability(engine, result, instanceId);
   if (roll.capability && !capability) throw new RuleError('ROLL', 'Required ability is unavailable.');
   const use = capability ? useAbility(engine, character, capability.id, eventId, { actionTracking: 'manual' }) : undefined;
   if (use?.pending) throw new RuleError('ROLL', 'A Roll Feature requires an immediately spent ability use.');
   const next = use?.character ?? structuredClone(character);
   const expression = featureRollExpression(roll, character, result);
-  const outcome = { id: eventId, instance: instanceId, feature: instance!.feature, definition: JSON.stringify(roll), expression, ...rollDice(expression, random) };
+  const outcome = { id: eventId, instance: instanceId, feature: instance!.feature, definition: JSON.stringify(roll), expression, ...(mode ? { casting: { capability: mode.capability.id, spell: roll.spell!, slotLevel: mode.slotLevel, ritual: mode.ritual } } : {}), ...rollDice(expression, random) };
   next.rollResults = [...next.rollResults ?? [], outcome];
   if (!use) next.events.push({ id: eventId, fingerprint: JSON.stringify({ kind: 'roll', instanceId, outcome }) });
   return { character: next, outcome };
@@ -65,7 +70,13 @@ export function applyFeatureRoll(engine: Engine, character: Character, rollId: s
   if (!eventId || character.events.some((event) => event.id === eventId)) throw new RuleError('ROLL', 'Application event ID has already been used.');
   const instance = result.instances.find((item) => item.id === outcome.instance && item.feature === outcome.feature && item.active);
   const roll = instance && engine.getFeature(instance.feature)?.roll;
-  if (!roll?.restoreResource || JSON.stringify(roll) !== outcome.definition) throw new RuleError('ROLL', 'The Roll Feature or its effect is no longer available.');
+  if (!roll || (!roll.restoreResource && !outcome.casting) || JSON.stringify(roll) !== outcome.definition) throw new RuleError('ROLL', 'The Roll Feature or its effect is no longer available.');
+  if (!roll.restoreResource) {
+    const next = structuredClone(character);
+    next.rollResults = next.rollResults!.map((item) => item.id === rollId ? { ...item, applied: outcome.total } : item);
+    next.events.push({ id: eventId, fingerprint: JSON.stringify({ kind: 'applySpellRoll', rollId }) });
+    return { character: next, applied: outcome.total };
+  }
   const pool = Object.values(result.resources).find((item) => item.key === roll.restoreResource && item.scope === 'character');
   if (!pool) throw new RuleError('ROLL', 'Recovery resource is unavailable.');
   const applied = Math.max(0, Math.min(outcome.total, pool.capacity - (pool.current ?? pool.capacity - pool.spent)));
