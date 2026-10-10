@@ -54,16 +54,37 @@ export class Engine {
       && (!choice.candidates.tags || choice.candidates.tags.every((tag) => feature.tags?.includes(tag))));
   }
 
-  /** Direct Class grants and selection pools, not a promise of character eligibility. */
+  private advancement?: Map<string, FeatureAdvancement[]>;
+
+  /** Recursive Class grants and selection pools, not a promise of character eligibility. */
   getFeatureAdvancement(featureId: string): FeatureAdvancement[] {
-    const feature = this.getFeature(featureId);
-    if (!feature) return [];
-    return this.catalogue.classes.flatMap((cls) => {
-      const levels = this.getClassLevels(cls.id).filter((row) => row.entries.some((entry) => entry.kind === 'grantFeature'
-        ? entry.feature === featureId
-        : (!entry.candidates.ids || entry.candidates.ids.includes(featureId)) && (!entry.candidates.tags || entry.candidates.tags.every((tag) => feature.tags?.includes(tag))))).map((row) => row.level);
-      return levels.length ? [{ classId: cls.id, className: cls.name, levels }] : [];
-    });
+    if (!this.advancement) {
+      this.advancement = new Map();
+      for (const cls of this.catalogue.classes) {
+        const found = new Map<string, Set<number>>();
+        const visit = (id: string, level: number) => {
+          const feature = this.getFeature(id);
+          if (!feature || found.get(id)?.has(level)) return;
+          const levels = found.get(id) ?? new Set<number>();
+          levels.add(level);
+          found.set(id, levels);
+          for (const component of feature.components) {
+            if (component.kind === 'grantFeature') visit(component.feature, Math.max(level, component.atClassLevel ?? level));
+            if (component.kind === 'chooseFeatures') for (const candidate of this.getSelectionFeatures(component)) visit(candidate.id, level);
+          }
+        };
+        for (const row of this.getClassLevels(cls.id)) for (const entry of row.entries) {
+          if (entry.kind === 'grantFeature') visit(entry.feature, Math.max(row.level, entry.atClassLevel ?? row.level));
+          else for (const candidate of this.getSelectionFeatures(entry)) visit(candidate.id, row.level);
+        }
+        for (const [id, levels] of found) {
+          const rows = this.advancement.get(id) ?? [];
+          rows.push({ classId: cls.id, className: cls.name, levels: [...levels].sort((a, b) => a - b) });
+          this.advancement.set(id, rows);
+        }
+      }
+    }
+    return clone(this.advancement.get(featureId) ?? []);
   }
 
   readonly catalogue: Catalogue;

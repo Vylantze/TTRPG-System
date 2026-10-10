@@ -1,4 +1,4 @@
-import { classEntryPath, selectionPath, pickPath } from '@/dist/index.js';
+import { classEntryPath, selectionPath, pickPath, childPath } from '@/dist/index.js';
 import { createDnd2014Engine, classInfo, wizardSpells } from '@/dist/systems/dnd5e-2014/index.js';
 
 /** A complete example builder with explicit choices, not a rules recommendation. */
@@ -41,7 +41,8 @@ export function exampleCharacter({ classes = [{ class: 'fighter', level: 3 }], r
       select(classEntryPath(p.id, lvl, 'improvement'), ['ability-score-improvement'], [Object.fromEntries(abilities.map((a) => [a, a === boost ? 2 : 0]))]);
     }
     if (lvl === info.subclassAt) select(classEntryPath(p.id, lvl, 'subclass'), [`${cls}.${info.subclass}`]);
-    if (cls === 'fighter' && [1, 10].includes(lvl)) select(classEntryPath(p.id, lvl, lvl === 1 ? 'fighting-style' : 'additional-style'), [lvl === 1 ? 'style.defense' : 'style.archery']);
+    if (cls === 'fighter' && lvl === 1) select(classEntryPath(p.id, 1, 'fighting-style'), ['style.defense']);
+    if (cls === 'fighter' && lvl === 10) select(selectionPath(childPath(pickPath(classEntryPath(p.id, 3, 'subclass'), 'pick-0'), 'progression-additional-style'), 'additional-style'), ['style.archery']);
     if (cls === 'rogue' && [1, 6].includes(lvl)) {
       const choices = [...trained, 'thieves-tools'].filter((s) => !expert.has(s)).slice(0, 2);
       select(classEntryPath(p.id, lvl, 'expertise'), choices.map((s) => `expertise.${s}`));

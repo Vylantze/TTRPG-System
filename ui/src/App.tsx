@@ -362,7 +362,7 @@ export function App({ initialWorkspace, persist }: { initialWorkspace: Workspace
               </div>
               <section className="panel">
                 <h3>Current bundled content</h3>
-                <p>DnD5e 2014 includes all 12 SRD classes plus Tasha’s Artificer, its four specialists and infusions. Tasha’s entries use mechanical data and source links without paid book descriptions. Conditional combat and some item effects require table resolution. Other non-SRD subclasses await approved sources.</p>
+                <p>DnD5e 2014 includes the 12 SRD classes, Tasha’s Artificer, and partner Blood Hunter, with 124 accessible subclass progressions. Partner content is labelled. New entries include source links and automation notes without paid book descriptions; locked entries are excluded. Each Feature identifies its supported mechanics and effects that require table resolution.</p>
                 <p className="muted">
                   {'The SRD 5.1 is licensed under CC BY 4.0. '}
                   <a href="https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf" target="_blank" rel="noreferrer">Official SRD</a>
@@ -553,9 +553,11 @@ export function App({ initialWorkspace, persist }: { initialWorkspace: Workspace
                                     <span className="eyebrow">
                                       {f.tags?.[0] ? tagName(engine.catalogue.system, f.tags[0]) : 'Feature'}
                                       {f.contentLevel !== undefined ? ` · level ${f.contentLevel}` : ''}
+                                      {f.tags?.includes('partner-content') ? ` · ${tagName(engine.catalogue.system, 'partner-content')}` : ''}
                                     </span>
                                     <FeatureLink className="link feature-card-title" id={f.id} engine={engine}>{featureName(f)}</FeatureLink>
                                     <RulesText text={descriptionPreview(featureDescription(f, engine))} engine={engine} openFeature={openFeature} exclude={[f.id]} />
+                                    {!featureDescription(f, engine) && !!f.mechanicalSummary?.length && <p className="muted small">{descriptionPreview(f.mechanicalSummary[0])}</p>}
                                     <span className="muted small">
                                       {f.components.length}
                                       {' '}

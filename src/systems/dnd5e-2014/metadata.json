@@ -2697,6 +2697,30 @@
         "perception",
         "sleight-of-hand"
       ]
+    },
+    "blood-hunter": {
+      "hitDie": 10,
+      "asi": [
+        4,
+        8,
+        12,
+        16,
+        19
+      ],
+      "subclassAt": 3,
+      "subclass": "subclass",
+      "startingSkills": 3,
+      "multiclassSkills": 0,
+      "skills": [
+        "acrobatics",
+        "arcana",
+        "athletics",
+        "history",
+        "insight",
+        "investigation",
+        "religion",
+        "survival"
+      ]
     }
   },
   "coverage": {
@@ -2770,10 +2794,9 @@
     ],
     "unsupportedClasses": [],
     "status": "All 12 core SRD class progressions, with source-backed descriptions and partial automation; final published non-SRD content awaits approved sources.",
-    "additionalSourcesPending": [
-      "Other non-SRD subclasses: final published sources pending approval/access"
-    ],
-    "classCatalogue": "All 12 SRD classes plus Tasha’s Artificer and four specialists. See the System document for automated and table-managed effects.",
-    "artificer": "Tasha’s Cauldron of Everything (2020): mechanical data and source links; no paid source descriptions."
+    "additionalSourcesPending": [],
+    "classCatalogue": "Thirteen standard classes and partner Blood Hunter, with 124 accessible D&D Beyond subclass progressions. Locked entries are excluded.",
+    "artificer": "Tasha’s Cauldron of Everything (2020): mechanical data and source links; no paid source descriptions.",
+    "subclasses": "Source-linked acquisition, shared resources and selected numerical effects. Each Feature states its automation coverage. Unimplemented effects remain source references, not simulated rules."
   }
 }

@@ -7,9 +7,15 @@ import { rollDice } from '@/src/dice.js';
 import { useAbility, adjustResource } from '@/src/commands.js';
 
 export function featureRollExpression(roll: FeatureRoll, character: Character, result: EvaluationResult): string {
+  const resolveDie = (value: number | { stat: string }) => {
+    const number = typeof value === 'number' ? value : result.stats[value.stat]?.value;
+    if (!Number.isSafeInteger(number) || number! < 1) throw new RuleError('ROLL', 'The roll requires a positive integer dice stat.');
+    return number!;
+  };
+  const dice = typeof roll.dice === 'string' ? roll.dice : `${resolveDie(roll.dice.count)}d${resolveDie(roll.dice.sides)}`;
   const bonus = typeof roll.bonus === 'number' ? roll.bonus : roll.bonus && 'stat' in roll.bonus ? result.stats[roll.bonus.stat]?.value : roll.bonus && 'class' in roll.bonus ? character.progressions.filter((p) => p.class === (roll.bonus as { class: string }).class).reduce((n, p) => n + p.level, 0) : 0;
   if (!Number.isFinite(bonus)) throw new RuleError('ROLL', 'The roll requires an unavailable stat.');
-  return `${roll.dice}${bonus ? ` ${bonus! < 0 ? '-' : '+'} ${Math.abs(bonus!)}` : ''}`;
+  return `${dice}${bonus ? ` ${bonus! < 0 ? '-' : '+'} ${Math.abs(bonus!)}` : ''}`;
 }
 
 /** Resolve a roll's owning ability through its parent chain, never an unrelated Feature. */

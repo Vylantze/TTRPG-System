@@ -16,7 +16,8 @@ const freshTurn = () => ({ bonusActionSpell: false, otherSpell: false, onlyActio
 test('2014 catalogue is serializable, isolated, and advertises its precise coverage', () => {
   const catalogue = createDnd2014Catalogue();
   assert.deepEqual(validateCatalogue(JSON.parse(JSON.stringify(catalogue))), []);
-  assert.equal(catalogue.classes.length, 13);
+  assert.equal(catalogue.classes.length, 14);
+  assert.ok(catalogue.classes.some((cls) => cls.id === id('blood-hunter')));
   assert.equal(wizardSpells.length, 204);
   assert.equal(dnd2014Coverage.unsupportedClasses.length, 0);
   assert.equal(getDnd2014FeatureCoverage(catalogue).length, catalogue.features.length);

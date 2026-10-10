@@ -455,8 +455,19 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
         record(roll);
         text(roll.id);
         text(roll.label);
-        text(roll.dice);
-        rollDice(roll.dice, () => 0);
+        if (typeof roll.dice === 'string') rollDice(roll.dice, () => 0);
+        else {
+          record(roll.dice);
+          for (const value of [roll.dice.count, roll.dice.sides]) {
+            if (typeof value === 'number') {
+              if (!Number.isSafeInteger(value) || value < 1) throw new RuleError('SCHEMA', 'Dice count and sides must be positive integers.');
+            } else {
+              record(value);
+              text(value.stat);
+            }
+          }
+          if (typeof roll.dice.count === 'number' && typeof roll.dice.sides === 'number') rollDice(`${roll.dice.count}d${roll.dice.sides}`, () => 0);
+        }
         if (f.components.length) throw new RuleError('SCHEMA', 'A Roll Feature cannot contain other building blocks.');
         if (roll.capability !== undefined) text(roll.capability);
         if (roll.spell !== undefined) text(roll.spell);

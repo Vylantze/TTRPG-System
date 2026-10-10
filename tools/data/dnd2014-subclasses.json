@@ -1,0 +1,4394 @@
+{
+  "version": 1,
+  "checkedOn": "2026-10-11",
+  "rules": "DnD5e 2014",
+  "classes": [
+    {
+      "className": "Barbarian",
+      "url": "https://www.dndbeyond.com/classes/9-barbarian",
+      "subclasses": [
+        {
+          "name": "Path of the Ancestral Guardian",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/9-barbarian#PathoftheAncestralGuardian",
+          "features": [
+            {
+              "name": "Ancestral Protectors",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#AncestralProtectors-636"
+            },
+            {
+              "name": "Spirit Shield",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#SpiritShield-637"
+            },
+            {
+              "name": "Consult the Spirits",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#ConsulttheSpirits-638"
+            },
+            {
+              "name": "Vengeful Ancestors",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#VengefulAncestors-639"
+            }
+          ]
+        },
+        {
+          "name": "Path of the Battlerager",
+          "publication": "Sword Coast Adventurer's Guide",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/9-barbarian#PathoftheBattlerager",
+          "features": [
+            {
+              "name": "Restriction: Dwarves Only",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#Restriction:DwarvesOnly-472"
+            },
+            {
+              "name": "Battlerager Armor",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#BattleragerArmor-473"
+            },
+            {
+              "name": "Reckless Abandon",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#RecklessAbandon-475"
+            },
+            {
+              "name": "Battlerager Charge",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#BattleragerCharge-476"
+            },
+            {
+              "name": "Spiked Retribution",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#SpikedRetribution-477"
+            }
+          ]
+        },
+        {
+          "name": "Path of the Beast",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/9-barbarian#PathoftheBeast",
+          "features": [
+            {
+              "name": "Form of the Beast",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#FormoftheBeast-2985870"
+            },
+            {
+              "name": "Bestial Soul",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#BestialSoul-2985925"
+            },
+            {
+              "name": "Infectious Fury",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#InfectiousFury-2986092"
+            },
+            {
+              "name": "Call the Hunt",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#CalltheHunt-2986176"
+            }
+          ]
+        },
+        {
+          "name": "Path of the Berserker",
+          "publication": "Basic Rules (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/9-barbarian#PathoftheBerserker",
+          "features": [
+            {
+              "name": "Frenzy",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#Frenzy-71"
+            },
+            {
+              "name": "Mindless Rage",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#MindlessRage-72"
+            },
+            {
+              "name": "Intimidating Presence",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#IntimidatingPresence-73"
+            },
+            {
+              "name": "Retaliation",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#Retaliation-529"
+            }
+          ]
+        },
+        {
+          "name": "Path of the Giant",
+          "publication": "Bigby Presents: Glory of the Giants",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/9-barbarian#PathoftheGiant",
+          "features": [
+            {
+              "name": "Giant’s Power",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#Giant’sPower-8396822"
+            },
+            {
+              "name": "Giant’s Havoc",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#Giant’sHavoc-8396823"
+            },
+            {
+              "name": "Elemental Cleaver",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#ElementalCleaver-8396824"
+            },
+            {
+              "name": "Mighty Impel",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#MightyImpel-8396825"
+            },
+            {
+              "name": "Demiurgic Colossus",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#DemiurgicColossus-8396826"
+            }
+          ]
+        },
+        {
+          "name": "Path of the Storm Herald",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/9-barbarian#PathoftheStormHerald",
+          "features": [
+            {
+              "name": "Storm Aura",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#StormAura-640"
+            },
+            {
+              "name": "Storm Soul",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#StormSoul-641"
+            },
+            {
+              "name": "Shielding Storm",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#ShieldingStorm-642"
+            },
+            {
+              "name": "Raging Storm",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#RagingStorm-643"
+            }
+          ]
+        },
+        {
+          "name": "Path of the Totem Warrior",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/9-barbarian#PathoftheTotemWarrior",
+          "features": [
+            {
+              "name": "Spirit Seeker",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#SpiritSeeker-99"
+            },
+            {
+              "name": "Totem Spirit",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#TotemSpirit-100"
+            },
+            {
+              "name": "Aspect of the Beast",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#AspectoftheBeast-101"
+            },
+            {
+              "name": "Spirit Walker",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#SpiritWalker-102"
+            },
+            {
+              "name": "Totemic Attunement",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#TotemicAttunement-103"
+            }
+          ]
+        },
+        {
+          "name": "Path of the Zealot",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/9-barbarian#PathoftheZealot",
+          "features": [
+            {
+              "name": "Divine Fury",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#DivineFury-644"
+            },
+            {
+              "name": "Warrior of the Gods",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#WarrioroftheGods-645"
+            },
+            {
+              "name": "Fanatical Focus",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#FanaticalFocus-646"
+            },
+            {
+              "name": "Zealous Presence",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#ZealousPresence-647"
+            },
+            {
+              "name": "Rage beyond Death",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#RagebeyondDeath-648"
+            }
+          ]
+        },
+        {
+          "name": "Path of Wild Magic",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/9-barbarian#PathofWildMagic",
+          "features": [
+            {
+              "name": "Magic Awareness",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#MagicAwareness-2986286"
+            },
+            {
+              "name": "Wild Surge",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#WildSurge-2986296"
+            },
+            {
+              "name": "Bolstering Magic",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#BolsteringMagic-2986331"
+            },
+            {
+              "name": "Unstable Backlash",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#UnstableBacklash-2986342"
+            },
+            {
+              "name": "Controlled Surge",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/9-barbarian#ControlledSurge-2986361"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Artificer",
+      "url": "https://www.dndbeyond.com/classes/252717-artificer",
+      "subclasses": [
+        {
+          "name": "Alchemist",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/252717-artificer#Alchemist",
+          "features": [
+            {
+              "name": "Tool Proficiency",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ToolProficiency-1138834"
+            },
+            {
+              "name": "Alchemist Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#AlchemistSpells-1138843"
+            },
+            {
+              "name": "Experimental Elixir",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ExperimentalElixir-1138853"
+            },
+            {
+              "name": "Alchemical Savant",
+              "level": 5,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#AlchemicalSavant-1138857"
+            },
+            {
+              "name": "Restorative Reagents",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#RestorativeReagents-1138875"
+            },
+            {
+              "name": "Chemical Mastery",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ChemicalMastery-1138888"
+            }
+          ]
+        },
+        {
+          "name": "Armorer",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/252717-artificer#Armorer",
+          "features": [
+            {
+              "name": "Tools of the Trade",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ToolsoftheTrade-2985519"
+            },
+            {
+              "name": "Armorer Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ArmorerSpells-2985529"
+            },
+            {
+              "name": "Arcane Armor",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ArcaneArmor-2985531"
+            },
+            {
+              "name": "Armor Model",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ArmorModel-2985544"
+            },
+            {
+              "name": "Extra Attack",
+              "level": 5,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ExtraAttack-2985619"
+            },
+            {
+              "name": "Armor Modifications",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ArmorModifications-2985626"
+            },
+            {
+              "name": "Perfected Armor",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#PerfectedArmor-2985710"
+            }
+          ]
+        },
+        {
+          "name": "Artillerist",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/252717-artificer#Artillerist",
+          "features": [
+            {
+              "name": "Tool Proficiency",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ToolProficiency-1138956"
+            },
+            {
+              "name": "Artillerist Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ArtilleristSpells-1138962"
+            },
+            {
+              "name": "Eldritch Cannon",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#EldritchCannon-1138963"
+            },
+            {
+              "name": "Arcane Firearm",
+              "level": 5,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ArcaneFirearm-1138964"
+            },
+            {
+              "name": "Explosive Cannon",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ExplosiveCannon-1138965"
+            },
+            {
+              "name": "Fortified Position",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#FortifiedPosition-1138966"
+            }
+          ]
+        },
+        {
+          "name": "Battle Smith",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/252717-artificer#BattleSmith",
+          "features": [
+            {
+              "name": "Tool Proficiency",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ToolProficiency-1139407"
+            },
+            {
+              "name": "Battle Smith Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#BattleSmithSpells-1139416"
+            },
+            {
+              "name": "Battle Ready",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#BattleReady-1139423"
+            },
+            {
+              "name": "Steel Defender",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#SteelDefender-1139436"
+            },
+            {
+              "name": "Extra Attack",
+              "level": 5,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ExtraAttack-1139437"
+            },
+            {
+              "name": "Arcane Jolt",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ArcaneJolt-1139439"
+            },
+            {
+              "name": "Improved Defender",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/252717-artificer#ImprovedDefender-1139475"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Bard",
+      "url": "https://www.dndbeyond.com/classes/1-bard",
+      "subclasses": [
+        {
+          "name": "College of Creation",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/1-bard#CollegeofCreation",
+          "features": [
+            {
+              "name": "Mote of Potential",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#MoteofPotential-2997296"
+            },
+            {
+              "name": "Performance of Creation",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#PerformanceofCreation-2997316"
+            },
+            {
+              "name": "Animating Performance",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/1-bard#AnimatingPerformance-2997320"
+            },
+            {
+              "name": "Creative Crescendo",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/1-bard#CreativeCrescendo-2997327"
+            }
+          ]
+        },
+        {
+          "name": "College of Eloquence",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/1-bard#CollegeofEloquence",
+          "features": [
+            {
+              "name": "Silver Tongue",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#SilverTongue-2203079"
+            },
+            {
+              "name": "Unsettling Words",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#UnsettlingWords-2203080"
+            },
+            {
+              "name": "Unfailing Inspiration",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/1-bard#UnfailingInspiration-2203081"
+            },
+            {
+              "name": "Universal Speech",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/1-bard#UniversalSpeech-2203082"
+            },
+            {
+              "name": "Infectious Inspiration",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/1-bard#InfectiousInspiration-2203083"
+            }
+          ]
+        },
+        {
+          "name": "College of Glamour",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/1-bard#CollegeofGlamour",
+          "features": [
+            {
+              "name": "Mantle of Inspiration",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#MantleofInspiration-649"
+            },
+            {
+              "name": "Enthralling Performance",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#EnthrallingPerformance-650"
+            },
+            {
+              "name": "Mantle of Majesty",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/1-bard#MantleofMajesty-651"
+            },
+            {
+              "name": "Unbreakable Majesty",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/1-bard#UnbreakableMajesty-652"
+            }
+          ]
+        },
+        {
+          "name": "College of Lore",
+          "publication": "Basic Rules (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/1-bard#CollegeofLore",
+          "features": [
+            {
+              "name": "Bonus Proficiencies",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#BonusProficiencies-95"
+            },
+            {
+              "name": "Cutting Words",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#CuttingWords-96"
+            },
+            {
+              "name": "Additional Magical Secrets",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/1-bard#AdditionalMagicalSecrets-97"
+            },
+            {
+              "name": "Peerless Skill",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/1-bard#PeerlessSkill-98"
+            }
+          ]
+        },
+        {
+          "name": "College of Spirits",
+          "publication": "Van Richten’s Guide to Ravenloft",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/1-bard#CollegeofSpirits",
+          "features": [
+            {
+              "name": "Guiding Whispers",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#GuidingWhispers-3991058"
+            },
+            {
+              "name": "Spiritual Focus",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#SpiritualFocus-3991059"
+            },
+            {
+              "name": "Tales from Beyond",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#TalesfromBeyond-3991060"
+            },
+            {
+              "name": "Spirit Session",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/1-bard#SpiritSession-3991061"
+            },
+            {
+              "name": "Mystical Connection",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/1-bard#MysticalConnection-3991062"
+            }
+          ]
+        },
+        {
+          "name": "College of Swords",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/1-bard#CollegeofSwords",
+          "features": [
+            {
+              "name": "Bonus Proficiencies",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#BonusProficiencies-653"
+            },
+            {
+              "name": "Fighting Style",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#FightingStyle-654"
+            },
+            {
+              "name": "Blade Flourish",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#BladeFlourish-655"
+            },
+            {
+              "name": "Extra Attack",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/1-bard#ExtraAttack-656"
+            },
+            {
+              "name": "Master’s Flourish",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/1-bard#Master’sFlourish-657"
+            }
+          ]
+        },
+        {
+          "name": "College of Valor",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/1-bard#CollegeofValor",
+          "features": [
+            {
+              "name": "Bonus Proficiencies",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#BonusProficiencies-104"
+            },
+            {
+              "name": "Combat Inspiration",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#CombatInspiration-105"
+            },
+            {
+              "name": "Extra Attack",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/1-bard#ExtraAttack-106"
+            },
+            {
+              "name": "Battle Magic",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/1-bard#BattleMagic-107"
+            }
+          ]
+        },
+        {
+          "name": "College of Whispers",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/1-bard#CollegeofWhispers",
+          "features": [
+            {
+              "name": "Psychic Blades",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#PsychicBlades-658"
+            },
+            {
+              "name": "Words of Terror",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/1-bard#WordsofTerror-659"
+            },
+            {
+              "name": "Mantle of Whispers",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/1-bard#MantleofWhispers-660"
+            },
+            {
+              "name": "Shadow Lore",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/1-bard#ShadowLore-661"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Cleric",
+      "url": "https://www.dndbeyond.com/classes/2-cleric",
+      "subclasses": [
+        {
+          "name": "Arcana Domain",
+          "publication": "Sword Coast Adventurer's Guide",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#ArcanaDomain",
+          "features": [
+            {
+              "name": "Arcane Initiate",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ArcaneInitiate-478"
+            },
+            {
+              "name": "Channel Divinity: Arcane Abjuration",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:ArcaneAbjuration-479"
+            },
+            {
+              "name": "Spell Breaker",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#SpellBreaker-480"
+            },
+            {
+              "name": "Potent Spellcasting",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#PotentSpellcasting-481"
+            },
+            {
+              "name": "Arcane Mastery",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ArcaneMastery-482"
+            }
+          ]
+        },
+        {
+          "name": "Death Domain",
+          "publication": "Dungeon Master’s Guide (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#DeathDomain",
+          "features": [
+            {
+              "name": "Bonus Proficiency",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BonusProficiency-595"
+            },
+            {
+              "name": "Reaper",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#Reaper-596"
+            },
+            {
+              "name": "Channel Divinity: Touch of Death",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:TouchofDeath-597"
+            },
+            {
+              "name": "Inescapable Destruction",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#InescapableDestruction-598"
+            },
+            {
+              "name": "Divine Strike",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DivineStrike-599"
+            },
+            {
+              "name": "Improved Reaper",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ImprovedReaper-600"
+            }
+          ]
+        },
+        {
+          "name": "Forge Domain",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#ForgeDomain",
+          "features": [
+            {
+              "name": "Domain Spells",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DomainSpells-612"
+            },
+            {
+              "name": "Bonus Proficiencies",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BonusProficiencies-613"
+            },
+            {
+              "name": "Blessing of the Forge",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BlessingoftheForge-614"
+            },
+            {
+              "name": "Channel Divinity: Artisan's Blessing",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:Artisan'sBlessing-615"
+            },
+            {
+              "name": "Soul of the Forge",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#SouloftheForge-616"
+            },
+            {
+              "name": "Divine Strike",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DivineStrike-617"
+            },
+            {
+              "name": "Saint of Forge and Fire",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#SaintofForgeandFire-618"
+            }
+          ]
+        },
+        {
+          "name": "Grave Domain",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#GraveDomain",
+          "features": [
+            {
+              "name": "Domain Spells",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DomainSpells-663"
+            },
+            {
+              "name": "Circle of Mortality",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#CircleofMortality-664"
+            },
+            {
+              "name": "Eyes of the Grave",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#EyesoftheGrave-666"
+            },
+            {
+              "name": "Channel Divinity: Path to the Grave",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:PathtotheGrave-667"
+            },
+            {
+              "name": "Sentinel at Death’s Door",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#SentinelatDeath’sDoor-669"
+            },
+            {
+              "name": "Potent Spellcasting",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#PotentSpellcasting-670"
+            },
+            {
+              "name": "Keeper of Souls",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#KeeperofSouls-672"
+            }
+          ]
+        },
+        {
+          "name": "Knowledge Domain",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#KnowledgeDomain",
+          "features": [
+            {
+              "name": "Blessings of Knowledge",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BlessingsofKnowledge-125"
+            },
+            {
+              "name": "Channel Divinity: Knowledge of the Ages",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:KnowledgeoftheAges-126"
+            },
+            {
+              "name": "Channel Divinity: Read Thoughts",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:ReadThoughts-127"
+            },
+            {
+              "name": "Potent Spellcasting",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#PotentSpellcasting-128"
+            },
+            {
+              "name": "Visions of the Past",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#VisionsofthePast-129"
+            }
+          ]
+        },
+        {
+          "name": "Life Domain",
+          "publication": "Basic Rules (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#LifeDomain",
+          "features": [
+            {
+              "name": "Bonus Proficiency",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BonusProficiency-130"
+            },
+            {
+              "name": "Disciple of Life",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DiscipleofLife-131"
+            },
+            {
+              "name": "Channel Divinity: Preserve Life",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:PreserveLife-132"
+            },
+            {
+              "name": "Blessed Healer",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BlessedHealer-133"
+            },
+            {
+              "name": "Divine Strike",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DivineStrike-134"
+            },
+            {
+              "name": "Supreme Healing",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#SupremeHealing-135"
+            }
+          ]
+        },
+        {
+          "name": "Light Domain",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#LightDomain",
+          "features": [
+            {
+              "name": "Bonus Cantrip",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BonusCantrip-136"
+            },
+            {
+              "name": "Warding Flare",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#WardingFlare-137"
+            },
+            {
+              "name": "Channel Divinity: Radiance of the Dawn",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:RadianceoftheDawn-138"
+            },
+            {
+              "name": "Improved Flare",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ImprovedFlare-139"
+            },
+            {
+              "name": "Potent Spellcasting",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#PotentSpellcasting-140"
+            },
+            {
+              "name": "Corona of Light",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#CoronaofLight-141"
+            }
+          ]
+        },
+        {
+          "name": "Nature Domain",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#NatureDomain",
+          "features": [
+            {
+              "name": "Acolyte of Nature",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#AcolyteofNature-142"
+            },
+            {
+              "name": "Bonus Proficiency",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BonusProficiency-143"
+            },
+            {
+              "name": "Channel Divinity: Charm Animals and Plants",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:CharmAnimalsandPlants-144"
+            },
+            {
+              "name": "Dampen Elements",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DampenElements-145"
+            },
+            {
+              "name": "Divine Strike",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DivineStrike-146"
+            },
+            {
+              "name": "Master of Nature",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#MasterofNature-147"
+            }
+          ]
+        },
+        {
+          "name": "Order Domain",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#OrderDomain",
+          "features": [
+            {
+              "name": "Domain Spells",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DomainSpells-275096"
+            },
+            {
+              "name": "Bonus Proficiencies",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BonusProficiencies-275108"
+            },
+            {
+              "name": "Voice of Authority",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#VoiceofAuthority-275143"
+            },
+            {
+              "name": "Channel Divinity: Order’s Demand",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:Order’sDemand-275160"
+            },
+            {
+              "name": "Embodiment of the Law",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#EmbodimentoftheLaw-275162"
+            },
+            {
+              "name": "Divine Strike",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DivineStrike-275175"
+            },
+            {
+              "name": "Order's Wrath",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#Order'sWrath-275210"
+            }
+          ]
+        },
+        {
+          "name": "Peace Domain",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#PeaceDomain",
+          "features": [
+            {
+              "name": "Domain Spells",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DomainSpells-2997235"
+            },
+            {
+              "name": "Implement of Peace",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ImplementofPeace-2997245"
+            },
+            {
+              "name": "Emboldening Bond",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#EmboldeningBond-2997252"
+            },
+            {
+              "name": "Channel Divinity: Balm of Peace",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:BalmofPeace-2997261"
+            },
+            {
+              "name": "Protective Bond",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ProtectiveBond-2997262"
+            },
+            {
+              "name": "Potent Spellcasting",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#PotentSpellcasting-2997270"
+            },
+            {
+              "name": "Expansive Bond",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ExpansiveBond-2997274"
+            }
+          ]
+        },
+        {
+          "name": "Tempest Domain",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#TempestDomain",
+          "features": [
+            {
+              "name": "Bonus Proficiencies",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BonusProficiencies-148"
+            },
+            {
+              "name": "Wrath of the Storm",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#WrathoftheStorm-149"
+            },
+            {
+              "name": "Channel Divinity: Destructive Wrath",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:DestructiveWrath-150"
+            },
+            {
+              "name": "Thunderbolt Strike",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ThunderboltStrike-151"
+            },
+            {
+              "name": "Divine Strike",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DivineStrike-152"
+            },
+            {
+              "name": "Stormborn",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#Stormborn-153"
+            }
+          ]
+        },
+        {
+          "name": "Trickery Domain",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#TrickeryDomain",
+          "features": [
+            {
+              "name": "Blessing of the Trickster",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BlessingoftheTrickster-154"
+            },
+            {
+              "name": "Channel Divinity: Invoke Duplicity",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:InvokeDuplicity-155"
+            },
+            {
+              "name": "Channel Divinity: Cloak of Shadows",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:CloakofShadows-156"
+            },
+            {
+              "name": "Divine Strike",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DivineStrike-157"
+            },
+            {
+              "name": "Improved Duplicity",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ImprovedDuplicity-158"
+            }
+          ]
+        },
+        {
+          "name": "Twilight Domain",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#TwilightDomain",
+          "features": [
+            {
+              "name": "Domain Spells",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DomainSpells-2996528"
+            },
+            {
+              "name": "Bonus Proficiencies",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BonusProficiencies-2996535"
+            },
+            {
+              "name": "Eyes of Night",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#EyesofNight-2996540"
+            },
+            {
+              "name": "Vigilant Blessing",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#VigilantBlessing-2996547"
+            },
+            {
+              "name": "Channel Divinity: Twilight Sanctuary",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:TwilightSanctuary-2996560"
+            },
+            {
+              "name": "Steps of Night",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#StepsofNight-2996562"
+            },
+            {
+              "name": "Divine Strike",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DivineStrike-2996570"
+            },
+            {
+              "name": "Twilight Shroud",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#TwilightShroud-2996583"
+            }
+          ]
+        },
+        {
+          "name": "War Domain",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/2-cleric#WarDomain",
+          "features": [
+            {
+              "name": "Bonus Proficiencies",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#BonusProficiencies-159"
+            },
+            {
+              "name": "War Priest",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#WarPriest-160"
+            },
+            {
+              "name": "Channel Divinity: Guided Strike",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:GuidedStrike-161"
+            },
+            {
+              "name": "Channel Divinity: War God’s Blessing",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#ChannelDivinity:WarGod’sBlessing-162"
+            },
+            {
+              "name": "Divine Strike",
+              "level": 8,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#DivineStrike-163"
+            },
+            {
+              "name": "Avatar of Battle",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/2-cleric#AvatarofBattle-164"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Druid",
+      "url": "https://www.dndbeyond.com/classes/3-druid",
+      "subclasses": [
+        {
+          "name": "Circle of Dreams",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/3-druid#CircleofDreams",
+          "features": [
+            {
+              "name": "Balm of the Summer Court",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#BalmoftheSummerCourt-662"
+            },
+            {
+              "name": "Hearth of Moonlight and Shadow",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/3-druid#HearthofMoonlightandShadow-665"
+            },
+            {
+              "name": "Hidden Paths",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/3-druid#HiddenPaths-668"
+            },
+            {
+              "name": "Walker in Dreams",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/3-druid#WalkerinDreams-671"
+            }
+          ]
+        },
+        {
+          "name": "Circle of Spores",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/3-druid#CircleofSpores",
+          "features": [
+            {
+              "name": "Circle Spells",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#CircleSpells-274915"
+            },
+            {
+              "name": "Halo of Spores",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#HaloofSpores-274932"
+            },
+            {
+              "name": "Symbiotic Entity",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#SymbioticEntity-274954"
+            },
+            {
+              "name": "Fungal Infestation",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/3-druid#FungalInfestation-274959"
+            },
+            {
+              "name": "Spreading Spores",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/3-druid#SpreadingSpores-274975"
+            },
+            {
+              "name": "Fungal Body",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/3-druid#FungalBody-274976"
+            }
+          ]
+        },
+        {
+          "name": "Circle of Stars",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/3-druid#CircleofStars",
+          "features": [
+            {
+              "name": "Star Map",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#StarMap-2996427"
+            },
+            {
+              "name": "Starry Form",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#StarryForm-2996434"
+            },
+            {
+              "name": "Cosmic Omen",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/3-druid#CosmicOmen-2996453"
+            },
+            {
+              "name": "Twinkling Constellations",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/3-druid#TwinklingConstellations-2996455"
+            },
+            {
+              "name": "Full of Stars",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/3-druid#FullofStars-2996459"
+            }
+          ]
+        },
+        {
+          "name": "Circle of the Land",
+          "publication": "Basic Rules (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/3-druid#CircleoftheLand",
+          "features": [
+            {
+              "name": "Bonus Cantrip",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#BonusCantrip-179"
+            },
+            {
+              "name": "Natural Recovery",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#NaturalRecovery-180"
+            },
+            {
+              "name": "Circle Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/3-druid#CircleSpells-184"
+            },
+            {
+              "name": "Land’s Stride",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/3-druid#Land’sStride-181"
+            },
+            {
+              "name": "Nature’s Ward",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/3-druid#Nature’sWard-182"
+            },
+            {
+              "name": "Nature’s Sanctuary",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/3-druid#Nature’sSanctuary-183"
+            }
+          ]
+        },
+        {
+          "name": "Circle of the Moon",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/3-druid#CircleoftheMoon",
+          "features": [
+            {
+              "name": "Combat Wild Shape",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#CombatWildShape-185"
+            },
+            {
+              "name": "Circle Forms",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#CircleForms-186"
+            },
+            {
+              "name": "Primal Strike",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/3-druid#PrimalStrike-187"
+            },
+            {
+              "name": "Circle Forms",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/3-druid#CircleForms-190"
+            },
+            {
+              "name": "Elemental Wild Shape",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/3-druid#ElementalWildShape-188"
+            },
+            {
+              "name": "Thousand Forms",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/3-druid#ThousandForms-189"
+            }
+          ]
+        },
+        {
+          "name": "Circle of the Shepherd",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/3-druid#CircleoftheShepherd",
+          "features": [
+            {
+              "name": "Speech of the Woods",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#SpeechoftheWoods-673"
+            },
+            {
+              "name": "Spirit Totem",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#SpiritTotem-676"
+            },
+            {
+              "name": "Mighty Summoner",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/3-druid#MightySummoner-679"
+            },
+            {
+              "name": "Guardian Spirit",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/3-druid#GuardianSpirit-681"
+            },
+            {
+              "name": "Faithful Summons",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/3-druid#FaithfulSummons-683"
+            }
+          ]
+        },
+        {
+          "name": "Circle of Wildfire",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/3-druid#CircleofWildfire",
+          "features": [
+            {
+              "name": "Circle Spells",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#CircleSpells-2996217"
+            },
+            {
+              "name": "Summon Wildfire Spirit",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/3-druid#SummonWildfireSpirit-2996197"
+            },
+            {
+              "name": "Enhanced Bond",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/3-druid#EnhancedBond-2996381"
+            },
+            {
+              "name": "Cauterizing Flames",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/3-druid#CauterizingFlames-2996393"
+            },
+            {
+              "name": "Blazing Revival",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/3-druid#BlazingRevival-2996415"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Fighter",
+      "url": "https://www.dndbeyond.com/classes/10-fighter",
+      "subclasses": [
+        {
+          "name": "Arcane Archer",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/10-fighter#ArcaneArcher",
+          "features": [
+            {
+              "name": "Arcane Archer Lore",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ArcaneArcherLore-674"
+            },
+            {
+              "name": "Arcane Shot",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ArcaneShot-675"
+            },
+            {
+              "name": "Magic Arrow",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#MagicArrow-677"
+            },
+            {
+              "name": "Curving Shot",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#CurvingShot-678"
+            },
+            {
+              "name": "Ever-Ready Shot",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#Ever-ReadyShot-680"
+            },
+            {
+              "name": "Arcane Shot Options",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ArcaneShotOptions-682"
+            }
+          ]
+        },
+        {
+          "name": "Battle Master",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/10-fighter#BattleMaster",
+          "features": [
+            {
+              "name": "Combat Superiority",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#CombatSuperiority-209"
+            },
+            {
+              "name": "Student of War",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#StudentofWar-210"
+            },
+            {
+              "name": "Maneuvers",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#Maneuvers-214"
+            },
+            {
+              "name": "Know Your Enemy",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#KnowYourEnemy-211"
+            },
+            {
+              "name": "Improved Combat Superiority",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ImprovedCombatSuperiority-212"
+            },
+            {
+              "name": "Relentless",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#Relentless-213"
+            },
+            {
+              "name": "Improved Combat Superiority",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ImprovedCombatSuperiority-832"
+            }
+          ]
+        },
+        {
+          "name": "Cavalier",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/10-fighter#Cavalier",
+          "features": [
+            {
+              "name": "Bonus Proficiency",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#BonusProficiency-684"
+            },
+            {
+              "name": "Born to the Saddle",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#BorntotheSaddle-685"
+            },
+            {
+              "name": "Unwavering Mark",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#UnwaveringMark-686"
+            },
+            {
+              "name": "Warding Maneuver",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#WardingManeuver-687"
+            },
+            {
+              "name": "Hold the Line",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#HoldtheLine-688"
+            },
+            {
+              "name": "Ferocious Charger",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#FerociousCharger-689"
+            },
+            {
+              "name": "Vigilant Defender",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#VigilantDefender-690"
+            }
+          ]
+        },
+        {
+          "name": "Champion",
+          "publication": "Basic Rules (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/10-fighter#Champion",
+          "features": [
+            {
+              "name": "Improved Critical",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ImprovedCritical-215"
+            },
+            {
+              "name": "Remarkable Athlete",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#RemarkableAthlete-216"
+            },
+            {
+              "name": "Additional Fighting Style",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#AdditionalFightingStyle-217"
+            },
+            {
+              "name": "Superior Critical",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#SuperiorCritical-218"
+            },
+            {
+              "name": "Survivor",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#Survivor-219"
+            }
+          ]
+        },
+        {
+          "name": "Eldritch Knight",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/10-fighter#EldritchKnight",
+          "features": [
+            {
+              "name": "Spellcasting",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#Spellcasting-220"
+            },
+            {
+              "name": "Weapon Bond",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#WeaponBond-221"
+            },
+            {
+              "name": "War Magic",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#WarMagic-222"
+            },
+            {
+              "name": "Eldritch Strike",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#EldritchStrike-223"
+            },
+            {
+              "name": "Arcane Charge",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ArcaneCharge-224"
+            },
+            {
+              "name": "Improved War Magic",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ImprovedWarMagic-225"
+            }
+          ]
+        },
+        {
+          "name": "Psi Warrior",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/10-fighter#PsiWarrior",
+          "features": [
+            {
+              "name": "Psionic Power",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#PsionicPower-2996139"
+            },
+            {
+              "name": "Telekinetic Adept",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#TelekineticAdept-2996141"
+            },
+            {
+              "name": "Guarded Mind",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#GuardedMind-2996148"
+            },
+            {
+              "name": "Bulwark of Force",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#BulwarkofForce-2996161"
+            },
+            {
+              "name": "Telekinetic Master",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#TelekineticMaster-2996167"
+            }
+          ]
+        },
+        {
+          "name": "Purple Dragon Knight",
+          "publication": "Sword Coast Adventurer's Guide",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/10-fighter#PurpleDragonKnight",
+          "features": [
+            {
+              "name": "Restriction: Knighthood",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#Restriction:Knighthood-483"
+            },
+            {
+              "name": "Rallying Cry",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#RallyingCry-484"
+            },
+            {
+              "name": "Royal Envoy",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#RoyalEnvoy-485"
+            },
+            {
+              "name": "Inspiring Surge",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#InspiringSurge-486"
+            },
+            {
+              "name": "Bulwark",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#Bulwark-487"
+            }
+          ]
+        },
+        {
+          "name": "Rune Knight",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/10-fighter#RuneKnight",
+          "features": [
+            {
+              "name": "Bonus Proficiencies",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#BonusProficiencies-2992711"
+            },
+            {
+              "name": "Rune Carver",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#RuneCarver-2992755"
+            },
+            {
+              "name": "Giant’s Might",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#Giant’sMight-2992763"
+            },
+            {
+              "name": "Runic Shield",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#RunicShield-2992787"
+            },
+            {
+              "name": "Great Stature",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#GreatStature-2992815"
+            },
+            {
+              "name": "Master of Runes",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#MasterofRunes-2992817"
+            },
+            {
+              "name": "Runic Juggernaut",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#RunicJuggernaut-2992854"
+            }
+          ]
+        },
+        {
+          "name": "Samurai",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/10-fighter#Samurai",
+          "features": [
+            {
+              "name": "Bonus Proficiency",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#BonusProficiency-691"
+            },
+            {
+              "name": "Fighting Spirit",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#FightingSpirit-692"
+            },
+            {
+              "name": "Elegant Courtier",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ElegantCourtier-693"
+            },
+            {
+              "name": "Tireless Spirit",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#TirelessSpirit-694"
+            },
+            {
+              "name": "Rapid Strike",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#RapidStrike-695"
+            },
+            {
+              "name": "Strength before Death",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#StrengthbeforeDeath-696"
+            }
+          ]
+        },
+        {
+          "name": "Echo Knight",
+          "publication": "Explorer's Guide to Wildemount",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/10-fighter#EchoKnight",
+          "features": [
+            {
+              "name": "Manifest Echo",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ManifestEcho-1810360"
+            },
+            {
+              "name": "Unleash Incarnation",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#UnleashIncarnation-1810361"
+            },
+            {
+              "name": "Echo Avatar",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#EchoAvatar-1810362"
+            },
+            {
+              "name": "Shadow Martyr",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ShadowMartyr-1810363"
+            },
+            {
+              "name": "Reclaim Potential",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ReclaimPotential-1810364"
+            },
+            {
+              "name": "Legion of One",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#LegionofOne-1810365"
+            }
+          ]
+        },
+        {
+          "name": "Gunslinger",
+          "publication": "Critical Role",
+          "partner": true,
+          "url": "https://www.dndbeyond.com/classes/10-fighter#Gunslinger",
+          "features": [
+            {
+              "name": "Firearm Proficiency",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#FirearmProficiency-6241"
+            },
+            {
+              "name": "Gunsmith",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#Gunsmith-39826"
+            },
+            {
+              "name": "Adept Marksman",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#AdeptMarksman-40902"
+            },
+            {
+              "name": "Quickdraw",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#Quickdraw-40905"
+            },
+            {
+              "name": "Rapid Repair",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#RapidRepair-40930"
+            },
+            {
+              "name": "Lightning Reload",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#LightningReload-40931"
+            },
+            {
+              "name": "Vicious Intent",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#ViciousIntent-40932"
+            },
+            {
+              "name": "Hemorrhaging Critical",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#HemorrhagingCritical-40934"
+            },
+            {
+              "name": "Trick Shots",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/10-fighter#TrickShots-40990"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Monk",
+      "url": "https://www.dndbeyond.com/classes/11-monk",
+      "subclasses": [
+        {
+          "name": "Way of Mercy",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/11-monk#WayofMercy",
+          "features": [
+            {
+              "name": "Implements of Mercy",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#ImplementsofMercy-2992635"
+            },
+            {
+              "name": "Hand of Healing",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#HandofHealing-2992639"
+            },
+            {
+              "name": "Hand of Harm",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#HandofHarm-2992649"
+            },
+            {
+              "name": "Physician’s Touch",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/11-monk#Physician’sTouch-2992662"
+            },
+            {
+              "name": "Flurry of Healing and Harm",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/11-monk#FlurryofHealingandHarm-2992676"
+            },
+            {
+              "name": "Hand of Ultimate Mercy",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/11-monk#HandofUltimateMercy-2992695"
+            }
+          ]
+        },
+        {
+          "name": "Way of Shadow",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/11-monk#WayofShadow",
+          "features": [
+            {
+              "name": "Shadow Arts",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#ShadowArts-252"
+            },
+            {
+              "name": "Shadow Step",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/11-monk#ShadowStep-253"
+            },
+            {
+              "name": "Cloak of Shadows",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/11-monk#CloakofShadows-254"
+            },
+            {
+              "name": "Opportunist",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/11-monk#Opportunist-255"
+            }
+          ]
+        },
+        {
+          "name": "Way of the Ascendant Dragon",
+          "publication": "Fizban's Treasury of Dragons",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/11-monk#WayoftheAscendantDragon",
+          "features": [
+            {
+              "name": "Draconic Disciple",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#DraconicDisciple-4821755"
+            },
+            {
+              "name": "Breath of the Dragon",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#BreathoftheDragon-4821756"
+            },
+            {
+              "name": "Wings Unfurled",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/11-monk#WingsUnfurled-4821757"
+            },
+            {
+              "name": "Aspect of the Wyrm",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/11-monk#AspectoftheWyrm-4821758"
+            },
+            {
+              "name": "Ascendant Aspect",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/11-monk#AscendantAspect-4821759"
+            }
+          ]
+        },
+        {
+          "name": "Way of the Astral Self",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/11-monk#WayoftheAstralSelf",
+          "features": [
+            {
+              "name": "Arms of the Astral Self",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#ArmsoftheAstralSelf-2992431"
+            },
+            {
+              "name": "Visage of the Astral Self",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/11-monk#VisageoftheAstralSelf-2992462"
+            },
+            {
+              "name": "Body of the Astral Self",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/11-monk#BodyoftheAstralSelf-2992479"
+            },
+            {
+              "name": "Awakened Astral Self",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/11-monk#AwakenedAstralSelf-2992524"
+            }
+          ]
+        },
+        {
+          "name": "Way of the Drunken Master",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/11-monk#WayoftheDrunkenMaster",
+          "features": [
+            {
+              "name": "Bonus Proficiencies",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#BonusProficiencies-697"
+            },
+            {
+              "name": "Drunken Technique",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#DrunkenTechnique-698"
+            },
+            {
+              "name": "Tipsy Sway",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/11-monk#TipsySway-699"
+            },
+            {
+              "name": "Drunkard’s Luck",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/11-monk#Drunkard’sLuck-700"
+            },
+            {
+              "name": "Intoxicated Frenzy",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/11-monk#IntoxicatedFrenzy-701"
+            }
+          ]
+        },
+        {
+          "name": "Way of the Four Elements",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/11-monk#WayoftheFourElements",
+          "features": [
+            {
+              "name": "Disciple of the Elements",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#DiscipleoftheElements-250"
+            },
+            {
+              "name": "Elemental Disciplines",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#ElementalDisciplines-251"
+            }
+          ]
+        },
+        {
+          "name": "Way of the Kensei",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/11-monk#WayoftheKensei",
+          "features": [
+            {
+              "name": "Path of the Kensei",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#PathoftheKensei-702"
+            },
+            {
+              "name": "One with the Blade",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/11-monk#OnewiththeBlade-703"
+            },
+            {
+              "name": "Kensei Weapon",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/11-monk#KenseiWeapon-766"
+            },
+            {
+              "name": "Sharpen the Blade",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/11-monk#SharpentheBlade-704"
+            },
+            {
+              "name": "Kensei Weapon",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/11-monk#KenseiWeapon-767"
+            },
+            {
+              "name": "Unerring Accuracy",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/11-monk#UnerringAccuracy-705"
+            },
+            {
+              "name": "Kensei Weapon",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/11-monk#KenseiWeapon-768"
+            }
+          ]
+        },
+        {
+          "name": "Way of the Long Death",
+          "publication": "Sword Coast Adventurer's Guide",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/11-monk#WayoftheLongDeath",
+          "features": [
+            {
+              "name": "Touch of Death",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#TouchofDeath-488"
+            },
+            {
+              "name": "Hour of Reaping",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/11-monk#HourofReaping-489"
+            },
+            {
+              "name": "Mastery of Death",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/11-monk#MasteryofDeath-490"
+            },
+            {
+              "name": "Touch of the Long Death",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/11-monk#TouchoftheLongDeath-491"
+            }
+          ]
+        },
+        {
+          "name": "Way of the Open Hand",
+          "publication": "Basic Rules (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/11-monk#WayoftheOpenHand",
+          "features": [
+            {
+              "name": "Open Hand Technique",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#OpenHandTechnique-256"
+            },
+            {
+              "name": "Wholeness of Body",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/11-monk#WholenessofBody-257"
+            },
+            {
+              "name": "Tranquility",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/11-monk#Tranquility-258"
+            },
+            {
+              "name": "Quivering Palm",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/11-monk#QuiveringPalm-259"
+            }
+          ]
+        },
+        {
+          "name": "Way of the Sun Soul",
+          "publication": "Sword Coast Adventurer's Guide",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/11-monk#WayoftheSunSoul",
+          "features": [
+            {
+              "name": "Radiant Sun Bolt",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#RadiantSunBolt-492"
+            },
+            {
+              "name": "Searing Arc Strike",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/11-monk#SearingArcStrike-493"
+            },
+            {
+              "name": "Searing Sunburst",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/11-monk#SearingSunburst-494"
+            },
+            {
+              "name": "Sun Shield",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/11-monk#SunShield-495"
+            }
+          ]
+        },
+        {
+          "name": "Way of the Cobalt Soul",
+          "publication": "Tal’Dorei Campaign Setting Reborn",
+          "partner": true,
+          "url": "https://www.dndbeyond.com/classes/11-monk#WayoftheCobaltSoul",
+          "features": [
+            {
+              "name": "Extract Aspects",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/11-monk#ExtractAspects-825"
+            },
+            {
+              "name": "Extort Truth",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/11-monk#ExtortTruth-826"
+            },
+            {
+              "name": "Mystical Erudition",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/11-monk#MysticalErudition-824"
+            },
+            {
+              "name": "Mind of Mercury",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/11-monk#MindofMercury-827"
+            },
+            {
+              "name": "Debilitating Barrage",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/11-monk#DebilitatingBarrage-829"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Paladin",
+      "url": "https://www.dndbeyond.com/classes/4-paladin",
+      "subclasses": [
+        {
+          "name": "Oath of Conquest",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/4-paladin#OathofConquest",
+          "features": [
+            {
+              "name": "Oath Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#OathSpells-706"
+            },
+            {
+              "name": "Channel Divinity",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ChannelDivinity-707"
+            },
+            {
+              "name": "Aura of Conquest",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#AuraofConquest-708"
+            },
+            {
+              "name": "Scornful Rebuke",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ScornfulRebuke-709"
+            },
+            {
+              "name": "Invincible Conqueror",
+              "level": 20,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#InvincibleConqueror-710"
+            }
+          ]
+        },
+        {
+          "name": "Oath of Devotion",
+          "publication": "Basic Rules (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/4-paladin#OathofDevotion",
+          "features": [
+            {
+              "name": "Channel Divinity",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ChannelDivinity-279"
+            },
+            {
+              "name": "Oath Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#OathSpells-291"
+            },
+            {
+              "name": "Aura of Devotion",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#AuraofDevotion-280"
+            },
+            {
+              "name": "Purity of Spirit",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#PurityofSpirit-281"
+            },
+            {
+              "name": "Holy Nimbus",
+              "level": 20,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#HolyNimbus-282"
+            }
+          ]
+        },
+        {
+          "name": "Oath of Glory",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/4-paladin#OathofGlory",
+          "features": [
+            {
+              "name": "Oath Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#OathSpells-2203084"
+            },
+            {
+              "name": "Channel Divinity",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ChannelDivinity-2203085"
+            },
+            {
+              "name": "Aura of Alacrity",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#AuraofAlacrity-2203086"
+            },
+            {
+              "name": "Glorious Defense",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#GloriousDefense-2203087"
+            },
+            {
+              "name": "Living Legend",
+              "level": 20,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#LivingLegend-2203088"
+            }
+          ]
+        },
+        {
+          "name": "Oath of Redemption",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/4-paladin#OathofRedemption",
+          "features": [
+            {
+              "name": "Oath Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#OathSpells-711"
+            },
+            {
+              "name": "Channel Divinity",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ChannelDivinity-712"
+            },
+            {
+              "name": "Aura of the Guardian",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#AuraoftheGuardian-713"
+            },
+            {
+              "name": "Protective Spirit",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ProtectiveSpirit-714"
+            },
+            {
+              "name": "Emissary of Redemption",
+              "level": 20,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#EmissaryofRedemption-715"
+            }
+          ]
+        },
+        {
+          "name": "Oath of the Ancients",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/4-paladin#OathoftheAncients",
+          "features": [
+            {
+              "name": "Channel Divinity",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ChannelDivinity-283"
+            },
+            {
+              "name": "Oath Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#OathSpells-292"
+            },
+            {
+              "name": "Aura of Warding",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#AuraofWarding-284"
+            },
+            {
+              "name": "Undying Sentinel",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#UndyingSentinel-285"
+            },
+            {
+              "name": "Elder Champion",
+              "level": 20,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ElderChampion-286"
+            }
+          ]
+        },
+        {
+          "name": "Oath of the Crown",
+          "publication": "Sword Coast Adventurer's Guide",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/4-paladin#OathoftheCrown",
+          "features": [
+            {
+              "name": "Oath Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#OathSpells-497"
+            },
+            {
+              "name": "Channel Divinity",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ChannelDivinity-498"
+            },
+            {
+              "name": "Divine Allegiance",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#DivineAllegiance-499"
+            },
+            {
+              "name": "Unyielding Spirit",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#UnyieldingSpirit-500"
+            },
+            {
+              "name": "Exalted Champion",
+              "level": 20,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ExaltedChampion-501"
+            }
+          ]
+        },
+        {
+          "name": "Oath of the Watchers",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/4-paladin#OathoftheWatchers",
+          "features": [
+            {
+              "name": "Oath Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#OathSpells-2992378"
+            },
+            {
+              "name": "Channel Divinity",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ChannelDivinity-2992381"
+            },
+            {
+              "name": "Aura of the Sentinel",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#AuraoftheSentinel-2992385"
+            },
+            {
+              "name": "Vigilant Rebuke",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#VigilantRebuke-2992386"
+            },
+            {
+              "name": "Mortal Bulwark",
+              "level": 20,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#MortalBulwark-2992394"
+            }
+          ]
+        },
+        {
+          "name": "Oath of Vengeance",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/4-paladin#OathofVengeance",
+          "features": [
+            {
+              "name": "Channel Divinity",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ChannelDivinity-287"
+            },
+            {
+              "name": "Oath Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#OathSpells-293"
+            },
+            {
+              "name": "Relentless Avenger",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#RelentlessAvenger-288"
+            },
+            {
+              "name": "Soul of Vengeance",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#SoulofVengeance-289"
+            },
+            {
+              "name": "Avenging Angel",
+              "level": 20,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#AvengingAngel-290"
+            }
+          ]
+        },
+        {
+          "name": "Oathbreaker",
+          "publication": "Dungeon Master’s Guide (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/4-paladin#Oathbreaker",
+          "features": [
+            {
+              "name": "Oathbreaker Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#OathbreakerSpells-601"
+            },
+            {
+              "name": "Channel Divinity",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ChannelDivinity-602"
+            },
+            {
+              "name": "Aura of Hate",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#AuraofHate-603"
+            },
+            {
+              "name": "Supernatural Resistance",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#SupernaturalResistance-604"
+            },
+            {
+              "name": "Dread Lord",
+              "level": 20,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#DreadLord-605"
+            }
+          ]
+        },
+        {
+          "name": "Oath of the Open Sea",
+          "publication": "Tal’Dorei Campaign Setting Reborn",
+          "partner": true,
+          "url": "https://www.dndbeyond.com/classes/4-paladin#OathoftheOpenSea",
+          "features": [
+            {
+              "name": "Oath Spells",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#OathSpells-2780278"
+            },
+            {
+              "name": "Channel Divinity",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#ChannelDivinity-2780258"
+            },
+            {
+              "name": "Aura of Liberation",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#AuraofLiberation-2780430"
+            },
+            {
+              "name": "Stormy Waters",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#StormyWaters-2780433"
+            },
+            {
+              "name": "Mythic Swashbuckler",
+              "level": 20,
+              "url": "https://www.dndbeyond.com/classes/4-paladin#MythicSwashbuckler-2780452"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Ranger",
+      "url": "https://www.dndbeyond.com/classes/5-ranger",
+      "subclasses": [
+        {
+          "name": "Beast Master",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/5-ranger#BeastMaster",
+          "features": [
+            {
+              "name": "Ranger’s Companion",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#Ranger’sCompanion-334"
+            },
+            {
+              "name": "Exceptional Training",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#ExceptionalTraining-335"
+            },
+            {
+              "name": "Bestial Fury",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#BestialFury-336"
+            },
+            {
+              "name": "Share Spells",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#ShareSpells-337"
+            }
+          ]
+        },
+        {
+          "name": "Drakewarden",
+          "publication": "Fizban's Treasury of Dragons",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/5-ranger#Drakewarden",
+          "features": [
+            {
+              "name": "Draconic Gift",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#DraconicGift-4821750"
+            },
+            {
+              "name": "Drake Companion",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#DrakeCompanion-4821754"
+            },
+            {
+              "name": "Bond of Fang and Scale",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#BondofFangandScale-4821751"
+            },
+            {
+              "name": "Drake’s Breath",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#Drake’sBreath-4821752"
+            },
+            {
+              "name": "Perfected Bond",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#PerfectedBond-4821753"
+            }
+          ]
+        },
+        {
+          "name": "Fey Wanderer",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/5-ranger#FeyWanderer",
+          "features": [
+            {
+              "name": "Dreadful Strikes",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#DreadfulStrikes-2992184"
+            },
+            {
+              "name": "Fey Wanderer Magic",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#FeyWandererMagic-2991813"
+            },
+            {
+              "name": "Otherworldly Glamour",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#OtherworldlyGlamour-2991816"
+            },
+            {
+              "name": "Beguiling Twist",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#BeguilingTwist-2991827"
+            },
+            {
+              "name": "Fey Reinforcements",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#FeyReinforcements-2992177"
+            },
+            {
+              "name": "Misty Wanderer",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#MistyWanderer-2992234"
+            }
+          ]
+        },
+        {
+          "name": "Gloom Stalker",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/5-ranger#GloomStalker",
+          "features": [
+            {
+              "name": "Gloom Stalker Magic",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#GloomStalkerMagic-716"
+            },
+            {
+              "name": "Dread Ambusher",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#DreadAmbusher-717"
+            },
+            {
+              "name": "Umbral Sight",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#UmbralSight-718"
+            },
+            {
+              "name": "Iron Mind",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#IronMind-719"
+            },
+            {
+              "name": "Stalker’s Flurry",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#Stalker’sFlurry-720"
+            },
+            {
+              "name": "Shadowy Dodge",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#ShadowyDodge-721"
+            }
+          ]
+        },
+        {
+          "name": "Horizon Walker",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/5-ranger#HorizonWalker",
+          "features": [
+            {
+              "name": "Horizon Walker Magic",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#HorizonWalkerMagic-722"
+            },
+            {
+              "name": "Detect Portal",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#DetectPortal-723"
+            },
+            {
+              "name": "Planar Warrior",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#PlanarWarrior-724"
+            },
+            {
+              "name": "Ethereal Step",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#EtherealStep-725"
+            },
+            {
+              "name": "Distant Strike",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#DistantStrike-726"
+            },
+            {
+              "name": "Spectral Defense",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#SpectralDefense-727"
+            }
+          ]
+        },
+        {
+          "name": "Hunter",
+          "publication": "Basic Rules (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/5-ranger#Hunter",
+          "features": [
+            {
+              "name": "Hunter’s Prey",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#Hunter’sPrey-338"
+            },
+            {
+              "name": "Defensive Tactics",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#DefensiveTactics-339"
+            },
+            {
+              "name": "Multiattack",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#Multiattack-340"
+            },
+            {
+              "name": "Superior Hunter’s Defense",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#SuperiorHunter’sDefense-341"
+            }
+          ]
+        },
+        {
+          "name": "Monster Slayer",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/5-ranger#MonsterSlayer",
+          "features": [
+            {
+              "name": "Monster Slayer Magic",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#MonsterSlayerMagic-728"
+            },
+            {
+              "name": "Hunter’s Sense",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#Hunter’sSense-729"
+            },
+            {
+              "name": "Slayer’s Prey",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#Slayer’sPrey-730"
+            },
+            {
+              "name": "Supernatural Defense",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#SupernaturalDefense-731"
+            },
+            {
+              "name": "Magic-User’s Nemesis",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#Magic-User’sNemesis-732"
+            },
+            {
+              "name": "Slayer’s Counter",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#Slayer’sCounter-733"
+            }
+          ]
+        },
+        {
+          "name": "Swarmkeeper",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/5-ranger#Swarmkeeper",
+          "features": [
+            {
+              "name": "Gathered Swarm",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#GatheredSwarm-2991401"
+            },
+            {
+              "name": "Swarmkeeper Magic",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#SwarmkeeperMagic-2991412"
+            },
+            {
+              "name": "Writhing Tide",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#WrithingTide-2991423"
+            },
+            {
+              "name": "Mighty Swarm",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#MightySwarm-2991430"
+            },
+            {
+              "name": "Swarming Dispersal",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/5-ranger#SwarmingDispersal-2991431"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Rogue",
+      "url": "https://www.dndbeyond.com/classes/12-rogue",
+      "subclasses": [
+        {
+          "name": "Arcane Trickster",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/12-rogue#ArcaneTrickster",
+          "features": [
+            {
+              "name": "Spellcasting",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#Spellcasting-354"
+            },
+            {
+              "name": "Mage Hand Legerdemain",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#MageHandLegerdemain-355"
+            },
+            {
+              "name": "Magical Ambush",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#MagicalAmbush-356"
+            },
+            {
+              "name": "Versatile Trickster",
+              "level": 13,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#VersatileTrickster-357"
+            },
+            {
+              "name": "Spell Thief",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#SpellThief-358"
+            }
+          ]
+        },
+        {
+          "name": "Assassin",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/12-rogue#Assassin",
+          "features": [
+            {
+              "name": "Bonus Proficiencies",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#BonusProficiencies-359"
+            },
+            {
+              "name": "Assassinate",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#Assassinate-360"
+            },
+            {
+              "name": "Infiltration Expertise",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#InfiltrationExpertise-361"
+            },
+            {
+              "name": "Impostor",
+              "level": 13,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#Impostor-362"
+            },
+            {
+              "name": "Death Strike",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#DeathStrike-363"
+            }
+          ]
+        },
+        {
+          "name": "Inquisitive",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/12-rogue#Inquisitive",
+          "features": [
+            {
+              "name": "Ear for Deceit",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#EarforDeceit-734"
+            },
+            {
+              "name": "Eye for Detail",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#EyeforDetail-735"
+            },
+            {
+              "name": "Insightful Fighting",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#InsightfulFighting-736"
+            },
+            {
+              "name": "Steady Eye",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#SteadyEye-737"
+            },
+            {
+              "name": "Unerring Eye",
+              "level": 13,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#UnerringEye-738"
+            },
+            {
+              "name": "Eye for Weakness",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#EyeforWeakness-739"
+            }
+          ]
+        },
+        {
+          "name": "Mastermind",
+          "publication": "Sword Coast Adventurer's Guide",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/12-rogue#Mastermind",
+          "features": [
+            {
+              "name": "Master of Intrigue",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#MasterofIntrigue-502"
+            },
+            {
+              "name": "Master of Tactics",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#MasterofTactics-503"
+            },
+            {
+              "name": "Insightful Manipulator",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#InsightfulManipulator-504"
+            },
+            {
+              "name": "Misdirection",
+              "level": 13,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#Misdirection-505"
+            },
+            {
+              "name": "Soul of Deceit",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#SoulofDeceit-506"
+            }
+          ]
+        },
+        {
+          "name": "Phantom",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/12-rogue#Phantom",
+          "features": [
+            {
+              "name": "Whispers of the Dead",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#WhispersoftheDead-2991316"
+            },
+            {
+              "name": "Wails from the Grave",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#WailsfromtheGrave-2991324"
+            },
+            {
+              "name": "Tokens of the Departed",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#TokensoftheDeparted-2991333"
+            },
+            {
+              "name": "Ghost Walk",
+              "level": 13,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#GhostWalk-2991337"
+            },
+            {
+              "name": "Death’s Friend",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#Death’sFriend-2991349"
+            }
+          ]
+        },
+        {
+          "name": "Scout",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/12-rogue#Scout",
+          "features": [
+            {
+              "name": "Skirmisher",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#Skirmisher-740"
+            },
+            {
+              "name": "Survivalist",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#Survivalist-741"
+            },
+            {
+              "name": "Superior Mobility",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#SuperiorMobility-742"
+            },
+            {
+              "name": "Ambush Master",
+              "level": 13,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#AmbushMaster-743"
+            },
+            {
+              "name": "Sudden Strike",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#SuddenStrike-744"
+            }
+          ]
+        },
+        {
+          "name": "Soulknife",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/12-rogue#Soulknife",
+          "features": [
+            {
+              "name": "Psionic Power",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#PsionicPower-2991269"
+            },
+            {
+              "name": "Psychic Blades",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#PsychicBlades-2991271"
+            },
+            {
+              "name": "Soul Blades",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#SoulBlades-2991275"
+            },
+            {
+              "name": "Psychic Veil",
+              "level": 13,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#PsychicVeil-2991288"
+            },
+            {
+              "name": "Rend Mind",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#RendMind-2991310"
+            }
+          ]
+        },
+        {
+          "name": "Swashbuckler",
+          "publication": "Sword Coast Adventurer's Guide",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/12-rogue#Swashbuckler",
+          "features": [
+            {
+              "name": "Fancy Footwork",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#FancyFootwork-507"
+            },
+            {
+              "name": "Rakish Audacity",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#RakishAudacity-508"
+            },
+            {
+              "name": "Panache",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#Panache-509"
+            },
+            {
+              "name": "Elegant Maneuver",
+              "level": 13,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#ElegantManeuver-510"
+            },
+            {
+              "name": "Master Duelist",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#MasterDuelist-511"
+            }
+          ]
+        },
+        {
+          "name": "Thief",
+          "publication": "Basic Rules (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/12-rogue#Thief",
+          "features": [
+            {
+              "name": "Fast Hands",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#FastHands-364"
+            },
+            {
+              "name": "Second-Story Work",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#Second-StoryWork-365"
+            },
+            {
+              "name": "Supreme Sneak",
+              "level": 9,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#SupremeSneak-366"
+            },
+            {
+              "name": "Use Magic Device",
+              "level": 13,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#UseMagicDevice-367"
+            },
+            {
+              "name": "Thief’s Reflexes",
+              "level": 17,
+              "url": "https://www.dndbeyond.com/classes/12-rogue#Thief’sReflexes-368"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Sorcerer",
+      "url": "https://www.dndbeyond.com/classes/6-sorcerer",
+      "subclasses": [
+        {
+          "name": "Aberrant Mind",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/6-sorcerer#AberrantMind",
+          "features": [
+            {
+              "name": "Psionic Spells",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#PsionicSpells-2986533"
+            },
+            {
+              "name": "Telepathic Speech",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#TelepathicSpeech-2986535"
+            },
+            {
+              "name": "Psionic Sorcery",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#PsionicSorcery-2986537"
+            },
+            {
+              "name": "Psychic Defenses",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#PsychicDefenses-2986539"
+            },
+            {
+              "name": "Revelation in Flesh",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#RevelationinFlesh-2986540"
+            },
+            {
+              "name": "Warping Implosion",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#WarpingImplosion-2986543"
+            }
+          ]
+        },
+        {
+          "name": "Clockwork Soul",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/6-sorcerer#ClockworkSoul",
+          "features": [
+            {
+              "name": "Clockwork Magic",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#ClockworkMagic-2986368"
+            },
+            {
+              "name": "Restore Balance",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#RestoreBalance-2986374"
+            },
+            {
+              "name": "Bastion of Law",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#BastionofLaw-2986381"
+            },
+            {
+              "name": "Trance of Order",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#TranceofOrder-2986383"
+            },
+            {
+              "name": "Clockwork Cavalcade",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#ClockworkCavalcade-2986391"
+            }
+          ]
+        },
+        {
+          "name": "Divine Soul",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/6-sorcerer#DivineSoul",
+          "features": [
+            {
+              "name": "Divine Magic",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#DivineMagic-745"
+            },
+            {
+              "name": "Favored by the Gods",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#FavoredbytheGods-746"
+            },
+            {
+              "name": "Empowered Healing",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#EmpoweredHealing-747"
+            },
+            {
+              "name": "Otherworldly Wings",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#OtherworldlyWings-748"
+            },
+            {
+              "name": "Unearthly Recovery",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#UnearthlyRecovery-749"
+            }
+          ]
+        },
+        {
+          "name": "Draconic Bloodline",
+          "publication": "Basic Rules (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/6-sorcerer#DraconicBloodline",
+          "features": [
+            {
+              "name": "Dragon Ancestor",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#DragonAncestor-376"
+            },
+            {
+              "name": "Draconic Resilience",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#DraconicResilience-377"
+            },
+            {
+              "name": "Elemental Affinity",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#ElementalAffinity-378"
+            },
+            {
+              "name": "Dragon Wings",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#DragonWings-379"
+            },
+            {
+              "name": "Draconic Presence",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#DraconicPresence-380"
+            }
+          ]
+        },
+        {
+          "name": "Shadow Magic",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/6-sorcerer#ShadowMagic",
+          "features": [
+            {
+              "name": "Eyes of the Dark",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#EyesoftheDark-750"
+            },
+            {
+              "name": "Strength of the Grave",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#StrengthoftheGrave-751"
+            },
+            {
+              "name": "Hound of Ill Omen",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#HoundofIllOmen-752"
+            },
+            {
+              "name": "Shadow Walk",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#ShadowWalk-753"
+            },
+            {
+              "name": "Umbral Form",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#UmbralForm-754"
+            }
+          ]
+        },
+        {
+          "name": "Storm Sorcery",
+          "publication": "Sword Coast Adventurer's Guide",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/6-sorcerer#StormSorcery",
+          "features": [
+            {
+              "name": "Wind Speaker",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#WindSpeaker-512"
+            },
+            {
+              "name": "Tempestuous Magic",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#TempestuousMagic-513"
+            },
+            {
+              "name": "Heart of the Storm",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#HeartoftheStorm-514"
+            },
+            {
+              "name": "Storm Guide",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#StormGuide-515"
+            },
+            {
+              "name": "Storm’s Fury",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#Storm’sFury-516"
+            },
+            {
+              "name": "Wind Soul",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#WindSoul-517"
+            }
+          ]
+        },
+        {
+          "name": "Wild Magic",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/6-sorcerer#WildMagic",
+          "features": [
+            {
+              "name": "Wild Magic Surge",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#WildMagicSurge-381"
+            },
+            {
+              "name": "Tides of Chaos",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#TidesofChaos-382"
+            },
+            {
+              "name": "Bend Luck",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#BendLuck-383"
+            },
+            {
+              "name": "Controlled Chaos",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#ControlledChaos-384"
+            },
+            {
+              "name": "Spell Bombardment",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/6-sorcerer#SpellBombardment-385"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Warlock",
+      "url": "https://www.dndbeyond.com/classes/7-warlock",
+      "subclasses": [
+        {
+          "name": "The Archfey",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/7-warlock#TheArchfey",
+          "features": [
+            {
+              "name": "Expanded Spell List",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#ExpandedSpellList-395"
+            },
+            {
+              "name": "Fey Presence",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#FeyPresence-396"
+            },
+            {
+              "name": "Misty Escape",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#MistyEscape-397"
+            },
+            {
+              "name": "Beguiling Defenses",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#BeguilingDefenses-398"
+            },
+            {
+              "name": "Dark Delirium",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#DarkDelirium-399"
+            }
+          ]
+        },
+        {
+          "name": "The Celestial",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/7-warlock#TheCelestial",
+          "features": [
+            {
+              "name": "Expanded Spell List",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#ExpandedSpellList-606"
+            },
+            {
+              "name": "Bonus Cantrips",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#BonusCantrips-607"
+            },
+            {
+              "name": "Healing Light",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#HealingLight-608"
+            },
+            {
+              "name": "Radiant Soul",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#RadiantSoul-609"
+            },
+            {
+              "name": "Celestial Resilience",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#CelestialResilience-610"
+            },
+            {
+              "name": "Searing Vengeance",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#SearingVengeance-611"
+            }
+          ]
+        },
+        {
+          "name": "The Fathomless",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/7-warlock#TheFathomless",
+          "features": [
+            {
+              "name": "Expanded Spell List",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#ExpandedSpellList-2986289"
+            },
+            {
+              "name": "Tentacle of the Deeps",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#TentacleoftheDeeps-2986291"
+            },
+            {
+              "name": "Gift of the Sea",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#GiftoftheSea-2986297"
+            },
+            {
+              "name": "Oceanic Soul",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#OceanicSoul-2986298"
+            },
+            {
+              "name": "Guardian Coil",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#GuardianCoil-2986300"
+            },
+            {
+              "name": "Grasping Tentacles",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#GraspingTentacles-2986310"
+            },
+            {
+              "name": "Fathomless Plunge",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#FathomlessPlunge-2986316"
+            }
+          ]
+        },
+        {
+          "name": "The Fiend",
+          "publication": "Basic Rules (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/7-warlock#TheFiend",
+          "features": [
+            {
+              "name": "Expanded Spell List",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#ExpandedSpellList-400"
+            },
+            {
+              "name": "Dark One’s Blessing",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#DarkOne’sBlessing-401"
+            },
+            {
+              "name": "Dark One’s Own Luck",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#DarkOne’sOwnLuck-402"
+            },
+            {
+              "name": "Fiendish Resilience",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#FiendishResilience-403"
+            },
+            {
+              "name": "Hurl Through Hell",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#HurlThroughHell-404"
+            }
+          ]
+        },
+        {
+          "name": "The Genie",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/7-warlock#TheGenie",
+          "features": [
+            {
+              "name": "Genie Kind",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#GenieKind-2986620"
+            },
+            {
+              "name": "Expanded Spell List",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#ExpandedSpellList-2986229"
+            },
+            {
+              "name": "Genie’s Vessel",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#Genie’sVessel-2986241"
+            },
+            {
+              "name": "Elemental Gift",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#ElementalGift-2986267"
+            },
+            {
+              "name": "Sanctuary Vessel",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#SanctuaryVessel-2986271"
+            },
+            {
+              "name": "Limited Wish",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#LimitedWish-2986272"
+            }
+          ]
+        },
+        {
+          "name": "The Great Old One",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/7-warlock#TheGreatOldOne",
+          "features": [
+            {
+              "name": "Expanded Spell List",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#ExpandedSpellList-405"
+            },
+            {
+              "name": "Awakened Mind",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#AwakenedMind-406"
+            },
+            {
+              "name": "Entropic Ward",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#EntropicWard-407"
+            },
+            {
+              "name": "Thought Shield",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#ThoughtShield-408"
+            },
+            {
+              "name": "Create Thrall",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#CreateThrall-409"
+            }
+          ]
+        },
+        {
+          "name": "The Hexblade",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/7-warlock#TheHexblade",
+          "features": [
+            {
+              "name": "Expanded Spell List",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#ExpandedSpellList-755"
+            },
+            {
+              "name": "Hexblade’s Curse",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#Hexblade’sCurse-756"
+            },
+            {
+              "name": "Hex Warrior",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#HexWarrior-757"
+            },
+            {
+              "name": "Accursed Specter",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#AccursedSpecter-758"
+            },
+            {
+              "name": "Armor of Hexes",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#ArmorofHexes-759"
+            },
+            {
+              "name": "Master of Hexes",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#MasterofHexes-760"
+            }
+          ]
+        },
+        {
+          "name": "The Undead",
+          "publication": "Van Richten’s Guide to Ravenloft",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/7-warlock#TheUndead",
+          "features": [
+            {
+              "name": "Expanded Spell List",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#ExpandedSpellList-3991064"
+            },
+            {
+              "name": "Form of Dread",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#FormofDread-3991063"
+            },
+            {
+              "name": "Grave Touched",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#GraveTouched-3991065"
+            },
+            {
+              "name": "Necrotic Husk",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#NecroticHusk-3991066"
+            },
+            {
+              "name": "Spirit Projection",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#SpiritProjection-3991067"
+            }
+          ]
+        },
+        {
+          "name": "The Undying",
+          "publication": "Sword Coast Adventurer's Guide",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/7-warlock#TheUndying",
+          "features": [
+            {
+              "name": "Expanded Spell List",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#ExpandedSpellList-518"
+            },
+            {
+              "name": "Among the Dead",
+              "level": 1,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#AmongtheDead-519"
+            },
+            {
+              "name": "Defy Death",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#DefyDeath-520"
+            },
+            {
+              "name": "Undying Nature",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#UndyingNature-521"
+            },
+            {
+              "name": "Indestructible Life",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/7-warlock#IndestructibleLife-522"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Wizard",
+      "url": "https://www.dndbeyond.com/classes/8-wizard",
+      "subclasses": [
+        {
+          "name": "Bladesinging",
+          "publication": "Sword Coast Adventurer's Guide",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#Bladesinging",
+          "features": [
+            {
+              "name": "Training in War and Song",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#TraininginWarandSong-524"
+            },
+            {
+              "name": "Bladesong",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#Bladesong-525"
+            },
+            {
+              "name": "Extra Attack",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ExtraAttack-526"
+            },
+            {
+              "name": "Song of Defense",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#SongofDefense-527"
+            },
+            {
+              "name": "Song of Victory",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#SongofVictory-528"
+            }
+          ]
+        },
+        {
+          "name": "Order of Scribes",
+          "publication": "Tasha’s Cauldron of Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#OrderofScribes",
+          "features": [
+            {
+              "name": "Wizardly Quill",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#WizardlyQuill-2986054"
+            },
+            {
+              "name": "Awakened Spellbook",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#AwakenedSpellbook-2986063"
+            },
+            {
+              "name": "Manifest Mind",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ManifestMind-2986096"
+            },
+            {
+              "name": "Master Scrivener",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#MasterScrivener-2986122"
+            },
+            {
+              "name": "One with the Word",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#OnewiththeWord-2986151"
+            }
+          ]
+        },
+        {
+          "name": "School of Abjuration",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#SchoolofAbjuration",
+          "features": [
+            {
+              "name": "Abjuration Savant",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#AbjurationSavant-415"
+            },
+            {
+              "name": "Arcane Ward",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ArcaneWard-416"
+            },
+            {
+              "name": "Projected Ward",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ProjectedWard-417"
+            },
+            {
+              "name": "Improved Abjuration",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ImprovedAbjuration-418"
+            },
+            {
+              "name": "Spell Resistance",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#SpellResistance-419"
+            }
+          ]
+        },
+        {
+          "name": "School of Conjuration",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#SchoolofConjuration",
+          "features": [
+            {
+              "name": "Conjuration Savant",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ConjurationSavant-420"
+            },
+            {
+              "name": "Minor Conjuration",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#MinorConjuration-421"
+            },
+            {
+              "name": "Benign Transposition",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#BenignTransposition-422"
+            },
+            {
+              "name": "Focused Conjuration",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#FocusedConjuration-423"
+            },
+            {
+              "name": "Durable Summons",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#DurableSummons-424"
+            }
+          ]
+        },
+        {
+          "name": "School of Divination",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#SchoolofDivination",
+          "features": [
+            {
+              "name": "Divination Savant",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#DivinationSavant-425"
+            },
+            {
+              "name": "Portent",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#Portent-426"
+            },
+            {
+              "name": "Expert Divination",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ExpertDivination-427"
+            },
+            {
+              "name": "The Third Eye",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#TheThirdEye-428"
+            },
+            {
+              "name": "Greater Portent",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#GreaterPortent-429"
+            }
+          ]
+        },
+        {
+          "name": "School of Enchantment",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#SchoolofEnchantment",
+          "features": [
+            {
+              "name": "Enchantment Savant",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#EnchantmentSavant-430"
+            },
+            {
+              "name": "Hypnotic Gaze",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#HypnoticGaze-431"
+            },
+            {
+              "name": "Instinctive Charm",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#InstinctiveCharm-432"
+            },
+            {
+              "name": "Split Enchantment",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#SplitEnchantment-433"
+            },
+            {
+              "name": "Alter Memories",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#AlterMemories-434"
+            }
+          ]
+        },
+        {
+          "name": "School of Evocation",
+          "publication": "Basic Rules (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#SchoolofEvocation",
+          "features": [
+            {
+              "name": "Evocation Savant",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#EvocationSavant-435"
+            },
+            {
+              "name": "Sculpt Spells",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#SculptSpells-436"
+            },
+            {
+              "name": "Potent Cantrip",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#PotentCantrip-437"
+            },
+            {
+              "name": "Empowered Evocation",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#EmpoweredEvocation-438"
+            },
+            {
+              "name": "Overchannel",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#Overchannel-439"
+            }
+          ]
+        },
+        {
+          "name": "School of Illusion",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#SchoolofIllusion",
+          "features": [
+            {
+              "name": "Illusion Savant",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#IllusionSavant-440"
+            },
+            {
+              "name": "Improved Minor Illusion",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ImprovedMinorIllusion-441"
+            },
+            {
+              "name": "Malleable Illusions",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#MalleableIllusions-442"
+            },
+            {
+              "name": "Illusory Self",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#IllusorySelf-443"
+            },
+            {
+              "name": "Illusory Reality",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#IllusoryReality-444"
+            }
+          ]
+        },
+        {
+          "name": "School of Necromancy",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#SchoolofNecromancy",
+          "features": [
+            {
+              "name": "Necromancy Savant",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#NecromancySavant-445"
+            },
+            {
+              "name": "Grim Harvest",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#GrimHarvest-446"
+            },
+            {
+              "name": "Undead Thralls",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#UndeadThralls-447"
+            },
+            {
+              "name": "Inured to Undeath",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#InuredtoUndeath-448"
+            },
+            {
+              "name": "Command Undead",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#CommandUndead-449"
+            }
+          ]
+        },
+        {
+          "name": "School of Transmutation",
+          "publication": "Player’s Handbook (2014)",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#SchoolofTransmutation",
+          "features": [
+            {
+              "name": "Transmutation Savant",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#TransmutationSavant-450"
+            },
+            {
+              "name": "Minor Alchemy",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#MinorAlchemy-451"
+            },
+            {
+              "name": "Transmuter’s Stone",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#Transmuter’sStone-452"
+            },
+            {
+              "name": "Shapechanger",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#Shapechanger-453"
+            },
+            {
+              "name": "Master Transmuter",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#MasterTransmuter-454"
+            }
+          ]
+        },
+        {
+          "name": "War Magic",
+          "publication": "Xanathar's Guide to Everything",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#WarMagic",
+          "features": [
+            {
+              "name": "Arcane Deflection",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ArcaneDeflection-761"
+            },
+            {
+              "name": "Tactical Wit",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#TacticalWit-762"
+            },
+            {
+              "name": "Power Surge",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#PowerSurge-763"
+            },
+            {
+              "name": "Durable Magic",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#DurableMagic-764"
+            },
+            {
+              "name": "Deflecting Shroud",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#DeflectingShroud-765"
+            }
+          ]
+        },
+        {
+          "name": "Chronurgy Magic",
+          "publication": "Explorer's Guide to Wildemount",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#ChronurgyMagic",
+          "features": [
+            {
+              "name": "Chronal Shift",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ChronalShift-1810355"
+            },
+            {
+              "name": "Temporal Awareness",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#TemporalAwareness-1810356"
+            },
+            {
+              "name": "Momentary Stasis",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#MomentaryStasis-1810357"
+            },
+            {
+              "name": "Arcane Abeyance",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ArcaneAbeyance-1810358"
+            },
+            {
+              "name": "Convergent Future",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ConvergentFuture-1810359"
+            }
+          ]
+        },
+        {
+          "name": "Graviturgy Magic",
+          "publication": "Explorer's Guide to Wildemount",
+          "partner": false,
+          "url": "https://www.dndbeyond.com/classes/8-wizard#GraviturgyMagic",
+          "features": [
+            {
+              "name": "Adjust Density",
+              "level": 2,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#AdjustDensity-1810366"
+            },
+            {
+              "name": "Gravity Well",
+              "level": 6,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#GravityWell-1810367"
+            },
+            {
+              "name": "Violent Attraction",
+              "level": 10,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#ViolentAttraction-1810368"
+            },
+            {
+              "name": "Event Horizon",
+              "level": 14,
+              "url": "https://www.dndbeyond.com/classes/8-wizard#EventHorizon-1810369"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "className": "Blood Hunter",
+      "url": "https://www.dndbeyond.com/classes/357975-blood-hunter",
+      "subclasses": [
+        {
+          "name": "Order of the Ghostslayer",
+          "publication": "Critical Role",
+          "partner": true,
+          "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#OrderoftheGhostslayer",
+          "features": [
+            {
+              "name": "Rite of the Dawn",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#RiteoftheDawn-1660841"
+            },
+            {
+              "name": "Curse Specialist",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#CurseSpecialist-1660896"
+            },
+            {
+              "name": "Aether Walk",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#AetherWalk-1660907"
+            },
+            {
+              "name": "Brand of Sundering",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#BrandofSundering-1660950"
+            },
+            {
+              "name": "Blood Curse of the Exorcist",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#BloodCurseoftheExorcist-1661071"
+            },
+            {
+              "name": "Rite Revival",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#RiteRevival-1661102"
+            }
+          ]
+        },
+        {
+          "name": "Order of the Lycan",
+          "publication": "Critical Role",
+          "partner": true,
+          "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#OrderoftheLycan",
+          "features": [
+            {
+              "name": "Heightened Senses",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#HeightenedSenses-1669233"
+            },
+            {
+              "name": "Hybrid Transformation",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#HybridTransformation-1669300"
+            },
+            {
+              "name": "Hybrid Transformation Features",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#HybridTransformationFeatures-1669324"
+            },
+            {
+              "name": "Stalker's Prowess",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#Stalker'sProwess-1670004"
+            },
+            {
+              "name": "Advanced Transformation",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#AdvancedTransformation-1670108"
+            },
+            {
+              "name": "Brand of the Voracious",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#BrandoftheVoracious-1670168"
+            },
+            {
+              "name": "Hybrid Transformation Mastery",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#HybridTransformationMastery-1670189"
+            }
+          ]
+        },
+        {
+          "name": "Order of the Mutant",
+          "publication": "Critical Role",
+          "partner": true,
+          "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#OrderoftheMutant",
+          "features": [
+            {
+              "name": "Mutagencraft",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#Mutagencraft-1668952"
+            },
+            {
+              "name": "Formulas",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#Formulas-1668735"
+            },
+            {
+              "name": "Strange Metabolism",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#StrangeMetabolism-1668999"
+            },
+            {
+              "name": "Brand of Axiom",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#BrandofAxiom-1669024"
+            },
+            {
+              "name": "Blood Curse of Corrosion",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#BloodCurseofCorrosion-1669088"
+            },
+            {
+              "name": "Exalted Mutation",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#ExaltedMutation-1669113"
+            },
+            {
+              "name": "Mutagens",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#Mutagens-1668740"
+            }
+          ]
+        },
+        {
+          "name": "Order of the Profane Soul",
+          "publication": "Critical Role",
+          "partner": true,
+          "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#OrderoftheProfaneSoul",
+          "features": [
+            {
+              "name": "Otherworldly Patron",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#OtherworldlyPatron-5463384"
+            },
+            {
+              "name": "Pact Magic",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#PactMagic-5463385"
+            },
+            {
+              "name": "Rite Focus",
+              "level": 3,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#RiteFocus-5463386"
+            },
+            {
+              "name": "Mystic Frenzy",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#MysticFrenzy-5463387"
+            },
+            {
+              "name": "Revealed Arcana",
+              "level": 7,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#RevealedArcana-5463388"
+            },
+            {
+              "name": "Brand of the Sapping Scar",
+              "level": 11,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#BrandoftheSappingScar-5463389"
+            },
+            {
+              "name": "Unsealed Arcana",
+              "level": 15,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#UnsealedArcana-5463390"
+            },
+            {
+              "name": "Blood Curse of the Souleater",
+              "level": 18,
+              "url": "https://www.dndbeyond.com/classes/357975-blood-hunter#BloodCurseoftheSouleater-5463391"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "coverage": "Accessible 2014 class-page entries for the thirteen standard classes and Blood Hunter. Locked source chapters are excluded; this is not a claim of complete ownership or coverage of every partner publication."
+}

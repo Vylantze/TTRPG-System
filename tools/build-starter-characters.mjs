@@ -31,6 +31,7 @@ const characters = templates.map((t) => {
   if (t.style) select(classEntryPath('class-0', 1, 'fighting-style'), [`style.${t.style}`]);
   if (t.cls === 'rogue') select(classEntryPath('class-0', 1, 'expertise'), ['expertise.stealth', 'expertise.thieves-tools']);
   if (t.cls === 'cleric') {
+    select(classEntryPath('class-0', 1, 'domain'), ['cleric.life']);
     select(selectionPath(race, 'artisan-tool'), ['tool.mason']);
     select(classEntryPath('class-0', 1, 'cantrips'), ['light', 'sacred-flame', 'thaumaturgy'].map((s) => `cleric.cantrip.${s}`));
     select(selectionPath(classEntryPath('class-0', 1, 'spellcasting'), 'prepared'), ['command', 'detect-magic', 'guiding-bolt', 'shield-of-faith'].map((s) => `cleric.prepared.${s}`));

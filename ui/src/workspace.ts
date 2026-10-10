@@ -1,6 +1,6 @@
 import LZString from 'lz-string';
 import { migrateDescriptionOverrides } from '@/ui/src/migrate-description-overrides';
-import { SystemRegistry, deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type SystemFile } from '@/src/index';
+import { SystemRegistry, deserializeCharacter, migrateCharacterStructure, parseSystemFile, serializeCharacter, type Character, type SystemFile } from '@/src/index';
 import type { Workspace } from '@/ui/src/types/Workspace';
 export type { Workspace } from '@/ui/src/types/Workspace';
 
@@ -16,10 +16,10 @@ export function reloadSystem(workspace: Workspace, existing: SystemFile, incomin
     const engine = after.engineForCharacter(character);
     const manifest = Object.fromEntries([...engine.catalogue.features, ...engine.catalogue.classes].map((definition) => [definition.id, definition.revision]));
     if (Object.entries(character.contentRevisions).some(([id, revision]) => manifest[id] !== revision && !(manifest[id] === undefined && existing.features.find((feature) => feature.id === id)?.roll))) throw new Error('Reload cannot remove or change pinned content revisions.');
-    const updated = Object.keys(manifest).length === Object.keys(character.contentRevisions).length && Object.entries(manifest).every(([id, revision]) => character.contentRevisions[id] === revision) ? character : { ...character, contentRevisions: manifest };
+    const updated = migrateCharacterStructure(character, before.engineForCharacter(character), engine);
     deserializeCharacter(serializeCharacter(updated), engine);
     if (before.engineForCharacter(character).evaluate(character).status === 'valid' && engine.evaluate(updated).status !== 'valid') throw new Error(`Reload would invalidate ${character.name}. The existing System has been kept.`);
-    return updated;
+    return JSON.stringify(updated) === JSON.stringify(character) ? character : updated;
   });
   return { ...workspace, systems, characters: characters.every((character, index) => character === workspace.characters[index]) ? workspace.characters : characters };
 }
