@@ -411,7 +411,7 @@ export function App() {
               </div>
               <section className="panel">
                 <h3>Current bundled content</h3>
-                <p>DnD5e 2014 includes all 12 SRD classes through level 20, their SRD subclasses, racial options, and class spell lists. Some class effects and selections remain descriptive; consult the source rules. Artificer and additional subclasses await approved final published sources.</p>
+                <p>DnD5e 2014 includes all 12 SRD classes plus Tasha’s Artificer, its four specialists and infusions. Tasha’s entries use mechanical data and source links without paid book descriptions. Conditional combat and some item effects require table resolution. Other non-SRD subclasses await approved sources.</p>
                 <p className="muted">
                   {'The SRD 5.1 is licensed under CC BY 4.0. '}
                   <a href="https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf" target="_blank" rel="noreferrer">Official SRD</a>

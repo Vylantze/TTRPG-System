@@ -36,12 +36,12 @@ export function FeatureDetail({ feature, engine, openFeature }: { feature: Featu
         <aside className="panel feature-facts">
           <h2>At a glance</h2>
           <FeatureRequirements feature={feature} engine={engine} />
-          {feature.source && <p className="muted small">{feature.source}</p>}
           {feature.resources?.length ? <p className="notice">Requires a compatible resource provider. This requirement cannot be waived.</p> : null}
           {feature.components.filter((c): c is Grant => c.kind === 'grantFeature').map((component) => (
             <p key={component.id}>
               {'Grants '}
               <FeatureLink className="link" id={component.feature} engine={engine}>{featureName(engine.getFeature(component.feature))}</FeatureLink>
+              {component.atClassLevel !== undefined && ` at class level ${component.atClassLevel}`}
             </p>
           ))}
           {feature.components.filter((c): c is Choice => c.kind === 'chooseFeatures').map((component) => (
@@ -56,12 +56,6 @@ export function FeatureDetail({ feature, engine, openFeature }: { feature: Featu
           ))}
         </aside>
       </div>
-      {!feature.description && feature.source && (
-        <p className="muted source">
-          {'Source: '}
-          {feature.source}
-        </p>
-      )}
       <details className="panel technical-details">
         <summary>Builder & engine details</summary>
         <p className="muted small">

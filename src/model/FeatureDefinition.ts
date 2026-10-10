@@ -1,4 +1,6 @@
 import type { FeatureRoll } from '@/src/model/FeatureRoll.js';
+import type { EquipmentEffect } from '@/src/model/EquipmentEffect.js';
+import type { CompanionDisplay } from '@/src/model/CompanionDisplay.js';
 import type { ScalingTable } from '@/src/model/ScalingTable.js';
 import type { Predicate } from '@/src/model/Predicate.js';
 import type { ParameterDefinition } from '@/src/model/ParameterDefinition.js';
@@ -6,6 +8,10 @@ import type { ResourceRequirement } from '@/src/model/ResourceRequirement.js';
 import type { Component } from '@/src/model/Component.js';
 
 export interface FeatureDefinition {
+  equipmentEffect?: EquipmentEffect;
+  companion?: CompanionDisplay;
+  /** Authored implementation notes, explicitly separate from quoted source descriptions. */
+  mechanicalSummary?: string[];
   /** A Roll Feature owns one roll; other Features grant it as a child. */
   roll?: FeatureRoll;
   id: string; revision: number; name: string; displayName?: string; description?: string; source?: string; tags?: string[]; contentLevel?: number;

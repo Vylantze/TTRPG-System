@@ -12,7 +12,7 @@ export function trackerPools(character: Character, instances: Instance[], featur
     const minimum = component.minimum ?? 0, integer = component.integer ?? false;
     const capacity = component.maximum === undefined ? Infinity : constrain(read(component.maximum, instance) as number, { minimum, integer });
     const initial = constrain(read(component.initialAmount, instance) as number, { minimum, maximum: capacity, integer, clamp: true });
-    const recovery = component.recovery.map((r) => ({ event: r.event, amount: r.amount === 'full' ? 'full' as const : constrain(read(r.amount, instance) as number, { minimum: 0, integer }) }));
+    const recovery = component.recovery.map((r) => ({ ...r, amount: r.amount === 'full' ? 'full' as const : constrain(read(r.amount, instance) as number, { minimum: 0, integer }) }));
     const signature = JSON.stringify({ minimum, capacity, initial, integer, units: component.units, contract: component.contract, recovery });
     if (contracts.has(id) && contracts.get(id) !== signature) throw new RuleError('RESOURCE_CONFLICT', `Conflicting shared tracker definitions for ${component.key}.`);
     contracts.set(id, signature);

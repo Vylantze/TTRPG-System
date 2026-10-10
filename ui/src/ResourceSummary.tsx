@@ -19,7 +19,7 @@ export function ResourceSummary({ pool, engine, result, ready = false, adjust, c
         </div>
       )}
       <p className="muted small">{`${pool.available} available · ${pool.reserved} reserved · ${pool.units}`}</p>
-      <p className="muted small">{pool.recovery.map((r) => `${labelFromId(r.event)}: ${r.amount === 'full' ? 'restore to maximum' : `recover ${expressionText(r.amount, engine)}`}`).join(' · ') || Object.entries(engine.catalogue.system.recoveryAllocations ?? {}).filter(([, policy]) => policy.keys.includes(pool.key)).map(([event, policy]) => `${labelFromId(event)}: shared recovery allowance of ${result.stats[policy.budgetStat]?.value ?? 0}`).join(' · ') || 'No automatic recovery'}</p>
+      <p className="muted small">{pool.recovery.map((r) => `${labelFromId(r.event)}: ${r.amount === 'full' ? 'restore to maximum' : `recover ${r.dice ? `${r.dice} + ` : ''}${expressionText(r.amount, engine)}`}`).join(' · ') || Object.entries(engine.catalogue.system.recoveryAllocations ?? {}).filter(([, policy]) => policy.keys.includes(pool.key)).map(([event, policy]) => `${labelFromId(event)}: shared recovery allowance of ${result.stats[policy.budgetStat]?.value ?? 0}`).join(' · ') || 'No automatic recovery'}</p>
       {children}
       <p className="muted small">{`Provided by: ${providers.join(', ')}`}</p>
     </article>

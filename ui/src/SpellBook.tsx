@@ -50,7 +50,7 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
           <article className="spell-slot" key={pool.id}>
             <h3>{`${pool.name ?? 'Spell slots'} · Level ${level}`}</h3>
             <strong>{`${pool.current ?? pool.capacity - pool.spent} / ${pool.capacity}`}</strong>
-            <p className="muted small">{pool.recovery.map((recovery) => `${labelFromId(recovery.event)}: ${recovery.amount === 'full' ? 'restore to maximum' : expressionText(recovery.amount, engine)}`).join(' · ')}</p>
+            <p className="muted small">{pool.recovery.map((recovery) => `${labelFromId(recovery.event)}: ${recovery.amount === 'full' ? 'restore to maximum' : `${recovery.dice ? `${recovery.dice} + ` : ''}${expressionText(recovery.amount, engine)}`}`).join(' · ')}</p>
             <div className="slot-pips" aria-hidden="true">{Array.from({ length: Math.min(12, pool.capacity) }, (_, index) => <span className={index < pool.available ? 'filled' : ''} key={index} />)}</div>
             <div className="toolbar">
               <button className="quiet resource-adjust-button" aria-label={`Decrease ${pool.name}`} disabled={!ready || pool.available < 1} onClick={() => attempt(() => update(adjustResource(engine, character, pool.id, -1, crypto.randomUUID())))}>−</button>

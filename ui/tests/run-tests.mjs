@@ -14,6 +14,8 @@ const { RulesText, FeatureRules, ReferencePopup } = await server.ssrLoadModule('
 const { FeatureRequirements } = await server.ssrLoadModule('/src/FeatureRequirements.tsx');
 const { CharacterFeatures } = await server.ssrLoadModule('/src/CharacterFeatures.tsx');
 const { ResourceSummary } = await server.ssrLoadModule('/src/ResourceSummary.tsx');
+const { CompanionPanels } = await server.ssrLoadModule('/src/CompanionPanels.tsx');
+const { EquipmentEffects } = await server.ssrLoadModule('/src/EquipmentEffects.tsx');
 const { SelectionCard } = await server.ssrLoadModule('/src/SelectionCard.tsx');
 const { addStarterCharacters, addStarterInventory, migrateMoney } = await server.ssrLoadModule('/src/starter-characters.ts');
 const { CharacterRuleContext } = await server.ssrLoadModule('/src/character-rule-context.ts');
@@ -699,6 +701,38 @@ test('System reload safely retires generated Roll Features while retaining chara
   const next = model.reloadSystem({ ...data(), systems: [old], characters: [saved] }, old, file);
   assert.equal(next.characters[0].contentRevisions['test:retired-roll'], undefined);
   assert.deepEqual(next.characters[0].resources, saved.resources);
+});
+
+test('Companion panels appear only for owned Features and show stats only when deployed', () => {
+  const feature = { id: 'companion', name: 'Test Defender', components: [], companion: { kind: 'creature', stats: ['companion.ac'], resources: [] }, source: 'https://www.dndbeyond.com/sources/dnd/tcoe/artificer#SteelDefender' };
+  const engine = { getFeature: (id) => id === feature.id ? feature : undefined, getStatDefinition: () => ({ name: 'Armor Class' }), catalogue: { features: [feature], system: {}, items: [], itemFeatures: [] } };
+  const result = { status: 'valid', instances: [], capabilities: [], resources: {}, stats: { 'companion.ac': { value: 15 } } };
+  const character = { buildState: 'finalized' };
+  const props = { engine, result, character, update: () => {}, report: () => {} };
+  assert.equal(renderToStaticMarkup(createElement(CompanionPanels, props)), '');
+  result.instances.push({ id: 'owned', feature: 'companion', active: true, eligible: true });
+  let html = renderToStaticMarkup(createElement(CompanionPanels, props));
+  assert.match(html, /Create \/ summon/);
+  assert.doesNotMatch(html, /companion-stats/);
+  character.deployedCompanions = ['owned'];
+  html = renderToStaticMarkup(createElement(CompanionPanels, props));
+  assert.match(html, /companion-stats/);
+  assert.match(html, /<dd>15<\/dd>/);
+  assert.match(html, /<dt>Armor Class<\/dt>/);
+  assert.match(html, /Dismiss/);
+  assert.match(html, /href="https:\/\/www.dndbeyond.com\/sources\/dnd\/tcoe\/artificer#SteelDefender"/);
+});
+
+test('Infusion assignment UI offers owned items and external recipients, with source-only links', () => {
+  const feature = { id: 'infusion', name: 'Enhanced Defense', source: 'https://www.dndbeyond.com/sources/dnd/tcoe/artificer#EnhancedDefense', equipmentEffect: { categories: ['Armor'], capacityStat: 'limit', group: 'infusions' }, components: [] };
+  const engine = { getFeature: () => feature, catalogue: { features: [feature], system: {}, items: [{ id: 'armor', name: 'Armor', category: 'Armor', features: [] }], itemFeatures: [] } };
+  const character = { inventory: [{ id: 'owned-armor', item: 'armor', quantity: 1, equipped: true }] };
+  const result = { instances: [{ id: 'known', feature: 'infusion', active: true, eligible: true }], stats: { limit: { value: 2 } } };
+  const html = renderToStaticMarkup(createElement(EquipmentEffects, { engine, character, result, update: () => {}, report: () => {} }));
+  assert.match(html, /value="inventory:owned-armor"/);
+  assert.match(html, /External: Armor/);
+  assert.match(html, /2 active item limit/);
+  assert.match(html, /target="_blank"/);
 });
 
 await server.close();

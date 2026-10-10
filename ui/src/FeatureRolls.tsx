@@ -28,6 +28,7 @@ export function FeatureRolls({ feature, engine, instanceId, castingCapability, r
         const capability = mode?.capability ?? rollCapability(engine, result, instance.id);
         const affordable = roll.spell ? Boolean(mode?.available) : !roll.capability || Boolean(capability && Object.entries(capability.costs).every(([pool, cost]) => (result.resources[pool]?.available ?? 0) >= cost));
         const records = character.rollResults?.filter((record) => record.instance === instance.id) ?? [];
+        if (roll.capability && !capability && !records.length) return null;
         return (
           <section className="roll-control" key={instance.id}>
             {!resultsOnly && roll.spell && !castingCapability && (

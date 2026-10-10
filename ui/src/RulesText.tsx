@@ -31,7 +31,7 @@ export function RulesText({ text, source, engine, openFeature, exclude = [], onP
   const display = { ranges: replaced.ranges.map((range) => ({ start: range.start - removedPrefix, end: range.end - removedPrefix })) };
   const prose = (value: string, explicit: boolean) => engine && characterContext && (explicit || processDescriptionAutomatically) ? personalizedText(value, engine, characterContext.character, characterContext.result, explicit) : value;
   const index = useMemo(() => engine ? textIndex(engine) : undefined, [engine]);
-  if (!displayedText) return null;
+  if (!displayedText && !source) return null;
   const linkedProse = (paragraph: string, explicit = false) => {
     const children: ReactNode[] = [];
     let offset = 0;
@@ -135,6 +135,12 @@ export function FeatureRules({ feature, engine, openFeature, onPreview, instance
   return (
     <>
       <RulesText processDescriptionAutomatically={feature.processDescriptionAutomatically} descriptionOverride={feature.descriptionOverride} descriptionTitle={featureName(feature)} text={feature.description} source={feature.source} engine={engine} openFeature={openFeature} exclude={[feature.id]} onPreview={onPreview} />
+      {!!feature.mechanicalSummary?.length && (
+        <section className="mechanical-summary">
+          <h4>Mechanics summary</h4>
+          {feature.mechanicalSummary.map((line) => <RulesText key={line} text={line} engine={engine} openFeature={openFeature} exclude={[feature.id]} onPreview={onPreview} processDescriptionAutomatically={false} />)}
+        </section>
+      )}
       {showRolls && <FeatureRolls feature={feature} engine={engine} instanceId={instanceId} />}
       {feature.textReferences?.map((id) => {
         const reference = engine.catalogue.features.find((f) => f.id === id);

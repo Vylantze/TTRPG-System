@@ -2674,6 +2674,29 @@
       ],
       "subclassAt": 1,
       "subclass": "life"
+    },
+    "artificer": {
+      "hitDie": 8,
+      "asi": [
+        4,
+        8,
+        12,
+        16,
+        19
+      ],
+      "subclassAt": 3,
+      "subclass": "specialist",
+      "startingSkills": 2,
+      "multiclassSkills": 0,
+      "skills": [
+        "arcana",
+        "history",
+        "investigation",
+        "medicine",
+        "nature",
+        "perception",
+        "sleight-of-hand"
+      ]
     }
   },
   "coverage": {
@@ -2748,9 +2771,9 @@
     "unsupportedClasses": [],
     "status": "All 12 core SRD class progressions, with source-backed descriptions and partial automation; final published non-SRD content awaits approved sources.",
     "additionalSourcesPending": [
-      "Artificer (final published 2014-compatible version)",
-      "Non-SRD subclasses: final published sources pending approval/access"
+      "Other non-SRD subclasses: final published sources pending approval/access"
     ],
-    "classCatalogue": "All 12 SRD classes; conditional combat, transformations, companions, and narrative effects remain source-text adjudicated."
+    "classCatalogue": "All 12 SRD classes plus Tasha’s Artificer and four specialists. See the System document for automated and table-managed effects.",
+    "artificer": "Tasha’s Cauldron of Everything (2020): mechanical data and source links; no paid source descriptions."
   }
 }

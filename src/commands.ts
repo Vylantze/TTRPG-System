@@ -1,4 +1,5 @@
 import { checkMoney, moneyTotal } from '@/src/currency.js';
+import { rollDice } from '@/src/dice.js';
 import { Engine, clone } from '@/src/engine.js';
 import { RuleError, constrain, number } from '@/src/expression.js';
 import type { Character, Edit, EditPreview, EvaluationResult } from '@/src/model.js';
@@ -241,7 +242,7 @@ export function settleAbility(input: Character, pendingId: string, outcome: stri
   delete character.pending[pendingId];
   return character;
 }
-export function recoverResources(engine: Engine, input: Character, recoveryEvent: string, eventId: string, allocation?: Record<string, number>): Character {
+export function recoverResources(engine: Engine, input: Character, recoveryEvent: string, eventId: string, allocation?: Record<string, number>, random?: () => number): Character {
   checkCharacter(input);
   const character = clone(input);
   if (input.buildState === 'draft') throw new RuleError('DRAFT', 'Finalize the construction draft before recovery.');
@@ -272,7 +273,7 @@ export function recoverResources(engine: Engine, input: Character, recoveryEvent
     // Every provider was validated to use identical recovery rules. Apply the pool rule once.
     for (const rule of rules) {
       const source = result.instances.find((i) => i.id === pool.providers[0])!;
-      const amount = rule.amount === 'full' ? Infinity : number(engine.evaluateForInstance(character, rule.amount, source));
+      const amount = rule.amount === 'full' ? Infinity : number(engine.evaluateForInstance(character, rule.amount, source)) + ('dice' in rule && typeof rule.dice === 'string' ? rollDice(rule.dice, random).total : 0);
       if (amount < 0) throw new RuleError('RECOVERY', 'Negative recovery amount.');
       if (amount !== Infinity) constrain(amount, { integer: pool.integer, minimum: 0 });
       const spent = character.resources[pool.id]?.spent ?? pool.spent;

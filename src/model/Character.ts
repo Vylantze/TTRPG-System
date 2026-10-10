@@ -4,8 +4,12 @@ import type { Pick } from '@/src/model/Pick.js';
 import type { RootAcquisition } from '@/src/model/RootAcquisition.js';
 import type { PendingUse } from '@/src/model/PendingUse.js';
 import type { InventoryEntry } from '@/src/model/InventoryEntry.js';
+import type { EquipmentAssignment } from '@/src/model/EquipmentAssignment.js';
 
 export interface Character {
+  equipmentAssignments?: EquipmentAssignment[];
+  deployedCompanions?: string[];
+  companionModes?: Record<string, string>;
   tabOrder?: string[];
   displayPreferences?: Record<string, boolean>;
   rollResults?: RolledFeature[];

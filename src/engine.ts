@@ -1,4 +1,5 @@
 import { checkMoney, moneyTotal } from '@/src/currency.js';
+import { equipmentContext, equipmentModifiers, validateEquipment } from '@/src/equipment-effects.js';
 import { inventoryModifiers, checkInventory } from '@/src/items.js';
 import { RuleError, boolean, constrain, evaluateExpression, number, type Environment } from '@/src/expression.js';
 import type { Catalogue, Character, Choice, Diagnostic, Expression, FunctionRegistry, Instance, Value,
@@ -126,7 +127,7 @@ export class Engine {
       throw new RuleError('LEVEL_DEPENDENCY', 'Character level cannot depend on stats.');
     });
     context.characterLevel = constrain(number(evaluateExpression(this.catalogue.system.characterLevel, env)), { integer: true, minimum: 0 });
-    return context;
+    return { ...context, ...equipmentContext(character, instance, this.catalogue) };
   }
 
   private satisfies(p: Predicate | undefined, instance: Instance, instances: Instance[], stats: (id: string) => number, context: Record<string, Value>): boolean {
@@ -144,7 +145,7 @@ export class Engine {
 
   private statView(character: Character, instances: Instance[], levels?: Record<string, number>, runtime: Record<string, Value> = {}): StatView {
     const results: Record<string, StatResult> = {}, visiting: string[] = [];
-    const modifierSources = [...instances.map((instance) => ({ instance, components: this.features.get(instance.feature)!.components })), ...inventoryModifiers(character, this.catalogue)];
+    const modifierSources = [...instances.map((instance) => ({ instance, components: this.features.get(instance.feature)!.components })), ...inventoryModifiers(character, this.catalogue), ...equipmentModifiers(character, this.catalogue, instances)];
     const get = (id: string): number => {
       if (Object.hasOwn(results, id)) return results[id].value;
       if (visiting.includes(id)) throw new RuleError('STAT_CYCLE', `Stat dependency cycle: ${[...visiting, id].join(' -> ')}.`);
@@ -347,7 +348,13 @@ export class Engine {
         const instance: Instance = { id, feature: f.id, parent, progression, parameters: params, acquiredCharacterLevel, acquiredClassLevel, acquiredEvent: event, active: active && parameterValid, eligible: false, waived, selection };
         result.instances.push(instance);
         for (const component of f.components) {
-          if (component.kind === 'grantFeature') instantiate(childPath(id, component.id), { id: component.id, feature: component.feature, parameters: component.parameters }, acquiredCharacterLevel, acquiredClassLevel, instance.active, id, progression, component.ignorePrerequisites ?? false, undefined, event);
+          if (component.kind === 'grantFeature') {
+            const threshold = component.atClassLevel;
+            const attainment = threshold === undefined ? -1 : character.history.findIndex((entry) => entry.progression === progression && entry.level === threshold);
+            const grantEvent = threshold === undefined ? event : Math.max(event, attainment + 1);
+            const enabled = threshold === undefined || (!!progression && (character.progressions.find((entry) => entry.id === progression)?.level ?? 0) >= threshold);
+            instantiate(childPath(id, component.id), { id: component.id, feature: component.feature, parameters: component.parameters }, threshold === undefined ? acquiredCharacterLevel : Math.max(acquiredCharacterLevel, grantEvent), Math.max(acquiredClassLevel, threshold ?? 0), instance.active && enabled, id, progression, component.ignorePrerequisites ?? false, undefined, grantEvent);
+          }
           if (component.kind === 'chooseFeatures') expandChoice(selectionPath(id, component.id), component, instance.active, acquiredCharacterLevel, acquiredClassLevel, id, progression, params, event);
         }
       };
@@ -482,6 +489,11 @@ export class Engine {
       const permanentView = Object.keys(runtime).length ? this.statView(character, result.instances) : view;
       const stub: Instance = { id: 'system', feature: '', parameters: {}, acquiredCharacterLevel: 0, acquiredClassLevel: 0, active: true, eligible: true, waived: false };
       const permanentContext = this.context(character);
+      try {
+        validateEquipment(character, this.catalogue, result.instances, permanentView.get);
+      } catch (e) {
+        report(e, 'equipment');
+      }
       for (const rule of this.catalogue.system.validation ?? []) {
         try {
           if (!this.satisfies(rule.requirement, stub, result.instances, permanentView.get, permanentContext)) report(new RuleError('SYSTEM_RULE', rule.message), `system/${rule.id}`);
