@@ -1,4 +1,5 @@
 import { rollDice } from '@/src/dice.js';
+import { checkEquipmentState } from '@/src/equipment-effects.js';
 import { checkMoney } from '@/src/currency.js';
 import { checkInventory, itemFeatures } from '@/src/items.js';
 import type { Catalogue, Character, Diagnostic, Expression, Predicate, Component, FunctionRegistry } from '@/src/model.js';
@@ -117,6 +118,7 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
   if (v.ignorePrerequisites !== undefined && typeof v.ignorePrerequisites !== 'boolean') throw new RuleError('SCHEMA', 'Invalid prerequisite waiver.');
   switch (v.kind) {
     case 'grantFeature': text(v.feature);
+      if (v.atClassLevel !== undefined) integer(v.atClassLevel, 1);
       if (!c.features.some((f) => f.id === v.feature)) throw new RuleError('UNKNOWN_FEATURE', `Missing grant ${v.feature}.`);
       if (v.condition) throw new RuleError('CONDITIONAL_GRANT', 'Use advancement entries for conditional acquisition; grants cannot have runtime conditions.');
       if (v.parameters !== undefined) {
@@ -183,6 +185,10 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
       for (const r of v.recovery) {
         record(r);
         text(r.event);
+        if (r.dice !== undefined) {
+          text(r.dice);
+          if (r.amount === 'full' || rollDice(r.dice, () => 0).total < 0) throw new RuleError('SCHEMA', 'Invalid dice recovery.');
+        }
         if (r.amount === 'full') {
           if (v.maximum === undefined) throw new RuleError('SCHEMA', 'An unbounded resource cannot recover to full.');
         } else expr(r.amount);
@@ -204,6 +210,10 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
       for (const r of v.recovery) {
         record(r);
         text(r.event);
+        if (r.dice !== undefined) {
+          text(r.dice);
+          if (r.amount === 'full' || rollDice(r.dice, () => 0).total < 0) throw new RuleError('SCHEMA', 'Invalid dice recovery.');
+        }
         if (r.amount !== 'full') expr(r.amount);
       }
       break;
@@ -310,7 +320,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       itemFeatures({ ...compiled, items: [{ id: '__validation', revision: 1, name: 'Validation', category: 'Validation', features: [f.id] }] }, '__validation');
     }
     if (compiled.itemFeatures?.length) {
-      const errors = validateCatalogue({ ...compiled, items: undefined, itemFeatures: undefined, features: [...compiled.features, ...compiled.itemFeatures.map((feature, index) => ({ id: `item-validation:${index}`, revision: 1, name: feature.name, components: feature.modifiers ?? [] }))] }, functions);
+      const errors = validateCatalogue({ ...compiled, items: undefined, itemFeatures: undefined, features: [...compiled.features.map((feature) => ({ ...feature, equipmentEffect: undefined })), ...compiled.itemFeatures.map((feature, index) => ({ id: `item-validation:${index}`, revision: 1, name: feature.name, components: feature.modifiers ?? [] }))] }, functions);
       if (errors.length) throw new RuleError(errors[0].code, errors[0].message);
     }
     for (const item of compiled.items ?? []) {
@@ -389,6 +399,48 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     }
     const created = new Map<string, Catalogue['system']['stats'][number]>();
     for (const f of compiled.features) {
+      if (f.mechanicalSummary !== undefined) {
+        list(f.mechanicalSummary);
+        f.mechanicalSummary.forEach(text);
+      }
+      if (f.equipmentEffect !== undefined) {
+        const effect = f.equipmentEffect;
+        record(effect);
+        list(effect.categories);
+        effect.categories.forEach(text);
+        text(effect.group);
+        text(effect.capacityStat);
+        if (effect.bonusCapacity !== undefined) {
+          record(effect.bonusCapacity);
+          text(effect.bonusCapacity.stat);
+          text(effect.bonusCapacity.itemProperty);
+        }
+        if (effect.attunement !== undefined && typeof effect.attunement !== 'boolean') throw new RuleError('SCHEMA', 'Attunement must be boolean.');
+        if (effect.attunementParameter !== undefined && f.parameters?.[effect.attunementParameter]?.kind !== 'boolean') throw new RuleError('SCHEMA', 'Attunement parameter must name a boolean Feature parameter.');
+        for (const key of ['itemFeatures', 'requiredProperties'] as const) if (effect[key] !== undefined) {
+          list(effect[key]);
+          effect[key]!.forEach(text);
+        }
+        for (const id of effect.itemFeatures ?? []) if (!compiled.itemFeatures?.some((item) => item.id === id)) throw new RuleError('SCHEMA', 'Unknown equipment Item Feature.');
+      }
+      if (f.companion !== undefined) {
+        record(f.companion);
+        if (!['creature', 'object'].includes(f.companion.kind)) throw new RuleError('SCHEMA', 'Invalid companion kind.');
+        list(f.companion.stats);
+        f.companion.stats.forEach(text);
+        list(f.companion.resources);
+        f.companion.resources.forEach(text);
+        if (f.companion.resetOnCreation !== undefined) {
+          list(f.companion.resetOnCreation);
+          for (const key of f.companion.resetOnCreation) if (!f.companion.resources.includes(key)) throw new RuleError('SCHEMA', 'Creation resets must belong to the companion.');
+        }
+        if (f.companion.creationCapability !== undefined) text(f.companion.creationCapability);
+        if (f.companion.modes !== undefined) {
+          list(f.companion.modes);
+          f.companion.modes.forEach(text);
+          if (!f.companion.modes.length) throw new RuleError('SCHEMA', 'Companion modes cannot be empty.');
+        }
+      }
       if (f.processDescriptionAutomatically !== undefined && typeof f.processDescriptionAutomatically !== 'boolean') throw new RuleError('SCHEMA', 'processDescriptionAutomatically must be a boolean.');
       if (f.descriptionOverride !== undefined) {
         list(f.descriptionOverride);
@@ -430,6 +482,14 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       }
     }
     const c = { ...compiled, system: { ...compiled.system, stats: [...compiled.system.stats, ...created.values()] } };
+    if (c.system.equipmentRules !== undefined) {
+      record(c.system.equipmentRules);
+      if (c.system.equipmentRules.attunementLimitStat !== undefined && !c.system.stats.some((stat) => stat.id === c.system.equipmentRules!.attunementLimitStat)) throw new RuleError('UNKNOWN_STAT', 'Unknown attunement limit stat.');
+      if (c.system.equipmentRules.preventDuplicateAttunement !== undefined && typeof c.system.equipmentRules.preventDuplicateAttunement !== 'boolean') throw new RuleError('SCHEMA', 'Duplicate attunement policy must be boolean.');
+    }
+    for (const feature of c.features) {
+      for (const id of [feature.equipmentEffect?.capacityStat, feature.equipmentEffect?.bonusCapacity?.stat, ...feature.companion?.stats ?? []].filter((id): id is string => !!id)) if (!c.system.stats.some((stat) => stat.id === id)) throw new RuleError('UNKNOWN_STAT', `Unknown equipment or companion stat ${id}.`);
+    }
     text(c.system.id);
     integer(c.system.revision, 1);
     text(c.system.name);
@@ -655,6 +715,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
         }), 'progression entry');
         for (const v of rows) {
           checkComponent(v, c, functions);
+          if (v.kind === 'grantFeature' && v.atClassLevel !== undefined) throw new RuleError('SCHEMA', 'Use the progression level key; atClassLevel is for nested Feature grants.');
           if (!['grantFeature', 'chooseFeatures'].includes(v.kind)) throw new RuleError('SCHEMA', 'Invalid progression entry.');
         }
       }
@@ -729,7 +790,10 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
 }
 
 export function checkCharacter(v: unknown): asserts v is Character {
-  if (v && typeof v === 'object') checkInventory(v as Character);
+  if (v && typeof v === 'object') {
+    checkInventory(v as Character);
+    checkEquipmentState(v as Character);
+  }
   record(v);
   checkMoney(v.money);
   if (v.tabOrder !== undefined) {

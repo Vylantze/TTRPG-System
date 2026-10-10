@@ -218,3 +218,9 @@ button.resource-adjust-button { box-sizing: border-box; flex: 0 0 2rem; width: 2
 .tab-order-editor { display: grid; gap: 12px; margin: 12px 0; }
 .tab-order-editor .toolbar { margin: 0; }
 .reorder-tabs { margin: 12px 0; }
+
+.companion-stats { display: flex; flex-wrap: wrap; gap: 1rem; margin-block: 1rem; }
+.companion-stats > div { min-width: 5rem; }
+.companion-stats dt { text-transform: capitalize; }
+.companion-stats dd { margin: 0; font-size: 1.3rem; font-weight: 700; }
+.mechanical-summary { margin-block: 1rem; }

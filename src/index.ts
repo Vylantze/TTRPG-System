@@ -8,6 +8,8 @@ export * from '@/src/policy-commands.js';
 export * from '@/src/feature-text.js';
 export * from '@/src/blocks.js';
 export * from '@/src/items.js';
+export * from '@/src/equipment-effects.js';
+export type { EquipmentAssignment } from '@/src/model/EquipmentAssignment.js';
 export * from '@/src/currency.js';
 export * from '@/src/spell-display.js';
 export type { SpellGroup } from '@/src/types/SpellGroup.js';

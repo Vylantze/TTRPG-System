@@ -1,5 +1,7 @@
 import { MoneySection } from '@/ui/src/MoneySection';
 import { Inventory } from '@/ui/src/Inventory';
+import { EquipmentEffects } from '@/ui/src/EquipmentEffects';
+import { CompanionPanels } from '@/ui/src/CompanionPanels';
 import { orderedSheetTabs, moveSheetTab } from '@/ui/src/sheet-tabs';
 import { LoadingOverlay } from '@/ui/src/LoadingOverlay';
 import { HitPoints } from '@/ui/src/HitPoints';
@@ -61,7 +63,8 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
   const spells = spellGroups(engine, result);
   const spellIds = new Set(spells.flatMap((spell) => spell.modes.map((mode) => mode.capability.id)));
   const slotIds = new Set(spellSlotPools(engine, result).map(({ pool }) => pool.id));
-  const abilities = result.capabilities.filter((capability) => !spellIds.has(capability.id) && !engine.getFeature(result.instances.find((instance) => instance.id === capability.source)!.feature)?.tags?.includes(engine.catalogue.system.healingFeaturesTag ?? ''));
+  const companionOwners = result.instances.filter((instance) => engine.getFeature(instance.feature)?.companion).map((instance) => instance.id);
+  const abilities = result.capabilities.filter((capability) => !companionOwners.some((id) => capability.source === id || capability.source.startsWith(`${id}/`)) && !spellIds.has(capability.id) && !engine.getFeature(result.instances.find((instance) => instance.id === capability.source)!.feature)?.tags?.includes(engine.catalogue.system.healingFeaturesTag ?? ''));
   const resource = (id: string) => result.resources[id] && <ResourceSummary key={id} pool={result.resources[id]} engine={engine} result={result} ready={ready} adjust={(delta) => attempt(() => update(adjustResource(engine, character, id, delta, crypto.randomUUID())))} />;
   const ability = (c: (typeof result.capabilities)[number]) => {
     const sourceFeature = engine.getFeature(result.instances.find((instance) => instance.id === c.source)!.feature)!;
@@ -302,6 +305,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
         <>
           <MoneySection engine={engine} character={character} update={update} report={report} />
           <Inventory engine={engine} character={character} update={update} report={report} />
+          <EquipmentEffects engine={engine} character={character} result={result} update={update} report={report} />
         </>
       )}
       {currentTab?.content === 'notes' && <CharacterDetails notes engine={engine} character={character} result={result} update={update} />}
@@ -311,13 +315,14 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
       {currentTab?.content === 'resources' && (
         <>
           <HitPoints engine={engine} character={character} result={result} update={update} report={report} />
+          <CompanionPanels engine={engine} character={character} result={result} update={update} report={report} />
           <div className="toolbar">
 
             {Boolean(character.rollResults?.length) && <button className="quiet" onClick={() => update(clearFeatureRolls(character))}>Clear all rolls</button>}
           </div>
           <h2>Abilities</h2>
           <div className="ability-list">{abilities.map(ability)}</div>
-          {Object.values(result.resources).filter((pool) => pool.key !== 'hit-points' && !Object.values(engine.catalogue.system.recoveryAllocations ?? {}).some((policy) => policy.keys.includes(pool.key)) && !slotIds.has(pool.id) && !abilities.some((capability) => Object.hasOwn(capability.costs, pool.id))).map((pool) => <div className="standalone-resource" key={pool.id}>{resource(pool.id)}</div>)}
+          {Object.values(result.resources).filter((pool) => pool.key !== 'hit-points' && !result.instances.some((instance) => engine.getFeature(instance.feature)?.companion?.resources.includes(pool.key)) && !Object.values(engine.catalogue.system.recoveryAllocations ?? {}).some((policy) => policy.keys.includes(pool.key)) && !slotIds.has(pool.id) && !abilities.some((capability) => Object.hasOwn(capability.costs, pool.id))).map((pool) => <div className="standalone-resource" key={pool.id}>{resource(pool.id)}</div>)}
           <SpellBook engine={engine} character={character} result={result} ready={ready} update={update} report={report} />
           {Object.entries(character.pending).map(([id, pending]) => (
             <section className="panel" key={id}>

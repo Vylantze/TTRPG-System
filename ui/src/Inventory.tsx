@@ -1,11 +1,13 @@
-import { useState } from 'react';
-import { getCurrency, itemProperties, updateInventory, type Character, type Engine, type InventoryEntry } from '@/src/index';
+import { useState, useContext } from 'react';
+import { CharacterRuleContext } from '@/ui/src/character-rule-context';
+import { getCurrency, itemProperties, infusedItemProperties, updateInventory, type Character, type Engine, type InventoryEntry } from '@/src/index';
 
 export function Inventory({ engine, character, update, report }: { engine: Engine;
   character: Character;
   update: (character: Character) => void;
   report: (message: string) => void; }) {
   const [selected, setSelected] = useState('');
+  const context = useContext(CharacterRuleContext);
   const entries = character.inventory ?? [];
   const change = (inventory: InventoryEntry[]) => {
     try {
@@ -34,11 +36,11 @@ export function Inventory({ engine, character, update, report }: { engine: Engin
           <tbody>
             {entries.map((entry) => {
               const item = engine.catalogue.items?.find((candidate) => candidate.id === entry.item);
-              const properties = item ? itemProperties(engine.catalogue, item.id) : {};
+              const properties = { ...(item ? itemProperties(engine.catalogue, item.id) : {}), ...infusedItemProperties(character, engine.catalogue, entry.id, context?.result.instances ?? []) };
               return (
                 <tr key={entry.id}>
                   <th scope="row">
-                    <span>{item?.name ?? 'Unavailable item'}</span>
+                    <span>{String(properties['Replicated item'] ?? item?.name ?? 'Unavailable item')}</span>
                     <small>
                       {item?.category}
                       {Object.entries(properties).map(([key, value]) => ` · ${key}: ${value}`).join('')}
@@ -59,7 +61,15 @@ export function Inventory({ engine, character, update, report }: { engine: Engin
                       }}
                     />
                   </td>
-                  <td><input type="checkbox" aria-label={`Equip ${item?.name}`} checked={entry.equipped} onChange={(event) => change(entries.map((value) => value.id === entry.id ? { ...entry, equipped: event.target.checked } : value))} /></td>
+                  <td>
+                    <input type="checkbox" aria-label={`Equip ${item?.name}`} checked={entry.equipped} onChange={(event) => change(entries.map((value) => value.id === entry.id ? { ...entry, equipped: event.target.checked } : value))} />
+                    {!!properties.attunement && (
+                      <label>
+                        <input type="checkbox" checked={entry.attuned ?? false} onChange={(event) => change(entries.map((value) => value.id === entry.id ? { ...entry, attuned: event.target.checked } : value))} />
+                        Attuned
+                      </label>
+                    )}
+                  </td>
                   <td><button className="quiet" aria-label={`Remove ${item?.name}`} onClick={() => change(entries.filter((value) => value.id !== entry.id))}>Remove</button></td>
                 </tr>
               );

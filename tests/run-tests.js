@@ -17,3 +17,6 @@ import '@/tests/character-play.test.js';
 import '@/tests/description-tokens.test.js';
 
 import '@/tests/expanded-classes.test.js';
+
+import '@/tests/artificer.test.js';
+import '@/tests/equipment-effects.test.js';

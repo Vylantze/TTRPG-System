@@ -15,15 +15,21 @@ test('text link contexts reject malformed metadata', () => {
   }
 });
 
-test('2014 JSON ships descriptions for every included Class and Feature', () => {
+test('2014 JSON preserves SRD descriptions and links licensed-only content', () => {
   parseSystemFile(file);
   for (const f of file.features) {
     const externalBackground = /^dnd5e:2014:background(?:-trait)?\.(noble|soldier|criminal|folk-hero)$/.test(f.id);
-    if (externalBackground) assert.match(f.source, /StarterSet_Charactersv2.pdf#page=/);
+    if (f.source?.includes('dndbeyond.com/sources/dnd/tcoe')) assert.equal(f.description, undefined);
+    else if (externalBackground) assert.match(f.source, /StarterSet_Charactersv2.pdf#page=/);
     else assert.ok(f.description?.trim() || f.textReferences?.length, f.id);
     assert.ok(f.displayName?.trim(), f.id);
   }
   for (const config of file.configurations) for (const cls of config.classes) {
+    if (cls.id === 'dnd5e:2014:artificer') {
+      assert.equal(cls.description, undefined);
+      assert.match(cls.source, /dndbeyond.com\/sources\/dnd\/tcoe\/artificer/);
+      continue;
+    }
     assert.match(cls.description, /Hit Points at 1st Level/);
     assert.match(cls.description, /Equipment/);
     assert.match(cls.source, /SRD 5.1/);
@@ -61,7 +67,7 @@ test('supporting Features use source passages and spell wrappers only share orig
 });
 
 test('spell descriptions retain complete effects and share canonical text across wrappers', () => {
-  const spells = file.features.filter((f) => f.id.startsWith('dnd5e:2014:spell.') && !f.roll);
+  const spells = file.features.filter((f) => f.id.startsWith('dnd5e:2014:spell.') && !f.roll && f.source?.includes('SRD 5.1'));
   assert.equal(spells.length, 319);
   for (const spell of spells) {
     assert.match(spell.description, /Casting Time:/);
