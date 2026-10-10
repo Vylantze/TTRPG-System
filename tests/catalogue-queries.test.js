@@ -31,3 +31,14 @@ test('advancement lookup includes tag-based selections and handles missing Featu
   assert.deepEqual(engine.getFeatureAdvancement('example:expert')[0].levels, [3]);
   assert.deepEqual(engine.getFeatureAdvancement('missing'), []);
 });
+
+test('advancement follows nested subclass grants, respects timing, and returns independent results', () => {
+  const data = structuredClone(catalogue);
+  data.features.push({ id: 'example:nested', revision: 1, name: 'Nested', components: [] });
+  data.features.find((feature) => feature.id === 'example:guard').components.push({ id: 'nested', kind: 'grantFeature', feature: 'example:nested', atClassLevel: 7 });
+  const engine = new Engine(data);
+  const rows = engine.getFeatureAdvancement('example:nested');
+  assert.deepEqual(rows[0].levels, [7]);
+  rows[0].levels.push(99);
+  assert.deepEqual(engine.getFeatureAdvancement('example:nested')[0].levels, [7]);
+});

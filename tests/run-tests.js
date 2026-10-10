@@ -20,3 +20,4 @@ import '@/tests/expanded-classes.test.js';
 
 import '@/tests/artificer.test.js';
 import '@/tests/equipment-effects.test.js';
+import '@/tests/subclass-expansion.test.js';

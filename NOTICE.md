@@ -10,3 +10,5 @@ The source PDF used for extraction has SHA-256 `2504d2a0abb0a4d491a939be4f17910a
 
 
 The Artificer, Alchemist, Armorer, Artillerist, Battle Smith and infusion mechanical entries reference [Tasha’s Cauldron of Everything (2020)](https://www.dndbeyond.com/sources/dnd/tcoe/artificer), © Wizards of the Coast LLC. This source is not represented as CC-licensed. Its full descriptions are not reproduced; the project stores mechanical data, authored implementation notes and links. Access to linked paid content depends on the reader’s D&D Beyond account. SRD text reused by these entries remains covered by the attribution above.
+
+Additional 2014-compatible subclass entries and Blood Hunter reference the D&D Beyond class pages and publications listed in `tools/data/dnd2014-subclasses.json`. Partner content is labelled separately from Wizards of the Coast publications. These entries contain names, mechanical data, source links and original implementation notes, without reproducing paid descriptions. Locked content is excluded. These sources are not represented as CC-licensed; the SRD attribution applies only to the reused SRD material.

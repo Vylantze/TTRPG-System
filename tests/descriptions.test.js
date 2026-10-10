@@ -19,7 +19,7 @@ test('2014 JSON preserves SRD descriptions and links licensed-only content', () 
   parseSystemFile(file);
   for (const f of file.features) {
     const externalBackground = /^dnd5e:2014:background(?:-trait)?\.(noble|soldier|criminal|folk-hero)$/.test(f.id);
-    if (f.source?.includes('dndbeyond.com/sources/dnd/tcoe')) assert.equal(f.description, undefined);
+    if (f.source?.includes('dndbeyond.com/')) assert.equal(f.description, undefined);
     else if (externalBackground) assert.match(f.source, /StarterSet_Charactersv2.pdf#page=/);
     else assert.ok(f.description?.trim() || f.textReferences?.length, f.id);
     assert.ok(f.displayName?.trim(), f.id);
@@ -28,6 +28,11 @@ test('2014 JSON preserves SRD descriptions and links licensed-only content', () 
     if (cls.id === 'dnd5e:2014:artificer') {
       assert.equal(cls.description, undefined);
       assert.match(cls.source, /dndbeyond.com\/sources\/dnd\/tcoe\/artificer/);
+      continue;
+    }
+    if (cls.id === 'dnd5e:2014:blood-hunter') {
+      assert.equal(cls.description, undefined);
+      assert.match(cls.source, /partner content.*dndbeyond.com\/classes\/357975-blood-hunter/);
       continue;
     }
     assert.match(cls.description, /Hit Points at 1st Level/);
