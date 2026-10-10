@@ -9,7 +9,7 @@ import noticeUrl from '@/NOTICE.md?url';
 import { deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type Engine, type SystemFile, type Value } from '@/src/index';
 import bundledUrl from '@/src/systems/dnd5e-2014/system.json?url';
 import starterUrl from '@/src/systems/dnd5e-2014/starter-characters.json?url';
-import { addStarterCharacters, addStarterInventory, migrateMoney } from '@/ui/src/starter-characters';
+import { addStarterCharacters, migrateMoney } from '@/ui/src/starter-characters';
 import { CharacterBuilder } from '@/ui/src/CharacterBuilder';
 import { ClassDetail } from '@/ui/src/ClassDetail';
 import { FeatureDetail } from '@/ui/src/FeatureDetail';
@@ -19,7 +19,7 @@ import { descriptionPreview, featureDescription, featureHref } from '@/ui/src/fe
 
 import { featureName, tagName } from '@/ui/src/display';
 import type { Route } from '@/ui/src/types/Route';
-import { reloadSystem, applyDescriptionUpdate, createRegistry, download, labelFromId, readWorkspace, systemKey, updateSystemDescriptions, writeWorkspace, type Workspace } from '@/ui/src/workspace';
+import { reloadSystem, createRegistry, download, labelFromId, systemKey, type Workspace } from '@/ui/src/workspace';
 function readRoute(): Route {
   const [path, query] = window.location.hash.slice(1).split('?');
   const params = new URLSearchParams(query);
@@ -35,21 +35,11 @@ function go(page: string, id?: string, engine?: Engine) {
   window.location.hash = `${page}${id ? `/${encodeURIComponent(id)}` : ''}${query}`;
 }
 const errorMessage = (e: unknown) => e instanceof Error ? e.message : String(e);
-const empty: Workspace = { version: 1, systems: [], characters: [] };
-
-export function App() {
-  const [initial] = useState(() => {
-    try {
-      return { workspace: readWorkspace(localStorage), error: '' };
-    } catch (e) {
-      return { workspace: empty, error: errorMessage(e) };
-    }
-  });
-  const [workspace, setWorkspace] = useState(initial.workspace), [route, setRoute] = useState(readRoute), [error, setError] = useState(initial.error), [storageError, setStorageError] = useState(initial.error), [blocked, setBlocked] = useState(Boolean(initial.error));
+export function App({ initialWorkspace, persist }: { initialWorkspace: Workspace; persist: (workspace: Workspace) => Promise<void> }) {
+  const [workspace, setWorkspace] = useState(initialWorkspace), [route, setRoute] = useState(readRoute), [error, setError] = useState(''), [storageError, setStorageError] = useState('');
   const [navigating, startNavigation] = useTransition();
   const [reloadMessage, setReloadMessage] = useState('');
   const [saved, setSaved] = useState(false), [loading, setLoading] = useState(false), [creating, setCreating] = useState(false);
-  const [updatingDescriptions, setUpdatingDescriptions] = useState(() => !initial.error && initial.workspace.systems.some((file) => file.id === 'dnd5e:2014-srd5.1'));
   const [selectedSystem, setSelectedSystem] = useState(systemKey(workspace.systems[0] ?? { id: '', revision: 1 })), [options, setOptions] = useState<Record<string, Value>>({});
   const registry = useMemo(() => createRegistry(workspace.systems), [workspace.systems]);
   const workspaceRef = useRef(workspace);
@@ -74,32 +64,6 @@ export function App() {
   }, [registry, active, route.system, route.revision, route.catalogue, browserEngine, workspace.systems]);
   const engine = resolved.engine;
   useEffect(() => {
-    const existing = initial.workspace.systems.find((file) => file.id === 'dnd5e:2014-srd5.1');
-    if (initial.error || !existing) return;
-    const controller = new AbortController();
-    let cancelled = false;
-    void (async () => {
-      try {
-        const response = await fetch(bundledUrl, { signal: controller.signal, cache: 'no-store' });
-        if (!response.ok) throw new Error('Bundled SRD descriptions could not be loaded.');
-        const incoming = parseSystemFile(await response.text());
-        const updated = updateSystemDescriptions(existing, incoming);
-        const templates = await fetch(starterUrl, { signal: controller.signal, cache: 'no-store' });
-        if (!templates.ok) throw new Error('Starter inventory could not be loaded.');
-        const saves: unknown = await templates.json();
-        if (!cancelled)setWorkspace((current) => migrateMoney(addStarterInventory(applyDescriptionUpdate(current, existing, updated), saves)));
-      } catch (e) {
-        if (!cancelled)setError(`Automatic SRD description update failed. ${errorMessage(e)} Retry with Systems → Reload System.`);
-      } finally {
-        if (!cancelled)setUpdatingDescriptions(false);
-      }
-    })();
-    return () => {
-      cancelled = true;
-      controller.abort();
-    };
-  }, [initial]);
-  useEffect(() => {
     const onHash = () => {
       startNavigation(() => setRoute(readRoute()));
     };
@@ -107,19 +71,22 @@ export function App() {
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
   useEffect(() => {
-    if (blocked) return;
-    // Report the result of synchronizing with external browser storage, including quota failures.
-
-    try {
-      writeWorkspace(localStorage, workspace);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- Reflect the result of writing external browser storage.
-      setStorageError('');
-      setSaved(true);
-    } catch (e) {
-      setStorageError(`Changes are in memory. Browser storage failed: ${errorMessage(e)} Export your characters before closing.`);
-      setSaved(false);
-    }
-  }, [workspace, blocked]);
+    let cancelled = false;
+    void persist(workspace).then(() => {
+      if (!cancelled) {
+        setStorageError('');
+        setSaved(true);
+      }
+    }, (reason: unknown) => {
+      if (!cancelled) {
+        setStorageError(`Changes are in memory. Local database save failed: ${errorMessage(reason)} Export your characters before closing.`);
+        setSaved(false);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [workspace, persist]);
   const change = (next: Workspace | ((current: Workspace) => Workspace)) => {
     setSaved(false);
     setWorkspace(next);
@@ -248,8 +215,8 @@ export function App() {
   const cls = engine?.catalogue.classes.find((c) => c.id === route.id);
   const list = useMemo(() => ['features', 'races'].includes(route.page) && !route.id ? engine?.catalogue.features.filter((f) => (route.page !== 'races' || f.tags?.includes(engine.catalogue.system.terminology?.creatureTag ?? 'race')) && `${featureName(f)} ${f.name} ${featureDescription(f, engine!) ?? ''} ${f.source ?? ''}`.toLowerCase().includes(query.toLowerCase()) && (!tag || f.tags?.includes(tag))).sort((a, b) => sort === 'level' ? (a.contentLevel ?? 0) - (b.contentLevel ?? 0) || featureName(a).localeCompare(featureName(b)) : featureName(a).localeCompare(featureName(b)) * (sort === 'name-desc' ? -1 : 1)) ?? [] : [], [engine, query, tag, sort, route.page, route.id]);
   return (
-    <div className="app-shell" aria-busy={loading || navigating || updatingDescriptions}>
-      {(loading || navigating || updatingDescriptions) && <LoadingOverlay />}
+    <div className="app-shell" aria-busy={loading || navigating}>
+      {(loading || navigating) && <LoadingOverlay />}
       <a
         href="#main-content"
         className="skip-link"
@@ -294,7 +261,7 @@ export function App() {
         </div>
         <div className="sidebar-bottom">
           <span className={`save-dot ${saved ? '' : 'unsaved'}`} />
-          {saved ? 'Saved in this browser' : 'Changes not saved'}
+          {saved ? 'Saved in local database' : 'Changes not saved'}
           <p>Local workspace · no account required</p>
         </div>
       </aside>
@@ -330,7 +297,6 @@ export function App() {
         </header>
         <main id="main-content" tabIndex={-1} aria-busy={loading || navigating}>
           {(loading || navigating) && <div className="loading-banner" role="status">Loading…</div>}
-          {updatingDescriptions && <p role="status" className="muted">Updating bundled SRD descriptions…</p>}
           {error && (
             <div role="alert" className="alert row">
               <span>{error}</span>
@@ -340,22 +306,7 @@ export function App() {
           {storageError && (
             <div role="alert" className="alert">
               <p>{storageError}</p>
-              {blocked && (
-                <button
-                  className="quiet"
-                  onClick={() => {
-                    try {
-                      download('workspace-recovery.json', localStorage.getItem('ttrpg-feature-forge:v1') ?? '{}');
-                      setBlocked(false);
-                      setStorageError('');
-                    } catch (e) {
-                      setError(errorMessage(e));
-                    }
-                  }}
-                >
-                  Export stored data and start a new workspace
-                </button>
-              )}
+
             </div>
           )}
           {resolved.error && (
@@ -366,7 +317,7 @@ export function App() {
           )}
           {route.page === 'systems' && (
             <>
-              <PageTitle eyebrow="Your rules, your table" title="Systems" description="Load a System from JSON. Its Classes, Features, options, and calculations become available throughout your workspace." />
+              <PageTitle eyebrow="Your rules, your table" title="Systems" description="Load a System from JSON into the local browser database. Its Classes, Features, options, and calculations become available throughout your workspace." />
               <SystemLoader loading={loading} bundledLoaded={workspace.systems.some((s) => s.id === 'dnd5e:2014-srd5.1')} loadBundled={() => void loadBundled()} loadFile={(file) => void loadFile(file)} />
               {reloadMessage && <p role="status">{reloadMessage}</p>}
               <div className="cards">
@@ -431,8 +382,8 @@ export function App() {
                   <PageTitle eyebrow="A character is a collection of choices" title="Every adventure starts with a Feature." description="Build your character one choice at a time. Explore what makes them different, and let the System handle the numbers." />
                   <div className="toolbar">
                     <button disabled={!selected} onClick={() => setCreating(true)}>Create a character →</button>
-                    <button className="quiet" disabled={loading || blocked || !selected} onClick={() => void loadMulticlassSample()}>Add multiclass sample</button>
-                    <button className="quiet" disabled={loading || blocked} onClick={() => void loadStarterParty()}>{loading ? 'Loading…' : 'Add 2014 Starter Set party'}</button>
+                    <button className="quiet" disabled={loading || !selected} onClick={() => void loadMulticlassSample()}>Add multiclass sample</button>
+                    <button className="quiet" disabled={loading} onClick={() => void loadStarterParty()}>{loading ? 'Loading…' : 'Add 2014 Starter Set party'}</button>
                     <label className="button quiet">
                       Import character
                       <input

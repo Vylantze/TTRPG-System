@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "tsc --noEmit && node --import ../tools/register-alias.mjs tests/run-tests.mjs"
+    "test": "tsc --noEmit && node --import ../tools/register-alias.mjs tests/run-tests.mjs && node --import ../tools/register-alias.mjs tests/database-tests.mjs"
   },
   "dependencies": {
     "lz-string": "^1.5.0",
@@ -17,6 +17,7 @@
   "devDependencies": {
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "fake-indexeddb": "^6.2.5",
     "typescript": "5.4.5",
     "vite": "7.3.7"
   },

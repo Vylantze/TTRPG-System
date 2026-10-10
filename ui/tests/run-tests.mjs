@@ -34,7 +34,7 @@ function render(workspace, hash = '') {
   globalThis.localStorage = storage();
   model.writeWorkspace(localStorage, workspace);
   globalThis.window = { location: { hash } };
-  return renderToStaticMarkup(createElement(App));
+  return renderToStaticMarkup(createElement(App, { initialWorkspace: workspace, persist: async () => {} }));
 }
 
 test('Items follows Skills by default, puts money first, and saved tab order survives loading', () => {
@@ -328,13 +328,11 @@ test('unloaded Systems keep characters exportable and display an explicit reload
   assert.match(html, /Example Hero/);
   assert.match(html, /must be loaded/);
 });
-test('bad persisted data is displayed as a recoverable error rather than silently discarded', () => {
-  globalThis.localStorage = storage();
-  localStorage.setItem(model.STORAGE_KEY, 'invalid JSON');
-  globalThis.window = { location: { hash: '' } };
-  const html = renderToStaticMarkup(createElement(App));
-  assert.match(html, /role="alert"/);
-  assert.match(html, /Export stored data/);
+test('malformed legacy data remains available for recovery when migration rejects it', () => {
+  const store = storage();
+  store.setItem(model.STORAGE_KEY, 'invalid JSON');
+  assert.throws(() => model.readWorkspace(store));
+  assert.equal(store.getItem(model.STORAGE_KEY), 'invalid JSON');
 });
 
 test('class guide has a progression table, jump controls, and expanded source descriptions', () => {
