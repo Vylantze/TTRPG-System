@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react';
-export function Modal({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
+export function Modal({ title, onClose, children, className = '' }: { title: string; onClose: () => void; children: ReactNode; className?: string }) {
   const dialog = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     const element = dialog.current!, previous = document.activeElement as HTMLElement | null;
@@ -12,7 +12,7 @@ export function Modal({ title, onClose, children }: { title: string; onClose: ()
   return (
     <dialog
       ref={dialog}
-      className="modal"
+      className={`modal ${className}`.trim()}
       aria-label={title}
       onCancel={(e) => {
         e.preventDefault();

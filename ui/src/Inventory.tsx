@@ -1,5 +1,6 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useDeferredValue } from 'react';
 import { CharacterRuleContext } from '@/ui/src/character-rule-context';
+import { Modal } from '@/ui/src/Modal';
 import { getCurrency, itemProperties, infusedItemProperties, updateInventory, type Character, type Engine, type InventoryEntry } from '@/src/index';
 
 export function Inventory({ engine, character, update, report }: { engine: Engine;
@@ -7,8 +8,20 @@ export function Inventory({ engine, character, update, report }: { engine: Engin
   update: (character: Character) => void;
   report: (message: string) => void; }) {
   const [selected, setSelected] = useState('');
+  const [search, setSearch] = useState('');
+  const [category, setCategory] = useState('');
+  const [details, setDetails] = useState<string>();
+  const query = useDeferredValue(search.trim().toLowerCase());
   const context = useContext(CharacterRuleContext);
   const entries = character.inventory ?? [];
+  const settings = engine.catalogue.system.sheetDisplay?.inventory;
+  const detailEntry = entries.find((entry) => entry.id === details);
+  const detailItem = engine.catalogue.items?.find((item) => item.id === detailEntry?.item);
+  const itemName = (entry: InventoryEntry) => {
+    const item = engine.catalogue.items?.find((candidate) => candidate.id === entry.item);
+    return String(infusedItemProperties(character, engine.catalogue, entry.id, context?.result.instances ?? [])['Replicated item'] ?? item?.name ?? 'Unavailable item');
+  };
+  const visible = entries.filter((entry) => (!settings?.search || itemName(entry).toLowerCase().includes(query)) && (!settings?.categoryFilter || !category || engine.catalogue.items?.find((item) => item.id === entry.item)?.category === category));
   const change = (inventory: InventoryEntry[]) => {
     try {
       update(updateInventory(engine, character, inventory, crypto.randomUUID()));
@@ -19,6 +32,23 @@ export function Inventory({ engine, character, update, report }: { engine: Engin
   return (
     <section className="panel inventory-section">
       <h2>Inventory</h2>
+      <div className="toolbar inventory-filters">
+        {settings?.search && (
+          <label>
+            Search inventory
+            <input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Find an item…" />
+          </label>
+        )}
+        {settings?.categoryFilter && (
+          <label>
+            Category
+            <select value={category} onChange={(event) => setCategory(event.target.value)}>
+              <option value="">All categories</option>
+              {[...new Set(entries.map((entry) => engine.catalogue.items?.find((item) => item.id === entry.item)?.category).filter((value) => value !== undefined))].sort().map((value) => <option key={value}>{value}</option>)}
+            </select>
+          </label>
+        )}
+      </div>
       <p className="muted small">
         Equipped items apply their stat modifiers. Quantities track supplies;
         owning a tool does not grant proficiency.
@@ -34,13 +64,13 @@ export function Inventory({ engine, character, update, report }: { engine: Engin
             </tr>
           </thead>
           <tbody>
-            {entries.map((entry) => {
+            {visible.map((entry) => {
               const item = engine.catalogue.items?.find((candidate) => candidate.id === entry.item);
               const properties = { ...(item ? itemProperties(engine.catalogue, item.id) : {}), ...infusedItemProperties(character, engine.catalogue, entry.id, context?.result.instances ?? []) };
               return (
                 <tr key={entry.id}>
                   <th scope="row">
-                    <span>{String(properties['Replicated item'] ?? item?.name ?? 'Unavailable item')}</span>
+                    {engine.catalogue.system.sheetDisplay?.detailsDrawer && item ? <button className="link" onClick={() => setDetails(entry.id)}>{String(properties['Replicated item'] ?? item.name)}</button> : <span>{String(properties['Replicated item'] ?? item?.name ?? 'Unavailable item')}</span>}
                     <small>
                       {item?.category}
                       {Object.entries(properties).map(([key, value]) => ` · ${key}: ${value}`).join('')}
@@ -78,6 +108,7 @@ export function Inventory({ engine, character, update, report }: { engine: Engin
         </table>
       </div>
       {!entries.length && <p className="muted">No items carried.</p>}
+      {!!entries.length && !visible.length && <p className="muted">No items match these filters.</p>}
       <div className="toolbar">
         <label>
           Add item
@@ -97,6 +128,22 @@ export function Inventory({ engine, character, update, report }: { engine: Engin
           Add to inventory
         </button>
       </div>
+      {detailEntry && detailItem && (
+        <Modal className="details-drawer" title={itemName(detailEntry)} onClose={() => setDetails(undefined)}>
+          <p>{`${detailItem.category} · quantity ${detailEntry.quantity}${detailEntry.equipped ? ' · equipped' : ''}${detailEntry.attuned ? ' · attuned' : ''}`}</p>
+          <dl className="item-details-properties">
+            {Object.entries({ ...itemProperties(engine.catalogue, detailItem.id), ...infusedItemProperties(character, engine.catalogue, detailEntry.id, context?.result.instances ?? []) }).map(([name, value]) => (
+              <div key={name}>
+                <dt>{name}</dt>
+                <dd>{String(value)}</dd>
+              </div>
+            ))}
+          </dl>
+          <h3>Item components</h3>
+          <ul>{detailItem.features.map((id) => <li key={id}>{engine.catalogue.itemFeatures?.find((feature) => feature.id === id)?.name ?? id}</li>)}</ul>
+          {detailItem.source && <p className="source">{detailItem.source}</p>}
+        </Modal>
+      )}
     </section>
   );
 }

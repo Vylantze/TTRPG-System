@@ -1,7 +1,7 @@
 import { resetConditionName } from '@/ui/src/reset-condition-name';
 import { expressionText } from '@/ui/src/feature-requirements';
 import { labelFromId } from '@/ui/src/workspace';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useDeferredValue } from 'react';
 import { featureRollInstances, adjustResource, spellGroups, spellSlotPools, useAbility as activateAbility, type Character, type Engine, type EvaluationResult, type SpellGroup } from '@/src/index';
 import { FeatureLink } from '@/ui/src/FeatureLink';
 import { FeatureRules } from '@/ui/src/RulesText';
@@ -13,8 +13,13 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
   const [casting, setCasting] = useState<string>();
   const [mode, setMode] = useState('');
   const [spent, setSpent] = useState<Record<string, string>>({});
+  const [search, setSearch] = useState('');
+  const [filterLevel, setFilterLevel] = useState('all');
+  const query = useDeferredValue(search.trim().toLowerCase());
+  const settings = engine.catalogue.system.sheetDisplay?.spells;
   const spells = useMemo(() => spellGroups(engine, result), [engine, result]);
   const slots = useMemo(() => spellSlotPools(engine, result), [engine, result]);
+  const visibleSpells = spells.filter((spell) => (!settings?.search || spell.name.toLowerCase().includes(query)) && (!settings?.levelFilter || filterLevel === 'all' || spell.level === Number(filterLevel)));
   const selected = spells.find((spell) => spell.id === casting);
   const attempt = (action: () => void) => {
     try {
@@ -63,11 +68,35 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
       </div>
       {!showEmpty && !slots.some(({ pool }) => (pool.current ?? pool.capacity - pool.spent) > 0) && <p className="muted">No spell slots remaining. Show all spell slots to adjust or inspect them.</p>}
       <h2>Spells</h2>
-      {[...new Set(spells.map((spell) => spell.level))].map((level) => (
+      <div className="toolbar spell-filters">
+        {settings?.search && (
+          <label>
+            Search spells
+            <input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Find a spell…" />
+          </label>
+        )}
+        {settings?.levelFilter && (
+          <label>
+            Spell level
+            <select value={filterLevel} onChange={(event) => setFilterLevel(event.target.value)}>
+              <option value="all">All levels</option>
+              {[...new Set(spells.map((spell) => spell.level))].sort((a, b) => a - b).map((level) => <option key={level} value={level}>{level === 0 ? 'Cantrips' : `Level ${level}`}</option>)}
+            </select>
+          </label>
+        )}
+      </div>
+      <div className="casting-summary">
+        {(settings?.castingStats ?? []).filter((source) => spells.some((spell) => spell.castingAbility === source.ability)).map((source) => {
+          const attack = result.stats[source.attackStat]?.value ?? 0;
+          return <p key={source.ability}>{`${labelFromId(source.ability)} · spell attack ${attack >= 0 ? '+' : ''}${attack} · save DC ${result.stats[source.saveStat]?.value ?? 0}`}</p>;
+        })}
+      </div>
+      {spells.length > 0 && !visibleSpells.length && <p className="muted">No spells match these filters.</p>}
+      {[...new Set(visibleSpells.map((spell) => spell.level))].sort((a, b) => a - b).map((level) => (
         <details className="spell-level" key={level} open>
           <summary>{level === 0 ? 'Cantrips' : `Level ${level} spells`}</summary>
-          {spells.filter((spell) => spell.level === level).map((spell) => (
-            <article className="panel spell-row" key={spell.id}>
+          {visibleSpells.filter((spell) => spell.level === level).map((spell) => (
+            <article className={`panel spell-row ${settings?.compact ? 'spell-compact' : ''}`} key={spell.id}>
               <div className="row">
                 <div>
                   <h3><FeatureLink id={spell.feature} engine={engine}>{spell.name}</FeatureLink></h3>
@@ -75,6 +104,19 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
                     {`Casting ability: ${labelFromId(spell.castingAbility)}`}
                     {spell.modes.every((mode) => mode.ritual) ? ' · Ritual only' : ''}
                   </small>
+                  <dl className="spell-quick-info">
+                    {(settings?.columns ?? []).map((column) => {
+                      const value = spell.modes.find((mode) => !mode.ritual)?.capability.definition.metadata?.[column.metadataKey] ?? spell.modes[0]?.capability.definition.metadata?.[column.metadataKey];
+                      return value === undefined
+                        ? null
+                        : (
+                            <div key={column.metadataKey}>
+                              <dt>{column.name}</dt>
+                              <dd>{String(value)}</dd>
+                            </div>
+                          );
+                    })}
+                  </dl>
                 </div>
                 <div className="spell-action">
                   {actionable(spell) && (

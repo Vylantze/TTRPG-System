@@ -1,5 +1,5 @@
 {
-  "assetVersion": "1.0.0",
+  "assetVersion": "1.1.0",
   "data": [
     {
       "id": "dnd5e:2014:tables",
@@ -123551,6 +123551,71 @@
       "components": [],
       "textReferences": [
         "dnd5e:2014:rules.resting"
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.temporary-hit-points",
+      "revision": 1,
+      "name": "Temporary HP",
+      "displayName": "Temporary HP",
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "temporary-hit-points",
+          "name": "Temporary HP",
+          "units": "HP",
+          "integer": true,
+          "initialAmount": 0,
+          "recovery": []
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.death-save.successes",
+      "revision": 1,
+      "name": "Death save successes",
+      "displayName": "Death save successes",
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "death-save.successes",
+          "name": "Death save successes",
+          "units": "saves",
+          "integer": true,
+          "initialAmount": 0,
+          "maximum": 3,
+          "recovery": []
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2014:resource.death-save.failures",
+      "revision": 1,
+      "name": "Death save failures",
+      "displayName": "Death save failures",
+      "tags": [
+        "resource-tracker"
+      ],
+      "components": [
+        {
+          "id": "tracker",
+          "kind": "trackResource",
+          "key": "death-save.failures",
+          "name": "Death save failures",
+          "units": "saves",
+          "integer": true,
+          "initialAmount": 0,
+          "maximum": 3,
+          "recovery": []
+        }
       ]
     }
   ]

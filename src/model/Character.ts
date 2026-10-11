@@ -5,8 +5,10 @@ import type { RootAcquisition } from '@/src/model/RootAcquisition.js';
 import type { PendingUse } from '@/src/model/PendingUse.js';
 import type { InventoryEntry } from '@/src/model/InventoryEntry.js';
 import type { EquipmentAssignment } from '@/src/model/EquipmentAssignment.js';
+import type { StatRoll } from '@/src/model/StatRoll.js';
 
 export interface Character {
+  statRolls?: StatRoll[];
   equipmentAssignments?: EquipmentAssignment[];
   deployedCompanions?: string[];
   companionModes?: Record<string, string>;

@@ -8,7 +8,7 @@ export function CharacterDetails({ character, engine, result, update, notes = fa
     <section className="panel character-details">
       <h2>{notes ? 'Notes' : 'Character details'}</h2>
       <dl className="character-facts">
-        {!notes && (
+        {!notes && !engine.catalogue.system.sheetDisplay?.overview && (
           <>
             <div>
               <dt>{engine.catalogue.system.terminology?.creatureSingular ?? 'Race'}</dt>
@@ -20,7 +20,7 @@ export function CharacterDetails({ character, engine, result, update, notes = fa
             </div>
           </>
         )}
-        {Object.entries({ Name: character.name, ...character.notes }).filter(([label]) => !['Starting money', 'Original money note'].includes(label) && (notes ? !(engine.catalogue.system.importantDetails ?? ['Name', 'Alignment']).includes(label) : (engine.catalogue.system.importantDetails ?? ['Name', 'Alignment']).includes(label))).map(([label, text]) => (
+        {Object.entries({ Name: character.name, ...character.notes }).filter(([label]) => !['Starting money', 'Original money note', ...(engine.catalogue.system.sheetDisplay?.overview ? ['Name'] : [])].includes(label) && (notes ? !(engine.catalogue.system.importantDetails ?? ['Name', 'Alignment']).includes(label) : (engine.catalogue.system.importantDetails ?? ['Name', 'Alignment']).includes(label))).map(([label, text]) => (
           <div key={label}>
             <dt className="row">
               {label}

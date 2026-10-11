@@ -26,3 +26,4 @@ import '@/tests/system-package.test.js';
 
 import '@/tests/loading-performance.test.js';
 import '@/tests/version-policy.test.js';
+import '@/tests/sheet-display.test.js';

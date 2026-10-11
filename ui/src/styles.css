@@ -228,3 +228,89 @@ button.resource-adjust-button { box-sizing: border-box; flex: 0 0 2rem; width: 2
 /* Keep the release note anchored to the page corner without covering controls. */
 #root { position: relative; min-height: 100vh; padding-bottom: 24px; }
 .ui-version { position: absolute; right: 8px; bottom: 4px; font-size: 10px; line-height: 1.4; color: var(--muted); pointer-events: none; white-space: nowrap; }
+
+/* A table-play overview remains visible while changing sheet tabs. */
+.sheet-overview { display:grid; grid-template-columns:minmax(280px,1.15fr) minmax(0,2fr); gap:18px; align-items:start; margin:18px 0 24px; }
+.sheet-overview .sheet-hit-points { background:#fffefa; border:1px solid var(--line); border-top:3px solid #6b8160; border-radius:10px; padding:18px; margin:0; }
+.sheet-overview h2 { font-size:20px; margin:0 0 12px; }
+.sheet-overview .resource-card { border:0; padding:0; background:transparent; margin:0 0 12px; }
+.sheet-overview .sheet-hit-points>.resource-card { display:grid; grid-template-columns:1fr auto; align-items:center; gap:6px 12px; }
+.sheet-overview .sheet-hit-points>.resource-card>strong { margin:0; font-size:26px; }
+.sheet-overview .sheet-hit-points>.resource-card>.toolbar { margin:0; }
+.sheet-overview .sheet-hit-points>.resource-card>p,.sheet-overview .sheet-hit-points>.resource-card>details { grid-column:1/-1; margin:0; }
+.character-page { padding-top:22px; }
+.character-page .character-actions { margin-bottom:12px; }
+.character-page .character-title { margin-top:0; }
+.character-page .character-title .eyebrow { margin:0 0 6px; }
+.character-page .name-input { font-size:32px; margin-bottom:5px; }
+.character-page .character-title .muted { margin:6px 0; }
+.character-page .rest-controls { margin:12px 0; }
+.overview-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:10px; }
+.overview-stat { padding:16px 12px; background:#fffefa; border:1px solid var(--line); border-radius:8px; min-width:0; }
+.overview-stat>span { display:block; font-size:11px; color:var(--muted); }
+.overview-stat>strong { display:block; font-size:26px; margin:12px 0; }
+.overview-stat strong small { font-size:12px; margin-left:6px; }
+.overview-stat summary { font-size:11px; padding:5px 0; }
+.health-adjust { align-items:end; margin:12px 0; }
+.health-adjust label { max-width:110px; margin:0; }
+.temporary-health { display:flex; align-items:center; gap:12px; max-width:100%; margin:14px 0; }
+.temporary-health input { width:80px; margin:0; }
+.health-counters { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:16px; }
+.sheet-overview .rest-healing { padding:0; margin:12px 0 0; border:0; border-top:1px solid var(--line); }
+.sheet-overview .rest-healing>summary { padding:12px 0; }
+.sheet-sections { align-items:start; }
+.sheet-abilities .sheet-stat { padding:14px 10px; }
+.sheet-abilities .sheet-stat h3 { font-size:13px; }
+.stat-roll-control { display:inline-flex; align-items:center; flex-wrap:wrap; gap:8px; }
+.rollable-value { font:inherit; font-weight:inherit; text-decoration:underline dotted; text-underline-offset:4px; padding:2px; }
+.stat-roll-control output { display:inline-block; margin:0; font:600 12px 'Segoe UI',sans-serif; padding:4px 7px; background:#e5efdf; border-radius:5px; }
+.resource-compact strong { font-size:24px; margin:8px 0; }
+.resource-compact>p { margin:8px 0; }
+.resource-compact summary { padding:6px 0; font-size:11px; }
+.spell-compact { padding:14px 18px; margin-bottom:10px; }
+.spell-quick-info { display:flex; flex-wrap:wrap; gap:12px 24px; margin:10px 0 0; }
+.spell-quick-info dt { font-size:10px; color:var(--muted); }
+.spell-quick-info dd { margin:4px 0 0; font-size:12px; }
+.casting-summary { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+.casting-summary p { padding:8px 12px; border:1px solid var(--line); border-radius:6px; font-size:12px; margin:0; }
+.inventory-filters,.spell-filters { gap:12px; margin:12px 0; }
+.sheet-statuses { grid-column:1/-1; display:flex; flex-wrap:wrap; gap:12px; padding:14px; border:1px solid var(--line); border-radius:8px; background:#fffefa; }
+.sheet-statuses h3 { margin:0; font-size:14px; }
+.action-table td { vertical-align:top; }
+.action-table small { display:block; margin-top:8px; }
+.action-table .feature-rolls { min-width:180px; }
+.actions-view .equipped-attacks { margin-top:20px; }
+.equipped-attacks>div { border-top:1px solid var(--line); padding:12px 0; }
+.inventory-filters label,.spell-filters label { flex:1 1 180px; margin:0; }
+.roll-history { margin-top:24px; padding:12px 18px; }
+.roll-history ol { display:grid; gap:8px; padding:0; max-height:280px; overflow:auto; list-style:none; }
+.roll-history li { display:flex; align-items:center; gap:12px; font-size:12px; padding:8px 0; border-bottom:1px solid var(--line); }
+.roll-history li span { flex:1; }
+.roll-history li small { color:var(--muted); }
+.details-drawer { position:fixed; inset:0 0 0 auto; margin:0; height:100dvh; max-height:100dvh; width:min(560px,100vw); max-width:100vw; border-radius:0; padding:24px; }
+.details-drawer .feature-detail { margin-top:18px; }
+.details-drawer h1 { font-size:28px; }
+.details-drawer .feature-reference-header h1 { display:none; }
+.item-details-properties { display:grid; gap:16px; }
+.item-details-properties dt { font-size:12px; color:var(--muted); }
+.item-details-properties dd { margin:6px 0 0; white-space:pre-wrap; overflow-wrap:anywhere; }
+.subnav button:focus-visible,.rollable-value:focus-visible { outline:2px solid #8f6426; outline-offset:4px; }
+.topbar>span { margin-right:auto; }
+@media(min-width:761px) {
+  .sidebar-collapsed .sidebar { width:78px; padding:24px 12px; }
+  .sidebar-collapsed .main-shell { margin-left:78px; }
+  .sidebar-collapsed .brand>span,.sidebar-collapsed .sidebar-label,.sidebar-collapsed .sidebar-characters,.sidebar-collapsed .sidebar-bottom { display:none; }
+  .sidebar-collapsed .brand { justify-content:center; }
+  .sidebar-collapsed .sidebar nav a { overflow:hidden; width:52px; white-space:nowrap; gap:30px; }
+  .sidebar-collapsed .sidebar nav a>span { flex:0 0 22px; }
+}
+@media(max-width:1050px) { .sheet-overview { grid-template-columns:1fr; } }
+@media(max-width:760px) {
+  .sidebar-toggle { display:none; }
+  .sheet-overview { gap:12px; }
+  .overview-stats { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .overview-stat { padding:12px 9px; }
+  .subnav { overflow-x:auto; flex-wrap:nowrap; gap:18px; }
+  .subnav button { white-space:nowrap; }
+  .spell-row>.row { flex-wrap:wrap; align-items:start; }
+}

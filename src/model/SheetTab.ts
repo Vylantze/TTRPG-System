@@ -2,6 +2,6 @@
 export interface SheetTab {
   id: string;
   name: string;
-  content: 'choices' | 'sheet' | 'features' | 'resources' | 'notes' | 'sections' | 'items';
+  content: 'choices' | 'sheet' | 'features' | 'resources' | 'notes' | 'sections' | 'items' | 'actions' | 'spells';
   sections?: string[];
 }

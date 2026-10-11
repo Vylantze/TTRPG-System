@@ -39,3 +39,5 @@ export { resolveSystemFile, loadSystemFile } from '@/src/system-package.js';
 export type { SystemAssetCache } from '@/src/types/SystemAssetCache.js';
 export { releaseVersion, isReleaseVersion, compareVersions, bumpVersion, versionChange, classifyReleaseChange } from '@/src/version-policy.js';
 export { assetData } from '@/src/asset-data.js';
+export type { SheetDisplay } from '@/src/model/SheetDisplay.js';
+export type { StatRoll } from '@/src/model/StatRoll.js';

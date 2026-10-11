@@ -68,6 +68,35 @@ test('Items follows Skills by default, puts money first, and saved tab order sur
   assert.match(html, /Rearrange tabs/);
 });
 
+test('System-defined overview, health workflow, roll controls, spell summaries, and action tabs render on sample sheets', async () => {
+  const character = starterSaves[0];
+  const workspace = { ...data(), characters: [character] };
+  const sheet = await render(workspace, `#characters/${character.id}?view=stats`);
+  assert.match(sheet, /Damage or healing amount/);
+  assert.match(sheet, /Temporary HP/);
+  assert.match(sheet, /Roll Initiative/);
+  assert.match(sheet, /Roll Strength check/);
+  assert.match(sheet, /role="tablist"/);
+  assert.match(sheet, /role="tabpanel"/);
+  assert.match(sheet, /Roll history/);
+  assert.doesNotMatch(sheet, />Death save failures</);
+  assert.ok(sheet.indexOf('sheet-overview') < sheet.indexOf('class="subnav"'));
+  const actions = await render(workspace, `#characters/${character.id}?view=actions`);
+  assert.match(actions, /Action category/);
+  assert.match(actions, /Second Wind/);
+  assert.doesNotMatch(actions, /Arcane Recovery/);
+  assert.match(actions, /Equipped weapons/);
+  const inventory = await render(workspace, `#characters/${character.id}?view=items`);
+  assert.match(inventory, /Search inventory/);
+  assert.match(inventory, /All categories/);
+  const wizard = starterSaves.find((entry) => entry.progressions.some((progression) => progression.class.includes('wizard')));
+  const spells = await render({ ...data(), characters: [wizard] }, `#characters/${wizard.id}?view=spells`);
+  assert.match(spells, /Search spells/);
+  assert.match(spells, /Casting time/);
+  assert.match(spells, /spell attack/);
+  assert.match(spells, /save DC/);
+});
+
 test('Races catalogue and class labels use System terminology', async () => {
   const renamed = structuredClone(file);
   for (const configuration of renamed.configurations) configuration.system.terminology = { classSingular: 'Profession', classPlural: 'Professions', creatureSingular: 'Ancestry', creaturePlural: 'Ancestries', creatureTag: 'race' };
@@ -428,7 +457,8 @@ test('Starter Set party loads its System, saves all five characters, and preserv
   assert.match(html, /Character details/);
   assert.doesNotMatch(html, /Original character sheet/);
   assert.match(await render(repeated, `#characters/${repeated.characters[1].id}?view=notes`), /Original character sheet/);
-  assert.match(html, /All calculated stats/);
+  assert.doesNotMatch(html, /All calculated stats/);
+  assert.match(html, /Character overview/);
   assert.match(await render(workspace), /Add 2014 Starter Set party/);
 });
 
@@ -469,7 +499,7 @@ test('Fighter resource UI omits Arcane Recovery, while Wizard recovery and adjus
   assert.match(wizard, /Arcane Recovery/);
   const sheet = await render(workspace, `#characters/${starterSaves[0].id}`);
   assert.match(sheet, /<h2>Abilities<\/h2>/);
-  assert.match(sheet, /Combat &amp; exploration/);
+  assert.match(sheet, /Armor class/);
   assert.match(sheet, /class="sheet-table skill-list\s*"/);
   assert.doesNotMatch(sheet, /<h2>Inventory<\/h2>/);
   assert.match(await render(workspace, `#characters/${starterSaves[0].id}?view=items`), /Chain mail/);
@@ -517,7 +547,7 @@ test('sheet controls expose inline editing, five coin balances, sortable columns
   assert.match(html, /aria-sort="ascending"/);
   assert.doesNotMatch(html, /Calculation for Athletics/);
   assert.match(await render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=skills`), /Calculation for Athletics/);
-  assert.match(html, /Show modifiers first/);
+  assert.match(html, /Show scores first/);
   assert.match(html, /role="tooltip"[^>]*>Strength score/);
   assert.match(html, /role="tooltip"[^>]*>Strength modifier/);
   const resources = await render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=resources`);
@@ -591,10 +621,10 @@ test('Wizard spells are separate from slots and empty slot levels are initially 
 test('multiclass sheet names race and both class levels and exposes build editing', async () => {
   const sample = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/multiclass-sample.json', import.meta.url), 'utf8')).data;
   const html = await render({ ...data(), characters: [sample] }, `#characters/${sample.id}`);
-  assert.match(html, /Classes &amp; levels/);
+  assert.doesNotMatch(html, /Classes &amp; levels/);
   assert.match(html, /Fighter 2 \/ Wizard 3/);
-  assert.match(html, /<dt>Race<\/dt><dd>Human/);
-  assert.match(html, /Edit Name/);
+  assert.match(html, /Human · Fighter 2 \/ Wizard 3/);
+  assert.match(html, /aria-label="Character name"/);
   assert.match(html, /Edit build/);
 });
 test('character rule text resolves Fighter level and offers the declared healing roll', async () => {
@@ -649,7 +679,7 @@ test('sheet display keeps Hit Point class levels literal and resolves modifiers'
 test('spell levels collapse and free utility spells have no use control', async () => {
   const html = await render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=resources`);
   assert.match(html, /<details class="spell-level" open=""><summary>Cantrips/);
-  const cards = [...html.matchAll(/<article class="panel spell-row">([\s\S]*?)<\/article>/g)].map((match) => match[1]);
+  const cards = [...html.matchAll(/<article class="panel spell-row[^"]*">([\s\S]*?)<\/article>/g)].map((match) => match[1]);
   const utility = cards.find((card) => card.includes('Mage Hand'));
   assert.ok(utility);
   assert.doesNotMatch(utility, /Use Spell/);
