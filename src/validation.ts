@@ -6,6 +6,17 @@ import type { Catalogue, Character, Diagnostic, Expression, Predicate, Component
 import { RuleError, number } from '@/src/expression.js';
 import { compileBlocks } from '@/src/blocks.js';
 
+// These indexes exist only for the private, per-validation catalogue; mutable public inputs are never cached.
+const indexes = new WeakMap<Catalogue, { stats: Set<string>; features: Map<string, Catalogue['features'][number]> }>();
+function hasStat(catalogue: Catalogue, id: unknown): boolean {
+  const index = indexes.get(catalogue);
+  return index ? index.stats.has(String(id)) : catalogue.system.stats.some((stat) => stat.id === id);
+}
+function feature(catalogue: Catalogue, id: unknown) {
+  const index = indexes.get(catalogue);
+  return index ? index.features.get(String(id)) : catalogue.features.find((entry) => entry.id === id);
+}
+
 const unsafe = new Set(['__proto__', 'constructor', 'prototype']);
 export function record(v: unknown): asserts v is Record<string, unknown> {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw new RuleError('SCHEMA', 'Expected an object.');
@@ -51,7 +62,7 @@ export function checkExpression(e: unknown, catalogue: Catalogue, functions: Fun
     if (typeof e.literal !== 'boolean') number(e.literal);
   } else if ('stat' in e) {
     text(e.stat);
-    if (!catalogue.system.stats.some((s) => s.id === e.stat)) throw new RuleError('UNKNOWN_STAT', `Unknown stat ${e.stat}.`);
+    if (!hasStat(catalogue, e.stat)) throw new RuleError('UNKNOWN_STAT', `Unknown stat ${e.stat}.`);
   } else if ('context' in e) text(e.context);
   else if ('parameter' in e) text(e.parameter);
   else if ('base' in e) {
@@ -64,7 +75,7 @@ export function checkExpression(e: unknown, catalogue: Catalogue, functions: Fun
     text(e.table);
     if (e.owner !== undefined) {
       text(e.owner);
-      if (!catalogue.features.some((f) => f.id === e.owner && Object.hasOwn(f.tables ?? {}, String(e.table)))) throw new RuleError('UNKNOWN_TABLE', 'Missing referenced table.');
+      if (!Object.hasOwn(feature(catalogue, e.owner)?.tables ?? {}, String(e.table))) throw new RuleError('UNKNOWN_TABLE', 'Missing referenced table.');
     }
     recurse(e.input);
   } else if ('call' in e) {
@@ -95,7 +106,7 @@ function checkPredicate(p: unknown, c: Catalogue, depth = 0, functions: Function
     if (p.kind !== undefined && !['class', 'character'].includes(String(p.kind))) throw new RuleError('SCHEMA', 'Invalid level kind.');
   } else if ('feature' in p) {
     text(p.feature);
-    if (!c.features.some((f) => f.id === p.feature)) throw new RuleError('UNKNOWN_FEATURE', `Missing prerequisite ${p.feature}.`);
+    if (!feature(c, p.feature)) throw new RuleError('UNKNOWN_FEATURE', `Missing prerequisite ${p.feature}.`);
     if (p.parameters !== undefined) {
       record(p.parameters);
       Object.values(p.parameters).forEach(value);
@@ -104,7 +115,7 @@ function checkPredicate(p: unknown, c: Catalogue, depth = 0, functions: Function
   else if ('stat' in p) {
     text(p.stat);
     number(p.minimum);
-    if (!c.system.stats.some((s) => s.id === p.stat)) throw new RuleError('UNKNOWN_STAT', 'Unknown prerequisite stat.');
+    if (!hasStat(c, p.stat)) throw new RuleError('UNKNOWN_STAT', 'Unknown prerequisite stat.');
   } else if ('parameter' in p) {
     text(p.parameter);
     value(p.equals);
@@ -119,7 +130,7 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
   switch (v.kind) {
     case 'grantFeature': text(v.feature);
       if (v.atClassLevel !== undefined) integer(v.atClassLevel, 1);
-      if (!c.features.some((f) => f.id === v.feature)) throw new RuleError('UNKNOWN_FEATURE', `Missing grant ${v.feature}.`);
+      if (!feature(c, v.feature)) throw new RuleError('UNKNOWN_FEATURE', `Missing grant ${v.feature}.`);
       if (v.condition !== undefined) throw new RuleError('CONDITIONAL_GRANT', 'Use advancement entries for conditional acquisition; grants cannot have runtime conditions.');
       if (v.parameters !== undefined) {
         record(v.parameters);
@@ -136,7 +147,7 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
         list(v.candidates.ids);
         for (const id of v.candidates.ids) {
           text(id);
-          if (!c.features.some((f) => f.id === id)) throw new RuleError('UNKNOWN_FEATURE', `Missing candidate ${id}.`);
+          if (!feature(c, id)) throw new RuleError('UNKNOWN_FEATURE', `Missing candidate ${id}.`);
         }
       }
       if (v.candidates.tags !== undefined) {
@@ -156,7 +167,7 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
       break;
     case 'modifyStat':
       text(v.stat);
-      if (!c.system.stats.some((s) => s.id === v.stat)) throw new RuleError('UNKNOWN_STAT', `Unknown modified stat ${v.stat}.`);
+      if (!hasStat(c, v.stat)) throw new RuleError('UNKNOWN_STAT', `Unknown modified stat ${v.stat}.`);
       if (!['add', 'multiply', 'floor', 'ceiling', 'override'].includes(String(v.operation))) throw new RuleError('SCHEMA', 'Invalid modifier operation.');
       expr(v.value);
       if (v.stacking !== undefined && !['sum', 'highest', 'lowest', 'bestBonusAndWorstPenalty'].includes(String(v.stacking))) throw new RuleError('SCHEMA', 'Invalid stacking policy.');
@@ -541,13 +552,14 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       }
     }
     const c = { ...compiled, system: { ...compiled.system, stats: [...compiled.system.stats, ...created.values()] } };
+    indexes.set(c, { stats: new Set(c.system.stats.map((stat) => stat.id)), features: new Map(c.features.map((entry) => [entry.id, entry])) });
     if (c.system.equipmentRules !== undefined) {
       record(c.system.equipmentRules);
       if (c.system.equipmentRules.attunementLimitStat !== undefined && !c.system.stats.some((stat) => stat.id === c.system.equipmentRules!.attunementLimitStat)) throw new RuleError('UNKNOWN_STAT', 'Unknown attunement limit stat.');
       if (c.system.equipmentRules.preventDuplicateAttunement !== undefined && typeof c.system.equipmentRules.preventDuplicateAttunement !== 'boolean') throw new RuleError('SCHEMA', 'Duplicate attunement policy must be boolean.');
     }
     for (const feature of c.features) {
-      for (const id of [feature.equipmentEffect?.capacityStat, feature.equipmentEffect?.bonusCapacity?.stat, ...feature.companion?.stats ?? []].filter((id): id is string => !!id)) if (!c.system.stats.some((stat) => stat.id === id)) throw new RuleError('UNKNOWN_STAT', `Unknown equipment or companion stat ${id}.`);
+      for (const id of [feature.equipmentEffect?.capacityStat, feature.equipmentEffect?.bonusCapacity?.stat, ...feature.companion?.stats ?? []].filter((id): id is string => !!id)) if (!hasStat(c, id)) throw new RuleError('UNKNOWN_STAT', `Unknown equipment or companion stat ${id}.`);
     }
     text(c.system.id);
     integer(c.system.revision, 1);
@@ -563,7 +575,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
         list(policy.ids);
         policy.ids.forEach((id) => {
           text(id);
-          if (!c.features.some((f) => f.id === id)) throw new RuleError('UNKNOWN_FEATURE', 'Unknown root candidate.');
+          if (!feature(c, id)) throw new RuleError('UNKNOWN_FEATURE', 'Unknown root candidate.');
         });
       }
       if (policy.tags) {
@@ -604,7 +616,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       unique(f.textReferences, 'text reference');
       for (const id of f.textReferences) {
         text(id);
-        if (!c.features.some((reference) => reference.id === id)) throw new RuleError('UNKNOWN_FEATURE', `Unknown text reference ${id}.`);
+        if (!feature(c, id)) throw new RuleError('UNKNOWN_FEATURE', `Unknown text reference ${id}.`);
       }
     }
     for (const f of c.features) if (f.displayName !== undefined) text(f.displayName);
@@ -660,7 +672,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
         text(recovery.capabilityName);
         text(recovery.requiredEvent);
         text(recovery.budgetStat);
-        if (!c.system.stats.some((s) => s.id === recovery.budgetStat)) throw new RuleError('UNKNOWN_STAT', 'Unknown recovery budget stat.');
+        if (!hasStat(c, recovery.budgetStat)) throw new RuleError('UNKNOWN_STAT', 'Unknown recovery budget stat.');
         if (recovery.boundaryEvent !== undefined) text(recovery.boundaryEvent);
         record(recovery.targets);
         if (!Object.keys(recovery.targets).length) throw new RuleError('SCHEMA', 'Recovery needs targets.');
@@ -788,7 +800,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     if (c.system.alternatives) {
       record(c.system.alternatives);
       for (const [stat, alternatives] of Object.entries(c.system.alternatives)) {
-        if (!c.system.stats.some((s) => s.id === stat)) throw new RuleError('UNKNOWN_STAT', stat);
+        if (!hasStat(c, stat)) throw new RuleError('UNKNOWN_STAT', stat);
         list(alternatives);
         unique(alternatives.map((a) => a.id), 'alternative');
         for (const a of alternatives) {
@@ -803,10 +815,13 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       if (visiting.has(id)) throw new RuleError('COMPOSITION_CYCLE', `Composition cycle at ${id}.`);
       if (done.has(id)) return;
       visiting.add(id);
-      const f = c.features.find((f) => f.id === id)!;
+      const f = feature(c, id)!;
       for (const v of f.components) {
         if (v.kind === 'grantFeature') visit(v.feature);
-        if (v.kind === 'chooseFeatures') for (const candidate of c.features.filter((f) => (!v.candidates.ids || v.candidates.ids.includes(f.id)) && (!v.candidates.tags || v.candidates.tags.every((t) => f.tags?.includes(t))))) visit(candidate.id);
+        if (v.kind === 'chooseFeatures') {
+          const candidates = v.candidates.ids ? v.candidates.ids.map((id) => feature(c, id)!) : c.features;
+          for (const candidate of candidates) if (!v.candidates.tags || v.candidates.tags.every((tag) => candidate.tags?.includes(tag))) visit(candidate.id);
+        }
       }
       visiting.delete(id);
       done.add(id);

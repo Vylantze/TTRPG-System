@@ -1,3 +1,4 @@
+import { evaluateForSheet } from '@/ui/src/sheet-evaluation';
 import { deserializeCharacter, migrateCharacterStructure, serializeCharacter, type Character, type SystemFile } from '@/src/index';
 import { createRegistry, systemKey, type Workspace } from '@/ui/src/workspace';
 import type { PrototypeCleanup } from '@/ui/src/types/PrototypeCleanup';
@@ -10,7 +11,7 @@ export function reconcilePrototypeCharacters(workspace: Workspace, templates: Ch
   const compatible = (character: Character) => {
     const engine = after.engineForCharacter(character);
     deserializeCharacter(serializeCharacter(character), engine);
-    const result = engine.evaluate(character);
+    const result = evaluateForSheet(engine, character);
     // Unfinished choices are expected in a draft. Structural damage is not.
     if (result.status !== 'valid' && (character.buildState !== 'draft' || result.diagnostics.some((d) => ['UNKNOWN_FEATURE', 'UNKNOWN_CLASS', 'HISTORY', 'SCHEMA', 'CONTENT_REVISION', 'CANDIDATE', 'ROOT_FEATURE'].includes(d.code)))) throw new Error('Character is incompatible with the loaded System.');
     return character;

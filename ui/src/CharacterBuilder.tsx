@@ -1,3 +1,4 @@
+import { evaluateForSheet } from '@/ui/src/sheet-evaluation';
 import { MoneySection } from '@/ui/src/MoneySection';
 import { RestControls } from '@/ui/src/RestControls';
 import { Inventory } from '@/ui/src/Inventory';
@@ -37,7 +38,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
   const [orderingTabs, setOrderingTabs] = useState(false);
   const [showSummary, setShowSummary] = useState(false);
   const [changingTab, startTabChange] = useTransition();
-  const result = useMemo(() => engine.evaluate(character), [engine, character]);
+  const result = useMemo(() => evaluateForSheet(engine, character), [engine, character]);
   const [tab, setTab] = useState(() => {
       const requested = typeof window !== 'undefined' ? new URLSearchParams(window.location.hash.split('?')[1]).get('view') : null;
       return requested && tabs.some((entry) => entry.id === requested) ? requested : (tabs.find((entry) => entry.content === (character.buildState === 'finalized' ? 'sheet' : 'choices')) ?? tabs[0])?.id;
@@ -61,9 +62,9 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
   const incomplete = result.diagnostics.filter((d) => d.severity === 'incomplete').length;
   const ready = character.buildState !== 'draft' && result.status === 'valid';
   const [recoveryOpen, setRecoveryOpen] = useState(false);
-  const spells = spellGroups(engine, result);
-  const spellIds = new Set(spells.flatMap((spell) => spell.modes.map((mode) => mode.capability.id)));
-  const slotIds = new Set(spellSlotPools(engine, result).map(({ pool }) => pool.id));
+  const spells = useMemo(() => spellGroups(engine, result), [engine, result]);
+  const spellIds = useMemo(() => new Set(spells.flatMap((spell) => spell.modes.map((mode) => mode.capability.id))), [spells]);
+  const slotIds = useMemo(() => new Set(spellSlotPools(engine, result).map(({ pool }) => pool.id)), [engine, result]);
   const companionOwners = result.instances.filter((instance) => engine.getFeature(instance.feature)?.companion).map((instance) => instance.id);
   const abilities = result.capabilities.filter((capability) => !companionOwners.some((id) => capability.source === id || capability.source.startsWith(`${id}/`)) && !spellIds.has(capability.id) && !engine.getFeature(result.instances.find((instance) => instance.id === capability.source)!.feature)?.tags?.includes(engine.catalogue.system.healingFeaturesTag ?? ''));
   const resource = (id: string) => result.resources[id] && <ResourceSummary key={id} pool={result.resources[id]} engine={engine} result={result} ready={ready} adjust={(delta) => attempt(() => update(adjustResource(engine, character, id, delta, crypto.randomUUID())))} />;
@@ -406,7 +407,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
 function SelectedRecovery({ engine, character, ready, update, report }: { engine: Engine; character: Character; ready: boolean; update: (c: Character) => void; report: (message: string) => void }) {
   const policy = engine.catalogue.system.commandRules!.selectedRecovery!;
   const [counts, setCounts] = useState<Record<string, number>>({}), [rest, setRest] = useState('');
-  const result = engine.evaluate(character);
+  const result = evaluateForSheet(engine, character);
   const events = character.events.filter((e) => {
     try {
       const data = JSON.parse(e.fingerprint);

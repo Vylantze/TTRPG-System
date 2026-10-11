@@ -1,6 +1,8 @@
 /** Upgrade the previous prototype's saved display fields without changing character data. */
 export function migrateDescriptionOverrides(input: unknown): unknown {
   if (!input || typeof input !== 'object') return input;
+  const candidate = input as Record<string, unknown>;
+  if (!Array.isArray(candidate.features) || !candidate.features.some((feature) => feature && (Object.hasOwn(feature, 'processDescription') || typeof feature.descriptionOverride === 'string'))) return input;
   const file = structuredClone(input) as Record<string, unknown>;
   if (!Array.isArray(file.features)) return file;
   const aliases: Record<string, string> = {};

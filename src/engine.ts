@@ -37,7 +37,7 @@ export class Engine {
   }
 
   getStatDefinition(id: string): Catalogue['system']['stats'][number] | undefined {
-    return this.catalogue.system.stats.find((s) => s.id === id) ?? this.catalogue.features.flatMap((f) => f.components.flatMap((c) => c.kind === 'defineStat' ? [c.stat] : [])).find((s) => s.id === id);
+    return this.statDefinitions.get(id);
   }
 
   /** Authored levels, in numerical order. No character state or rules are changed. */
@@ -89,12 +89,15 @@ export class Engine {
 
   readonly catalogue: Catalogue;
   private readonly features: Map<string, Catalogue['features'][number]>;
+  private readonly statDefinitions = new Map<string, Catalogue['system']['stats'][number]>();
   constructor(catalogue: Catalogue, private functions: FunctionRegistry = {}) {
     catalogue = compileBlocks(catalogue);
     const errors = validateCatalogue(catalogue, functions);
     if (errors.length) throw new RuleError(errors[0].code, errors[0].message, errors[0].path);
     this.catalogue = freeze(clone(catalogue));
     this.features = new Map(this.catalogue.features.map((f) => [f.id, f]));
+    for (const stat of this.catalogue.system.stats) this.statDefinitions.set(stat.id, stat);
+    for (const feature of this.catalogue.features) for (const component of feature.components) if (component.kind === 'defineStat' && !this.statDefinitions.has(component.stat.id)) this.statDefinitions.set(component.stat.id, component.stat);
   }
 
   resolveDefinition(id: string, revision?: number) {

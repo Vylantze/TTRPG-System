@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { App } from '@/ui/src/App';
+import { ScreenBoundary } from '@/ui/src/ScreenBoundary';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
+const App = lazy(() => import('@/ui/src/App').then((module) => ({ default: module.App })));
 import { LoadingOverlay } from '@/ui/src/LoadingOverlay';
 import { WorkspaceDatabase } from '@/ui/src/WorkspaceDatabase';
 import { download, STORAGE_KEY, type Workspace } from '@/ui/src/workspace';
@@ -18,14 +19,15 @@ export function DatabaseApp() {
     // One initialization promise also makes StrictMode's effect replay harmless.
     const loading = initialization.current ??= Promise.resolve().then(async () => {
       if (!database) throw new Error('IndexedDB is unavailable in this browser. Enable local storage and reload.');
-      const templates = await loadPrototypeTemplates();
+      const templatesPromise = loadPrototypeTemplates();
       const schemaMessages: string[] = [];
-      const loaded = await database.load({ getItem: (key) => localStorage.getItem(key) }, (value) => {
+      const loaded = await database.load({ getItem: (key) => localStorage.getItem(key) }, templatesPromise.then((templates) => (value) => {
         const raw = value && typeof value === 'object' ? value as Record<string, unknown> : {};
         const template = templates.find((sample) => sample.id === raw.id);
         schemaMessages.push(`${template ? 'Rebuilt sample' : 'Removed incompatible character'}: ${typeof raw.name === 'string' ? raw.name : String(raw.id ?? 'Unnamed')}.`);
         return template && structuredClone(template);
-      });
+      }));
+      const templates = await templatesPromise;
       const result = reconcilePrototypeCharacters(loaded, templates);
       if (result.workspace !== loaded || schemaMessages.length) await database.save(result.workspace);
       setCleanupMessage([...schemaMessages, ...result.rebuilt.map((name) => `Rebuilt sample: ${name}.`), ...result.removed.map((name) => `Removed incompatible character: ${name}.`)].join(' '));
@@ -40,7 +42,7 @@ export function DatabaseApp() {
       cancelled = true;
     };
   }, [database]);
-  if (workspace && database) return <App initialWorkspace={workspace} persist={persist} startupMessage={cleanupMessage} />;
+  if (workspace && database) return <ScreenBoundary><Suspense fallback={<LoadingOverlay />}><App initialWorkspace={workspace} persist={persist} startupMessage={cleanupMessage} /></Suspense></ScreenBoundary>;
   if (error) return (
     <main className="panel" role="alert">
       <h1>Local database could not be opened</h1>

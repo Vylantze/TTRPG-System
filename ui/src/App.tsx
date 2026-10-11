@@ -4,16 +4,16 @@ import { SystemLoader } from '@/ui/src/SystemLoader';
 import { ReloadSystemButton } from '@/ui/src/ReloadSystemButton';
 import { safeReturn } from '@/ui/src/feature-origin';
 import { FeatureLink } from '@/ui/src/FeatureLink';
-import { useEffect, useMemo, useRef, useState, useTransition, type FormEvent } from 'react';
+import { lazy, memo, useCallback, useEffect, useMemo, useRef, useState, useTransition, type FormEvent } from 'react';
 import noticeUrl from '@/NOTICE.md?url';
 import { deserializeCharacter, serializeCharacter, type Character, type Engine, type SystemFile, type Value } from '@/src/index';
 import { loadBundledSystem, loadSelectedSystem } from '@/ui/src/load-system-package';
 import bundledUrl from '@/src/systems/dnd5e-2014/system.json?url';
 import starterUrl from '@/src/systems/dnd5e-2014/starter-characters.json?url';
 import { addStarterCharacters, migrateMoney } from '@/ui/src/starter-characters';
-import { CharacterBuilder } from '@/ui/src/CharacterBuilder';
-import { ClassDetail } from '@/ui/src/ClassDetail';
-import { FeatureDetail } from '@/ui/src/FeatureDetail';
+const CharacterBuilder = lazy(() => import('@/ui/src/CharacterBuilder').then((module) => ({ default: memo(module.CharacterBuilder) })));
+const ClassDetail = lazy(() => import('@/ui/src/ClassDetail').then((module) => ({ default: memo(module.ClassDetail) })));
+const FeatureDetail = lazy(() => import('@/ui/src/FeatureDetail').then((module) => ({ default: memo(module.FeatureDetail) })));
 import { Modal } from '@/ui/src/Modal';
 import { RulesText } from '@/ui/src/RulesText';
 import { descriptionPreview, featureDescription, featureHref } from '@/ui/src/feature-description';
@@ -118,13 +118,16 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
     setSaved(false);
     setWorkspace(next);
   };
-  const update = (character: Character) => change((current) => ({ ...current, characters: current.characters.map((c) => c.id === character.id ? character : c), active: character.id }));
+  const update = useCallback((character: Character) => {
+    setSaved(false);
+    setWorkspace((current) => ({ ...current, characters: current.characters.map((c) => c.id === character.id ? character : c), active: character.id }));
+  }, []);
   const loadFile = async (input?: File[]) => {
     setLoading(true);
     setError('');
     try {
       const file = input ? await loadSelectedSystem(input) : await loadBundledSystem();
-      registry.load(file);
+      createRegistry([...workspaceRef.current.systems, file]);
       change((current) => migrateMoney({ ...current, systems: [...current.systems, file] }));
       setSelectedSystem(systemKey(file));
       setOptions({});
@@ -195,9 +198,9 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
   const setQuery = (value: string) => browse('q', value);
   const setTag = (value: string) => browse('tag', value);
   const setPage = (value: number) => browse('page', String(value));
-  const openFeature = (id: string) => {
+  const openFeature = useCallback((id: string) => {
     if (engine) window.location.hash = featureHref(id, engine);
-  };
+  }, [engine]);
   const loadStarterParty = async () => {
     setLoading(true);
     setError('');

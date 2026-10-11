@@ -23,3 +23,5 @@ import '@/tests/equipment-effects.test.js';
 import '@/tests/subclass-expansion.test.js';
 import '@/tests/audit-regressions.test.js';
 import '@/tests/system-package.test.js';
+
+import '@/tests/loading-performance.test.js';

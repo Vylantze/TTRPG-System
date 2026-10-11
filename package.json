@@ -29,7 +29,8 @@
     "templates:build": "npm run build && node --import ./tools/register-alias.mjs tools/build-starter-characters.mjs",
     "ui:dev": "npm run dev --prefix ui",
     "ui:build": "npm run build --prefix ui",
-    "test:ui": "npm run build && npm run test --prefix ui"
+    "test:ui": "npm run build && npm run test --prefix ui",
+    "benchmark:loading": "npm run build && node --import ./tools/register-alias.mjs tools/benchmark-loading.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
