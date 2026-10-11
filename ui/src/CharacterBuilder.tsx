@@ -1,4 +1,5 @@
 import { MoneySection } from '@/ui/src/MoneySection';
+import { RestControls } from '@/ui/src/RestControls';
 import { Inventory } from '@/ui/src/Inventory';
 import { EquipmentEffects } from '@/ui/src/EquipmentEffects';
 import { CompanionPanels } from '@/ui/src/CompanionPanels';
@@ -116,6 +117,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
         </div>
         <button aria-expanded={showSummary || result.status === 'invalid'} aria-controls="build-summary" onClick={() => setShowSummary(!showSummary)} className={`badge ${result.status}`}>{result.status === 'valid' && character.buildState === 'draft' ? 'Ready to finalize' : result.status}</button>
       </div>
+      <RestControls engine={engine} character={character} result={result} update={update} report={report} />
       {(showSummary || result.status === 'invalid') && (
         <div id="build-summary" className="summary-strip">
           <div>

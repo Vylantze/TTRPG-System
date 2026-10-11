@@ -6,7 +6,8 @@ import { safeReturn } from '@/ui/src/feature-origin';
 import { FeatureLink } from '@/ui/src/FeatureLink';
 import { useEffect, useMemo, useRef, useState, useTransition, type FormEvent } from 'react';
 import noticeUrl from '@/NOTICE.md?url';
-import { deserializeCharacter, parseSystemFile, serializeCharacter, type Character, type Engine, type SystemFile, type Value } from '@/src/index';
+import { deserializeCharacter, serializeCharacter, type Character, type Engine, type SystemFile, type Value } from '@/src/index';
+import { loadBundledSystem, loadSelectedSystem } from '@/ui/src/load-system-package';
 import bundledUrl from '@/src/systems/dnd5e-2014/system.json?url';
 import starterUrl from '@/src/systems/dnd5e-2014/starter-characters.json?url';
 import { addStarterCharacters, migrateMoney } from '@/ui/src/starter-characters';
@@ -118,11 +119,11 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
     setWorkspace(next);
   };
   const update = (character: Character) => change((current) => ({ ...current, characters: current.characters.map((c) => c.id === character.id ? character : c), active: character.id }));
-  const loadFile = async (input: File | string) => {
+  const loadFile = async (input?: File[]) => {
     setLoading(true);
     setError('');
     try {
-      const file = parseSystemFile(typeof input === 'string' ? input : await input.text());
+      const file = input ? await loadSelectedSystem(input) : await loadBundledSystem();
       registry.load(file);
       change((current) => migrateMoney({ ...current, systems: [...current.systems, file] }));
       setSelectedSystem(systemKey(file));
@@ -136,27 +137,18 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
   const loadBundled = async () => {
     setLoading(true);
     try {
-      const response = await fetch(bundledUrl);
-      if (!response.ok) throw new Error('Bundled System could not be loaded.');
-      await loadFile(await response.text());
+      await loadFile();
     } catch (e) {
       setError(errorMessage(e));
       setLoading(false);
     }
   };
-  const reload = async (existing: SystemFile, source?: File) => {
+  const reload = async (existing: SystemFile, source?: File[]) => {
     setReloadMessage('');
     setLoading(true);
     setError('');
     try {
-      let text: string;
-      if (source) text = await source.text();
-      else {
-        const response = await fetch(bundledUrl, { cache: 'no-store' });
-        if (!response.ok) throw new Error('Bundled System could not be reloaded.');
-        text = await response.text();
-      }
-      const incoming = parseSystemFile(text);
+      const incoming = source ? await loadSelectedSystem(source) : await loadBundledSystem();
       if (systemKey(incoming) !== systemKey(existing)) throw new Error('Load a different System revision separately.');
       const cleanup = reconcilePrototypeCharacters(workspace, await loadPrototypeTemplates(), incoming);
       const next = migrateMoney(cleanup.workspace);
@@ -210,9 +202,9 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
     setLoading(true);
     setError('');
     try {
-      const responses = await Promise.all([fetch(bundledUrl), fetch(starterUrl)]);
-      if (responses.some((response) => !response.ok)) throw new Error('Starter Set files could not be loaded.');
-      const [system, saves] = await Promise.all(responses.map((response) => response.json()));
+      const [system, response] = await Promise.all([loadBundledSystem(), fetch(starterUrl)]);
+      if (!response.ok) throw new Error('Starter Set files could not be loaded.');
+      const saves: unknown = await response.json();
       const next = addStarterCharacters(workspaceRef.current, system, saves);
       change(next);
       go('characters');

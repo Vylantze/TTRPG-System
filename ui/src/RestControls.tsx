@@ -8,6 +8,8 @@ export function RestControls({ engine, character, result, update, report }: { en
   const [allocation, setAllocation] = useState<Record<string, number>>({});
   const ready = character.buildState !== 'draft' && result.status === 'valid';
   const events = [...new Set([...(engine.catalogue.system.recoveryEvents ?? []), ...Object.values(result.resources).flatMap((pool) => pool.recovery.map((rule) => rule.event)), ...Object.keys(engine.catalogue.system.recoveryAllocations ?? {}), ...(engine.catalogue.system.commandRules?.selectedRecovery ? [engine.catalogue.system.commandRules.selectedRecovery.requiredEvent] : [])])];
+  const buttons = engine.catalogue.system.resetButtons ?? events.map((name) => ({ event: name, label: labelFromId(name) }));
+  const eventLabel = (name: string) => buttons.find((button) => button.event === name)?.label ?? labelFromId(name);
   const recover = (name: string, counts?: Record<string, number>) => {
     try {
       update(recoverResources(engine, character, name, crypto.randomUUID(), counts));
@@ -20,8 +22,8 @@ export function RestControls({ engine, character, result, update, report }: { en
   const pools = policy ? Object.values(result.resources).filter((pool) => policy.keys.includes(pool.key) && pool.spent > 0) : [];
   return (
     <>
-      <div className="toolbar rest-controls">
-        {events.map((name) => (
+      <div className="toolbar rest-controls" role="group" aria-label="Character resets">
+        {buttons.map(({ event: name, label }) => (
           <button
             className="quiet"
             key={name}
@@ -40,12 +42,12 @@ export function RestControls({ engine, character, result, update, report }: { en
               setEvent(name);
             }}
           >
-            {labelFromId(name)}
+            {label}
           </button>
         ))}
       </div>
       {event && policy && (
-        <Modal title={`Complete ${labelFromId(event)}`} onClose={() => setEvent(undefined)}>
+        <Modal title={`Complete ${eventLabel(event)}`} onClose={() => setEvent(undefined)}>
           <p>{`Recover up to ${result.stats[policy.budgetStat].value} spent resource units in total. Other resources recover normally.`}</p>
           {pools.map((pool) => (
             <label key={pool.id}>
@@ -53,7 +55,7 @@ export function RestControls({ engine, character, result, update, report }: { en
               <input type="number" min="0" max={pool.spent} step="1" value={allocation[pool.key] ?? 0} onChange={(e) => setAllocation({ ...allocation, [pool.key]: Number(e.target.value) })} />
             </label>
           ))}
-          <button disabled={Object.values(allocation).some((amount) => !Number.isInteger(amount) || amount < 0) || Object.values(allocation).reduce((a, b) => a + b, 0) > result.stats[policy.budgetStat].value} onClick={() => recover(event, allocation)}>Complete rest</button>
+          <button disabled={Object.values(allocation).some((amount) => !Number.isInteger(amount) || amount < 0) || Object.values(allocation).reduce((a, b) => a + b, 0) > result.stats[policy.budgetStat].value} onClick={() => recover(event, allocation)}>{`Complete ${eventLabel(event)}`}</button>
         </Modal>
       )}
     </>

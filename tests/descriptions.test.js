@@ -1,10 +1,10 @@
+import { readSystem } from '@/tools/read-system.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import { Engine, parseSystemFile, validateCatalogue } from '@/dist/index.js';
 import { catalogue as fixture } from '@/examples/catalogue.js';
 
-const file = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
+const file = readSystem(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url));
 const feature = (name) => file.features.find((f) => f.id === `dnd5e:2014:${name}`);
 
 test('text link contexts reject malformed metadata', () => {

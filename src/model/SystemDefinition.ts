@@ -16,6 +16,8 @@ export interface SystemDefinition {
   recoveryAllocations?: Record<string, { budgetStat: string; keys: string[] }>;
   terminology?: { classSingular: string; classPlural: string; creatureSingular: string; creaturePlural: string; creatureTag: string };
   recoveryEvents?: string[];
+  /** Ordered character-level reset controls. Empty explicitly hides all controls. */
+  resetButtons?: { event: string; label: string }[];
   healingFeaturesTag?: string;
   sheetTabs?: SheetTab[];
   importantDetails?: string[];

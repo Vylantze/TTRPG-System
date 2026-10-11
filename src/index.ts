@@ -35,3 +35,4 @@ export { descriptionTokenValues } from '@/src/description-tokens.js';
 export { applyDescriptionOverrides } from '@/src/description-overrides.js';
 
 export { migrateCharacterStructure } from '@/src/migrate-character-structure.js';
+export { resolveSystemFile, loadSystemFile } from '@/src/system-package.js';

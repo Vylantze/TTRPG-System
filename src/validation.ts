@@ -338,6 +338,17 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       record(compiled.system.terminology);
       for (const key of ['classSingular', 'classPlural', 'creatureSingular', 'creaturePlural', 'creatureTag']) text(compiled.system.terminology[key as keyof typeof compiled.system.terminology]);
     }
+    if (compiled.system.resetButtons !== undefined) {
+      list(compiled.system.resetButtons);
+      const events = new Set<string>();
+      for (const button of compiled.system.resetButtons) {
+        record(button);
+        text(button.event);
+        text(button.label);
+        if (events.has(button.event)) throw new RuleError('SCHEMA', 'Duplicate reset button event.');
+        events.add(button.event);
+      }
+    }
     if (compiled.system.recoveryEvents !== undefined) {
       list(compiled.system.recoveryEvents);
       compiled.system.recoveryEvents.forEach(text);
