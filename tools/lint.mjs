@@ -5,6 +5,8 @@ import { spawnSync } from 'node:child_process';
 import { lintSource } from '@/tools/lint-rules.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
+const schemaCheck = spawnSync(process.execPath, ['tools/generate-editor-schema.mjs', '--check'], { cwd: root, stdio: 'inherit' });
+if (schemaCheck.status !== 0) process.exit(schemaCheck.status ?? 1);
 const excluded = new Set(['node_modules', 'dist', 'coverage']);
 function sources(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {

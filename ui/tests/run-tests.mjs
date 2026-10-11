@@ -861,8 +861,53 @@ test('System data editor supports immutable record edits, versioning, and safe r
   const html = await render(data(), '#system-data');
   assert.match(html, /System to edit/);
   assert.match(html, /Find record/);
-  assert.match(html, /System JSON data/);
+  assert.match(html, /System editor categories/);
+  assert.match(html, /Rules configuration/);
+  assert.match(html, /System settings/);
+  assert.doesNotMatch(html, /System JSON data/);
+  assert.match(html, /System options/);
   assert.match(html, /Validate and save/);
+});
+
+test('Structured System forms create, edit, and delete records without mutating loaded data', async () => {
+  const { editorRecords, newSystemRecord, editSystemRecord } = await server.ssrLoadModule('/src/system-editor-records.ts');
+  const { formSchema, formDefault, matchesFormSchema, switchFormVariant } = await server.ssrLoadModule('/src/authoring-form.ts');
+  const { AuthoringField } = await server.ssrLoadModule('/src/AuthoringField.tsx');
+  for (const category of ['classes', 'features', 'spells', 'items', 'itemFeatures', 'blocks', 'settings']) {
+    const records = editorRecords(file, category, 0);
+    assert.ok(records.length, category);
+    if (category === 'settings') continue;
+    const created = newSystemRecord(file, category, 0);
+    const record = editorRecords(created.file, category, 0).find((entry) => entry.id === created.id);
+    assert.ok(record);
+    assert.ok(!editorRecords(file, category, 0).some((entry) => entry.id === created.id));
+    const edited = editSystemRecord(created.file, category, 0, created.id, { ...record.value, name: 'My custom record' });
+    assert.equal(editorRecords(edited, category, 0).find((entry) => entry.id === created.id).label, 'My custom record');
+    assert.ok(!editorRecords(editSystemRecord(edited, category, 0, created.id, undefined), category, 0).some((entry) => entry.id === created.id));
+    assert.notEqual(newSystemRecord(created.file, category, 0).id, created.id);
+  }
+  const cls = file.configurations[0].classes[0];
+  assert.deepEqual(editorRecords(file, 'options', 0)[0].value, file.options);
+  assert.ok(matchesFormSchema(formSchema('SystemOptions'), file.options));
+  assert.equal(editSystemRecord(file, 'options', 0, file.id, { ...file.options }).features, file.features);
+  const edited = editSystemRecord(file, 'classes', 0, cls.id, { ...cls, name: 'Custom class' });
+  assert.equal(edited.configurations[1], file.configurations[1]);
+  assert.equal(file.configurations[0].classes[0], cls);
+  for (const name of ['FeatureDefinition', 'ClassDefinition', 'ItemDefinition', 'SystemDefinition']) assert.ok(matchesFormSchema(formSchema(name), formDefault(formSchema(name))), name);
+  const component = { id: 'grant', kind: 'grantFeature', feature: file.features[0].id };
+  assert.equal(formDefault(formSchema('DefineStat')).stat.kind, 'derived');
+  const derived = switchFormVariant(formSchema('DefineStat'), { id: 'existing-component', kind: 'describe', text: 'Old prose' });
+  assert.equal(derived.id, 'existing-component');
+  assert.equal(derived.kind, 'defineStat');
+  assert.equal(derived.text, undefined);
+  const withClass = newSystemRecord(file, 'classes', 0);
+  if (file.configurations[0].system.classes) assert.ok(withClass.file.configurations[0].system.classes.includes(withClass.id));
+  assert.ok(matchesFormSchema(formSchema('Component'), component));
+  const html = renderToStaticMarkup(createElement(AuthoringField, { schema: formSchema('Component'), value: component, label: 'Component', change: () => {} }));
+  assert.match(html, /grantFeature/);
+  assert.match(html, /Value type/);
+  assert.match(html, /authoring-references/);
+  assert.doesNotMatch(html, /textarea/);
 });
 
 test.after(() => server.close());

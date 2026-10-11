@@ -12,6 +12,10 @@ export function prepareSystemDataEdit(file: SystemFile, section: string, draft: 
   }
   const candidate = section === 'all' ? data : { ...file, [section]: value };
   if (!candidate || typeof candidate !== 'object' || Array.isArray(candidate)) throw new Error('Expected System JSON.');
+  return versionSystemDataEdit(file, candidate as SystemFile);
+}
+
+export function versionSystemDataEdit(file: SystemFile, candidate: SystemFile): SystemFile {
   const kind = classifyReleaseChange(file, candidate);
   const updated = { ...candidate as SystemFile, contentVersion: kind === 'none' ? file.contentVersion : bumpVersion(releaseVersion(file.contentVersion), kind) };
   if (kind !== 'none') delete updated.assetVersions;

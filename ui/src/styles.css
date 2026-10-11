@@ -320,5 +320,18 @@ button.resource-adjust-button { box-sizing: border-box; flex: 0 0 2rem; width: 2
 .selection-card.selection-error>summary { color:#8b2424; }
 .selection-issues { color:#8b2424; font-size:13px; }
 .system-data-editor fieldset { border:0; padding:0; min-width:0; }
-.system-data-editor textarea { display:block; width:100%; height:60vh; min-height:300px; max-height:75vh; resize:vertical; overflow:auto; font:12px/1.5 monospace; white-space:pre; margin:18px 0; }
+.system-data-editor textarea { display:block; width:100%; min-height:140px; max-height:400px; resize:vertical; overflow:auto; font:inherit; margin:8px 0; }
+.system-editor-layout { display:grid; grid-template-columns:minmax(180px,260px) minmax(0,1fr); gap:24px; margin:22px 0; }
+.system-editor-browser,.system-editor-form { min-width:0; }
+.system-editor-records { display:grid; gap:8px; max-height:65vh; overflow:auto; margin:16px 0; padding-right:6px; }
+.system-editor-records button { display:block; text-align:left; overflow-wrap:anywhere; }
+.system-editor-records small { display:block; font-weight:normal; font-size:10px; opacity:.8; }
+.authoring-group { border:1px solid var(--line); border-radius:8px; padding:0 14px 14px; margin:14px 0; min-width:0; }
+.authoring-group>summary { font-weight:600; padding:14px 0; cursor:pointer; }
+.authoring-property,.authoring-entry { margin:12px 0; padding:10px 0; border-bottom:1px solid var(--line); min-width:0; }
+.authoring-checkbox { display:flex; align-items:center; gap:10px; }
+.authoring-checkbox input { width:auto; }
+.authoring-union { background:#f5f6f0; padding:12px; border-radius:7px; margin:10px 0; }
+.system-data-editor .toolbar { margin:12px 0; }
+@media(max-width:760px) { .system-editor-layout { grid-template-columns:minmax(0,1fr); } .system-editor-records { max-height:230px; } }
 .selection-level { display: block; font-size: 12px; font-weight: normal; margin-top: 4px; }

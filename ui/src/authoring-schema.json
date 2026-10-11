@@ -1,0 +1,5419 @@
+{
+  "BlockDefinition": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "parameters": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "ParameterDefinition"
+          }
+        },
+        "optional": true
+      },
+      "components": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "record",
+            "item": {
+              "kind": "unknown"
+            }
+          }
+        },
+        "optional": false
+      }
+    }
+  },
+  "BoundaryPolicy": {
+    "kind": "union",
+    "variants": [
+      {
+        "kind": "literal",
+        "value": "error"
+      },
+      {
+        "kind": "literal",
+        "value": "boundary"
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "fallback": {
+            "schema": {
+              "kind": "number"
+            },
+            "optional": false
+          }
+        }
+      }
+    ]
+  },
+  "Candidate": {
+    "kind": "object",
+    "fields": {
+      "feature": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "status": {
+        "schema": {
+          "kind": "unknown"
+        },
+        "optional": false
+      },
+      "waived": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": false
+      },
+      "diagnostics": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "Diagnostic"
+          }
+        },
+        "optional": false
+      }
+    }
+  },
+  "Capability": {
+    "kind": "intersection",
+    "variants": [
+      {
+        "kind": "ref",
+        "name": "ComponentBase"
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "grantCapability"
+            },
+            "optional": false
+          },
+          "name": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "description": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": true
+          },
+          "action": {
+            "schema": {
+              "kind": "object",
+              "fields": {
+                "kind": {
+                  "schema": {
+                    "kind": "string"
+                  },
+                  "optional": false
+                },
+                "amount": {
+                  "schema": {
+                    "kind": "number"
+                  },
+                  "optional": false
+                }
+              }
+            },
+            "optional": true
+          },
+          "requirements": {
+            "schema": {
+              "kind": "ref",
+              "name": "Predicate"
+            },
+            "optional": true
+          },
+          "costs": {
+            "schema": {
+              "kind": "array",
+              "item": {
+                "kind": "object",
+                "fields": {
+                  "key": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": false
+                  },
+                  "amount": {
+                    "schema": {
+                      "kind": "ref",
+                      "name": "Expression"
+                    },
+                    "optional": false
+                  },
+                  "requirement": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": true
+                  }
+                }
+              }
+            },
+            "optional": true
+          },
+          "spendOnOutcomes": {
+            "schema": {
+              "kind": "array",
+              "item": {
+                "kind": "string"
+              }
+            },
+            "optional": true
+          },
+          "metadata": {
+            "schema": {
+              "kind": "record",
+              "item": {
+                "kind": "ref",
+                "name": "Value"
+              }
+            },
+            "optional": true
+          }
+        }
+      }
+    ]
+  },
+  "CapabilityResult": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "source": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "definition": {
+        "schema": {
+          "kind": "ref",
+          "name": "Capability"
+        },
+        "optional": false
+      },
+      "costs": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "number"
+          }
+        },
+        "optional": false
+      }
+    }
+  },
+  "Catalogue": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "revision": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "system": {
+        "schema": {
+          "kind": "ref",
+          "name": "SystemDefinition"
+        },
+        "optional": false
+      },
+      "features": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "FeatureDefinition"
+          }
+        },
+        "optional": false
+      },
+      "classes": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "ClassDefinition"
+          }
+        },
+        "optional": false
+      },
+      "blocks": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "BlockDefinition"
+          }
+        },
+        "optional": true
+      },
+      "items": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "ItemDefinition"
+          }
+        },
+        "optional": true
+      },
+      "itemFeatures": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "ItemFeature"
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  "Character": {
+    "kind": "object",
+    "fields": {
+      "statRolls": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "StatRoll"
+          }
+        },
+        "optional": true
+      },
+      "equipmentAssignments": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "EquipmentAssignment"
+          }
+        },
+        "optional": true
+      },
+      "deployedCompanions": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "companionModes": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "tabOrder": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "displayPreferences": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "boolean"
+          }
+        },
+        "optional": true
+      },
+      "rollResults": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "RolledFeature"
+          }
+        },
+        "optional": true
+      },
+      "money": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "number"
+          }
+        },
+        "optional": true
+      },
+      "inventory": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "InventoryEntry"
+          }
+        },
+        "optional": true
+      },
+      "notes": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "buildState": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "draft"
+            },
+            {
+              "kind": "literal",
+              "value": "finalized"
+            }
+          ]
+        },
+        "optional": true
+      },
+      "version": {
+        "schema": {
+          "kind": "literal",
+          "value": 1
+        },
+        "optional": false
+      },
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "system": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "id": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": false
+            },
+            "revision": {
+              "schema": {
+                "kind": "number"
+              },
+              "optional": false
+            }
+          }
+        },
+        "optional": false
+      },
+      "catalogue": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "id": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": false
+            },
+            "revision": {
+              "schema": {
+                "kind": "number"
+              },
+              "optional": false
+            }
+          }
+        },
+        "optional": false
+      },
+      "contentRevisions": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "number"
+          }
+        },
+        "optional": false
+      },
+      "inputs": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "number"
+          }
+        },
+        "optional": false
+      },
+      "progressions": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "Progression"
+          }
+        },
+        "optional": false
+      },
+      "history": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "progression": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "level": {
+                "schema": {
+                  "kind": "number"
+                },
+                "optional": false
+              }
+            }
+          }
+        },
+        "optional": false
+      },
+      "roots": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "RootAcquisition"
+          }
+        },
+        "optional": false
+      },
+      "selections": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "array",
+            "item": {
+              "kind": "ref",
+              "name": "Pick"
+            }
+          }
+        },
+        "optional": false
+      },
+      "bindings": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      },
+      "alternatives": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      },
+      "resources": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "spent": {
+                "schema": {
+                  "kind": "number"
+                },
+                "optional": false
+              },
+              "current": {
+                "schema": {
+                  "kind": "number"
+                },
+                "optional": true
+              },
+              "grants": {
+                "schema": {
+                  "kind": "array",
+                  "item": {
+                    "kind": "string"
+                  }
+                },
+                "optional": true
+              }
+            }
+          }
+        },
+        "optional": false
+      },
+      "pending": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "PendingUse"
+          }
+        },
+        "optional": false
+      },
+      "events": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "id": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "fingerprint": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "actions": {
+                "schema": {
+                  "kind": "record",
+                  "item": {
+                    "kind": "number"
+                  }
+                },
+                "optional": true
+              }
+            }
+          }
+        },
+        "optional": false
+      }
+    }
+  },
+  "Choice": {
+    "kind": "intersection",
+    "variants": [
+      {
+        "kind": "ref",
+        "name": "ComponentBase"
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "chooseFeatures"
+            },
+            "optional": false
+          },
+          "minimum": {
+            "schema": {
+              "kind": "ref",
+              "name": "Expression"
+            },
+            "optional": false
+          },
+          "maximum": {
+            "schema": {
+              "kind": "ref",
+              "name": "Expression"
+            },
+            "optional": false
+          },
+          "candidates": {
+            "schema": {
+              "kind": "object",
+              "fields": {
+                "ids": {
+                  "schema": {
+                    "kind": "array",
+                    "item": {
+                      "kind": "string"
+                    }
+                  },
+                  "optional": true
+                },
+                "tags": {
+                  "schema": {
+                    "kind": "array",
+                    "item": {
+                      "kind": "string"
+                    }
+                  },
+                  "optional": true
+                },
+                "maximumLevel": {
+                  "schema": {
+                    "kind": "ref",
+                    "name": "Expression"
+                  },
+                  "optional": true
+                }
+              }
+            },
+            "optional": false
+          },
+          "ignorePrerequisites": {
+            "schema": {
+              "kind": "boolean"
+            },
+            "optional": true
+          },
+          "allowDuplicates": {
+            "schema": {
+              "kind": "boolean"
+            },
+            "optional": true
+          },
+          "eligibility": {
+            "schema": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "literal",
+                  "value": "acquisition"
+                },
+                {
+                  "kind": "literal",
+                  "value": "current"
+                }
+              ]
+            },
+            "optional": true
+          },
+          "retraining": {
+            "schema": {
+              "kind": "object",
+              "fields": {
+                "allowed": {
+                  "schema": {
+                    "kind": "boolean"
+                  },
+                  "optional": false
+                },
+                "events": {
+                  "schema": {
+                    "kind": "array",
+                    "item": {
+                      "kind": "string"
+                    }
+                  },
+                  "optional": true
+                }
+              }
+            },
+            "optional": true
+          }
+        }
+      }
+    ]
+  },
+  "ClassDefinition": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "revision": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "description": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "source": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "levels": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "array",
+            "item": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "ref",
+                  "name": "Grant"
+                },
+                {
+                  "kind": "ref",
+                  "name": "Choice"
+                }
+              ]
+            }
+          }
+        },
+        "optional": false
+      },
+      "maximumLevel": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      },
+      "multiclassPrerequisites": {
+        "schema": {
+          "kind": "ref",
+          "name": "Predicate"
+        },
+        "optional": true
+      }
+    }
+  },
+  "CompanionDisplay": {
+    "kind": "object",
+    "fields": {
+      "kind": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "creature"
+            },
+            {
+              "kind": "literal",
+              "value": "object"
+            }
+          ]
+        },
+        "optional": false
+      },
+      "stats": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      },
+      "resources": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      },
+      "creationCapability": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "modes": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "resetOnCreation": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  "Component": {
+    "kind": "union",
+    "variants": [
+      {
+        "kind": "ref",
+        "name": "Grant"
+      },
+      {
+        "kind": "ref",
+        "name": "Choice"
+      },
+      {
+        "kind": "ref",
+        "name": "Modifier"
+      },
+      {
+        "kind": "ref",
+        "name": "Resource"
+      },
+      {
+        "kind": "ref",
+        "name": "Capability"
+      },
+      {
+        "kind": "ref",
+        "name": "DefineStat"
+      },
+      {
+        "kind": "ref",
+        "name": "TrackResource"
+      },
+      {
+        "kind": "ref",
+        "name": "GrantResource"
+      },
+      {
+        "kind": "ref",
+        "name": "UseBlock"
+      },
+      {
+        "kind": "intersection",
+        "variants": [
+          {
+            "kind": "ref",
+            "name": "ComponentBase"
+          },
+          {
+            "kind": "object",
+            "fields": {
+              "kind": {
+                "schema": {
+                  "kind": "literal",
+                  "value": "describe"
+                },
+                "optional": false
+              },
+              "text": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "ComponentBase": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "condition": {
+        "schema": {
+          "kind": "ref",
+          "name": "Expression"
+        },
+        "optional": true
+      }
+    }
+  },
+  "CurrencyDefinition": {
+    "kind": "object",
+    "fields": {
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "denominations": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "CurrencyDenomination"
+          }
+        },
+        "optional": false
+      },
+      "primary": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "decimalPlaces": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      }
+    }
+  },
+  "CurrencyDenomination": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "symbol": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "value": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "legacyItemIds": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  "DefineStat": {
+    "kind": "intersection",
+    "variants": [
+      {
+        "kind": "ref",
+        "name": "ComponentBase"
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "defineStat"
+            },
+            "optional": false
+          },
+          "stat": {
+            "schema": {
+              "kind": "extract",
+              "base": {
+                "kind": "ref",
+                "name": "StatDefinition"
+              },
+              "filter": {
+                "kind": "object",
+                "fields": {
+                  "kind": {
+                    "schema": {
+                      "kind": "literal",
+                      "value": "derived"
+                    },
+                    "optional": false
+                  }
+                }
+              }
+            },
+            "optional": false
+          }
+        }
+      }
+    ]
+  },
+  "Diagnostic": {
+    "kind": "object",
+    "fields": {
+      "code": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "severity": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "invalid"
+            },
+            {
+              "kind": "literal",
+              "value": "incomplete"
+            }
+          ]
+        },
+        "optional": false
+      },
+      "path": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "message": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      }
+    }
+  },
+  "Edit": {
+    "kind": "union",
+    "variants": [
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "input"
+            },
+            "optional": false
+          },
+          "stat": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "value": {
+            "schema": {
+              "kind": "number"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "removeProgression"
+            },
+            "optional": false
+          },
+          "progression": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "addProgression"
+            },
+            "optional": false
+          },
+          "progression": {
+            "schema": {
+              "kind": "ref",
+              "name": "Progression"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "select"
+            },
+            "optional": false
+          },
+          "selection": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "picks": {
+            "schema": {
+              "kind": "array",
+              "item": {
+                "kind": "ref",
+                "name": "Pick"
+              }
+            },
+            "optional": false
+          },
+          "event": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": true
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "level"
+            },
+            "optional": false
+          },
+          "progression": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "level": {
+            "schema": {
+              "kind": "number"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "root"
+            },
+            "optional": false
+          },
+          "acquisition": {
+            "schema": {
+              "kind": "ref",
+              "name": "RootAcquisition"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "removeRoot"
+            },
+            "optional": false
+          },
+          "id": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "alternative"
+            },
+            "optional": false
+          },
+          "stat": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "alternative": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "bind"
+            },
+            "optional": false
+          },
+          "requirement": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "pool": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          }
+        }
+      }
+    ]
+  },
+  "EditPreview": {
+    "kind": "object",
+    "fields": {
+      "character": {
+        "schema": {
+          "kind": "ref",
+          "name": "Character"
+        },
+        "optional": false
+      },
+      "before": {
+        "schema": {
+          "kind": "ref",
+          "name": "EvaluationResult"
+        },
+        "optional": false
+      },
+      "after": {
+        "schema": {
+          "kind": "ref",
+          "name": "EvaluationResult"
+        },
+        "optional": false
+      },
+      "added": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      },
+      "removed": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      },
+      "changedStats": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      },
+      "changedResources": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      }
+    }
+  },
+  "EquipmentAssignment": {
+    "kind": "object",
+    "fields": {
+      "instance": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "inventory": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "recipient": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "item": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "attuned": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": false
+      }
+    }
+  },
+  "EquipmentEffect": {
+    "kind": "object",
+    "fields": {
+      "categories": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      },
+      "itemFeatures": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "attunement": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "attunementParameter": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "group": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "capacityStat": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "requiredProperties": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "bonusCapacity": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "stat": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": false
+            },
+            "itemProperty": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": false
+            }
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  "EvaluationResult": {
+    "kind": "object",
+    "fields": {
+      "status": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "valid"
+            },
+            {
+              "kind": "literal",
+              "value": "incomplete"
+            },
+            {
+              "kind": "literal",
+              "value": "invalid"
+            }
+          ]
+        },
+        "optional": false
+      },
+      "provisional": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": false
+      },
+      "characterLevel": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "instances": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "Instance"
+          }
+        },
+        "optional": false
+      },
+      "selections": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "SelectionResult"
+          }
+        },
+        "optional": false
+      },
+      "stats": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "StatResult"
+          }
+        },
+        "optional": false
+      },
+      "resources": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "PoolResult"
+          }
+        },
+        "optional": false
+      },
+      "capabilities": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "CapabilityResult"
+          }
+        },
+        "optional": false
+      },
+      "bindings": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      },
+      "diagnostics": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "Diagnostic"
+          }
+        },
+        "optional": false
+      }
+    }
+  },
+  "Expression": {
+    "kind": "union",
+    "variants": [
+      {
+        "kind": "number"
+      },
+      {
+        "kind": "boolean"
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "literal": {
+            "schema": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "number"
+                },
+                {
+                  "kind": "boolean"
+                }
+              ]
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "stat": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "context": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "parameter": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "base": {
+            "schema": {
+              "kind": "literal",
+              "value": true
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "op": {
+            "schema": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "literal",
+                  "value": "add"
+                },
+                {
+                  "kind": "literal",
+                  "value": "subtract"
+                },
+                {
+                  "kind": "literal",
+                  "value": "multiply"
+                },
+                {
+                  "kind": "literal",
+                  "value": "divide"
+                },
+                {
+                  "kind": "literal",
+                  "value": "min"
+                },
+                {
+                  "kind": "literal",
+                  "value": "max"
+                },
+                {
+                  "kind": "literal",
+                  "value": "floor"
+                },
+                {
+                  "kind": "literal",
+                  "value": "ceil"
+                },
+                {
+                  "kind": "literal",
+                  "value": "eq"
+                },
+                {
+                  "kind": "literal",
+                  "value": "gt"
+                },
+                {
+                  "kind": "literal",
+                  "value": "gte"
+                },
+                {
+                  "kind": "literal",
+                  "value": "lt"
+                },
+                {
+                  "kind": "literal",
+                  "value": "lte"
+                },
+                {
+                  "kind": "literal",
+                  "value": "and"
+                },
+                {
+                  "kind": "literal",
+                  "value": "or"
+                },
+                {
+                  "kind": "literal",
+                  "value": "not"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "args": {
+            "schema": {
+              "kind": "array",
+              "item": {
+                "kind": "ref",
+                "name": "Expression"
+              }
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "if": {
+            "schema": {
+              "kind": "ref",
+              "name": "Expression"
+            },
+            "optional": false
+          },
+          "then": {
+            "schema": {
+              "kind": "ref",
+              "name": "Expression"
+            },
+            "optional": false
+          },
+          "else": {
+            "schema": {
+              "kind": "ref",
+              "name": "Expression"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "table": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "owner": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": true
+          },
+          "input": {
+            "schema": {
+              "kind": "ref",
+              "name": "Expression"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "call": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "args": {
+            "schema": {
+              "kind": "array",
+              "item": {
+                "kind": "ref",
+                "name": "Expression"
+              }
+            },
+            "optional": false
+          }
+        }
+      }
+    ]
+  },
+  "FeatureDefinition": {
+    "kind": "object",
+    "fields": {
+      "equipmentEffect": {
+        "schema": {
+          "kind": "ref",
+          "name": "EquipmentEffect"
+        },
+        "optional": true
+      },
+      "companion": {
+        "schema": {
+          "kind": "ref",
+          "name": "CompanionDisplay"
+        },
+        "optional": true
+      },
+      "mechanicalSummary": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "roll": {
+        "schema": {
+          "kind": "ref",
+          "name": "FeatureRoll"
+        },
+        "optional": true
+      },
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "revision": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "displayName": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "description": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "source": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "tags": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "contentLevel": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      },
+      "textReferences": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "textAliases": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "processDescriptionAutomatically": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "descriptionOverride": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "originalString": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "overrideString": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "textLinkContext": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "before": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "string"
+                }
+              },
+              "optional": true
+            },
+            "after": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "string"
+                }
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "prerequisites": {
+        "schema": {
+          "kind": "ref",
+          "name": "Predicate"
+        },
+        "optional": true
+      },
+      "maintenance": {
+        "schema": {
+          "kind": "ref",
+          "name": "Predicate"
+        },
+        "optional": true
+      },
+      "resources": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "ResourceRequirement"
+          }
+        },
+        "optional": true
+      },
+      "repeat": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "maximum": {
+              "schema": {
+                "kind": "number"
+              },
+              "optional": false
+            },
+            "scope": {
+              "schema": {
+                "kind": "union",
+                "variants": [
+                  {
+                    "kind": "literal",
+                    "value": "character"
+                  },
+                  {
+                    "kind": "literal",
+                    "value": "progression"
+                  },
+                  {
+                    "kind": "literal",
+                    "value": "parent"
+                  }
+                ]
+              },
+              "optional": false
+            },
+            "uniqueBy": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "string"
+                }
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "parameters": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "ParameterDefinition"
+          }
+        },
+        "optional": true
+      },
+      "tables": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "ScalingTable"
+          }
+        },
+        "optional": true
+      },
+      "components": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "Component"
+          }
+        },
+        "optional": false
+      }
+    }
+  },
+  "FeatureRoll": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "label": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "dice": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "string"
+            },
+            {
+              "kind": "object",
+              "fields": {
+                "count": {
+                  "schema": {
+                    "kind": "union",
+                    "variants": [
+                      {
+                        "kind": "number"
+                      },
+                      {
+                        "kind": "object",
+                        "fields": {
+                          "stat": {
+                            "schema": {
+                              "kind": "string"
+                            },
+                            "optional": false
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "optional": false
+                },
+                "sides": {
+                  "schema": {
+                    "kind": "union",
+                    "variants": [
+                      {
+                        "kind": "number"
+                      },
+                      {
+                        "kind": "object",
+                        "fields": {
+                          "stat": {
+                            "schema": {
+                              "kind": "string"
+                            },
+                            "optional": false
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "optional": false
+                }
+              }
+            }
+          ]
+        },
+        "optional": false
+      },
+      "bonus": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "number"
+            },
+            {
+              "kind": "object",
+              "fields": {
+                "stat": {
+                  "schema": {
+                    "kind": "string"
+                  },
+                  "optional": false
+                }
+              }
+            },
+            {
+              "kind": "object",
+              "fields": {
+                "class": {
+                  "schema": {
+                    "kind": "string"
+                  },
+                  "optional": false
+                }
+              }
+            },
+            {
+              "kind": "object",
+              "fields": {
+                "castingAbility": {
+                  "schema": {
+                    "kind": "literal",
+                    "value": true
+                  },
+                  "optional": false
+                }
+              }
+            }
+          ]
+        },
+        "optional": true
+      },
+      "characterScaling": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "level": {
+                "schema": {
+                  "kind": "number"
+                },
+                "optional": false
+              },
+              "count": {
+                "schema": {
+                  "kind": "number"
+                },
+                "optional": false
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "slotScaling": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "baseLevel": {
+              "schema": {
+                "kind": "number"
+              },
+              "optional": false
+            },
+            "dicePerLevel": {
+              "schema": {
+                "kind": "number"
+              },
+              "optional": false
+            }
+          }
+        },
+        "optional": true
+      },
+      "capability": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "spell": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "restoreResource": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      }
+    }
+  },
+  "FunctionRegistry": {
+    "kind": "record",
+    "item": {
+      "kind": "ref",
+      "name": "RegisteredFunction"
+    }
+  },
+  "Grant": {
+    "kind": "intersection",
+    "variants": [
+      {
+        "kind": "ref",
+        "name": "ComponentBase"
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "grantFeature"
+            },
+            "optional": false
+          },
+          "feature": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "parameters": {
+            "schema": {
+              "kind": "record",
+              "item": {
+                "kind": "ref",
+                "name": "Value"
+              }
+            },
+            "optional": true
+          },
+          "ignorePrerequisites": {
+            "schema": {
+              "kind": "boolean"
+            },
+            "optional": true
+          },
+          "atClassLevel": {
+            "schema": {
+              "kind": "number"
+            },
+            "optional": true
+          }
+        }
+      }
+    ]
+  },
+  "GrantResource": {
+    "kind": "intersection",
+    "variants": [
+      {
+        "kind": "ref",
+        "name": "ComponentBase"
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "grantResource"
+            },
+            "optional": false
+          },
+          "key": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "amount": {
+            "schema": {
+              "kind": "ref",
+              "name": "Expression"
+            },
+            "optional": false
+          }
+        }
+      }
+    ]
+  },
+  "Instance": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "feature": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "parent": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "progression": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "parameters": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "Value"
+          }
+        },
+        "optional": false
+      },
+      "acquiredCharacterLevel": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "acquiredClassLevel": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "acquiredEvent": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      },
+      "active": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": false
+      },
+      "eligible": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": false
+      },
+      "waived": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": false
+      },
+      "selection": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      }
+    }
+  },
+  "InventoryEntry": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "item": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "quantity": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "equipped": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": false
+      },
+      "attuned": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      }
+    }
+  },
+  "ItemDefinition": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "revision": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "category": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "features": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      },
+      "slot": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "source": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      }
+    }
+  },
+  "ItemFeature": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "features": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "properties": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "Value"
+          }
+        },
+        "optional": true
+      },
+      "modifiers": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "Modifier"
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  "Modifier": {
+    "kind": "intersection",
+    "variants": [
+      {
+        "kind": "ref",
+        "name": "ComponentBase"
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "modifyStat"
+            },
+            "optional": false
+          },
+          "stat": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "operation": {
+            "schema": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "literal",
+                  "value": "add"
+                },
+                {
+                  "kind": "literal",
+                  "value": "multiply"
+                },
+                {
+                  "kind": "literal",
+                  "value": "floor"
+                },
+                {
+                  "kind": "literal",
+                  "value": "ceiling"
+                },
+                {
+                  "kind": "literal",
+                  "value": "override"
+                }
+              ]
+            },
+            "optional": false
+          },
+          "value": {
+            "schema": {
+              "kind": "ref",
+              "name": "Expression"
+            },
+            "optional": false
+          },
+          "group": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": true
+          },
+          "stacking": {
+            "schema": {
+              "kind": "ref",
+              "name": "StackingPolicy"
+            },
+            "optional": true
+          },
+          "priority": {
+            "schema": {
+              "kind": "number"
+            },
+            "optional": true
+          }
+        }
+      }
+    ]
+  },
+  "ModifierExplanation": {
+    "kind": "object",
+    "fields": {
+      "source": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "component": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "operation": {
+        "schema": {
+          "kind": "unknown"
+        },
+        "optional": false
+      },
+      "amount": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      },
+      "applied": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": false
+      },
+      "reason": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      }
+    }
+  },
+  "NumericConstraints": {
+    "kind": "object",
+    "fields": {
+      "integer": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "minimum": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      },
+      "maximum": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      },
+      "rounding": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "floor"
+            },
+            {
+              "kind": "literal",
+              "value": "ceil"
+            },
+            {
+              "kind": "literal",
+              "value": "round"
+            }
+          ]
+        },
+        "optional": true
+      },
+      "clamp": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      }
+    }
+  },
+  "ParameterDefinition": {
+    "kind": "object",
+    "fields": {
+      "kind": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "number"
+            },
+            {
+              "kind": "literal",
+              "value": "string"
+            },
+            {
+              "kind": "literal",
+              "value": "boolean"
+            }
+          ]
+        },
+        "optional": false
+      },
+      "default": {
+        "schema": {
+          "kind": "ref",
+          "name": "Value"
+        },
+        "optional": true
+      },
+      "options": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "Value"
+          }
+        },
+        "optional": true
+      },
+      "minimum": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      },
+      "maximum": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      },
+      "integer": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      }
+    }
+  },
+  "PendingUse": {
+    "kind": "object",
+    "fields": {
+      "ability": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "costs": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "number"
+          }
+        },
+        "optional": false
+      },
+      "spendOnOutcomes": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      }
+    }
+  },
+  "Pick": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "feature": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "parameters": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "Value"
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  "PoolResult": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "key": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "scope": {
+        "schema": {
+          "kind": "ref",
+          "name": "Scope"
+        },
+        "optional": false
+      },
+      "units": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "contract": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "integer": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": false
+      },
+      "capacity": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "spent": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "reserved": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "available": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "providers": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      },
+      "recovery": {
+        "schema": {
+          "kind": "unknown"
+        },
+        "optional": false
+      },
+      "initial": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "full"
+            },
+            {
+              "kind": "literal",
+              "value": "empty"
+            }
+          ]
+        },
+        "optional": false
+      },
+      "tracking": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "minimum": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      },
+      "current": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      },
+      "grants": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  "Predicate": {
+    "kind": "union",
+    "variants": [
+      {
+        "kind": "object",
+        "fields": {
+          "level": {
+            "schema": {
+              "kind": "number"
+            },
+            "optional": false
+          },
+          "kind": {
+            "schema": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "literal",
+                  "value": "character"
+                },
+                {
+                  "kind": "literal",
+                  "value": "class"
+                }
+              ]
+            },
+            "optional": true
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "feature": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "parameters": {
+            "schema": {
+              "kind": "record",
+              "item": {
+                "kind": "ref",
+                "name": "Value"
+              }
+            },
+            "optional": true
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "tag": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "stat": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "minimum": {
+            "schema": {
+              "kind": "number"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "parameter": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "equals": {
+            "schema": {
+              "kind": "ref",
+              "name": "Value"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "expression": {
+            "schema": {
+              "kind": "ref",
+              "name": "Expression"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "all": {
+            "schema": {
+              "kind": "array",
+              "item": {
+                "kind": "ref",
+                "name": "Predicate"
+              }
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "any": {
+            "schema": {
+              "kind": "array",
+              "item": {
+                "kind": "ref",
+                "name": "Predicate"
+              }
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "not": {
+            "schema": {
+              "kind": "ref",
+              "name": "Predicate"
+            },
+            "optional": false
+          }
+        }
+      }
+    ]
+  },
+  "Progression": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "class": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "level": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      }
+    }
+  },
+  "RegisteredFunction": {
+    "kind": "object",
+    "fields": {
+      "arguments": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "union",
+            "variants": [
+              {
+                "kind": "literal",
+                "value": "number"
+              },
+              {
+                "kind": "literal",
+                "value": "boolean"
+              }
+            ]
+          }
+        },
+        "optional": false
+      },
+      "result": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "number"
+            },
+            {
+              "kind": "literal",
+              "value": "boolean"
+            }
+          ]
+        },
+        "optional": false
+      },
+      "invoke": {
+        "schema": {
+          "kind": "unknown"
+        },
+        "optional": false
+      }
+    }
+  },
+  "ResetCondition": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "description": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "showButton": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      }
+    }
+  },
+  "Resource": {
+    "kind": "intersection",
+    "variants": [
+      {
+        "kind": "ref",
+        "name": "ComponentBase"
+      },
+      {
+        "kind": "ref",
+        "name": "NumericConstraints"
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "defineResource"
+            },
+            "optional": false
+          },
+          "key": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "scope": {
+            "schema": {
+              "kind": "ref",
+              "name": "Scope"
+            },
+            "optional": false
+          },
+          "units": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "contract": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": true
+          },
+          "capacity": {
+            "schema": {
+              "kind": "ref",
+              "name": "Expression"
+            },
+            "optional": false
+          },
+          "combine": {
+            "schema": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "literal",
+                  "value": "sum"
+                },
+                {
+                  "kind": "literal",
+                  "value": "highest"
+                }
+              ]
+            },
+            "optional": true
+          },
+          "initial": {
+            "schema": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "literal",
+                  "value": "full"
+                },
+                {
+                  "kind": "literal",
+                  "value": "empty"
+                }
+              ]
+            },
+            "optional": true
+          },
+          "recovery": {
+            "schema": {
+              "kind": "array",
+              "item": {
+                "kind": "object",
+                "fields": {
+                  "event": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": false
+                  },
+                  "amount": {
+                    "schema": {
+                      "kind": "union",
+                      "variants": [
+                        {
+                          "kind": "ref",
+                          "name": "Expression"
+                        },
+                        {
+                          "kind": "literal",
+                          "value": "full"
+                        }
+                      ]
+                    },
+                    "optional": false
+                  },
+                  "dice": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": true
+                  }
+                }
+              }
+            },
+            "optional": false
+          }
+        }
+      }
+    ]
+  },
+  "ResourceRequirement": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "key": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "scope": {
+        "schema": {
+          "kind": "ref",
+          "name": "Scope"
+        },
+        "optional": true
+      },
+      "units": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "contract": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "minimumCapacity": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      }
+    }
+  },
+  "RolledFeature": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "instance": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "feature": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "definition": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "expression": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "casting": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "capability": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": false
+            },
+            "spell": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": false
+            },
+            "slotLevel": {
+              "schema": {
+                "kind": "number"
+              },
+              "optional": false
+            },
+            "ritual": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": false
+            }
+          }
+        },
+        "optional": true
+      },
+      "total": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "breakdown": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "applied": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      }
+    }
+  },
+  "RootAcquisition": {
+    "kind": "intersection",
+    "variants": [
+      {
+        "kind": "ref",
+        "name": "Pick"
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "acquiredCharacterLevel": {
+            "schema": {
+              "kind": "number"
+            },
+            "optional": false
+          },
+          "acquiredEvent": {
+            "schema": {
+              "kind": "number"
+            },
+            "optional": true
+          }
+        }
+      }
+    ]
+  },
+  "ScalingTable": {
+    "kind": "object",
+    "fields": {
+      "mode": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "exact"
+            },
+            {
+              "kind": "literal",
+              "value": "threshold"
+            }
+          ]
+        },
+        "optional": false
+      },
+      "rows": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "key": {
+                "schema": {
+                  "kind": "number"
+                },
+                "optional": false
+              },
+              "value": {
+                "schema": {
+                  "kind": "number"
+                },
+                "optional": false
+              }
+            }
+          }
+        },
+        "optional": false
+      },
+      "below": {
+        "schema": {
+          "kind": "ref",
+          "name": "BoundaryPolicy"
+        },
+        "optional": false
+      },
+      "above": {
+        "schema": {
+          "kind": "ref",
+          "name": "BoundaryPolicy"
+        },
+        "optional": false
+      },
+      "missing": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "error"
+            },
+            {
+              "kind": "object",
+              "fields": {
+                "fallback": {
+                  "schema": {
+                    "kind": "number"
+                  },
+                  "optional": false
+                }
+              }
+            }
+          ]
+        },
+        "optional": true
+      }
+    }
+  },
+  "Scope": {
+    "kind": "union",
+    "variants": [
+      {
+        "kind": "literal",
+        "value": "character"
+      },
+      {
+        "kind": "literal",
+        "value": "progression"
+      },
+      {
+        "kind": "literal",
+        "value": "parent"
+      },
+      {
+        "kind": "literal",
+        "value": "instance"
+      }
+    ]
+  },
+  "SelectionResult": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "owner": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "definition": {
+        "schema": {
+          "kind": "ref",
+          "name": "Choice"
+        },
+        "optional": false
+      },
+      "minimum": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "maximum": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "picks": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "Pick"
+          }
+        },
+        "optional": false
+      },
+      "context": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "Value"
+          }
+        },
+        "optional": false
+      }
+    }
+  },
+  "SheetDisplay": {
+    "kind": "object",
+    "fields": {
+      "overview": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "stat": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "name": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": true
+              },
+              "signed": {
+                "schema": {
+                  "kind": "boolean"
+                },
+                "optional": true
+              },
+              "unit": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": true
+              },
+              "roll": {
+                "schema": {
+                  "kind": "object",
+                  "fields": {
+                    "dice": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    },
+                    "bonusStat": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": true
+                    }
+                  }
+                },
+                "optional": true
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "health": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "name": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": true
+            },
+            "showHealingFeatures": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            },
+            "countersVisibleAtOrBelow": {
+              "schema": {
+                "kind": "number"
+              },
+              "optional": true
+            },
+            "counters": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "string"
+                }
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "descriptionProcessing": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "statPhrases": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "object",
+                  "fields": {
+                    "phrase": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    },
+                    "stat": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    }
+                  }
+                }
+              },
+              "optional": true
+            },
+            "classLevelPhrases": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "resources": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "compact": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            },
+            "showDetailsByDefault": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "inventory": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "search": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            },
+            "categoryFilter": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "restPreview": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "rollHistory": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "showAllStats": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "detailsDrawer": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "sidebarCollapsed": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "actions": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "categories": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "object",
+                  "fields": {
+                    "id": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    },
+                    "name": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    },
+                    "kinds": {
+                      "schema": {
+                        "kind": "array",
+                        "item": {
+                          "kind": "string"
+                        }
+                      },
+                      "optional": false
+                    }
+                  }
+                }
+              },
+              "optional": true
+            },
+            "itemCategories": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "string"
+                }
+              },
+              "optional": true
+            },
+            "columns": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "object",
+                  "fields": {
+                    "name": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    },
+                    "metadataKey": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    }
+                  }
+                }
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "statuses": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "name": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "tags": {
+                "schema": {
+                  "kind": "array",
+                  "item": {
+                    "kind": "string"
+                  }
+                },
+                "optional": false
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "spells": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "search": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            },
+            "levelFilter": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            },
+            "compact": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            },
+            "zeroLevelName": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": true
+            },
+            "zeroLevelHeading": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": true
+            },
+            "slotPipLimit": {
+              "schema": {
+                "kind": "number"
+              },
+              "optional": true
+            },
+            "columns": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "object",
+                  "fields": {
+                    "name": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    },
+                    "metadataKey": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    }
+                  }
+                }
+              },
+              "optional": true
+            },
+            "castingStats": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "object",
+                  "fields": {
+                    "ability": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    },
+                    "attackStat": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    },
+                    "saveStat": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    }
+                  }
+                }
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  "SheetSection": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "layout": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "abilities"
+            },
+            {
+              "kind": "literal",
+              "value": "skills"
+            },
+            {
+              "kind": "literal",
+              "value": "stats"
+            }
+          ]
+        },
+        "optional": false
+      },
+      "modifierFirst": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "primaryValueLabel": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "secondaryValueLabel": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "primarySigned": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "secondarySigned": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "trainingLevels": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "minimum": {
+                "schema": {
+                  "kind": "number"
+                },
+                "optional": false
+              },
+              "name": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "symbol": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "trained": {
+                "schema": {
+                  "kind": "boolean"
+                },
+                "optional": true
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "defaultSort": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "Training"
+            },
+            {
+              "kind": "literal",
+              "value": "Name"
+            },
+            {
+              "kind": "literal",
+              "value": "Ability"
+            },
+            {
+              "kind": "literal",
+              "value": "Bonus"
+            }
+          ]
+        },
+        "optional": true
+      },
+      "columns": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "union",
+            "variants": [
+              {
+                "kind": "literal",
+                "value": "Training"
+              },
+              {
+                "kind": "literal",
+                "value": "Name"
+              },
+              {
+                "kind": "literal",
+                "value": "Ability"
+              },
+              {
+                "kind": "literal",
+                "value": "Bonus"
+              }
+            ]
+          }
+        },
+        "optional": true
+      },
+      "columnLabels": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "Training": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": true
+            },
+            "Name": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": true
+            },
+            "Ability": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": true
+            },
+            "Bonus": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "rows": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "stat": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "name": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": true
+              },
+              "secondaryStat": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": true
+              },
+              "proficiencyStat": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": true
+              },
+              "ability": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": true
+              },
+              "feature": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": true
+              },
+              "roll": {
+                "schema": {
+                  "kind": "object",
+                  "fields": {
+                    "dice": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": false
+                    },
+                    "bonusStat": {
+                      "schema": {
+                        "kind": "string"
+                      },
+                      "optional": true
+                    }
+                  }
+                },
+                "optional": true
+              }
+            }
+          }
+        },
+        "optional": false
+      }
+    }
+  },
+  "SheetTab": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "content": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "choices"
+            },
+            {
+              "kind": "literal",
+              "value": "sheet"
+            },
+            {
+              "kind": "literal",
+              "value": "features"
+            },
+            {
+              "kind": "literal",
+              "value": "resources"
+            },
+            {
+              "kind": "literal",
+              "value": "notes"
+            },
+            {
+              "kind": "literal",
+              "value": "sections"
+            },
+            {
+              "kind": "literal",
+              "value": "items"
+            },
+            {
+              "kind": "literal",
+              "value": "actions"
+            },
+            {
+              "kind": "literal",
+              "value": "spells"
+            }
+          ]
+        },
+        "optional": false
+      },
+      "sections": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  "SpellDisplay": {
+    "kind": "object",
+    "fields": {
+      "spellKey": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "levelKey": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "slotLevelKey": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "ritualKey": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "castingAbilityKey": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "castingBonusStats": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "slots": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "level": {
+                "schema": {
+                  "kind": "number"
+                },
+                "optional": true
+              },
+              "levelStat": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": true
+              },
+              "key": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "scope": {
+                "schema": {
+                  "kind": "ref",
+                  "name": "Scope"
+                },
+                "optional": false
+              }
+            }
+          }
+        },
+        "optional": false
+      }
+    }
+  },
+  "StackingPolicy": {
+    "kind": "union",
+    "variants": [
+      {
+        "kind": "literal",
+        "value": "sum"
+      },
+      {
+        "kind": "literal",
+        "value": "highest"
+      },
+      {
+        "kind": "literal",
+        "value": "lowest"
+      },
+      {
+        "kind": "literal",
+        "value": "bestBonusAndWorstPenalty"
+      }
+    ]
+  },
+  "StatDefinition": {
+    "kind": "intersection",
+    "variants": [
+      {
+        "kind": "ref",
+        "name": "NumericConstraints"
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "id": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "name": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          }
+        }
+      },
+      {
+        "kind": "union",
+        "variants": [
+          {
+            "kind": "object",
+            "fields": {
+              "kind": {
+                "schema": {
+                  "kind": "literal",
+                  "value": "input"
+                },
+                "optional": false
+              },
+              "default": {
+                "schema": {
+                  "kind": "number"
+                },
+                "optional": true
+              }
+            }
+          },
+          {
+            "kind": "object",
+            "fields": {
+              "kind": {
+                "schema": {
+                  "kind": "literal",
+                  "value": "derived"
+                },
+                "optional": false
+              },
+              "expression": {
+                "schema": {
+                  "kind": "ref",
+                  "name": "Expression"
+                },
+                "optional": false
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "StatResult": {
+    "kind": "object",
+    "fields": {
+      "value": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "base": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "modifiers": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "ModifierExplanation"
+          }
+        },
+        "optional": false
+      }
+    }
+  },
+  "StatRoll": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "stat": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "expression": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "total": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "breakdown": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      }
+    }
+  },
+  "SystemDefinition": {
+    "kind": "object",
+    "fields": {
+      "sheetDisplay": {
+        "schema": {
+          "kind": "ref",
+          "name": "SheetDisplay"
+        },
+        "optional": true
+      },
+      "healthRules": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "resourceKey": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": false
+            },
+            "temporaryResourceKey": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": true
+            },
+            "resetResourceKeysOnHealing": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "string"
+                }
+              },
+              "optional": true
+            },
+            "clearOnReset": {
+              "schema": {
+                "kind": "record",
+                "item": {
+                  "kind": "array",
+                  "item": {
+                    "kind": "string"
+                  }
+                }
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "resetConditions": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "ResetCondition"
+          }
+        },
+        "optional": true
+      },
+      "equipmentRules": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "attunementLimitStat": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": true
+            },
+            "preventDuplicateAttunement": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "recoveryAllocations": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "budgetStat": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "keys": {
+                "schema": {
+                  "kind": "array",
+                  "item": {
+                    "kind": "string"
+                  }
+                },
+                "optional": false
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "terminology": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "classSingular": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": false
+            },
+            "classPlural": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": false
+            },
+            "creatureSingular": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": false
+            },
+            "creaturePlural": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": false
+            },
+            "creatureTag": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": false
+            }
+          }
+        },
+        "optional": true
+      },
+      "recoveryEvents": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "resetButtons": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "event": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "label": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "healingFeaturesTag": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "sheetTabs": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "SheetTab"
+          }
+        },
+        "optional": true
+      },
+      "importantDetails": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "spellDisplay": {
+        "schema": {
+          "kind": "ref",
+          "name": "SpellDisplay"
+        },
+        "optional": true
+      },
+      "currency": {
+        "schema": {
+          "kind": "ref",
+          "name": "CurrencyDefinition"
+        },
+        "optional": true
+      },
+      "sheetSections": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "SheetSection"
+          }
+        },
+        "optional": true
+      },
+      "featureCategories": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "id": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "name": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "tags": {
+                "schema": {
+                  "kind": "array",
+                  "item": {
+                    "kind": "string"
+                  }
+                },
+                "optional": false
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "revision": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "name": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "stats": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "StatDefinition"
+          }
+        },
+        "optional": false
+      },
+      "classes": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "tagDisplayNames": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "allowMultipleClasses": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": false
+      },
+      "characterLevel": {
+        "schema": {
+          "kind": "ref",
+          "name": "Expression"
+        },
+        "optional": false
+      },
+      "allowDuplicateClasses": {
+        "schema": {
+          "kind": "boolean"
+        },
+        "optional": true
+      },
+      "rootCandidates": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "ids": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "string"
+                }
+              },
+              "optional": true
+            },
+            "tags": {
+              "schema": {
+                "kind": "array",
+                "item": {
+                  "kind": "string"
+                }
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "validation": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "object",
+            "fields": {
+              "id": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              },
+              "requirement": {
+                "schema": {
+                  "kind": "ref",
+                  "name": "Predicate"
+                },
+                "optional": false
+              },
+              "message": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": false
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "contextDefaults": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "Value"
+          }
+        },
+        "optional": true
+      },
+      "advancement": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "array",
+            "item": {
+              "kind": "union",
+              "variants": [
+                {
+                  "kind": "ref",
+                  "name": "Grant"
+                },
+                {
+                  "kind": "ref",
+                  "name": "Choice"
+                }
+              ]
+            }
+          }
+        },
+        "optional": true
+      },
+      "alternatives": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "array",
+            "item": {
+              "kind": "object",
+              "fields": {
+                "id": {
+                  "schema": {
+                    "kind": "string"
+                  },
+                  "optional": false
+                },
+                "expression": {
+                  "schema": {
+                    "kind": "ref",
+                    "name": "Expression"
+                  },
+                  "optional": false
+                },
+                "requirements": {
+                  "schema": {
+                    "kind": "ref",
+                    "name": "Predicate"
+                  },
+                  "optional": true
+                }
+              }
+            }
+          }
+        },
+        "optional": true
+      },
+      "commandRules": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "spellTurn": {
+              "schema": {
+                "kind": "object",
+                "fields": {
+                  "castingAbilityKey": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": false
+                  },
+                  "levelKey": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": false
+                  },
+                  "timeKey": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": false
+                  },
+                  "ritualKey": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": false
+                  },
+                  "bonusTime": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": false
+                  },
+                  "actionTime": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": false
+                  }
+                }
+              },
+              "optional": true
+            },
+            "selectedRecovery": {
+              "schema": {
+                "kind": "object",
+                "fields": {
+                  "eventKind": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": true
+                  },
+                  "capabilityName": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": false
+                  },
+                  "requiredEvent": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": false
+                  },
+                  "boundaryEvent": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": true
+                  },
+                  "budgetStat": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": false
+                  },
+                  "targets": {
+                    "schema": {
+                      "kind": "record",
+                      "item": {
+                        "kind": "object",
+                        "fields": {
+                          "key": {
+                            "schema": {
+                              "kind": "string"
+                            },
+                            "optional": false
+                          },
+                          "scope": {
+                            "schema": {
+                              "kind": "ref",
+                              "name": "Scope"
+                            },
+                            "optional": false
+                          },
+                          "weight": {
+                            "schema": {
+                              "kind": "number"
+                            },
+                            "optional": false
+                          }
+                        }
+                      }
+                    },
+                    "optional": false
+                  }
+                }
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  "TrackResource": {
+    "kind": "intersection",
+    "variants": [
+      {
+        "kind": "ref",
+        "name": "ComponentBase"
+      },
+      {
+        "kind": "object",
+        "fields": {
+          "kind": {
+            "schema": {
+              "kind": "literal",
+              "value": "trackResource"
+            },
+            "optional": false
+          },
+          "key": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "name": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "units": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": false
+          },
+          "contract": {
+            "schema": {
+              "kind": "string"
+            },
+            "optional": true
+          },
+          "minimum": {
+            "schema": {
+              "kind": "number"
+            },
+            "optional": true
+          },
+          "maximum": {
+            "schema": {
+              "kind": "ref",
+              "name": "Expression"
+            },
+            "optional": true
+          },
+          "initialAmount": {
+            "schema": {
+              "kind": "ref",
+              "name": "Expression"
+            },
+            "optional": false
+          },
+          "integer": {
+            "schema": {
+              "kind": "boolean"
+            },
+            "optional": true
+          },
+          "recovery": {
+            "schema": {
+              "kind": "array",
+              "item": {
+                "kind": "object",
+                "fields": {
+                  "event": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": false
+                  },
+                  "amount": {
+                    "schema": {
+                      "kind": "union",
+                      "variants": [
+                        {
+                          "kind": "ref",
+                          "name": "Expression"
+                        },
+                        {
+                          "kind": "literal",
+                          "value": "full"
+                        }
+                      ]
+                    },
+                    "optional": false
+                  },
+                  "dice": {
+                    "schema": {
+                      "kind": "string"
+                    },
+                    "optional": true
+                  }
+                }
+              }
+            },
+            "optional": false
+          }
+        }
+      }
+    ]
+  },
+  "UseBlock": {
+    "kind": "object",
+    "fields": {
+      "condition": {
+        "schema": {
+          "kind": "unknown"
+        },
+        "optional": true
+      },
+      "kind": {
+        "schema": {
+          "kind": "literal",
+          "value": "useBlock"
+        },
+        "optional": false
+      },
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "block": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "arguments": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "Value"
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  "Value": {
+    "kind": "union",
+    "variants": [
+      {
+        "kind": "number"
+      },
+      {
+        "kind": "boolean"
+      },
+      {
+        "kind": "string"
+      }
+    ]
+  },
+  "SystemOptions": {
+    "kind": "record",
+    "item": {
+      "kind": "object",
+      "fields": {
+        "default": {
+          "schema": {
+            "kind": "ref",
+            "name": "Value"
+          },
+          "optional": false
+        },
+        "values": {
+          "schema": {
+            "kind": "array",
+            "item": {
+              "kind": "ref",
+              "name": "Value"
+            }
+          },
+          "optional": false
+        }
+      }
+    }
+  }
+}

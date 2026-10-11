@@ -2,40 +2,53 @@ import { useRef, useState } from 'react';
 import { releaseVersion, type SystemFile } from '@/src/index';
 import { validateSystemAsync } from '@/ui/src/system-worker-client';
 import { systemKey } from '@/ui/src/workspace';
-import { prepareSystemDataEdit } from '@/ui/src/system-data';
+import { versionSystemDataEdit } from '@/ui/src/system-data';
 import { LoadingOverlay } from '@/ui/src/LoadingOverlay';
+import { AuthoringField } from '@/ui/src/AuthoringField';
+import { formSchema } from '@/ui/src/authoring-form';
+import { editorRecords, editSystemRecord, newSystemRecord, editorCategories } from '@/ui/src/system-editor-records';
 
 export function SystemDataEditor({ files, save }: { files: SystemFile[]; save: (existing: SystemFile, incoming: SystemFile) => void }) {
   const baseline = useRef<SystemFile | undefined>(undefined);
   const [selected, setSelected] = useState(files[0] ? systemKey(files[0]) : '');
-  const [section, setSection] = useState('configurations');
-  const [draft, setDraft] = useState<string>();
-  const [record, setRecord] = useState('all');
+  const [category, setCategory] = useState('classes');
+  const [configuration, setConfiguration] = useState(0);
+  const [record, setRecord] = useState('');
   const [query, setQuery] = useState('');
+  const [page, setPage] = useState(0);
+  const [draft, setDraft] = useState<SystemFile>();
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const [failed, setFailed] = useState(false);
-  const file = files.find((entry) => systemKey(entry) === selected);
-  const data = section === 'all' ? file : file?.[section as keyof SystemFile];
-  const records = Array.isArray(data) ? data : [];
-  const text = draft ?? JSON.stringify(record === 'all' ? data : records[Number(record)], null, 2);
+  const original = files.find((entry) => systemKey(entry) === selected);
+  const file = draft ?? original;
+  const records = file ? editorRecords(file, category, configuration) : [];
+  const entry = records.find((entry) => entry.id === record) ?? records[0];
+  const definition = editorCategories.find((entry) => entry.id === category)!;
+  const matches = records.filter((entry) => `${entry.label} ${entry.id}`.toLowerCase().includes(query.toLowerCase()));
+  const lastPage = Math.max(0, Math.ceil(matches.length / 50) - 1);
+  const currentPage = Math.min(page, lastPage);
   const reset = () => {
     setDraft(undefined);
     baseline.current = undefined;
     setMessage('');
     setFailed(false);
   };
+  const change = (next: SystemFile) => {
+    if (!draft) baseline.current = original;
+    setDraft(next);
+    setMessage('');
+  };
   const apply = async () => {
-    if (!file || draft === undefined) return;
+    if (!original || !draft) return;
     setBusy(true);
-    setMessage('Validating System and character compatibility…');
     setFailed(false);
     try {
-      if (baseline.current !== file) throw new Error('The System changed while you were editing. Discard these edits and try again.');
-      const updated = prepareSystemDataEdit(file, section, draft, record);
-      const incoming = await validateSystemAsync(updated);
-      save(file, incoming);
+      if (baseline.current !== original) throw new Error('The System changed while you were editing. Discard these edits and try again.');
+      const incoming = await validateSystemAsync(versionSystemDataEdit(original, draft));
+      save(original, incoming);
       setDraft(undefined);
+      baseline.current = undefined;
       setMessage(`Saved local System ${releaseVersion(incoming.contentVersion)}. Character compatibility verified.`);
     } catch (error) {
       setFailed(true);
@@ -46,7 +59,7 @@ export function SystemDataEditor({ files, save }: { files: SystemFile[]; save: (
     <section className="panel system-data-editor" aria-busy={busy}>
       {busy && <LoadingOverlay />}
       <h1>System data</h1>
-      <p>View and edit the loaded System JSON. Changes are local to this browser; export from Systems to keep a portable copy. Saving validates the System and preserves compatible characters. Incompatible edits are rejected.</p>
+      <p>Edit rules with forms. Changes are saved to this browser after validation; export from Systems to keep a portable copy. Existing characters are preserved, and incompatible edits are rejected.</p>
       {!files.length
         ? (
             <p>
@@ -62,74 +75,140 @@ export function SystemDataEditor({ files, save }: { files: SystemFile[]; save: (
                 <label>
                   System to edit
                   <select
-                    disabled={draft !== undefined}
                     value={selected}
+                    disabled={!!draft}
                     onChange={(event) => {
                       setSelected(event.target.value);
-                      setRecord('all');
-                      setQuery('');
+                      setConfiguration(0);
+                      setRecord('');
                       reset();
                     }}
                   >
                     {files.map((entry) => <option key={systemKey(entry)} value={systemKey(entry)}>{entry.configurations[0].system.name}</option>)}
                   </select>
                 </label>
-                <label>
-                  Data section
-                  <select
-                    disabled={draft !== undefined}
-                    value={section}
-                    onChange={(event) => {
-                      setSection(event.target.value);
-                      setRecord('all');
-                      setQuery('');
-                      reset();
-                    }}
-                  >
-                    <option value="all">Complete System</option>
-                    {file && Object.keys(file).filter((key) => !['assetVersions', 'contentVersion'].includes(key)).map((key) => <option key={key} value={key}>{key}</option>)}
-                  </select>
-                </label>
-                {records.length > 0 && (
-                  <>
-                    <label>
-                      Find record
-                      <input value={query} onChange={(event) => setQuery(event.target.value)} />
-                    </label>
-                    <label>
-                      Record
-                      <select
-                        disabled={draft !== undefined}
-                        value={record}
-                        onChange={(event) => {
-                          setRecord(event.target.value);
-                          reset();
-                        }}
-                      >
-                        <option value="all">All records (add or remove entries here)</option>
-                        {records.map((entry, index) => ({ index, label: String(('displayName' in entry ? entry.displayName : undefined) ?? ('name' in entry ? entry.name : undefined) ?? entry.id ?? index) })).filter(({ label, index }) => String(index) === record || label.toLowerCase().includes(query.toLowerCase())).sort((a, b) => Number(String(b.index) === record) - Number(String(a.index) === record)).slice(0, 200).map(({ index, label }) => <option key={index} value={index}>{label}</option>)}
-                      </select>
-                    </label>
-                  </>
+                {file && (
+                  <label>
+                    Rules configuration
+                    <select
+                      value={configuration}
+                      onChange={(event) => {
+                        setConfiguration(Number(event.target.value));
+                        setRecord('');
+                      }}
+                    >
+                      {file.configurations.map((config, index) => <option key={config.id} value={index}>{Object.entries(config.options).map(([key, value]) => `${key}: ${value}`).join(' · ') || config.id}</option>)}
+                    </select>
+                  </label>
                 )}
               </div>
+              <nav className="subnav" aria-label="System editor categories">
+                {editorCategories.map((entry) => (
+                  <button
+                    key={entry.id}
+                    className={category === entry.id ? 'active' : 'quiet'}
+                    aria-pressed={category === entry.id}
+                    onClick={() => {
+                      setCategory(entry.id);
+                      setRecord('');
+                      setQuery('');
+                      setPage(0);
+                    }}
+                  >
+                    {entry.label}
+                  </button>
+                ))}
+              </nav>
               {file && (
-                <textarea
-                  wrap="off"
-                  spellCheck={false}
-                  aria-label="System JSON data"
-                  value={text ?? ''}
-                  onChange={(event) => {
-                    if (draft === undefined) baseline.current = file;
-                    setDraft(event.target.value);
-                  }}
-                />
+                <div className="system-editor-layout">
+                  <aside className="system-editor-browser">
+                    <label>
+                      Find record
+                      <input
+                        value={query}
+                        onChange={(event) => {
+                          setQuery(event.target.value);
+                          setPage(0);
+                        }}
+                      />
+                    </label>
+                    <p className="muted small">
+                      {records.length}
+                      {' '}
+                      {definition.label.toLowerCase()}
+                    </p>
+                    <div className="system-editor-records">
+                      {matches.slice(currentPage * 50, (currentPage + 1) * 50).map((item) => (
+                        <button className={entry?.id === item.id ? '' : 'quiet'} key={item.id} onClick={() => setRecord(item.id)}>
+                          {item.label}
+                          <small>{item.id}</small>
+                        </button>
+                      ))}
+                    </div>
+                    <div className="toolbar">
+                      <button className="quiet" disabled={currentPage === 0} onClick={() => setPage(currentPage - 1)}>Previous</button>
+                      <span>
+                        {currentPage + 1}
+                        {' '}
+                        /
+                        {' '}
+                        {lastPage + 1}
+                      </span>
+                      <button className="quiet" disabled={currentPage === lastPage} onClick={() => setPage(currentPage + 1)}>Next</button>
+                    </div>
+                    {!['settings', 'options'].includes(category) && (
+                      <button
+                        className="quiet"
+                        onClick={() => {
+                          const created = newSystemRecord(file, category, configuration);
+                          change(created.file);
+                          setRecord(created.id);
+                          setQuery('');
+                        }}
+                      >
+                        Add
+                        {definition.singular}
+                      </button>
+                    )}
+                  </aside>
+                  <article className="system-editor-form">
+                    <h2>{entry?.label ?? `No ${definition.label.toLowerCase()} yet`}</h2>
+                    {(category === 'classes' || category === 'settings') && <p className="notice">Changes here apply to the selected rules configuration.</p>}
+                    {entry && (
+                      <AuthoringField
+                        key={`${category}/${configuration}`}
+                        schema={formSchema(definition.schema)}
+                        value={entry.value}
+                        label={definition.singular}
+                        change={(value) => {
+                          const next = editSystemRecord(file, category, configuration, entry.id, value);
+                          change(next);
+                          if (category !== 'options' && value && typeof value === 'object' && 'id' in value) setRecord(String(value.id));
+                        }}
+                      />
+                    )}
+                    {entry && !['settings', 'options'].includes(category) && (
+                      <button
+                        className="quiet danger"
+                        onClick={() => {
+                          change(editSystemRecord(file, category, configuration, entry.id, undefined));
+                          setRecord('');
+                        }}
+                      >
+                        Delete
+                        {definition.singular}
+                      </button>
+                    )}
+                  </article>
+                </div>
               )}
-              {draft !== undefined && <p className="muted small">Save or discard edits before switching records or Systems. The local release version is classified and incremented automatically.</p>}
+              {!!draft && <p className="notice">Unsaved changes. You can switch categories and records without losing edits. Save or discard before switching Systems.</p>}
               <div className="toolbar">
-                <button disabled={!file || draft === undefined} onClick={() => void apply()}>Validate and save</button>
-                <button className="quiet" disabled={draft === undefined} onClick={reset}>Discard edits</button>
+                <button disabled={!draft} onClick={() => void apply()}>Validate and save</button>
+                <button className="quiet" disabled={!draft} onClick={reset}>Discard edits</button>
               </div>
+              <datalist id="authoring-references">{file && [...new Map([...file.features, ...file.configurations[configuration].classes, ...(file.items ?? []), ...(file.itemFeatures ?? []), ...(file.blocks ?? []), ...file.configurations[configuration].system.stats].map((entry) => [entry.id, entry])).values()].map((entry) => <option value={entry.id} key={entry.id}>{'name' in entry ? entry.name : entry.id}</option>)}</datalist>
+              <datalist id="authoring-tags">{file && [...new Set(file.features.flatMap((feature) => feature.tags ?? []))].sort().map((tag) => <option value={tag} key={tag}>{file.configurations[configuration].system.tagDisplayNames?.[tag] ?? tag}</option>)}</datalist>
             </fieldset>
           )}
       {message && <p role={failed ? 'alert' : 'status'} className={failed ? 'notice invalid' : 'notice'}>{message}</p>}
