@@ -20,6 +20,7 @@
     "lint": "eslint . --max-warnings 0 && node --import ./tools/register-alias.mjs tools/lint.mjs",
     "lint:fix": "eslint . --fix --max-warnings 0 && node --import ./tools/register-alias.mjs tools/lint.mjs",
     "lint:test": "node --import ./tools/register-alias.mjs tests/lint.test.js",
+    "version:test": "node --import ./tools/register-alias.mjs tests/ui-release.test.js",
     "hooks:install": "node --import ./tools/register-alias.mjs tools/install-hooks.mjs",
     "prepare": "npm run hooks:install",
     "build": "tsc -p tsconfig.json && node tools/rewrite-imports.mjs",

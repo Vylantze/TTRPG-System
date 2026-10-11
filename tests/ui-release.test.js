@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import { classifyUiChange, isUiReleaseFile, nextUiVersion } from '@/tools/ui-release-policy.mjs';
+
+assert.equal(classifyUiChange('ui/src/a.css', 'a {}', 'a { color: red; }'), 'patch');
+assert.equal(classifyUiChange('ui/src/A.tsx', 'export function A() { return <p>Old</p>; }', 'export function A() { return <p>New</p>; }'), 'patch');
+assert.equal(classifyUiChange('ui/src/A.tsx', 'export function A() { return <p />; }', 'export function A() { return <button onClick={save} />; }'), 'minor');
+assert.equal(classifyUiChange('ui/src/A.tsx', 'export function A() {}', 'function A() {}'), 'major');
+assert.equal(classifyUiChange('ui/src/A.tsx', 'export function A() {}', undefined), 'major');
+assert.equal(classifyUiChange('ui/src/A.tsx', undefined, 'export function A() {}'), 'minor');
+assert.equal(classifyUiChange('ui/package.json', '{"version":"0.2.0"}', '{"version":"0.3.0"}'), 'none');
+assert.equal(classifyUiChange('ui/package.json', '{"dependencies":{"react":"19.2.4"}}', '{"dependencies":{"react":"20.0.0"}}'), 'major');
+assert.equal(classifyUiChange('ui/src/a.ts', 'const key = "old";', 'const key = "new";'), 'minor');
+assert.equal(isUiReleaseFile('ui/tests/test.mjs'), false);
+assert.equal(isUiReleaseFile('docs/react-ui.md'), false);
+assert.equal(isUiReleaseFile('ui/public/icon.svg'), true);
+assert.equal(classifyUiChange('ui/src/a.ts', 'export function a(x: string) {}', 'export function a(x: number) {}'), 'major');
+assert.equal(classifyUiChange('ui/package-lock.json', '{"version":"0.2.0","packages":{"":{"version":"0.2.0"}}}', '{"version":"0.3.0","packages":{"":{"version":"0.3.0"}}}'), 'none');
+assert.equal(nextUiVersion('0.2.0', '0.2.0', 'patch'), '0.2.1');
+assert.equal(nextUiVersion('0.2.0', '0.2.1', 'patch'), '0.2.1');
+assert.equal(nextUiVersion('0.2.0', '0.2.0', 'minor'), '0.3.0');
+assert.equal(nextUiVersion('0.2.0', '0.2.0', 'major'), '1.0.0');
+assert.equal(nextUiVersion('0.2.0', '2.0.0', 'patch'), '2.0.0');
+assert.throws(() => nextUiVersion('0.2.0', '2', 'patch'));
+console.log('UI release classification checks passed.');
