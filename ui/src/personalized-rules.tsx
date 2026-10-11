@@ -4,17 +4,19 @@ import { Tooltip } from '@/ui/src/Tooltip';
 export function ruleValues(text: string, engine: Engine, character: Character, result: EvaluationResult, explicit = false) {
   if (explicit) return descriptionTokenValues(text, engine, character, result);
   const values: { start: number; end: number; label: string; value: number }[] = [];
+  const processing = engine.catalogue.system.sheetDisplay?.descriptionProcessing;
   const candidates = [
-    ...engine.catalogue.system.stats.filter((stat) => stat.id.startsWith('modifier.')).map((stat) => ({ phrase: `${stat.id.slice(9)} modifier`, value: result.stats[stat.id]?.value })),
-    ...engine.catalogue.classes.map((cls) => ({ phrase: `${cls.name} level`, value: character.progressions.filter((p) => p.class === cls.id).reduce((n, p) => n + p.level, 0) })),
-    { phrase: 'proficiency bonus', value: result.stats.proficiencyBonus?.value },
+    ...processing?.statPhrases?.map(({ phrase, stat }) => ({ phrase, value: result.stats[stat]?.value })) ?? [],
+    ...processing?.classLevelPhrases ? engine.catalogue.classes.map((cls) => ({ phrase: `${cls.name} level`, value: character.progressions.filter((p) => p.class === cls.id).reduce((n, p) => n + p.level, 0) })) : [],
   ];
   for (const candidate of candidates) {
     if (!Number.isFinite(candidate.value)) continue;
     const escaped = candidate.phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     for (const match of text.matchAll(new RegExp(`\\b(?:your )?${escaped}\\b`, 'gi'))) values.push({ start: match.index!, end: match.index! + match[0].length, label: match[0], value: candidate.value! });
   }
-  return values.sort((a, b) => a.start - b.start);
+  const matches: typeof values = [];
+  for (const value of values.sort((a, b) => a.start - b.start || b.end - a.end)) if (!matches.length || value.start >= matches.at(-1)!.end) matches.push(value);
+  return matches;
 }
 export function personalizedText(text: string, engine: Engine, character: Character, result: EvaluationResult, explicit = false) {
   let offset = 0;

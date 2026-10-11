@@ -91,7 +91,7 @@ export function rollStat(engine: Engine, input: Character, stat: string, eventId
 export function changeHealth(engine: Engine, input: Character, kind: 'damage' | 'heal', amount: number, eventId: string): Character {
   checkCharacter(input);
   if (input.buildState === 'draft') throw new RuleError('DRAFT', 'Finalize the character before changing health.');
-  constrain(number(amount), { minimum: 0, integer: true });
+  constrain(number(amount), { minimum: 0 });
   if (!['damage', 'heal'].includes(kind)) throw new RuleError('HEALTH', 'Unknown health operation.');
   const character = clone(input);
   if (!stamp(character, eventId, { kind: 'health', operation: kind, amount })) return character;
@@ -101,6 +101,7 @@ export function changeHealth(engine: Engine, input: Character, kind: 'damage' | 
   const pools = Object.values(result.resources);
   const health = pools.find((pool) => pool.key === policy?.resourceKey);
   if (!policy || !health) throw new RuleError('HEALTH', 'No health pool is configured for this character.');
+  constrain(amount, { integer: health.integer });
   storeTrackers(character, result.resources);
   const set = (pool: (typeof pools)[number], current: number) => {
     current = constrain(current, { minimum: (pool.minimum ?? 0) + pool.reserved, maximum: pool.capacity, integer: pool.integer, clamp: true });

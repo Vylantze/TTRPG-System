@@ -1,5 +1,5 @@
 {
-  "assetVersion": "2.0.0",
+  "assetVersion": "3.0.0",
   "data": {
     "variant-1": {
       "id": "dnd5e:2014-srd5.1",
@@ -134,7 +134,7 @@
         },
         {
           "id": "modifier.strength",
-          "name": "modifier.strength",
+          "name": "Strength modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -159,7 +159,7 @@
         },
         {
           "id": "modifier.dexterity",
-          "name": "modifier.dexterity",
+          "name": "Dexterity modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -184,7 +184,7 @@
         },
         {
           "id": "modifier.constitution",
-          "name": "modifier.constitution",
+          "name": "Constitution modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -209,7 +209,7 @@
         },
         {
           "id": "modifier.intelligence",
-          "name": "modifier.intelligence",
+          "name": "Intelligence modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -234,7 +234,7 @@
         },
         {
           "id": "modifier.wisdom",
-          "name": "modifier.wisdom",
+          "name": "Wisdom modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -259,7 +259,7 @@
         },
         {
           "id": "modifier.charisma",
-          "name": "modifier.charisma",
+          "name": "Charisma modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -5461,7 +5461,10 @@
               }
             }
           ],
-          "modifierFirst": true
+          "modifierFirst": true,
+          "primaryValueLabel": "score",
+          "secondaryValueLabel": "modifier",
+          "secondarySigned": true
         },
         {
           "id": "combat",
@@ -5528,7 +5531,28 @@
             "Training",
             "Name",
             "Bonus"
-          ]
+          ],
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         },
         {
           "id": "skills",
@@ -5716,7 +5740,28 @@
               }
             }
           ],
-          "defaultSort": "Name"
+          "defaultSort": "Name",
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         }
       ],
       "featureCategories": [
@@ -5846,7 +5891,15 @@
             "scope": "character",
             "levelStat": "pactSlotLevel"
           }
-        ]
+        ],
+        "castingBonusStats": {
+          "strength": "modifier.strength",
+          "dexterity": "modifier.dexterity",
+          "constitution": "modifier.constitution",
+          "intelligence": "modifier.intelligence",
+          "wisdom": "modifier.wisdom",
+          "charisma": "modifier.charisma"
+        }
       },
       "importantDetails": [
         "Name",
@@ -5999,10 +6052,43 @@
         "health": {
           "name": "Hit points",
           "showHealingFeatures": true,
-          "showDeathSavesAtZero": true,
+          "countersVisibleAtOrBelow": 0,
           "counters": [
             "death-save.successes",
             "death-save.failures"
+          ]
+        },
+        "descriptionProcessing": {
+          "classLevelPhrases": true,
+          "statPhrases": [
+            {
+              "phrase": "strength modifier",
+              "stat": "modifier.strength"
+            },
+            {
+              "phrase": "dexterity modifier",
+              "stat": "modifier.dexterity"
+            },
+            {
+              "phrase": "constitution modifier",
+              "stat": "modifier.constitution"
+            },
+            {
+              "phrase": "intelligence modifier",
+              "stat": "modifier.intelligence"
+            },
+            {
+              "phrase": "wisdom modifier",
+              "stat": "modifier.wisdom"
+            },
+            {
+              "phrase": "charisma modifier",
+              "stat": "modifier.charisma"
+            },
+            {
+              "phrase": "proficiency bonus",
+              "stat": "proficiencyBonus"
+            }
           ]
         },
         "resources": {
@@ -6017,6 +6103,9 @@
           "compact": true,
           "search": true,
           "levelFilter": true,
+          "zeroLevelName": "Cantrip",
+          "zeroLevelHeading": "Cantrips",
+          "slotPipLimit": 12,
           "columns": [
             {
               "name": "Casting time",
@@ -6233,7 +6322,7 @@
         },
         {
           "id": "modifier.strength",
-          "name": "modifier.strength",
+          "name": "Strength modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -6258,7 +6347,7 @@
         },
         {
           "id": "modifier.dexterity",
-          "name": "modifier.dexterity",
+          "name": "Dexterity modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -6283,7 +6372,7 @@
         },
         {
           "id": "modifier.constitution",
-          "name": "modifier.constitution",
+          "name": "Constitution modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -6308,7 +6397,7 @@
         },
         {
           "id": "modifier.intelligence",
-          "name": "modifier.intelligence",
+          "name": "Intelligence modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -6333,7 +6422,7 @@
         },
         {
           "id": "modifier.wisdom",
-          "name": "modifier.wisdom",
+          "name": "Wisdom modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -6358,7 +6447,7 @@
         },
         {
           "id": "modifier.charisma",
-          "name": "modifier.charisma",
+          "name": "Charisma modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -11551,7 +11640,10 @@
               }
             }
           ],
-          "modifierFirst": true
+          "modifierFirst": true,
+          "primaryValueLabel": "score",
+          "secondaryValueLabel": "modifier",
+          "secondarySigned": true
         },
         {
           "id": "combat",
@@ -11618,7 +11710,28 @@
             "Training",
             "Name",
             "Bonus"
-          ]
+          ],
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         },
         {
           "id": "skills",
@@ -11806,7 +11919,28 @@
               }
             }
           ],
-          "defaultSort": "Name"
+          "defaultSort": "Name",
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         }
       ],
       "featureCategories": [
@@ -11936,7 +12070,15 @@
             "scope": "character",
             "levelStat": "pactSlotLevel"
           }
-        ]
+        ],
+        "castingBonusStats": {
+          "strength": "modifier.strength",
+          "dexterity": "modifier.dexterity",
+          "constitution": "modifier.constitution",
+          "intelligence": "modifier.intelligence",
+          "wisdom": "modifier.wisdom",
+          "charisma": "modifier.charisma"
+        }
       },
       "importantDetails": [
         "Name",
@@ -12089,10 +12231,43 @@
         "health": {
           "name": "Hit points",
           "showHealingFeatures": true,
-          "showDeathSavesAtZero": true,
+          "countersVisibleAtOrBelow": 0,
           "counters": [
             "death-save.successes",
             "death-save.failures"
+          ]
+        },
+        "descriptionProcessing": {
+          "classLevelPhrases": true,
+          "statPhrases": [
+            {
+              "phrase": "strength modifier",
+              "stat": "modifier.strength"
+            },
+            {
+              "phrase": "dexterity modifier",
+              "stat": "modifier.dexterity"
+            },
+            {
+              "phrase": "constitution modifier",
+              "stat": "modifier.constitution"
+            },
+            {
+              "phrase": "intelligence modifier",
+              "stat": "modifier.intelligence"
+            },
+            {
+              "phrase": "wisdom modifier",
+              "stat": "modifier.wisdom"
+            },
+            {
+              "phrase": "charisma modifier",
+              "stat": "modifier.charisma"
+            },
+            {
+              "phrase": "proficiency bonus",
+              "stat": "proficiencyBonus"
+            }
           ]
         },
         "resources": {
@@ -12107,6 +12282,9 @@
           "compact": true,
           "search": true,
           "levelFilter": true,
+          "zeroLevelName": "Cantrip",
+          "zeroLevelHeading": "Cantrips",
+          "slotPipLimit": 12,
           "columns": [
             {
               "name": "Casting time",
@@ -12323,7 +12501,7 @@
         },
         {
           "id": "modifier.strength",
-          "name": "modifier.strength",
+          "name": "Strength modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -12348,7 +12526,7 @@
         },
         {
           "id": "modifier.dexterity",
-          "name": "modifier.dexterity",
+          "name": "Dexterity modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -12373,7 +12551,7 @@
         },
         {
           "id": "modifier.constitution",
-          "name": "modifier.constitution",
+          "name": "Constitution modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -12398,7 +12576,7 @@
         },
         {
           "id": "modifier.intelligence",
-          "name": "modifier.intelligence",
+          "name": "Intelligence modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -12423,7 +12601,7 @@
         },
         {
           "id": "modifier.wisdom",
-          "name": "modifier.wisdom",
+          "name": "Wisdom modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -12448,7 +12626,7 @@
         },
         {
           "id": "modifier.charisma",
-          "name": "modifier.charisma",
+          "name": "Charisma modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -17650,7 +17828,10 @@
               }
             }
           ],
-          "modifierFirst": true
+          "modifierFirst": true,
+          "primaryValueLabel": "score",
+          "secondaryValueLabel": "modifier",
+          "secondarySigned": true
         },
         {
           "id": "combat",
@@ -17717,7 +17898,28 @@
             "Training",
             "Name",
             "Bonus"
-          ]
+          ],
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         },
         {
           "id": "skills",
@@ -17905,7 +18107,28 @@
               }
             }
           ],
-          "defaultSort": "Name"
+          "defaultSort": "Name",
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         }
       ],
       "featureCategories": [
@@ -18035,7 +18258,15 @@
             "scope": "character",
             "levelStat": "pactSlotLevel"
           }
-        ]
+        ],
+        "castingBonusStats": {
+          "strength": "modifier.strength",
+          "dexterity": "modifier.dexterity",
+          "constitution": "modifier.constitution",
+          "intelligence": "modifier.intelligence",
+          "wisdom": "modifier.wisdom",
+          "charisma": "modifier.charisma"
+        }
       },
       "importantDetails": [
         "Name",
@@ -18188,10 +18419,43 @@
         "health": {
           "name": "Hit points",
           "showHealingFeatures": true,
-          "showDeathSavesAtZero": true,
+          "countersVisibleAtOrBelow": 0,
           "counters": [
             "death-save.successes",
             "death-save.failures"
+          ]
+        },
+        "descriptionProcessing": {
+          "classLevelPhrases": true,
+          "statPhrases": [
+            {
+              "phrase": "strength modifier",
+              "stat": "modifier.strength"
+            },
+            {
+              "phrase": "dexterity modifier",
+              "stat": "modifier.dexterity"
+            },
+            {
+              "phrase": "constitution modifier",
+              "stat": "modifier.constitution"
+            },
+            {
+              "phrase": "intelligence modifier",
+              "stat": "modifier.intelligence"
+            },
+            {
+              "phrase": "wisdom modifier",
+              "stat": "modifier.wisdom"
+            },
+            {
+              "phrase": "charisma modifier",
+              "stat": "modifier.charisma"
+            },
+            {
+              "phrase": "proficiency bonus",
+              "stat": "proficiencyBonus"
+            }
           ]
         },
         "resources": {
@@ -18206,6 +18470,9 @@
           "compact": true,
           "search": true,
           "levelFilter": true,
+          "zeroLevelName": "Cantrip",
+          "zeroLevelHeading": "Cantrips",
+          "slotPipLimit": 12,
           "columns": [
             {
               "name": "Casting time",
@@ -18422,7 +18689,7 @@
         },
         {
           "id": "modifier.strength",
-          "name": "modifier.strength",
+          "name": "Strength modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -18447,7 +18714,7 @@
         },
         {
           "id": "modifier.dexterity",
-          "name": "modifier.dexterity",
+          "name": "Dexterity modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -18472,7 +18739,7 @@
         },
         {
           "id": "modifier.constitution",
-          "name": "modifier.constitution",
+          "name": "Constitution modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -18497,7 +18764,7 @@
         },
         {
           "id": "modifier.intelligence",
-          "name": "modifier.intelligence",
+          "name": "Intelligence modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -18522,7 +18789,7 @@
         },
         {
           "id": "modifier.wisdom",
-          "name": "modifier.wisdom",
+          "name": "Wisdom modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -18547,7 +18814,7 @@
         },
         {
           "id": "modifier.charisma",
-          "name": "modifier.charisma",
+          "name": "Charisma modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -23740,7 +24007,10 @@
               }
             }
           ],
-          "modifierFirst": true
+          "modifierFirst": true,
+          "primaryValueLabel": "score",
+          "secondaryValueLabel": "modifier",
+          "secondarySigned": true
         },
         {
           "id": "combat",
@@ -23807,7 +24077,28 @@
             "Training",
             "Name",
             "Bonus"
-          ]
+          ],
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         },
         {
           "id": "skills",
@@ -23995,7 +24286,28 @@
               }
             }
           ],
-          "defaultSort": "Name"
+          "defaultSort": "Name",
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         }
       ],
       "featureCategories": [
@@ -24125,7 +24437,15 @@
             "scope": "character",
             "levelStat": "pactSlotLevel"
           }
-        ]
+        ],
+        "castingBonusStats": {
+          "strength": "modifier.strength",
+          "dexterity": "modifier.dexterity",
+          "constitution": "modifier.constitution",
+          "intelligence": "modifier.intelligence",
+          "wisdom": "modifier.wisdom",
+          "charisma": "modifier.charisma"
+        }
       },
       "importantDetails": [
         "Name",
@@ -24278,10 +24598,43 @@
         "health": {
           "name": "Hit points",
           "showHealingFeatures": true,
-          "showDeathSavesAtZero": true,
+          "countersVisibleAtOrBelow": 0,
           "counters": [
             "death-save.successes",
             "death-save.failures"
+          ]
+        },
+        "descriptionProcessing": {
+          "classLevelPhrases": true,
+          "statPhrases": [
+            {
+              "phrase": "strength modifier",
+              "stat": "modifier.strength"
+            },
+            {
+              "phrase": "dexterity modifier",
+              "stat": "modifier.dexterity"
+            },
+            {
+              "phrase": "constitution modifier",
+              "stat": "modifier.constitution"
+            },
+            {
+              "phrase": "intelligence modifier",
+              "stat": "modifier.intelligence"
+            },
+            {
+              "phrase": "wisdom modifier",
+              "stat": "modifier.wisdom"
+            },
+            {
+              "phrase": "charisma modifier",
+              "stat": "modifier.charisma"
+            },
+            {
+              "phrase": "proficiency bonus",
+              "stat": "proficiencyBonus"
+            }
           ]
         },
         "resources": {
@@ -24296,6 +24649,9 @@
           "compact": true,
           "search": true,
           "levelFilter": true,
+          "zeroLevelName": "Cantrip",
+          "zeroLevelHeading": "Cantrips",
+          "slotPipLimit": 12,
           "columns": [
             {
               "name": "Casting time",
@@ -24512,7 +24868,7 @@
         },
         {
           "id": "modifier.strength",
-          "name": "modifier.strength",
+          "name": "Strength modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -24537,7 +24893,7 @@
         },
         {
           "id": "modifier.dexterity",
-          "name": "modifier.dexterity",
+          "name": "Dexterity modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -24562,7 +24918,7 @@
         },
         {
           "id": "modifier.constitution",
-          "name": "modifier.constitution",
+          "name": "Constitution modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -24587,7 +24943,7 @@
         },
         {
           "id": "modifier.intelligence",
-          "name": "modifier.intelligence",
+          "name": "Intelligence modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -24612,7 +24968,7 @@
         },
         {
           "id": "modifier.wisdom",
-          "name": "modifier.wisdom",
+          "name": "Wisdom modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -24637,7 +24993,7 @@
         },
         {
           "id": "modifier.charisma",
-          "name": "modifier.charisma",
+          "name": "Charisma modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -29496,7 +29852,10 @@
               }
             }
           ],
-          "modifierFirst": true
+          "modifierFirst": true,
+          "primaryValueLabel": "score",
+          "secondaryValueLabel": "modifier",
+          "secondarySigned": true
         },
         {
           "id": "combat",
@@ -29563,7 +29922,28 @@
             "Training",
             "Name",
             "Bonus"
-          ]
+          ],
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         },
         {
           "id": "skills",
@@ -29751,7 +30131,28 @@
               }
             }
           ],
-          "defaultSort": "Name"
+          "defaultSort": "Name",
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         }
       ],
       "featureCategories": [
@@ -29881,7 +30282,15 @@
             "scope": "character",
             "levelStat": "pactSlotLevel"
           }
-        ]
+        ],
+        "castingBonusStats": {
+          "strength": "modifier.strength",
+          "dexterity": "modifier.dexterity",
+          "constitution": "modifier.constitution",
+          "intelligence": "modifier.intelligence",
+          "wisdom": "modifier.wisdom",
+          "charisma": "modifier.charisma"
+        }
       },
       "importantDetails": [
         "Name",
@@ -30034,10 +30443,43 @@
         "health": {
           "name": "Hit points",
           "showHealingFeatures": true,
-          "showDeathSavesAtZero": true,
+          "countersVisibleAtOrBelow": 0,
           "counters": [
             "death-save.successes",
             "death-save.failures"
+          ]
+        },
+        "descriptionProcessing": {
+          "classLevelPhrases": true,
+          "statPhrases": [
+            {
+              "phrase": "strength modifier",
+              "stat": "modifier.strength"
+            },
+            {
+              "phrase": "dexterity modifier",
+              "stat": "modifier.dexterity"
+            },
+            {
+              "phrase": "constitution modifier",
+              "stat": "modifier.constitution"
+            },
+            {
+              "phrase": "intelligence modifier",
+              "stat": "modifier.intelligence"
+            },
+            {
+              "phrase": "wisdom modifier",
+              "stat": "modifier.wisdom"
+            },
+            {
+              "phrase": "charisma modifier",
+              "stat": "modifier.charisma"
+            },
+            {
+              "phrase": "proficiency bonus",
+              "stat": "proficiencyBonus"
+            }
           ]
         },
         "resources": {
@@ -30052,6 +30494,9 @@
           "compact": true,
           "search": true,
           "levelFilter": true,
+          "zeroLevelName": "Cantrip",
+          "zeroLevelHeading": "Cantrips",
+          "slotPipLimit": 12,
           "columns": [
             {
               "name": "Casting time",
@@ -30268,7 +30713,7 @@
         },
         {
           "id": "modifier.strength",
-          "name": "modifier.strength",
+          "name": "Strength modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -30293,7 +30738,7 @@
         },
         {
           "id": "modifier.dexterity",
-          "name": "modifier.dexterity",
+          "name": "Dexterity modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -30318,7 +30763,7 @@
         },
         {
           "id": "modifier.constitution",
-          "name": "modifier.constitution",
+          "name": "Constitution modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -30343,7 +30788,7 @@
         },
         {
           "id": "modifier.intelligence",
-          "name": "modifier.intelligence",
+          "name": "Intelligence modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -30368,7 +30813,7 @@
         },
         {
           "id": "modifier.wisdom",
-          "name": "modifier.wisdom",
+          "name": "Wisdom modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -30393,7 +30838,7 @@
         },
         {
           "id": "modifier.charisma",
-          "name": "modifier.charisma",
+          "name": "Charisma modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -35243,7 +35688,10 @@
               }
             }
           ],
-          "modifierFirst": true
+          "modifierFirst": true,
+          "primaryValueLabel": "score",
+          "secondaryValueLabel": "modifier",
+          "secondarySigned": true
         },
         {
           "id": "combat",
@@ -35310,7 +35758,28 @@
             "Training",
             "Name",
             "Bonus"
-          ]
+          ],
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         },
         {
           "id": "skills",
@@ -35498,7 +35967,28 @@
               }
             }
           ],
-          "defaultSort": "Name"
+          "defaultSort": "Name",
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         }
       ],
       "featureCategories": [
@@ -35628,7 +36118,15 @@
             "scope": "character",
             "levelStat": "pactSlotLevel"
           }
-        ]
+        ],
+        "castingBonusStats": {
+          "strength": "modifier.strength",
+          "dexterity": "modifier.dexterity",
+          "constitution": "modifier.constitution",
+          "intelligence": "modifier.intelligence",
+          "wisdom": "modifier.wisdom",
+          "charisma": "modifier.charisma"
+        }
       },
       "importantDetails": [
         "Name",
@@ -35781,10 +36279,43 @@
         "health": {
           "name": "Hit points",
           "showHealingFeatures": true,
-          "showDeathSavesAtZero": true,
+          "countersVisibleAtOrBelow": 0,
           "counters": [
             "death-save.successes",
             "death-save.failures"
+          ]
+        },
+        "descriptionProcessing": {
+          "classLevelPhrases": true,
+          "statPhrases": [
+            {
+              "phrase": "strength modifier",
+              "stat": "modifier.strength"
+            },
+            {
+              "phrase": "dexterity modifier",
+              "stat": "modifier.dexterity"
+            },
+            {
+              "phrase": "constitution modifier",
+              "stat": "modifier.constitution"
+            },
+            {
+              "phrase": "intelligence modifier",
+              "stat": "modifier.intelligence"
+            },
+            {
+              "phrase": "wisdom modifier",
+              "stat": "modifier.wisdom"
+            },
+            {
+              "phrase": "charisma modifier",
+              "stat": "modifier.charisma"
+            },
+            {
+              "phrase": "proficiency bonus",
+              "stat": "proficiencyBonus"
+            }
           ]
         },
         "resources": {
@@ -35799,6 +36330,9 @@
           "compact": true,
           "search": true,
           "levelFilter": true,
+          "zeroLevelName": "Cantrip",
+          "zeroLevelHeading": "Cantrips",
+          "slotPipLimit": 12,
           "columns": [
             {
               "name": "Casting time",
@@ -36015,7 +36549,7 @@
         },
         {
           "id": "modifier.strength",
-          "name": "modifier.strength",
+          "name": "Strength modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -36040,7 +36574,7 @@
         },
         {
           "id": "modifier.dexterity",
-          "name": "modifier.dexterity",
+          "name": "Dexterity modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -36065,7 +36599,7 @@
         },
         {
           "id": "modifier.constitution",
-          "name": "modifier.constitution",
+          "name": "Constitution modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -36090,7 +36624,7 @@
         },
         {
           "id": "modifier.intelligence",
-          "name": "modifier.intelligence",
+          "name": "Intelligence modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -36115,7 +36649,7 @@
         },
         {
           "id": "modifier.wisdom",
-          "name": "modifier.wisdom",
+          "name": "Wisdom modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -36140,7 +36674,7 @@
         },
         {
           "id": "modifier.charisma",
-          "name": "modifier.charisma",
+          "name": "Charisma modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -40999,7 +41533,10 @@
               }
             }
           ],
-          "modifierFirst": true
+          "modifierFirst": true,
+          "primaryValueLabel": "score",
+          "secondaryValueLabel": "modifier",
+          "secondarySigned": true
         },
         {
           "id": "combat",
@@ -41066,7 +41603,28 @@
             "Training",
             "Name",
             "Bonus"
-          ]
+          ],
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         },
         {
           "id": "skills",
@@ -41254,7 +41812,28 @@
               }
             }
           ],
-          "defaultSort": "Name"
+          "defaultSort": "Name",
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         }
       ],
       "featureCategories": [
@@ -41384,7 +41963,15 @@
             "scope": "character",
             "levelStat": "pactSlotLevel"
           }
-        ]
+        ],
+        "castingBonusStats": {
+          "strength": "modifier.strength",
+          "dexterity": "modifier.dexterity",
+          "constitution": "modifier.constitution",
+          "intelligence": "modifier.intelligence",
+          "wisdom": "modifier.wisdom",
+          "charisma": "modifier.charisma"
+        }
       },
       "importantDetails": [
         "Name",
@@ -41537,10 +42124,43 @@
         "health": {
           "name": "Hit points",
           "showHealingFeatures": true,
-          "showDeathSavesAtZero": true,
+          "countersVisibleAtOrBelow": 0,
           "counters": [
             "death-save.successes",
             "death-save.failures"
+          ]
+        },
+        "descriptionProcessing": {
+          "classLevelPhrases": true,
+          "statPhrases": [
+            {
+              "phrase": "strength modifier",
+              "stat": "modifier.strength"
+            },
+            {
+              "phrase": "dexterity modifier",
+              "stat": "modifier.dexterity"
+            },
+            {
+              "phrase": "constitution modifier",
+              "stat": "modifier.constitution"
+            },
+            {
+              "phrase": "intelligence modifier",
+              "stat": "modifier.intelligence"
+            },
+            {
+              "phrase": "wisdom modifier",
+              "stat": "modifier.wisdom"
+            },
+            {
+              "phrase": "charisma modifier",
+              "stat": "modifier.charisma"
+            },
+            {
+              "phrase": "proficiency bonus",
+              "stat": "proficiencyBonus"
+            }
           ]
         },
         "resources": {
@@ -41555,6 +42175,9 @@
           "compact": true,
           "search": true,
           "levelFilter": true,
+          "zeroLevelName": "Cantrip",
+          "zeroLevelHeading": "Cantrips",
+          "slotPipLimit": 12,
           "columns": [
             {
               "name": "Casting time",
@@ -41771,7 +42394,7 @@
         },
         {
           "id": "modifier.strength",
-          "name": "modifier.strength",
+          "name": "Strength modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -41796,7 +42419,7 @@
         },
         {
           "id": "modifier.dexterity",
-          "name": "modifier.dexterity",
+          "name": "Dexterity modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -41821,7 +42444,7 @@
         },
         {
           "id": "modifier.constitution",
-          "name": "modifier.constitution",
+          "name": "Constitution modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -41846,7 +42469,7 @@
         },
         {
           "id": "modifier.intelligence",
-          "name": "modifier.intelligence",
+          "name": "Intelligence modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -41871,7 +42494,7 @@
         },
         {
           "id": "modifier.wisdom",
-          "name": "modifier.wisdom",
+          "name": "Wisdom modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -41896,7 +42519,7 @@
         },
         {
           "id": "modifier.charisma",
-          "name": "modifier.charisma",
+          "name": "Charisma modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -46746,7 +47369,10 @@
               }
             }
           ],
-          "modifierFirst": true
+          "modifierFirst": true,
+          "primaryValueLabel": "score",
+          "secondaryValueLabel": "modifier",
+          "secondarySigned": true
         },
         {
           "id": "combat",
@@ -46813,7 +47439,28 @@
             "Training",
             "Name",
             "Bonus"
-          ]
+          ],
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         },
         {
           "id": "skills",
@@ -47001,7 +47648,28 @@
               }
             }
           ],
-          "defaultSort": "Name"
+          "defaultSort": "Name",
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         }
       ],
       "featureCategories": [
@@ -47131,7 +47799,15 @@
             "scope": "character",
             "levelStat": "pactSlotLevel"
           }
-        ]
+        ],
+        "castingBonusStats": {
+          "strength": "modifier.strength",
+          "dexterity": "modifier.dexterity",
+          "constitution": "modifier.constitution",
+          "intelligence": "modifier.intelligence",
+          "wisdom": "modifier.wisdom",
+          "charisma": "modifier.charisma"
+        }
       },
       "importantDetails": [
         "Name",
@@ -47284,10 +47960,43 @@
         "health": {
           "name": "Hit points",
           "showHealingFeatures": true,
-          "showDeathSavesAtZero": true,
+          "countersVisibleAtOrBelow": 0,
           "counters": [
             "death-save.successes",
             "death-save.failures"
+          ]
+        },
+        "descriptionProcessing": {
+          "classLevelPhrases": true,
+          "statPhrases": [
+            {
+              "phrase": "strength modifier",
+              "stat": "modifier.strength"
+            },
+            {
+              "phrase": "dexterity modifier",
+              "stat": "modifier.dexterity"
+            },
+            {
+              "phrase": "constitution modifier",
+              "stat": "modifier.constitution"
+            },
+            {
+              "phrase": "intelligence modifier",
+              "stat": "modifier.intelligence"
+            },
+            {
+              "phrase": "wisdom modifier",
+              "stat": "modifier.wisdom"
+            },
+            {
+              "phrase": "charisma modifier",
+              "stat": "modifier.charisma"
+            },
+            {
+              "phrase": "proficiency bonus",
+              "stat": "proficiencyBonus"
+            }
           ]
         },
         "resources": {
@@ -47302,6 +48011,9 @@
           "compact": true,
           "search": true,
           "levelFilter": true,
+          "zeroLevelName": "Cantrip",
+          "zeroLevelHeading": "Cantrips",
+          "slotPipLimit": 12,
           "columns": [
             {
               "name": "Casting time",
@@ -47518,7 +48230,7 @@
         },
         {
           "id": "modifier.strength",
-          "name": "modifier.strength",
+          "name": "Strength modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -47543,7 +48255,7 @@
         },
         {
           "id": "modifier.dexterity",
-          "name": "modifier.dexterity",
+          "name": "Dexterity modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -47568,7 +48280,7 @@
         },
         {
           "id": "modifier.constitution",
-          "name": "modifier.constitution",
+          "name": "Constitution modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -47593,7 +48305,7 @@
         },
         {
           "id": "modifier.intelligence",
-          "name": "modifier.intelligence",
+          "name": "Intelligence modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -47618,7 +48330,7 @@
         },
         {
           "id": "modifier.wisdom",
-          "name": "modifier.wisdom",
+          "name": "Wisdom modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -47643,7 +48355,7 @@
         },
         {
           "id": "modifier.charisma",
-          "name": "modifier.charisma",
+          "name": "Charisma modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -52300,7 +53012,10 @@
               }
             }
           ],
-          "modifierFirst": true
+          "modifierFirst": true,
+          "primaryValueLabel": "score",
+          "secondaryValueLabel": "modifier",
+          "secondarySigned": true
         },
         {
           "id": "combat",
@@ -52367,7 +53082,28 @@
             "Training",
             "Name",
             "Bonus"
-          ]
+          ],
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         },
         {
           "id": "skills",
@@ -52555,7 +53291,28 @@
               }
             }
           ],
-          "defaultSort": "Name"
+          "defaultSort": "Name",
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         }
       ],
       "featureCategories": [
@@ -52685,7 +53442,15 @@
             "scope": "character",
             "levelStat": "pactSlotLevel"
           }
-        ]
+        ],
+        "castingBonusStats": {
+          "strength": "modifier.strength",
+          "dexterity": "modifier.dexterity",
+          "constitution": "modifier.constitution",
+          "intelligence": "modifier.intelligence",
+          "wisdom": "modifier.wisdom",
+          "charisma": "modifier.charisma"
+        }
       },
       "importantDetails": [
         "Name",
@@ -52838,10 +53603,43 @@
         "health": {
           "name": "Hit points",
           "showHealingFeatures": true,
-          "showDeathSavesAtZero": true,
+          "countersVisibleAtOrBelow": 0,
           "counters": [
             "death-save.successes",
             "death-save.failures"
+          ]
+        },
+        "descriptionProcessing": {
+          "classLevelPhrases": true,
+          "statPhrases": [
+            {
+              "phrase": "strength modifier",
+              "stat": "modifier.strength"
+            },
+            {
+              "phrase": "dexterity modifier",
+              "stat": "modifier.dexterity"
+            },
+            {
+              "phrase": "constitution modifier",
+              "stat": "modifier.constitution"
+            },
+            {
+              "phrase": "intelligence modifier",
+              "stat": "modifier.intelligence"
+            },
+            {
+              "phrase": "wisdom modifier",
+              "stat": "modifier.wisdom"
+            },
+            {
+              "phrase": "charisma modifier",
+              "stat": "modifier.charisma"
+            },
+            {
+              "phrase": "proficiency bonus",
+              "stat": "proficiencyBonus"
+            }
           ]
         },
         "resources": {
@@ -52856,6 +53654,9 @@
           "compact": true,
           "search": true,
           "levelFilter": true,
+          "zeroLevelName": "Cantrip",
+          "zeroLevelHeading": "Cantrips",
+          "slotPipLimit": 12,
           "columns": [
             {
               "name": "Casting time",
@@ -53072,7 +53873,7 @@
         },
         {
           "id": "modifier.strength",
-          "name": "modifier.strength",
+          "name": "Strength modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -53097,7 +53898,7 @@
         },
         {
           "id": "modifier.dexterity",
-          "name": "modifier.dexterity",
+          "name": "Dexterity modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -53122,7 +53923,7 @@
         },
         {
           "id": "modifier.constitution",
-          "name": "modifier.constitution",
+          "name": "Constitution modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -53147,7 +53948,7 @@
         },
         {
           "id": "modifier.intelligence",
-          "name": "modifier.intelligence",
+          "name": "Intelligence modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -53172,7 +53973,7 @@
         },
         {
           "id": "modifier.wisdom",
-          "name": "modifier.wisdom",
+          "name": "Wisdom modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -53197,7 +53998,7 @@
         },
         {
           "id": "modifier.charisma",
-          "name": "modifier.charisma",
+          "name": "Charisma modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -57845,7 +58646,10 @@
               }
             }
           ],
-          "modifierFirst": true
+          "modifierFirst": true,
+          "primaryValueLabel": "score",
+          "secondaryValueLabel": "modifier",
+          "secondarySigned": true
         },
         {
           "id": "combat",
@@ -57912,7 +58716,28 @@
             "Training",
             "Name",
             "Bonus"
-          ]
+          ],
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         },
         {
           "id": "skills",
@@ -58100,7 +58925,28 @@
               }
             }
           ],
-          "defaultSort": "Name"
+          "defaultSort": "Name",
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         }
       ],
       "featureCategories": [
@@ -58230,7 +59076,15 @@
             "scope": "character",
             "levelStat": "pactSlotLevel"
           }
-        ]
+        ],
+        "castingBonusStats": {
+          "strength": "modifier.strength",
+          "dexterity": "modifier.dexterity",
+          "constitution": "modifier.constitution",
+          "intelligence": "modifier.intelligence",
+          "wisdom": "modifier.wisdom",
+          "charisma": "modifier.charisma"
+        }
       },
       "importantDetails": [
         "Name",
@@ -58383,10 +59237,43 @@
         "health": {
           "name": "Hit points",
           "showHealingFeatures": true,
-          "showDeathSavesAtZero": true,
+          "countersVisibleAtOrBelow": 0,
           "counters": [
             "death-save.successes",
             "death-save.failures"
+          ]
+        },
+        "descriptionProcessing": {
+          "classLevelPhrases": true,
+          "statPhrases": [
+            {
+              "phrase": "strength modifier",
+              "stat": "modifier.strength"
+            },
+            {
+              "phrase": "dexterity modifier",
+              "stat": "modifier.dexterity"
+            },
+            {
+              "phrase": "constitution modifier",
+              "stat": "modifier.constitution"
+            },
+            {
+              "phrase": "intelligence modifier",
+              "stat": "modifier.intelligence"
+            },
+            {
+              "phrase": "wisdom modifier",
+              "stat": "modifier.wisdom"
+            },
+            {
+              "phrase": "charisma modifier",
+              "stat": "modifier.charisma"
+            },
+            {
+              "phrase": "proficiency bonus",
+              "stat": "proficiencyBonus"
+            }
           ]
         },
         "resources": {
@@ -58401,6 +59288,9 @@
           "compact": true,
           "search": true,
           "levelFilter": true,
+          "zeroLevelName": "Cantrip",
+          "zeroLevelHeading": "Cantrips",
+          "slotPipLimit": 12,
           "columns": [
             {
               "name": "Casting time",
@@ -58617,7 +59507,7 @@
         },
         {
           "id": "modifier.strength",
-          "name": "modifier.strength",
+          "name": "Strength modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -58642,7 +59532,7 @@
         },
         {
           "id": "modifier.dexterity",
-          "name": "modifier.dexterity",
+          "name": "Dexterity modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -58667,7 +59557,7 @@
         },
         {
           "id": "modifier.constitution",
-          "name": "modifier.constitution",
+          "name": "Constitution modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -58692,7 +59582,7 @@
         },
         {
           "id": "modifier.intelligence",
-          "name": "modifier.intelligence",
+          "name": "Intelligence modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -58717,7 +59607,7 @@
         },
         {
           "id": "modifier.wisdom",
-          "name": "modifier.wisdom",
+          "name": "Wisdom modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -58742,7 +59632,7 @@
         },
         {
           "id": "modifier.charisma",
-          "name": "modifier.charisma",
+          "name": "Charisma modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -63399,7 +64289,10 @@
               }
             }
           ],
-          "modifierFirst": true
+          "modifierFirst": true,
+          "primaryValueLabel": "score",
+          "secondaryValueLabel": "modifier",
+          "secondarySigned": true
         },
         {
           "id": "combat",
@@ -63466,7 +64359,28 @@
             "Training",
             "Name",
             "Bonus"
-          ]
+          ],
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         },
         {
           "id": "skills",
@@ -63654,7 +64568,28 @@
               }
             }
           ],
-          "defaultSort": "Name"
+          "defaultSort": "Name",
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         }
       ],
       "featureCategories": [
@@ -63784,7 +64719,15 @@
             "scope": "character",
             "levelStat": "pactSlotLevel"
           }
-        ]
+        ],
+        "castingBonusStats": {
+          "strength": "modifier.strength",
+          "dexterity": "modifier.dexterity",
+          "constitution": "modifier.constitution",
+          "intelligence": "modifier.intelligence",
+          "wisdom": "modifier.wisdom",
+          "charisma": "modifier.charisma"
+        }
       },
       "importantDetails": [
         "Name",
@@ -63937,10 +64880,43 @@
         "health": {
           "name": "Hit points",
           "showHealingFeatures": true,
-          "showDeathSavesAtZero": true,
+          "countersVisibleAtOrBelow": 0,
           "counters": [
             "death-save.successes",
             "death-save.failures"
+          ]
+        },
+        "descriptionProcessing": {
+          "classLevelPhrases": true,
+          "statPhrases": [
+            {
+              "phrase": "strength modifier",
+              "stat": "modifier.strength"
+            },
+            {
+              "phrase": "dexterity modifier",
+              "stat": "modifier.dexterity"
+            },
+            {
+              "phrase": "constitution modifier",
+              "stat": "modifier.constitution"
+            },
+            {
+              "phrase": "intelligence modifier",
+              "stat": "modifier.intelligence"
+            },
+            {
+              "phrase": "wisdom modifier",
+              "stat": "modifier.wisdom"
+            },
+            {
+              "phrase": "charisma modifier",
+              "stat": "modifier.charisma"
+            },
+            {
+              "phrase": "proficiency bonus",
+              "stat": "proficiencyBonus"
+            }
           ]
         },
         "resources": {
@@ -63955,6 +64931,9 @@
           "compact": true,
           "search": true,
           "levelFilter": true,
+          "zeroLevelName": "Cantrip",
+          "zeroLevelHeading": "Cantrips",
+          "slotPipLimit": 12,
           "columns": [
             {
               "name": "Casting time",
@@ -64171,7 +65150,7 @@
         },
         {
           "id": "modifier.strength",
-          "name": "modifier.strength",
+          "name": "Strength modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -64196,7 +65175,7 @@
         },
         {
           "id": "modifier.dexterity",
-          "name": "modifier.dexterity",
+          "name": "Dexterity modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -64221,7 +65200,7 @@
         },
         {
           "id": "modifier.constitution",
-          "name": "modifier.constitution",
+          "name": "Constitution modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -64246,7 +65225,7 @@
         },
         {
           "id": "modifier.intelligence",
-          "name": "modifier.intelligence",
+          "name": "Intelligence modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -64271,7 +65250,7 @@
         },
         {
           "id": "modifier.wisdom",
-          "name": "modifier.wisdom",
+          "name": "Wisdom modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -64296,7 +65275,7 @@
         },
         {
           "id": "modifier.charisma",
-          "name": "modifier.charisma",
+          "name": "Charisma modifier",
           "kind": "derived",
           "expression": {
             "op": "floor",
@@ -68944,7 +69923,10 @@
               }
             }
           ],
-          "modifierFirst": true
+          "modifierFirst": true,
+          "primaryValueLabel": "score",
+          "secondaryValueLabel": "modifier",
+          "secondarySigned": true
         },
         {
           "id": "combat",
@@ -69011,7 +69993,28 @@
             "Training",
             "Name",
             "Bonus"
-          ]
+          ],
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         },
         {
           "id": "skills",
@@ -69199,7 +70202,28 @@
               }
             }
           ],
-          "defaultSort": "Name"
+          "defaultSort": "Name",
+          "trainingLevels": [
+            {
+              "minimum": 0,
+              "name": "Not proficient",
+              "symbol": "○",
+              "trained": false
+            },
+            {
+              "minimum": 1,
+              "name": "Proficient",
+              "symbol": "●",
+              "trained": true
+            },
+            {
+              "minimum": 2,
+              "name": "Expertise",
+              "symbol": "◆",
+              "trained": true
+            }
+          ],
+          "primarySigned": true
         }
       ],
       "featureCategories": [
@@ -69329,7 +70353,15 @@
             "scope": "character",
             "levelStat": "pactSlotLevel"
           }
-        ]
+        ],
+        "castingBonusStats": {
+          "strength": "modifier.strength",
+          "dexterity": "modifier.dexterity",
+          "constitution": "modifier.constitution",
+          "intelligence": "modifier.intelligence",
+          "wisdom": "modifier.wisdom",
+          "charisma": "modifier.charisma"
+        }
       },
       "importantDetails": [
         "Name",
@@ -69482,10 +70514,43 @@
         "health": {
           "name": "Hit points",
           "showHealingFeatures": true,
-          "showDeathSavesAtZero": true,
+          "countersVisibleAtOrBelow": 0,
           "counters": [
             "death-save.successes",
             "death-save.failures"
+          ]
+        },
+        "descriptionProcessing": {
+          "classLevelPhrases": true,
+          "statPhrases": [
+            {
+              "phrase": "strength modifier",
+              "stat": "modifier.strength"
+            },
+            {
+              "phrase": "dexterity modifier",
+              "stat": "modifier.dexterity"
+            },
+            {
+              "phrase": "constitution modifier",
+              "stat": "modifier.constitution"
+            },
+            {
+              "phrase": "intelligence modifier",
+              "stat": "modifier.intelligence"
+            },
+            {
+              "phrase": "wisdom modifier",
+              "stat": "modifier.wisdom"
+            },
+            {
+              "phrase": "charisma modifier",
+              "stat": "modifier.charisma"
+            },
+            {
+              "phrase": "proficiency bonus",
+              "stat": "proficiencyBonus"
+            }
           ]
         },
         "resources": {
@@ -69500,6 +70565,9 @@
           "compact": true,
           "search": true,
           "levelFilter": true,
+          "zeroLevelName": "Cantrip",
+          "zeroLevelHeading": "Cantrips",
+          "slotPipLimit": 12,
           "columns": [
             {
               "name": "Casting time",

@@ -114,7 +114,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
             }}
           />
           <p className="muted">
-            {result.instances.filter((instance) => instance.active && instance.eligible && engine.getFeature(instance.feature)?.tags?.includes(engine.catalogue.system.terminology?.creatureTag ?? 'race')).map((instance) => featureName(engine.getFeature(instance.feature))).join(', ') || 'Origin not selected'}
+            {result.instances.filter((instance) => instance.active && instance.eligible && engine.getFeature(instance.feature)?.tags?.includes(engine.catalogue.system.terminology?.creatureTag ?? '')).map((instance) => featureName(engine.getFeature(instance.feature))).join(', ') || 'Origin not selected'}
             {' · '}
             {character.progressions.filter((progression) => progression.level > 0).map((progression) => `${engine.catalogue.classes.find((cls) => cls.id === progression.class)?.name ?? progression.class} ${progression.level}`).join(' / ') || 'No class selected'}
           </p>
@@ -344,7 +344,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
             </div>
             <h2>Abilities</h2>
             <div className="ability-list">{abilities.map(ability)}</div>
-            {Object.values(result.resources).filter((pool) => ![engine.catalogue.system.healthRules?.resourceKey ?? 'hit-points', engine.catalogue.system.healthRules?.temporaryResourceKey, ...engine.catalogue.system.sheetDisplay?.health?.counters ?? []].includes(pool.key) && !result.instances.some((instance) => engine.getFeature(instance.feature)?.companion?.resources.includes(pool.key)) && !Object.values(engine.catalogue.system.recoveryAllocations ?? {}).some((policy) => policy.keys.includes(pool.key)) && !slotIds.has(pool.id) && !abilities.some((capability) => Object.hasOwn(capability.costs, pool.id))).map((pool) => <div className="standalone-resource" key={pool.id}>{resource(pool.id)}</div>)}
+            {Object.values(result.resources).filter((pool) => ![engine.catalogue.system.healthRules?.resourceKey, engine.catalogue.system.healthRules?.temporaryResourceKey, ...engine.catalogue.system.sheetDisplay?.health?.counters ?? []].includes(pool.key) && !result.instances.some((instance) => engine.getFeature(instance.feature)?.companion?.resources.includes(pool.key)) && !Object.values(engine.catalogue.system.recoveryAllocations ?? {}).some((policy) => policy.keys.includes(pool.key)) && !slotIds.has(pool.id) && !abilities.some((capability) => Object.hasOwn(capability.costs, pool.id))).map((pool) => <div className="standalone-resource" key={pool.id}>{resource(pool.id)}</div>)}
             <SpellBook engine={engine} character={character} result={result} ready={ready} update={update} report={report} />
             {Object.entries(character.pending).map(([id, pending]) => (
               <section className="panel" key={id}>

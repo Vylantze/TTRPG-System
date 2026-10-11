@@ -9,6 +9,8 @@ for (const [key, name, maximum] of [['temporary-hit-points', 'Temporary HP', und
   if (!features.data.some((feature) => feature.id === id)) features.data.push({ id, revision: 1, name, displayName: name, tags: ['resource-tracker'], components: [{ id: 'tracker', kind: 'trackResource', key, name, units: key === 'temporary-hit-points' ? 'HP' : 'saves', integer: true, initialAmount: 0, ...(maximum === undefined ? {} : { maximum }), recovery: [] }] });
 }
 for (const system of Object.values(definitions.data)) {
+  for (const stat of system.stats.filter((stat) => stat.id.startsWith('modifier.'))) stat.name = `${stat.id.slice(9).replace(/^./, (letter) => letter.toUpperCase())} modifier`;
+  if (system.spellDisplay) system.spellDisplay.castingBonusStats = Object.fromEntries(system.stats.filter((stat) => stat.id.startsWith('modifier.')).map((stat) => [stat.id.slice(9), stat.id]));
   system.healthRules = { resourceKey: 'hit-points', temporaryResourceKey: 'temporary-hit-points', resetResourceKeysOnHealing: counters, clearOnReset: { 'long-rest': ['temporary-hit-points', ...counters] } };
   system.sheetDisplay = {
     overview: [
@@ -18,10 +20,11 @@ for (const system of Object.values(definitions.data)) {
       { stat: 'proficiencyBonus', name: 'Proficiency', signed: true },
       { stat: 'passivePerception', name: 'Passive perception' },
     ],
-    health: { name: 'Hit points', showHealingFeatures: true, showDeathSavesAtZero: true, counters },
+    health: { name: 'Hit points', showHealingFeatures: true, countersVisibleAtOrBelow: 0, counters },
+    descriptionProcessing: { classLevelPhrases: true, statPhrases: [...system.stats.filter((stat) => stat.id.startsWith('modifier.')).map((stat) => ({ phrase: `${stat.id.slice(9)} modifier`, stat: stat.id })), { phrase: 'proficiency bonus', stat: 'proficiencyBonus' }] },
     resources: { compact: true, showDetailsByDefault: false },
     inventory: { search: true, categoryFilter: true },
-    spells: { compact: true, search: true, levelFilter: true, columns: [{ name: 'Casting time', metadataKey: 'castingTime' }, { name: 'Range', metadataKey: 'range' }], castingStats: [] },
+    spells: { compact: true, search: true, levelFilter: true, zeroLevelName: 'Cantrip', zeroLevelHeading: 'Cantrips', slotPipLimit: 12, columns: [{ name: 'Casting time', metadataKey: 'castingTime' }, { name: 'Range', metadataKey: 'range' }], castingStats: [] },
     restPreview: true,
     rollHistory: true,
     showAllStats: false,
@@ -42,11 +45,18 @@ for (const system of Object.values(definitions.data)) {
     if (!system.advancement['0'].some((grant) => grant.id === key)) system.advancement['0'].push({ id: key, kind: 'grantFeature', feature: `dnd5e:2014:resource.${key}` });
   }
   for (const section of system.sheetSections) {
-    if (section.layout === 'skills') section.defaultSort = 'Name';
+    if (section.layout === 'skills') {
+      section.defaultSort = 'Name';
+      section.primarySigned = true;
+      section.trainingLevels = [{ minimum: 0, name: 'Not proficient', symbol: '○', trained: false }, { minimum: 1, name: 'Proficient', symbol: '●', trained: true }, { minimum: 2, name: 'Expertise', symbol: '◆', trained: true }];
+    }
     if (section.id === 'saves') section.columns = ['Training', 'Name', 'Bonus'];
     if (section.layout === 'abilities') {
       section.name = 'Abilities';
       section.modifierFirst = true;
+      section.primaryValueLabel = 'score';
+      section.secondaryValueLabel = 'modifier';
+      section.secondarySigned = true;
     }
     for (const row of section.rows) if (section.layout === 'abilities' || section.layout === 'skills') row.roll = { dice: '1d20', ...(section.layout === 'abilities' ? { bonusStat: row.secondaryStat } : {}) };
   }

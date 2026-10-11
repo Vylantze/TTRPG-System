@@ -9,8 +9,8 @@ export function descriptionTokenValues(text: string, engine: Engine, character: 
     const cls = token.startsWith('class:') ? engine.catalogue.classes.find((entry) => entry.id === token.slice(6)) : undefined;
     const value = stat ? result.stats[stat]?.value : cls ? character.progressions.filter((entry) => entry.class === cls.id).reduce((sum, entry) => sum + entry.level, 0) : undefined;
     if (value === undefined || !Number.isFinite(value)) continue;
-    const name = stat && engine.catalogue.system.stats.find((entry) => entry.id === stat)?.name;
-    const label = stat ? name && name !== stat ? name : stat.replace(/^modifier\.(.+)$/, '$1 modifier').replace(/[._-]/g, ' ').replace(/^./, (letter) => letter.toUpperCase()) : `${cls!.name} level`;
+    const name = stat && engine.getStatDefinition(stat)?.name;
+    const label = stat ? name || stat : `${cls!.name} level`;
     values.push({ start: match.index, end: match.index + match[0].length, label, value });
   }
   return values;

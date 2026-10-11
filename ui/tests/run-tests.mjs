@@ -6,7 +6,7 @@ import { createServer } from 'vite';
 import { createElement } from 'react';
 import { renderToStaticMarkup, renderToPipeableStream } from 'react-dom/server';
 import { PassThrough } from 'node:stream';
-import { finalizeCharacter, spellGroups, featureRollInstances, rollFeature, applyFeatureRoll } from '@/dist/index.js';
+import { Engine, finalizeCharacter, spellGroups, featureRollInstances, rollFeature, applyFeatureRoll } from '@/dist/index.js';
 import { exampleCharacter } from '@/examples/dnd2014-character.js';
 
 const server = await createServer({ server: { middlewareMode: true }, appType: 'custom' });
@@ -774,6 +774,53 @@ test('Infusion assignment UI offers owned items and external recipients, with so
   assert.match(html, /External: Armor/);
   assert.match(html, /2 active item limit/);
   assert.match(html, /target="_blank"/);
+});
+
+test('Generic sheet settings control value captions, training thresholds, phrases and health roles', async () => {
+  const { SheetSectionView } = await server.ssrLoadModule('/src/SheetSectionView.tsx');
+  const { HitPoints } = await server.ssrLoadModule('/src/HitPoints.tsx');
+  const { SheetOverview } = await server.ssrLoadModule('/src/SheetOverview.tsx');
+  const { resolvedRuleText } = await server.ssrLoadModule('/src/personalized-rules.tsx');
+  const section = { id: 'custom', name: 'Ranks', layout: 'skills', trainingLevels: [{ minimum: 0, name: 'Novice', symbol: 'N' }, { minimum: 5, name: 'Master', symbol: 'M' }], rows: [{ stat: 'fortune', proficiencyStat: 'training' }] };
+  const catalogue = { id: 'custom', revision: 1, classes: [], features: [{ id: 'health', revision: 1, name: 'Energy', components: [{ id: 'energy', kind: 'trackResource', key: 'hit-points', name: 'Energy', units: 'energy', initialAmount: 10, maximum: 10, recovery: [] }] }], system: { id: 'custom', revision: 1, name: 'Custom', allowMultipleClasses: false, characterLevel: 0, stats: [{ id: 'fortune', name: 'Fortune', kind: 'derived', expression: 7 }, { id: 'training', name: 'Training', kind: 'derived', expression: 6 }], sheetSections: [section], sheetDisplay: { descriptionProcessing: { statPhrases: [{ phrase: 'fortune modifier', stat: 'fortune' }] } }, advancement: { 0: [{ id: 'health', kind: 'grantFeature', feature: 'health' }] } } };
+  const engine = new Engine(catalogue);
+  const character = engine.createCharacter('custom', 'Custom');
+  const result = engine.evaluate(character);
+  const props = { engine, character, result, update: () => {}, report: () => {} };
+  const skills = renderToStaticMarkup(createElement(SheetSectionView, { ...props, section }));
+  assert.match(skills, /aria-label="Master"/);
+  assert.doesNotMatch(skills, /Expertise|Proficient/);
+  const ranks = renderToStaticMarkup(createElement(SheetSectionView, { ...props, section: { ...section, layout: 'abilities', modifierFirst: true, primaryValueLabel: 'rank', secondaryValueLabel: 'adjustment', rows: [{ stat: 'fortune', secondaryStat: 'training' }] } }));
+  assert.match(ranks, /Show ranks first/);
+  assert.match(ranks, /Fortune adjustment/);
+  assert.doesNotMatch(ranks, /Fortune score|Fortune modifier/);
+  assert.equal(resolvedRuleText('fortune modifier + proficiency bonus', engine, character, result), '7 + proficiency bonus');
+  assert.equal(resolvedRuleText('{{stat:fortune}}', engine, character, result, true), '7');
+  assert.doesNotMatch(renderToStaticMarkup(createElement(HitPoints, props)), /Energy|Damage or healing amount/);
+  assert.match(renderToStaticMarkup(createElement(SheetOverview, props)), /without-health/);
+  assert.doesNotMatch(renderToStaticMarkup(createElement(SheetOverview, props)), /sheet-hit-points/);
+});
+
+test('System-authored zero-level spell names replace Cantrip in spell summaries and casting controls', async () => {
+  const custom = structuredClone(file);
+  for (const config of custom.configurations) {
+    config.system.sheetDisplay.spells.zeroLevelName = 'Minor spell';
+    config.system.sheetDisplay.spells.zeroLevelHeading = 'Minor spells';
+  }
+  const wizard = starterSaves[3];
+  const html = await render({ ...data(), systems: [custom], characters: [wizard] }, `#characters/${wizard.id}?view=spells`);
+  assert.match(html, /Minor spells/);
+  assert.doesNotMatch(html, /Cantrips/);
+});
+
+test('Missing casting bonus mappings disable affected rolls without crashing the character sheet', async () => {
+  const old = structuredClone(file);
+  for (const config of old.configurations) delete config.system.spellDisplay.castingBonusStats;
+  const cleric = starterSaves[1];
+  const html = await render({ ...data(), systems: [old], characters: [cleric] }, `#characters/${cleric.id}?view=actions`);
+  assert.match(html, /Character overview/);
+  assert.match(html, /requires an unavailable stat/);
+  assert.match(html, /disabled="">Roll/);
 });
 
 test.after(() => server.close());

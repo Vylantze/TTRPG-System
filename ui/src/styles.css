@@ -231,6 +231,7 @@ button.resource-adjust-button { box-sizing: border-box; flex: 0 0 2rem; width: 2
 
 /* A table-play overview remains visible while changing sheet tabs. */
 .sheet-overview { display:grid; grid-template-columns:minmax(280px,1.15fr) minmax(0,2fr); gap:18px; align-items:start; margin:18px 0 24px; }
+.sheet-overview.without-health { grid-template-columns:minmax(0,1fr); }
 .sheet-overview .sheet-hit-points { background:#fffefa; border:1px solid var(--line); border-top:3px solid #6b8160; border-radius:10px; padding:18px; margin:0; }
 .sheet-overview h2 { font-size:20px; margin:0 0 12px; }
 .sheet-overview .resource-card { border:0; padding:0; background:transparent; margin:0 0 12px; }

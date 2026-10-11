@@ -18,6 +18,11 @@ export function SheetSectionView({ section, engine, character, result, update, r
   const columns = section.columns ?? ['Training', 'Name', 'Ability', 'Bonus'];
   const name = (row: SheetSection['rows'][number]) => row.name ?? engine.getStatDefinition(row.stat)?.name ?? row.stat;
   const training = (row: SheetSection['rows'][number]) => row.proficiencyStat ? result.stats[row.proficiencyStat]?.value ?? 0 : 0;
+  const trainingLevel = (row: SheetSection['rows'][number]) => [...section.trainingLevels ?? []].sort((a, b) => b.minimum - a.minimum).find((level) => training(row) >= level.minimum) ?? { minimum: 0, name: String(training(row)), symbol: String(training(row)), trained: false };
+  const primaryLabel = section.primaryValueLabel ?? 'value';
+  const secondaryLabel = section.secondaryValueLabel ?? 'secondary value';
+  const primaryValue = (value: number) => section.primarySigned ? signed(value) : value;
+  const secondaryValue = (value: number) => section.secondarySigned ? signed(value) : value;
   const value = (row: SheetSection['rows'][number]) => sort === 'Training' ? training(row) : sort === 'Bonus' ? result.stats[row.stat].value : sort === 'Ability' ? row.ability ?? '' : name(row);
   if (section.layout === 'skills') rows.sort((a, b) => {
     const left = value(a), right = value(b);
@@ -33,7 +38,7 @@ export function SheetSectionView({ section, engine, character, result, update, r
     <section className={`panel sheet-section sheet-${section.layout}`}>
       <div className="section-heading">
         <h2>{section.name}</h2>
-        {section.layout === 'abilities' && <Tooltip text={modifierFirst ? 'Show scores first' : 'Show modifiers first'}><button className="quiet icon-button" aria-label={modifierFirst ? 'Show scores first' : 'Show modifiers first'} aria-pressed={modifierFirst} onClick={() => update?.({ ...character, displayPreferences: { ...character.displayPreferences, [preference]: !modifierFirst } })}><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h15l-4-4M20 17H5l4 4M19 7l-4 4M5 17l4-4" /></svg></button></Tooltip>}
+        {section.layout === 'abilities' && <Tooltip text={`Show ${modifierFirst ? primaryLabel : secondaryLabel}s first`}><button disabled={!update} className="quiet icon-button" aria-label={`Show ${modifierFirst ? primaryLabel : secondaryLabel}s first`} aria-pressed={modifierFirst} onClick={() => update?.({ ...character, displayPreferences: { ...character.displayPreferences, [preference]: !modifierFirst } })}><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 7h15l-4-4M20 17H5l4 4M19 7l-4 4M5 17l4-4" /></svg></button></Tooltip>}
       </div>
       {section.layout === 'skills'
         ? (
@@ -61,7 +66,7 @@ export function SheetSectionView({ section, engine, character, result, update, r
                 {rows.map((row) => (
                   <tr key={row.stat}>
                     {columns.map((column) => column === 'Training'
-                      ? <td key={column}><span className={`proficiency-dot ${training(row) > 0 ? 'trained' : ''}`} aria-label={training(row) >= 2 ? 'Expertise' : training(row) > 0 ? 'Proficient' : 'Not proficient'} title={training(row) >= 2 ? 'Expertise' : training(row) > 0 ? 'Proficient' : 'Not proficient'}>{training(row) >= 2 ? '◆' : training(row) > 0 ? '●' : '○'}</span></td>
+                      ? <td key={column}><span className={`proficiency-dot ${trainingLevel(row).trained ? 'trained' : ''}`} aria-label={trainingLevel(row).name} title={trainingLevel(row).name}>{trainingLevel(row).symbol}</span></td>
                       : column === 'Name'
                         ? <th key={column} scope="row">{row.feature ? <FeatureLink id={row.feature} engine={engine}>{name(row)}</FeatureLink> : name(row)}</th>
                         : column === 'Ability'
@@ -69,7 +74,7 @@ export function SheetSectionView({ section, engine, character, result, update, r
                           : (
                               <td key={column}>
                                 <div className="bonus-control">
-                                  <strong>{row.roll ? <StatRollButton stat={row.stat} label={name(row)} value={signed(result.stats[row.stat].value)} engine={engine} character={character} result={result} update={update} report={report} /> : signed(result.stats[row.stat].value)}</strong>
+                                  <strong>{row.roll ? <StatRollButton stat={row.stat} label={name(row)} value={primaryValue(result.stats[row.stat].value)} engine={engine} character={character} result={result} update={update} report={report} /> : primaryValue(result.stats[row.stat].value)}</strong>
                                   <button className="link calculation-toggle" aria-label={`Calculation for ${name(row)}`} aria-expanded={expanded.includes(row.stat)} aria-controls={`calculation-${section.id}-${row.stat}`} onClick={() => setExpanded(expanded.includes(row.stat) ? expanded.filter((stat) => stat !== row.stat) : [...expanded, row.stat])}>{expanded.includes(row.stat) ? '▾' : '▸'}</button>
                                 </div>
                               </td>
@@ -94,8 +99,8 @@ export function SheetSectionView({ section, engine, character, result, update, r
                           )
                         : name(row)}
                     </h3>
-                    <Tooltip text={`${name(row)} ${swapped ? 'modifier' : 'score'}`}><strong className="stat-value">{swapped ? signed(secondary.value) : result.stats[row.stat].value}</strong></Tooltip>
-                    {secondary && <Tooltip text={`${name(row)} ${swapped ? 'score' : 'modifier'}`}><span className="ability-modifier">{swapped ? result.stats[row.stat].value : signed(secondary.value)}</span></Tooltip>}
+                    <Tooltip text={`${name(row)} ${swapped ? secondaryLabel : primaryLabel}`}><strong className="stat-value">{swapped ? secondaryValue(secondary.value) : primaryValue(result.stats[row.stat].value)}</strong></Tooltip>
+                    {secondary && <Tooltip text={`${name(row)} ${swapped ? primaryLabel : secondaryLabel}`}><span className="ability-modifier">{swapped ? primaryValue(result.stats[row.stat].value) : secondaryValue(secondary.value)}</span></Tooltip>}
                     <details>
                       <summary>Calculation</summary>
                       <StatCalculation id={swapped ? row.secondaryStat! : row.stat} engine={engine} character={character} result={result} />
