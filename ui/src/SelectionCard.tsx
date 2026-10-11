@@ -1,4 +1,5 @@
 import { FeatureLink } from '@/ui/src/FeatureLink';
+import { selectionLevel } from '@/ui/src/build-selections';
 import { featureName, tagName } from '@/ui/src/display';
 import { useMemo, useState } from 'react';
 import { type Engine, type Character, type Edit, type SelectionResult, type Value } from '@/src/index';
@@ -9,7 +10,7 @@ import { descriptionPreview, featureDescription } from '@/ui/src/feature-descrip
 import { FeatureRequirements } from '@/ui/src/FeatureRequirements';
 
 const PAGE = 12;
-export function SelectionCard({ slot, engine, character, edit, openFeature, ownerName }: { slot: SelectionResult; engine: Engine; character: Character; edit: (edits: Edit[]) => void; openFeature: (id: string) => void; ownerName?: string }) {
+export function SelectionCard({ slot, engine, character, edit, openFeature, ownerName, issues = [] }: { slot: SelectionResult; engine: Engine; character: Character; edit: (edits: Edit[]) => void; openFeature: (id: string) => void; ownerName?: string; issues?: string[] }) {
   const [open, setOpen] = useState(false), [query, setQuery] = useState(''), [page, setPage] = useState(0), [event, setEvent] = useState('');
   const definitions = engine.catalogue.features;
   const [listMode, setListMode] = useState(false);
@@ -22,11 +23,16 @@ export function SelectionCard({ slot, engine, character, edit, openFeature, owne
   const picks = character.selections[slot.id] ?? [];
   const update = (next: typeof picks) => edit([{ kind: 'select', selection: slot.id, picks: next, ...(event ? { event } : {}) }]);
   const missing = Math.max(0, slot.minimum - picks.length);
+  const invalid = missing > 0 || picks.length > slot.maximum || issues.length > 0;
   return (
-    <details className={`selection-card ${missing ? 'needs-choice' : ''}`} onToggle={(e) => setOpen(e.currentTarget.open)}>
+    <details className={`selection-card ${invalid ? 'selection-error' : ''}`} onToggle={(e) => setOpen(e.currentTarget.open)}>
       <summary>
-        <span>{title}</span>
-        <span className={`badge ${missing ? 'incomplete' : 'valid'}`}>
+        <span>
+          {title}
+          <small className="selection-level">{slot.id.startsWith('advancement/') ? 'Origins' : selectionLevel(slot) ? `Level ${selectionLevel(slot)}` : 'Additional choices'}</small>
+        </span>
+        <span className={`badge ${invalid ? 'invalid' : 'valid'}`}>
+          {invalid && 'Needs attention · '}
           {picks.length}
           {' '}
           {'/ '}
@@ -34,6 +40,7 @@ export function SelectionCard({ slot, engine, character, edit, openFeature, owne
           {slot.minimum === slot.maximum ? slot.maximum : `${slot.minimum}–${slot.maximum}`}
         </span>
       </summary>
+      {issues.length > 0 && <ul className="selection-issues">{issues.map((issue) => <li key={issue}>{issue}</li>)}</ul>}
       <p className="muted small">{slot.id}</p>
       <button className="quiet" aria-pressed={listMode} onClick={() => setListMode(!listMode)}>{listMode ? 'Use dropdown' : 'Use list'}</button>
       {slot.definition.ignorePrerequisites && <p className="notice">Ordinary prerequisites are waived here. Resource requirements still apply.</p>}

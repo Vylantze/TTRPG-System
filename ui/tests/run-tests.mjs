@@ -6,7 +6,7 @@ import { createServer } from 'vite';
 import { createElement } from 'react';
 import { renderToStaticMarkup, renderToPipeableStream } from 'react-dom/server';
 import { PassThrough } from 'node:stream';
-import { Engine, finalizeCharacter, spellGroups, featureRollInstances, rollFeature, applyFeatureRoll } from '@/dist/index.js';
+import { Engine, finalizeCharacter, spellGroups, featureRollInstances, rollFeature, applyFeatureRoll, applyEdit } from '@/dist/index.js';
 import { exampleCharacter } from '@/examples/dnd2014-character.js';
 
 const server = await createServer({ server: { middlewareMode: true }, appType: 'custom' });
@@ -821,6 +821,48 @@ test('Missing casting bonus mappings disable affected rolls without crashing the
   assert.match(html, /Character overview/);
   assert.match(html, /requires an unavailable stat/);
   assert.match(html, /disabled="">Roll/);
+});
+
+test('Build choices sort numerically and highlight missing or invalid selections', async () => {
+  const { sortBuildSelections, selectionIssues } = await server.ssrLoadModule('/src/build-selections.ts');
+  const { engine, character, evaluation } = exampleCharacter();
+  const original = evaluation.selections[0];
+  const slots = [10, 2, 3].map((level) => ({ ...original, id: `class/test/${level}/choice`, context: { acquiredClassLevel: level } }));
+  assert.deepEqual(sortBuildSelections(slots).map((slot) => slot.context.acquiredClassLevel), [2, 3, 10]);
+  assert.equal(slots[0].context.acquiredClassLevel, 10);
+  const issues = selectionIssues(original, [{ path: `${original.id}/pick/parameter`, message: 'Parameter out of range' }, { path: 'other', message: 'Unrelated' }]);
+  assert.deepEqual(issues, ['Parameter out of range']);
+  const props = { engine, character, slot: original, edit: () => {}, openFeature: () => {} };
+  assert.match(renderToStaticMarkup(createElement(SelectionCard, { ...props, issues })), /selection-error/);
+  assert.match(renderToStaticMarkup(createElement(SelectionCard, { ...props, character: { ...character, selections: {} } })), /selection-error/);
+  const leveled = applyEdit(engine, character, [{ kind: 'level', progression: 'class-0', level: 4 }], 'level-up-warning');
+  const improvement = engine.evaluate(leveled).selections.find((slot) => slot.definition.id === 'improvement');
+  assert.ok(improvement);
+  assert.match(renderToStaticMarkup(createElement(SelectionCard, { ...props, character: leveled, slot: improvement })), /Needs attention/);
+});
+
+test('System data editor supports immutable record edits, versioning, and safe rejection', async () => {
+  const { prepareSystemDataEdit } = await server.ssrLoadModule('/src/system-data.ts');
+  const feature = file.features[0];
+  const updated = prepareSystemDataEdit(file, 'features', JSON.stringify({ ...feature, name: 'Edited display name' }), '0');
+  assert.equal(updated.features[0].name, 'Edited display name');
+  assert.notEqual(file.features[0].name, 'Edited display name');
+  assert.equal(updated.features[1], file.features[1]);
+  assert.equal(updated.contentVersion, file.contentVersion.split('.').map((part, index) => index === 2 ? Number(part) + 1 : part).join('.'));
+  assert.equal(updated.assetVersions, undefined);
+  const workspace = { ...data(), characters: [starterSaves[0]] };
+  const saved = model.reloadSystem(workspace, file, updated);
+  assert.equal(saved.characters[0].id, starterSaves[0].id);
+  assert.equal(saved.systems[0].features[0].name, 'Edited display name');
+  assert.throws(() => prepareSystemDataEdit(file, 'features', '{bad JSON', '0'));
+  assert.throws(() => prepareSystemDataEdit(file, 'features', '{}', '999999'), /no longer available/);
+  assert.throws(() => model.reloadSystem(workspace, file, { ...updated, features: [] }));
+  assert.equal(workspace.systems[0], file);
+  const html = await render(data(), '#system-data');
+  assert.match(html, /System to edit/);
+  assert.match(html, /Find record/);
+  assert.match(html, /System JSON data/);
+  assert.match(html, /Validate and save/);
 });
 
 test.after(() => server.close());
