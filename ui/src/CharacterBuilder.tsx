@@ -25,6 +25,7 @@ import { useMemo, useState, useTransition } from 'react';
 import { clearFeatureRolls, featureRollInstances, reopenCharacter, spellGroups, spellSlotPools, adjustResource, applyEdit, previewEdit, finalizeCharacter, recoverSelectedResources, settleAbility, useAbility as activateAbility, type Engine, type Character, type Edit, type EditPreview } from '@/src/index';
 import { labelFromId } from '@/ui/src/workspace';
 import { SelectionCard } from '@/ui/src/SelectionCard';
+import { selectionBucket, selectionIssues, sortBuildSelections } from '@/ui/src/build-selections';
 import { Modal } from '@/ui/src/Modal';
 import { FeatureRules, RulesText } from '@/ui/src/RulesText';
 import { ResourceSummary } from '@/ui/src/ResourceSummary';
@@ -61,8 +62,8 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
     if (character.buildState === 'draft') update(applyEdit(engine, character, edits, crypto.randomUUID()));
     else setPreview({ edits, result: previewEdit(engine, character, edits) });
   });
-  const slots = result.selections.filter((s) => level === 'all' || (s.id.startsWith('advancement/') ? 'origins' : s.id.match(/^class\/[^/]+\/(\d+)/)?.[1] ?? 'extra') === level);
-  const levels = [...new Set(result.selections.map((s) => s.id.startsWith('advancement/') ? 'origins' : s.id.match(/^class\/[^/]+\/(\d+)/)?.[1] ?? 'extra'))].sort((a, b) => Number(a) - Number(b));
+  const slots = sortBuildSelections(result.selections).filter((slot) => level === 'all' || selectionBucket(slot) === level);
+  const levels = [...new Set(sortBuildSelections(result.selections).map(selectionBucket))];
   const inputs = engine.catalogue.system.stats.filter((s) => s.kind === 'input');
   const incomplete = result.diagnostics.filter((d) => d.severity === 'incomplete').length;
   const ready = character.buildState !== 'draft' && result.status === 'valid';
@@ -299,7 +300,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
               <p className="muted">Each slot is independent. Choose a Feature to reveal its parameters and nested choices.</p>
               {slots.map((slot) => {
                 const owner = result.instances.find((i) => i.id === slot.owner), name = owner ? featureName(engine.catalogue.features.find((f) => f.id === owner.feature)) : undefined;
-                return <SelectionCard key={slot.id} slot={slot} engine={engine} character={character} edit={edit} openFeature={openFeature} ownerName={name} />;
+                return <SelectionCard key={slot.id} slot={slot} engine={engine} character={character} edit={edit} openFeature={openFeature} ownerName={name} issues={selectionIssues(slot, result.diagnostics)} />;
               })}
               {!slots.length && <p>No selections at this level.</p>}
               <details className="panel">

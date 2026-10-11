@@ -15,13 +15,14 @@ import { addStarterCharacters, migrateMoney } from '@/ui/src/starter-characters'
 const CharacterBuilder = lazy(() => import('@/ui/src/CharacterBuilder').then((module) => ({ default: memo(module.CharacterBuilder) })));
 const ClassDetail = lazy(() => import('@/ui/src/ClassDetail').then((module) => ({ default: memo(module.ClassDetail) })));
 const FeatureDetail = lazy(() => import('@/ui/src/FeatureDetail').then((module) => ({ default: memo(module.FeatureDetail) })));
+const SystemDataEditor = lazy(() => import('@/ui/src/SystemDataEditor').then((module) => ({ default: module.SystemDataEditor })));
 import { Modal } from '@/ui/src/Modal';
 import { RulesText } from '@/ui/src/RulesText';
 import { descriptionPreview, featureDescription, featureHref } from '@/ui/src/feature-description';
 
 import { featureName, tagName } from '@/ui/src/display';
 import type { Route } from '@/ui/src/types/Route';
-import { createRegistry, download, labelFromId, systemKey, type Workspace } from '@/ui/src/workspace';
+import { createRegistry, download, labelFromId, systemKey, reloadSystem, type Workspace } from '@/ui/src/workspace';
 import { reconcilePrototypeCharacters } from '@/ui/src/prototype-characters';
 import { loadPrototypeTemplates } from '@/ui/src/load-prototype-templates';
 import { bundledUpdateKind, applySystemPatch } from '@/ui/src/system-updates';
@@ -290,7 +291,7 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
         </a>
         <p className="sidebar-label">WORKSPACE</p>
         <nav aria-label="Main navigation">
-          {[['characters', 'Characters', '◈'], ['classes', engine?.catalogue.system.terminology?.classPlural ?? 'Classes', '▤'], ['races', engine?.catalogue.system.terminology?.creaturePlural ?? 'Races', '♧'], ['features', 'Features', '◇'], ['systems', 'Systems', '⬡']].map(([id, title, icon]) => (
+          {[['characters', 'Characters', '◈'], ['classes', engine?.catalogue.system.terminology?.classPlural ?? 'Classes', '▤'], ['races', engine?.catalogue.system.terminology?.creaturePlural ?? 'Races', '♧'], ['features', 'Features', '◇'], ['systems', 'Systems', '⬡'], ['system-data', 'System data', '✎']].map(([id, title, icon]) => (
             <a href={`#${id}`} className={route.page === id ? 'active' : ''} aria-current={route.page === id ? 'page' : undefined} key={id}>
               <span aria-hidden="true">{icon}</span>
               {title}
@@ -335,7 +336,7 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
               ☰
             </button>
           </Tooltip>
-          <span>{route.page === 'races' ? engine?.catalogue.system.terminology?.creaturePlural ?? 'Races' : route.page === 'classes' ? engine?.catalogue.system.terminology?.classPlural ?? 'Classes' : route.page.slice(0, 1).toUpperCase() + route.page.slice(1)}</span>
+          <span>{route.page === 'system-data' ? 'System data' : route.page === 'races' ? engine?.catalogue.system.terminology?.creaturePlural ?? 'Races' : route.page === 'classes' ? engine?.catalogue.system.terminology?.classPlural ?? 'Classes' : route.page.slice(0, 1).toUpperCase() + route.page.slice(1)}</span>
           <div className="toolbar">
             {selected && (
               <label className="system-switch">
@@ -390,6 +391,17 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
               <p>{resolved.error}</p>
               <a href="#systems">Manage Systems →</a>
             </div>
+          )}
+          {route.page === 'system-data' && (
+            <SystemDataEditor
+              files={workspace.systems}
+              save={(existing, incoming) => {
+                const current = workspaceRef.current;
+                const next = reloadSystem(current, existing, incoming);
+                change(next);
+                setOptions({});
+              }}
+            />
           )}
           {route.page === 'systems' && (
             <>

@@ -1,5 +1,5 @@
 {
-  "assetVersion": "1.0.0",
+  "assetVersion": "2.0.0",
   "data": [
     {
       "id": "dnd5e:2014:fighter.entry",
@@ -2084,81 +2084,52 @@
           "feature": "dnd5e:2014:cleric.prepared.cure-wounds"
         },
         {
-          "id": "domain-spells",
-          "kind": "chooseFeatures",
-          "eligibility": "current",
-          "minimum": {
-            "op": "multiply",
-            "args": [
-              2,
-              {
-                "op": "min",
-                "args": [
-                  4,
-                  {
-                    "op": "max",
-                    "args": [
-                      0,
-                      {
-                        "op": "subtract",
-                        "args": [
-                          {
-                            "stat": "clericSpellLevel"
-                          },
-                          1
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          "maximum": {
-            "op": "multiply",
-            "args": [
-              2,
-              {
-                "op": "min",
-                "args": [
-                  4,
-                  {
-                    "op": "max",
-                    "args": [
-                      0,
-                      {
-                        "op": "subtract",
-                        "args": [
-                          {
-                            "stat": "clericSpellLevel"
-                          },
-                          1
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          "candidates": {
-            "ids": [
-              "dnd5e:2014:cleric.prepared.lesser-restoration",
-              "dnd5e:2014:cleric.prepared.spiritual-weapon",
-              "dnd5e:2014:cleric.prepared.beacon-of-hope",
-              "dnd5e:2014:cleric.prepared.revivify",
-              "dnd5e:2014:cleric.prepared.death-ward",
-              "dnd5e:2014:cleric.prepared.guardian-of-faith",
-              "dnd5e:2014:cleric.prepared.mass-cure-wounds",
-              "dnd5e:2014:cleric.prepared.raise-dead"
-            ],
-            "maximumLevel": {
-              "stat": "clericSpellLevel"
-            }
-          },
-          "retraining": {
-            "allowed": true
-          }
+          "id": "domain-lesser-restoration",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:cleric.prepared.lesser-restoration",
+          "atClassLevel": 3
+        },
+        {
+          "id": "domain-spiritual-weapon",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:cleric.prepared.spiritual-weapon",
+          "atClassLevel": 3
+        },
+        {
+          "id": "domain-beacon-of-hope",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:cleric.prepared.beacon-of-hope",
+          "atClassLevel": 5
+        },
+        {
+          "id": "domain-revivify",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:cleric.prepared.revivify",
+          "atClassLevel": 5
+        },
+        {
+          "id": "domain-death-ward",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:cleric.prepared.death-ward",
+          "atClassLevel": 7
+        },
+        {
+          "id": "domain-guardian-of-faith",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:cleric.prepared.guardian-of-faith",
+          "atClassLevel": 7
+        },
+        {
+          "id": "domain-mass-cure-wounds",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:cleric.prepared.mass-cure-wounds",
+          "atClassLevel": 9
+        },
+        {
+          "id": "domain-raise-dead",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2014:cleric.prepared.raise-dead",
+          "atClassLevel": 9
         },
         {
           "id": "progression-cleric.channel-divinity-preserve-life",

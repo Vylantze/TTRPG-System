@@ -1,6 +1,6 @@
 {
   "format": "ttrpg-system",
-  "contentVersion": "3.0.0",
+  "contentVersion": "4.0.0",
   "version": 1,
   "id": "dnd5e:2014-srd5.1",
   "revision": 1,
@@ -238,7 +238,7 @@
   },
   "assetVersions": {
     "blocks.json": "1.0.0",
-    "class-features.json": "1.0.0",
+    "class-features.json": "2.0.0",
     "classes.json": "1.0.0",
     "definitions.json": "3.0.0",
     "features.json": "1.1.0",

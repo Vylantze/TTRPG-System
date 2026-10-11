@@ -156,7 +156,7 @@ oath['description']='Oath Spells\n'+source['text'];oath['source']=oath['source']
 names='protection from evil and good|sanctuary|lesser restoration|zone of truth|beacon of hope|dispel magic|freedom of movement|guardian of faith|commune|flame strike'
 oath['components']=[C('oath-spells',[P+'paladin.prepared.'+slug(name) for name in names.split('|')],op('multiply',2,st('paladinSpellLevel')),maximumLevel=st('paladinSpellLevel'))]
 names='lesser restoration|spiritual weapon|beacon of hope|revivify|death ward|guardian of faith|mass cure wounds|raise dead'
-fs[P+'cleric.life']['components']=[x for x in fs[P+'cleric.life']['components'] if x['id']!='domain-spells']+[C('domain-spells',[P+'cleric.prepared.'+slug(name) for name in names.split('|')],op('multiply',2,op('min',4,op('max',0,op('subtract',st('clericSpellLevel'),1)))),maximumLevel=st('clericSpellLevel'))]
+fs[P+'cleric.life']['components']=[x for x in fs[P+'cleric.life']['components'] if x['id']!='domain-spells' and not x['id'].startswith('domain-')]+[G(P+'cleric.prepared.'+slug(name),ident='domain-'+slug(name),atClassLevel=3+2*(index//2)) for index,name in enumerate(names.split('|'))]
 # Wizard preparations may also spend a multiclass character's Pact Magic slots.
 for feature in list(fs.values()):
  if not feature['id'].startswith(P+'prepared.'):continue
