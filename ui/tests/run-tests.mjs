@@ -389,8 +389,39 @@ test('class guide has a progression table, jump controls, and expanded source de
 test('Feature pages put rules first and keep authoring details collapsed', async () => {
   const html = await render(data(), '#features/dnd5e%3A2014%3Afighter.second-wind');
   assert.match(html, /<h2>Rules<\/h2>/);
-  assert.match(html, /<h2>At a glance<\/h2>/);
+  assert.match(html, /<h2>Feature content<\/h2>/);
+  assert.doesNotMatch(html, /At a glance|<aside class="panel feature-facts"/);
   assert.match(html, /<details class="panel technical-details"><summary>Builder &amp; engine details/);
+});
+
+test('Feature content includes granted rules and selection options, with unique header tags', async () => {
+  const { FeatureDetail } = await server.ssrLoadModule('/src/FeatureDetail.tsx');
+  const { engine } = exampleCharacter();
+  const secondWind = engine.getFeature('dnd5e:2014:fighter.second-wind');
+  const feature = {
+    ...secondWind,
+    id: 'test:full-content',
+    description: 'Parent rules.',
+    textReferences: [],
+    tags: ['action', 'action'],
+    components: [
+      { id: 'grant', kind: 'grantFeature', feature: secondWind.id, atClassLevel: 2 },
+      { id: 'choice', kind: 'chooseFeatures', minimum: 1, maximum: 1, candidates: { ids: [secondWind.id] } },
+      { id: 'action-one', kind: 'grantCapability', name: 'First', action: { kind: 'action', amount: 1 } },
+      { id: 'action-two', kind: 'grantCapability', name: 'Second', action: { kind: 'action', amount: 1 } },
+    ],
+  };
+  const html = renderToStaticMarkup(createElement(FeatureDetail, { feature, engine, openFeature() {} }));
+  const header = html.slice(0, html.indexOf('</header>'));
+  assert.equal((header.match(/>Action<\/span>/g) ?? []).length, 1);
+  assert.match(html, /Granted at class level 2/);
+  assert.match(html, /1d10 \+ your fighter level/);
+  assert.match(html, /1 options/);
+  assert.match(html, /feature-content-entry/);
+  const spell = await render(data(), '#features/dnd5e%3A2014%3Aartificer.prepared.absorb-elements');
+  const spellHeader = spell.match(/<header class="feature-reference-header">[\s\S]*?<\/header>/)?.[0];
+  assert.ok(spellHeader);
+  assert.equal((spellHeader.match(/>Action<\/span>/g) ?? []).length, 1);
 });
 
 test('acquired Feature library exposes search, origins and acquisition levels', async () => {

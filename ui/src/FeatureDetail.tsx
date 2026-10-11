@@ -5,8 +5,14 @@ import { labelFromId } from '@/ui/src/workspace';
 import { FeatureRules } from '@/ui/src/RulesText';
 
 import { FeatureRequirements } from '@/ui/src/FeatureRequirements';
+import { FeatureSelectionContent } from '@/ui/src/FeatureSelectionContent';
 
 export function FeatureDetail({ feature, engine, openFeature }: { feature: FeatureDefinition; engine: Engine; openFeature: (id: string) => void }) {
+  const tagLabels = [...new Set([
+    ...(feature.tags ?? []).map((tag) => tagName(engine.catalogue.system, tag)),
+    ...feature.components.flatMap((component) => component.kind === 'grantCapability' && component.action ? [labelFromId(component.action.kind)] : []),
+  ])];
+  const grants = feature.components.filter((component): component is Grant => component.kind === 'grantFeature');
   return (
     <article className="feature-detail">
       <header className="feature-reference-header">
@@ -23,8 +29,7 @@ export function FeatureDetail({ feature, engine, openFeature }: { feature: Featu
               {feature.contentLevel}
             </span>
           )}
-          {feature.tags?.map((t) => <span className="tag" key={t}>{tagName(engine.catalogue.system, t)}</span>)}
-          {feature.components.flatMap((component) => component.kind === 'grantCapability' && component.action ? [<span className="tag" key={`action:${component.id}`}>{labelFromId(component.action.kind)}</span>] : [])}
+          {tagLabels.map((label) => <span className="tag" key={label}>{label}</span>)}
         </div>
       </header>
       <div className="feature-reading-layout">
@@ -33,28 +38,26 @@ export function FeatureDetail({ feature, engine, openFeature }: { feature: Featu
           <FeatureRules feature={feature} engine={engine} openFeature={openFeature} />
           {!feature.description && !feature.textReferences?.length && <p className="muted">No source description is available for this Feature.</p>}
         </section>
-        <aside className="panel feature-facts">
-          <h2>At a glance</h2>
+        <section className="panel feature-content">
+          <h2>Feature content</h2>
           <FeatureRequirements feature={feature} engine={engine} />
           {feature.resources?.length ? <p className="notice">Requires a compatible resource provider. This requirement cannot be waived.</p> : null}
-          {feature.components.filter((c): c is Grant => c.kind === 'grantFeature').map((component) => (
-            <p key={component.id}>
-              {'Grants '}
-              <FeatureLink className="link" id={component.feature} engine={engine}>{featureName(engine.getFeature(component.feature))}</FeatureLink>
-              {component.atClassLevel !== undefined && ` at class level ${component.atClassLevel}`}
-            </p>
-          ))}
+          {grants.length > 0 && <h3>Granted Features</h3>}
+          {grants.map((component) => {
+            const granted = engine.getFeature(component.feature);
+            return (
+              <section className="feature-content-entry" key={component.id}>
+                <h4><FeatureLink className="link" id={component.feature} engine={engine}>{featureName(granted)}</FeatureLink></h4>
+                {component.atClassLevel !== undefined && <p className="muted">{`Granted at class level ${component.atClassLevel}`}</p>}
+                {granted && !feature.textReferences?.includes(granted.id) && <FeatureRules feature={granted} engine={engine} openFeature={openFeature} />}
+                {feature.textReferences?.includes(component.feature) && <p className="muted">Full rules are included above.</p>}
+              </section>
+            );
+          })}
           {feature.components.filter((c): c is Choice => c.kind === 'chooseFeatures').map((component) => (
-            <div key={component.id}>
-              <h3>{labelFromId(component.id)}</h3>
-              <p className="muted small">
-                {engine.getSelectionFeatures(component).length}
-                {' '}
-                options in this selection pool. Character requirements still apply.
-              </p>
-            </div>
+            <FeatureSelectionContent key={component.id} choice={component} engine={engine} openFeature={openFeature} />
           ))}
-        </aside>
+        </section>
       </div>
       <details className="panel technical-details">
         <summary>Builder & engine details</summary>
