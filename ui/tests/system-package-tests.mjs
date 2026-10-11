@@ -56,6 +56,8 @@ test('sheet evaluation reuses cosmetic edits but invalidates rule edits and engi
   const first = evaluateForSheet(engine, character);
   const cosmetic = { ...character, name: 'Renamed', notes: { Note: 'New note' }, tabOrder: ['notes'], displayPreferences: { modifiers: true } };
   assert.equal(evaluateForSheet(engine, cosmetic), first);
+  const checkOnly = { ...cosmetic, statRolls: [{ id: 'check', stat: 'agility', name: 'Agility', expression: '1d20 + 2', total: 4, breakdown: '2 (1d20) + 2' }], events: [...cosmetic.events, { id: 'check', fingerprint: '{"kind":"rollStat","stat":"agility"}' }] };
+  assert.equal(evaluateForSheet(engine, checkOnly), first);
   assert.ok(Object.isFrozen(first.stats));
   const invalid = { ...cosmetic, inputs: { unknown: 4 } };
   assert.equal(evaluateForSheet(engine, invalid).status, 'invalid');

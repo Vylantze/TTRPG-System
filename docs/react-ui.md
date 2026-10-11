@@ -152,7 +152,7 @@ Expanded System snapshots use cached lz-string compression in local storage; exi
 
 ## Proposed character-sheet improvements (2026-10-11)
 
-Status: recommendations recorded after comparing the rendered D&D Beyond sheet, the deployed Feature Forge sheet, and current source. Not yet implemented. The deployed sheet showed some older presentation details; source was checked before identifying gaps.
+Status: recommendations recorded after comparing the rendered D&D Beyond sheet, the deployed Feature Forge sheet, and current source. The implementation below now covers the overview, HP workflow, actions/spell presentation, rolling, resource summaries, inventory filters, details drawer, history, rest preview, and tab accessibility. The deployed sheet originally showed some older presentation details; source was checked before identifying gaps.
 
 Priority order:
 

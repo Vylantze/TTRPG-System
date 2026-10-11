@@ -10,8 +10,11 @@ import type { Scope } from '@/src/model/Scope.js';
 import type { SheetSection } from '@/src/model/SheetSection.js';
 import type { CurrencyDefinition } from '@/src/model/CurrencyDefinition.js';
 import type { SpellDisplay } from '@/src/model/SpellDisplay.js';
+import type { SheetDisplay } from '@/src/model/SheetDisplay.js';
 
 export interface SystemDefinition {
+  sheetDisplay?: SheetDisplay;
+  healthRules?: { resourceKey: string; temporaryResourceKey?: string; resetResourceKeysOnHealing?: string[]; clearOnReset?: Record<string, string[]> };
   resetConditions?: ResetCondition[];
   equipmentRules?: { attunementLimitStat?: string; preventDuplicateAttunement?: boolean };
   /** Resource recovery allocation shares one budget across all listed character pools. */

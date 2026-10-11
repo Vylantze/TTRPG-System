@@ -6,7 +6,10 @@ import { EquipmentEffects } from '@/ui/src/EquipmentEffects';
 import { CompanionPanels } from '@/ui/src/CompanionPanels';
 import { orderedSheetTabs, moveSheetTab } from '@/ui/src/sheet-tabs';
 import { LoadingOverlay } from '@/ui/src/LoadingOverlay';
-import { HitPoints } from '@/ui/src/HitPoints';
+import { SheetOverview } from '@/ui/src/SheetOverview';
+import { RollHistory } from '@/ui/src/RollHistory';
+import { FeatureDetail } from '@/ui/src/FeatureDetail';
+import { ActionsView } from '@/ui/src/ActionsView';
 import { CharacterDetails } from '@/ui/src/CharacterDetails';
 import { SheetSectionView } from '@/ui/src/SheetSectionView';
 import type { SheetTab } from '@/src/model/SheetTab';
@@ -15,6 +18,7 @@ import { FeatureRolls } from '@/ui/src/FeatureRolls';
 import { SpellBook } from '@/ui/src/SpellBook';
 import { CharacterSheet } from '@/ui/src/CharacterSheet';
 import { FeatureLink } from '@/ui/src/FeatureLink';
+import { featureHref } from '@/ui/src/feature-description';
 import { CharacterFeatures } from '@/ui/src/CharacterFeatures';
 import { featureName } from '@/ui/src/display';
 import { useMemo, useState, useTransition } from 'react';
@@ -37,6 +41,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
   const tabs = orderedSheetTabs(systemTabs, character.tabOrder);
   const [orderingTabs, setOrderingTabs] = useState(false);
   const [showSummary, setShowSummary] = useState(false);
+  const [details, setDetails] = useState<string>();
   const [changingTab, startTabChange] = useTransition();
   const result = useMemo(() => evaluateForSheet(engine, character), [engine, character]);
   const [tab, setTab] = useState(() => {
@@ -93,7 +98,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
     );
   };
   return (
-    <CharacterRuleContext.Provider value={{ character, result, update, report }}>
+    <CharacterRuleContext.Provider value={{ character, result, update, report, openDetails: engine.catalogue.system.sheetDisplay?.detailsDrawer ? setDetails : undefined }}>
       <div className="character-title">
         <div>
           <p className="eyebrow">Character workspace</p>
@@ -109,16 +114,15 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
             }}
           />
           <p className="muted">
-            {engine.catalogue.system.name}
-            {' '}
-            {'· level '}
-            {' '}
-            {result.characterLevel}
+            {result.instances.filter((instance) => instance.active && instance.eligible && engine.getFeature(instance.feature)?.tags?.includes(engine.catalogue.system.terminology?.creatureTag ?? 'race')).map((instance) => featureName(engine.getFeature(instance.feature))).join(', ') || 'Origin not selected'}
+            {' · '}
+            {character.progressions.filter((progression) => progression.level > 0).map((progression) => `${engine.catalogue.classes.find((cls) => cls.id === progression.class)?.name ?? progression.class} ${progression.level}`).join(' / ') || 'No class selected'}
           </p>
         </div>
         <button aria-expanded={showSummary || result.status === 'invalid'} aria-controls="build-summary" onClick={() => setShowSummary(!showSummary)} className={`badge ${result.status}`}>{result.status === 'valid' && character.buildState === 'draft' ? 'Ready to finalize' : result.status}</button>
       </div>
       <RestControls engine={engine} character={character} result={result} update={update} report={report} />
+      <SheetOverview engine={engine} character={character} result={result} update={update} report={report} />
       {(showSummary || result.status === 'invalid') && (
         <div id="build-summary" className="summary-strip">
           <div>
@@ -154,10 +158,23 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
           ))}
         </div>
       )}
-      <nav className="subnav" aria-label="Character sections">
+      <nav className="subnav" aria-label="Character sections" role="tablist">
         {tabs.map(({ id, name }) => (
           <button
             key={id}
+            id={`tab-${id}`}
+            role="tab"
+            aria-selected={currentTab?.id === id}
+            aria-controls="character-tab-panel"
+            tabIndex={currentTab?.id === id ? 0 : -1}
+            onKeyDown={(event) => {
+              const index = tabs.findIndex((entry) => entry.id === id);
+              const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : event.key === 'ArrowRight' ? (index + 1) % tabs.length : event.key === 'ArrowLeft' ? (index + tabs.length - 1) % tabs.length : undefined;
+              if (next === undefined) return;
+              event.preventDefault();
+              document.getElementById(`tab-${tabs[next].id}`)?.click();
+              document.getElementById(`tab-${tabs[next].id}`)?.focus();
+            }}
             className={tab === id ? 'active' : ''}
             onClick={() => {
               startTabChange(() => setTab(id));
@@ -171,188 +188,198 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
           </button>
         ))}
       </nav>
-      {result.diagnostics.length > 0 && (
-        <details className="diagnostics" open={result.status === 'invalid'}>
-          <summary>{result.status === 'invalid' ? 'Build needs repair' : `${incomplete} requirements to finish`}</summary>
-          <ul>
-            {result.diagnostics.map((d, i) => (
-              <li key={i}>
-                <strong>{d.message}</strong>
-                <small>{d.path}</small>
-              </li>
-            ))}
-          </ul>
-          <p>Totals are provisional until every requirement is satisfied.</p>
-        </details>
-      )}
-      {currentTab?.content === 'choices' && (
-        <div className="builder-grid">
-          <aside className="builder-setup">
-            <section className="panel">
-              <h3>{`${engine.catalogue.system.terminology?.classSingular ?? 'Class'} progression`}</h3>
-              {character.progressions.map((p) => {
-                const cls = engine.catalogue.classes.find((c) => c.id === p.class);
-                return cls?.description
-                  ? (
-                      <details key={`rules:${p.id}`}>
-                        <summary>
-                          {'Read '}
-                          {cls.name}
-                          {' '}
-                          {`${engine.catalogue.system.terminology?.classSingular ?? 'Class'} rules`}
-                        </summary>
-                        <RulesText text={cls.description} source={cls.source} engine={engine} openFeature={openFeature} />
-                      </details>
-                    )
-                  : null;
-              })}
-              {character.progressions.map((p) => (
-                <label key={p.id}>
-                  {engine.catalogue.classes.find((c) => c.id === p.class)?.name ?? p.class}
-                  <input
-                    type="number"
-                    key={`${p.id}:${p.level}`}
-                    min="0"
-                    max={engine.catalogue.classes.find((c) => c.id === p.class)?.maximumLevel}
-                    defaultValue={p.level}
-                    onBlur={(e) => {
-                      if (e.target.value === '')e.target.value = String(p.level);
-                      if (Number(e.target.value) !== p.level)edit([{ kind: 'level', progression: p.id, level: Number(e.target.value) }]);
-                    }}
-                  />
-                  {character.buildState === 'draft' && <button className="link" onClick={() => edit([{ kind: 'removeProgression', progression: p.id }])}>Remove progression</button>}
-                </label>
+      <div id="character-tab-panel" role="tabpanel" aria-labelledby={`tab-${currentTab?.id}`}>
+        {result.diagnostics.length > 0 && (
+          <details className="diagnostics" open={result.status === 'invalid'}>
+            <summary>{result.status === 'invalid' ? 'Build needs repair' : `${incomplete} requirements to finish`}</summary>
+            <ul>
+              {result.diagnostics.map((d, i) => (
+                <li key={i}>
+                  <strong>{d.message}</strong>
+                  <small>{d.path}</small>
+                </li>
               ))}
-              {engine.catalogue.classes.length > 0 && (
-                <>
-                  <label>
-                    Add a class
-                    <select value={classId} onChange={(e) => setClassId(e.target.value)}>{engine.catalogue.classes.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select>
+            </ul>
+            <p>Totals are provisional until every requirement is satisfied.</p>
+          </details>
+        )}
+        {currentTab?.content === 'choices' && (
+          <div className="builder-grid">
+            <aside className="builder-setup">
+              <section className="panel">
+                <h3>{`${engine.catalogue.system.terminology?.classSingular ?? 'Class'} progression`}</h3>
+                {character.progressions.map((p) => {
+                  const cls = engine.catalogue.classes.find((c) => c.id === p.class);
+                  return cls?.description
+                    ? (
+                        <details key={`rules:${p.id}`}>
+                          <summary>
+                            {'Read '}
+                            {cls.name}
+                            {' '}
+                            {`${engine.catalogue.system.terminology?.classSingular ?? 'Class'} rules`}
+                          </summary>
+                          <RulesText text={cls.description} source={cls.source} engine={engine} openFeature={openFeature} />
+                        </details>
+                      )
+                    : null;
+                })}
+                {character.progressions.map((p) => (
+                  <label key={p.id}>
+                    {engine.catalogue.classes.find((c) => c.id === p.class)?.name ?? p.class}
+                    <input
+                      type="number"
+                      key={`${p.id}:${p.level}`}
+                      min="0"
+                      max={engine.catalogue.classes.find((c) => c.id === p.class)?.maximumLevel}
+                      defaultValue={p.level}
+                      onBlur={(e) => {
+                        if (e.target.value === '')e.target.value = String(p.level);
+                        if (Number(e.target.value) !== p.level)edit([{ kind: 'level', progression: p.id, level: Number(e.target.value) }]);
+                      }}
+                    />
+                    {character.buildState === 'draft' && <button className="link" onClick={() => edit([{ kind: 'removeProgression', progression: p.id }])}>Remove progression</button>}
                   </label>
-                  <button className="quiet full" disabled={(!engine.catalogue.system.allowMultipleClasses && character.progressions.length > 0) || (engine.catalogue.system.allowDuplicateClasses === false && character.progressions.some((p) => p.class === classId))} onClick={() => edit([{ kind: 'addProgression', progression: { id: crypto.randomUUID(), class: classId, level: 1 } }])}>Add progression</button>
-                </>
-              )}
-              {!engine.catalogue.system.allowMultipleClasses && <p className="muted small">{`This configuration permits one ${(engine.catalogue.system.terminology?.classSingular ?? 'Class').toLowerCase()} progression.`}</p>}
-              <details>
-                <summary>Advancement history</summary>
-                <ol>
-                  {character.history.map((h, i) => (
-                    <li key={i}>
-                      {engine.catalogue.classes.find((c) => c.id === character.progressions.find((p) => p.id === h.progression)?.class)?.name}
-                      {' '}
-                      {h.level}
-                    </li>
-                  ))}
-                </ol>
-              </details>
-            </section>
-            <section className="panel">
-              <h3>Basic stats</h3>
-              {inputs.map((s) => (
-                <label key={s.id}>
-                  {s.name}
-                  <input
-                    key={`${character.id}:${s.id}:${character.inputs[s.id]}`}
-                    type="number"
-                    defaultValue={character.inputs[s.id] ?? ''}
-                    min={s.minimum}
-                    max={s.maximum}
-                    step={s.integer ? 1 : 'any'}
-                    onBlur={(e) => {
-                      if (e.target.value === '')e.target.value = String(character.inputs[s.id] ?? '');
-                      if (e.target.value !== '' && Number(e.target.value) !== character.inputs[s.id])edit([{ kind: 'input', stat: s.id, value: Number(e.target.value) }]);
-                    }}
-                  />
-                </label>
-              ))}
-            </section>
-          </aside>
-          <section>
-            <div className="row">
-              <h2>Feature selections</h2>
-              <label className="compact">
-                Show
-                <select aria-label="Filter selections by level" value={level} onChange={(e) => setLevel(e.target.value)}>
-                  <option value="all">All levels</option>
-                  {levels.map((l) => <option value={l} key={l}>{l === 'origins' ? 'Origins' : l === 'extra' ? 'Additional Features' : `${engine.catalogue.system.terminology?.classSingular ?? 'Class'} level ${l}`}</option>)}
-                </select>
-              </label>
-            </div>
-            <p className="muted">Each slot is independent. Choose a Feature to reveal its parameters and nested choices.</p>
-            {slots.map((slot) => {
-              const owner = result.instances.find((i) => i.id === slot.owner), name = owner ? featureName(engine.catalogue.features.find((f) => f.id === owner.feature)) : undefined;
-              return <SelectionCard key={slot.id} slot={slot} engine={engine} character={character} edit={edit} openFeature={openFeature} ownerName={name} />;
-            })}
-            {!slots.length && <p>No selections at this level.</p>}
-            <details className="panel">
-              <summary>Additional root Features</summary>
-              <p className="muted">Add supported extra acquisitions from this System. Engine prerequisites and resource rules still apply.</p>
-              <RootPicker engine={engine} character={character} edit={edit} level={result.characterLevel} />
-              {character.roots.map((root) => (
-                <div className="row" key={root.id}>
-                  <FeatureLink className="link" id={root.feature} engine={engine}>{featureName(engine.catalogue.features.find((f) => f.id === root.feature))}</FeatureLink>
-                  <button className="quiet" onClick={() => edit([{ kind: 'removeRoot', id: root.id }])}>Remove</button>
-                </div>
-              ))}
-            </details>
-            {character.buildState === 'draft' && (
-              <div className="finalize">
-                <p>{result.status === 'valid' ? 'All requirements are met. Finalize to use abilities and resources.' : 'Drafts are saved as you work. Finish the requirements to finalize.'}</p>
-                <button disabled={result.status !== 'valid'} onClick={() => attempt(() => update(finalizeCharacter(engine, character, crypto.randomUUID())))}>Finalize character</button>
-              </div>
-            )}
-          </section>
-        </div>
-      )}
-      {currentTab?.content === 'items' && (
-        <>
-          <MoneySection engine={engine} character={character} update={update} report={report} />
-          <Inventory engine={engine} character={character} update={update} report={report} />
-          <EquipmentEffects engine={engine} character={character} result={result} update={update} report={report} />
-        </>
-      )}
-      {currentTab?.content === 'notes' && <CharacterDetails notes engine={engine} character={character} result={result} update={update} />}
-      {currentTab?.content === 'sections' && (engine.catalogue.system.sheetSections ?? []).filter((section) => currentTab.sections?.includes(section.id)).map((section) => <SheetSectionView key={section.id} section={section} engine={engine} character={character} result={result} update={update} />)}
-      {currentTab?.content === 'sheet' && <CharacterSheet sectionIds={currentTab.sections} engine={engine} character={character} result={result} update={update} report={report} />}
-      {currentTab?.content === 'features' && <CharacterFeatures engine={engine} character={character} result={result} openFeature={openFeature} />}
-      {currentTab?.content === 'resources' && (
-        <>
-          <HitPoints engine={engine} character={character} result={result} update={update} report={report} />
-          <CompanionPanels engine={engine} character={character} result={result} update={update} report={report} />
-          <div className="toolbar">
-
-            {Boolean(character.rollResults?.length) && <button className="quiet" onClick={() => update(clearFeatureRolls(character))}>Clear all rolls</button>}
-          </div>
-          <h2>Abilities</h2>
-          <div className="ability-list">{abilities.map(ability)}</div>
-          {Object.values(result.resources).filter((pool) => pool.key !== 'hit-points' && !result.instances.some((instance) => engine.getFeature(instance.feature)?.companion?.resources.includes(pool.key)) && !Object.values(engine.catalogue.system.recoveryAllocations ?? {}).some((policy) => policy.keys.includes(pool.key)) && !slotIds.has(pool.id) && !abilities.some((capability) => Object.hasOwn(capability.costs, pool.id))).map((pool) => <div className="standalone-resource" key={pool.id}>{resource(pool.id)}</div>)}
-          <SpellBook engine={engine} character={character} result={result} ready={ready} update={update} report={report} />
-          {Object.entries(character.pending).map(([id, pending]) => (
-            <section className="panel" key={id}>
-              <h3>Resolve reserved ability use</h3>
-              <p className="muted small">{id}</p>
-              <div className="toolbar">
-                {pending.spendOnOutcomes.map((outcome) => (
-                  <button className="quiet" key={outcome} disabled={!ready} onClick={() => attempt(() => update(settleAbility(character, id, outcome, crypto.randomUUID())))}>
-                    {labelFromId(outcome)}
-                    {' '}
-                    · consume
-                  </button>
                 ))}
-                <button
-                  className="quiet"
-                  disabled={!ready}
-                  onClick={() => attempt(() => {
-                    const release = `release:${crypto.randomUUID()}`;
-                    update(settleAbility(character, id, release, crypto.randomUUID()));
-                  })}
-                >
-                  Release reservation
-                </button>
+                {engine.catalogue.classes.length > 0 && (
+                  <>
+                    <label>
+                      Add a class
+                      <select value={classId} onChange={(e) => setClassId(e.target.value)}>{engine.catalogue.classes.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select>
+                    </label>
+                    <button className="quiet full" disabled={(!engine.catalogue.system.allowMultipleClasses && character.progressions.length > 0) || (engine.catalogue.system.allowDuplicateClasses === false && character.progressions.some((p) => p.class === classId))} onClick={() => edit([{ kind: 'addProgression', progression: { id: crypto.randomUUID(), class: classId, level: 1 } }])}>Add progression</button>
+                  </>
+                )}
+                {!engine.catalogue.system.allowMultipleClasses && <p className="muted small">{`This configuration permits one ${(engine.catalogue.system.terminology?.classSingular ?? 'Class').toLowerCase()} progression.`}</p>}
+                <details>
+                  <summary>Advancement history</summary>
+                  <ol>
+                    {character.history.map((h, i) => (
+                      <li key={i}>
+                        {engine.catalogue.classes.find((c) => c.id === character.progressions.find((p) => p.id === h.progression)?.class)?.name}
+                        {' '}
+                        {h.level}
+                      </li>
+                    ))}
+                  </ol>
+                </details>
+              </section>
+              <section className="panel">
+                <h3>Basic stats</h3>
+                {inputs.map((s) => (
+                  <label key={s.id}>
+                    {s.name}
+                    <input
+                      key={`${character.id}:${s.id}:${character.inputs[s.id]}`}
+                      type="number"
+                      defaultValue={character.inputs[s.id] ?? ''}
+                      min={s.minimum}
+                      max={s.maximum}
+                      step={s.integer ? 1 : 'any'}
+                      onBlur={(e) => {
+                        if (e.target.value === '')e.target.value = String(character.inputs[s.id] ?? '');
+                        if (e.target.value !== '' && Number(e.target.value) !== character.inputs[s.id])edit([{ kind: 'input', stat: s.id, value: Number(e.target.value) }]);
+                      }}
+                    />
+                  </label>
+                ))}
+              </section>
+            </aside>
+            <section>
+              <div className="row">
+                <h2>Feature selections</h2>
+                <label className="compact">
+                  Show
+                  <select aria-label="Filter selections by level" value={level} onChange={(e) => setLevel(e.target.value)}>
+                    <option value="all">All levels</option>
+                    {levels.map((l) => <option value={l} key={l}>{l === 'origins' ? 'Origins' : l === 'extra' ? 'Additional Features' : `${engine.catalogue.system.terminology?.classSingular ?? 'Class'} level ${l}`}</option>)}
+                  </select>
+                </label>
               </div>
+              <p className="muted">Each slot is independent. Choose a Feature to reveal its parameters and nested choices.</p>
+              {slots.map((slot) => {
+                const owner = result.instances.find((i) => i.id === slot.owner), name = owner ? featureName(engine.catalogue.features.find((f) => f.id === owner.feature)) : undefined;
+                return <SelectionCard key={slot.id} slot={slot} engine={engine} character={character} edit={edit} openFeature={openFeature} ownerName={name} />;
+              })}
+              {!slots.length && <p>No selections at this level.</p>}
+              <details className="panel">
+                <summary>Additional root Features</summary>
+                <p className="muted">Add supported extra acquisitions from this System. Engine prerequisites and resource rules still apply.</p>
+                <RootPicker engine={engine} character={character} edit={edit} level={result.characterLevel} />
+                {character.roots.map((root) => (
+                  <div className="row" key={root.id}>
+                    <FeatureLink className="link" id={root.feature} engine={engine}>{featureName(engine.catalogue.features.find((f) => f.id === root.feature))}</FeatureLink>
+                    <button className="quiet" onClick={() => edit([{ kind: 'removeRoot', id: root.id }])}>Remove</button>
+                  </div>
+                ))}
+              </details>
+              {character.buildState === 'draft' && (
+                <div className="finalize">
+                  <p>{result.status === 'valid' ? 'All requirements are met. Finalize to use abilities and resources.' : 'Drafts are saved as you work. Finish the requirements to finalize.'}</p>
+                  <button disabled={result.status !== 'valid'} onClick={() => attempt(() => update(finalizeCharacter(engine, character, crypto.randomUUID())))}>Finalize character</button>
+                </div>
+              )}
             </section>
-          ))}
-        </>
+          </div>
+        )}
+        {currentTab?.content === 'items' && (
+          <>
+            <MoneySection engine={engine} character={character} update={update} report={report} />
+            <Inventory engine={engine} character={character} update={update} report={report} />
+            <EquipmentEffects engine={engine} character={character} result={result} update={update} report={report} />
+          </>
+        )}
+        {currentTab?.content === 'notes' && <CharacterDetails notes engine={engine} character={character} result={result} update={update} />}
+        {currentTab?.content === 'sections' && (engine.catalogue.system.sheetSections ?? []).filter((section) => currentTab.sections?.includes(section.id)).map((section) => <SheetSectionView key={section.id} section={section} engine={engine} character={character} result={result} update={update} report={report} />)}
+        {currentTab?.content === 'sheet' && <CharacterSheet sectionIds={currentTab.sections} engine={engine} character={character} result={result} update={update} report={report} />}
+        {currentTab?.content === 'features' && <CharacterFeatures engine={engine} character={character} result={result} openFeature={openFeature} />}
+        {currentTab?.content === 'actions' && <ActionsView engine={engine} character={character} result={result} update={update} report={report} />}
+        {currentTab?.content === 'spells' && <SpellBook engine={engine} character={character} result={result} ready={ready} update={update} report={report} />}
+        {currentTab?.content === 'resources' && (
+          <>
+            <CompanionPanels engine={engine} character={character} result={result} update={update} report={report} />
+            <div className="toolbar">
+
+              {Boolean(character.rollResults?.length) && <button className="quiet" onClick={() => update(clearFeatureRolls(character))}>Clear all rolls</button>}
+            </div>
+            <h2>Abilities</h2>
+            <div className="ability-list">{abilities.map(ability)}</div>
+            {Object.values(result.resources).filter((pool) => ![engine.catalogue.system.healthRules?.resourceKey ?? 'hit-points', engine.catalogue.system.healthRules?.temporaryResourceKey, ...engine.catalogue.system.sheetDisplay?.health?.counters ?? []].includes(pool.key) && !result.instances.some((instance) => engine.getFeature(instance.feature)?.companion?.resources.includes(pool.key)) && !Object.values(engine.catalogue.system.recoveryAllocations ?? {}).some((policy) => policy.keys.includes(pool.key)) && !slotIds.has(pool.id) && !abilities.some((capability) => Object.hasOwn(capability.costs, pool.id))).map((pool) => <div className="standalone-resource" key={pool.id}>{resource(pool.id)}</div>)}
+            <SpellBook engine={engine} character={character} result={result} ready={ready} update={update} report={report} />
+            {Object.entries(character.pending).map(([id, pending]) => (
+              <section className="panel" key={id}>
+                <h3>Resolve reserved ability use</h3>
+                <p className="muted small">{id}</p>
+                <div className="toolbar">
+                  {pending.spendOnOutcomes.map((outcome) => (
+                    <button className="quiet" key={outcome} disabled={!ready} onClick={() => attempt(() => update(settleAbility(character, id, outcome, crypto.randomUUID())))}>
+                      {labelFromId(outcome)}
+                      {' '}
+                      · consume
+                    </button>
+                  ))}
+                  <button
+                    className="quiet"
+                    disabled={!ready}
+                    onClick={() => attempt(() => {
+                      const release = `release:${crypto.randomUUID()}`;
+                      update(settleAbility(character, id, release, crypto.randomUUID()));
+                    })}
+                  >
+                    Release reservation
+                  </button>
+                </div>
+              </section>
+            ))}
+          </>
+        )}
+      </div>
+      <RollHistory engine={engine} character={character} update={update} />
+      {details && engine.getFeature(details) && (
+        <Modal className="details-drawer" title={featureName(engine.getFeature(details))} onClose={() => setDetails(undefined)}>
+          <a className="link" href={featureHref(details, engine)} target="_blank" rel="noopener noreferrer">Open Feature in a new tab ↗</a>
+          <FeatureDetail feature={engine.getFeature(details)!} engine={engine} openFeature={setDetails} />
+        </Modal>
       )}
       {character.buildState !== 'draft' && (
         <button

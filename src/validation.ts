@@ -1,4 +1,5 @@
 import { rollDice } from '@/src/dice.js';
+import { validateSheetDisplay } from '@/src/sheet-display.js';
 import { checkEquipmentState } from '@/src/equipment-effects.js';
 import { checkMoney } from '@/src/currency.js';
 import { checkInventory, itemFeatures } from '@/src/items.js';
@@ -403,7 +404,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       for (const tab of compiled.system.sheetTabs) {
         text(tab.id);
         text(tab.name);
-        if (!['choices', 'sheet', 'features', 'resources', 'notes', 'sections', 'items'].includes(tab.content)) throw new RuleError('PRESENTATION', 'Unknown sheet tab content.');
+        if (!['choices', 'sheet', 'features', 'resources', 'notes', 'sections', 'items', 'actions', 'spells'].includes(tab.content)) throw new RuleError('PRESENTATION', 'Unknown sheet tab content.');
         if (tab.sections !== undefined) {
           list(tab.sections);
           for (const id of tab.sections) if (!compiled.system.sheetSections?.some((section) => section.id === id)) throw new RuleError('PRESENTATION', `Unknown sheet section ${id}.`);
@@ -427,6 +428,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
         }
       }
     }
+    validateSheetDisplay(compiled);
     if (compiled.system.featureCategories !== undefined) {
       list(compiled.system.featureCategories);
       unique(compiled.system.featureCategories.map((category) => category.id), 'Feature category');
@@ -882,6 +884,17 @@ export function checkCharacter(v: unknown): asserts v is Character {
   if (v.notes !== undefined) {
     record(v.notes);
     if (Object.values(v.notes).some((note) => typeof note !== 'string')) throw new RuleError('SCHEMA', 'Character notes must be text.');
+  }
+  if (v.statRolls !== undefined) {
+    list(v.statRolls);
+    if (v.statRolls.length > 100) throw new RuleError('SCHEMA', 'At most 100 stat checks are retained.');
+    for (const roll of v.statRolls) {
+      record(roll);
+      for (const key of ['id', 'stat', 'name', 'expression', 'breakdown']) text(roll[key]);
+      number(roll.total);
+      rollDice(String(roll.expression), () => 0);
+    }
+    unique((v.statRolls as Character['statRolls'])!.map((roll) => roll.id), 'stat roll');
   }
   if (v.buildState !== undefined && v.buildState !== 'draft' && v.buildState !== 'finalized') throw new RuleError('SCHEMA', 'Invalid character build state.');
   record(v);

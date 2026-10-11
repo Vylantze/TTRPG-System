@@ -52,6 +52,10 @@ export function adjustResource(engine: Engine, input: Character, poolId: string,
   const current = constrain((pool.current ?? pool.capacity - pool.spent) + delta, { minimum: (pool.minimum ?? 0) + pool.reserved, maximum: pool.capacity, integer: pool.integer });
   storeTrackers(character, result.resources);
   character.resources[poolId] = { ...character.resources[poolId], spent: Number.isFinite(pool.capacity) ? pool.capacity - current : 0, ...(pool.tracking ? { current } : {}) };
+  if (delta > 0 && pool.key === engine.catalogue.system.healthRules?.resourceKey) for (const counter of Object.values(result.resources).filter((counter) => engine.catalogue.system.healthRules?.resetResourceKeysOnHealing?.includes(counter.key))) {
+    if (counter.reserved > 0) throw new RuleError('RESOURCE_RESERVATION', 'Release reservations before clearing a health counter.');
+    character.resources[counter.id] = { ...character.resources[counter.id], spent: Number.isFinite(counter.capacity) ? counter.capacity - (counter.minimum ?? 0) : 0, ...(counter.tracking ? { current: counter.minimum ?? 0 } : {}) };
+  }
   return character;
 }
 function stamp(character: Character, id: string, payload: unknown): boolean {
@@ -64,6 +68,54 @@ function stamp(character: Character, id: string, payload: unknown): boolean {
   }
   character.events.push({ id, fingerprint });
   return true;
+}
+
+/** System-defined free checks use evaluated stats and persist across sheet tabs. */
+export function rollStat(engine: Engine, input: Character, stat: string, eventId: string, random?: () => number): Character {
+  checkCharacter(input);
+  const character = clone(input);
+  if (!stamp(character, eventId, { kind: 'rollStat', stat })) return character;
+  const result = engine.evaluate(input);
+  requireValid(result);
+  const row = [...engine.catalogue.system.sheetSections?.flatMap((section) => section.rows) ?? [], ...engine.catalogue.system.sheetDisplay?.overview ?? []].find((entry) => entry.stat === stat && entry.roll);
+  if (!row?.roll) throw new RuleError('ROLL', 'This stat has no configured sheet roll.');
+  const bonus = result.stats[row.roll.bonusStat ?? row.stat]?.value;
+  if (!Number.isFinite(bonus)) throw new RuleError('ROLL', 'The check bonus is unavailable.');
+  const expression = `${row.roll.dice} ${bonus! < 0 ? '-' : '+'} ${Math.abs(bonus!)}`;
+  const rolled = rollDice(expression, random);
+  character.statRolls = [...character.statRolls ?? [], { id: eventId, stat, name: row.name ?? engine.getStatDefinition(stat)?.name ?? stat, expression, ...rolled }].slice(-100);
+  return character;
+}
+
+/** Damage absorbs temporary HP first; healing is capped and clears configured counters. */
+export function changeHealth(engine: Engine, input: Character, kind: 'damage' | 'heal', amount: number, eventId: string): Character {
+  checkCharacter(input);
+  if (input.buildState === 'draft') throw new RuleError('DRAFT', 'Finalize the character before changing health.');
+  constrain(number(amount), { minimum: 0, integer: true });
+  if (!['damage', 'heal'].includes(kind)) throw new RuleError('HEALTH', 'Unknown health operation.');
+  const character = clone(input);
+  if (!stamp(character, eventId, { kind: 'health', operation: kind, amount })) return character;
+  const result = engine.evaluate(input);
+  requireValid(result);
+  const policy = engine.catalogue.system.healthRules;
+  const pools = Object.values(result.resources);
+  const health = pools.find((pool) => pool.key === policy?.resourceKey);
+  if (!policy || !health) throw new RuleError('HEALTH', 'No health pool is configured for this character.');
+  storeTrackers(character, result.resources);
+  const set = (pool: (typeof pools)[number], current: number) => {
+    current = constrain(current, { minimum: (pool.minimum ?? 0) + pool.reserved, maximum: pool.capacity, integer: pool.integer, clamp: true });
+    character.resources[pool.id] = { ...character.resources[pool.id], spent: Number.isFinite(pool.capacity) ? pool.capacity - current : 0, ...(pool.tracking ? { current } : {}) };
+  };
+  const temporary = pools.find((pool) => pool.key === policy.temporaryResourceKey);
+  const absorbed = kind === 'damage' && temporary ? Math.min(amount, temporary.available) : 0;
+  if (temporary && absorbed) set(temporary, (temporary.current ?? temporary.capacity - temporary.spent) - absorbed);
+  const current = health.current ?? health.capacity - health.spent;
+  set(health, current + (kind === 'heal' ? amount : -(amount - absorbed)));
+  if (kind === 'heal' && amount > 0 && current < health.capacity) for (const pool of pools.filter((pool) => policy.resetResourceKeysOnHealing?.includes(pool.key))) {
+    if (pool.reserved > 0) throw new RuleError('RESOURCE_RESERVATION', 'Release reservations before clearing a health counter.');
+    set(pool, pool.minimum ?? 0);
+  }
+  return character;
 }
 function canonical(value: unknown): string {
   const order = (v: unknown): unknown => {
@@ -282,6 +334,10 @@ export function recoverResources(engine: Engine, input: Character, recoveryEvent
         const current = number(Math.min(pool.capacity, character.resources[pool.id].current! + amount));
         character.resources[pool.id] = { ...character.resources[pool.id], current, spent: Number.isFinite(pool.capacity) ? pool.capacity - current : 0 };
       } else character.resources[pool.id] = { spent: Math.max(0, spent - amount) };
+    }
+    if (engine.catalogue.system.healthRules?.clearOnReset?.[recoveryEvent]?.includes(pool.key)) {
+      if (pool.reserved > 0) throw new RuleError('RESOURCE_RESERVATION', 'Release reservations before clearing a health pool.');
+      character.resources[pool.id] = { ...character.resources[pool.id], spent: Number.isFinite(pool.capacity) ? pool.capacity - (pool.minimum ?? 0) : 0, ...(pool.tracking ? { current: pool.minimum ?? 0 } : {}) };
     }
   }
   return character;

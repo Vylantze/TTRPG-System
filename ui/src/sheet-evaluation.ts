@@ -14,8 +14,9 @@ export function evaluateForSheet(engine: Engine, character: Character): Evaluati
   } catch {
     return engine.evaluate(character);
   }
-  // These fields have no rules semantics; all present and future other fields form the key.
-  const { name, notes, tabOrder, displayPreferences, ...rules } = character;
+  // Evaluation does not inspect replay history; commands still check it independently.
+  // All other present and future fields remain part of the rules key.
+  const { name, notes, tabOrder, displayPreferences, statRolls, events, ...rules } = character;
   const key = JSON.stringify(rules);
   let cache = evaluations.get(engine);
   const previous = cache?.get(character.id);

@@ -4,6 +4,7 @@ import { SystemLoader } from '@/ui/src/SystemLoader';
 import { ReloadSystemButton } from '@/ui/src/ReloadSystemButton';
 import { safeReturn } from '@/ui/src/feature-origin';
 import { FeatureLink } from '@/ui/src/FeatureLink';
+import { Tooltip } from '@/ui/src/Tooltip';
 import { lazy, memo, useCallback, useEffect, useMemo, useRef, useState, useTransition, type FormEvent } from 'react';
 import noticeUrl from '@/NOTICE.md?url';
 import { deserializeCharacter, serializeCharacter, type Character, type Engine, type SystemFile, type Value } from '@/src/index';
@@ -41,6 +42,12 @@ function go(page: string, id?: string, engine?: Engine) {
 }
 const errorMessage = (e: unknown) => e instanceof Error ? e.message : String(e);
 export function App({ initialWorkspace, persist, startupMessage = '' }: { initialWorkspace: Workspace; persist: (workspace: Workspace) => Promise<void>; startupMessage?: string }) {
+  const [sidebarPreference, setSidebarPreference] = useState<boolean | undefined>(() => {
+    try {
+      const saved = localStorage.getItem('ttrpg-sidebar-collapsed');
+      return saved === null ? undefined : saved === 'true';
+    } catch { return undefined; }
+  });
   const [workspace, setWorkspace] = useState(initialWorkspace), [route, setRoute] = useState(readRoute), [error, setError] = useState(''), [storageError, setStorageError] = useState('');
   const [navigating, startNavigation] = useTransition();
   const [reloadMessage, setReloadMessage] = useState(startupMessage);
@@ -70,6 +77,7 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
     }
   }, [registry, active, route.system, route.revision, route.catalogue, browserEngine, workspace.systems]);
   const engine = resolved.engine;
+  const sidebarCollapsed = sidebarPreference ?? engine?.catalogue.system.sheetDisplay?.sidebarCollapsed ?? false;
   useEffect(() => {
     const loaded = workspace.systems.find((file) => file.id === 'dnd5e:2014-srd5.1');
     if (!loaded) return;
@@ -260,7 +268,7 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
   const cls = engine?.catalogue.classes.find((c) => c.id === route.id);
   const list = useMemo(() => ['features', 'races'].includes(route.page) && !route.id ? engine?.catalogue.features.filter((f) => (route.page !== 'races' || f.tags?.includes(engine.catalogue.system.terminology?.creatureTag ?? 'race')) && `${featureName(f)} ${f.name} ${featureDescription(f, engine!) ?? ''} ${f.source ?? ''}`.toLowerCase().includes(query.toLowerCase()) && (!tag || f.tags?.includes(tag))).sort((a, b) => sort === 'level' ? (a.contentLevel ?? 0) - (b.contentLevel ?? 0) || featureName(a).localeCompare(featureName(b)) : featureName(a).localeCompare(featureName(b)) * (sort === 'name-desc' ? -1 : 1)) ?? [] : [], [engine, query, tag, sort, route.page, route.id]);
   return (
-    <div className="app-shell" aria-busy={loading || navigating}>
+    <div className={`app-shell${sidebarCollapsed ? ' sidebar-collapsed' : ''}`} aria-busy={loading || navigating}>
       {(loading || navigating) && <LoadingOverlay />}
       <a
         href="#main-content"
@@ -312,6 +320,21 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
       </aside>
       <div className="main-shell">
         <header className="topbar">
+          <Tooltip text={sidebarCollapsed ? 'Expand navigation' : 'Collapse navigation'}>
+            <button
+              className="quiet icon-button sidebar-toggle"
+              aria-label={sidebarCollapsed ? 'Expand navigation' : 'Collapse navigation'}
+              aria-expanded={!sidebarCollapsed}
+              onClick={() => {
+                setSidebarPreference(!sidebarCollapsed);
+                try {
+                  localStorage.setItem('ttrpg-sidebar-collapsed', String(!sidebarCollapsed));
+                } catch { setError('Navigation preference could not be saved.'); }
+              }}
+            >
+              ☰
+            </button>
+          </Tooltip>
           <span>{route.page === 'races' ? engine?.catalogue.system.terminology?.creaturePlural ?? 'Races' : route.page === 'classes' ? engine?.catalogue.system.terminology?.classPlural ?? 'Classes' : route.page.slice(0, 1).toUpperCase() + route.page.slice(1)}</span>
           <div className="toolbar">
             {selected && (
@@ -340,7 +363,7 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
             <button onClick={() => setCreating(true)} disabled={!selected}>+ New character</button>
           </div>
         </header>
-        <main id="main-content" tabIndex={-1} aria-busy={loading || navigating}>
+        <main id="main-content" className={active ? 'character-page' : undefined} tabIndex={-1} aria-busy={loading || navigating}>
           {reloadMessage && <p className="notice" role="status">{reloadMessage}</p>}
           {bundledUpdate && workspace.systems.includes(bundledUpdate) && (
             <div className="notice row" role="status">
