@@ -28,6 +28,13 @@ export function validateSheetDisplay(catalogue: Catalogue): void {
   const resource = (key: string) => {
     if (!resources.has(key)) fail(`Unknown sheet resource ${key}.`);
   };
+  if (system.spellDisplay?.castingBonusStats !== undefined) {
+    object(system.spellDisplay.castingBonusStats);
+    for (const [key, id] of Object.entries(system.spellDisplay.castingBonusStats)) {
+      text(key);
+      stat(id);
+    }
+  }
   const roll = (value: { dice: string; bonusStat?: string } | undefined) => {
     if (value === undefined) return;
     object(value);
@@ -36,10 +43,25 @@ export function validateSheetDisplay(catalogue: Catalogue): void {
   };
   for (const section of system.sheetSections ?? []) {
     boolean(section.modifierFirst);
+    boolean(section.primarySigned);
+    boolean(section.secondarySigned);
+    for (const label of [section.primaryValueLabel, section.secondaryValueLabel].filter((label) => label !== undefined)) text(label);
+    if (section.trainingLevels !== undefined) {
+      list(section.trainingLevels);
+      for (const level of section.trainingLevels) {
+        object(level);
+        if (!Number.isFinite(level.minimum)) fail('Invalid training threshold.');
+        text(level.name);
+        text(level.symbol);
+        boolean(level.trained);
+      }
+      if (new Set(section.trainingLevels.map((level) => level.minimum)).size !== section.trainingLevels.length) fail('Duplicate training threshold.');
+    }
     if (section.defaultSort !== undefined && !['Name', 'Training', 'Ability', 'Bonus'].includes(section.defaultSort)) fail('Invalid default sheet sort.');
     if (section.columns !== undefined) {
       list(section.columns);
       if (new Set(section.columns).size !== section.columns.length || !section.columns.includes('Name') || !section.columns.includes('Bonus') || section.columns.some((column) => !['Name', 'Training', 'Ability', 'Bonus'].includes(column))) fail('Invalid stat table columns.');
+      if (section.defaultSort && !section.columns.includes(section.defaultSort)) fail('Default sort must use a visible column.');
     }
     if (section.columnLabels !== undefined) {
       object(section.columnLabels);
@@ -86,20 +108,35 @@ export function validateSheetDisplay(catalogue: Catalogue): void {
     }
     if (new Set(display.overview.map((row) => row.stat)).size !== display.overview.length) fail('Duplicate overview stat.');
   }
-  if (display.health) {
+  if (display.descriptionProcessing !== undefined) {
+    object(display.descriptionProcessing);
+    boolean(display.descriptionProcessing.classLevelPhrases);
+    if (display.descriptionProcessing.statPhrases !== undefined) {
+      list(display.descriptionProcessing.statPhrases);
+      for (const entry of display.descriptionProcessing.statPhrases) {
+        object(entry);
+        text(entry.phrase);
+        stat(entry.stat);
+      }
+      if (new Set(display.descriptionProcessing.statPhrases.map((entry) => entry.phrase.toLowerCase())).size !== display.descriptionProcessing.statPhrases.length) fail('Duplicate description phrase.');
+    }
+  }
+  if (display.health !== undefined) {
     object(display.health);
     if (display.health.name !== undefined) text(display.health.name);
     boolean(display.health.showHealingFeatures);
-    boolean(display.health.showDeathSavesAtZero);
+    if (display.health.countersVisibleAtOrBelow !== undefined && !Number.isFinite(display.health.countersVisibleAtOrBelow)) fail('Invalid health counter visibility threshold.');
     if (display.health.counters !== undefined) {
       list(display.health.counters);
       display.health.counters.forEach(resource);
     }
   }
-  for (const settings of [display.resources, display.inventory, display.spells]) if (settings) {
+  for (const settings of [display.resources, display.inventory, display.spells]) if (settings !== undefined) {
     object(settings);
-    for (const [key, value] of Object.entries(settings)) if (!['columns', 'castingStats'].includes(key)) boolean(value);
+    for (const [key, value] of Object.entries(settings)) if (!['columns', 'castingStats', 'zeroLevelName', 'zeroLevelHeading', 'slotPipLimit'].includes(key)) boolean(value);
   }
+  for (const label of [display.spells?.zeroLevelName, display.spells?.zeroLevelHeading].filter((label) => label !== undefined)) text(label);
+  if (display.spells?.slotPipLimit !== undefined && (!Number.isInteger(display.spells.slotPipLimit) || display.spells.slotPipLimit < 0 || display.spells.slotPipLimit > 100)) fail('Invalid slot pip limit.');
   if (display.spells?.columns !== undefined) {
     list(display.spells.columns);
     for (const column of display.spells.columns) {
@@ -117,7 +154,7 @@ export function validateSheetDisplay(catalogue: Catalogue): void {
       stat(source.saveStat);
     }
   }
-  if (display.actions) {
+  if (display.actions !== undefined) {
     object(display.actions);
     if (display.actions.itemCategories !== undefined) {
       list(display.actions.itemCategories);

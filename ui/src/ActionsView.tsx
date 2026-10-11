@@ -74,7 +74,7 @@ export function ActionsView({ engine, character, result, update, report }: { eng
                     <select aria-label={`Casting option for ${spell.name}`} value={selected.capability.id} onChange={(event) => setModes({ ...modes, [spell.id]: event.target.value })}>
                       {options.map((mode) => (
                         <option value={mode.capability.id} key={mode.capability.id}>
-                          {mode.ritual ? 'Ritual' : mode.slotLevel ? `Level ${mode.slotLevel} slot` : 'Cantrip'}
+                          {mode.ritual ? 'Ritual' : mode.slotLevel ? `Level ${mode.slotLevel} slot` : (engine.catalogue.system.sheetDisplay?.spells?.zeroLevelName ?? 'Level 0 spell')}
                           {mode.available ? '' : ' · none remaining'}
                         </option>
                       ))}

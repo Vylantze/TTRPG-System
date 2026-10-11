@@ -5,7 +5,7 @@ The linked System definition (for DnD5e 2014, `definitions.json`) owns sheet set
 | Setting | Meaning |
 | --- | --- |
 | `overview` | Ordered primary stats with `stat`, optional `name`, `signed`, `unit`, and `roll`. |
-| `health` | Optional heading, `showHealingFeatures`, `showDeathSavesAtZero`, and resource-key `counters`. |
+| `health` | Optional heading, `showHealingFeatures`, numeric `countersVisibleAtOrBelow` (omit to show counters at all health values), and resource-key `counters`. |
 | `resources` | `compact` cards and `showDetailsByDefault`; current/maximum and recovery precede reservations/providers. |
 | `inventory` | Enable `search` and `categoryFilter`. |
 | `spells` | Enable `search`, `levelFilter`, and `compact`; `columns` map labels to capability metadata keys. `castingStats` maps each casting ability to authored attack/save stat IDs. |
@@ -38,10 +38,22 @@ Health behavior belongs in `healthRules`, independently of display:
 }
 ```
 
-All referenced resources must have Feature providers. DnD5e grants three separate atomic tracker Features for temporary HP and the two death-save counters. They each start at zero; counters are capped at three. Temporary HP uses its own unbounded pool, accepts an explicit replacement value, and is consumed before normal HP by `changeHealth`. Healing/damage are capped to pool bounds. Supported healing applications and positive manual HP adjustments clear the configured counters. Defined resets clear the configured pools without filling temporary HP; reserved counters must be released before clearing. The zero-HP controls track successes/failures manually: this release does not automatically adjudicate death, stabilization, critical failures, or instant death.
+All referenced resources must have Feature providers. DnD5e grants three separate atomic tracker Features for temporary HP and the two death-save counters. They each start at zero; counters are capped at three. Temporary HP uses its own unbounded pool, accepts an explicit replacement value, and is consumed before normal HP by `changeHealth`. Healing/damage are capped to pool bounds and accept fractions only if the authored health pool permits them. Temporary-resource editing respects minimum, maximum, reservations, and integer constraints. Applied recovery labels use the resource units. Supported healing applications and positive manual HP adjustments clear the configured counters. Defined resets clear the configured pools without filling temporary HP; reserved counters must be released before clearing. The zero-HP controls track successes/failures manually: this release does not automatically adjudicate death, stabilization, critical failures, or instant death.
 
 The overview stays outside tabs, with HP first and System reset buttons above it. Race/origin and every class progression appear beneath the editable name. Skills and saving throws remain sortable with a separate calculation column. Tabs support Arrow Left/Right, Home, and End, and retain the existing saved custom order. Name, notes, tab order, and display preferences remain independent of rule totals; history and drawers retain their context during sheet navigation.
 
 Run `node tools/configure-dnd-sheet.mjs` to regenerate the authored 2014 display settings idempotently. After changing Feature providers, rebuild the engine and run both sample generators so bundled samples carry the current content revision manifest. The standing prototype reconciliation policy still rebuilds incompatible samples and removes incompatible other characters at startup.
 
-This release uses UI/engine `0.3.0` for additive configuration and play commands. The 2014 System and definitions asset use `2.0.0` because the sheet structure changes and redundant section rows are removed. New tracker Features and refreshed samples use `1.1.0`; unchanged assets retain their versions. Reload the System to adopt the new configuration.
+The initial sheet-layout release used UI/engine `0.3.0` for additive configuration and play commands. That release used `2.0.0` for the 2014 System and definitions asset because the sheet structure changes and redundant section rows are removed. New tracker Features and refreshed samples use `1.1.0`; unchanged assets retain their versions. Reload the System to adopt the new configuration.
+
+## Sheet review follow-up
+
+`sheetDisplay.descriptionProcessing.statPhrases` maps `{phrase, stat}` entries to any evaluated stat; `classLevelPhrases` enables class-name + “level” phrases. No phrases are inferred from stat IDs. Overlapping matches choose the earliest, longest match. Existing explicit tokens remain independent. Stat-token hover captions come from authored stat names, including Feature-created stats.
+
+`sheetDisplay.spells.zeroLevelName` / `zeroLevelHeading` name level-zero spells (generic defaults: “Level 0 spell(s)”). `slotPipLimit` bounds visual pips from 0–100; totals remain visible. Section `primaryValueLabel` / `secondaryValueLabel` control paired-value tooltips and swapping (defaults: “value” / “secondary value”). Section `trainingLevels` supplies `{minimum, name, symbol, trained?}` entries; the highest satisfied threshold wins, or the numeric value appears without configuration. `primarySigned` and `secondarySigned` control numeric signs rather than assuming the secondary value is a modifier. `defaultSort` must use a visible column.
+
+`spellDisplay.castingBonusStats` maps casting-source metadata values to stat IDs. DnD authors wisdom → modifier.wisdom, for example; the engine never concatenates casting sources into stat IDs. Missing mappings fail explicitly. Direct callers of `featureRollExpression` now provide `casting.bonusStat`, replacing `casting.castingAbility`. The generic health counter threshold replaces the former death-save-specific flag, so existing Systems must reload the updated definition.
+
+The review also removed the implicit hit-points pool and race-tag assumptions. A health pool requires `healthRules.resourceKey`; the creature tag comes only from `terminology.creatureTag`. Generic fallback captions and app layout constants remain in the UI; bundled source imports are deployment wiring, rather than character rules. Weapon automation and condition adjudication still require authored mechanics as noted above.
+
+This follow-up releases UI/engine `0.4.0` and System/definitions `3.0.0`. The System major version reflects replacing the old counter-visibility field; other asset versions remain unchanged. Compatible characters can be preserved when reloading. Missing casting metadata is shown as a disabled roll with an explanation, rather than a render exception. Systems without a health role do not reserve an empty health card.

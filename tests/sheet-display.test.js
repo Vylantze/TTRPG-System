@@ -54,3 +54,27 @@ test('Configured free stat checks persist, retain their breakdown, and retry wit
   assert.throws(() => new Engine({ ...setup().catalogue, system: { ...setup().catalogue.system, sheetDisplay: { overview: [{ stat: 'missing' }] } } }), /Unknown sheet stat/);
   assert.throws(() => new Engine({ ...setup().catalogue, system: { ...setup().catalogue.system, healthRules: { resourceKey: 'missing' } } }), /Unknown sheet resource/);
 });
+
+test('Fractional health obeys authored resource constraints, while integer health rejects fractional amounts', () => {
+  const { catalogue } = setup();
+  for (const feature of catalogue.features) feature.components[0].integer = false;
+  const engine = new Engine(catalogue);
+  let character = engine.createCharacter('fractional', 'Fractional');
+  character = adjustResource(engine, character, pool(engine, character, 'ward').id, 2.5, 'ward');
+  character = changeHealth(engine, character, 'damage', 3.25, 'damage');
+  assert.equal(pool(engine, character, 'ward').current, 0);
+  assert.equal(pool(engine, character, 'vitality').current, 9.25);
+  const integer = setup();
+  assert.throws(() => changeHealth(integer.engine, integer.character, 'heal', 0.5, 'fraction'), /integer/i);
+});
+
+test('Sheet configuration rejects malformed optional objects, unknown phrase stats and hidden sort columns', () => {
+  const invalid = (display) => new Engine({ ...setup().catalogue, system: { ...setup().catalogue.system, sheetDisplay: display } });
+  assert.throws(() => invalid({ health: false }), /configuration object/);
+  assert.throws(() => invalid({ spells: null }), /configuration object/);
+  assert.throws(() => invalid({ descriptionProcessing: { statPhrases: [{ phrase: 'energy', stat: 'missing' }] } }), /Unknown sheet stat/);
+  assert.throws(() => invalid({ spells: { slotPipLimit: 1000 } }), /pip limit/);
+  const { catalogue } = setup();
+  catalogue.system.sheetSections = [{ id: 'test', name: 'Test', layout: 'skills', defaultSort: 'Ability', columns: ['Name', 'Bonus'], rows: [{ stat: 'bonus' }] }];
+  assert.throws(() => new Engine(catalogue), /visible column/);
+});

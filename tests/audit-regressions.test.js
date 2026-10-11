@@ -61,5 +61,6 @@ test('spell dice scale by character level or the selected slot and casting abili
   const cantrip = { id: 'damage', label: 'Damage', dice: '1d10', characterScaling: [{ level: 5, count: 2 }, { level: 11, count: 3 }, { level: 17, count: 4 }] };
   for (const [level, dice] of [[1, '1d10'], [5, '2d10'], [11, '3d10'], [17, '4d10']]) assert.equal(featureRollExpression(cantrip, {}, { characterLevel: level, stats: {} }), dice);
   const heal = { id: 'heal', label: 'Heal', dice: '1d8', bonus: { castingAbility: true }, slotScaling: { baseLevel: 1, dicePerLevel: 1 } };
-  assert.equal(featureRollExpression(heal, {}, { stats: { 'modifier.wisdom': { value: 3 } } }, { slotLevel: 3, castingAbility: 'wisdom' }), '3d8 + 3');
+  assert.equal(featureRollExpression(heal, {}, { stats: { 'custom.casting': { value: 3 } } }, { slotLevel: 3, bonusStat: 'custom.casting' }), '3d8 + 3');
+  assert.throws(() => featureRollExpression(heal, {}, { stats: {} }, { slotLevel: 3 }), /unavailable stat/);
 });

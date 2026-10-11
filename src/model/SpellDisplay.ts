@@ -6,5 +6,7 @@ export interface SpellDisplay {
   slotLevelKey: string;
   ritualKey: string;
   castingAbilityKey: string;
+  /** Map authored casting-source metadata values to the stats used by Roll Features. */
+  castingBonusStats?: Record<string, string>;
   slots: { level?: number; levelStat?: string; key: string; scope: Scope }[];
 }

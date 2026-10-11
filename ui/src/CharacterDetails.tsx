@@ -11,8 +11,8 @@ export function CharacterDetails({ character, engine, result, update, notes = fa
         {!notes && !engine.catalogue.system.sheetDisplay?.overview && (
           <>
             <div>
-              <dt>{engine.catalogue.system.terminology?.creatureSingular ?? 'Race'}</dt>
-              <dd>{result.instances.filter((instance) => instance.active && engine.getFeature(instance.feature)?.tags?.includes(engine.catalogue.system.terminology?.creatureTag ?? 'race')).map((instance) => engine.getFeature(instance.feature)?.displayName ?? engine.getFeature(instance.feature)?.name).join(', ') || 'Not selected'}</dd>
+              <dt>{engine.catalogue.system.terminology?.creatureSingular ?? 'Creature'}</dt>
+              <dd>{result.instances.filter((instance) => instance.active && engine.getFeature(instance.feature)?.tags?.includes(engine.catalogue.system.terminology?.creatureTag ?? '')).map((instance) => engine.getFeature(instance.feature)?.displayName ?? engine.getFeature(instance.feature)?.name).join(', ') || 'Not selected'}</dd>
             </div>
             <div>
               <dt>{`${engine.catalogue.system.terminology?.classPlural ?? 'Classes'} & levels`}</dt>

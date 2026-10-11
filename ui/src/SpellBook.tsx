@@ -36,11 +36,11 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
     setSpent({ ...spent, [spell.id]: costs });
     setCasting(undefined);
   });
-  const label = (option: SpellGroup['modes'][number]) => option.ritual ? 'Ritual — no spell slot' : option.slotLevel === 0 ? 'Cantrip — no spell slot' : `Level ${option.slotLevel} · ${Object.keys(option.capability.costs).map((id) => result.resources[id]?.name ?? 'Spell slot').join(', ')}${option.available ? '' : ' — none remaining'}`;
+  const label = (option: SpellGroup['modes'][number]) => option.ritual ? 'Ritual — no spell slot' : option.slotLevel === 0 ? `${settings?.zeroLevelName ?? 'Level 0 spell'} — no spell slot` : `Level ${option.slotLevel} · ${Object.keys(option.capability.costs).map((id) => result.resources[id]?.name ?? 'Spell slot').join(', ')}${option.available ? '' : ' — none remaining'}`;
   const actionable = (spell: SpellGroup) => featureRollInstances(engine, result, spell.feature).length > 0 || spell.modes.some((option) => Object.values(option.capability.costs).some((amount) => amount > 0));
   const notification = (spell: SpellGroup) => {
     const latest = character.rollResults?.filter((record) => record.casting?.spell === spell.feature && spell.modes.some((option) => option.capability.id === record.casting?.capability)).at(-1);
-    return spent[spell.id] ?? (latest?.casting ? latest.casting.ritual ? 'Ritual · no spell slot spent' : latest.casting.slotLevel ? `1 level ${latest.casting.slotLevel} spell slot spent` : 'Cantrip · no spell slot spent' : undefined);
+    return spent[spell.id] ?? (latest?.casting ? latest.casting.ritual ? 'Ritual · no spell slot spent' : latest.casting.slotLevel ? `1 level ${latest.casting.slotLevel} spell slot spent` : `${settings?.zeroLevelName ?? 'Level 0 spell'} · no spell slot spent` : undefined);
   };
   if (!spells.length && !slots.length) return null;
   return (
@@ -58,7 +58,7 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
             <h3>{`${pool.name ?? 'Spell slots'} · Level ${level}`}</h3>
             <strong>{`${pool.current ?? pool.capacity - pool.spent} / ${pool.capacity}`}</strong>
             <p className="muted small">{pool.recovery.map((recovery) => `${resetConditionName(engine.catalogue.system, recovery.event)}: ${recovery.amount === 'full' ? 'restore to maximum' : `${recovery.dice ? `${recovery.dice} + ` : ''}${expressionText(recovery.amount, engine)}`}`).join(' · ')}</p>
-            <div className="slot-pips" aria-hidden="true">{Array.from({ length: Math.min(12, pool.capacity) }, (_, index) => <span className={index < pool.available ? 'filled' : ''} key={index} />)}</div>
+            <div className="slot-pips" aria-hidden="true">{Array.from({ length: Math.min(settings?.slotPipLimit ?? 12, pool.capacity) }, (_, index) => <span className={index < pool.available ? 'filled' : ''} key={index} />)}</div>
             <div className="toolbar">
               <button className="quiet resource-adjust-button" aria-label={`Decrease ${pool.name}`} disabled={!ready || pool.available < 1} onClick={() => attempt(() => update(adjustResource(engine, character, pool.id, -1, crypto.randomUUID())))}>−</button>
               <button className="quiet resource-adjust-button" aria-label={`Increase ${pool.name}`} disabled={!ready || (pool.current ?? pool.capacity - pool.spent) >= pool.capacity} onClick={() => attempt(() => update(adjustResource(engine, character, pool.id, 1, crypto.randomUUID())))}>+</button>
@@ -80,7 +80,7 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
             Spell level
             <select value={filterLevel} onChange={(event) => setFilterLevel(event.target.value)}>
               <option value="all">All levels</option>
-              {[...new Set(spells.map((spell) => spell.level))].sort((a, b) => a - b).map((level) => <option key={level} value={level}>{level === 0 ? 'Cantrips' : `Level ${level}`}</option>)}
+              {[...new Set(spells.map((spell) => spell.level))].sort((a, b) => a - b).map((level) => <option key={level} value={level}>{level === 0 ? (settings?.zeroLevelHeading ?? 'Level 0 spells') : `Level ${level}`}</option>)}
             </select>
           </label>
         )}
@@ -94,7 +94,7 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
       {spells.length > 0 && !visibleSpells.length && <p className="muted">No spells match these filters.</p>}
       {[...new Set(visibleSpells.map((spell) => spell.level))].sort((a, b) => a - b).map((level) => (
         <details className="spell-level" key={level} open>
-          <summary>{level === 0 ? 'Cantrips' : `Level ${level} spells`}</summary>
+          <summary>{level === 0 ? (settings?.zeroLevelHeading ?? 'Level 0 spells') : `Level ${level} spells`}</summary>
           {visibleSpells.filter((spell) => spell.level === level).map((spell) => (
             <article className={`panel spell-row ${settings?.compact ? 'spell-compact' : ''}`} key={spell.id}>
               <div className="row">
