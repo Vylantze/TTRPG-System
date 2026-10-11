@@ -230,3 +230,14 @@ The loading recommendations above now have the following implementation:
 Run `npm run benchmark:loading` to measure cold package validation, first engine creation, and repeated engine reuse. Browser User Timing entries `system:package` and `system:validate` include worker turnaround and transfer. These measurements do not represent the entire time to an interactive character sheet.
 
 Observed local runs: before this change, package loading was approximately 32.2 seconds and fresh registry/engine creation 4.4-4.8 seconds. With immutable reuse, repeat registry/engine creation rounds to 0 ms (under 1 ms); one later cold-validation run was 27.4 seconds. Cold timings vary with machine load, and no percentage speedup is claimed. Full cold validation remains substantial, but runs in the worker so the loading UI can remain responsive. Further persistent compiled-data caching needs an explicit schema/engine-version and dependency-validation design; it must not trust arbitrary imports solely by their declared version.
+# Automatic UI releases
+
+The pre-commit hook versions UI changes before linting. It compares the staged UI sources, public assets, entry HTML, Vite/TypeScript configuration, dependencies, and lockfile against HEAD. Tests, documentation, release tooling, and version-only edits do not trigger a release.
+
+- Patch: styles, existing image/font assets, visible JSX copy, and tooltip/placeholder text.
+- Minor: added files or behavior and other implementation/configuration changes whose compatibility cannot be determined automatically.
+- Major: removed UI files or exports, changed exported function signatures or type definitions, and incompatible dependency/configuration changes detected by the shared JSON release classifier.
+
+These are conservative source-based defaults, not proof of semantic compatibility. When the intended change differs (for example, an implementation bug fix is a patch, or a persisted character format change is major), explicitly classify the commit. In PowerShell, set `$env:UI_RELEASE_TYPE = 'patch'`, `'minor'`, or `'major'` before committing and remove it afterward with `Remove-Item Env:UI_RELEASE_TYPE`. Review this override along with the staged diff; it applies to all UI changes in that commit. Authors may also supply a higher package version; the hook never lowers it.
+
+The hook synchronizes `ui/package.json`, the lockfile root, and the lockfile package entry, then stages those metadata files. Both files must be fully staged or unchanged to avoid capturing unrelated edits. Failed-commit retries compare against HEAD and do not repeatedly increment the version. The existing bottom-right version note reads the package version, so each subsequent UI build displays the release automatically. Install hooks with `npm run hooks:install`; verify classification with `npm run version:test`.
