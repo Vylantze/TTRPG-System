@@ -149,3 +149,67 @@ Hit Points leads both Character sheet and Abilities & resources. The validity bu
 The Items tab follows Skills by default and renders currency above inventory. **Rearrange tabs** exposes keyboard-accessible left/right controls; the character's `tabOrder` persists across reloads and exports. The HP panel contains rest buttons and expandable rest-healing Features. Hit Dice rolls consume the appropriate die pool immediately, with a separate healing application; long-rest allocation shares one budget across die types. Race/Class navigation and detail labels use System terminology.
 
 Expanded System snapshots use cached lz-string compression in local storage; existing uncompressed and deduplicated saves remain readable. Engine loading reuses validation for unchanged JSON and invalidates that reuse on edits, without skipping validation of changed hidden configurations.
+
+## Proposed character-sheet improvements (2026-10-11)
+
+Status: recommendations recorded after comparing the rendered D&D Beyond sheet, the deployed Feature Forge sheet, and current source. Not yet implemented. The deployed sheet showed some older presentation details; source was checked before identifying gaps.
+
+Priority order:
+
+1. Compact overview: keep HP first and System-defined resets above tabs; group AC, initiative, speed, and proficiency nearby. Reduce oversized cards and offer a collapsible application sidebar.
+2. HP workflow: amount input with Damage/Heal, retain small +/- adjustments, add temporary HP and conditional death-save controls through System-defined mechanics.
+3. Unified Actions view: aggregate equipped attacks, spells, and abilities; show hit/save, effect, range, cost, and remaining uses. Filter by action category without tracking action budgets.
+4. Rollable skill, saving-throw, and initiative bonuses; keep calculation expansion separate and preserve sortable tables.
+5. Compact spell rows with casting time, range, attack/save, effect, concentration/ritual indicators, search and filters. Show casting attack/DC per source for multiclass characters. Preserve original-level grouping, slot visibility preference, upcasting, and separate roll/application behavior.
+6. Player-facing resource labels: remaining/maximum and recovery first; move reservations and provider details into expandable explanations. Keep shared pools unified.
+7. Put race and all class levels beneath the character name; remove duplicate name presentation from details.
+8. Add a status area for conditions, concentration, defenses, and conditional roll bonuses. Rules behavior belongs in the engine/System, not prose inference.
+9. Inventory search/category filters and structured properties; retain money at the top of Items and existing equipment/attunement support.
+10. Persistent feature/spell/item details drawer retaining scroll and tab context, alongside existing new-tab links.
+11. Shared roll history: ability checks currently use component-local state while Feature rolls persist. Preserve resource spending on roll and separate application; do not add free rerolls.
+12. Rest preview showing affected pools and relevant Hit Dice controls before completion.
+13. Extend existing System display configuration with primary-stat roles, action columns, status displays, and resource presentation types; avoid hardcoded HP keys.
+14. Separate presentation-only character edits from rule evaluation; improve keyboard-accessible tab semantics and touch-accessible explanations.
+
+Preserve custom tab order, separate Skills and Items tabs, explicit calculation details, System-defined terminology, and character validity diagnostics. First implementation phase should cover overview, HP controls, and skill/save rolling; second phase Actions and spells.
+
+Reference: https://dndbeyond-support.wizards.com/hc/en-us/articles/7747193980820-Character-Header and https://dndbeyond-support.wizards.com/hc/en-us/articles/7747193946388-Sheet-Sections . These describe product patterns; they are not sources for imported game rules.
+
+## System-loading optimization assessment (2026-10-11)
+
+Status: source-based assessment, not a timing benchmark or implemented optimization. React 19.2.4 with Vite and local IndexedDB is the current architecture.
+
+### Observed loading path and costs
+
+- DatabaseApp waits for both prototype template downloads before loading IndexedDB. Those files total approximately 1.73 MB uncompressed and use no-store. Template loading failures currently prevent opening the saved workspace.
+- WorkspaceDatabase reads all Systems and characters, then serializes the retrieved structured objects so readWorkspace can parse them again.
+- readWorkspace calls parseSystemFile; registry loading calls it again. Even cache hits still traverse safe(), stringify the full System, and clone it. The existing cache saves validation work but not all traversal/allocation costs.
+- Prototype reconciliation creates before/after registries even when there is no replacement. App creates another registry afterward. Engines are cached within each registry, but that cache is not shared between these registries.
+- loadSystemFile reads each linked asset/cache entry sequentially and writes cache entries sequentially after validation. Independent files could load concurrently. Versioned caching already skips unchanged asset downloads, but assembly and full validation still run.
+- resolveSystemFile reparses documents and serializes the expanded result before parseSystemFile parses it again. Shared references expand into repeated structures.
+- Bundled JSON and templates are fetched with no-store, including Vite-emitted asset URLs. Keep manifest freshness, but allow normal caching for verified content-hashed immutable asset URLs.
+- CharacterBuilder, ClassDetail, and FeatureDetail are eagerly imported by App. Character evaluation also depends on the entire character object, including presentation-only changes.
+- StrictMode initialization already shares a Promise: disabling StrictMode is not a recommended optimization.
+
+### Recommended sequence
+
+1. Instrument cold import, warm startup, unchanged reload, one-asset update, and character navigation. Time fetch, JSON parsing, reference expansion, validation, compilation, reconciliation, database commit, and first usable render separately. Record main-thread long tasks, transferred bytes, and engine/validation invocation counts. Use production builds and representative multiclass/caster saves; report medians rather than inventing speedup claims.
+2. Load independent assets with bounded concurrency (for example four reads), retain in-flight Promise deduplication, cycle/depth/size limits, and all-or-nothing publication. Batch IndexedDB reads/writes where possible. Do not publish cache entries as trusted until package validation succeeds.
+3. Accept structured database objects directly instead of stringify/parse round trips. Introduce an internal immutable validated System representation and reuse registry/compiled catalogue instances across reconciliation and UI. Public imports must remain fully validated; a version number alone does not make arbitrary imported data trustworthy.
+4. Allow HTTP caching of immutable emitted assets and cache template files by their emitted URL/version. Start raw database reads and template reads together where feasible; keep the authorized every-run compatibility check and sample rebuilding/deletion behavior. Do not bypass reconciliation to make startup appear faster.
+5. Put parsing, compilation, and compatibility checking in a Web Worker if timings show main-thread blocking. Keep engine ownership in the worker where practical and return compact serializable view data; returning whole compiled catalogues can introduce expensive structured-clone work. Preserve atomic saves and existing optimistic multi-tab locking.
+6. For partial updates, track dependency invalidation: a changed block or stat can affect many classes/features. Asset-version caching currently optimizes I/O, not incremental compilation. Reuse unchanged data only where dependency analysis proves it safe. Include engine/schema version in any persistent compiled-cache key.
+7. Code-split secondary routes with React.lazy and Suspense after measuring JS startup costs. Render progress stages such as Reading saved Systems, Validating rules, and Checking characters. Preserve the requested disabled interactions during actual System replacement.
+
+### React API applicability
+
+- lazy + Suspense: defer route component JavaScript and provide loading boundaries. They do not automatically cache JSON or reduce validation work. Suspense does not detect ordinary fetching inside Effects.
+- useTransition: already used for navigation; schedules non-urgent React updates and exposes pending state. It does not move synchronous parsing/engine evaluation onto a background thread.
+- useMemo / memo: reduce repeated computation/rendering when inputs have stable identities. Treat them as performance optimizations, not durable validated-data storage. The existing engine registry should remain the owner of engine caching.
+- useDeferredValue: useful for catalogue filtering while typing; does not accelerate initial System loading or independently debounce network requests.
+- use: can read a stable cached Promise under Suspense; the application or a compatible data layer still needs to own Promise caching, invalidation, cancellation, and errors. Avoid constructing new Promises on each render or adopting undocumented Suspense integrations.
+- cache: React's cache API is for Server Components, not a browser IndexedDB cache. Server Functions are not a built-in backend for this static GitHub Pages deployment. A server/framework migration is unnecessary for the identified bottlenecks.
+
+Recommendation: retain the client-only architecture. Optimize the loader and data ownership first; use React APIs for route splitting and responsive presentation. Add a fetching library only if query lifecycle complexity justifies it, not as a substitute for engine/loader optimization.
+
+Official React references: https://react.dev/reference/react/Suspense , https://react.dev/reference/react/lazy , https://react.dev/reference/react/useTransition , https://react.dev/reference/react/useDeferredValue , https://react.dev/reference/react/use , https://react.dev/reference/react/cache .
