@@ -1,5 +1,6 @@
 import { loadSystemFile } from '@/src/index';
 import bundledUrl from '@/src/systems/dnd5e-2014/system.json?url';
+import { SystemAssetDatabase } from '@/ui/src/SystemAssetDatabase';
 
 // Vite emits each JSON separately and rewrites its URL for the deployment base.
 const bundledParts = Object.fromEntries(Object.entries(import.meta.glob('@/src/systems/dnd5e-2014/*.json', { query: '?url', import: 'default', eager: true }) as Record<string, string>).map(([path, url]) => [path.split('/').at(-1), url]));
@@ -14,7 +15,7 @@ export async function loadBundledSystem() {
     const url = bundledParts[path];
     if (!url) throw new Error(`Missing bundled System document: ${path}`);
     return read(url);
-  });
+  }, typeof indexedDB === 'undefined' ? undefined : new SystemAssetDatabase(indexedDB));
 }
 
 /** Select system.json and its referenced files together; exports also load alone. */

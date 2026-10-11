@@ -37,6 +37,7 @@ export type { StackingPolicy } from '@/src/model/StackingPolicy.js';
 export type { StatDefinition } from '@/src/model/StatDefinition.js';
 export type { StatResult } from '@/src/model/StatResult.js';
 export type { SystemDefinition } from '@/src/model/SystemDefinition.js';
+export type { ResetCondition } from '@/src/model/ResetCondition.js';
 export type { Value } from '@/src/model/Value.js';
 export type { DefineStat } from '@/src/model/DefineStat.js';
 export type { TrackResource } from '@/src/model/TrackResource.js';

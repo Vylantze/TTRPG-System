@@ -21,13 +21,18 @@ export function readSystem(path) {
 /** Preserve the existing package's feature groups when a JS generator edits it. */
 export function writeSystem(path, file) {
   const manifest = JSON.parse(readFileSync(path, 'utf8'));
-  const save = (url, value) => writeFileSync(url, JSON.stringify(value, null, 2) + '\n');
+  const save = (url, value) => {
+    const existing = JSON.parse(readFileSync(url, 'utf8'));
+    if (url.href !== path.href && existing.assetVersion !== undefined) value = { assetVersion: existing.assetVersion, data: value };
+    if (JSON.stringify(existing) !== JSON.stringify(value)) writeFileSync(url, JSON.stringify(value, null, 2) + '\n');
+  };
   if (!manifest.features.some((entry) => entry.$ref)) return save(path, file);
   const groups = new Map(), membership = new Map();
   for (const ref of manifest.features) {
     const name = ref.$ref;
     groups.set(name, []);
-    for (const feature of JSON.parse(readFileSync(new URL(name, path), 'utf8'))) membership.set(feature.id, name);
+    const asset = JSON.parse(readFileSync(new URL(name, path), 'utf8'));
+    for (const feature of asset.data ?? asset) membership.set(feature.id, name);
   }
   for (const feature of file.features) {
     const owner = feature.id.split('.roll.')[0];

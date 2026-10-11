@@ -15,6 +15,8 @@ def read_system(path):
             if name not in cache:
                 cache[name] = json.loads((path.parent / name).read_text(encoding='utf-8'))
             item = cache[name]
+            if isinstance(item, dict) and "assetVersion" in item:
+                item = item["data"]
             for token in pointer.lstrip('/').split('/') if pointer else []:
                 token = token.replace('~1', '/').replace('~0', '~')
                 item = item[int(token)] if isinstance(item, list) else item[token]
@@ -43,7 +45,11 @@ def write_system(path, data, modular=None):
         modular = any(isinstance(f, dict) and '$ref' in f for f in original.get('features', []))
 
     def save(target, value):
-        target.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+        existing = json.loads(target.read_text(encoding='utf-8')) if target.exists() else None
+        if target != path and isinstance(existing, dict) and 'assetVersion' in existing:
+            value = {'assetVersion': existing['assetVersion'], 'data': value}
+        if existing != value:
+            target.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 
     if not modular:
         save(path, data)

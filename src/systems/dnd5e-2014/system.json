@@ -1,6 +1,6 @@
 {
   "format": "ttrpg-system",
-  "contentVersion": 4,
+  "contentVersion": 5,
   "version": 1,
   "id": "dnd5e:2014-srd5.1",
   "revision": 1,
@@ -235,5 +235,17 @@
   },
   "itemFeatures": {
     "$ref": "item-features.json"
+  },
+  "assetVersions": {
+    "blocks.json": 1,
+    "class-features.json": 1,
+    "classes.json": 1,
+    "definitions.json": 1,
+    "features.json": 1,
+    "item-features.json": 1,
+    "items.json": 1,
+    "races.json": 1,
+    "spells.json": 1,
+    "subclasses.json": 1
   }
 }

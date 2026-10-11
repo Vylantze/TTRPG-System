@@ -8,7 +8,8 @@ export function RestControls({ engine, character, result, update, report }: { en
   const [allocation, setAllocation] = useState<Record<string, number>>({});
   const ready = character.buildState !== 'draft' && result.status === 'valid';
   const events = [...new Set([...(engine.catalogue.system.recoveryEvents ?? []), ...Object.values(result.resources).flatMap((pool) => pool.recovery.map((rule) => rule.event)), ...Object.keys(engine.catalogue.system.recoveryAllocations ?? {}), ...(engine.catalogue.system.commandRules?.selectedRecovery ? [engine.catalogue.system.commandRules.selectedRecovery.requiredEvent] : [])])];
-  const buttons = engine.catalogue.system.resetButtons ?? events.map((name) => ({ event: name, label: labelFromId(name) }));
+  const conditions = engine.catalogue.system.resetConditions;
+  const buttons = conditions?.filter((condition) => condition.showButton !== false).map((condition) => ({ event: condition.id, label: condition.name })) ?? engine.catalogue.system.resetButtons ?? events.map((name) => ({ event: name, label: labelFromId(name) }));
   const eventLabel = (name: string) => buttons.find((button) => button.event === name)?.label ?? labelFromId(name);
   const recover = (name: string, counts?: Record<string, number>) => {
     try {
@@ -27,6 +28,7 @@ export function RestControls({ engine, character, result, update, report }: { en
           <button
             className="quiet"
             key={name}
+            title={conditions?.find((condition) => condition.id === name)?.description}
             disabled={!ready}
             onClick={() => {
               const rule = engine.catalogue.system.recoveryAllocations?.[name];

@@ -19,6 +19,14 @@ test('only a newer content version offers an update; legacy version is one', () 
   for (const contentVersion of [0, -1, 1.5, '2']) assert.throws(() => hasBundledUpdate(file, { ...file, contentVersion }), /version/);
 });
 
+test('manifest asset versions detect targeted updates without comparing content', () => {
+  const loaded = { ...file, contentVersion: 2, assetVersions: { 'spells.json': 3, 'classes.json': 1 } };
+  assert.equal(hasBundledUpdate(loaded, { ...loaded, assetVersions: { ...loaded.assetVersions, 'spells.json': 4 } }), true);
+  assert.equal(hasBundledUpdate(loaded, structuredClone(loaded)), false);
+  assert.equal(hasBundledUpdate(loaded, { ...loaded, contentVersion: 1, assetVersions: { 'spells.json': 5 } }), false);
+  assert.throws(() => hasBundledUpdate(loaded, { ...loaded, assetVersions: { 'spells.json': -1 } }), /asset version/);
+});
+
 test('reload preserves edited compatible characters and rebuilds only incompatible samples', () => {
   const edited = { ...character('edited'), name: 'My edited character', notes: { Story: 'Keep me' } };
   const sample = character('sample'), broken = character('broken');
