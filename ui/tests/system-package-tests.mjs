@@ -40,13 +40,13 @@ test('System-labelled reset controls appear once above the tabs on every sheet t
 test('asset database persists across loaders and replaces only the selected asset', async () => {
   const factory = new IDBFactory();
   const first = new SystemAssetDatabase(factory);
-  await first.set('spells', { version: 1, document: { assetVersion: 1, data: [] } });
-  await first.set('classes', { version: 1, document: { assetVersion: 1, data: ['class'] } });
+  await first.set('spells', { version: '1.0.0', document: { assetVersion: '1.0.0', data: [] } });
+  await first.set('classes', { version: '1.0.0', document: { assetVersion: '1.0.0', data: ['class'] } });
   const reopened = new SystemAssetDatabase(factory);
-  assert.equal((await reopened.get('spells')).version, 1);
-  await reopened.set('spells', { version: 2, document: { assetVersion: 2, data: ['spell'] } });
-  assert.equal((await first.get('spells')).version, 2);
-  assert.equal((await first.get('classes')).version, 1);
+  assert.equal((await reopened.get('spells')).version, '1.0.0');
+  await reopened.set('spells', { version: '1.0.1', document: { assetVersion: '1.0.1', data: ['spell'] } });
+  assert.equal((await first.get('spells')).version, '1.0.1');
+  assert.equal((await first.get('classes')).version, '1.0.0');
 });
 
 test('sheet evaluation reuses cosmetic edits but invalidates rule edits and engine replacements', () => {

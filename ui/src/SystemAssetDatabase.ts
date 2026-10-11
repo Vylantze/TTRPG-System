@@ -35,14 +35,14 @@ export class SystemAssetDatabase implements SystemAssetCache {
     return this.connection;
   }
 
-  private async access(key: string, entry?: { version: number; document: unknown }): Promise<{ version: number; document: unknown } | undefined> {
+  private async access(key: string, entry?: { version: string; document: unknown }): Promise<{ version: string; document: unknown } | undefined> {
     const database = await this.open();
     if (!database) return;
-    return new Promise<{ version: number; document: unknown } | undefined>((resolve) => {
+    return new Promise<{ version: string; document: unknown } | undefined>((resolve) => {
       const transaction = database.transaction('assets', entry ? 'readwrite' : 'readonly');
       const store = transaction.objectStore('assets');
       const request = entry ? store.put(entry, key) : store.get(key);
-      let value: { version: number; document: unknown } | undefined;
+      let value: { version: string; document: unknown } | undefined;
       request.onsuccess = () => {
         if (!entry) value = request.result;
       };
@@ -56,5 +56,5 @@ export class SystemAssetDatabase implements SystemAssetCache {
   }
 
   get(key: string) { return this.access(key); }
-  async set(key: string, entry: { version: number; document: unknown }) { await this.access(key, entry); }
+  async set(key: string, entry: { version: string; document: unknown }) { await this.access(key, entry); }
 }

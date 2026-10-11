@@ -123,7 +123,7 @@ The UI now stores Systems and characters in IndexedDB. Legacy localStorage works
 
 ## System release versions
 
-Use a positive integer `contentVersion` on the root System JSON and increment it whenever publishing changed content. The pre-commit hook does this automatically when any JSON in the System directory changes, including a referenced content file, unless a higher version is already authored. Legacy files without the field are treated as version 1. Keep `version` for the file-format schema and `revision` for the rules identity pinned by characters. A newer content version offers a reload in the UI; an equal counter can also offer a reload when a declared asset version increases. Older releases are ignored, and content is not compared. The reload validates the incoming catalogue before replacing the stored System.
+Use `major.minor.patch` strings for `contentVersion`, each `assetVersion`, and each manifest `assetVersions` entry. `version` remains the file-format schema ID and `revision` remains the rules identity pinned by characters. Old positive integer release counters are normalized to `1.0.(counter - 1)` when read; author new releases only as semantic-version strings. Patch releases refresh compatible display data automatically without a reload prompt. Minor and major releases require explicit reload and the existing character compatibility checks. Downgrades and equal releases are ignored.
 
 `SystemDefinition.resetButtons` is the legacy display-only configuration, for example `[{ "event": "short-rest", "label": "Short rest" }, { "event": "long-rest", "label": "Long rest" }, { "event": "dawn", "label": "Dawn" }]`. Buttons dispatch the corresponding recovery event, retaining resource allocation prompts and event replay protection. Labels and order are authored by the System; an empty array hides them. When omitted, legacy Systems derive controls from their recovery events. Draft or invalid characters cannot use them.
 
@@ -151,15 +151,25 @@ Completing the condition is a table decision: the engine does not infer rest com
 A versioned package manifest lists each referenced document's expected version:
 
 ```json
-"assetVersions": { "definitions.json": 1, "features.json": 3 }
+"assetVersions": { "definitions.json": "1.0.0", "features.json": "1.2.0" }
 ```
 
-Each document has an envelope such as `{ "assetVersion": 3, "data": [...] }`. Existing `$ref` paths and JSON Pointers select the **data** inside the envelope, so `definitions.json#/variant-1` still works. All referenced documents must have matching positive versions when `assetVersions` is present. Unversioned packages and self-contained exports remain supported. Format `version`, content release `contentVersion`, rules `revision`, and per-document `assetVersion` have separate purposes.
+Each document has an envelope such as `{ "assetVersion": "1.2.0", "data": [...] }`. Existing `$ref` paths and JSON Pointers select the **data** inside the envelope, so `definitions.json#/variant-1` still works. All referenced documents must have matching semantic versions when `assetVersions` is present. The bundled manifest also lists auxiliary metadata, spell lists, and sample assets; listing them does not cause the engine to load them eagerly. Unversioned packages and self-contained exports remain supported. Format `version`, content release `contentVersion`, rules `revision`, and per-document `assetVersion` have separate purposes.
 
 `loadSystemFile` accepts an optional third `SystemAssetCache` argument. The cache is keyed by System ID, rules revision, and path, with a version and document per entry. Unchanged versions reuse cached documents; missing or changed versions fetch only their document. Cached envelope mismatches are refetched. New entries are published only after the combined System passes validation. An invalid or unavailable replacement never replaces the active System. The bundled browser loader uses a disposable IndexedDB asset cache that survives restarts; unavailable cache storage falls back to ordinary loading. Character snapshots and self-contained exports remain independent of that cache.
 
-The pre-commit hook increments each changed linked asset, updates its manifest version entry, and increments the overall content version. Unchanged asset versions stay unchanged. Complete staging is required for modified assets and the manifest. Authoring helpers preserve version envelopes and avoid rewriting identical data. Authors distributing files without Git must increment the edited asset versions and manifest entries, plus `contentVersion`, themselves.
+The pre-commit hook classifies each changed asset, bumps its semantic version, synchronizes the manifest, and bumps the overall System by the highest change category. Unchanged data and version-format migration alone do not increment assets. Complete staging is required. Auxiliary JSON (metadata, spell lists, sample saves) uses the same `assetVersion`/`data` envelope and is versioned too; it is not eagerly loaded by the engine. Authoring helpers preserve envelopes. Authors distributing files without Git must apply the same classification and update manifest entries themselves.
 
 Incremental loading avoids redundant downloads and JSON regeneration. Changes still require combined validation and affected character evaluation because references and formulas can cross asset boundaries; this does not claim partial engine validation. Versions are authoritative: editing data without incrementing its version intentionally does not invalidate a cached copy.
 
 The update banner also compares the manifest's asset versions, so a newer individual asset is detected even if the overall version is unchanged. An older overall release is never offered automatically.
+
+### Release classification
+
+- **Patch**: descriptions, display names/labels, source attribution, automatic description-processing overrides, and text-link presentation. A patch must preserve rules, layout, identifiers, and character data. The browser validates it and rejects any mislabelled mechanical/layout change before applying it. It preserves the character array and saves exactly.
+- **Minor**: additive Features/classes/choices, changed formulas/resource capacities/prerequisites, new options, or sheet layouts. Existing characters may be affected, so reload is required.
+- **Major**: removal of definitions/options/structural fields, changed identifiers or pinned revisions, schema/format changes, or incompatible value types. Reload is required.
+
+Classification is conservative: anything outside the explicit display-only field allowlist is at least minor. It cannot prove every semantic breaking change; authors should choose a higher version for changes that break existing behavior. The hook preserves an authored version only when it is at least the required bump and propagates higher asset bumps to the System release. Version comparison is numeric, so `1.10.0` is newer than `1.9.0`. No prerelease/build suffixes are used. A patch is an automatic validated snapshot refresh, not a full-page reload; changed asset versions still invalidate their caches.
+
+The semantic-version migration is System `1.1.0` (minor loading-contract change), with unchanged assets initialized at `1.0.0`. The engine and UI release is `0.2.0`; the UI version comes directly from `ui/package.json` and appears as an absolute-positioned note at the bottom-right of the page, including loading/error screens.

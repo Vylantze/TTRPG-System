@@ -9,7 +9,7 @@ const file = readSystem(new URL('../src/systems/dnd5e-2014/system.json', import.
 test('multiclass sample is valid and shares one HP pool; engine cache invalidates on unload', () => {
   const registry = new SystemRegistry();
   registry.load(file);
-  const character = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/multiclass-sample.json', import.meta.url), 'utf8'));
+  const character = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/multiclass-sample.json', import.meta.url), 'utf8')).data;
   const engine = registry.engineForCharacter(character);
   assert.equal(registry.engineForCharacter({ ...character, name: 'Renamed' }), engine);
   const result = engine.evaluate(character);

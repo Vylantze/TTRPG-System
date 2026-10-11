@@ -1,22 +1,30 @@
 import { parseSystemFile, type SystemFile } from '@/src/system-loader.js';
 import { RuleError } from '@/src/expression.js';
 import type { SystemAssetCache } from '@/src/types/SystemAssetCache.js';
+import { releaseVersion } from '@/src/version-policy.js';
 
 const limit = 20_000_000;
-function versions(input: unknown): Record<string, number> | undefined {
+function versions(input: unknown): Record<string, string> | undefined {
   const value = (input as { assetVersions?: unknown })?.assetVersions;
   if (value === undefined) return;
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new RuleError('SYSTEM_VERSION', 'Invalid asset versions.');
   for (const [path, version] of Object.entries(value)) {
     reference({ $ref: path });
-    if (path.includes('#') || !Number.isSafeInteger(version) || Number(version) < 1) throw new RuleError('SYSTEM_VERSION', 'Invalid asset version.');
+    try {
+      releaseVersion(version);
+    } catch { throw new RuleError('SYSTEM_VERSION', 'Invalid asset version.'); }
+    if (path.includes('#')) throw new RuleError('SYSTEM_VERSION', 'Invalid asset version.');
   }
-  return value as Record<string, number>;
+  return Object.fromEntries(Object.entries(value).map(([path, version]) => [path, releaseVersion(version)]));
 }
-function asset(value: unknown, path: string, expected?: Record<string, number>): unknown {
+function asset(value: unknown, path: string, expected?: Record<string, string>): unknown {
   if (!expected) return value;
-  const entry = value as { assetVersion?: number; data?: unknown };
-  if (!Object.hasOwn(expected, path) || !entry || entry.assetVersion !== expected[path] || !Object.hasOwn(entry, 'data')) throw new RuleError('SYSTEM_VERSION', `Asset version mismatch: ${path}`);
+  const entry = value as { assetVersion?: unknown; data?: unknown };
+  let version: string | undefined;
+  try {
+    if (entry?.assetVersion !== undefined) version = releaseVersion(entry.assetVersion);
+  } catch { /* Mismatched or malformed assets are rejected below. */ }
+  if (!Object.hasOwn(expected, path) || !entry || version !== expected[path] || !Object.hasOwn(entry, 'data')) throw new RuleError('SYSTEM_VERSION', `Asset version mismatch: ${path}`);
   return entry.data;
 }
 function document(input: unknown): unknown {
@@ -84,7 +92,7 @@ export async function loadSystemFile(input: unknown, read: (path: string) => Pro
   const root = document(input), documents: Record<string, unknown> = Object.create(null);
   const expected = versions(root);
   const identity = root as { id: string; revision: number };
-  const pending: { key: string; version: number; document: unknown }[] = [];
+  const pending: { key: string; version: string; document: unknown }[] = [];
   const queue: string[] = [];
   const seen = new Set<string>();
   const collect = (ref: string) => {

@@ -37,3 +37,5 @@ export { applyDescriptionOverrides } from '@/src/description-overrides.js';
 export { migrateCharacterStructure } from '@/src/migrate-character-structure.js';
 export { resolveSystemFile, loadSystemFile } from '@/src/system-package.js';
 export type { SystemAssetCache } from '@/src/types/SystemAssetCache.js';
+export { releaseVersion, isReleaseVersion, compareVersions, bumpVersion, versionChange, classifyReleaseChange } from '@/src/version-policy.js';
+export { assetData } from '@/src/asset-data.js';

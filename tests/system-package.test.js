@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { loadSystemFile, resolveSystemFile, Engine, validateCatalogue, migrateCharacterStructure, recoverResources, adjustResource } from '@/dist/index.js';
 
 const system = { id: 'package', revision: 1, name: 'Package', allowMultipleClasses: false, characterLevel: 0, stats: [] };
-const manifest = { format: 'ttrpg-system', version: 1, contentVersion: 1, id: 'package', revision: 1, options: {}, features: [{ $ref: 'features.json' }], configurations: [{ id: 'package', revision: 1, options: {}, system: { $ref: 'definitions.json#/base' }, classes: { $ref: 'classes.json' } }] };
+const manifest = { format: 'ttrpg-system', version: 1, contentVersion: '1.0.0', id: 'package', revision: 1, options: {}, features: [{ $ref: 'features.json' }], configurations: [{ id: 'package', revision: 1, options: {}, system: { $ref: 'definitions.json#/base' }, classes: { $ref: 'classes.json' } }] };
 const parts = { 'features.json': [{ id: 'feature', revision: 1, name: 'Feature', components: [] }], 'definitions.json': { base: system }, 'classes.json': [] };
 
 test('references assemble a complete System without changing inline exports', async () => {
@@ -53,8 +53,8 @@ test('reorganizing package definitions leaves character revision pins unchanged'
 });
 
 test('asset versions reuse cached documents and fetch only changed parts', async () => {
-  const root = { ...manifest, assetVersions: Object.fromEntries(Object.keys(parts).map((path) => [path, 1])) };
-  const documents = Object.fromEntries(Object.entries(parts).map(([path, data]) => [path, { assetVersion: 1, data }]));
+  const root = { ...manifest, assetVersions: Object.fromEntries(Object.keys(parts).map((path) => [path, '1.0.0'])) };
+  const documents = Object.fromEntries(Object.entries(parts).map(([path, data]) => [path, { assetVersion: '1.0.0', data }]));
   const stored = new Map(), reads = [];
   const cache = { get: async (key) => stored.get(key), set: async (key, value) => {
     stored.set(key, value);
@@ -68,15 +68,15 @@ test('asset versions reuse cached documents and fetch only changed parts', async
   reads.length = 0;
   assert.deepEqual(await loadSystemFile(root, read, cache), first);
   assert.deepEqual(reads, []);
-  root.assetVersions['features.json'] = 2;
-  documents['features.json'] = { assetVersion: 2, data: [{ ...parts['features.json'][0], name: 'Updated' }] };
+  root.assetVersions['features.json'] = '1.0.1';
+  documents['features.json'] = { assetVersion: '1.0.1', data: [{ ...parts['features.json'][0], name: 'Updated' }] };
   assert.equal((await loadSystemFile(root, read, cache)).features[0].name, 'Updated');
   assert.deepEqual(reads, ['features.json']);
   const snapshot = structuredClone([...stored]);
-  root.assetVersions['features.json'] = 3;
+  root.assetVersions['features.json'] = '1.1.0';
   await assert.rejects(loadSystemFile(root, read, cache), /version mismatch/);
   assert.deepEqual([...stored], snapshot);
-  documents['features.json'] = { assetVersion: 3, data: [{ id: 'broken' }] };
+  documents['features.json'] = { assetVersion: '1.1.0', data: [{ id: 'broken' }] };
   await assert.rejects(loadSystemFile(root, read, cache));
   assert.deepEqual([...stored], snapshot);
   delete root.assetVersions['classes.json'];

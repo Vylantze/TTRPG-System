@@ -49,10 +49,10 @@ test('package reads run concurrently with bounded fan-out and preserve reference
 
 test('failed parallel packages publish no cached data', async () => {
   const writes = [];
-  const input = { ...file, assetVersions: { 'a.json': 1, 'b.json': 1 }, features: [{ $ref: 'a.json' }, { $ref: 'b.json' }] };
+  const input = { ...file, assetVersions: { 'a.json': '1.0.0', 'b.json': '1.0.0' }, features: [{ $ref: 'a.json' }, { $ref: 'b.json' }] };
   await assert.rejects(loadSystemFile(input, async (path) => {
     if (path === 'b.json') throw new Error('read failed');
-    return { assetVersion: 1, data: [] };
+    return { assetVersion: '1.0.0', data: [] };
   }, { async get() {}, async set(...args) { writes.push(args); } }), /read failed/);
   assert.deepEqual(writes, []);
 });

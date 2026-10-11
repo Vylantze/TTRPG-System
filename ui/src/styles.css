@@ -224,3 +224,7 @@ button.resource-adjust-button { box-sizing: border-box; flex: 0 0 2rem; width: 2
 .companion-stats dt { text-transform: capitalize; }
 .companion-stats dd { margin: 0; font-size: 1.3rem; font-weight: 700; }
 .mechanical-summary { margin-block: 1rem; }
+
+/* Keep the release note anchored to the page corner without covering controls. */
+#root { position: relative; min-height: 100vh; padding-bottom: 24px; }
+.ui-version { position: absolute; right: 8px; bottom: 4px; font-size: 10px; line-height: 1.4; color: var(--muted); pointer-events: none; white-space: nowrap; }
