@@ -120,7 +120,7 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
     case 'grantFeature': text(v.feature);
       if (v.atClassLevel !== undefined) integer(v.atClassLevel, 1);
       if (!c.features.some((f) => f.id === v.feature)) throw new RuleError('UNKNOWN_FEATURE', `Missing grant ${v.feature}.`);
-      if (v.condition) throw new RuleError('CONDITIONAL_GRANT', 'Use advancement entries for conditional acquisition; grants cannot have runtime conditions.');
+      if (v.condition !== undefined) throw new RuleError('CONDITIONAL_GRANT', 'Use advancement entries for conditional acquisition; grants cannot have runtime conditions.');
       if (v.parameters !== undefined) {
         record(v.parameters);
         Object.values(v.parameters).forEach(value);
@@ -128,7 +128,7 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
       break;
     case 'chooseFeatures':
       if (v.eligibility !== undefined && !['acquisition', 'current'].includes(String(v.eligibility))) throw new RuleError('SCHEMA', 'Invalid choice eligibility timing.');
-      if (v.condition) throw new RuleError('CONDITIONAL_CHOICE', 'Choices cannot depend on runtime conditions.');
+      if (v.condition !== undefined) throw new RuleError('CONDITIONAL_CHOICE', 'Choices cannot depend on runtime conditions.');
       expr(v.minimum);
       expr(v.maximum);
       record(v.candidates);
@@ -471,6 +471,22 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
         if (f.components.length) throw new RuleError('SCHEMA', 'A Roll Feature cannot contain other building blocks.');
         if (roll.capability !== undefined) text(roll.capability);
         if (roll.spell !== undefined) text(roll.spell);
+        if (roll.characterScaling !== undefined) {
+          list(roll.characterScaling);
+          for (const step of roll.characterScaling) {
+            record(step);
+            integer(step.level, 1);
+            integer(step.count, 1);
+          }
+          if (new Set(roll.characterScaling.map((step) => step.level)).size !== roll.characterScaling.length) throw new RuleError('SCHEMA', 'Duplicate roll scaling threshold.');
+        }
+        if (roll.slotScaling !== undefined) {
+          record(roll.slotScaling);
+          integer(roll.slotScaling.baseLevel, 1);
+          integer(roll.slotScaling.dicePerLevel, 1);
+          text(roll.spell);
+        }
+        if ((roll.characterScaling || roll.slotScaling) && typeof roll.dice === 'string' && !/^\d+d\d+$/.test(roll.dice)) throw new RuleError('SCHEMA', 'Scaling requires a single dice term.');
         if (roll.restoreResource !== undefined) {
           text(roll.restoreResource);
           if (roll.spell === undefined) text(roll.capability);
@@ -478,7 +494,10 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
         if (roll.bonus !== undefined && typeof roll.bonus !== 'number') {
           record(roll.bonus);
           if ('stat' in roll.bonus) text(roll.bonus.stat);
-          else text(roll.bonus.class);
+          else if ('castingAbility' in roll.bonus) {
+            if (roll.bonus.castingAbility !== true) throw new RuleError('SCHEMA', 'Invalid casting ability bonus.');
+            text(roll.spell);
+          } else text(roll.bonus.class);
         } else if (typeof roll.bonus === 'number' && !Number.isSafeInteger(roll.bonus)) throw new RuleError('SCHEMA', 'Roll bonus must be an integer.');
       }
       list(f.components);

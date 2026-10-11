@@ -197,7 +197,7 @@ export class Engine {
             continue;
           }
           const env = { ...this.environment(this.context(character, levels, runtime, instance), get, instance), base };
-          if (component.condition && !boolean(evaluateExpression(component.condition, env))) {
+          if (component.condition !== undefined && !boolean(evaluateExpression(component.condition, env))) {
             explanation.reason = 'Condition is false.';
             continue;
           }
@@ -260,7 +260,7 @@ export class Engine {
     for (const instance of instances.filter((i) => i.active && i.eligible)) for (const component of this.features.get(instance.feature)!.components) {
       if (component.kind !== 'defineResource') continue;
       const env = this.environment(this.context(character, levels, runtime, instance), stats.get, instance);
-      if (component.condition && !boolean(evaluateExpression(component.condition, env))) continue;
+      if (component.condition !== undefined && !boolean(evaluateExpression(component.condition, env))) continue;
       const owner = component.scope === 'character' ? 'character' : component.scope === 'progression' ? instance.progression : component.scope === 'parent' ? instance.parent ?? instance.id : instance.id;
       if (!owner) throw new RuleError('RESOURCE_SCOPE', 'A progression resource needs a class progression.');
       const id = `pool/${component.scope}/${segment(owner)}/${segment(component.key)}`;
@@ -374,7 +374,8 @@ export class Engine {
             const attainment = threshold === undefined ? -1 : character.history.findIndex((entry) => entry.progression === progression && entry.level === threshold);
             const grantEvent = threshold === undefined ? event : Math.max(event, attainment + 1);
             const enabled = threshold === undefined || (!!progression && (character.progressions.find((entry) => entry.id === progression)?.level ?? 0) >= threshold);
-            instantiate(childPath(id, component.id), { id: component.id, feature: component.feature, parameters: component.parameters }, threshold === undefined ? acquiredCharacterLevel : Math.max(acquiredCharacterLevel, grantEvent), Math.max(acquiredClassLevel, threshold ?? 0), instance.active && enabled, id, progression, component.ignorePrerequisites ?? false, undefined, grantEvent);
+            const grantLevel = eventSnapshots.has(grantEvent) ? Number(this.context(character, eventSnapshots.get(grantEvent)).characterLevel) : acquiredCharacterLevel;
+            instantiate(childPath(id, component.id), { id: component.id, feature: component.feature, parameters: component.parameters }, threshold === undefined ? acquiredCharacterLevel : Math.max(acquiredCharacterLevel, grantLevel), Math.max(acquiredClassLevel, threshold ?? 0), instance.active && enabled, id, progression, component.ignorePrerequisites ?? false, undefined, grantEvent);
           }
           if (component.kind === 'chooseFeatures') expandChoice(selectionPath(id, component.id), component, instance.active, acquiredCharacterLevel, acquiredClassLevel, id, progression, params, event);
         }
@@ -585,10 +586,10 @@ export class Engine {
         const f = this.features.get(i.feature)!;
         try {
           const env = this.environment(this.context(character, undefined, runtime, i), view.get, i);
-          for (const component of f.components) if (component.kind === 'grantResource' && (!component.condition || boolean(evaluateExpression(component.condition, env)))) this.matchPool(character, i, { id: component.id, key: component.key }, result.resources, result.instances);
+          for (const component of f.components) if (component.kind === 'grantResource' && (component.condition === undefined || boolean(evaluateExpression(component.condition, env)))) this.matchPool(character, i, { id: component.id, key: component.key }, result.resources, result.instances);
           for (const req of f.resources ?? []) result.bindings[`${i.id}/${segment(req.id)}`] = this.matchPool(character, i, req, result.resources, result.instances).id;
           for (const component of f.components) if (component.kind === 'grantCapability') {
-            if ((component.condition && !boolean(evaluateExpression(component.condition, env))) || !this.satisfies(component.requirements, i, result.instances, view.get, env.context)) continue;
+            if ((component.condition !== undefined && !boolean(evaluateExpression(component.condition, env))) || !this.satisfies(component.requirements, i, result.instances, view.get, env.context)) continue;
             const costs: Record<string, number> = {};
             for (const cost of component.costs ?? []) {
               const requirement = cost.requirement ? f.resources?.find((r) => r.id === cost.requirement) : { id: component.id + '/' + cost.key, key: cost.key };

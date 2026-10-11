@@ -57,7 +57,7 @@ function unpackSystem(packed: ReturnType<typeof buildPackedSystem>): SystemFile 
   };
   return { ...packed.definition, configurations: packed.configurations.map((c) => ({ ...c, classes: item(packed.classes, c.classes), system: { ...c.system, stats: item(packed.stats, c.system.stats) } })) };
 }
-export function readWorkspace(storage: Pick<Storage, 'getItem'> & Partial<Pick<Storage, 'removeItem'>>): Workspace {
+export function readWorkspace(storage: Pick<Storage, 'getItem'> & Partial<Pick<Storage, 'removeItem'>>, recoverCharacter?: (value: unknown) => Character | undefined): Workspace {
   // User-authorized prototype reset also releases quota occupied by the old workspace.
   storage.removeItem?.('ttrpg-feature-forge:v1');
   const raw = storage.getItem(STORAGE_KEY);
@@ -83,7 +83,15 @@ export function readWorkspace(storage: Pick<Storage, 'getItem'> & Partial<Pick<S
     }
     return file;
   });
-  const characters = value.characters.map((c: unknown) => deserializeCharacter(JSON.stringify(c)));
+  const characters = value.characters.flatMap((c: unknown) => {
+    try {
+      return [deserializeCharacter(JSON.stringify(c))];
+    } catch (error) {
+      if (!recoverCharacter) throw error;
+      const recovered = recoverCharacter(c);
+      return recovered ? [deserializeCharacter(JSON.stringify(recovered))] : [];
+    }
+  });
   if (new Set(characters.map((c: Character) => c.id)).size !== characters.length) throw new Error('Stored character IDs are duplicated.');
   return { version: 1, systems, characters, active: typeof value.active === 'string' ? value.active : undefined };
 }

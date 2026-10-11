@@ -58,6 +58,36 @@ test('stale tabs cannot overwrite newer database changes', async () => {
   await reopened.close();
 });
 
+test('prototype recovery removes malformed records from IndexedDB rather than leaving orphaned saves', async () => {
+  const factory = new IDBFactory(), db = new WorkspaceDatabase(factory);
+  await db.load();
+  await db.save(workspace());
+  await db.close();
+  const connection = await new Promise((resolve, reject) => {
+    const opening = factory.open('ttrpg-feature-forge');
+    opening.onsuccess = () => resolve(opening.result);
+    opening.onerror = () => reject(opening.error);
+  });
+  await new Promise((resolve, reject) => {
+    const transaction = connection.transaction('characters', 'readwrite');
+    transaction.objectStore('characters').put({ id: 'hero', name: 'Broken' }, 'hero');
+    transaction.oncomplete = resolve;
+    transaction.onerror = reject;
+  });
+  connection.close();
+  const repaired = new WorkspaceDatabase(factory), removed = [];
+  const loaded = await repaired.load(undefined, (raw) => {
+    removed.push(raw.id);
+  });
+  assert.deepEqual(removed, ['hero']);
+  assert.equal(loaded.characters.length, 0);
+  await repaired.save(loaded);
+  await repaired.close();
+  const reopened = new WorkspaceDatabase(factory);
+  assert.equal((await reopened.load()).characters.length, 0);
+  await reopened.close();
+});
+
 test('failed validation leaves the previous transaction intact and later saves work', async () => {
   const factory = new IDBFactory(), db = new WorkspaceDatabase(factory);
   await db.load();

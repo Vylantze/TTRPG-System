@@ -50,7 +50,7 @@ export function FeatureRolls({ feature, engine, instanceId, castingCapability, r
                     update(rollFeature(engine, character, instance.id, crypto.randomUUID(), undefined, roll.spell ? selectedMode : undefined).character);
                   })}
                 >
-                  {`Roll ${featureRollExpression(roll, character, result)}`}
+                  {`Roll ${featureRollExpression(roll, character, result, mode ? { slotLevel: mode.slotLevel, castingAbility: String(mode.capability.definition.metadata?.[engine.catalogue.system.spellDisplay!.castingAbilityKey]) } : undefined)}`}
                 </button>
                 <small>{roll.spell ? `${roll.label} · spends the selected casting cost when rolled` : roll.capability ? `${roll.label} · spends the ability use when rolled` : `${roll.label} · reference dice only`}</small>
               </div>
