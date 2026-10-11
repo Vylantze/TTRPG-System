@@ -15,11 +15,12 @@ test('text link contexts reject malformed metadata', () => {
   }
 });
 
-test('2014 JSON preserves SRD descriptions and links licensed-only content', () => {
+test('2014 JSON preserves SRD descriptions and plain-text credits for licensed-only content', () => {
   parseSystemFile(file);
+  assert.doesNotMatch(JSON.stringify(file), /https?:\/\/(?:[\w-]+\.)*(?:dndbeyond\.com|roll20\.net)\b/i);
   for (const f of file.features) {
     const externalBackground = /^dnd5e:2014:background(?:-trait)?\.(noble|soldier|criminal|folk-hero)$/.test(f.id);
-    if (f.source?.includes('dndbeyond.com/')) assert.equal(f.description, undefined);
+    if (f.source && !/SRD 5.1|StarterSet_Charactersv2/.test(f.source)) assert.equal(f.description, undefined, f.id);
     else if (externalBackground) assert.match(f.source, /StarterSet_Charactersv2.pdf#page=/);
     else assert.ok(f.description?.trim() || f.textReferences?.length, f.id);
     assert.ok(f.displayName?.trim(), f.id);
@@ -27,12 +28,12 @@ test('2014 JSON preserves SRD descriptions and links licensed-only content', () 
   for (const config of file.configurations) for (const cls of config.classes) {
     if (cls.id === 'dnd5e:2014:artificer') {
       assert.equal(cls.description, undefined);
-      assert.match(cls.source, /dndbeyond.com\/sources\/dnd\/tcoe\/artificer/);
+      assert.match(cls.source, /Tasha’s Cauldron of Everything/);
       continue;
     }
     if (cls.id === 'dnd5e:2014:blood-hunter') {
       assert.equal(cls.description, undefined);
-      assert.match(cls.source, /partner content.*dndbeyond.com\/classes\/357975-blood-hunter/);
+      assert.match(cls.source, /Critical Role.*partner content/);
       continue;
     }
     assert.match(cls.description, /Hit Points at 1st Level/);

@@ -7,6 +7,7 @@ import copy
 import json
 import re
 from pathlib import Path
+from json_sources import without_reference_urls
 
 PATH = Path('src/systems/dnd5e-2014/system.json')
 D = json.loads(PATH.read_text(encoding='utf-8'))
@@ -91,8 +92,8 @@ def stat(owner, key, name, expression):
 # Convert old unconditional SRD subclass grants into descendants of their chosen
 # subclass. Existing Feature IDs are retained so a reload can migrate ownership.
 champion=next(s for c in SOURCE['classes'] if c['className']=='Fighter' for s in c['subclasses'] if s['name']=='Champion')
-style_source=next(f['url'] for f in champion['features'] if f['name']=='Additional Fighting Style')
-make(PREFIX+'fighter.champion.additional-fighting-style','Additional Fighting Style','Player’s Handbook (2014), '+style_source,10,
+style_source=champion['publication']
+make(PREFIX+'fighter.champion.additional-fighting-style','Additional Fighting Style',style_source,10,
      [choose('additional-style',[P+'style.'+s for s in ['archery','defense','dueling','great-weapon-fighting','protection','two-weapon-fighting']])])
 for config in D['configurations']:
     for cls in config['classes']:
@@ -128,13 +129,13 @@ for source_class in SOURCE['classes']:
         sid = PREFIX + key + '.' + slug(sub)
         origin = ['partner-content'] if subclass['partner'] else ['official-content']
         entry = min(f['level'] for f in subclass['features'])
-        root = make(sid, sub, subclass['publication'] + ', ' + subclass['url'], entry, tags=['subclass', key + '-subclass'] + origin)
+        root = make(sid, sub, subclass['publication'], entry, tags=['subclass', key + '-subclass'] + origin)
         root['mechanicalSummary'] = ['Select this subclass to receive its level-gated Features. Each Feature states its automation coverage; source rules remain authoritative.']
         ROOTS[key].append(sid)
         for item in subclass['features']:
             fid = sid + '.' + slug(item['name']) + '.' + str(item['level'])
             # Repeated names at different levels are distinct progression steps.
-            feature = make(fid, item['name'], subclass['publication'] + ', ' + item['url'], item['level'], tags=['subclass-feature'] + origin)
+            feature = make(fid, item['name'], subclass['publication'], item['level'], tags=['subclass-feature'] + origin)
             INDEX[(key, sub, item['name'])] = fid
             root['components'].append(grant(fid, slug(item['name']) + '-' + str(item['level']), item['level']))
 
@@ -478,7 +479,7 @@ for config in D['configurations']:
     tags.update({key + '-subclass': key.replace('-', ' ').title() + ' Subclasses' for key in ROOTS})
 
 D['features'] = list(F.values())
-PATH.write_text(json.dumps(D, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+PATH.write_text(json.dumps(without_reference_urls(D), indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 META['classInfo'][BH]={'hitDie':10,'asi':[4,8,12,16,19],'subclassAt':3,'subclass':'subclass','startingSkills':3,'multiclassSkills':0,'skills':bhskills}
 META['coverage']['classCatalogue']='Thirteen standard classes and partner Blood Hunter, with 124 accessible D&D Beyond subclass progressions. Locked entries are excluded.'
 META['coverage']['additionalSourcesPending']=[]

@@ -7,6 +7,7 @@ import copy
 import json
 import re
 from pathlib import Path
+from json_sources import without_reference_urls
 
 PATH = Path('src/systems/dnd5e-2014/system.json')
 D = json.loads(PATH.read_text(encoding='utf-8'))
@@ -364,7 +365,7 @@ for config in D['configurations']:
     caster['expression']=expr
     system['recoveryEvents']=list(dict.fromkeys(system['recoveryEvents']+['dawn']))
 D['features']=list(F.values())
-PATH.write_text(json.dumps(D,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+PATH.write_text(json.dumps(without_reference_urls(D),indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
 path=Path('src/systems/dnd5e-2014/metadata.json');meta=json.loads(path.read_text(encoding='utf-8'))
 meta['classInfo']['artificer']={'hitDie':8,'asi':[4,8,12,16,19],'subclassAt':3,'subclass':'specialist','startingSkills':2,'multiclassSkills':0,'skills':['arcana','history','investigation','medicine','nature','perception','sleight-of-hand']}
 meta['coverage']['additionalSourcesPending']=['Other non-SRD subclasses: final published sources pending approval/access']
