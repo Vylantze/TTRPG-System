@@ -6,9 +6,10 @@ import copy
 import json
 import re
 from pathlib import Path
+from system_package import read_system, write_system
 
 path = Path('src/systems/dnd5e-2014/system.json')
-data = json.loads(path.read_text(encoding='utf-8'))
+data = read_system(path)
 P = 'dnd5e:2014:'
 F = {f['id']: f for f in data['features']}
 op = lambda key, *args: {'op': key, 'args': list(args)}
@@ -248,5 +249,5 @@ for name in ['Burning Hands', 'Fireball', 'Lightning Bolt', 'Thunderwave', 'Shat
 
 data['features'] = list(F.values())
 data['blocks'] = list(blocks.values())
-path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+write_system(path, data)
 print('Applied audited subclass, resource, and spell-roll corrections.')

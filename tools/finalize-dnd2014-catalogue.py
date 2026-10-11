@@ -1,10 +1,11 @@
 """Attach source references and presentation labels to generated atomic Features."""
 from pathlib import Path
+from system_package import read_system, write_system
 import json,re
 import pdfplumber
 
 path=Path('src/systems/dnd5e-2014/system.json')
-data=json.loads(path.read_text(encoding='utf-8'))
+data=read_system(path)
 prefix='dnd5e:2014:'
 features={feature['id']:feature for feature in data['features']}
 with pdfplumber.open('.reference-cache/srd-5.1.pdf') as pdf:
@@ -31,5 +32,5 @@ for config in data['configurations']:
  for feature in features.values():
   for tag in feature.get('tags',[]):config['system']['tagDisplayNames'].setdefault(tag,tag.replace('-',' ').title())
 data['features']=list(features.values())
-path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+write_system(path, data)
 print('Attached source text and tag display names.')

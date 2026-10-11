@@ -1,10 +1,11 @@
+import { readSystem } from '@/tools/read-system.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { Engine, clearFeatureRolls, SystemRegistry, reopenCharacter, applyEdit, finalizeCharacter, adjustResource, rollDice, rollFeature, applyFeatureRoll, serializeCharacter, deserializeCharacter } from '@/dist/index.js';
 import { exampleCharacter } from '@/examples/dnd2014-character.js';
 
-const file = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
+const file = readSystem(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url));
 test('multiclass sample is valid and shares one HP pool; engine cache invalidates on unload', () => {
   const registry = new SystemRegistry();
   registry.load(file);

@@ -1,4 +1,3 @@
-import { RestControls } from '@/ui/src/RestControls';
 import { FeatureRolls } from '@/ui/src/FeatureRolls';
 import { adjustResource, type Character, type Engine, type EvaluationResult } from '@/src/index';
 import { ResourceSummary } from '@/ui/src/ResourceSummary';
@@ -6,7 +5,6 @@ import { ResourceSummary } from '@/ui/src/ResourceSummary';
 export function HitPoints({ engine, character, result, update, report }: { engine: Engine; character: Character; result: EvaluationResult; update: (character: Character) => void; report: (message: string) => void }) {
   return (
     <div className="sheet-hit-points">
-      <RestControls engine={engine} character={character} result={result} update={update} report={report} />
       {Object.values(result.resources).filter((pool) => pool.key === 'hit-points').map((pool) => (
         <ResourceSummary
           key={pool.id}

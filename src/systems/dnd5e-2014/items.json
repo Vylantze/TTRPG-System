@@ -1,0 +1,938 @@
+[
+  {
+    "id": "dnd5e:2014:item.arrow",
+    "revision": 1,
+    "name": "Arrow",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.backpack",
+    "revision": 1,
+    "name": "Backpack",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.bedroll",
+    "revision": 1,
+    "name": "Bedroll",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.bell",
+    "revision": 1,
+    "name": "Bell",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.blanket",
+    "revision": 1,
+    "name": "Blanket",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.candle",
+    "revision": 1,
+    "name": "Candle",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.carpenters-tools",
+    "revision": 1,
+    "name": "Carpenter’s tools",
+    "category": "Tools",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.chain-mail",
+    "revision": 1,
+    "name": "Chain mail",
+    "category": "Armor",
+    "features": [
+      "armor.chain-mail"
+    ],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf",
+    "slot": "armor"
+  },
+  {
+    "id": "dnd5e:2014:item.common-clothing",
+    "revision": 1,
+    "name": "Common clothing",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.component-pouch",
+    "revision": 1,
+    "name": "Component pouch",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.crowbar",
+    "revision": 1,
+    "name": "Crowbar",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.dark-clothing",
+    "revision": 1,
+    "name": "Dark clothing with hood",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.fine-clothing",
+    "revision": 1,
+    "name": "Fine clothing",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.gold-piece",
+    "revision": 1,
+    "name": "Gold piece",
+    "category": "Currency",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.greataxe",
+    "revision": 1,
+    "name": "Greataxe",
+    "category": "Weapons",
+    "features": [
+      "weapon.greataxe"
+    ],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.greatsword",
+    "revision": 1,
+    "name": "Greatsword",
+    "category": "Weapons",
+    "features": [
+      "weapon.greatsword"
+    ],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.hammer",
+    "revision": 1,
+    "name": "Hammer",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.handaxe",
+    "revision": 1,
+    "name": "Handaxe",
+    "category": "Weapons",
+    "features": [
+      "weapon.handaxe",
+      "property.thrown"
+    ],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.hemp-rope",
+    "revision": 1,
+    "name": "Hemp rope (50 ft)",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.historical-tome",
+    "revision": 1,
+    "name": "Historical tome",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.holy-symbol",
+    "revision": 1,
+    "name": "Holy symbol",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.hooded-lantern",
+    "revision": 1,
+    "name": "Hooded lantern",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.ink",
+    "revision": 1,
+    "name": "Ink (bottle)",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.iron-pot",
+    "revision": 1,
+    "name": "Iron pot",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.javelin",
+    "revision": 1,
+    "name": "Javelin",
+    "category": "Weapons",
+    "features": [
+      "weapon.javelin",
+      "property.thrown"
+    ],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.leather-armor",
+    "revision": 1,
+    "name": "Leather armor",
+    "category": "Armor",
+    "features": [
+      "armor.leather-armor"
+    ],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf",
+    "slot": "armor"
+  },
+  {
+    "id": "dnd5e:2014:item.longbow",
+    "revision": 1,
+    "name": "Longbow",
+    "category": "Weapons",
+    "features": [
+      "weapon.longbow",
+      "property.ammunition"
+    ],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.masons-tools",
+    "revision": 1,
+    "name": "Mason’s tools",
+    "category": "Tools",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.mess-kit",
+    "revision": 1,
+    "name": "Mess kit",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.oil",
+    "revision": 1,
+    "name": "Oil (flask)",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.parchment",
+    "revision": 1,
+    "name": "Parchment (sheet)",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.pedigree-scroll",
+    "revision": 1,
+    "name": "Pedigree scroll",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.pen",
+    "revision": 1,
+    "name": "Pen",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.piton",
+    "revision": 1,
+    "name": "Piton",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.playing-cards",
+    "revision": 1,
+    "name": "Playing cards",
+    "category": "Tools",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.pouch",
+    "revision": 1,
+    "name": "Pouch",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.prayer-book",
+    "revision": 1,
+    "name": "Prayer book",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.rations",
+    "revision": 1,
+    "name": "Rations (1 day)",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.sergeants-insignia",
+    "revision": 1,
+    "name": "Sergeant’s insignia",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.shield",
+    "revision": 1,
+    "name": "Shield",
+    "category": "Armor",
+    "features": [
+      "armor.shield",
+      "property.shield"
+    ],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf",
+    "slot": "shield"
+  },
+  {
+    "id": "dnd5e:2014:item.shortbow",
+    "revision": 1,
+    "name": "Shortbow",
+    "category": "Weapons",
+    "features": [
+      "weapon.shortbow",
+      "property.ammunition"
+    ],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.shortsword",
+    "revision": 1,
+    "name": "Shortsword",
+    "category": "Weapons",
+    "features": [
+      "weapon.shortsword"
+    ],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.shovel",
+    "revision": 1,
+    "name": "Shovel",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.signet-ring",
+    "revision": 1,
+    "name": "Signet ring",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.small-knife",
+    "revision": 1,
+    "name": "Small knife",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.spellbook",
+    "revision": 1,
+    "name": "Spellbook",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.thieves-tools",
+    "revision": 1,
+    "name": "Thieves’ tools",
+    "category": "Tools",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.tinderbox",
+    "revision": 1,
+    "name": "Tinderbox",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.torch",
+    "revision": 1,
+    "name": "Torch",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.trophy-dagger",
+    "revision": 1,
+    "name": "Trophy dagger",
+    "category": "Weapons",
+    "features": [
+      "weapon.trophy-dagger"
+    ],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.warhammer",
+    "revision": 1,
+    "name": "Warhammer",
+    "category": "Weapons",
+    "features": [
+      "weapon.warhammer"
+    ],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "dnd5e:2014:item.waterskin",
+    "revision": 1,
+    "name": "Waterskin",
+    "category": "Adventuring gear",
+    "features": [],
+    "source": "https://media.wizards.com/downloads/dnd/StarterSet_Charactersv2.pdf"
+  },
+  {
+    "id": "replica-materials.alchemy-jug",
+    "revision": 1,
+    "name": "Materials for Alchemy Jug",
+    "category": "Replica materials: Alchemy Jug",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.bag-of-holding",
+    "revision": 1,
+    "name": "Materials for Bag of Holding",
+    "category": "Replica materials: Bag of Holding",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.cap-of-water-breathing",
+    "revision": 1,
+    "name": "Materials for Cap of Water Breathing",
+    "category": "Replica materials: Cap of Water Breathing",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.goggles-of-night",
+    "revision": 1,
+    "name": "Materials for Goggles of Night",
+    "category": "Replica materials: Goggles of Night",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.rope-of-climbing",
+    "revision": 1,
+    "name": "Materials for Rope of Climbing",
+    "category": "Replica materials: Rope of Climbing",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.sending-stones",
+    "revision": 1,
+    "name": "Materials for Sending Stones",
+    "category": "Replica materials: Sending Stones",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.wand-of-magic-detection",
+    "revision": 1,
+    "name": "Materials for Wand of Magic Detection",
+    "category": "Replica materials: Wand of Magic Detection",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.wand-of-secrets",
+    "revision": 1,
+    "name": "Materials for Wand of Secrets",
+    "category": "Replica materials: Wand of Secrets",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.boots-of-elvenkind",
+    "revision": 1,
+    "name": "Materials for Boots of Elvenkind",
+    "category": "Replica materials: Boots of Elvenkind",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.cloak-of-elvenkind",
+    "revision": 1,
+    "name": "Materials for Cloak of Elvenkind",
+    "category": "Replica materials: Cloak of Elvenkind",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.cloak-of-the-manta-ray",
+    "revision": 1,
+    "name": "Materials for Cloak of the Manta Ray",
+    "category": "Replica materials: Cloak of the Manta Ray",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.eyes-of-charming",
+    "revision": 1,
+    "name": "Materials for Eyes of Charming",
+    "category": "Replica materials: Eyes of Charming",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.gloves-of-thievery",
+    "revision": 1,
+    "name": "Materials for Gloves of Thievery",
+    "category": "Replica materials: Gloves of Thievery",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.lantern-of-revealing",
+    "revision": 1,
+    "name": "Materials for Lantern of Revealing",
+    "category": "Replica materials: Lantern of Revealing",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.pipes-of-haunting",
+    "revision": 1,
+    "name": "Materials for Pipes of Haunting",
+    "category": "Replica materials: Pipes of Haunting",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.ring-of-water-walking",
+    "revision": 1,
+    "name": "Materials for Ring of Water Walking",
+    "category": "Replica materials: Ring of Water Walking",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.boots-of-striding-and-springing",
+    "revision": 1,
+    "name": "Materials for Boots of Striding and Springing",
+    "category": "Replica materials: Boots of Striding and Springing",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.boots-of-the-winterlands",
+    "revision": 1,
+    "name": "Materials for Boots of the Winterlands",
+    "category": "Replica materials: Boots of the Winterlands",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.bracers-of-archery",
+    "revision": 1,
+    "name": "Materials for Bracers of Archery",
+    "category": "Replica materials: Bracers of Archery",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.brooch-of-shielding",
+    "revision": 1,
+    "name": "Materials for Brooch of Shielding",
+    "category": "Replica materials: Brooch of Shielding",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.cloak-of-protection",
+    "revision": 1,
+    "name": "Materials for Cloak of Protection",
+    "category": "Replica materials: Cloak of Protection",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.eyes-of-the-eagle",
+    "revision": 1,
+    "name": "Materials for Eyes of the Eagle",
+    "category": "Replica materials: Eyes of the Eagle",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.gauntlets-of-ogre-power",
+    "revision": 1,
+    "name": "Materials for Gauntlets of Ogre Power",
+    "category": "Replica materials: Gauntlets of Ogre Power",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.gloves-of-missile-snaring",
+    "revision": 1,
+    "name": "Materials for Gloves of Missile Snaring",
+    "category": "Replica materials: Gloves of Missile Snaring",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.gloves-of-swimming-and-climbing",
+    "revision": 1,
+    "name": "Materials for Gloves of Swimming and Climbing",
+    "category": "Replica materials: Gloves of Swimming and Climbing",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.hat-of-disguise",
+    "revision": 1,
+    "name": "Materials for Hat of Disguise",
+    "category": "Replica materials: Hat of Disguise",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.headband-of-intellect",
+    "revision": 1,
+    "name": "Materials for Headband of Intellect",
+    "category": "Replica materials: Headband of Intellect",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.helm-of-telepathy",
+    "revision": 1,
+    "name": "Materials for Helm of Telepathy",
+    "category": "Replica materials: Helm of Telepathy",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.medallion-of-thoughts",
+    "revision": 1,
+    "name": "Materials for Medallion of Thoughts",
+    "category": "Replica materials: Medallion of Thoughts",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.necklace-of-adaptation",
+    "revision": 1,
+    "name": "Materials for Necklace of Adaptation",
+    "category": "Replica materials: Necklace of Adaptation",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.periapt-of-wound-closure",
+    "revision": 1,
+    "name": "Materials for Periapt of Wound Closure",
+    "category": "Replica materials: Periapt of Wound Closure",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.pipes-of-the-sewers",
+    "revision": 1,
+    "name": "Materials for Pipes of the Sewers",
+    "category": "Replica materials: Pipes of the Sewers",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.quiver-of-ehlonna",
+    "revision": 1,
+    "name": "Materials for Quiver of Ehlonna",
+    "category": "Replica materials: Quiver of Ehlonna",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.ring-of-jumping",
+    "revision": 1,
+    "name": "Materials for Ring of Jumping",
+    "category": "Replica materials: Ring of Jumping",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.ring-of-mind-shielding",
+    "revision": 1,
+    "name": "Materials for Ring of Mind Shielding",
+    "category": "Replica materials: Ring of Mind Shielding",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.slippers-of-spider-climbing",
+    "revision": 1,
+    "name": "Materials for Slippers of Spider Climbing",
+    "category": "Replica materials: Slippers of Spider Climbing",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.winged-boots",
+    "revision": 1,
+    "name": "Materials for Winged Boots",
+    "category": "Replica materials: Winged Boots",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.amulet-of-health",
+    "revision": 1,
+    "name": "Materials for Amulet of Health",
+    "category": "Replica materials: Amulet of Health",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.belt-of-hill-giant-strength",
+    "revision": 1,
+    "name": "Materials for Belt of Hill Giant Strength",
+    "category": "Replica materials: Belt of Hill Giant Strength",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.boots-of-levitation",
+    "revision": 1,
+    "name": "Materials for Boots of Levitation",
+    "category": "Replica materials: Boots of Levitation",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.boots-of-speed",
+    "revision": 1,
+    "name": "Materials for Boots of Speed",
+    "category": "Replica materials: Boots of Speed",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.bracers-of-defense",
+    "revision": 1,
+    "name": "Materials for Bracers of Defense",
+    "category": "Replica materials: Bracers of Defense",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.cloak-of-the-bat",
+    "revision": 1,
+    "name": "Materials for Cloak of the Bat",
+    "category": "Replica materials: Cloak of the Bat",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.dimensional-shackles",
+    "revision": 1,
+    "name": "Materials for Dimensional Shackles",
+    "category": "Replica materials: Dimensional Shackles",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.gem-of-seeing",
+    "revision": 1,
+    "name": "Materials for Gem of Seeing",
+    "category": "Replica materials: Gem of Seeing",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.horn-of-blasting",
+    "revision": 1,
+    "name": "Materials for Horn of Blasting",
+    "category": "Replica materials: Horn of Blasting",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.ring-of-free-action",
+    "revision": 1,
+    "name": "Materials for Ring of Free Action",
+    "category": "Replica materials: Ring of Free Action",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.ring-of-protection",
+    "revision": 1,
+    "name": "Materials for Ring of Protection",
+    "category": "Replica materials: Ring of Protection",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.ring-of-the-ram",
+    "revision": 1,
+    "name": "Materials for Ring of the Ram",
+    "category": "Replica materials: Ring of the Ram",
+    "features": [],
+    "source": "Tasha’s Cauldron of Everything (2020)"
+  },
+  {
+    "id": "replica-materials.common",
+    "revision": 1,
+    "name": "Materials for a common magic item (not a potion or scroll)",
+    "category": "Common item materials",
+    "features": []
+  },
+  {
+    "id": "arcane-armor.chest",
+    "revision": 1,
+    "name": "Arcane Armor: Chest",
+    "category": "Armor",
+    "slot": "arcane-armor.chest",
+    "features": [
+      "arcane-armor.component"
+    ]
+  },
+  {
+    "id": "arcane-armor.boots",
+    "revision": 1,
+    "name": "Arcane Armor: Boots",
+    "category": "Boots",
+    "slot": "arcane-armor.boots",
+    "features": [
+      "arcane-armor.component"
+    ]
+  },
+  {
+    "id": "arcane-armor.helmet",
+    "revision": 1,
+    "name": "Arcane Armor: Helmet",
+    "category": "Helmet",
+    "slot": "arcane-armor.helmet",
+    "features": [
+      "arcane-armor.component"
+    ]
+  },
+  {
+    "id": "arcane-armor.weapon",
+    "revision": 1,
+    "name": "Arcane Armor: Weapon",
+    "category": "Weapons",
+    "slot": "arcane-armor.weapon",
+    "features": [
+      "arcane-armor.component"
+    ]
+  },
+  {
+    "id": "artificer-material.boots",
+    "revision": 1,
+    "name": "Boots",
+    "category": "Boots",
+    "features": []
+  },
+  {
+    "id": "artificer-material.helmet",
+    "revision": 1,
+    "name": "Helmet",
+    "category": "Helmet",
+    "features": []
+  },
+  {
+    "id": "artificer-material.wand",
+    "revision": 1,
+    "name": "Wand",
+    "category": "Focus",
+    "features": []
+  },
+  {
+    "id": "artificer-material.rod",
+    "revision": 1,
+    "name": "Rod",
+    "category": "Focus",
+    "features": []
+  },
+  {
+    "id": "artificer-material.robes",
+    "revision": 1,
+    "name": "Robes",
+    "category": "Robes",
+    "features": []
+  },
+  {
+    "id": "artificer-material.ring",
+    "revision": 1,
+    "name": "Ring",
+    "category": "Ring",
+    "features": []
+  },
+  {
+    "id": "artificer-material.gem-100-gp",
+    "revision": 1,
+    "name": "Gem (100 gp)",
+    "category": "Gem",
+    "features": []
+  }
+]

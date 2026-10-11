@@ -7,7 +7,9 @@ import type { Character, Instance } from '@/src/model.js';
  */
 export function migrateCharacterStructure(character: Character, before: Engine, after: Engine): Character {
   const updated = clone(character);
-  updated.contentRevisions = Object.fromEntries([...after.catalogue.features, ...after.catalogue.classes].map((f) => [f.id, f.revision]));
+  const revisions = Object.fromEntries([...after.catalogue.features, ...after.catalogue.classes].map((f) => [f.id, f.revision]));
+  // File grouping can reorder definitions without changing any revision pins.
+  if (Object.keys(revisions).length !== Object.keys(updated.contentRevisions).length || Object.entries(revisions).some(([id, revision]) => updated.contentRevisions[id] !== revision)) updated.contentRevisions = revisions;
   const oldEvaluation = before.evaluate(character);
   const oldInstances = oldEvaluation.instances;
   const convertedSlots = new Set<string>();

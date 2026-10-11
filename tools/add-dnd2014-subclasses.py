@@ -7,10 +7,10 @@ import copy
 import json
 import re
 from pathlib import Path
-from json_sources import without_reference_urls
+from system_package import read_system, write_system
 
 PATH = Path('src/systems/dnd5e-2014/system.json')
-D = json.loads(PATH.read_text(encoding='utf-8'))
+D = read_system(PATH)
 SOURCE = json.loads(Path('tools/data/dnd2014-subclasses.json').read_text(encoding='utf-8'))
 P = 'dnd5e:2014:'
 PREFIX = P + 'subclass.'
@@ -479,7 +479,7 @@ for config in D['configurations']:
     tags.update({key + '-subclass': key.replace('-', ' ').title() + ' Subclasses' for key in ROOTS})
 
 D['features'] = list(F.values())
-PATH.write_text(json.dumps(without_reference_urls(D), indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+write_system(PATH, D)
 META['classInfo'][BH]={'hitDie':10,'asi':[4,8,12,16,19],'subclassAt':3,'subclass':'subclass','startingSkills':3,'multiclassSkills':0,'skills':bhskills}
 META['coverage']['classCatalogue']='Thirteen standard classes and partner Blood Hunter, with 124 accessible D&D Beyond subclass progressions. Locked entries are excluded.'
 META['coverage']['additionalSourcesPending']=[]

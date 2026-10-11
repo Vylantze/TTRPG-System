@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-export function SystemLoader({ loading, bundledLoaded, loadBundled, loadFile }: { loading: boolean; bundledLoaded: boolean; loadBundled: () => void; loadFile: (file: File) => void }) {
+export function SystemLoader({ loading, bundledLoaded, loadBundled, loadFile }: { loading: boolean; bundledLoaded: boolean; loadBundled: () => void; loadFile: (files: File[]) => void }) {
   const [source, setSource] = useState('dnd2014');
   const input = useRef<HTMLInputElement>(null);
   return (
@@ -15,17 +15,18 @@ export function SystemLoader({ loading, bundledLoaded, loadBundled, loadFile }: 
           <option value="json">Other System from JSON…</option>
         </select>
       </label>
-      <button disabled={loading || (source === 'dnd2014' && bundledLoaded)} onClick={() => source === 'json' ? input.current?.click() : loadBundled()}>{loading ? 'Loading…' : source === 'json' ? 'Choose JSON file' : 'Load System'}</button>
+      <button disabled={loading || (source === 'dnd2014' && bundledLoaded)} onClick={() => source === 'json' ? input.current?.click() : loadBundled()}>{loading ? 'Loading…' : source === 'json' ? 'Choose JSON files' : 'Load System'}</button>
       <input
         ref={input}
         hidden
         type="file"
+        multiple
         accept=".json,application/json"
         aria-label="Load System JSON"
         disabled={loading}
         onChange={(event) => {
-          const file = event.target.files?.[0];
-          if (file) loadFile(file);
+          const files = Array.from(event.target.files ?? []);
+          if (files.length) loadFile(files);
           event.target.value = '';
         }}
       />

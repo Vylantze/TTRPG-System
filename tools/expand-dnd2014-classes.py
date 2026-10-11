@@ -4,9 +4,10 @@ Run extract-srd-catalogue.py first. Conditional combat effects retain source rul
 base progression, proficiencies, HP, resources, selections and spell slots use engine blocks.
 """
 from pathlib import Path
+from system_package import read_system, write_system
 import json,re,copy
 P='dnd5e:2014:'
-path=Path('src/systems/dnd5e-2014/system.json');data=json.loads(path.read_text(encoding='utf-8'))
+path=Path('src/systems/dnd5e-2014/system.json');data=read_system(path)
 sections=json.loads(Path('.reference-cache/srd-class-spell-sections.json').read_text(encoding='utf-8'))
 features={f['id']:f for f in data['features']}
 slug=lambda s:re.sub('[^a-z0-9]+','-',s.lower()).strip('-')
@@ -141,5 +142,5 @@ meta['coverage']['additionalSourcesPending']=['Artificer (final published 2014-c
 meta['coverage']['classCatalogue']='All 12 SRD classes; conditional combat, transformations, companions, and narrative effects remain source-text adjudicated.'
 for cls,sp in specs.items():meta['classInfo'][cls]={'hitDie':sp['die'],'asi':[4,8,12,16,19],'subclassAt':sp['sub'][1],'subclass':'subclass','startingSkills':sp['count'],'multiclassSkills':1 if cls in ['bard','ranger'] else 0,'skills':[x.split('skill.')[-1] for x in (allskills if sp['skills']=='all' else sp['skills'].split())]}
 meta_path.write_text(json.dumps(meta,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
-data['features']=list(features.values());path.write_text(json.dumps(data,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+data['features']=list(features.values());write_system(path, data)
 print('Added eight SRD class progressions and their subclass source Features.')

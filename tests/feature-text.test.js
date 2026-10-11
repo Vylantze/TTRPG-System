@@ -1,11 +1,11 @@
+import { readSystem } from '@/tools/read-system.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { FeatureTextIndex } from '@/dist/index.js';
-import { readFileSync } from 'node:fs';
 const definition = (id, name, extra = {}) => ({ id, name, revision: 1, components: [], ...extra });
 
 test('ambiguous spell names require spell context without changing source wording', () => {
-  const file = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
+  const file = readSystem(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url));
   const index = new FeatureTextIndex(file.features);
   assert.deepEqual(index.resolve('You start with a shield and light crossbow. Bright light, darkness, fear, and sleep.'), []);
   const text = 'Cast SHIELD, the light spell, and casting\n the darkness. Fireball';

@@ -1,7 +1,7 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readSystem, writeSystem } from '@/tools/read-system.mjs';
 
 const path = new URL('../src/systems/dnd5e-2014/system.json', import.meta.url);
-const file = JSON.parse(readFileSync(path, 'utf8'));
+const file = readSystem(path);
 const parents = file.features.filter((feature) => !feature.roll);
 const standalone = file.features.filter((feature) => feature.roll && !parents.some((parent) => feature.id.startsWith(`${parent.id}.roll.`)));
 const rolls = [];
@@ -39,5 +39,5 @@ for (const feature of parents) {
 }
 file.features = [...parents, ...rolls, ...standalone];
 for (const config of file.configurations) config.system.tagDisplayNames['roll-feature'] = 'Roll Feature';
-writeFileSync(path, JSON.stringify(file, null, 2) + '\n');
+writeSystem(path, file);
 console.log(`Authored ${rolls.length} separate Roll Features.`);

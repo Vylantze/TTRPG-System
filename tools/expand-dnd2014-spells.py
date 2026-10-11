@@ -1,7 +1,8 @@
 """Add the SRD spell lists and class spell selections from approved extracted source text."""
 from pathlib import Path
+from system_package import read_system, write_system
 import json,re,copy
-P='dnd5e:2014:';path=Path('src/systems/dnd5e-2014/system.json');d=json.loads(path.read_text(encoding='utf-8'));fs={f['id']:f for f in d['features']};sections=json.loads(Path('.reference-cache/srd-class-spell-sections.json').read_text(encoding='utf-8'))
+P='dnd5e:2014:';path=Path('src/systems/dnd5e-2014/system.json');d=read_system(path);fs={f['id']:f for f in d['features']};sections=json.loads(Path('.reference-cache/srd-class-spell-sections.json').read_text(encoding='utf-8'))
 slug=lambda s:re.sub('[^a-z0-9]+','-',s.lower()).strip('-');op=lambda name,*args:{'op':name,'args':list(args)};stat=lambda s:{'stat':s};level=lambda c:{'context':'level.'+P+c}
 grant=lambda f,ident=None,**kw:{'kind':'grantFeature','id':ident or f.split(':')[-1],'feature':f if f.startswith(P) else P+f,**kw}
 def choose(ident,ids,minimum,maximum=None,maxlevel=None):return {'kind':'chooseFeatures','eligibility':'current','id':ident,'minimum':minimum,'maximum':minimum if maximum is None else maximum,'candidates':{'ids':ids,**({'maximumLevel':maxlevel} if maxlevel is not None else {})},'retraining':{'allowed':True}}
@@ -105,5 +106,5 @@ for c in d['configurations']:
  c['system']['validation']=[r for r in c['system'].get('validation',[]) if r['id']!='cleric-level-one-only']
 # Retain an audit of source spell lists for regression tests and future content updates.
 Path('src/systems/dnd5e-2014/spell-lists.json').write_text(json.dumps(lists,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
-d['features']=list(fs.values());path.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+d['features']=list(fs.values());write_system(path, d)
 print('Expanded all SRD spell lists and casting wrappers.')

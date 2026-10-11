@@ -7,10 +7,10 @@ import copy
 import json
 import re
 from pathlib import Path
-from json_sources import without_reference_urls
+from system_package import read_system, write_system
 
 PATH = Path('src/systems/dnd5e-2014/system.json')
-D = json.loads(PATH.read_text(encoding='utf-8'))
+D = read_system(PATH)
 P = 'dnd5e:2014:'
 URL = 'https://www.dndbeyond.com/sources/dnd/tcoe/artificer'
 F = {f['id']: f for f in D['features'] if not f['id'].startswith(P+'artificer.')}
@@ -365,8 +365,8 @@ for config in D['configurations']:
     caster['expression']=expr
     system['recoveryEvents']=list(dict.fromkeys(system['recoveryEvents']+['dawn']))
 D['features']=list(F.values())
-PATH.write_text(json.dumps(without_reference_urls(D),indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
-path=Path('src/systems/dnd5e-2014/metadata.json');meta=json.loads(path.read_text(encoding='utf-8'))
+write_system(PATH, D)
+path=Path('src/systems/dnd5e-2014/metadata.json');meta=read_system(path)
 meta['classInfo']['artificer']={'hitDie':8,'asi':[4,8,12,16,19],'subclassAt':3,'subclass':'specialist','startingSkills':2,'multiclassSkills':0,'skills':['arcana','history','investigation','medicine','nature','perception','sleight-of-hand']}
 meta['coverage']['additionalSourcesPending']=['Other non-SRD subclasses: final published sources pending approval/access']
 meta['coverage']['classCatalogue']='All 12 SRD classes plus Tasha’s Artificer and four specialists. See the System document for automated and table-managed effects.'

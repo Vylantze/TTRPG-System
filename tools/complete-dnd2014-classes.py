@@ -1,7 +1,8 @@
 """Complete SRD nested class selections and level grants without replacing saved acquisition IDs."""
 from pathlib import Path
+from system_package import read_system, write_system
 import json,re,copy
-P='dnd5e:2014:';path=Path('src/systems/dnd5e-2014/system.json');d=json.loads(path.read_text(encoding='utf-8'));fs={f['id']:f for f in d['features']};ss=json.loads(Path('.reference-cache/srd-class-spell-sections.json').read_text(encoding='utf-8'))
+P='dnd5e:2014:';path=Path('src/systems/dnd5e-2014/system.json');d=read_system(path);fs={f['id']:f for f in d['features']};ss=json.loads(Path('.reference-cache/srd-class-spell-sections.json').read_text(encoding='utf-8'))
 slug=lambda s:re.sub('[^a-z0-9]+','-',s.lower()).strip('-');op=lambda name,*args:{'op':name,'args':list(args)};lv=lambda c:{'context':'level.'+P+c};st=lambda s:{'stat':s}
 def section(name,a,b):return next(x for x in ss if a<=x['page']<=b and x['heading']==name)
 def make(cls,name,a,b,ident=None):
@@ -166,5 +167,5 @@ for feature in list(fs.values()):
   mode=copy.deepcopy(original);mode.update(id='pact-'+str(spelllevel),name=fs[original['metadata']['spell']]['name']+f' (pact slot {spelllevel})',costs=[{'key':'pact-slot','amount':1}],condition=op('and',op('gte',st('armorProficient'),1),{'context':'spellComponentsAvailable'},op('eq',st('pactSlotLevel'),spelllevel),op('gte',st('pactSlotCount'),1)))
   mode['metadata'].update(spellSlotLevel=spelllevel,castingMode='pact-'+str(spelllevel));feature['components'].append(mode)
 # Source-and-mechanics scope is explicit in the content manifest.
-d['features']=list(fs.values());path.write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+d['features']=list(fs.values());write_system(path, d)
 print('Completed nested selections and Cleric progression.')

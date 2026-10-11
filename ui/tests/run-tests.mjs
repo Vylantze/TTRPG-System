@@ -1,3 +1,4 @@
+import { readSystem } from '@/tools/read-system.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -24,7 +25,7 @@ const { featureHref } = await server.ssrLoadModule('/src/feature-description.ts'
 const { safeReturn } = await server.ssrLoadModule('/src/feature-origin.ts');
 const { orderedSheetTabs, moveSheetTab } = await server.ssrLoadModule('/src/sheet-tabs.ts');
 const { advancementLabels } = await server.ssrLoadModule('/src/feature-requirements.ts');
-const file = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
+const file = readSystem(new URL('../../src/systems/dnd5e-2014/system.json', import.meta.url));
 function storage() {
   const values = new Map();
   return { getItem: (key) => values.get(key) ?? null, setItem: (key, value) => values.set(key, value) };
@@ -79,7 +80,7 @@ test('System tabs partition skills and notes, persist ability preferences, and l
   assert.match(notes, /A long custom note/);
   assert.match(notes, /Add note/);
   const resources = render(workspace, `#characters/${character.id}?view=resources`);
-  assert.ok(resources.indexOf('sheet-hit-points') < resources.indexOf('>Long rest</button>'));
+  assert.ok(resources.indexOf('>Long rest</button>') < resources.indexOf('sheet-hit-points'));
   const store = storage();
   model.writeWorkspace(store, workspace);
   assert.deepEqual(model.readWorkspace(store).characters[0].displayPreferences, character.displayPreferences);

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-export function ReloadSystemButton({ name, loading, bundled, reload }: { name: string; loading: boolean; bundled: boolean; reload: (file?: File) => void }) {
+export function ReloadSystemButton({ name, loading, bundled, reload }: { name: string; loading: boolean; bundled: boolean; reload: (files?: File[]) => void }) {
   const input = useRef<HTMLInputElement>(null);
   return (
     <>
@@ -15,12 +15,13 @@ export function ReloadSystemButton({ name, loading, bundled, reload }: { name: s
         ref={input}
         hidden
         type="file"
+        multiple
         accept=".json,application/json"
         aria-label={`Replacement JSON for ${name}`}
         disabled={loading}
         onChange={(event) => {
-          const file = event.target.files?.[0];
-          if (file) reload(file);
+          const files = Array.from(event.target.files ?? []);
+          if (files.length) reload(files);
           event.target.value = '';
         }}
       />

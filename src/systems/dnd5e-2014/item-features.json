@@ -1,0 +1,1084 @@
+[
+  {
+    "id": "damage.slashing",
+    "name": "Slashing damage",
+    "properties": {
+      "Damage type": "Slashing"
+    }
+  },
+  {
+    "id": "damage.piercing",
+    "name": "Piercing damage",
+    "properties": {
+      "Damage type": "Piercing"
+    }
+  },
+  {
+    "id": "damage.bludgeoning",
+    "name": "Bludgeoning damage",
+    "properties": {
+      "Damage type": "Bludgeoning"
+    }
+  },
+  {
+    "id": "armor.chain-mail",
+    "name": "Chain mail",
+    "modifiers": [
+      {
+        "id": "armor",
+        "kind": "modifyStat",
+        "stat": "armorIndex",
+        "operation": "override",
+        "value": 10
+      }
+    ]
+  },
+  {
+    "id": "weapon.greataxe",
+    "name": "Greataxe",
+    "features": [
+      "damage.slashing"
+    ],
+    "properties": {
+      "Damage dice": "1d12"
+    }
+  },
+  {
+    "id": "weapon.greatsword",
+    "name": "Greatsword",
+    "features": [
+      "damage.slashing"
+    ],
+    "properties": {
+      "Damage dice": "2d6"
+    }
+  },
+  {
+    "id": "weapon.handaxe",
+    "name": "Handaxe",
+    "features": [
+      "damage.slashing"
+    ],
+    "properties": {
+      "Damage dice": "1d6"
+    }
+  },
+  {
+    "id": "weapon.javelin",
+    "name": "Javelin",
+    "features": [
+      "damage.piercing"
+    ],
+    "properties": {
+      "Damage dice": "1d6"
+    }
+  },
+  {
+    "id": "armor.leather-armor",
+    "name": "Leather armor",
+    "modifiers": [
+      {
+        "id": "armor",
+        "kind": "modifyStat",
+        "stat": "armorIndex",
+        "operation": "override",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "weapon.longbow",
+    "name": "Longbow",
+    "features": [
+      "damage.piercing"
+    ],
+    "properties": {
+      "Damage dice": "1d8"
+    }
+  },
+  {
+    "id": "armor.shield",
+    "name": "Shield",
+    "modifiers": [
+      {
+        "id": "armor",
+        "kind": "modifyStat",
+        "stat": "shield",
+        "operation": "override",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "weapon.shortbow",
+    "name": "Shortbow",
+    "features": [
+      "damage.piercing"
+    ],
+    "properties": {
+      "Damage dice": "1d6"
+    }
+  },
+  {
+    "id": "weapon.shortsword",
+    "name": "Shortsword",
+    "features": [
+      "damage.piercing"
+    ],
+    "properties": {
+      "Damage dice": "1d6"
+    }
+  },
+  {
+    "id": "weapon.trophy-dagger",
+    "name": "Trophy dagger",
+    "features": [
+      "damage.piercing"
+    ],
+    "properties": {
+      "Damage dice": "1d4"
+    }
+  },
+  {
+    "id": "weapon.warhammer",
+    "name": "Warhammer",
+    "features": [
+      "damage.bludgeoning"
+    ],
+    "properties": {
+      "Damage dice": "1d8"
+    }
+  },
+  {
+    "id": "infusion.arcane-propulsion-armor",
+    "name": "Arcane Propulsion Armor",
+    "properties": {
+      "Gauntlets": "1d8 force, thrown 20/60, returning"
+    },
+    "modifiers": [
+      {
+        "id": "speed",
+        "kind": "modifyStat",
+        "stat": "walkingSpeed",
+        "operation": "add",
+        "value": 5
+      }
+    ]
+  },
+  {
+    "id": "infusion.armor-of-magical-strength",
+    "name": "Armor of Magical Strength",
+    "properties": {},
+    "modifiers": []
+  },
+  {
+    "id": "infusion.boots-of-the-winding-path",
+    "name": "Boots of the Winding Path",
+    "properties": {
+      "Teleport": "15 feet to a space occupied this turn; bonus action"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.enhanced-arcane-focus",
+    "name": "Enhanced Arcane Focus",
+    "properties": {
+      "Cover": "Ignore half cover"
+    },
+    "modifiers": [
+      {
+        "id": "spell-attack-artificer",
+        "kind": "modifyStat",
+        "stat": "artificerSpellAttack",
+        "operation": "add",
+        "value": {
+          "if": {
+            "op": "gte",
+            "args": [
+              {
+                "context": "level.dnd5e:2014:artificer"
+              },
+              10
+            ]
+          },
+          "then": 2,
+          "else": 1
+        }
+      },
+      {
+        "id": "spell-attack-bard",
+        "kind": "modifyStat",
+        "stat": "bardSpellAttack",
+        "operation": "add",
+        "value": {
+          "if": {
+            "op": "gte",
+            "args": [
+              {
+                "context": "level.dnd5e:2014:artificer"
+              },
+              10
+            ]
+          },
+          "then": 2,
+          "else": 1
+        }
+      },
+      {
+        "id": "spell-attack-cleric",
+        "kind": "modifyStat",
+        "stat": "clericSpellAttack",
+        "operation": "add",
+        "value": {
+          "if": {
+            "op": "gte",
+            "args": [
+              {
+                "context": "level.dnd5e:2014:artificer"
+              },
+              10
+            ]
+          },
+          "then": 2,
+          "else": 1
+        }
+      },
+      {
+        "id": "spell-attack-druid",
+        "kind": "modifyStat",
+        "stat": "druidSpellAttack",
+        "operation": "add",
+        "value": {
+          "if": {
+            "op": "gte",
+            "args": [
+              {
+                "context": "level.dnd5e:2014:artificer"
+              },
+              10
+            ]
+          },
+          "then": 2,
+          "else": 1
+        }
+      },
+      {
+        "id": "spell-attack-paladin",
+        "kind": "modifyStat",
+        "stat": "paladinSpellAttack",
+        "operation": "add",
+        "value": {
+          "if": {
+            "op": "gte",
+            "args": [
+              {
+                "context": "level.dnd5e:2014:artificer"
+              },
+              10
+            ]
+          },
+          "then": 2,
+          "else": 1
+        }
+      },
+      {
+        "id": "spell-attack-ranger",
+        "kind": "modifyStat",
+        "stat": "rangerSpellAttack",
+        "operation": "add",
+        "value": {
+          "if": {
+            "op": "gte",
+            "args": [
+              {
+                "context": "level.dnd5e:2014:artificer"
+              },
+              10
+            ]
+          },
+          "then": 2,
+          "else": 1
+        }
+      },
+      {
+        "id": "spell-attack-sorcerer",
+        "kind": "modifyStat",
+        "stat": "sorcererSpellAttack",
+        "operation": "add",
+        "value": {
+          "if": {
+            "op": "gte",
+            "args": [
+              {
+                "context": "level.dnd5e:2014:artificer"
+              },
+              10
+            ]
+          },
+          "then": 2,
+          "else": 1
+        }
+      },
+      {
+        "id": "spell-attack-warlock",
+        "kind": "modifyStat",
+        "stat": "warlockSpellAttack",
+        "operation": "add",
+        "value": {
+          "if": {
+            "op": "gte",
+            "args": [
+              {
+                "context": "level.dnd5e:2014:artificer"
+              },
+              10
+            ]
+          },
+          "then": 2,
+          "else": 1
+        }
+      },
+      {
+        "id": "spell-attack-wizard",
+        "kind": "modifyStat",
+        "stat": "wizardSpellAttack",
+        "operation": "add",
+        "value": {
+          "if": {
+            "op": "gte",
+            "args": [
+              {
+                "context": "level.dnd5e:2014:artificer"
+              },
+              10
+            ]
+          },
+          "then": 2,
+          "else": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "infusion.enhanced-defense",
+    "name": "Enhanced Defense",
+    "properties": {},
+    "modifiers": [
+      {
+        "id": "ac",
+        "kind": "modifyStat",
+        "stat": "armorClass",
+        "operation": "add",
+        "value": {
+          "if": {
+            "op": "gte",
+            "args": [
+              {
+                "context": "level.dnd5e:2014:artificer"
+              },
+              10
+            ]
+          },
+          "then": 2,
+          "else": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "infusion.enhanced-weapon",
+    "name": "Enhanced Weapon",
+    "properties": {
+      "Attack/damage bonus": "+1; +2 at Artificer 10"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.helm-of-awareness",
+    "name": "Helm of Awareness",
+    "properties": {
+      "Initiative": "Advantage",
+      "Surprise": "Immune while not incapacitated"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.homunculus-servant",
+    "name": "Homunculus Servant",
+    "properties": {
+      "Material": "Gem or crystal worth at least 100 gp"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.mind-sharpener",
+    "name": "Mind Sharpener",
+    "properties": {},
+    "modifiers": []
+  },
+  {
+    "id": "infusion.radiant-weapon",
+    "name": "Radiant Weapon",
+    "properties": {
+      "Attack/damage bonus": 1,
+      "Light": "30 feet bright / 30 feet dim"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.repeating-shot",
+    "name": "Repeating Shot",
+    "properties": {
+      "Attack/damage bonus": 1,
+      "Ammunition": "Generated; ignores loading"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.repulsion-shield",
+    "name": "Repulsion Shield",
+    "properties": {},
+    "modifiers": [
+      {
+        "id": "ac",
+        "kind": "modifyStat",
+        "stat": "armorClass",
+        "operation": "add",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "infusion.resistant-armor",
+    "name": "Resistant Armor",
+    "properties": {},
+    "modifiers": []
+  },
+  {
+    "id": "infusion.returning-weapon",
+    "name": "Returning Weapon",
+    "properties": {
+      "Attack/damage bonus": 1,
+      "Return": "Immediately after ranged attack"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.spell-refueling-ring",
+    "name": "Spell-Refueling Ring",
+    "properties": {},
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-alchemy-jug",
+    "name": "Replicate Magic Item: Alchemy Jug",
+    "properties": {
+      "Replicated item": "Alchemy Jug"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-bag-of-holding",
+    "name": "Replicate Magic Item: Bag of Holding",
+    "properties": {
+      "Replicated item": "Bag of Holding"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-cap-of-water-breathing",
+    "name": "Replicate Magic Item: Cap of Water Breathing",
+    "properties": {
+      "Replicated item": "Cap of Water Breathing"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-goggles-of-night",
+    "name": "Replicate Magic Item: Goggles of Night",
+    "properties": {
+      "Replicated item": "Goggles of Night"
+    },
+    "modifiers": [
+      {
+        "id": "darkvision",
+        "kind": "modifyStat",
+        "stat": "darkvision",
+        "operation": "add",
+        "value": 60
+      }
+    ]
+  },
+  {
+    "id": "infusion.replicate-magic-item-rope-of-climbing",
+    "name": "Replicate Magic Item: Rope of Climbing",
+    "properties": {
+      "Replicated item": "Rope of Climbing"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-sending-stones",
+    "name": "Replicate Magic Item: Sending Stones",
+    "properties": {
+      "Replicated item": "Sending Stones"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-wand-of-magic-detection",
+    "name": "Replicate Magic Item: Wand of Magic Detection",
+    "properties": {
+      "Replicated item": "Wand of Magic Detection"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-wand-of-secrets",
+    "name": "Replicate Magic Item: Wand of Secrets",
+    "properties": {
+      "Replicated item": "Wand of Secrets"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-boots-of-elvenkind",
+    "name": "Replicate Magic Item: Boots of Elvenkind",
+    "properties": {
+      "Replicated item": "Boots of Elvenkind"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-cloak-of-elvenkind",
+    "name": "Replicate Magic Item: Cloak of Elvenkind",
+    "properties": {
+      "Replicated item": "Cloak of Elvenkind"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-cloak-of-the-manta-ray",
+    "name": "Replicate Magic Item: Cloak of the Manta Ray",
+    "properties": {
+      "Replicated item": "Cloak of the Manta Ray"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-eyes-of-charming",
+    "name": "Replicate Magic Item: Eyes of Charming",
+    "properties": {
+      "Replicated item": "Eyes of Charming"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-gloves-of-thievery",
+    "name": "Replicate Magic Item: Gloves of Thievery",
+    "properties": {
+      "Replicated item": "Gloves of Thievery"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-lantern-of-revealing",
+    "name": "Replicate Magic Item: Lantern of Revealing",
+    "properties": {
+      "Replicated item": "Lantern of Revealing"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-pipes-of-haunting",
+    "name": "Replicate Magic Item: Pipes of Haunting",
+    "properties": {
+      "Replicated item": "Pipes of Haunting"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-ring-of-water-walking",
+    "name": "Replicate Magic Item: Ring of Water Walking",
+    "properties": {
+      "Replicated item": "Ring of Water Walking"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-boots-of-striding-and-springing",
+    "name": "Replicate Magic Item: Boots of Striding and Springing",
+    "properties": {
+      "Replicated item": "Boots of Striding and Springing"
+    },
+    "modifiers": [
+      {
+        "id": "walking-speed",
+        "kind": "modifyStat",
+        "stat": "walkingSpeed",
+        "operation": "floor",
+        "value": 30
+      },
+      {
+        "id": "heavy-armor-speed",
+        "kind": "modifyStat",
+        "stat": "armorStrengthExemption",
+        "operation": "floor",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "infusion.replicate-magic-item-boots-of-the-winterlands",
+    "name": "Replicate Magic Item: Boots of the Winterlands",
+    "properties": {
+      "Replicated item": "Boots of the Winterlands"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-bracers-of-archery",
+    "name": "Replicate Magic Item: Bracers of Archery",
+    "properties": {
+      "Replicated item": "Bracers of Archery"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-brooch-of-shielding",
+    "name": "Replicate Magic Item: Brooch of Shielding",
+    "properties": {
+      "Replicated item": "Brooch of Shielding"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-cloak-of-protection",
+    "name": "Replicate Magic Item: Cloak of Protection",
+    "properties": {
+      "Replicated item": "Cloak of Protection"
+    },
+    "modifiers": [
+      {
+        "id": "ac",
+        "kind": "modifyStat",
+        "stat": "armorClass",
+        "operation": "add",
+        "value": 1
+      },
+      {
+        "id": "save-strength",
+        "kind": "modifyStat",
+        "stat": "save.strength",
+        "operation": "add",
+        "value": 1
+      },
+      {
+        "id": "save-dexterity",
+        "kind": "modifyStat",
+        "stat": "save.dexterity",
+        "operation": "add",
+        "value": 1
+      },
+      {
+        "id": "save-constitution",
+        "kind": "modifyStat",
+        "stat": "save.constitution",
+        "operation": "add",
+        "value": 1
+      },
+      {
+        "id": "save-intelligence",
+        "kind": "modifyStat",
+        "stat": "save.intelligence",
+        "operation": "add",
+        "value": 1
+      },
+      {
+        "id": "save-wisdom",
+        "kind": "modifyStat",
+        "stat": "save.wisdom",
+        "operation": "add",
+        "value": 1
+      },
+      {
+        "id": "save-charisma",
+        "kind": "modifyStat",
+        "stat": "save.charisma",
+        "operation": "add",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "infusion.replicate-magic-item-eyes-of-the-eagle",
+    "name": "Replicate Magic Item: Eyes of the Eagle",
+    "properties": {
+      "Replicated item": "Eyes of the Eagle"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-gauntlets-of-ogre-power",
+    "name": "Replicate Magic Item: Gauntlets of Ogre Power",
+    "properties": {
+      "Replicated item": "Gauntlets of Ogre Power"
+    },
+    "modifiers": [
+      {
+        "id": "strength",
+        "kind": "modifyStat",
+        "stat": "strength",
+        "operation": "floor",
+        "value": 19
+      }
+    ]
+  },
+  {
+    "id": "infusion.replicate-magic-item-gloves-of-missile-snaring",
+    "name": "Replicate Magic Item: Gloves of Missile Snaring",
+    "properties": {
+      "Replicated item": "Gloves of Missile Snaring"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-gloves-of-swimming-and-climbing",
+    "name": "Replicate Magic Item: Gloves of Swimming and Climbing",
+    "properties": {
+      "Replicated item": "Gloves of Swimming and Climbing"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-hat-of-disguise",
+    "name": "Replicate Magic Item: Hat of Disguise",
+    "properties": {
+      "Replicated item": "Hat of Disguise"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-headband-of-intellect",
+    "name": "Replicate Magic Item: Headband of Intellect",
+    "properties": {
+      "Replicated item": "Headband of Intellect"
+    },
+    "modifiers": [
+      {
+        "id": "intelligence",
+        "kind": "modifyStat",
+        "stat": "intelligence",
+        "operation": "floor",
+        "value": 19
+      }
+    ]
+  },
+  {
+    "id": "infusion.replicate-magic-item-helm-of-telepathy",
+    "name": "Replicate Magic Item: Helm of Telepathy",
+    "properties": {
+      "Replicated item": "Helm of Telepathy"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-medallion-of-thoughts",
+    "name": "Replicate Magic Item: Medallion of Thoughts",
+    "properties": {
+      "Replicated item": "Medallion of Thoughts"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-necklace-of-adaptation",
+    "name": "Replicate Magic Item: Necklace of Adaptation",
+    "properties": {
+      "Replicated item": "Necklace of Adaptation"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-periapt-of-wound-closure",
+    "name": "Replicate Magic Item: Periapt of Wound Closure",
+    "properties": {
+      "Replicated item": "Periapt of Wound Closure"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-pipes-of-the-sewers",
+    "name": "Replicate Magic Item: Pipes of the Sewers",
+    "properties": {
+      "Replicated item": "Pipes of the Sewers"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-quiver-of-ehlonna",
+    "name": "Replicate Magic Item: Quiver of Ehlonna",
+    "properties": {
+      "Replicated item": "Quiver of Ehlonna"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-ring-of-jumping",
+    "name": "Replicate Magic Item: Ring of Jumping",
+    "properties": {
+      "Replicated item": "Ring of Jumping"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-ring-of-mind-shielding",
+    "name": "Replicate Magic Item: Ring of Mind Shielding",
+    "properties": {
+      "Replicated item": "Ring of Mind Shielding"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-slippers-of-spider-climbing",
+    "name": "Replicate Magic Item: Slippers of Spider Climbing",
+    "properties": {
+      "Replicated item": "Slippers of Spider Climbing"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-winged-boots",
+    "name": "Replicate Magic Item: Winged Boots",
+    "properties": {
+      "Replicated item": "Winged Boots"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-amulet-of-health",
+    "name": "Replicate Magic Item: Amulet of Health",
+    "properties": {
+      "Replicated item": "Amulet of Health"
+    },
+    "modifiers": [
+      {
+        "id": "constitution",
+        "kind": "modifyStat",
+        "stat": "constitution",
+        "operation": "floor",
+        "value": 19
+      }
+    ]
+  },
+  {
+    "id": "infusion.replicate-magic-item-belt-of-hill-giant-strength",
+    "name": "Replicate Magic Item: Belt of Hill Giant Strength",
+    "properties": {
+      "Replicated item": "Belt of Hill Giant Strength"
+    },
+    "modifiers": [
+      {
+        "id": "strength",
+        "kind": "modifyStat",
+        "stat": "strength",
+        "operation": "floor",
+        "value": 21
+      }
+    ]
+  },
+  {
+    "id": "infusion.replicate-magic-item-boots-of-levitation",
+    "name": "Replicate Magic Item: Boots of Levitation",
+    "properties": {
+      "Replicated item": "Boots of Levitation"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-boots-of-speed",
+    "name": "Replicate Magic Item: Boots of Speed",
+    "properties": {
+      "Replicated item": "Boots of Speed"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-bracers-of-defense",
+    "name": "Replicate Magic Item: Bracers of Defense",
+    "properties": {
+      "Replicated item": "Bracers of Defense"
+    },
+    "modifiers": [
+      {
+        "id": "unarmored-ac",
+        "kind": "modifyStat",
+        "stat": "armorClass",
+        "operation": "add",
+        "value": 2,
+        "condition": {
+          "op": "and",
+          "args": [
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "stat": "armorIndex"
+                },
+                0
+              ]
+            },
+            {
+              "op": "eq",
+              "args": [
+                {
+                  "stat": "shield"
+                },
+                0
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "infusion.replicate-magic-item-cloak-of-the-bat",
+    "name": "Replicate Magic Item: Cloak of the Bat",
+    "properties": {
+      "Replicated item": "Cloak of the Bat"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-dimensional-shackles",
+    "name": "Replicate Magic Item: Dimensional Shackles",
+    "properties": {
+      "Replicated item": "Dimensional Shackles"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-gem-of-seeing",
+    "name": "Replicate Magic Item: Gem of Seeing",
+    "properties": {
+      "Replicated item": "Gem of Seeing"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-horn-of-blasting",
+    "name": "Replicate Magic Item: Horn of Blasting",
+    "properties": {
+      "Replicated item": "Horn of Blasting"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-ring-of-free-action",
+    "name": "Replicate Magic Item: Ring of Free Action",
+    "properties": {
+      "Replicated item": "Ring of Free Action"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-ring-of-protection",
+    "name": "Replicate Magic Item: Ring of Protection",
+    "properties": {
+      "Replicated item": "Ring of Protection"
+    },
+    "modifiers": [
+      {
+        "id": "ac",
+        "kind": "modifyStat",
+        "stat": "armorClass",
+        "operation": "add",
+        "value": 1
+      },
+      {
+        "id": "save-strength",
+        "kind": "modifyStat",
+        "stat": "save.strength",
+        "operation": "add",
+        "value": 1
+      },
+      {
+        "id": "save-dexterity",
+        "kind": "modifyStat",
+        "stat": "save.dexterity",
+        "operation": "add",
+        "value": 1
+      },
+      {
+        "id": "save-constitution",
+        "kind": "modifyStat",
+        "stat": "save.constitution",
+        "operation": "add",
+        "value": 1
+      },
+      {
+        "id": "save-intelligence",
+        "kind": "modifyStat",
+        "stat": "save.intelligence",
+        "operation": "add",
+        "value": 1
+      },
+      {
+        "id": "save-wisdom",
+        "kind": "modifyStat",
+        "stat": "save.wisdom",
+        "operation": "add",
+        "value": 1
+      },
+      {
+        "id": "save-charisma",
+        "kind": "modifyStat",
+        "stat": "save.charisma",
+        "operation": "add",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "infusion.replicate-magic-item-ring-of-the-ram",
+    "name": "Replicate Magic Item: Ring of the Ram",
+    "properties": {
+      "Replicated item": "Ring of the Ram"
+    },
+    "modifiers": []
+  },
+  {
+    "id": "infusion.replicate-magic-item-common-item",
+    "name": "Replicate Magic Item: Common Item",
+    "properties": {},
+    "modifiers": []
+  },
+  {
+    "id": "arcane-armor.component",
+    "name": "Arcane Armor component",
+    "properties": {
+      "arcaneArmorComponent": true
+    }
+  },
+  {
+    "id": "property.shield",
+    "name": "Shield",
+    "properties": {
+      "shield": true
+    }
+  },
+  {
+    "id": "property.ammunition",
+    "name": "Ammunition",
+    "properties": {
+      "ammunition": true
+    }
+  },
+  {
+    "id": "property.thrown",
+    "name": "Thrown",
+    "properties": {
+      "thrown": true
+    }
+  }
+]

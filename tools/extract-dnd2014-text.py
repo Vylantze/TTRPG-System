@@ -8,6 +8,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
+from system_package import read_system, write_system
 import pdfplumber
 from dnd2014_class_tags import apply_class_tags
 
@@ -82,7 +83,7 @@ def source(first, last=None):
     return f'SRD 5.1 {pages} (CC BY 4.0), {URL}#page={first}'
 
 
-system = json.loads(SYSTEM.read_text(encoding='utf8'))
+system = read_system(SYSTEM)
 features = {f['id']: f for f in system['features']}
 apply_class_tags(system)
 for feature in features.values():
@@ -288,5 +289,5 @@ for feature in system['features']:
     if not feature.get('description') and not feature.get('textReferences'):
         raise ValueError('Missing source passage for ' + feature['id'])
 
-SYSTEM.write_text(json.dumps(system, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+write_system(SYSTEM, system)
 print(f'Saved source text for {len(system["features"])} Features (including shared references) and 3 Classes; {len(metadata["wizardSpells"])} complete Wizard spell descriptions.')

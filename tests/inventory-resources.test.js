@@ -1,3 +1,4 @@
+import { readSystem } from '@/tools/read-system.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -38,7 +39,7 @@ test('item Features detect recursive cycles and invalid stat modifiers without e
   const bad = structuredClone(engine.catalogue);
   bad.itemFeatures[0].modifiers = [{ kind: 'modifyStat', id: 'bad', stat: 'missing', operation: 'add', value: 1 }];
   assert.throws(() => new Engine(bad), /stat/i);
-  const file = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url), 'utf8'));
+  const file = readSystem(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url));
   file.configurations[0].system.sheetSections[0].rows[0].stat = 'missing';
   assert.throws(() => parseSystemFile(file), /displayed stat/);
 });
