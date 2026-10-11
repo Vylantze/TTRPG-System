@@ -335,3 +335,10 @@ button.resource-adjust-button { box-sizing: border-box; flex: 0 0 2rem; width: 2
 .system-data-editor .toolbar { margin:12px 0; }
 @media(max-width:760px) { .system-editor-layout { grid-template-columns:minmax(0,1fr); } .system-editor-records { max-height:230px; } }
 .selection-level { display: block; font-size: 12px; font-weight: normal; margin-top: 4px; }
+
+/* Feature reference content reads as a full-width page, including in sheet drawers. */
+.feature-reading-layout{display:block}
+.feature-content-entry{margin:20px 0;padding:18px 0;border-top:1px solid var(--line);min-width:0;overflow-wrap:anywhere}
+.feature-content-entry h4{font-size:18px;margin:0 0 12px}
+.feature-selection-content{margin-top:24px}
+.feature-content-pagination{flex-wrap:wrap;margin-top:20px;gap:12px}
