@@ -76,7 +76,7 @@ export function resolveSystemFile(input: unknown, documents: Record<string, unkn
     if (bytes > limit * 3) throw new RuleError('SYSTEM_SIZE', 'Expanded System exceeds size limit.');
     return value;
   };
-  return parseSystemFile(JSON.stringify(resolve(root)));
+  return parseSystemFile(resolve(root));
 }
 
 /** The host supplies file access; missing parts never publish a partial System. */
@@ -98,28 +98,29 @@ export async function loadSystemFile(input: unknown, read: (path: string) => Pro
   walk(root, collect);
   let bytes = 0;
   while (queue.length) {
-    const path = queue.shift()!;
-    if (expected && !Object.hasOwn(expected, path)) throw new RuleError('SYSTEM_VERSION', `Missing asset version: ${path}`);
-    const version = expected?.[path];
-    const key = JSON.stringify([identity.id, identity.revision, path]);
-    const cached = version !== undefined ? await cache?.get(key) : undefined;
-    let value: unknown;
-    if (cached?.version === version && cached !== undefined) {
-      try {
-        value = document(cached.document);
-        asset(value, path, expected);
-      } catch { value = undefined; }
-    }
-    if (value === undefined) {
-      value = document(await read(path));
-      if (version !== undefined) pending.push({ key, version, document: value });
-    }
-    bytes += new TextEncoder().encode(JSON.stringify(value)).length;
-    if (bytes > limit) throw new RuleError('SYSTEM_SIZE', 'Referenced System documents exceed 20 MB.');
-    documents[path] = value;
-    walk(asset(value, path, expected), collect);
+    await Promise.all(queue.splice(0, 4).map(async (path) => {
+      if (expected && !Object.hasOwn(expected, path)) throw new RuleError('SYSTEM_VERSION', `Missing asset version: ${path}`);
+      const version = expected?.[path];
+      const key = JSON.stringify([identity.id, identity.revision, path]);
+      const cached = version !== undefined ? await cache?.get(key) : undefined;
+      let value: unknown;
+      if (cached?.version === version && cached !== undefined) {
+        try {
+          value = document(cached.document);
+          asset(value, path, expected);
+        } catch { value = undefined; }
+      }
+      if (value === undefined) {
+        value = document(await read(path));
+        if (version !== undefined) pending.push({ key, version, document: value });
+      }
+      bytes += new TextEncoder().encode(JSON.stringify(value)).length;
+      if (bytes > limit) throw new RuleError('SYSTEM_SIZE', 'Referenced System documents exceed 20 MB.');
+      documents[path] = value;
+      walk(asset(value, path, expected), collect);
+    }));
   }
   const file = resolveSystemFile(root, documents);
-  for (const entry of pending) await cache?.set(entry.key, { version: entry.version, document: entry.document });
+  await Promise.all(pending.map((entry) => cache?.set(entry.key, { version: entry.version, document: entry.document })));
   return file;
 }

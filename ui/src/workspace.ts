@@ -1,3 +1,4 @@
+import { isSystemSnapshot, retainSystemSnapshot } from '@/src/system-snapshot';
 import LZString from 'lz-string';
 import { migrateDescriptionOverrides } from '@/ui/src/migrate-description-overrides';
 import { SystemRegistry, deserializeCharacter, migrateCharacterStructure, parseSystemFile, serializeCharacter, type Character, type SystemFile } from '@/src/index';
@@ -62,7 +63,9 @@ export function readWorkspace(storage: Pick<Storage, 'getItem'> & Partial<Pick<S
   storage.removeItem?.('ttrpg-feature-forge:v1');
   const raw = storage.getItem(STORAGE_KEY);
   if (!raw) return { version: 1, systems: [], characters: [] };
-  const value = JSON.parse(raw);
+  return decodeWorkspace(JSON.parse(raw), recoverCharacter);
+}
+export function decodeWorkspace(value: ReturnType<typeof JSON.parse>, recoverCharacter?: (value: unknown) => Character | undefined): Workspace {
   if (![1, 2, 3].includes(value.version) || !Array.isArray(value.systems) || !Array.isArray(value.characters)) throw new Error('Stored workspace has an unsupported format. Export or repair it before replacing it.');
   const systemIds = new Set<string>(), catalogueIds = new Set<string>();
   const systems = value.systems.map((s: unknown) => {
@@ -72,7 +75,7 @@ export function readWorkspace(storage: Pick<Storage, 'getItem'> & Partial<Pick<S
       if (!json) throw new Error('Compressed System data could not be read.');
       s = JSON.parse(json);
     }
-    const file = parseSystemFile(migrateDescriptionOverrides(value.version >= 2 ? unpackSystem(s as ReturnType<typeof buildPackedSystem>) : s));
+    const file = retainSystemSnapshot(parseSystemFile(migrateDescriptionOverrides(value.version >= 2 ? unpackSystem(s as ReturnType<typeof buildPackedSystem>) : s)));
     const key = systemKey(file);
     if (systemIds.has(key)) throw new Error('Stored System revisions are duplicated.');
     systemIds.add(key);
@@ -144,9 +147,14 @@ export function applyDescriptionUpdate(workspace: Workspace, existing: SystemFil
   if (!workspace.systems.includes(existing) || JSON.stringify(existing) === JSON.stringify(updated)) return workspace;
   return { ...workspace, systems: workspace.systems.map((file) => file === existing ? updated : file) };
 }
+const registries = new WeakMap<SystemFile[], { files: SystemFile[]; registry: SystemRegistry }>();
 export function createRegistry(files: SystemFile[]): SystemRegistry {
+  const reusable = files.every(isSystemSnapshot);
+  const cached = reusable ? registries.get(files) : undefined;
+  if (cached && cached.files.length === files.length && cached.files.every((file, index) => file === files[index])) return cached.registry;
   const registry = new SystemRegistry();
   files.forEach((f) => registry.load(f));
+  if (reusable) registries.set(files, { files: [...files], registry });
   return registry;
 }
 export const systemKey = (s: { id: string; revision: number }) => JSON.stringify([s.id, s.revision]);

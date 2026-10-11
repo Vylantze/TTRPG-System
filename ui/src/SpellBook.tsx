@@ -1,7 +1,7 @@
 import { resetConditionName } from '@/ui/src/reset-condition-name';
 import { expressionText } from '@/ui/src/feature-requirements';
 import { labelFromId } from '@/ui/src/workspace';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { featureRollInstances, adjustResource, spellGroups, spellSlotPools, useAbility as activateAbility, type Character, type Engine, type EvaluationResult, type SpellGroup } from '@/src/index';
 import { FeatureLink } from '@/ui/src/FeatureLink';
 import { FeatureRules } from '@/ui/src/RulesText';
@@ -13,7 +13,8 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
   const [casting, setCasting] = useState<string>();
   const [mode, setMode] = useState('');
   const [spent, setSpent] = useState<Record<string, string>>({});
-  const spells = spellGroups(engine, result), slots = spellSlotPools(engine, result);
+  const spells = useMemo(() => spellGroups(engine, result), [engine, result]);
+  const slots = useMemo(() => spellSlotPools(engine, result), [engine, result]);
   const selected = spells.find((spell) => spell.id === casting);
   const attempt = (action: () => void) => {
     try {

@@ -10,6 +10,9 @@ const server = await createServer({ server: { middlewareMode: true, hmr: false }
 const { loadSelectedSystem } = await server.ssrLoadModule('/src/load-system-package.ts');
 const { SystemAssetDatabase } = await server.ssrLoadModule('/src/SystemAssetDatabase.ts');
 const { CharacterBuilder } = await server.ssrLoadModule('/src/CharacterBuilder.tsx');
+const { evaluateForSheet } = await server.ssrLoadModule('/src/sheet-evaluation.ts');
+const { validateSystemAsync } = await server.ssrLoadModule('/src/system-worker-client.ts');
+const { createRegistry } = await server.ssrLoadModule('/src/workspace.ts');
 const system = { id: 'package', revision: 1, name: 'Package', allowMultipleClasses: false, characterLevel: 0, stats: [], resetConditions: [{ id: 'short-rest', name: 'Take a breather', description: 'Take a break.' }, { id: 'long-rest', name: 'Make camp', description: 'Finish resting.' }, { id: 'dawn', name: 'New day', description: 'Sunrise.' }, { id: 'hidden', name: 'Hidden condition', description: 'Triggered elsewhere.', showButton: false }] };
 const file = { format: 'ttrpg-system', version: 1, id: 'package', revision: 1, options: {}, features: [], configurations: [{ id: 'package', revision: 1, options: {}, system, classes: [] }] };
 
@@ -44,6 +47,31 @@ test('asset database persists across loaders and replaces only the selected asse
   await reopened.set('spells', { version: 2, document: { assetVersion: 2, data: ['spell'] } });
   assert.equal((await first.get('spells')).version, 2);
   assert.equal((await first.get('classes')).version, 1);
+});
+
+test('sheet evaluation reuses cosmetic edits but invalidates rule edits and engine replacements', () => {
+  const catalogue = { id: 'package', revision: 1, system, classes: [], features: [] };
+  const engine = new Engine(catalogue);
+  const character = engine.createCharacter('cache', 'Cache', []);
+  const first = evaluateForSheet(engine, character);
+  const cosmetic = { ...character, name: 'Renamed', notes: { Note: 'New note' }, tabOrder: ['notes'], displayPreferences: { modifiers: true } };
+  assert.equal(evaluateForSheet(engine, cosmetic), first);
+  assert.ok(Object.isFrozen(first.stats));
+  const invalid = { ...cosmetic, inputs: { unknown: 4 } };
+  assert.equal(evaluateForSheet(engine, invalid).status, 'invalid');
+  assert.notEqual(evaluateForSheet(new Engine(catalogue), character), first);
+  assert.equal(evaluateForSheet(engine, { ...character, name: 123 }).status, 'invalid');
+});
+
+test('validated UI snapshots share registries and do not trust changed imports', async () => {
+  const validated = await validateSystemAsync(file);
+  const files = [validated];
+  assert.equal(createRegistry(files), createRegistry(files));
+  const changed = structuredClone(file);
+  changed.configurations[0].system.name = 'Changed';
+  files[0] = await validateSystemAsync(changed);
+  assert.equal(createRegistry(files).createEngine(file.id, 1).catalogue.system.name, 'Changed');
+  await assert.rejects(validateSystemAsync({ ...file, features: [{ id: 'broken' }] }));
 });
 
 test.after(() => server.close());

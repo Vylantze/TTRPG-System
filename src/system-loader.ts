@@ -1,3 +1,4 @@
+import { isSystemSnapshot, retainSystemSnapshot } from '@/src/system-snapshot.js';
 import { Engine, clone } from '@/src/engine.js';
 import { RuleError } from '@/src/expression.js';
 import type { Catalogue, Character, Value } from '@/src/model.js';
@@ -30,6 +31,7 @@ function rememberValidation(file: object, fingerprint: string): void {
 
 /** Browser-safe parsing: no fetch, filesystem access, imports, or executable JSON. */
 export function parseSystemFile(input: string | unknown): SystemFile {
+  if (isSystemSnapshot(input)) return input;
   let parsed: unknown = input;
   if (typeof input === 'string') {
     if (new TextEncoder().encode(input).length > 20_000_000) throw new RuleError('SYSTEM_SIZE', 'System file exceeds 20 MB.');
@@ -44,6 +46,7 @@ export function parseSystemFile(input: string | unknown): SystemFile {
   // Public files remain editable. Reuse validation only when their complete JSON
   // is unchanged; mutations and non-JSON additions must still be rejected.
   const fingerprint = JSON.stringify(parsed);
+  if (new TextEncoder().encode(fingerprint).length > 20_000_000) throw new RuleError('SYSTEM_SIZE', 'System file exceeds 20 MB.');
   if (validatedFiles.get(parsed) === fingerprint || validatedJson.has(fingerprint)) {
     const copy = clone(parsed) as unknown as SystemFile;
     rememberValidation(copy, fingerprint);
@@ -97,15 +100,15 @@ function selectCatalogue(file: SystemFile, settings: Record<string, Value>): Cat
 }
 
 /** Registry ownership controls availability; unloading never edits character saves. */
+const snapshotEngines = new WeakMap<SystemFile, Map<string, Engine>>();
 export class SystemRegistry {
   private files = new Map<string, SystemFile>();
-  private engines = new Map<string, Engine>();
   private key(id: string, revision: number): string {
     return JSON.stringify([id, revision]);
   }
 
   load(input: unknown): { id: string; revision: number } {
-    const file = parseSystemFile(input), key = this.key(file.id, file.revision);
+    const file = retainSystemSnapshot(parseSystemFile(input)), key = this.key(file.id, file.revision);
     if (this.files.has(key)) throw new RuleError('SYSTEM_LOADED', 'System revision is already loaded; unload it before replacement.');
     for (const loaded of this.files.values()) for (const config of file.configurations) if (loaded.configurations.some((c) => c.id === config.id && c.revision === config.revision)) throw new RuleError('CATALOGUE_CONFLICT', 'Catalogue identity is already supplied by another loaded System.');
     this.files.set(key, file);
@@ -113,7 +116,6 @@ export class SystemRegistry {
   }
 
   unload(id: string, revision: number): boolean {
-    this.engines.clear();
     return this.files.delete(this.key(id, revision));
   }
 
@@ -126,10 +128,15 @@ export class SystemRegistry {
     if (!file) throw new RuleError('SYSTEM_UNAVAILABLE', 'Required System revision is not loaded.');
     const resolved = { ...Object.fromEntries(Object.entries(file.options).map(([name, option]) => [name, option.default])), ...options };
     const key = JSON.stringify([id, revision, Object.entries(resolved).sort(([a], [b]) => a.localeCompare(b))]);
-    let engine = this.engines.get(key);
+    let shared = snapshotEngines.get(file);
+    if (!shared) {
+      shared = new Map();
+      snapshotEngines.set(file, shared);
+    }
+    let engine = shared.get(key);
     if (!engine) {
       engine = new Engine(selectCatalogue(file, options));
-      this.engines.set(key, engine);
+      shared.set(key, engine);
     }
     return engine;
   }

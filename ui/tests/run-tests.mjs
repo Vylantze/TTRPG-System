@@ -4,7 +4,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createServer } from 'vite';
 import { createElement } from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
+import { renderToStaticMarkup, renderToPipeableStream } from 'react-dom/server';
+import { PassThrough } from 'node:stream';
 import { finalizeCharacter, spellGroups, featureRollInstances, rollFeature, applyFeatureRoll } from '@/dist/index.js';
 import { exampleCharacter } from '@/examples/dnd2014-character.js';
 
@@ -25,7 +26,7 @@ const { featureHref } = await server.ssrLoadModule('/src/feature-description.ts'
 const { safeReturn } = await server.ssrLoadModule('/src/feature-origin.ts');
 const { orderedSheetTabs, moveSheetTab } = await server.ssrLoadModule('/src/sheet-tabs.ts');
 const { advancementLabels } = await server.ssrLoadModule('/src/feature-requirements.ts');
-const file = readSystem(new URL('../../src/systems/dnd5e-2014/system.json', import.meta.url));
+const file = model.decodeWorkspace({ version: 1, systems: [readSystem(new URL('../../src/systems/dnd5e-2014/system.json', import.meta.url))], characters: [] }).systems[0];
 function storage() {
   const values = new Map();
   return { getItem: (key) => values.get(key) ?? null, setItem: (key, value) => values.set(key, value) };
@@ -33,12 +34,23 @@ function storage() {
 const data = () => ({ version: 1, systems: [file], characters: [] });
 function render(workspace, hash = '') {
   globalThis.localStorage = storage();
-  model.writeWorkspace(localStorage, workspace);
   globalThis.window = { location: { hash } };
-  return renderToStaticMarkup(createElement(App, { initialWorkspace: workspace, persist: async () => {} }));
+  return new Promise((resolve, reject) => {
+    const output = new PassThrough();
+    let html = '';
+    output.on('data', (chunk) => {
+      html += chunk.toString();
+    });
+    output.on('end', () => resolve(html.replace(/<!--[\s\S]*?-->/g, '')));
+    output.on('error', reject);
+    const stream = renderToPipeableStream(createElement(App, { initialWorkspace: workspace, persist: async () => {} }), {
+      onAllReady() { stream.pipe(output); },
+      onError: reject,
+    });
+  });
 }
 
-test('Items follows Skills by default, puts money first, and saved tab order survives loading', () => {
+test('Items follows Skills by default, puts money first, and saved tab order survives loading', async () => {
   const character = { ...starterSaves[0], tabOrder: ['items', 'stats', 'skills'] };
   const tabs = file.configurations[0].system.sheetTabs;
   assert.equal(tabs[tabs.findIndex((tab) => tab.id === 'skills') + 1].id, 'items');
@@ -49,17 +61,17 @@ test('Items follows Skills by default, puts money first, and saved tab order sur
   model.writeWorkspace(store, { ...data(), characters: [character] });
   const restored = model.readWorkspace(store);
   assert.deepEqual(restored.characters[0].tabOrder, character.tabOrder);
-  const html = render(restored, `#characters/${character.id}?view=items`);
+  const html = await render(restored, `#characters/${character.id}?view=items`);
   const nav = html.match(/<nav class="subnav"[^>]*>([\s\S]*?)<\/nav>/)[1];
   assert.ok(nav.indexOf('Items') < nav.indexOf('Character sheet'));
   assert.ok(html.indexOf('Copper (cp)') < html.indexOf('Chain mail'));
   assert.match(html, /Rearrange tabs/);
 });
 
-test('Races catalogue and class labels use System terminology', () => {
+test('Races catalogue and class labels use System terminology', async () => {
   const renamed = structuredClone(file);
   for (const configuration of renamed.configurations) configuration.system.terminology = { classSingular: 'Profession', classPlural: 'Professions', creatureSingular: 'Ancestry', creaturePlural: 'Ancestries', creatureTag: 'race' };
-  const html = render({ ...data(), systems: [renamed] }, '#races');
+  const html = await render({ ...data(), systems: [renamed] }, '#races');
   assert.match(html, /Ancestries found/);
   assert.match(html, /Professions/);
   assert.match(html, /Human/);
@@ -67,19 +79,19 @@ test('Races catalogue and class labels use System terminology', () => {
   assert.equal(safeReturn('#races?q=elf&sort=name-desc'), '#races?q=elf&sort=name-desc');
 });
 
-test('System tabs partition skills and notes, persist ability preferences, and lead with HP', () => {
+test('System tabs partition skills and notes, persist ability preferences, and lead with HP', async () => {
   const character = { ...starterSaves[0], displayPreferences: { 'modifierFirst:abilities': true }, notes: { ...starterSaves[0].notes, 'Note 1': 'A long custom note\n'.repeat(1000) } };
   const workspace = { ...data(), characters: [character] };
-  const sheet = render(workspace, `#characters/${character.id}?view=stats`);
+  const sheet = await render(workspace, `#characters/${character.id}?view=stats`);
   assert.match(sheet, /Show scores first/);
   assert.match(sheet, /Roll Strength check/);
   assert.ok(sheet.indexOf('sheet-hit-points') < sheet.indexOf('Character details'));
   assert.doesNotMatch(sheet, /id="build-summary"/);
   assert.doesNotMatch(sheet, /Calculation for Athletics|A long custom note/);
-  const notes = render(workspace, `#characters/${character.id}?view=notes`);
+  const notes = await render(workspace, `#characters/${character.id}?view=notes`);
   assert.match(notes, /A long custom note/);
   assert.match(notes, /Add note/);
-  const resources = render(workspace, `#characters/${character.id}?view=resources`);
+  const resources = await render(workspace, `#characters/${character.id}?view=resources`);
   assert.ok(resources.indexOf('>Long rest</button>') < resources.indexOf('sheet-hit-points'));
   const store = storage();
   model.writeWorkspace(store, workspace);
@@ -87,10 +99,10 @@ test('System tabs partition skills and notes, persist ability preferences, and l
   assert.equal(model.readWorkspace(store).characters[0].notes['Note 1'], character.notes['Note 1']);
   const custom = structuredClone(file);
   custom.configurations.forEach((config) => config.system.sheetTabs.push({ id: 'explore', name: 'Exploration', content: 'sections', sections: ['combat'] }));
-  assert.match(render({ ...workspace, systems: [custom] }, `#characters/${character.id}?view=explore`), /Combat &amp; exploration/);
+  assert.match(await render({ ...workspace, systems: [custom] }, `#characters/${character.id}?view=explore`), /Combat &amp; exploration/);
 });
 
-test('workspace roundtrip preserves loaded rules, character choices and exact catalogue pins', () => {
+test('workspace roundtrip preserves loaded rules, character choices and exact catalogue pins', async () => {
   const store = storage(), { character } = exampleCharacter();
   character.buildState = 'draft';
   model.writeWorkspace(store, { ...data(), characters: [character], active: character.id });
@@ -98,7 +110,7 @@ test('workspace roundtrip preserves loaded rules, character choices and exact ca
   assert.deepEqual(restored.characters[0], character);
   assert.equal(model.createRegistry(restored.systems).engineForCharacter(character).evaluate(character).status, 'valid');
 });
-test('workspace rejects malformed saves and reports storage quota failures', () => {
+test('workspace rejects malformed saves and reports storage quota failures', async () => {
   const store = storage();
   store.setItem(model.STORAGE_KEY, '{"version":9}');
   assert.throws(() => model.readWorkspace(store));
@@ -109,38 +121,38 @@ test('workspace rejects malformed saves and reports storage quota failures', () 
   store.setItem(model.STORAGE_KEY, JSON.stringify(duplicate));
   assert.throws(() => model.readWorkspace(store), /duplicated/);
 });
-test('React initial screen explains System loading and provides character import', () => {
-  const html = render({ version: 1, systems: [], characters: [] });
+test('React initial screen explains System loading and provides character import', async () => {
+  const html = await render({ version: 1, systems: [], characters: [] });
   assert.match(html, /Every adventure starts with a Feature/);
   assert.match(html, /Load DnD5e 2014/);
   assert.match(html, /Import character/);
 });
-test('React Class and Feature browsers render directly from the loaded JSON', () => {
-  const classes = render(data(), '#classes');
+test('React Class and Feature browsers render directly from the loaded JSON', async () => {
+  const classes = await render(data(), '#classes');
   assert.match(classes, /Explore Class/);
   assert.match(classes, /Fighter/);
   assert.match(classes, /Wizard/);
-  const features = render(data(), '#features');
+  const features = await render(data(), '#features');
   assert.match(features, /Explore Features/);
   assert.match(features, /Features found/);
-  const detail = render(data(), '#features/dnd5e%3A2014%3Awizard.spellcasting');
+  const detail = await render(data(), '#features/dnd5e%3A2014%3Awizard.spellcasting');
   assert.match(detail, /Building blocks/);
   assert.match(detail, /chooseFeatures/);
 });
-test('Class and Feature detail pages display source rules and shared spell effects', () => {
-  const cls = render(data(), '#classes/dnd5e%3A2014%3Afighter');
+test('Class and Feature detail pages display source rules and shared spell effects', async () => {
+  const cls = await render(data(), '#classes/dnd5e%3A2014%3Afighter');
   assert.match(cls.replace(/<[^>]+>/g, ''), /Hit Points at 1st Level/);
   assert.match(cls, /martial weapons/);
   assert.match(cls, /SRD 5.1 pp. 24/);
-  const secondWind = render(data(), '#features/dnd5e%3A2014%3Afighter.second-wind');
+  const secondWind = await render(data(), '#features/dnd5e%3A2014%3Afighter.second-wind');
   assert.match(secondWind, /1d10 \+ your fighter level/);
-  const spell = render(data(), '#features/dnd5e%3A2014%3Aprepared.fireball');
+  const spell = await render(data(), '#features/dnd5e%3A2014%3Aprepared.fireball');
   assert.match(spell, /8d6 fire damage/);
   assert.match(spell, /At Higher Levels/);
   assert.match(spell, /View Fireball Feature/);
-  assert.match(render(data(), '#systems'), /Reload System/);
+  assert.match(await render(data(), '#systems'), /Reload System/);
 });
-test('stored workspaces deduplicate repeated configuration data and read older saves', () => {
+test('stored workspaces deduplicate repeated configuration data and read older saves', async () => {
   const store = storage(), workspace = { ...data(), characters: [exampleCharacter().character] };
   model.writeWorkspace(store, workspace);
   const packed = store.getItem(model.STORAGE_KEY);
@@ -154,7 +166,7 @@ test('stored workspaces deduplicate repeated configuration data and read older s
   store.setItem(model.STORAGE_KEY, JSON.stringify(broken));
   assert.throws(() => model.readWorkspace(store), /Compressed System data is malformed/);
 });
-test('description refresh preserves pinned rules and rejects mechanical changes', () => {
+test('description refresh preserves pinned rules and rejects mechanical changes', async () => {
   const older = structuredClone(file);
   older.features.forEach((f) => {
     delete f.description;
@@ -181,7 +193,7 @@ test('description refresh preserves pinned rules and rejects mechanical changes'
   assert.equal(changed.configurations[0].classes[0].maximumLevel, 19);
 });
 
-test('saved System description updates preserve character edits and never restore unloaded or replaced Systems', () => {
+test('saved System description updates preserve character edits and never restore unloaded or replaced Systems', async () => {
   const old = structuredClone(file);
   old.features[0].description = 'Old summary';
   const character = exampleCharacter().character;
@@ -200,7 +212,7 @@ test('saved System description updates preserve character edits and never restor
   const replaced = { ...workspace, systems: [structuredClone(old)] };
   assert.equal(model.applyDescriptionUpdate(replaced, old, updated), replaced);
 });
-test('bundled category refresh accepts the Class Feature tag but preserves tags used by rules', () => {
+test('bundled category refresh accepts the Class Feature tag but preserves tags used by rules', async () => {
   const old = structuredClone(file);
   old.features.forEach((f) => {
     if (f.tags?.includes('class-feature')) {
@@ -227,18 +239,18 @@ test('bundled category refresh accepts the Class Feature tag but preserves tags 
   const changedRoots = structuredClone(roots);
   changedRoots.features.find((f) => f.id.endsWith(':fighter.second-wind')).tags = [];
   assert.throws(() => model.updateSystemDescriptions(changedRoots, roots), /rules differ/);
-  const html = render(data(), '#features');
+  const html = await render(data(), '#features');
   assert.match(html, /value="class-feature">Class Feature/);
-  assert.match(render(data(), '#features/dnd5e%3A2014%3Afighter.second-wind'), /class="tag">Class Feature/);
+  assert.match(await render(data(), '#features/dnd5e%3A2014%3Afighter.second-wind'), /class="tag">Class Feature/);
 });
-test('Feature pages show Class progression timing and preserve readable prerequisite logic', () => {
+test('Feature pages show Class progression timing and preserve readable prerequisite logic', async () => {
   const engine = model.createRegistry([file]).createEngine(file.id, file.revision);
   const find = (name) => engine.catalogue.features.find((f) => f.id === `dnd5e:2014:${name}`);
-  const surge = render(data(), '#features/dnd5e%3A2014%3Afighter.action-surge');
+  const surge = await render(data(), '#features/dnd5e%3A2014%3Afighter.action-surge');
   assert.match(surge, /Levels &amp; requirements/);
   assert.match(surge, /Fighter level 2/);
   assert.deepEqual(advancementLabels(find('fighter.remarkable-athlete'), engine), ['Fighter level 7']);
-  const athlete = render(data(), '#features/dnd5e%3A2014%3Afighter.remarkable-athlete');
+  const athlete = await render(data(), '#features/dnd5e%3A2014%3Afighter.remarkable-athlete');
   assert.match(athlete, /Requires Champion/);
   const spell = renderToStaticMarkup(createElement(FeatureRequirements, { feature: find('spellbook.fireball'), engine }));
   assert.match(spell, /Content level:<\/strong> 3/);
@@ -253,7 +265,7 @@ test('Feature pages show Class progression timing and preserve readable prerequi
   assert.match(text, / AND /);
   assert.match(text, /NOT \(Character level 10 or higher\)/);
 });
-test('React uses Feature and tag display names while retaining internal filter identities', () => {
+test('React uses Feature and tag display names while retaining internal filter identities', async () => {
   const custom = structuredClone(file), feature = custom.features.find((f) => f.id.endsWith(':skill.acrobatics'));
   feature.name = 'internal_feature_name';
   feature.displayName = 'Graceful Movement';
@@ -262,11 +274,11 @@ test('React uses Feature and tag display names while retaining internal filter i
     c.system.tagDisplayNames['skill-proficiency'] = 'Trained Skill';
   });
   const workspace = { version: 1, systems: [custom], characters: [] };
-  const browse = render(workspace, '#features?q=Graceful');
+  const browse = await render(workspace, '#features?q=Graceful');
   assert.match(browse, /Graceful Movement/);
   assert.match(browse, /value="skill-proficiency">Trained Skill/);
   assert.doesNotMatch(browse, /internal_feature_name/);
-  const detail = render(workspace, '#features/dnd5e%3A2014%3Askill.acrobatics');
+  const detail = await render(workspace, '#features/dnd5e%3A2014%3Askill.acrobatics');
   assert.match(detail, /<h1>Graceful Movement<\/h1>/);
   assert.match(detail, /class="tag">Trained Skill/);
   const legacy = structuredClone(file);
@@ -275,9 +287,9 @@ test('React uses Feature and tag display names while retaining internal filter i
     delete c.system.tagDisplayNames;
     delete c.system.descriptionTokens;
   });
-  assert.match(render({ version: 1, systems: [legacy], characters: [] }, '#features?q=acrobatics'), /Proficiency: acrobatics/);
+  assert.match(await render({ version: 1, systems: [legacy], characters: [] }, '#features?q=acrobatics'), /Proficiency: acrobatics/);
 });
-test('imported descriptions render as text and shared references do not recurse', () => {
+test('imported descriptions render as text and shared references do not recurse', async () => {
   const html = renderToStaticMarkup(createElement(RulesText, { text: '<script>alert(1)</script>\n\nSecond paragraph', source: 'javascript:alert(1)' }));
   assert.doesNotMatch(html, /<script>/);
   assert.match(html, /&lt;script&gt;/);
@@ -288,7 +300,7 @@ test('imported descriptions render as text and shared references do not recurse'
   assert.equal((shared.match(/Shared text/g) ?? []).length, 2);
 });
 
-test('source mentions link skills and abilities within their System and popup retains original rules', () => {
+test('source mentions link skills and abilities within their System and popup retains original rules', async () => {
   const engine = model.createRegistry([file]).createEngine(file.id, file.revision, {});
   const thief = file.features.find((f) => f.id === 'dnd5e:2014:rogue.thief');
   const html = renderToStaticMarkup(createElement(FeatureRules, { feature: thief, engine }));
@@ -308,10 +320,10 @@ test('source mentions link skills and abilities within their System and popup re
   assert.match(spell, /8d6 fire damage/);
   assert.doesNotMatch(spell, /require adjudication/);
 });
-test('React character builder exposes nested selections and preserves a construction draft', () => {
+test('React character builder exposes nested selections and preserves a construction draft', async () => {
   const { character } = exampleCharacter();
   character.buildState = 'draft';
-  const html = render({ ...data(), characters: [character] }, `#characters/${character.id}`);
+  const html = await render({ ...data(), characters: [character] }, `#characters/${character.id}`);
   assert.match(html, /Feature selections/);
   assert.match(html, /Basic stats/);
   assert.match(html, /Finalize character/);
@@ -322,22 +334,22 @@ test('React character builder exposes nested selections and preserves a construc
   assert.match(html, /Read Feature rules/);
   assert.match(html, /While you are wearing armor, you gain a \+1 bonus to AC/);
 });
-test('unloaded Systems keep characters exportable and display an explicit reload requirement', () => {
+test('unloaded Systems keep characters exportable and display an explicit reload requirement', async () => {
   const { character } = exampleCharacter();
-  const html = render({ version: 1, systems: [], characters: [character] }, `#characters/${character.id}`);
+  const html = await render({ version: 1, systems: [], characters: [character] }, `#characters/${character.id}`);
   assert.match(html, /Export character/);
   assert.match(html, /Example Hero/);
   assert.match(html, /must be loaded/);
 });
-test('malformed legacy data remains available for recovery when migration rejects it', () => {
+test('malformed legacy data remains available for recovery when migration rejects it', async () => {
   const store = storage();
   store.setItem(model.STORAGE_KEY, 'invalid JSON');
   assert.throws(() => model.readWorkspace(store));
   assert.equal(store.getItem(model.STORAGE_KEY), 'invalid JSON');
 });
 
-test('class guide has a progression table, jump controls, and expanded source descriptions', () => {
-  const html = render(data(), '#classes/dnd5e%3A2014%3Afighter');
+test('class guide has a progression table, jump controls, and expanded source descriptions', async () => {
+  const html = await render(data(), '#classes/dnd5e%3A2014%3Afighter');
   assert.match(html, /aria-label="Fighter contents"/);
   assert.match(html, /<caption>Fighter Features by level<\/caption>/);
   assert.match(html, /Jump to level 20/);
@@ -345,14 +357,14 @@ test('class guide has a progression table, jump controls, and expanded source de
   assert.match(html, /class="level-row reference-section"/);
 });
 
-test('Feature pages put rules first and keep authoring details collapsed', () => {
-  const html = render(data(), '#features/dnd5e%3A2014%3Afighter.second-wind');
+test('Feature pages put rules first and keep authoring details collapsed', async () => {
+  const html = await render(data(), '#features/dnd5e%3A2014%3Afighter.second-wind');
   assert.match(html, /<h2>Rules<\/h2>/);
   assert.match(html, /<h2>At a glance<\/h2>/);
   assert.match(html, /<details class="panel technical-details"><summary>Builder &amp; engine details/);
 });
 
-test('acquired Feature library exposes search, origins and acquisition levels', () => {
+test('acquired Feature library exposes search, origins and acquisition levels', async () => {
   const { engine, character } = exampleCharacter({ classes: [{ class: 'fighter', level: 3 }, { class: 'rogue', level: 2 }], settings: { multiclass: true } });
   const result = engine.evaluate(character);
   const html = renderToStaticMarkup(createElement(CharacterFeatures, { engine, character, result, openFeature: () => {} }));
@@ -364,7 +376,7 @@ test('acquired Feature library exposes search, origins and acquisition levels', 
   assert.match(html, /included Features/);
 });
 
-test('resource summaries expose actual balance, maximum, recovery and shared providers', () => {
+test('resource summaries expose actual balance, maximum, recovery and shared providers', async () => {
   const { engine, character } = exampleCharacter();
   const result = engine.evaluate(character);
   const pool = Object.values(result.resources).find((p) => p.key === 'second-wind');
@@ -379,7 +391,7 @@ test('resource summaries expose actual balance, maximum, recovery and shared pro
   assert.match(unlimited, /Turn: recover 2/);
 });
 
-test('prototype reset discards the old workspace before loading the new storage key', () => {
+test('prototype reset discards the old workspace before loading the new storage key', async () => {
   const removed = [];
   const fresh = model.readWorkspace({ removeItem: (key) => removed.push(key), getItem: (key) => {
     assert.equal(key, model.STORAGE_KEY);
@@ -389,7 +401,7 @@ test('prototype reset discards the old workspace before loading the new storage 
   assert.deepEqual(fresh, { version: 1, systems: [], characters: [] });
 });
 
-test('Feature selections default to a dropdown with a list toggle and no HP choices', () => {
+test('Feature selections default to a dropdown with a list toggle and no HP choices', async () => {
   const { engine, character } = exampleCharacter();
   const result = engine.evaluate(character);
   assert(!result.selections.some((slot) => slot.definition.id === 'hit-points'));
@@ -401,7 +413,7 @@ test('Feature selections default to a dropdown with a list toggle and no HP choi
   assert.doesNotMatch(html, /class="row pagination"/);
 });
 
-test('Starter Set party loads its System, saves all five characters, and preserves edited copies on repeated imports', () => {
+test('Starter Set party loads its System, saves all five characters, and preserves edited copies on repeated imports', async () => {
   const workspace = addStarterCharacters({ version: 1, systems: [], characters: [] }, file, starterSaves);
   assert.equal(workspace.characters.length, 5);
   assert.equal(workspace.systems.length, 1);
@@ -412,15 +424,15 @@ test('Starter Set party loads its System, saves all five characters, and preserv
   const store = storage();
   model.writeWorkspace(store, repeated);
   assert.deepEqual(model.readWorkspace(store).characters, repeated.characters);
-  const html = render(repeated, `#characters/${repeated.characters[1].id}`);
+  const html = await render(repeated, `#characters/${repeated.characters[1].id}`);
   assert.match(html, /Character details/);
   assert.doesNotMatch(html, /Original character sheet/);
-  assert.match(render(repeated, `#characters/${repeated.characters[1].id}?view=notes`), /Original character sheet/);
+  assert.match(await render(repeated, `#characters/${repeated.characters[1].id}?view=notes`), /Original character sheet/);
   assert.match(html, /All calculated stats/);
-  assert.match(render(workspace), /Add 2014 Starter Set party/);
+  assert.match(await render(workspace), /Add 2014 Starter Set party/);
 });
 
-test('Starter Set import fails atomically for invalid characters or incompatible loaded rules', () => {
+test('Starter Set import fails atomically for invalid characters or incompatible loaded rules', async () => {
   const empty = { version: 1, systems: [], characters: [] };
   const invalid = structuredClone(starterSaves);
   invalid[1].inputs['base.wisdom'] = 99;
@@ -431,7 +443,7 @@ test('Starter Set import fails atomically for invalid characters or incompatible
   assert.throws(() => addStarterCharacters({ ...empty, systems: [old] }, file, starterSaves));
 });
 
-test('Feature links preserve list filters and class anchors in native anchor URLs', () => {
+test('Feature links preserve list filters and class anchors in native anchor URLs', async () => {
   const engine = model.createRegistry([file]).createEngine(file.id, file.revision);
   const origin = '#features?q=wind&tag=class-feature&sort=name-desc&page=2';
   const link = featureHref('dnd5e:2014:fighter.second-wind', engine, origin);
@@ -439,32 +451,32 @@ test('Feature links preserve list filters and class anchors in native anchor URL
   assert(back.includes('q=wind&tag=class-feature&sort=name-desc&page=2'));
   assert.equal(safeReturn('https://example.com'), undefined);
   assert.equal(safeReturn('#classes/x?section=level-3'), '#classes/x?section=level-3');
-  const html = render(data(), '#classes/dnd5e%3A2014%3Afighter');
+  const html = await render(data(), '#classes/dnd5e%3A2014%3Afighter');
   assert.match(html, /returnTo=.*section%3Dclass-/);
   assert.match(html, /<a class="link" href="#features\/dnd5e%3A2014%3Afighter.second-wind/);
-  const filtered = render(data(), '#features?q=Second%20Wind&sort=name-desc&tag=class-feature');
+  const filtered = await render(data(), '#features?q=Second%20Wind&sort=name-desc&tag=class-feature');
   assert.match(filtered, /value="Second Wind"/);
   assert.match(filtered, /value="name-desc" selected/);
 });
 
-test('Fighter resource UI omits Arcane Recovery, while Wizard recovery and adjustment controls remain', () => {
+test('Fighter resource UI omits Arcane Recovery, while Wizard recovery and adjustment controls remain', async () => {
   const workspace = { ...data(), characters: starterSaves };
-  const fighter = render(workspace, `#characters/${starterSaves[0].id}?view=resources`);
+  const fighter = await render(workspace, `#characters/${starterSaves[0].id}?view=resources`);
   assert.doesNotMatch(fighter, /Arcane Recovery/);
   assert.match(fighter, /Decrease Second Wind/);
   assert.match(fighter, /Increase Second Wind/);
-  const wizard = render(workspace, `#characters/${starterSaves[3].id}?view=resources`);
+  const wizard = await render(workspace, `#characters/${starterSaves[3].id}?view=resources`);
   assert.match(wizard, /Arcane Recovery/);
-  const sheet = render(workspace, `#characters/${starterSaves[0].id}`);
+  const sheet = await render(workspace, `#characters/${starterSaves[0].id}`);
   assert.match(sheet, /<h2>Abilities<\/h2>/);
   assert.match(sheet, /Combat &amp; exploration/);
   assert.match(sheet, /class="sheet-table skill-list\s*"/);
   assert.doesNotMatch(sheet, /<h2>Inventory<\/h2>/);
-  assert.match(render(workspace, `#characters/${starterSaves[0].id}?view=items`), /Chain mail/);
+  assert.match(await render(workspace, `#characters/${starterSaves[0].id}?view=items`), /Chain mail/);
   assert.match(sheet, /class="character-facts"/);
 });
 
-test('additive item and layout updates preserve rules and safely migrate original Starter equipment', () => {
+test('additive item and layout updates preserve rules and safely migrate original Starter equipment', async () => {
   const old = structuredClone(file);
   delete old.items;
   delete old.itemFeatures;
@@ -495,25 +507,25 @@ test('additive item and layout updates preserve rules and safely migrate origina
   assert.throws(() => model.updateSystemDescriptions(file, changed), /rules differ/);
 });
 
-test('sheet controls expose inline editing, five coin balances, sortable columns and number labels', () => {
-  const html = render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=stats`);
+test('sheet controls expose inline editing, five coin balances, sortable columns and number labels', async () => {
+  const html = await render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=stats`);
   assert.match(html, /Edit Alignment/);
   assert.doesNotMatch(html, /Edit character details/);
-  const items = render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=items`);
+  const items = await render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=items`);
   for (const coin of ['Copper', 'Silver', 'Electrum', 'Gold', 'Platinum']) assert.match(items, new RegExp(`${coin} balance`));
   assert.match(items, /25 gp total/);
   assert.match(html, /aria-sort="ascending"/);
   assert.doesNotMatch(html, /Calculation for Athletics/);
-  assert.match(render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=skills`), /Calculation for Athletics/);
+  assert.match(await render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=skills`), /Calculation for Athletics/);
   assert.match(html, /Show modifiers first/);
   assert.match(html, /role="tooltip"[^>]*>Strength score/);
   assert.match(html, /role="tooltip"[^>]*>Strength modifier/);
-  const resources = render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=resources`);
+  const resources = await render({ ...data(), characters: [starterSaves[0]] }, `#characters/${starterSaves[0].id}?view=resources`);
   assert.doesNotMatch(resources, /Turn budget|Start new turn/);
   assert.match(resources, /ability-row[\s\S]*resource-card[\s\S]*Roll 1d10/);
 });
 
-test('money migration removes coins and old starting-money notes without double counting', () => {
+test('money migration removes coins and old starting-money notes without double counting', async () => {
   const old = structuredClone(starterSaves[0]);
   delete old.money;
   old.inventory.push({ id: 'coins', item: 'dnd5e:2014:item.gold-piece', quantity: 25, equipped: false });
@@ -530,15 +542,15 @@ test('money migration removes coins and old starting-money notes without double 
   assert.throws(() => model.updateSystemDescriptions(file, changed), /rules differ/);
 });
 
-test('Systems offer a dropdown and an accessible refresh control', () => {
-  const html = render(data(), '#systems');
+test('Systems offer a dropdown and an accessible refresh control', async () => {
+  const html = await render(data(), '#systems');
   assert.match(html, /System to load/);
   assert.match(html, /Other System from JSON/);
   assert.match(html, /aria-label="Reload DnD5e 2014"/);
   assert.match(html, /<svg aria-hidden="true"/);
 });
 
-test('System reload is atomic and preserves characters while rejecting incompatible replacements', () => {
+test('System reload is atomic and preserves characters while rejecting incompatible replacements', async () => {
   const workspace = { ...data(), characters: [starterSaves[0]] };
   const refreshed = structuredClone(file);
   refreshed.configurations[0].system.name = 'Refreshed DnD5e 2014';
@@ -556,7 +568,7 @@ test('System reload is atomic and preserves characters while rejecting incompati
   assert.throws(() => model.reloadSystem(workspace, file, incompatible), /revision/i);
 });
 
-test('rules descriptions render lists and paragraphs while preserving automatic links and escaping HTML', () => {
+test('rules descriptions render lists and paragraphs while preserving automatic links and escaping HTML', async () => {
   const engine = model.createRegistry([file]).engineForCharacter(starterSaves[0]);
   const html = renderToStaticMarkup(createElement(RulesText, { engine, text: 'First paragraph.\n\n• Second Wind • Another point\n\nNext paragraph.\n\n1. First step\n2. <script>unsafe</script>' }));
   assert.match(html, /<ul><li><a[^>]*>Second Wind<\/a><\/li><li>Another point<\/li><\/ul>/);
@@ -565,8 +577,8 @@ test('rules descriptions render lists and paragraphs while preserving automatic 
   assert.doesNotMatch(html, /<script>/);
 });
 
-test('Wizard spells are separate from slots and empty slot levels are initially hidden', () => {
-  const html = render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=resources`);
+test('Wizard spells are separate from slots and empty slot levels are initially hidden', async () => {
+  const html = await render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=resources`);
   assert.match(html, /Show all spell slots/);
   assert.match(html, /Cantrips/);
   assert.match(html, /Level 1 spells/);
@@ -576,16 +588,16 @@ test('Wizard spells are separate from slots and empty slot levels are initially 
   assert.match(html, /ability-row[\s\S]*Arcane Recovery/);
 });
 
-test('multiclass sheet names race and both class levels and exposes build editing', () => {
+test('multiclass sheet names race and both class levels and exposes build editing', async () => {
   const sample = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/multiclass-sample.json', import.meta.url), 'utf8'));
-  const html = render({ ...data(), characters: [sample] }, `#characters/${sample.id}`);
+  const html = await render({ ...data(), characters: [sample] }, `#characters/${sample.id}`);
   assert.match(html, /Classes &amp; levels/);
   assert.match(html, /Fighter 2 \/ Wizard 3/);
   assert.match(html, /<dt>Race<\/dt><dd>Human/);
   assert.match(html, /Edit Name/);
   assert.match(html, /Edit build/);
 });
-test('character rule text resolves Fighter level and offers the declared healing roll', () => {
+test('character rule text resolves Fighter level and offers the declared healing roll', async () => {
   const { engine, character } = exampleCharacter({ classes: [{ class: 'fighter', level: 2 }] });
   const result = engine.evaluate(character);
   const html = renderToStaticMarkup(createElement(CharacterRuleContext.Provider, { value: { character, result, update: () => {}, report: () => {} } }, createElement(FeatureRules, { engine, feature: engine.getFeature('dnd5e:2014:fighter.second-wind') })));
@@ -594,7 +606,7 @@ test('character rule text resolves Fighter level and offers the declared healing
   assert.match(html, /Roll 1d10 \+ 2/);
 });
 
-test('explicit reload accepts additive definitions and preserves character choices and balances', () => {
+test('explicit reload accepts additive definitions and preserves character choices and balances', async () => {
   const { character } = exampleCharacter();
   const incoming = structuredClone(file);
   incoming.features.push({ id: 'test:additive', revision: 1, name: 'Additive', components: [] });
@@ -605,7 +617,7 @@ test('explicit reload accepts additive definitions and preserves character choic
   assert.equal(model.createRegistry(next.systems).engineForCharacter(next.characters[0]).evaluate(next.characters[0]).status, 'valid');
 });
 
-test('spell results expose separate application and casting level after spending the slot', () => {
+test('spell results expose separate application and casting level after spending the slot', async () => {
   const { engine, character } = exampleCharacter({ classes: [{ class: 'wizard', level: 5 }] });
   const ready = finalizeCharacter(engine, character, 'finalize');
   const result = engine.evaluate(ready);
@@ -613,19 +625,19 @@ test('spell results expose separate application and casting level after spending
   const mode = spell.modes.find((entry) => entry.slotLevel === 3);
   const instance = featureRollInstances(engine, result, spell.feature)[0];
   const rolled = rollFeature(engine, ready, instance.id, 'spell-roll', () => 0, mode.capability.id).character;
-  const show = (saved) => render({ ...data(), characters: [saved] }, `#characters/${saved.id}?view=resources`);
-  const pending = show(rolled);
+  const show = async (saved) => await render({ ...data(), characters: [saved] }, `#characters/${saved.id}?view=resources`);
+  const pending = await show(rolled);
   assert.match(pending, /Level 3 slot spent/);
   assert.match(pending, /Mark applied/);
   assert.match(pending, /Clear rolls/);
   assert.match(pending, /Clear all rolls/);
   assert.doesNotMatch(pending, /Reroll/);
-  const applied = show(applyFeatureRoll(engine, rolled, 'spell-roll', 'apply').character);
+  const applied = await show(applyFeatureRoll(engine, rolled, 'spell-roll', 'apply').character);
   assert.match(applied, /disabled="">Applied/);
   assert.doesNotMatch(applied, />Mark applied</);
 });
 
-test('sheet display keeps Hit Point class levels literal and resolves modifiers', () => {
+test('sheet display keeps Hit Point class levels literal and resolves modifiers', async () => {
   const { engine, character } = exampleCharacter({ classes: [{ class: 'wizard', level: 3 }] });
   const result = engine.evaluate(character);
   const html = renderToStaticMarkup(createElement(CharacterRuleContext.Provider, { value: { character, result, update: () => {}, report: () => {} } }, createElement(FeatureRules, { engine, feature: engine.getFeature('dnd5e:2014:wizard.hit-points') })));
@@ -634,8 +646,8 @@ test('sheet display keeps Hit Point class levels literal and resolves modifiers'
   assert.match(html, /resolved-value/);
 });
 
-test('spell levels collapse and free utility spells have no use control', () => {
-  const html = render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=resources`);
+test('spell levels collapse and free utility spells have no use control', async () => {
+  const html = await render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=resources`);
   assert.match(html, /<details class="spell-level" open=""><summary>Cantrips/);
   const cards = [...html.matchAll(/<article class="panel spell-row">([\s\S]*?)<\/article>/g)].map((match) => match[1]);
   const utility = cards.find((card) => card.includes('Mage Hand'));
@@ -645,12 +657,12 @@ test('spell levels collapse and free utility spells have no use control', () => 
   assert.match(fire, />Use Spell<\/button>/);
   assert.doesNotMatch(html, /Rolling spends the ability use and saves the result/);
   assert.ok(html.indexOf('>Long rest</button>') < html.indexOf('<h2>Abilities</h2>'));
-  const sheet = render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=items`);
+  const sheet = await render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=items`);
   assert.match(sheet, /Copper \(cp\)/);
   assert.doesNotMatch(sheet, /<span>cp<\/span>/);
 });
 
-test('description flags and replacement arrays separate automatic prose from explicit exceptions', () => {
+test('description flags and replacement arrays separate automatic prose from explicit exceptions', async () => {
   const { engine, character } = exampleCharacter({ classes: [{ class: 'wizard', level: 3 }] });
   const result = engine.evaluate(character);
   const show = (feature, contextual = true) => {
@@ -658,27 +670,27 @@ test('description flags and replacement arrays separate automatic prose from exp
     return renderToStaticMarkup(contextual ? createElement(CharacterRuleContext.Provider, { value: { character, result, update: () => {}, report: () => {} } }, rules) : rules);
   };
   const feature = { id: 'example', revision: 1, name: 'Example', components: [], description: 'your Constitution modifier per wizard level. EXTRA', processDescriptionAutomatically: false };
-  assert.doesNotMatch(show(feature), /resolved-value/);
+  assert.doesNotMatch(await show(feature), /resolved-value/);
   const override = { ...feature, descriptionOverride: [
     { originalString: 'your Constitution modifier', overrideString: '{{stat:modifier.constitution}} Constitution modifier' },
     { originalString: 'EXTRA', overrideString: '{{stat:constitution}} {{UNKNOWN}} <script>bad</script>' },
   ] };
-  const html = show(override);
+  const html = await show(override);
   assert.equal((html.match(/resolved-value/g) ?? []).length, 2);
   assert.match(html, /Constitution modifier/);
   assert.match(html, /per wizard level/);
   assert.match(html, /{{UNKNOWN}}/);
   assert.doesNotMatch(html, /<script>/);
-  assert.equal((show({ ...override, processDescriptionAutomatically: true }).match(/resolved-value/g) ?? []).length, 3);
-  assert.match(show(override, false), /your Constitution modifier per wizard level/);
-  assert.doesNotMatch(show({ ...feature, descriptionOverride: [{ originalString: feature.description, overrideString: '' }] }), /wizard level/);
-  assert.match(show({ ...feature, description: 'Example\nOriginal', descriptionOverride: [{ originalString: 'Example\nOriginal', overrideString: 'Whole source replaced' }] }), /Whole source replaced/);
-  const lists = show({ ...feature, descriptionOverride: [{ originalString: feature.description, overrideString: 'First\n\n- {{stat:constitution}}\n- Constitution modifier' }] });
+  assert.equal((await show({ ...override, processDescriptionAutomatically: true }).match(/resolved-value/g) ?? []).length, 3);
+  assert.match(await show(override, false), /your Constitution modifier per wizard level/);
+  assert.doesNotMatch(await show({ ...feature, descriptionOverride: [{ originalString: feature.description, overrideString: '' }] }), /wizard level/);
+  assert.match(await show({ ...feature, description: 'Example\nOriginal', descriptionOverride: [{ originalString: 'Example\nOriginal', overrideString: 'Whole source replaced' }] }), /Whole source replaced/);
+  const lists = await show({ ...feature, descriptionOverride: [{ originalString: feature.description, overrideString: 'First\n\n- {{stat:constitution}}\n- Constitution modifier' }] });
   assert.match(lists, /<ul>/);
   assert.equal((lists.match(/resolved-value/g) ?? []).length, 1);
 });
 
-test('saved full-string overrides migrate to arrays without losing characters', () => {
+test('saved full-string overrides migrate to arrays without losing characters', async () => {
   const legacy = structuredClone(file);
   const hp = legacy.features.find((feature) => feature.id === 'dnd5e:2014:wizard.hit-points');
   hp.descriptionOverride = hp.description.replace('your Constitution modifier', '{{CON}}');
@@ -692,7 +704,7 @@ test('saved full-string overrides migrate to arrays without losing characters', 
   assert.match(converted[0].overrideString, /{{stat:modifier.constitution}}/);
 });
 
-test('System reload safely retires generated Roll Features while retaining character balances', () => {
+test('System reload safely retires generated Roll Features while retaining character balances', async () => {
   const old = structuredClone(file);
   old.features.push({ id: 'test:retired-roll', revision: 1, name: 'Old roll', roll: { id: 'old', label: 'Old roll', dice: '1d6' }, components: [] });
   const { character } = exampleCharacter();
@@ -702,7 +714,7 @@ test('System reload safely retires generated Roll Features while retaining chara
   assert.deepEqual(next.characters[0].resources, saved.resources);
 });
 
-test('Companion panels appear only for owned Features and show stats only when deployed', () => {
+test('Companion panels appear only for owned Features and show stats only when deployed', async () => {
   const feature = { id: 'companion', name: 'Test Defender', components: [], companion: { kind: 'creature', stats: ['companion.ac'], resources: [] }, source: 'https://www.dndbeyond.com/sources/dnd/tcoe/artificer#SteelDefender' };
   const engine = { getFeature: (id) => id === feature.id ? feature : undefined, getStatDefinition: () => ({ name: 'Armor Class' }), catalogue: { features: [feature], system: {}, items: [], itemFeatures: [] } };
   const result = { status: 'valid', instances: [], capabilities: [], resources: {}, stats: { 'companion.ac': { value: 15 } } };
@@ -722,7 +734,7 @@ test('Companion panels appear only for owned Features and show stats only when d
   assert.match(html, /href="https:\/\/www.dndbeyond.com\/sources\/dnd\/tcoe\/artificer#SteelDefender"/);
 });
 
-test('Infusion assignment UI offers owned items and external recipients, with source-only links', () => {
+test('Infusion assignment UI offers owned items and external recipients, with source-only links', async () => {
   const feature = { id: 'infusion', name: 'Enhanced Defense', source: 'https://www.dndbeyond.com/sources/dnd/tcoe/artificer#EnhancedDefense', equipmentEffect: { categories: ['Armor'], capacityStat: 'limit', group: 'infusions' }, components: [] };
   const engine = { getFeature: () => feature, catalogue: { features: [feature], system: {}, items: [{ id: 'armor', name: 'Armor', category: 'Armor', features: [] }], itemFeatures: [] } };
   const character = { inventory: [{ id: 'owned-armor', item: 'armor', quantity: 1, equipped: true }] };
@@ -734,4 +746,4 @@ test('Infusion assignment UI offers owned items and external recipients, with so
   assert.match(html, /target="_blank"/);
 });
 
-await server.close();
+test.after(() => server.close());

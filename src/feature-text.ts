@@ -29,10 +29,11 @@ function normalized(text: string) {
 /** A reusable, System-independent index. Ambiguous names retain every target. */
 export class FeatureTextIndex {
   private readonly root = node();
+  private readonly resolved = new Map<string, FeatureTextSpan[]>();
   private readonly contexts = new Map<string, NonNullable<FeatureDefinition['textLinkContext']>>();
   constructor(features: readonly FeatureDefinition[]) {
     const definitions = new Map(features.map((feature) => [feature.id, feature]));
-    for (const feature of features) if (feature.textLinkContext) this.contexts.set(feature.id, feature.textLinkContext);
+    for (const feature of features) if (feature.textLinkContext) this.contexts.set(feature.id, { before: feature.textLinkContext.before?.map((phrase) => normalized(phrase).value.trim()), after: feature.textLinkContext.after?.map((phrase) => normalized(phrase).value.trim()) });
     for (const feature of features) for (const name of [feature.displayName ?? feature.name, ...(feature.textAliases ?? [])]) {
       const label = normalized(name).value.trim();
       if (!label) continue;
@@ -49,6 +50,9 @@ export class FeatureTextIndex {
   }
 
   resolve(text: string, exclude: readonly string[] = []): FeatureTextSpan[] {
+    const key = text.length <= 8000 ? JSON.stringify([text, exclude]) : undefined;
+    const cached = key ? this.resolved.get(key) : undefined;
+    if (cached) return cached.map((span) => ({ ...span, features: [...span.features] }));
     const { value, starts, ends } = normalized(text), ignored = new Set(exclude), spans: FeatureTextSpan[] = [];
     for (let start = 0; start < value.length; start++) {
       if (word(value[start - 1])) continue;
@@ -66,6 +70,10 @@ export class FeatureTextIndex {
         start = match.end;
       }
     }
+    if (key) {
+      if (this.resolved.size >= 256) this.resolved.delete(this.resolved.keys().next().value!);
+      this.resolved.set(key, spans.map((span) => ({ ...span, features: [...span.features] })));
+    }
     return spans;
   }
 
@@ -74,7 +82,7 @@ export class FeatureTextIndex {
     if (!context) return true;
     const before = text.slice(0, start).trimEnd(), after = text.slice(end).trimStart();
     return !!context.before?.some((phrase) => {
-      const match = normalized(phrase).value.trim();
+      const match = phrase;
       return before.endsWith(match) && !word(before[before.length - match.length - 1]);
     }) || !!context.after?.some((phrase) => {
       const match = normalized(phrase).value.trim();
