@@ -2,9 +2,9 @@ import type { Catalogue, Value } from '@/src/model.js';
 
 export interface SystemFile {
   format: 'ttrpg-system'; version: 1; id: string; revision: number;
-  /** Monotonically increasing bundle release; independent of schema and pinned rules revisions. */
-  contentVersion?: number;
-  assetVersions?: Record<string, number>;
+  /** Semantic release; independent of schema and pinned rules revisions. */
+  contentVersion?: string;
+  assetVersions?: Record<string, string>;
   options: Record<string, { default: Value; values: Value[] }>;
   features: Catalogue['features'];
   blocks?: Catalogue['blocks'];

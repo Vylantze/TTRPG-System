@@ -6,7 +6,7 @@ import { Engine, adjustResource, updateInventory, itemProperties, parseSystemFil
 import { createDnd2014Engine } from '@/dist/systems/dnd5e-2014/index.js';
 
 const engine = createDnd2014Engine();
-const characters = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8'));
+const characters = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8')).data;
 
 test('inventory is separate from acquired Features and equipment changes recalculate AC', () => {
   const fighter = characters[0];

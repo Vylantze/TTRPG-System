@@ -1,3 +1,4 @@
+from system_package import read_asset, write_asset
 """Add the SRD spell lists and class spell selections from approved extracted source text."""
 from pathlib import Path
 from system_package import read_system, write_system
@@ -105,6 +106,6 @@ for c in d['configurations']:
  for n in [4,8,12,16,19]:cls['levels'][str(n)].append(copy.deepcopy(c['classes'][0]['levels']['4'][-1]))
  c['system']['validation']=[r for r in c['system'].get('validation',[]) if r['id']!='cleric-level-one-only']
 # Retain an audit of source spell lists for regression tests and future content updates.
-Path('src/systems/dnd5e-2014/spell-lists.json').write_text(json.dumps(lists,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+write_asset('src/systems/dnd5e-2014/spell-lists.json', lists)
 d['features']=list(fs.values());write_system(path, d)
 print('Expanded all SRD spell lists and casting wrappers.')

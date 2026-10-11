@@ -21,7 +21,7 @@ const { EquipmentEffects } = await server.ssrLoadModule('/src/EquipmentEffects.t
 const { SelectionCard } = await server.ssrLoadModule('/src/SelectionCard.tsx');
 const { addStarterCharacters, addStarterInventory, migrateMoney } = await server.ssrLoadModule('/src/starter-characters.ts');
 const { CharacterRuleContext } = await server.ssrLoadModule('/src/character-rule-context.ts');
-const starterSaves = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8'));
+const starterSaves = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8')).data;
 const { featureHref } = await server.ssrLoadModule('/src/feature-description.ts');
 const { safeReturn } = await server.ssrLoadModule('/src/feature-origin.ts');
 const { orderedSheetTabs, moveSheetTab } = await server.ssrLoadModule('/src/sheet-tabs.ts');
@@ -589,7 +589,7 @@ test('Wizard spells are separate from slots and empty slot levels are initially 
 });
 
 test('multiclass sheet names race and both class levels and exposes build editing', async () => {
-  const sample = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/multiclass-sample.json', import.meta.url), 'utf8'));
+  const sample = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/multiclass-sample.json', import.meta.url), 'utf8')).data;
   const html = await render({ ...data(), characters: [sample] }, `#characters/${sample.id}`);
   assert.match(html, /Classes &amp; levels/);
   assert.match(html, /Fighter 2 \/ Wizard 3/);

@@ -1,3 +1,4 @@
+from system_package import read_asset, write_asset
 """Build accessible, source-linked 2014 subclass progressions without paid prose.
 
 Run after the SRD and Artificer authorship scripts. The reviewed manifest contains
@@ -407,7 +408,7 @@ pool(find(BH,'Order of the Mutant','Exalted Mutation'),op('max',1,st('hemocraftM
 # The two PHB third-casters reuse the normal casting blocks and shared slot
 # resources. Known spells are selected at their own acquisition levels.
 META_PATH=Path('src/systems/dnd5e-2014/metadata.json')
-META=json.loads(META_PATH.read_text(encoding='utf-8'))
+META=read_asset(META_PATH)
 for cls,sub,schools in [('fighter','Eldritch Knight',['abjuration','evocation']),('rogue','Arcane Trickster',['enchantment','illusion'])]:
     caster=find(cls,sub,'Spellcasting')
     modify(caster,'thirdCasterLevel.'+cls,lv(cls),'floor')

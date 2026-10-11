@@ -1,3 +1,4 @@
+from system_package import read_asset, write_asset
 """Expand the approved SRD 5.1 class catalogue using extracted source prose.
 
 Run extract-srd-catalogue.py first. Conditional combat effects retain source rules;
@@ -136,11 +137,11 @@ for cls,die in {**{k:v['die'] for k,v in specs.items()},'fighter':10,'rogue':8,'
  hp=features[P+cls+'.hit-points'];hp['components']=[x for x in hp['components'] if x['id']!='hit-die-grant']+[{'id':'hit-die-grant','kind':'grantResource','key':f'hit-dice.d{die}','amount':1}]
 for die in [6,8,10,12]:features[P+f'resource.hit-dice.d{die}']['components'][0]['initialAmount']=0
 # Record exact catalogue automation scope separately from source text.
-meta_path=Path('src/systems/dnd5e-2014/metadata.json');meta=json.loads(meta_path.read_text(encoding='utf-8'))
+meta_path=Path('src/systems/dnd5e-2014/metadata.json');meta=read_asset(meta_path)
 meta['coverage']['unsupportedClasses']=[]
 meta['coverage']['additionalSourcesPending']=['Artificer (final published 2014-compatible version)','Non-SRD subclasses: final published sources pending approval/access']
 meta['coverage']['classCatalogue']='All 12 SRD classes; conditional combat, transformations, companions, and narrative effects remain source-text adjudicated.'
 for cls,sp in specs.items():meta['classInfo'][cls]={'hitDie':sp['die'],'asi':[4,8,12,16,19],'subclassAt':sp['sub'][1],'subclass':'subclass','startingSkills':sp['count'],'multiclassSkills':1 if cls in ['bard','ranger'] else 0,'skills':[x.split('skill.')[-1] for x in (allskills if sp['skills']=='all' else sp['skills'].split())]}
-meta_path.write_text(json.dumps(meta,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+write_asset(meta_path, meta)
 data['features']=list(features.values());write_system(path, data)
 print('Added eight SRD class progressions and their subclass source Features.')

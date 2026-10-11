@@ -1,5 +1,5 @@
 import { starterInventory } from '@/tools/starter-inventory.mjs';
-import { writeFileSync } from 'node:fs';
+import { writeAsset } from '@/tools/read-system.mjs';
 import { classEntryPath, selectionPath, pickPath, serializeCharacter } from '@/dist/index.js';
 import { createDnd2014Engine } from '@/dist/systems/dnd5e-2014/index.js';
 
@@ -55,5 +55,5 @@ const characters = templates.map((t) => {
   serializeCharacter(c);
   return c;
 });
-writeFileSync(new URL('../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), JSON.stringify(characters, null, 2) + '\n');
+writeAsset(new URL('../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), characters);
 console.log(`Generated ${characters.length} valid Starter Set characters.`);

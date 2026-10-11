@@ -1,3 +1,4 @@
+from system_package import read_asset, write_asset
 """Complete SRD nested class selections and level grants without replacing saved acquisition IDs."""
 from pathlib import Path
 from system_package import read_system, write_system
@@ -88,7 +89,7 @@ for f in fs.values():
  if 'spell' in f.get('tags',[]):f['repeat']={'maximum':20,'scope':'character'}
 # A prepared caster's class spell list and a known caster's extra patron options
 # remain separate from the reusable casting wrappers.
-lists=json.loads(Path('src/systems/dnd5e-2014/spell-lists.json').read_text(encoding='utf-8'))
+lists=read_asset('src/systems/dnd5e-2014/spell-lists.json')
 for name in ['Burning Hands','Command','Blindness/Deafness','Scorching Ray','Fireball','Stinking Cloud','Fire Shield','Wall of Fire','Flame Strike','Hallow']:
  fid=P+'warlock.prepared.'+slug(name)
  known=next(x for x in fs[P+'warlock.pact-magic']['components'] if x['id']=='known')

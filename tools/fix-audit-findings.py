@@ -1,3 +1,4 @@
+from system_package import read_asset, write_asset
 """Idempotent mechanical corrections; run after the class and roll generators.
 
 Uses the approved SRD and source links on the reviewed subclass entries. No paid prose.
@@ -107,7 +108,7 @@ def spell(owner, name, ability, key=None):
 
 
 arcana = F[P + 'subclass.cleric.arcana-domain.arcane-initiate.1']
-meta = json.loads(Path('src/systems/dnd5e-2014/metadata.json').read_text(encoding='utf-8'))
+meta = read_asset('src/systems/dnd5e-2014/metadata.json')
 cantrips = [spell(arcana, entry['name'], 'wisdom')['id'] for entry in meta['wizardSpells'] if entry['level'] == 0]
 put(arcana, choice('wizard-cantrips', cantrips, 2))
 arcana['mechanicalSummary'] = ['Arcana proficiency and two Wizard cantrips are granted. These cantrips use Wisdom as Cleric spells.']

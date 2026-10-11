@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { deserializeCharacter, serializeCharacter, useAbility, recoverResources } from '@/dist/index.js';
 import { createDnd2014Engine } from '@/dist/systems/dnd5e-2014/index.js';
 
-const characters = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8'));
+const characters = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8')).data;
 const engine = createDnd2014Engine();
 const expected = [
   { abilities: [16, 9, 15, 11, 13, 14], hp: 12, ac: 17, speed: 30, skills: { athletics: 5, history: 2, perception: 3, persuasion: 4 } },

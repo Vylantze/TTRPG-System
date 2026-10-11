@@ -1,6 +1,6 @@
 {
   "format": "ttrpg-system",
-  "contentVersion": 5,
+  "contentVersion": "1.1.0",
   "version": 1,
   "id": "dnd5e:2014-srd5.1",
   "revision": 1,
@@ -237,15 +237,19 @@
     "$ref": "item-features.json"
   },
   "assetVersions": {
-    "blocks.json": 1,
-    "class-features.json": 1,
-    "classes.json": 1,
-    "definitions.json": 1,
-    "features.json": 1,
-    "item-features.json": 1,
-    "items.json": 1,
-    "races.json": 1,
-    "spells.json": 1,
-    "subclasses.json": 1
+    "blocks.json": "1.0.0",
+    "class-features.json": "1.0.0",
+    "classes.json": "1.0.0",
+    "definitions.json": "1.0.0",
+    "features.json": "1.0.0",
+    "item-features.json": "1.0.0",
+    "items.json": "1.0.0",
+    "metadata.json": "1.0.0",
+    "multiclass-sample.json": "1.0.0",
+    "races.json": "1.0.0",
+    "spell-lists.json": "1.0.0",
+    "spells.json": "1.0.0",
+    "starter-characters.json": "1.0.0",
+    "subclasses.json": "1.0.0"
   }
 }

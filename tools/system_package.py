@@ -5,6 +5,17 @@ from pathlib import Path
 from json_sources import without_reference_urls
 
 
+def read_asset(path):
+    value = json.loads(Path(path).read_text(encoding='utf-8'))
+    return value['data'] if isinstance(value, dict) and 'assetVersion' in value else value
+
+
+def write_asset(path, data):
+    path = Path(path)
+    existing = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {}
+    path.write_text(json.dumps({'assetVersion': existing.get('assetVersion', '1.0.0'), 'data': data}, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+
 def read_system(path):
     path = Path(path)
     cache = {}
@@ -34,12 +45,14 @@ def read_system(path):
             return result
         return value
 
-    return resolve(json.loads(path.read_text(encoding='utf-8')))
+    return resolve(read_asset(path))
 
 
 def write_system(path, data, modular=None):
     path = Path(path)
     data = without_reference_urls(data)
+    if path.name != 'system.json':
+        return write_asset(path, data)
     if modular is None:
         original = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {}
         modular = any(isinstance(f, dict) and '$ref' in f for f in original.get('features', []))

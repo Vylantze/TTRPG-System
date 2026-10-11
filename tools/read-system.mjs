@@ -18,6 +18,16 @@ export function readSystem(path) {
   return resolveSystemFile(root, documents);
 }
 
+/** Auxiliary content and sample saves use the same version envelope as linked assets. */
+export function readAsset(path) {
+  const document = JSON.parse(readFileSync(path, 'utf8'));
+  return document.data ?? document;
+}
+export function writeAsset(path, data) {
+  const previous = JSON.parse(readFileSync(path, 'utf8'));
+  writeFileSync(path, JSON.stringify({ assetVersion: previous.assetVersion ?? '1.0.0', data }, null, 2) + '\n');
+}
+
 /** Preserve the existing package's feature groups when a JS generator edits it. */
 export function writeSystem(path, file) {
   const manifest = JSON.parse(readFileSync(path, 'utf8'));

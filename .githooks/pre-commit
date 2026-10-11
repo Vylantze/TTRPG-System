@@ -1,5 +1,5 @@
 #!/bin/sh
 set -eu
 cd "$(git rev-parse --show-toplevel)"
-node tools/version-staged-systems.mjs
+node --import ./tools/register-alias.mjs tools/version-staged-systems.mjs
 npm run lint

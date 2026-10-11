@@ -25,3 +25,4 @@ import '@/tests/audit-regressions.test.js';
 import '@/tests/system-package.test.js';
 
 import '@/tests/loading-performance.test.js';
+import '@/tests/version-policy.test.js';

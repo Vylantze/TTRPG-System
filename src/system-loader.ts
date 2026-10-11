@@ -1,4 +1,5 @@
 import { isSystemSnapshot, retainSystemSnapshot } from '@/src/system-snapshot.js';
+import { releaseVersion } from '@/src/version-policy.js';
 import { Engine, clone } from '@/src/engine.js';
 import { RuleError } from '@/src/expression.js';
 import type { Catalogue, Character, Value } from '@/src/model.js';
@@ -43,6 +44,15 @@ export function parseSystemFile(input: string | unknown): SystemFile {
   }
   safe(parsed);
   record(parsed);
+  try {
+    if (parsed.contentVersion !== undefined) parsed = { ...parsed, contentVersion: releaseVersion(parsed.contentVersion) };
+    record(parsed);
+    if (parsed.assetVersions !== undefined) {
+      record(parsed.assetVersions);
+      parsed = { ...parsed, assetVersions: Object.fromEntries(Object.entries(parsed.assetVersions).map(([path, version]) => [path, releaseVersion(version)])) };
+    }
+  } catch { throw new RuleError('SYSTEM_VERSION', 'Release versions must be major.minor.patch.'); }
+  record(parsed);
   // Public files remain editable. Reuse validation only when their complete JSON
   // is unchanged; mutations and non-JSON additions must still be rejected.
   const fingerprint = JSON.stringify(parsed);
@@ -53,11 +63,6 @@ export function parseSystemFile(input: string | unknown): SystemFile {
     return copy;
   }
   if (parsed.format !== 'ttrpg-system' || parsed.version !== 1 || typeof parsed.id !== 'string' || !parsed.id || !Number.isInteger(parsed.revision) || Number(parsed.revision) < 1) throw new RuleError('SYSTEM_VERSION', 'Invalid or unsupported System file.');
-  if (parsed.contentVersion !== undefined && (!Number.isSafeInteger(parsed.contentVersion) || Number(parsed.contentVersion) < 1)) throw new RuleError('SYSTEM_VERSION', 'Content version must be a positive integer.');
-  if (parsed.assetVersions !== undefined) {
-    record(parsed.assetVersions);
-    for (const version of Object.values(parsed.assetVersions)) if (!Number.isSafeInteger(version) || Number(version) < 1) throw new RuleError('SYSTEM_VERSION', 'Asset versions must be positive integers.');
-  }
   record(parsed.options);
   for (const option of Object.values(parsed.options)) {
     record(option);

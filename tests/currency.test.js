@@ -5,7 +5,7 @@ import { Engine, getCurrency, moneyTotal, setMoney, convertCurrencyItems, useAbi
 import { createDnd2014Engine } from '@/dist/systems/dnd5e-2014/index.js';
 
 const engine = createDnd2014Engine();
-const fighter = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8'))[0];
+const fighter = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8')).data[0];
 
 test('five coin balances retain quantities, total correctly and survive saves', () => {
   const money = { cp: 3, sp: 2, ep: 1, gp: 4, pp: 2 };

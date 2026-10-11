@@ -1,7 +1,7 @@
 import { Engine, clone } from '@/src/engine.js';
 import type { Catalogue } from '@/src/model.js';
 import { SystemRegistry, getFeatureCoverage } from '@/src/system-loader.js';
-import metadata from '@/src/systems/dnd5e-2014/metadata.json' with { type: 'json' };
+import metadataAsset from '@/src/systems/dnd5e-2014/metadata.json' with { type: 'json' };
 import systemFile from '@/src/systems/dnd5e-2014/system.json' with { type: 'json' };
 import { systemDocuments } from '@/src/systems/dnd5e-2014/documents.js';
 import { resolveSystemFile } from '@/src/system-package.js';
@@ -11,6 +11,7 @@ export { castSpell, castWizardSpell, recoverArcaneSlots, type SpellTurn } from '
 export type { Dnd2014Options } from '@/src/systems/dnd5e-2014/types/Dnd2014Options.js';
 export type { Spell } from '@/src/systems/dnd5e-2014/types/Spell.js';
 export type { SupportedClass } from '@/src/systems/dnd5e-2014/types/SupportedClass.js';
+const metadata = metadataAsset.data;
 export const armor = metadata.armor;
 export const wizardSpells: Spell[] = metadata.wizardSpells;
 export const classInfo = metadata.classInfo;

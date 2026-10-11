@@ -23,7 +23,8 @@ import type { Route } from '@/ui/src/types/Route';
 import { createRegistry, download, labelFromId, systemKey, type Workspace } from '@/ui/src/workspace';
 import { reconcilePrototypeCharacters } from '@/ui/src/prototype-characters';
 import { loadPrototypeTemplates } from '@/ui/src/load-prototype-templates';
-import { hasBundledUpdate } from '@/ui/src/system-updates';
+import { bundledUpdateKind, applySystemPatch } from '@/ui/src/system-updates';
+import { releaseVersion, assetData } from '@/src/index';
 function readRoute(): Route {
   const [path, query] = window.location.hash.slice(1).split('?');
   const params = new URLSearchParams(query);
@@ -76,11 +77,18 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
     void (async () => {
       const response = await fetch(bundledUrl, { cache: 'no-store' });
       if (!response.ok) throw new Error('Could not check for a bundled System update. Use Reload System to retry.');
-      // Checking the release counter does not need to compile the full catalogue.
-      // The replacement is fully validated only when the user reloads it.
-      const incoming = await response.json() as Pick<SystemFile, 'id' | 'revision' | 'contentVersion'>;
+      const incoming = await response.json() as Pick<SystemFile, 'id' | 'revision' | 'contentVersion' | 'assetVersions'>;
+      const kind = bundledUpdateKind(loaded, incoming);
+      if (kind === 'patch') {
+        const patch = await loadBundledSystem();
+        // A deployment can change between manifest checks; never apply a minor update silently.
+        if (!cancelled && bundledUpdateKind(loaded, patch) === 'patch') {
+          const accepted = applySystemPatch({ version: 1, systems: [loaded], characters: [] }, loaded, patch).systems[0];
+          setWorkspace((current) => current.systems.includes(loaded) ? { ...current, systems: current.systems.map((file) => file === loaded ? accepted : file) } : current);
+        } else if (!cancelled) setBundledUpdate(bundledUpdateKind(loaded, patch) === 'none' ? undefined : loaded);
+      }
       if (!cancelled) {
-        setBundledUpdate(hasBundledUpdate(loaded, incoming) ? loaded : undefined);
+        if (kind !== 'patch') setBundledUpdate(['minor', 'major'].includes(kind) ? loaded : undefined);
         setUpdateError('');
       }
     })().catch((reason: unknown) => {
@@ -153,6 +161,19 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
     try {
       const incoming = source ? await loadSelectedSystem(source) : await loadBundledSystem();
       if (systemKey(incoming) !== systemKey(existing)) throw new Error('Load a different System revision separately.');
+      if (bundledUpdateKind(existing, incoming) === 'patch') {
+        const patched = applySystemPatch(workspace, existing, incoming);
+        change((current) => {
+          if (current !== workspace) {
+            setError('The workspace changed during the patch update. Try again.');
+            return current;
+          }
+          setReloadMessage(`Applied ${incoming.configurations[0].system.name} patch ${releaseVersion(incoming.contentVersion)}.`);
+          setBundledUpdate(undefined);
+          return patched;
+        });
+        return;
+      }
       const cleanup = reconcilePrototypeCharacters(workspace, await loadPrototypeTemplates(), incoming);
       const next = migrateMoney(cleanup.workspace);
       change((current) => {
@@ -207,7 +228,7 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
     try {
       const [system, response] = await Promise.all([loadBundledSystem(), fetch(starterUrl)]);
       if (!response.ok) throw new Error('Starter Set files could not be loaded.');
-      const saves: unknown = await response.json();
+      const saves = assetData(await response.json());
       const next = addStarterCharacters(workspaceRef.current, system, saves);
       change(next);
       go('characters');
@@ -223,7 +244,7 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
     try {
       const response = await fetch(multiclassUrl);
       if (!response.ok) throw new Error('Multiclass sample could not be loaded.');
-      const character = deserializeCharacter(await response.text());
+      const character = deserializeCharacter(JSON.stringify(assetData(await response.json())));
       const result = registry.engineForCharacter(character).evaluate(character);
       if (result.status !== 'valid') throw new Error('Reload the bundled System before adding this sample.');
       character.id = crypto.randomUUID();
@@ -323,7 +344,7 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
           {reloadMessage && <p className="notice" role="status">{reloadMessage}</p>}
           {bundledUpdate && workspace.systems.includes(bundledUpdate) && (
             <div className="notice row" role="status">
-              <span>An updated bundled System is available. Reload to get the latest classes and Features. Compatible characters are preserved; incompatible samples are rebuilt and other incompatible characters are removed.</span>
+              <span>A minor or major System update is available and requires reloading. Compatible characters are preserved; incompatible samples are rebuilt and other incompatible characters are removed.</span>
               <button disabled={loading} onClick={() => void reload(bundledUpdate)}>Reload updated System</button>
             </div>
           )}
@@ -358,7 +379,7 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
                       {'Loaded · revision '}
                       {file.revision}
                       {' · content version '}
-                      {file.contentVersion ?? 1}
+                      {releaseVersion(file.contentVersion)}
                     </p>
                     <h2>{file.configurations[0].system.name}</h2>
                     <p>

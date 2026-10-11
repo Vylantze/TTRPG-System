@@ -1,3 +1,4 @@
+from system_package import read_asset, write_asset
 """Save display text for the implemented SRD 5.1 content in system.json.
 
 Run from the project root with pdfplumber installed. The official source PDF belongs
@@ -212,7 +213,7 @@ for short_id, headings in {
 
 # One full spell description, shared by its prepared, book, mastery, signature,
 # cantrip, and racial wrappers. This avoids hundreds of repeated rule blocks.
-metadata = json.loads((SYSTEM.parent / 'metadata.json').read_text(encoding='utf8'))
+metadata = read_asset(SYSTEM.parent / 'metadata.json')
 for spell in metadata['wizardSpells']:
     save('spell.' + spell['slug'], [find(spell['name'], spell['page'])])
 

@@ -1,3 +1,4 @@
+from system_package import read_asset, write_asset
 """Rebuild the SRD 5.1 Wizard spell metadata from the authorized official PDF.
 
 Requires pypdf. Source PDF is a local, untracked reference cache. This script
@@ -51,7 +52,7 @@ for level, names in enumerate(SPELLS):
 
 # Update cosmetic spell header metadata; executable rules remain in system.json.
 metadata_path = Path('src/systems/dnd5e-2014/metadata.json')
-metadata = json.loads(metadata_path.read_text(encoding='utf8'))
+metadata = read_asset(metadata_path)
 metadata['wizardSpells'] = rows
-metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+write_asset(metadata_path, metadata)
 print(f'Extracted {len(rows)} Wizard spell headers from SRD 5.1.')
