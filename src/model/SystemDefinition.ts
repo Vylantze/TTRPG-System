@@ -1,4 +1,5 @@
 import type { SheetTab } from '@/src/model/SheetTab.js';
+import type { ResetCondition } from '@/src/model/ResetCondition.js';
 import type { Value } from '@/src/model/Value.js';
 import type { Expression } from '@/src/model/Expression.js';
 import type { Predicate } from '@/src/model/Predicate.js';
@@ -11,6 +12,7 @@ import type { CurrencyDefinition } from '@/src/model/CurrencyDefinition.js';
 import type { SpellDisplay } from '@/src/model/SpellDisplay.js';
 
 export interface SystemDefinition {
+  resetConditions?: ResetCondition[];
   equipmentRules?: { attunementLimitStat?: string; preventDuplicateAttunement?: boolean };
   /** Resource recovery allocation shares one budget across all listed character pools. */
   recoveryAllocations?: Record<string, { budgetStat: string; keys: string[] }>;

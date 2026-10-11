@@ -51,6 +51,10 @@ export function parseSystemFile(input: string | unknown): SystemFile {
   }
   if (parsed.format !== 'ttrpg-system' || parsed.version !== 1 || typeof parsed.id !== 'string' || !parsed.id || !Number.isInteger(parsed.revision) || Number(parsed.revision) < 1) throw new RuleError('SYSTEM_VERSION', 'Invalid or unsupported System file.');
   if (parsed.contentVersion !== undefined && (!Number.isSafeInteger(parsed.contentVersion) || Number(parsed.contentVersion) < 1)) throw new RuleError('SYSTEM_VERSION', 'Content version must be a positive integer.');
+  if (parsed.assetVersions !== undefined) {
+    record(parsed.assetVersions);
+    for (const version of Object.values(parsed.assetVersions)) if (!Number.isSafeInteger(version) || Number(version) < 1) throw new RuleError('SYSTEM_VERSION', 'Asset versions must be positive integers.');
+  }
   record(parsed.options);
   for (const option of Object.values(parsed.options)) {
     record(option);

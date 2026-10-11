@@ -244,6 +244,7 @@ export function settleAbility(input: Character, pendingId: string, outcome: stri
 }
 export function recoverResources(engine: Engine, input: Character, recoveryEvent: string, eventId: string, allocation?: Record<string, number>, random?: () => number): Character {
   checkCharacter(input);
+  if (engine.catalogue.system.resetConditions && !engine.catalogue.system.resetConditions.some((condition) => condition.id === recoveryEvent)) throw new RuleError('RECOVERY', 'Unknown System reset condition.');
   const character = clone(input);
   if (input.buildState === 'draft') throw new RuleError('DRAFT', 'Finalize the construction draft before recovery.');
   if (!stamp(character, eventId, { kind: 'recover', recoveryEvent, ...(allocation !== undefined ? { allocation } : {}) })) return character;

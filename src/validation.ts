@@ -185,6 +185,7 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
       for (const r of v.recovery) {
         record(r);
         text(r.event);
+        if (c.system.resetConditions && !c.system.resetConditions.some((condition) => condition.id === r.event)) throw new RuleError('RECOVERY', `Unknown System reset condition: ${r.event}`);
         if (r.dice !== undefined) {
           text(r.dice);
           if (r.amount === 'full' || rollDice(r.dice, () => 0).total < 0) throw new RuleError('SCHEMA', 'Invalid dice recovery.');
@@ -210,6 +211,7 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
       for (const r of v.recovery) {
         record(r);
         text(r.event);
+        if (c.system.resetConditions && !c.system.resetConditions.some((condition) => condition.id === r.event)) throw new RuleError('RECOVERY', `Unknown System reset condition: ${r.event}`);
         if (r.dice !== undefined) {
           text(r.dice);
           if (r.amount === 'full' || rollDice(r.dice, () => 0).total < 0) throw new RuleError('SCHEMA', 'Invalid dice recovery.');
@@ -337,6 +339,22 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
     if (compiled.system.terminology !== undefined) {
       record(compiled.system.terminology);
       for (const key of ['classSingular', 'classPlural', 'creatureSingular', 'creaturePlural', 'creatureTag']) text(compiled.system.terminology[key as keyof typeof compiled.system.terminology]);
+    }
+    if (compiled.system.resetConditions !== undefined) {
+      list(compiled.system.resetConditions);
+      const ids = new Set<string>();
+      for (const condition of compiled.system.resetConditions) {
+        record(condition);
+        text(condition.id);
+        text(condition.name);
+        text(condition.description);
+        if (condition.showButton !== undefined && typeof condition.showButton !== 'boolean') throw new RuleError('RECOVERY', 'Invalid reset button visibility.');
+        if (ids.has(condition.id)) throw new RuleError('RECOVERY', 'Duplicate reset condition.');
+        ids.add(condition.id);
+      }
+      const selected = compiled.system.commandRules?.selectedRecovery;
+      const references = [...(compiled.system.recoveryEvents ?? []), ...(compiled.system.resetButtons ?? []).map((button) => button.event), ...Object.keys(compiled.system.recoveryAllocations ?? {}), ...(selected ? [selected.requiredEvent, ...(selected.boundaryEvent ? [selected.boundaryEvent] : [])] : [])];
+      if (references.some((id) => !ids.has(id))) throw new RuleError('RECOVERY', 'Unknown System reset condition reference.');
     }
     if (compiled.system.resetButtons !== undefined) {
       list(compiled.system.resetButtons);
