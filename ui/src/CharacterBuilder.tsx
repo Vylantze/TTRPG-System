@@ -493,7 +493,7 @@ function RootPicker({ engine, character, edit, level }: { engine: Engine; charac
           {choices.map((f) => <option value={f.id} key={f.id}>{featureName(f)}</option>)}
         </select>
       </label>
-      <button className="quiet" disabled={!selected} onClick={() => edit([{ kind: 'root', acquisition: { id: crypto.randomUUID(), feature: selected, acquiredCharacterLevel: level, ...(character.history.length ? { acquiredEvent: character.history.length - 1 } : {}) } }])}>Add Feature</button>
+      <button className="quiet" disabled={!selected} onClick={() => edit([{ kind: 'root', acquisition: { id: crypto.randomUUID(), feature: selected, acquiredCharacterLevel: level, acquiredEvent: character.history.length } }])}>Add Feature</button>
     </>
   );
 }

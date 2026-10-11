@@ -7,7 +7,7 @@ export function trackerPools(character: Character, instances: Instance[], featur
   const active = instances.filter((i) => i.active && i.eligible);
   const contracts = new Map<string, string>();
   for (const instance of active) for (const component of features.get(instance.feature)!.components) {
-    if (component.kind !== 'trackResource' || (component.condition && !read(component.condition, instance))) continue;
+    if (component.kind !== 'trackResource' || (component.condition !== undefined && !read(component.condition, instance))) continue;
     const id = `pool/character/character/${encodeURIComponent(component.key)}`;
     const minimum = component.minimum ?? 0, integer = component.integer ?? false;
     const capacity = component.maximum === undefined ? Infinity : constrain(read(component.maximum, instance) as number, { minimum, integer });
@@ -26,7 +26,7 @@ export function trackerPools(character: Character, instances: Instance[], featur
       tracking: true, current, available: 0, spent: 0, reserved: 0, providers: [instance.id], recovery, initial: 'empty', grants: [...state?.grants ?? []] };
   }
   for (const instance of active) for (const component of features.get(instance.feature)!.components) {
-    if (component.kind !== 'grantResource' || (component.condition && !read(component.condition, instance))) continue;
+    if (component.kind !== 'grantResource' || (component.condition !== undefined && !read(component.condition, instance))) continue;
     const pool = result[`pool/character/character/${encodeURIComponent(component.key)}`];
     if (!pool) continue; // Final evaluation diagnoses missing providers, independent of admission order.
     const token = JSON.stringify([instance.id, component.id]);

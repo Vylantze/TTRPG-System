@@ -1,4 +1,4 @@
-import { parseSystemFile, serializeCharacter } from '@/src/index';
+import { parseSystemFile, serializeCharacter, type Character } from '@/src/index';
 import { readWorkspace, systemKey, type Workspace } from '@/ui/src/workspace';
 import type { DatabaseSnapshot } from '@/ui/src/types/DatabaseSnapshot';
 
@@ -22,6 +22,8 @@ export class WorkspaceDatabase {
   private connection?: Promise<IDBDatabase>;
   private revision = 0;
   private previous?: Workspace;
+  private storedCharacterIds: string[] = [];
+  private storedSystemKeys: string[] = [];
   private queue: Promise<void> = Promise.resolve();
 
   constructor(private factory: IDBFactory, private name = 'ttrpg-feature-forge') {}
@@ -58,7 +60,7 @@ export class WorkspaceDatabase {
     return this.connection;
   }
 
-  async load(legacy?: Pick<Storage, 'getItem'>): Promise<Workspace> {
+  async load(legacy?: Pick<Storage, 'getItem'>, recoverCharacter?: (value: unknown) => Character | undefined): Promise<Workspace> {
     const database = await this.open();
     const transaction = database.transaction(stores, 'readonly');
     const done = completion(transaction);
@@ -72,7 +74,7 @@ export class WorkspaceDatabase {
     if (!snapshot) {
       if (systems.length || characters.length) throw new Error('The local database snapshot is missing. Existing records have been preserved.');
       // Do not delete the legacy copy: a failed migration must always be recoverable.
-      const workspace = legacy ? readWorkspace({ getItem: (key) => legacy.getItem(key) }) : { version: 1 as const, systems: [], characters: [] };
+      const workspace = legacy ? readWorkspace({ getItem: (key) => legacy.getItem(key) }, recoverCharacter) : { version: 1 as const, systems: [], characters: [] };
       await this.save(workspace);
       return workspace;
     }
@@ -81,9 +83,17 @@ export class WorkspaceDatabase {
     const byCharacter = new Map(characters.map((character) => [character.id, character]));
     if (bySystem.size !== snapshot.systemKeys.length || byCharacter.size !== snapshot.characterIds.length || new Set(snapshot.systemKeys).size !== snapshot.systemKeys.length || new Set(snapshot.characterIds).size !== snapshot.characterIds.length || snapshot.systemKeys.some((key) => !bySystem.has(key)) || snapshot.characterIds.some((id) => !byCharacter.has(id))) throw new Error('The database contains an incomplete workspace. Records have been preserved.');
     const stored = { version: 1, systems: snapshot.systemKeys.map((key) => bySystem.get(key)), characters: snapshot.characterIds.map((id) => byCharacter.get(id)), active: snapshot.active };
-    const workspace = readWorkspace({ getItem: () => JSON.stringify(stored) });
+    let repaired = false;
+    const workspace = readWorkspace({ getItem: () => JSON.stringify(stored) }, recoverCharacter
+      ? (value) => {
+          repaired = true;
+          return recoverCharacter(value);
+        }
+      : undefined);
     this.revision = snapshot.revision;
-    this.previous = workspace;
+    this.storedCharacterIds = snapshot.characterIds;
+    this.storedSystemKeys = snapshot.systemKeys;
+    this.previous = repaired ? undefined : workspace;
     return workspace;
   }
 
@@ -111,9 +121,9 @@ export class WorkspaceDatabase {
         return;
       }
       const systems = transaction.objectStore('systems'), characters = transaction.objectStore('characters');
-      for (const old of this.previous?.systems ?? []) if (!systemKeys.includes(systemKey(old))) systems.delete(systemKey(old));
+      for (const old of this.storedSystemKeys) if (!systemKeys.includes(old)) systems.delete(old);
       for (const file of workspace.systems) if (!this.previous?.systems.includes(file)) systems.put(file, systemKey(file));
-      for (const old of this.previous?.characters ?? []) if (!characterIds.includes(old.id)) characters.delete(old.id);
+      for (const old of this.storedCharacterIds) if (!characterIds.includes(old)) characters.delete(old);
       for (const character of workspace.characters) if (!this.previous?.characters.includes(character)) characters.put(character, character.id);
       const snapshot: DatabaseSnapshot = { version: 1, revision: this.revision + 1, systemKeys, characterIds, active: workspace.active };
       transaction.objectStore('workspace').put(snapshot, 'current');
@@ -125,6 +135,8 @@ export class WorkspaceDatabase {
       throw error;
     }
     this.revision++;
+    this.storedCharacterIds = characterIds;
+    this.storedSystemKeys = systemKeys;
     this.previous = workspace;
   }
 

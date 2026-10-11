@@ -50,6 +50,7 @@ export function parseSystemFile(input: string | unknown): SystemFile {
     return copy;
   }
   if (parsed.format !== 'ttrpg-system' || parsed.version !== 1 || typeof parsed.id !== 'string' || !parsed.id || !Number.isInteger(parsed.revision) || Number(parsed.revision) < 1) throw new RuleError('SYSTEM_VERSION', 'Invalid or unsupported System file.');
+  if (parsed.contentVersion !== undefined && (!Number.isSafeInteger(parsed.contentVersion) || Number(parsed.contentVersion) < 1)) throw new RuleError('SYSTEM_VERSION', 'Content version must be a positive integer.');
   record(parsed.options);
   for (const option of Object.values(parsed.options)) {
     record(option);
@@ -119,7 +120,8 @@ export class SystemRegistry {
   createEngine(id: string, revision: number, options: Record<string, Value> = {}): Engine {
     const file = this.files.get(this.key(id, revision));
     if (!file) throw new RuleError('SYSTEM_UNAVAILABLE', 'Required System revision is not loaded.');
-    const key = JSON.stringify([id, revision, Object.entries(options).sort(([a], [b]) => a.localeCompare(b))]);
+    const resolved = { ...Object.fromEntries(Object.entries(file.options).map(([name, option]) => [name, option.default])), ...options };
+    const key = JSON.stringify([id, revision, Object.entries(resolved).sort(([a], [b]) => a.localeCompare(b))]);
     let engine = this.engines.get(key);
     if (!engine) {
       engine = new Engine(selectCatalogue(file, options));

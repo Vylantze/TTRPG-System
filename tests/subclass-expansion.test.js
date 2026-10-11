@@ -1,11 +1,106 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createDnd2014Engine } from '@/dist/systems/dnd5e-2014/index.js';
-import { classEntryPath, Engine, migrateCharacterStructure, featureRollExpression } from '@/dist/index.js';
+import { classEntryPath, Engine, migrateCharacterStructure, featureRollExpression, spellGroups, finalizeCharacter, rollFeature, applyFeatureRoll, adjustResource } from '@/dist/index.js';
 
 const engine = createDnd2014Engine();
 const prefix = 'dnd5e:2014:';
 const choiceFor = (cls) => Object.entries(cls.levels).flatMap(([level, entries]) => entries.filter((entry) => entry.kind === 'chooseFeatures' && ['subclass', 'domain', 'specialist'].includes(entry.id)).map((entry) => ({ level: Number(level), entry })))[0];
+
+function subclassCharacter(cls, level, name, rules = engine, other = []) {
+  const character = rules.createCharacter('subclass-boundary', name, [{ id: 'main', class: prefix + cls, level }, ...other]);
+  const choice = choiceFor(rules.catalogue.classes.find((entry) => entry.id === prefix + cls));
+  const feature = choice.entry.candidates.ids.find((id) => rules.getFeature(id).name === name);
+  assert.ok(feature, name);
+  character.selections[classEntryPath('main', choice.level, choice.entry.id)] = [{ id: 'selected', feature }];
+  return character;
+}
+
+test('named subclass choices respect their source level boundaries', () => {
+  const arcana = engine.evaluate(subclassCharacter('cleric', 1, 'Arcana Domain'));
+  const cantrips = arcana.selections.find((slot) => slot.definition.id === 'wizard-cantrips');
+  assert.equal(cantrips.minimum, 2);
+  assert.ok(spellGroups(engine, arcana).some((spell) => spell.name === 'Magic Missile' && spell.castingAbility === 'wisdom'));
+  const swords = engine.evaluate(subclassCharacter('bard', 3, 'College of Swords'));
+  assert.deepEqual(swords.selections.find((slot) => slot.definition.id === 'style').definition.candidates.ids, [prefix + 'style.dueling', prefix + 'style.two-weapon-fighting']);
+  for (const [level, count, uses] of [[3, 2, 1], [7, 3, 1], [10, 4, 1], [15, 5, 2]]) {
+    const character = subclassCharacter('fighter', level, 'Rune Knight');
+    const slot = engine.evaluate(character).selections.find((entry) => entry.definition.id === 'runes');
+    assert.equal(slot.minimum, count);
+    const hill = slot.definition.candidates.ids.find((id) => engine.getFeature(id).name === 'Hill Rune');
+    assert.equal(engine.getCandidates(character, slot.id, {}, { features: [hill] })[0].status === 'invalid', level < 7);
+    character.selections[slot.id] = slot.definition.candidates.ids.slice(0, count).map((feature, index) => ({ id: String(index), feature }));
+    const result = engine.evaluate(character);
+    const pools = Object.values(result.resources).filter((pool) => pool.key.startsWith('rune-knight-'));
+    assert.equal(pools.length, count);
+    assert.ok(pools.every((pool) => pool.capacity === uses));
+  }
+});
+
+test('Perfected Guardian is unavailable under the Infiltrator armor model', () => {
+  for (const model of ['guardian', 'infiltrator']) {
+    const character = subclassCharacter('artificer', 15, 'Armorer');
+    const slot = engine.evaluate(character).selections.find((entry) => entry.definition.candidates.ids?.includes(prefix + 'artificer.armorer.guardian'));
+    assert.ok(slot);
+    character.selections[slot.id] = [{ id: 'model', feature: prefix + 'artificer.armorer.' + model }];
+    const result = engine.evaluate(character);
+    assert.equal(Object.values(result.resources).some((pool) => pool.key === 'perfected-guardian'), model === 'guardian');
+    assert.equal(result.capabilities.some((cap) => cap.definition.name.includes('Perfected Guardian')), model === 'guardian');
+  }
+});
+
+test('Profane Soul uses its own table and shares the combined Warlock Pact progression', () => {
+  for (const [level, slots, slotLevel, known] of [[3, 1, 1, 2], [6, 2, 1, 3], [7, 2, 2, 4], [13, 2, 3, 7], [19, 2, 4, 10], [20, 2, 4, 11]]) {
+    const result = engine.evaluate(subclassCharacter('blood-hunter', level, 'Order of the Profane Soul'));
+    assert.equal(result.stats.pactSlotCount.value, slots);
+    assert.equal(result.stats.pactSlotLevel.value, slotLevel);
+    assert.equal(result.selections.find((slot) => slot.definition.id === 'known').minimum, known);
+  }
+  const rules = createDnd2014Engine({ multiclass: true });
+  const character = subclassCharacter('blood-hunter', 9, 'Order of the Profane Soul', rules, [{ id: 'warlock', class: prefix + 'warlock', level: 1 }]);
+  const result = rules.evaluate(character);
+  assert.equal(result.stats.pactSlotCount.value, 2);
+  assert.equal(result.stats.pactSlotLevel.value, 2);
+  assert.equal(result.selections.filter((slot) => slot.definition.id === 'cantrips').reduce((total, slot) => total + slot.minimum, 0), 3);
+  assert.equal(Object.values(result.resources).filter((pool) => pool.key === 'pact-slot').length, 1);
+});
+
+test('Cleric and Paladin share one Channel Divinity allowance', () => {
+  const rules = createDnd2014Engine({ multiclass: true });
+  const character = rules.createCharacter('channel', 'Channel', [{ id: 'cleric', class: prefix + 'cleric', level: 6 }, { id: 'paladin', class: prefix + 'paladin', level: 3 }]);
+  const pools = Object.values(rules.evaluate(character).resources).filter((pool) => pool.key.includes('channel-divinity'));
+  assert.equal(pools.length, 1);
+  assert.equal(pools[0].capacity, 2);
+});
+
+test('Celestial grants bonus cantrips and Healing Light spends dice before applying healing', () => {
+  let character = subclassCharacter('warlock', 1, 'The Celestial');
+  for (let iteration = 0; iteration < 40; iteration++) {
+    const result = engine.evaluate(character);
+    const slot = result.selections.find((entry) => entry.picks.length < entry.minimum);
+    if (!slot) break;
+    const features = engine.getSelectionFeatures(slot.definition).filter((feature) => !result.instances.some((instance) => instance.active && instance.feature === feature.id));
+    const chosen = features.find((feature) => engine.getCandidates(character, slot.id, {}, { features: [feature.id] })[0]?.status !== 'invalid');
+    assert.ok(chosen, slot.id);
+    character.selections[slot.id] = [...slot.picks, { id: String(slot.picks.length), feature: chosen.id }];
+  }
+  assert.equal(engine.evaluate(character).status, 'valid', JSON.stringify(engine.evaluate(character).diagnostics));
+  character = finalizeCharacter(engine, character, 'finalize');
+  let result = engine.evaluate(character);
+  for (const name of ['Light', 'Sacred Flame']) assert.ok(spellGroups(engine, result).some((spell) => spell.name === name && spell.castingAbility === 'charisma'));
+  const hp = Object.values(result.resources).find((pool) => pool.key === 'hit-points');
+  const healing = Object.values(result.resources).find((pool) => pool.key === 'celestial-healing-light');
+  assert.equal(healing.capacity, 2);
+  character = adjustResource(engine, character, hp.id, -5, 'damage');
+  const instance = result.instances.find((entry) => engine.getFeature(entry.feature).roll?.label === 'Healing Light (1d6)');
+  const rolled = rollFeature(engine, character, instance.id, 'heal-roll', () => 0);
+  result = engine.evaluate(rolled.character);
+  assert.equal(result.resources[healing.id].available, 1);
+  assert.equal(result.resources[hp.id].current, hp.current - 5);
+  const applied = applyFeatureRoll(engine, rolled.character, 'heal-roll', 'apply');
+  assert.equal(engine.evaluate(applied.character).resources[hp.id].current, hp.current - 4);
+  assert.equal(engine.evaluate(applied.character).resources[healing.id].available, 1);
+});
 
 test('all 124 accessible subclasses are selectable only through their owning class', () => {
   let count = 0;

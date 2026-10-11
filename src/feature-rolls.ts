@@ -6,14 +6,22 @@ import { spellGroups } from '@/src/spell-display.js';
 import { rollDice } from '@/src/dice.js';
 import { useAbility, adjustResource } from '@/src/commands.js';
 
-export function featureRollExpression(roll: FeatureRoll, character: Character, result: EvaluationResult): string {
+export function featureRollExpression(roll: FeatureRoll, character: Character, result: EvaluationResult, casting?: { slotLevel?: number; castingAbility?: string }): string {
   const resolveDie = (value: number | { stat: string }) => {
     const number = typeof value === 'number' ? value : result.stats[value.stat]?.value;
     if (!Number.isSafeInteger(number) || number! < 1) throw new RuleError('ROLL', 'The roll requires a positive integer dice stat.');
     return number!;
   };
-  const dice = typeof roll.dice === 'string' ? roll.dice : `${resolveDie(roll.dice.count)}d${resolveDie(roll.dice.sides)}`;
-  const bonus = typeof roll.bonus === 'number' ? roll.bonus : roll.bonus && 'stat' in roll.bonus ? result.stats[roll.bonus.stat]?.value : roll.bonus && 'class' in roll.bonus ? character.progressions.filter((p) => p.class === (roll.bonus as { class: string }).class).reduce((n, p) => n + p.level, 0) : 0;
+  let dice = typeof roll.dice === 'string' ? roll.dice : `${resolveDie(roll.dice.count)}d${resolveDie(roll.dice.sides)}`;
+  if (roll.characterScaling || roll.slotScaling) {
+    const match = /^(\d+)d(\d+)$/.exec(dice);
+    if (!match) throw new RuleError('ROLL', 'Scaling requires a single dice term.');
+    let count = Number(match[1]);
+    for (const step of [...roll.characterScaling ?? []].sort((a, b) => a.level - b.level)) if (result.characterLevel >= step.level) count = step.count;
+    if (roll.slotScaling) count += Math.max(0, (casting?.slotLevel ?? roll.slotScaling.baseLevel) - roll.slotScaling.baseLevel) * roll.slotScaling.dicePerLevel;
+    dice = `${count}d${match[2]}`;
+  }
+  const bonus = typeof roll.bonus === 'number' ? roll.bonus : roll.bonus && 'stat' in roll.bonus ? result.stats[roll.bonus.stat]?.value : roll.bonus && 'class' in roll.bonus ? character.progressions.filter((p) => p.class === (roll.bonus as { class: string }).class).reduce((n, p) => n + p.level, 0) : roll.bonus && 'castingAbility' in roll.bonus ? casting?.castingAbility ? result.stats[`modifier.${casting.castingAbility}`]?.value : 0 : 0;
   if (!Number.isFinite(bonus)) throw new RuleError('ROLL', 'The roll requires an unavailable stat.');
   return `${dice}${bonus ? ` ${bonus! < 0 ? '-' : '+'} ${Math.abs(bonus!)}` : ''}`;
 }
@@ -60,7 +68,7 @@ export function rollFeature(engine: Engine, character: Character, instanceId: st
   const use = capability ? useAbility(engine, character, capability.id, eventId, { actionTracking: 'manual' }) : undefined;
   if (use?.pending) throw new RuleError('ROLL', 'A Roll Feature requires an immediately spent ability use.');
   const next = use?.character ?? structuredClone(character);
-  const expression = featureRollExpression(roll, character, result);
+  const expression = featureRollExpression(roll, character, result, mode ? { slotLevel: mode.slotLevel, castingAbility: spell.find((group) => group.modes.includes(mode))!.castingAbility } : undefined);
   const outcome = { id: eventId, instance: instanceId, feature: instance!.feature, definition: JSON.stringify(roll), expression, ...(mode ? { casting: { capability: mode.capability.id, spell: roll.spell!, slotLevel: mode.slotLevel, ritual: mode.ritual } } : {}), ...rollDice(expression, random) };
   next.rollResults = [...next.rollResults ?? [], outcome];
   if (!use) next.events.push({ id: eventId, fingerprint: JSON.stringify({ kind: 'roll', instanceId, outcome }) });

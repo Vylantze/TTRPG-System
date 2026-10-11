@@ -8,7 +8,8 @@ import type { Character, Instance } from '@/src/model.js';
 export function migrateCharacterStructure(character: Character, before: Engine, after: Engine): Character {
   const updated = clone(character);
   updated.contentRevisions = Object.fromEntries([...after.catalogue.features, ...after.catalogue.classes].map((f) => [f.id, f.revision]));
-  const oldInstances = before.evaluate(character).instances;
+  const oldEvaluation = before.evaluate(character);
+  const oldInstances = oldEvaluation.instances;
   const convertedSlots = new Set<string>();
   for (const progression of character.progressions) {
     const oldClass = before.catalogue.classes.find((c) => c.id === progression.class);
@@ -29,7 +30,7 @@ export function migrateCharacterStructure(character: Character, before: Engine, 
   const retainedSelections = Object.fromEntries([...convertedSlots].map((path) => [path, updated.selections[path]]));
   const same = (a: Instance, b: Instance) => a.feature === b.feature && a.progression === b.progression && a.acquiredClassLevel === b.acquiredClassLevel && JSON.stringify(a.parameters) === JSON.stringify(b.parameters);
   const remap = (value: string): string => {
-    if (value.startsWith('pool/feature/')) {
+    if (/^pool\/(instance|parent|feature)\//.test(value)) {
       const parts = value.split('/');
       parts[2] = encodeURIComponent(remap(decodeURIComponent(parts[2])));
       return parts.join('/');
@@ -72,9 +73,18 @@ export function migrateCharacterStructure(character: Character, before: Engine, 
     }
     updated.selections = selections;
   }
-  if (!paths.size) return updated;
-  if (Object.keys(character.pending).length) throw new Error('Finish pending ability uses before reloading a System with moved Features.');
-  updated.bindings = Object.fromEntries(Object.entries(updated.bindings).map(([key, value]) => [remap(key), remap(value)]));
+  const newPools = after.evaluate(updated).resources;
+  // A shared pool can be renamed or merged while its provider Feature stays put.
+  // Preserve total expenditure rather than granting fresh uses under the new key.
+  const poolPaths = new Map<string, string>();
+  for (const old of Object.values(oldEvaluation.resources)) {
+    if (newPools[remap(old.id)]) continue;
+    const candidates = Object.values(newPools).filter((pool) => old.providers.some((provider) => pool.providers.includes(remap(provider))));
+    if (candidates.length === 1) poolPaths.set(old.id, candidates[0].id);
+  }
+  if (!paths.size && !poolPaths.size) return updated;
+  if (Object.keys(character.pending).length) throw new Error('Finish pending ability uses before reloading a System with moved Features or resources.');
+  updated.bindings = Object.fromEntries(Object.entries(updated.bindings).map(([key, value]) => [remap(key), poolPaths.get(value) ?? remap(value)]));
   const remapGrant = (token: string) => {
     try {
       const value: unknown = JSON.parse(token);
@@ -82,7 +92,18 @@ export function migrateCharacterStructure(character: Character, before: Engine, 
     } catch { /* Preserve unknown legacy tokens without granting them again. */ }
     return token;
   };
-  updated.resources = Object.fromEntries(Object.entries(updated.resources).map(([key, value]) => [remap(key), { ...value, ...(value.grants ? { grants: value.grants.map(remapGrant) } : {}) }]));
+  const resources: Character['resources'] = {};
+  const merged = new Set(poolPaths.values());
+  for (const [key, value] of Object.entries(updated.resources)) {
+    const target = poolPaths.get(key) ?? remap(key);
+    const state = { ...value, ...(value.grants ? { grants: value.grants.map(remapGrant) } : {}) };
+    if (merged.has(target)) {
+      if (!Number.isFinite(newPools[target].capacity)) throw new Error('An unlimited pool cannot be merged automatically.');
+      const spent = (resources[target]?.spent ?? 0) + (oldEvaluation.resources[key]?.spent ?? value.spent);
+      resources[target] = { ...state, spent, current: Math.max(newPools[target].minimum ?? 0, newPools[target].capacity - spent), grants: [...new Set([...(resources[target]?.grants ?? []), ...(state.grants ?? [])])] };
+    } else resources[target] = state;
+  }
+  updated.resources = resources;
   updated.rollResults = updated.rollResults?.map((roll) => ({ ...roll, instance: remap(roll.instance), ...(roll.casting ? { casting: { ...roll.casting, capability: remap(roll.casting.capability) } } : {}) }));
   updated.equipmentAssignments = updated.equipmentAssignments?.map((assignment) => ({ ...assignment, instance: remap(assignment.instance) }));
   updated.deployedCompanions = updated.deployedCompanions?.map(remap);

@@ -19,7 +19,10 @@ import { descriptionPreview, featureDescription, featureHref } from '@/ui/src/fe
 
 import { featureName, tagName } from '@/ui/src/display';
 import type { Route } from '@/ui/src/types/Route';
-import { reloadSystem, createRegistry, download, labelFromId, systemKey, type Workspace } from '@/ui/src/workspace';
+import { createRegistry, download, labelFromId, systemKey, type Workspace } from '@/ui/src/workspace';
+import { reconcilePrototypeCharacters } from '@/ui/src/prototype-characters';
+import { loadPrototypeTemplates } from '@/ui/src/load-prototype-templates';
+import { hasBundledUpdate } from '@/ui/src/system-updates';
 function readRoute(): Route {
   const [path, query] = window.location.hash.slice(1).split('?');
   const params = new URLSearchParams(query);
@@ -35,10 +38,12 @@ function go(page: string, id?: string, engine?: Engine) {
   window.location.hash = `${page}${id ? `/${encodeURIComponent(id)}` : ''}${query}`;
 }
 const errorMessage = (e: unknown) => e instanceof Error ? e.message : String(e);
-export function App({ initialWorkspace, persist }: { initialWorkspace: Workspace; persist: (workspace: Workspace) => Promise<void> }) {
+export function App({ initialWorkspace, persist, startupMessage = '' }: { initialWorkspace: Workspace; persist: (workspace: Workspace) => Promise<void>; startupMessage?: string }) {
   const [workspace, setWorkspace] = useState(initialWorkspace), [route, setRoute] = useState(readRoute), [error, setError] = useState(''), [storageError, setStorageError] = useState('');
   const [navigating, startNavigation] = useTransition();
-  const [reloadMessage, setReloadMessage] = useState('');
+  const [reloadMessage, setReloadMessage] = useState(startupMessage);
+  const [bundledUpdate, setBundledUpdate] = useState<SystemFile>();
+  const [updateError, setUpdateError] = useState('');
   const [saved, setSaved] = useState(false), [loading, setLoading] = useState(false), [creating, setCreating] = useState(false);
   const [selectedSystem, setSelectedSystem] = useState(systemKey(workspace.systems[0] ?? { id: '', revision: 1 })), [options, setOptions] = useState<Record<string, Value>>({});
   const registry = useMemo(() => createRegistry(workspace.systems), [workspace.systems]);
@@ -63,6 +68,27 @@ export function App({ initialWorkspace, persist }: { initialWorkspace: Workspace
     }
   }, [registry, active, route.system, route.revision, route.catalogue, browserEngine, workspace.systems]);
   const engine = resolved.engine;
+  useEffect(() => {
+    const loaded = workspace.systems.find((file) => file.id === 'dnd5e:2014-srd5.1');
+    if (!loaded) return;
+    let cancelled = false;
+    void (async () => {
+      const response = await fetch(bundledUrl, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Could not check for a bundled System update. Use Reload System to retry.');
+      // Checking the release counter does not need to compile the full catalogue.
+      // The replacement is fully validated only when the user reloads it.
+      const incoming = await response.json() as Pick<SystemFile, 'id' | 'revision' | 'contentVersion'>;
+      if (!cancelled) {
+        setBundledUpdate(hasBundledUpdate(loaded, incoming) ? loaded : undefined);
+        setUpdateError('');
+      }
+    })().catch((reason: unknown) => {
+      if (!cancelled) setUpdateError(errorMessage(reason));
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [workspace.systems]);
   useEffect(() => {
     const onHash = () => {
       startNavigation(() => setRoute(readRoute()));
@@ -131,13 +157,16 @@ export function App({ initialWorkspace, persist }: { initialWorkspace: Workspace
         text = await response.text();
       }
       const incoming = parseSystemFile(text);
-      const next = migrateMoney(reloadSystem(workspace, existing, incoming));
+      if (systemKey(incoming) !== systemKey(existing)) throw new Error('Load a different System revision separately.');
+      const cleanup = reconcilePrototypeCharacters(workspace, await loadPrototypeTemplates(), incoming);
+      const next = migrateMoney(cleanup.workspace);
       change((current) => {
         if (current !== workspace) {
           setError('The workspace changed during reload. Try again.');
           return current;
         }
-        setReloadMessage(`Reloaded ${incoming.configurations[0].system.name}. Characters preserved.`);
+        setReloadMessage(`Reloaded ${incoming.configurations[0].system.name}. Compatible characters preserved. ${cleanup.rebuilt.map((name) => `Rebuilt sample: ${name}.`).join(' ')} ${cleanup.removed.map((name) => `Removed incompatible character: ${name}.`).join(' ')}`);
+        setBundledUpdate(undefined);
         return next;
       });
     } catch (e) {
@@ -296,6 +325,14 @@ export function App({ initialWorkspace, persist }: { initialWorkspace: Workspace
           </div>
         </header>
         <main id="main-content" tabIndex={-1} aria-busy={loading || navigating}>
+          {reloadMessage && <p className="notice" role="status">{reloadMessage}</p>}
+          {bundledUpdate && workspace.systems.includes(bundledUpdate) && (
+            <div className="notice row" role="status">
+              <span>An updated bundled System is available. Reload to get the latest classes and Features. Compatible characters are preserved; incompatible samples are rebuilt and other incompatible characters are removed.</span>
+              <button disabled={loading} onClick={() => void reload(bundledUpdate)}>Reload updated System</button>
+            </div>
+          )}
+          {updateError && <p className="notice" role="status">{updateError}</p>}
           {(loading || navigating) && <div className="loading-banner" role="status">Loading…</div>}
           {error && (
             <div role="alert" className="alert row">
@@ -319,13 +356,14 @@ export function App({ initialWorkspace, persist }: { initialWorkspace: Workspace
             <>
               <PageTitle eyebrow="Your rules, your table" title="Systems" description="Load a System from JSON into the local browser database. Its Classes, Features, options, and calculations become available throughout your workspace." />
               <SystemLoader loading={loading} bundledLoaded={workspace.systems.some((s) => s.id === 'dnd5e:2014-srd5.1')} loadBundled={() => void loadBundled()} loadFile={(file) => void loadFile(file)} />
-              {reloadMessage && <p role="status">{reloadMessage}</p>}
               <div className="cards">
                 {workspace.systems.map((file) => (
                   <article className="panel system-card" key={systemKey(file)}>
                     <p className="eyebrow">
                       {'Loaded · revision '}
                       {file.revision}
+                      {' · content version '}
+                      {file.contentVersion ?? 1}
                     </p>
                     <h2>{file.configurations[0].system.name}</h2>
                     <p>
