@@ -27,6 +27,17 @@ const { safeReturn } = await server.ssrLoadModule('/src/feature-origin.ts');
 const { orderedSheetTabs, moveSheetTab } = await server.ssrLoadModule('/src/sheet-tabs.ts');
 const { advancementLabels } = await server.ssrLoadModule('/src/feature-requirements.ts');
 const file = model.decodeWorkspace({ version: 1, systems: [readSystem(new URL('../../src/systems/dnd5e-2014/system.json', import.meta.url))], characters: [] }).systems[0];
+
+test('calculation display renders signed contributions and their reasons instead of inactive inputs', async () => {
+  const { StatCalculation } = await server.ssrLoadModule('/src/StatCalculation.tsx');
+  const engine = { getStatDefinition: () => ({ name: 'Defense' }) };
+  const result = { stats: { defense: { value: 15, base: 10, modifiers: [], contributions: [{ amount: 16, label: 'Chain mail' }, { amount: 2, label: 'Shield' }, { amount: -3, label: 'Penalty' }] } } };
+  const html = renderToStaticMarkup(createElement(StatCalculation, { id: 'defense', engine, result, character: {} }));
+  assert.match(html, /16 \(Chain mail\)/);
+  assert.match(html, /\+ 2 \(Shield\)/);
+  assert.match(html, /− 3 \(Penalty\)/);
+  assert.doesNotMatch(html, /Base:|Applied|Inactive/);
+});
 function storage() {
   const values = new Map();
   return { getItem: (key) => values.get(key) ?? null, setItem: (key, value) => values.set(key, value) };

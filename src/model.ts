@@ -36,6 +36,7 @@ export type { SelectionResult } from '@/src/model/SelectionResult.js';
 export type { StackingPolicy } from '@/src/model/StackingPolicy.js';
 export type { StatDefinition } from '@/src/model/StatDefinition.js';
 export type { StatResult } from '@/src/model/StatResult.js';
+export type { StatContribution } from '@/src/model/StatContribution.js';
 export type { SystemDefinition } from '@/src/model/SystemDefinition.js';
 export type { ResetCondition } from '@/src/model/ResetCondition.js';
 export type { Value } from '@/src/model/Value.js';
