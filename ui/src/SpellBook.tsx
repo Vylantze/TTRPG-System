@@ -7,6 +7,7 @@ import { FeatureLink } from '@/ui/src/FeatureLink';
 import { FeatureRules } from '@/ui/src/RulesText';
 import { FeatureRolls } from '@/ui/src/FeatureRolls';
 import { Modal } from '@/ui/src/Modal';
+import { actionCostKind } from '@/ui/src/action-costs';
 
 export function SpellBook({ engine, character, result, ready, update, report }: { engine: Engine; character: Character; result: EvaluationResult; ready: boolean; update: (character: Character) => void; report: (message: string) => void }) {
   const [showEmpty, setShowEmpty] = useState(false);
@@ -15,11 +16,14 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
   const [spent, setSpent] = useState<Record<string, string>>({});
   const [search, setSearch] = useState('');
   const [filterLevel, setFilterLevel] = useState('all');
+  const [actionCategory, setActionCategory] = useState('');
   const query = useDeferredValue(search.trim().toLowerCase());
   const settings = engine.catalogue.system.sheetDisplay?.spells;
+  const categories = engine.catalogue.system.sheetDisplay?.actions?.categories ?? [];
+  const kinds = settings?.actionFilter ? categories.find((category) => category.id === actionCategory)?.kinds : undefined;
   const spells = useMemo(() => spellGroups(engine, result), [engine, result]);
   const slots = useMemo(() => spellSlotPools(engine, result), [engine, result]);
-  const visibleSpells = spells.filter((spell) => (!settings?.search || spell.name.toLowerCase().includes(query)) && (!settings?.levelFilter || filterLevel === 'all' || spell.level === Number(filterLevel)));
+  const visibleSpells = spells.filter((spell) => (!settings?.search || spell.name.toLowerCase().includes(query)) && (!settings?.levelFilter || filterLevel === 'all' || spell.level === Number(filterLevel)) && (!kinds || spell.modes.some((mode) => kinds.includes(actionCostKind(mode.capability.definition.action)))));
   const selected = spells.find((spell) => spell.id === casting);
   const attempt = (action: () => void) => {
     try {
@@ -69,6 +73,15 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
       {!showEmpty && !slots.some(({ pool }) => (pool.current ?? pool.capacity - pool.spent) > 0) && <p className="muted">No spell slots remaining. Show all spell slots to adjust or inspect them.</p>}
       <h2>Spells</h2>
       <div className="toolbar spell-filters">
+        {settings?.actionFilter && (
+          <label>
+            Spell action cost
+            <select value={actionCategory} onChange={(event) => setActionCategory(event.target.value)}>
+              <option value="">All action costs</option>
+              {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
+            </select>
+          </label>
+        )}
         {settings?.search && (
           <label>
             Search spells

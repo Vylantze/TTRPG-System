@@ -11,6 +11,19 @@ function setup() {
 }
 const pool = (engine, character, key) => Object.values(engine.evaluate(character).resources).find((pool) => pool.key === key);
 
+test('System action grouping, filters, and healing dice settings validate their types', () => {
+  const { catalogue } = setup();
+  catalogue.system.sheetDisplay.abilities = { groupByActionCost: true, actionFilter: true };
+  catalogue.system.sheetDisplay.spells = { actionFilter: true };
+  catalogue.system.sheetDisplay.health = { healingResourceIcons: true };
+  assert.doesNotThrow(() => new Engine(catalogue));
+  for (const [section, key] of [['abilities', 'groupByActionCost'], ['abilities', 'actionFilter'], ['spells', 'actionFilter'], ['health', 'healingResourceIcons']]) {
+    const invalid = structuredClone(catalogue);
+    invalid.system.sheetDisplay[section][key] = 'yes';
+    assert.throws(() => new Engine(invalid), /boolean/);
+  }
+});
+
 test('System health roles absorb temporary points, clamp healing/damage, and reset counters without hardcoded HP keys', () => {
   const { engine, character } = setup();
   const ward = pool(engine, character, 'ward');

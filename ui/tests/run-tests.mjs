@@ -68,7 +68,7 @@ test('Items follows Skills by default, puts money first, and saved tab order sur
   assert.match(html, /Rearrange tabs/);
 });
 
-test('System-defined overview, health workflow, roll controls, spell summaries, and action tabs render on sample sheets', async () => {
+test('System-defined overview, health workflow, roll controls, spells, and resource actions render on sample sheets', async () => {
   const character = starterSaves[0];
   const workspace = { ...data(), characters: [character] };
   const sheet = await render(workspace, `#characters/${character.id}?view=stats`);
@@ -81,8 +81,9 @@ test('System-defined overview, health workflow, roll controls, spell summaries, 
   assert.match(sheet, /Roll history/);
   assert.doesNotMatch(sheet, />Death save failures</);
   assert.ok(sheet.indexOf('sheet-overview') < sheet.indexOf('class="subnav"'));
-  const actions = await render(workspace, `#characters/${character.id}?view=actions`);
-  assert.match(actions, /Action category/);
+  const actions = await render(workspace, `#characters/${character.id}?view=resources`);
+  assert.match(actions, /Ability action cost/);
+  assert.doesNotMatch(actions, /id="tab-actions"/);
   assert.match(actions, /Second Wind/);
   assert.doesNotMatch(actions, /Arcane Recovery/);
   assert.match(actions, /Equipped weapons/);
@@ -384,6 +385,49 @@ test('class guide has a progression table, jump controls, and expanded source de
   assert.match(html, /Jump to level 20/);
   assert.match(html, /1d10 \+ your fighter level/);
   assert.match(html, /class="level-row reference-section"/);
+});
+
+test('sheet controls show dice, separate skill calculations and configured action filters', async () => {
+  const character = starterSaves.find((entry) => entry.id === 'starter-2014-human-fighter-noble');
+  const workspace = { ...data(), characters: [character] };
+  const skills = await render(workspace, `#characters/${character.id}?view=skills`);
+  assert.match(skills, /hit-dice-icons/);
+  assert.match(skills, /dice remaining/);
+  assert.match(skills, /<th>Calculation<\/th>/);
+  assert.match(skills, /class="skill-calculation"/);
+  assert.match(skills, /Level up Fighter/);
+  const resources = await render(workspace, `#characters/${character.id}?view=resources`);
+  assert.match(resources, /Ability action cost/);
+  assert.match(resources, /ability-cost-group/);
+  assert.match(resources, /Bonus actions/);
+  assert.doesNotMatch(resources, /id="tab-actions"/);
+  const wizard = starterSaves.find((entry) => entry.progressions.some((p) => p.class.endsWith(':wizard')));
+  const spells = await render({ ...data(), characters: [wizard] }, `#characters/${wizard.id}?view=spells`);
+  assert.match(spells, /Spell action cost/);
+  const { HitDiceIcons } = await server.ssrLoadModule('/src/HitDiceIcons.tsx');
+  const icons = renderToStaticMarkup(createElement(HitDiceIcons, { pool: { name: 'Hit dice', available: 2, capacity: 3 } }));
+  assert.equal((icons.match(/class="available"/g) ?? []).length, 2);
+  assert.equal((icons.match(/class="spent"/g) ?? []).length, 1);
+});
+
+test('leveling a sample preserves edits and keeps unfinished choices in a recoverable draft', async () => {
+  const { setCharacterLevel } = await server.ssrLoadModule('/src/character-leveling.ts');
+  const { reconcilePrototypeCharacters } = await server.ssrLoadModule('/src/prototype-characters.ts');
+  const character = structuredClone(starterSaves.find((entry) => entry.id === 'starter-2014-human-fighter-noble'));
+  character.name = 'Edited sample';
+  const workspace = { ...data(), characters: [character] };
+  const engine = model.createRegistry(workspace.systems).engineForCharacter(character);
+  const updated = setCharacterLevel(engine, character, character.progressions[0].id, 4);
+  assert.equal(updated.buildState, 'draft');
+  assert.equal(updated.progressions[0].level, 4);
+  assert.equal(updated.name, character.name);
+  assert.deepEqual(updated.inventory, character.inventory);
+  assert.deepEqual(updated.selections, character.selections);
+  assert.equal(character.progressions[0].level, 1);
+  assert.ok(engine.evaluate(updated).selections.some((slot) => slot.minimum > slot.picks.length));
+  const cleaned = reconcilePrototypeCharacters({ ...workspace, characters: [updated] }, starterSaves);
+  assert.deepEqual(cleaned.rebuilt, []);
+  assert.equal(cleaned.workspace.characters[0].progressions[0].level, 4);
 });
 
 test('Feature pages put rules first and keep authoring details collapsed', async () => {

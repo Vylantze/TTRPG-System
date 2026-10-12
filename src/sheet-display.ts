@@ -131,10 +131,11 @@ export function validateSheetDisplay(catalogue: Catalogue): void {
       display.health.counters.forEach(resource);
     }
   }
-  for (const settings of [display.resources, display.inventory, display.spells]) if (settings !== undefined) {
+  for (const settings of [display.resources, display.inventory, display.spells, display.abilities]) if (settings !== undefined) {
     object(settings);
     for (const [key, value] of Object.entries(settings)) if (!['columns', 'castingStats', 'zeroLevelName', 'zeroLevelHeading', 'slotPipLimit'].includes(key)) boolean(value);
   }
+  boolean(display.health?.healingResourceIcons);
   for (const label of [display.spells?.zeroLevelName, display.spells?.zeroLevelHeading].filter((label) => label !== undefined)) text(label);
   if (display.spells?.slotPipLimit !== undefined && (!Number.isInteger(display.spells.slotPipLimit) || display.spells.slotPipLimit < 0 || display.spells.slotPipLimit > 100)) fail('Invalid slot pip limit.');
   if (display.spells?.columns !== undefined) {
