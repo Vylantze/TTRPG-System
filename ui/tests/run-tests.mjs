@@ -618,7 +618,7 @@ test('Fighter resource UI omits Arcane Recovery, while Wizard recovery and adjus
   const sheet = await render(workspace, `#characters/${starterSaves[0].id}`);
   assert.match(sheet, /<h2>Abilities<\/h2>/);
   assert.match(sheet, /Armor class/);
-  assert.match(sheet, /class="sheet-table skill-list\s*"/);
+  assert.match(sheet, /class="sheet-table skill-list table-values-left\s*"/);
   assert.doesNotMatch(sheet, /<h2>Inventory<\/h2>/);
   assert.match(await render(workspace, `#characters/${starterSaves[0].id}?view=items`), /Chain mail/);
   assert.match(sheet, /class="character-facts"/);
