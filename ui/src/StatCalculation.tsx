@@ -3,7 +3,7 @@ import type { Character, Engine, EvaluationResult } from '@/src/index';
 export function StatCalculation({ id, engine, result }: { id: string; engine: Engine; character: Character; result: EvaluationResult }) {
   const stat = result.stats[id];
   if (!stat) return <div className="calculation-box">Unavailable</div>;
-  const terms = stat.contributions ?? [{ amount: stat.value, label: engine.getStatDefinition(id)?.name ?? id }];
+  const terms = (stat.contributions ?? [{ amount: stat.value, label: engine.getStatDefinition(id)?.name ?? id }]).filter((term) => term.amount !== 0);
   const readable = (label: string) => label.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\bmodifier\./g, '').replace(/^./, (letter) => letter.toUpperCase());
   return (
     <div className="calculation-box">
@@ -18,7 +18,7 @@ export function StatCalculation({ id, engine, result }: { id: string; engine: En
                 )
               </span>
             ))
-          : '0 (No nonzero contributions)'}
+          : '0'}
       </p>
     </div>
   );

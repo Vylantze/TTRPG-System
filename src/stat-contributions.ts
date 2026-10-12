@@ -11,17 +11,7 @@ export function expressionContributions(expression: Expression, env: Environment
     if ('stat' in expression) return [...stat(expression.stat)];
     if ('if' in expression) {
       const selected = boolean(evaluateExpression(expression.if, env)) ? expression.then : expression.else;
-      const condition = (value: Expression): string => {
-        if (typeof value !== 'object') return String(value);
-        if ('stat' in value) return value.stat;
-        if ('table' in value) return `${value.table} (${condition(value.input)})`;
-        if ('op' in value) {
-          const symbols: Record<string, string> = { lt: '<', lte: '≤', gt: '>', gte: '≥', eq: '=', and: 'and', or: 'or' };
-          return value.args.map(condition).join(` ${symbols[value.op] ?? value.op} `);
-        }
-        return label;
-      };
-      return expressionContributions(selected, env, `${label}: ${condition(expression.if)}`, stat);
+      return expressionContributions(selected, env, label, stat);
     }
     if ('op' in expression) {
       if (expression.op === 'add') return expression.args.flatMap(walk);
@@ -34,7 +24,9 @@ export function expressionContributions(expression: Expression, env: Environment
     const labels = (value: Expression): string[] => {
       if (typeof value !== 'object') return [];
       if ('stat' in value) return stat(value.stat).map((term) => term.label);
+      if ('if' in value) return labels(boolean(evaluateExpression(value.if, env)) ? value.then : value.else);
       if ('table' in value) return labels(value.input);
+      if ('op' in value && (value.op === 'min' || value.op === 'max')) return walk(value).filter((term) => term.amount !== 0).map((term) => term.label);
       if ('args' in value) return value.args.flatMap(labels);
       return [];
     };

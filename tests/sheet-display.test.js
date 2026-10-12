@@ -45,8 +45,12 @@ test('stat contribution totals include multiplication and only effective bounds 
   catalogue.system.advancement[0].push({ id: 'effects', kind: 'grantFeature', feature: 'effects' });
   const engine = new Engine(catalogue), result = engine.evaluate(engine.createCharacter('test', 'Test'));
   assert.equal(result.stats.score.value, 18);
-  assert.deepEqual(result.stats.score.contributions.map((term) => term.amount), [10, 10, -1, -1]);
-  assert.ok(result.stats.score.contributions.every((term) => !term.label.includes('minimum')));
+  assert.deepEqual(result.stats.score.contributions, [{ amount: 18, label: 'Score limit' }]);
+  delete catalogue.system.stats[0].maximum;
+  catalogue.features.at(-1).components = catalogue.features.at(-1).components.slice(0, 1);
+  const multipliedEngine = new Engine(catalogue);
+  const multiplied = multipliedEngine.evaluate(multipliedEngine.createCharacter('test', 'Test'));
+  assert.deepEqual(multiplied.stats.score.contributions, [{ amount: 20, label: 'Score, Effects' }]);
 });
 
 test('System action grouping, filters, and healing dice settings validate their types', () => {
@@ -60,6 +64,19 @@ test('System action grouping, filters, and healing dice settings validate their 
     invalid.system.sheetDisplay[section][key] = 'yes';
     assert.throws(() => new Engine(invalid), /boolean/);
   }
+});
+
+test('multiplied expression labels exclude unselected branches and unused limits', () => {
+  const { catalogue } = setup();
+  delete catalogue.system.sheetDisplay;
+  catalogue.system.stats = [
+    { id: 'chosen', name: 'Chosen source', kind: 'derived', expression: 3 },
+    { id: 'unused', name: 'Unused source', kind: 'derived', expression: 10 },
+    { id: 'total', name: 'Total', kind: 'derived', expression: { op: 'multiply', args: [2, { if: true, then: { op: 'min', args: [{ stat: 'chosen' }, { stat: 'unused' }] }, else: { stat: 'unused' } }] } },
+  ];
+  const engine = new Engine(catalogue);
+  const result = engine.evaluate(engine.createCharacter('test', 'Test'));
+  assert.deepEqual(result.stats.total.contributions, [{ amount: 6, label: 'Chosen source' }]);
 });
 
 test('System health roles absorb temporary points, clamp healing/damage, and reset counters without hardcoded HP keys', () => {
