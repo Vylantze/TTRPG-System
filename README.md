@@ -18,6 +18,28 @@ Run `npm run build`, `npm test`, or `npm run demo` after installing the TypeScri
 
 Engine tests run in isolated files with at most two workers. `npm test -- --test-shard=1/4` runs one of the four shards used by GitHub Actions; change the numerator to run another shard. Pages runs all four engine shards alongside lint, UI tests, and the UI build, and deploys only after every job passes.
 
+Run local suites separately with these commands (from the project root):
+
+| Command | Coverage |
+| --- | --- |
+| `npm run test:all` | All engine and UI suites |
+| `npm test` | All engine suites |
+| `npm run test:suites` | List engine suites and their file counts |
+| `npm run test:core` | Evaluation, building blocks, drafts, queries, caching |
+| `npm run test:systems` | Loading, asset packages, version policies |
+| `npm run test:content` | Descriptions, links, tokens, spell display |
+| `npm run test:characters` | Sheets, inventory, resources, currency, play |
+| `npm run test:classes` | Class progressions, subclasses, domain spells, audit regressions |
+| `npm run test:artificer` | Artificer, infusions, companions |
+| `npm run test:tooling` | Lint, UI release policy, suite selection |
+| `npm run test:ui` | All UI suites and UI type checking |
+| `npm run test:ui:components` | React pages, sheets, and editors |
+| `npm run test:ui:database` | Browser database storage |
+| `npm run test:ui:updates` | System update handling |
+| `npm run test:ui:packages` | Browser asset package loading |
+
+Combine engine suites with `npm test -- --suite=core,systems`. Native Node test options such as `--test-name-pattern` and `--test-shard` still work. Every root test command builds the engine first; `npm run lint` checks both engine and UI types. After a build, `node --import ./tools/register-alias.mjs tests/run-tests.js --suite=content` runs a suite without rebuilding. Newly discovered engine files are automatically included in the full run and the `other` suite until categorized; unknown suite names fail rather than silently skipping tests.
+
 Project-local imports use `@/` for the repository root (for example, `@/src/index.js` and `@/ui/src/display`). Root/UI TypeScript paths, JavaScript editor configuration, and Vite resolve the same alias. npm scripts preload `tools/register-alias.mjs` for Node tests and examples; direct execution of those source scripts requires `node --import ./tools/register-alias.mjs <script>`. The engine build rewrites emitted imports to relative paths, so consumers of `dist` need no alias loader. Package and Node built-in imports retain their normal names.
 
 The 2014 System grants hit points automatically at each Class level: the starting Class receives its maximum Hit Die at level one, and subsequent levels use the fixed average, with Constitution applied at every level. Feature selection defaults to a dropdown; use **Use list** to browse the searchable, paginated cards. Existing browser workspaces keep their loaded System JSON; reload the updated bundled System to use revised rules.

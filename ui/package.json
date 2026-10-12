@@ -1,13 +1,17 @@
 {
   "name": "ttrpg-system-ui",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "tsc --noEmit && node --import ../tools/register-alias.mjs tests/run-tests.mjs && node --import ../tools/register-alias.mjs tests/database-tests.mjs && node --import ../tools/register-alias.mjs tests/system-update-tests.mjs && node --import ../tools/register-alias.mjs tests/system-package-tests.mjs"
+    "test": "tsc --noEmit && npm run test:components && npm run test:database && npm run test:updates && npm run test:packages",
+    "test:components": "node --import ../tools/register-alias.mjs tests/run-tests.mjs",
+    "test:database": "node --import ../tools/register-alias.mjs tests/database-tests.mjs",
+    "test:updates": "node --import ../tools/register-alias.mjs tests/system-update-tests.mjs",
+    "test:packages": "node --import ../tools/register-alias.mjs tests/system-package-tests.mjs"
   },
   "dependencies": {
     "lz-string": "^1.5.0",
