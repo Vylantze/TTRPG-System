@@ -1,5 +1,5 @@
 {
-  "assetVersion": "4.0.0",
+  "assetVersion": "4.1.0",
   "data": {
     "variant-1": {
       "id": "dnd5e:2014-srd5.1",
@@ -5552,7 +5552,9 @@
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "calculationPlacement": "belowValue",
+          "valueAlignment": "left"
         },
         {
           "id": "skills",
@@ -11739,7 +11741,9 @@
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "calculationPlacement": "belowValue",
+          "valueAlignment": "left"
         },
         {
           "id": "skills",
@@ -17935,7 +17939,9 @@
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "calculationPlacement": "belowValue",
+          "valueAlignment": "left"
         },
         {
           "id": "skills",
@@ -24122,7 +24128,9 @@
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "calculationPlacement": "belowValue",
+          "valueAlignment": "left"
         },
         {
           "id": "skills",
@@ -29975,7 +29983,9 @@
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "calculationPlacement": "belowValue",
+          "valueAlignment": "left"
         },
         {
           "id": "skills",
@@ -35819,7 +35829,9 @@
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "calculationPlacement": "belowValue",
+          "valueAlignment": "left"
         },
         {
           "id": "skills",
@@ -41672,7 +41684,9 @@
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "calculationPlacement": "belowValue",
+          "valueAlignment": "left"
         },
         {
           "id": "skills",
@@ -47516,7 +47530,9 @@
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "calculationPlacement": "belowValue",
+          "valueAlignment": "left"
         },
         {
           "id": "skills",
@@ -53167,7 +53183,9 @@
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "calculationPlacement": "belowValue",
+          "valueAlignment": "left"
         },
         {
           "id": "skills",
@@ -58809,7 +58827,9 @@
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "calculationPlacement": "belowValue",
+          "valueAlignment": "left"
         },
         {
           "id": "skills",
@@ -64460,7 +64480,9 @@
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "calculationPlacement": "belowValue",
+          "valueAlignment": "left"
         },
         {
           "id": "skills",
@@ -70102,7 +70124,9 @@
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "calculationPlacement": "belowValue",
+          "valueAlignment": "left"
         },
         {
           "id": "skills",

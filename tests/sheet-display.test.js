@@ -66,6 +66,17 @@ test('System action grouping, filters, and healing dice settings validate their 
   }
 });
 
+test('Systems configure calculation placement and value alignment, rejecting unsupported layouts', () => {
+  const { catalogue } = setup();
+  catalogue.system.sheetSections = [{ id: 'table', name: 'Stat table', layout: 'skills', columns: ['Name', 'Bonus'], calculationPlacement: 'belowValue', valueAlignment: 'left', rows: [{ stat: 'bonus' }] }];
+  assert.doesNotThrow(() => new Engine(catalogue));
+  for (const [field, invalid] of [['calculationPlacement', 'hidden'], ['valueAlignment', 'center']]) {
+    const changed = structuredClone(catalogue);
+    changed.system.sheetSections[0][field] = invalid;
+    assert.throws(() => new Engine(changed), /Invalid calculation placement|Invalid stat value alignment/);
+  }
+});
+
 test('multiplied expression labels exclude unselected branches and unused limits', () => {
   const { catalogue } = setup();
   delete catalogue.system.sheetDisplay;

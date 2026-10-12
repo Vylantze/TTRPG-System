@@ -42,6 +42,8 @@ export function validateSheetDisplay(catalogue: Catalogue): void {
     if (value.bonusStat !== undefined) stat(value.bonusStat);
   };
   for (const section of system.sheetSections ?? []) {
+    if (section.calculationPlacement !== undefined && !['column', 'belowValue'].includes(section.calculationPlacement)) fail('Invalid calculation placement.');
+    if (section.valueAlignment !== undefined && !['left', 'right'].includes(section.valueAlignment)) fail('Invalid stat value alignment.');
     boolean(section.modifierFirst);
     boolean(section.primarySigned);
     boolean(section.secondarySigned);

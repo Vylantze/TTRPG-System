@@ -12,5 +12,7 @@ export interface SheetSection {
   defaultSort?: 'Training' | 'Name' | 'Ability' | 'Bonus';
   columns?: ('Training' | 'Name' | 'Ability' | 'Bonus')[];
   columnLabels?: Partial<Record<'Training' | 'Name' | 'Ability' | 'Bonus', string>>;
+  calculationPlacement?: 'column' | 'belowValue';
+  valueAlignment?: 'left' | 'right';
   rows: { stat: string; name?: string; secondaryStat?: string; proficiencyStat?: string; ability?: string; feature?: string; roll?: { dice: string; bonusStat?: string } }[];
 }

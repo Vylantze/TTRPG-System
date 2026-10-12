@@ -16,6 +16,7 @@ export function SheetSectionView({ section, engine, character, result, update, r
   const modifierFirst = character.displayPreferences?.[preference] ?? section.modifierFirst ?? false;
   const rows = section.rows.filter((row) => result.stats[row.stat]);
   const columns = section.columns ?? ['Training', 'Name', 'Ability', 'Bonus'];
+  const calculationsBelow = section.calculationPlacement === 'belowValue';
   const name = (row: SheetSection['rows'][number]) => row.name ?? engine.getStatDefinition(row.stat)?.name ?? row.stat;
   const training = (row: SheetSection['rows'][number]) => row.proficiencyStat ? result.stats[row.proficiencyStat]?.value ?? 0 : 0;
   const trainingLevel = (row: SheetSection['rows'][number]) => [...section.trainingLevels ?? []].sort((a, b) => b.minimum - a.minimum).find((level) => training(row) >= level.minimum) ?? { minimum: 0, name: String(training(row)), symbol: String(training(row)), trained: false };
@@ -23,6 +24,12 @@ export function SheetSectionView({ section, engine, character, result, update, r
   const secondaryLabel = section.secondaryValueLabel ?? 'secondary value';
   const primaryValue = (value: number) => section.primarySigned ? signed(value) : value;
   const secondaryValue = (value: number) => section.secondarySigned ? signed(value) : value;
+  const calculation = (row: SheetSection['rows'][number]) => (
+    <>
+      <button className="link calculation-toggle" aria-label={`Calculation for ${name(row)}`} aria-expanded={expanded.includes(row.stat)} aria-controls={`calculation-${section.id}-${row.stat}`} onClick={() => setExpanded(expanded.includes(row.stat) ? expanded.filter((stat) => stat !== row.stat) : [...expanded, row.stat])}>{expanded.includes(row.stat) ? '▾' : '▸'}</button>
+      <div id={`calculation-${section.id}-${row.stat}`} hidden={!expanded.includes(row.stat)}>{expanded.includes(row.stat) && <StatCalculation id={row.stat} engine={engine} character={character} result={result} />}</div>
+    </>
+  );
   const value = (row: SheetSection['rows'][number]) => sort === 'Training' ? training(row) : sort === 'Bonus' ? result.stats[row.stat].value : sort === 'Ability' ? row.ability ?? '' : name(row);
   if (section.layout === 'skills') rows.sort((a, b) => {
     const left = value(a), right = value(b);
@@ -42,7 +49,7 @@ export function SheetSectionView({ section, engine, character, result, update, r
       </div>
       {section.layout === 'skills'
         ? (
-            <table className={`sheet-table skill-list ${expanded.length ? 'has-calculations' : ''}`}>
+            <table className={`sheet-table skill-list table-values-${section.valueAlignment ?? 'right'} ${expanded.length ? 'has-calculations' : ''}`}>
               <thead>
                 <tr>
                   {columns.map((column) => (
@@ -59,7 +66,7 @@ export function SheetSectionView({ section, engine, character, result, update, r
                       </button>
                     </th>
                   ))}
-                  <th>Calculation</th>
+                  {!calculationsBelow && <th>Calculation</th>}
                 </tr>
               </thead>
               <tbody>
@@ -72,16 +79,14 @@ export function SheetSectionView({ section, engine, character, result, update, r
                         : column === 'Ability'
                           ? <td key={column}>{row.ability ?? '—'}</td>
                           : (
-                              <td key={column}>
+                              <td className="table-stat-value" key={column}>
                                 <div className="bonus-control">
                                   <strong>{row.roll ? <StatRollButton stat={row.stat} label={name(row)} value={primaryValue(result.stats[row.stat].value)} engine={engine} character={character} result={result} update={update} report={report} /> : primaryValue(result.stats[row.stat].value)}</strong>
                                 </div>
+                                {calculationsBelow && <div className="value-calculation">{calculation(row)}</div>}
                               </td>
                             ))}
-                    <td className="skill-calculation">
-                      <button className="link calculation-toggle" aria-label={`Calculation for ${name(row)}`} aria-expanded={expanded.includes(row.stat)} aria-controls={`calculation-${section.id}-${row.stat}`} onClick={() => setExpanded(expanded.includes(row.stat) ? expanded.filter((stat) => stat !== row.stat) : [...expanded, row.stat])}>{expanded.includes(row.stat) ? '▾' : '▸'}</button>
-                      <div id={`calculation-${section.id}-${row.stat}`} hidden={!expanded.includes(row.stat)}>{expanded.includes(row.stat) && <StatCalculation id={row.stat} engine={engine} character={character} result={result} />}</div>
-                    </td>
+                    {!calculationsBelow && <td className="skill-calculation">{calculation(row)}</td>}
                   </tr>
                 ))}
               </tbody>
