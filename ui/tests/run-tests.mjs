@@ -433,6 +433,12 @@ test('sheet controls show dice, separate skill calculations and configured actio
   assert.match(skills, /<th>Calculation<\/th>/);
   assert.match(skills, /class="skill-calculation"/);
   assert.match(skills, /Level up Fighter/);
+  const sheet = await render(workspace, `#characters/${character.id}?view=stats`);
+  const saves = sheet.match(/<table class="sheet-table skill-list table-values-left[^"]*">[\s\S]*?<\/table>/)?.[0];
+  assert.ok(saves, 'Saving throws use left-aligned values');
+  assert.doesNotMatch(saves, /<th>Calculation<\/th>|class="skill-calculation"/);
+  assert.match(saves, /class="table-stat-value"[\s\S]*?<strong>[\s\S]*?<\/strong>[\s\S]*?class="value-calculation"/);
+  assert.match(saves, /aria-label="Calculation for Strength"/);
   const resources = await render(workspace, `#characters/${character.id}?view=resources`);
   assert.match(resources, /Ability action cost/);
   assert.match(resources, /ability-cost-group/);

@@ -4316,6 +4316,38 @@
         },
         "optional": true
       },
+      "calculationPlacement": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "column"
+            },
+            {
+              "kind": "literal",
+              "value": "belowValue"
+            }
+          ]
+        },
+        "optional": true
+      },
+      "valueAlignment": {
+        "schema": {
+          "kind": "union",
+          "variants": [
+            {
+              "kind": "literal",
+              "value": "left"
+            },
+            {
+              "kind": "literal",
+              "value": "right"
+            }
+          ]
+        },
+        "optional": true
+      },
       "rows": {
         "schema": {
           "kind": "array",
