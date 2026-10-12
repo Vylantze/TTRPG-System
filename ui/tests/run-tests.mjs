@@ -31,12 +31,30 @@ const file = model.decodeWorkspace({ version: 1, systems: [readSystem(new URL('.
 test('calculation display renders signed contributions and their reasons instead of inactive inputs', async () => {
   const { StatCalculation } = await server.ssrLoadModule('/src/StatCalculation.tsx');
   const engine = { getStatDefinition: () => ({ name: 'Defense' }) };
-  const result = { stats: { defense: { value: 15, base: 10, modifiers: [], contributions: [{ amount: 16, label: 'Chain mail' }, { amount: 2, label: 'Shield' }, { amount: -3, label: 'Penalty' }] } } };
+  const result = { stats: { defense: { value: 15, base: 10, modifiers: [], contributions: [{ amount: 16, label: 'Chain mail' }, { amount: 2, label: 'Shield' }, { amount: -3, label: 'Penalty' }, { amount: 0, label: 'Unused' }] } } };
   const html = renderToStaticMarkup(createElement(StatCalculation, { id: 'defense', engine, result, character: {} }));
   assert.match(html, /16 \(Chain mail\)/);
   assert.match(html, /\+ 2 \(Shield\)/);
   assert.match(html, /− 3 \(Penalty\)/);
-  assert.doesNotMatch(html, /Base:|Applied|Inactive/);
+  assert.doesNotMatch(html, /Base:|Applied|Inactive|Unused/);
+});
+
+test('existing sample characters display evaluated equipment and race sources without formulas', async () => {
+  const { StatCalculation } = await server.ssrLoadModule('/src/StatCalculation.tsx');
+  const registry = model.createRegistry([file]);
+  for (const character of starterSaves) {
+    const engine = registry.engineForCharacter(character), result = engine.evaluate(character);
+    for (const id of Object.keys(result.stats)) {
+      const html = renderToStaticMarkup(createElement(StatCalculation, { id, engine, result, character }));
+      assert.doesNotMatch(html, /Base:|then |otherwise|table at|×|÷|minimum \d|maximum \d/);
+    }
+  }
+  const cleric = starterSaves[1];
+  const html = await render({ ...data(), characters: [cleric] }, `#characters/${cleric.id}?view=stats`);
+  assert.match(html, /16 \(Chain mail\)/);
+  assert.match(html, /\+ 2 \(Shield\)/);
+  assert.match(html, /25 \(Walking Speed, Hill Dwarf\)/);
+  assert.doesNotMatch(html, /Armor Base table|Worn armor index:|Base:/);
 });
 function storage() {
   const values = new Map();
@@ -75,7 +93,9 @@ test('Items follows Skills by default, puts money first, and saved tab order sur
   const html = await render(restored, `#characters/${character.id}?view=items`);
   const nav = html.match(/<nav class="subnav"[^>]*>([\s\S]*?)<\/nav>/)[1];
   assert.ok(nav.indexOf('Items') < nav.indexOf('Character sheet'));
-  assert.ok(html.indexOf('Copper (cp)') < html.indexOf('Chain mail'));
+  const itemPanel = html.slice(html.indexOf('id="character-tab-panel"'));
+  assert.ok(itemPanel.indexOf('Copper (cp)') >= 0);
+  assert.ok(itemPanel.indexOf('Copper (cp)') < itemPanel.indexOf('Chain mail'));
   assert.match(html, /Rearrange tabs/);
 });
 
@@ -903,10 +923,16 @@ test('Missing casting bonus mappings disable affected rolls without crashing the
   const old = structuredClone(file);
   for (const config of old.configurations) delete config.system.spellDisplay.castingBonusStats;
   const cleric = starterSaves[1];
-  const html = await render({ ...data(), systems: [old], characters: [cleric] }, `#characters/${cleric.id}?view=actions`);
+  const html = await render({ ...data(), systems: [old], characters: [cleric] }, `#characters/${cleric.id}?view=resources`);
   assert.match(html, /Character overview/);
-  assert.match(html, /requires an unavailable stat/);
-  assert.match(html, /disabled="">Roll/);
+  // Casting controls are now opened from a spell dialog rather than shown on an Actions tab.
+  const engine = model.createRegistry([old]).engineForCharacter(cleric), result = engine.evaluate(cleric);
+  const roll = result.instances.map((instance) => engine.getFeature(instance.feature)?.roll).find((roll) => roll?.bonus && typeof roll.bonus === 'object' && 'castingAbility' in roll.bonus);
+  assert.ok(roll?.spell);
+  const { FeatureRolls } = await server.ssrLoadModule('/src/FeatureRolls.tsx');
+  const controls = renderToStaticMarkup(createElement(CharacterRuleContext.Provider, { value: { character: cleric, result, update: () => {}, report: () => {} } }, createElement(FeatureRolls, { engine, feature: engine.getFeature(roll.spell) })));
+  assert.match(controls, /requires an unavailable stat/);
+  assert.match(controls, /disabled="">Roll/);
 });
 
 test('Build choices sort numerically and highlight missing or invalid selections', async () => {

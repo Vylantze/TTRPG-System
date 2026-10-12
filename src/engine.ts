@@ -277,16 +277,15 @@ export class Engine {
             subtotal = 0;
             continue;
           }
-          const amount = subtotal * modifier.amount - subtotal;
-          contributions.push({ amount, label: `${sourceLabel(modifier.explanation.source)} (×${modifier.amount})` });
-          subtotal += amount;
+          if (modifier.amount !== 1) contributions = contributions.map((term) => ({ amount: term.amount * modifier.amount, label: [...new Set([term.label, sourceLabel(modifier.explanation.source)])].join(', ') }));
+          subtotal *= modifier.amount;
         }
         const bounded = Math.min(ceiling, Math.max(floor, subtotal));
         if (bounded !== subtotal) {
           const bound = modifiers.find((entry) => entry.definition.operation === (bounded > subtotal ? 'floor' : 'ceiling') && entry.amount === bounded)!;
-          contributions.push({ amount: bounded - subtotal, label: `${sourceLabel(bound.explanation.source)} (${bounded > subtotal ? 'minimum' : 'maximum'} ${bounded})` });
+          contributions = [{ amount: bounded, label: sourceLabel(bound.explanation.source) }];
         }
-        if (value !== bounded) contributions.push({ amount: value - bounded, label: `${baseLabel} (rounding or limits)` });
+        if (value !== bounded) contributions = [{ amount: value, label: `${baseLabel} limit` }];
         results[id] = { base, value, modifiers: explanations, contributions: contributions.filter((term) => term.amount !== 0) };
         return value;
       } finally {

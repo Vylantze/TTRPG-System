@@ -110,7 +110,11 @@ test('display references do not acquire Features or alter evaluation, including 
   second.textReferences = [first.id];
   first.textAliases = ['Alternative name'];
   const a = new Engine(original), b = new Engine(decorated), character = a.createCharacter('test', 'Test', [{ id: 'main', class: original.classes[0].id, level: 1 }]);
-  assert.deepEqual(b.evaluate(character), a.evaluate(character));
+  const before = a.evaluate(character), after = b.evaluate(character);
+  // Display names affect source labels, while all rules and contribution amounts remain identical.
+  const withoutLabels = (result) => JSON.parse(JSON.stringify(result, (key, value) => key === 'label' ? undefined : value));
+  assert.deepEqual(withoutLabels(after), withoutLabels(before));
+  assert.ok(Object.values(after.stats).some((stat) => stat.contributions?.some((term) => term.label.includes('Readable narrative'))));
 });
 
 test('catalogue validation rejects malformed display text and unresolved references', () => {
