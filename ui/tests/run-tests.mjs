@@ -37,6 +37,12 @@ test('calculation display renders signed contributions and their reasons instead
   assert.match(html, /\+ 2 \(Shield\)/);
   assert.match(html, /− 3 \(Penalty\)/);
   assert.doesNotMatch(html, /Base:|Applied|Inactive|Unused/);
+  const empty = { stats: { defense: { value: 0, base: 0, modifiers: [], contributions: [] } } };
+  assert.match(renderToStaticMarkup(createElement(StatCalculation, { id: 'defense', engine, result: empty, character: {} })), /0 \(Base, Defense\)/);
+  const canceled = { stats: { defense: { value: 0, base: 10, modifiers: [], contributions: [{ amount: 10, label: 'Armor' }, { amount: -10, label: 'Penalty' }] } } };
+  const canceledHtml = renderToStaticMarkup(createElement(StatCalculation, { id: 'defense', engine, result: canceled, character: {} }));
+  assert.match(canceledHtml, /10 \(Base, Defense\)/);
+  assert.match(canceledHtml, /− 10 \(Penalty\)/);
 });
 
 test('existing sample characters display evaluated equipment and race sources without formulas', async () => {

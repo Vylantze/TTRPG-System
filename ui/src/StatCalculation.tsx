@@ -7,19 +7,29 @@ export function StatCalculation({ id, engine, result }: { id: string; engine: En
   const readable = (label: string) => label.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\bmodifier\./g, '').replace(/^./, (letter) => letter.toUpperCase());
   return (
     <div className="calculation-box">
-      <p>
-        {terms.length
-          ? terms.map((term, index) => (
-              <span key={index}>
-                {index ? term.amount < 0 ? ' − ' : ' + ' : term.amount < 0 ? '−' : ''}
-                {Math.abs(term.amount)}
-                {' ('}
-                {readable(term.label)}
-                )
-              </span>
-            ))
-          : '0'}
-      </p>
+      {stat.value === 0 && (
+        <p>
+          {stat.base}
+          {' (Base, '}
+          {readable(engine.getStatDefinition(id)?.name ?? id)}
+          )
+        </p>
+      )}
+      {(terms.length > 0 || stat.value !== 0) && (
+        <p>
+          {terms.length
+            ? terms.map((term, index) => (
+                <span key={index}>
+                  {index ? term.amount < 0 ? ' − ' : ' + ' : term.amount < 0 ? '−' : ''}
+                  {Math.abs(term.amount)}
+                  {' ('}
+                  {readable(term.label)}
+                  )
+                </span>
+              ))
+            : '0'}
+        </p>
+      )}
     </div>
   );
 }
