@@ -6,6 +6,17 @@ import { createDnd2014Engine } from '@/dist/systems/dnd5e-2014/index.js';
 
 const characters = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8')).data;
 const engine = createDnd2014Engine();
+
+test('sample Cleric calculations name contributing race and equipment, omitting zero terms', () => {
+  const result = engine.evaluate(characters[1]);
+  assert.deepEqual(result.stats.armorClass.contributions, [{ amount: 16, label: 'Chain mail' }, { amount: 2, label: 'Shield' }]);
+  assert.deepEqual(result.stats.speed.contributions, [{ amount: 25, label: 'Walking Speed, Hill Dwarf' }]);
+  assert.deepEqual(result.stats['modifier.dexterity'].contributions, [{ amount: -1, label: 'Dexterity modifier' }]);
+  for (const stat of Object.values(result.stats)) {
+    assert.ok(stat.contributions.every((term) => term.amount !== 0));
+    assert.ok(Math.abs(stat.contributions.reduce((sum, term) => sum + term.amount, 0) - stat.value) < 1e-9);
+  }
+});
 const expected = [
   { abilities: [16, 9, 15, 11, 13, 14], hp: 12, ac: 17, speed: 30, skills: { athletics: 5, history: 2, perception: 3, persuasion: 4 } },
   { abilities: [14, 8, 15, 10, 16, 12], hp: 11, ac: 18, speed: 25, skills: { athletics: 4, intimidation: 3, medicine: 5, religion: 2 } },

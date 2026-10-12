@@ -4556,6 +4556,23 @@
       }
     ]
   },
+  "StatContribution": {
+    "kind": "object",
+    "fields": {
+      "amount": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "label": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      }
+    }
+  },
   "StatDefinition": {
     "kind": "intersection",
     "variants": [
@@ -4648,6 +4665,16 @@
           }
         },
         "optional": false
+      },
+      "contributions": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "StatContribution"
+          }
+        },
+        "optional": true
       }
     }
   },

@@ -236,6 +236,8 @@ Run `npm run benchmark:loading` to measure cold package validation, first engine
 Observed local runs: before this change, package loading was approximately 32.2 seconds and fresh registry/engine creation 4.4-4.8 seconds. With immutable reuse, repeat registry/engine creation rounds to 0 ms (under 1 ms); one later cold-validation run was 27.4 seconds. Cold timings vary with machine load, and no percentage speedup is claimed. Full cold validation remains substantial, but runs in the worker so the loading UI can remain responsive. Further persistent compiled-data caching needs an explicit schema/engine-version and dependency-validation design; it must not trust arbitrary imports solely by their declared version.
 # Automatic UI releases
 
+Character-sheet calculation panels use the engine's evaluated `StatResult.contributions`, each with a signed `amount` and source `label`. They follow selected expression branches and effective modifier stacking, replace overridden bases, and omit zero contributions. Race/parent Features and equipped items supply source names. Multiplication, effective bounds, and final rounding/clamping appear as signed adjustments, so the terms sum to the displayed value. The original modifier audit remains available in `StatResult.modifiers` for diagnostics. This evaluation metadata does not change saved characters or System assets.
+
 The pre-commit hook versions UI changes before linting. It compares the staged UI sources, public assets, entry HTML, Vite/TypeScript configuration, dependencies, and lockfile against HEAD. Tests, documentation, release tooling, and version-only edits do not trigger a release.
 
 - Patch: styles, existing image/font assets, visible JSX copy, and tooltip/placeholder text.

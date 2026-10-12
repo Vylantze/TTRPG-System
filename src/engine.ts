@@ -11,6 +11,7 @@ import type { FeatureAdvancement } from '@/src/types/FeatureAdvancement.js';
 import { checkCharacter, validateCatalogue } from '@/src/validation.js';
 import { compileBlocks } from '@/src/blocks.js';
 import { trackerPools, storeTrackers } from '@/src/resource-trackers.js';
+import { expressionContributions } from '@/src/stat-contributions.js';
 
 export const segment = (id: string): string => encodeURIComponent(id);
 export const rootPath = (id: string): string => `root/${segment(id)}`;
@@ -182,6 +183,8 @@ export class Engine {
         const provider = providers[0]?.instance;
         const definitionEnv = provider ? this.environment(this.context(character, levels, runtime, provider), get, provider) : globalEnv;
         let base = definition.kind === 'input' ? constrain(number(character.inputs[id] ?? definition.default), definition, true) : number(evaluateExpression(definition.expression, definitionEnv));
+        let baseExpression = definition.kind === 'derived' ? definition.expression : undefined;
+        let baseLabel = definition.name;
         for (const other of providers.slice(1)) if (number(evaluateExpression(other.definition.expression, this.environment(this.context(character, levels, runtime, other.instance), get, other.instance))) !== base) throw new RuleError('STAT_CONFLICT', `Active providers disagree on ${id}.`);
         const alternatives = this.catalogue.system.alternatives?.[id];
         if (character.alternatives[id]) {
@@ -189,6 +192,8 @@ export class Engine {
           const stub: Instance = { id: 'alternative', feature: '', parameters: {}, acquiredCharacterLevel: 0, acquiredClassLevel: 0, active: true, eligible: true, waived: false };
           if (!alternative || !this.satisfies(alternative.requirements, stub, instances, get, globalEnv.context)) throw new RuleError('ALTERNATIVE', `Unavailable alternative for ${id}.`);
           base = number(evaluateExpression(alternative.expression, globalEnv));
+          baseExpression = alternative.expression;
+          baseLabel = `${definition.name} (${alternative.id})`;
         }
         const explanations: ModifierExplanation[] = [], modifiers: { definition: Modifier; explanation: ModifierExplanation; amount: number }[] = [];
         for (const { instance, components } of modifierSources) for (const component of components) {
@@ -249,7 +254,40 @@ export class Engine {
         const ceiling = Math.min(Infinity, ...modifiers.filter((m) => m.definition.operation === 'ceiling').map((m) => m.amount));
         if (floor > ceiling) throw new RuleError('BOUND_CONFLICT', `Floor exceeds ceiling for ${id}.`);
         value = constrain(Math.min(ceiling, Math.max(floor, value)), definition);
-        results[id] = { base, value, modifiers: explanations };
+        const sourceLabel = (source: string): string => {
+          if (source.startsWith('item/')) return this.catalogue.items?.find((item) => item.id === character.inventory?.find((entry) => entry.id === decodeURIComponent(source.split('/')[1]))?.item)?.name ?? baseLabel;
+          const instance = instances.find((entry) => entry.id === source);
+          const feature = instance && this.features.get(instance.feature);
+          const parent = instance?.parent && instances.find((entry) => entry.id === instance.parent);
+          const parentFeature = parent && this.features.get(parent.feature);
+          return [...new Set([feature?.displayName ?? feature?.name, parentFeature && (parentFeature.displayName ?? parentFeature.name)].filter(Boolean))].join(', ') || baseLabel;
+        };
+        let contributions = baseExpression === undefined
+          ? [{ amount: base, label: baseLabel }]
+          : expressionContributions(baseExpression, character.alternatives[id] ? globalEnv : definitionEnv, provider ? `${baseLabel}, ${sourceLabel(provider.id)}` : baseLabel, (stat) => {
+              get(stat);
+              return results[stat].contributions ?? [{ amount: results[stat].value, label: stat }];
+            });
+        if (overrides.length) contributions = [{ amount: overrides[0].amount, label: sourceLabel(overrides[0].explanation.source) }];
+        for (const modifier of modifiers.filter((entry) => entry.definition.operation === 'add' && entry.explanation.applied)) contributions.push({ amount: modifier.amount, label: sourceLabel(modifier.explanation.source) });
+        let subtotal = contributions.reduce((sum, term) => sum + term.amount, 0);
+        for (const modifier of modifiers.filter((entry) => entry.definition.operation === 'multiply')) {
+          if (modifier.amount === 0) {
+            contributions = [];
+            subtotal = 0;
+            continue;
+          }
+          const amount = subtotal * modifier.amount - subtotal;
+          contributions.push({ amount, label: `${sourceLabel(modifier.explanation.source)} (×${modifier.amount})` });
+          subtotal += amount;
+        }
+        const bounded = Math.min(ceiling, Math.max(floor, subtotal));
+        if (bounded !== subtotal) {
+          const bound = modifiers.find((entry) => entry.definition.operation === (bounded > subtotal ? 'floor' : 'ceiling') && entry.amount === bounded)!;
+          contributions.push({ amount: bounded - subtotal, label: `${sourceLabel(bound.explanation.source)} (${bounded > subtotal ? 'minimum' : 'maximum'} ${bounded})` });
+        }
+        if (value !== bounded) contributions.push({ amount: value - bounded, label: `${baseLabel} (rounding or limits)` });
+        results[id] = { base, value, modifiers: explanations, contributions: contributions.filter((term) => term.amount !== 0) };
         return value;
       } finally {
         visiting.pop();

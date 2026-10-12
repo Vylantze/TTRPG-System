@@ -1,34 +1,25 @@
 import type { Character, Engine, EvaluationResult } from '@/src/index';
-import { expressionText } from '@/ui/src/feature-requirements';
-export function StatCalculation({ id, engine, character, result }: { id: string; engine: Engine; character: Character; result: EvaluationResult }) {
-  const definition = engine.getStatDefinition(id);
-  const inputs = new Set<string>();
-  const collect = (value: unknown): void => {
-    if (!value || typeof value !== 'object') return;
-    if ('stat' in value && typeof value.stat === 'string') inputs.add(value.stat);
-    Object.values(value).forEach(collect);
-  };
-  if (definition?.kind === 'derived') collect(definition.expression);
+
+export function StatCalculation({ id, engine, result }: { id: string; engine: Engine; character: Character; result: EvaluationResult }) {
+  const stat = result.stats[id];
+  if (!stat) return <div className="calculation-box">Unavailable</div>;
+  const terms = stat.contributions ?? [{ amount: stat.value, label: engine.getStatDefinition(id)?.name ?? id }];
+  const readable = (label: string) => label.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/\bmodifier\./g, '').replace(/^./, (letter) => letter.toUpperCase());
   return (
     <div className="calculation-box">
-      {definition?.kind === 'derived' && <p>{expressionText(definition.expression, engine)}</p>}
-      {[...inputs].map((stat) => <p key={stat}>{`${engine.getStatDefinition(stat)?.name ?? stat}: ${result.stats[stat]?.value ?? 'Unavailable'}`}</p>)}
       <p>
-        {'Base: '}
-        {result.stats[id]?.base}
+        {terms.length
+          ? terms.map((term, index) => (
+              <span key={index}>
+                {index ? term.amount < 0 ? ' − ' : ' + ' : term.amount < 0 ? '−' : ''}
+                {Math.abs(term.amount)}
+                {' ('}
+                {readable(term.label)}
+                )
+              </span>
+            ))
+          : '0 (No nonzero contributions)'}
       </p>
-      {result.stats[id]?.modifiers.map((modifier, index) => (
-        <p key={index}>
-          {modifier.operation}
-          {' '}
-          {modifier.amount}
-          {' '}
-          ·
-          {' '}
-          {modifier.applied ? 'Applied' : modifier.reason}
-          <small>{modifier.source.startsWith('item/') ? engine.catalogue.items?.find((item) => item.id === character.inventory?.find((entry) => entry.id === decodeURIComponent(modifier.source.split('/')[1]))?.item)?.name : engine.getFeature(result.instances.find((instance) => instance.id === modifier.source)?.feature ?? '')?.displayName ?? 'Feature'}</small>
-        </p>
-      ))}
     </div>
   );
 }
