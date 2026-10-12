@@ -20,7 +20,11 @@ test('2014 JSON preserves SRD descriptions and plain-text credits for licensed-o
   assert.doesNotMatch(JSON.stringify(file), /https?:\/\/(?:[\w-]+\.)*(?:dndbeyond\.com|roll20\.net)\b/i);
   for (const f of file.features) {
     const externalBackground = /^dnd5e:2014:background(?:-trait)?\.(noble|soldier|criminal|folk-hero)$/.test(f.id);
-    if (f.source && !/SRD 5.1|StarterSet_Charactersv2/.test(f.source)) assert.equal(f.description, undefined, f.id);
+    const sheetTracker = ['resource.temporary-hit-points', 'resource.death-save.successes', 'resource.death-save.failures'].some((id) => f.id === `dnd5e:2014:${id}`);
+    if (sheetTracker) {
+      assert.ok(f.components.length > 0 && f.components.every((component) => component.kind === 'trackResource'), f.id);
+      assert.equal(f.description, undefined, 'Internal sheet trackers do not duplicate source prose');
+    } else if (f.source && !/SRD 5.1|StarterSet_Charactersv2/.test(f.source)) assert.equal(f.description, undefined, f.id);
     else if (externalBackground) assert.match(f.source, /StarterSet_Charactersv2.pdf#page=/);
     else assert.ok(f.description?.trim() || f.textReferences?.length, f.id);
     assert.ok(f.displayName?.trim(), f.id);

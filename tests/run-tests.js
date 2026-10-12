@@ -1,30 +1,15 @@
-import '@/tests/engine.test.js';
-import '@/tests/dnd2014.test.js';
-import '@/tests/system-loader.test.js';
-import '@/tests/drafts.test.js';
-import '@/tests/descriptions.test.js';
-import '@/tests/feature-text.test.js';
-import '@/tests/lint.test.js';
-import '@/tests/catalogue-queries.test.js';
-import '@/tests/building-blocks.test.js';
-import '@/tests/starter-characters.test.js';
-import '@/tests/inventory-resources.test.js';
-import '@/tests/currency.test.js';
-import '@/tests/spell-display.test.js';
+import { readdirSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
-import '@/tests/character-play.test.js';
-
-import '@/tests/description-tokens.test.js';
-
-import '@/tests/expanded-classes.test.js';
-
-import '@/tests/artificer.test.js';
-import '@/tests/equipment-effects.test.js';
-import '@/tests/subclass-expansion.test.js';
-import '@/tests/audit-regressions.test.js';
-import '@/tests/system-package.test.js';
-
-import '@/tests/loading-performance.test.js';
-import '@/tests/version-policy.test.js';
-import '@/tests/sheet-display.test.js';
-import '@/tests/domain-spells.test.js';
+// Separate test files so expensive progressions do not serialize the entire suite.
+// A bounded worker count avoids loading every large rules catalogue at once.
+const directory = new URL('./', import.meta.url);
+const files = readdirSync(directory).filter((name) => name.endsWith('.test.js')).sort()
+  .map((name) => fileURLToPath(new URL(name, directory)));
+const result = spawnSync(process.execPath, [
+  '--import', new URL('../tools/register-alias.mjs', import.meta.url).href,
+  '--test', '--test-concurrency=2', ...process.argv.slice(2), ...files,
+], { stdio: 'inherit' });
+if (result.error) console.error(result.error.message);
+process.exitCode = result.status ?? 1;

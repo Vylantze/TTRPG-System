@@ -16,6 +16,8 @@ For a new repository, select **Settings → Pages → Build and deployment → S
 
 Run `npm run build`, `npm test`, or `npm run demo` after installing the TypeScript development dependency. The engine has no runtime dependencies.
 
+Engine tests run in isolated files with at most two workers. `npm test -- --test-shard=1/4` runs one of the four shards used by GitHub Actions; change the numerator to run another shard. Pages runs all four engine shards alongside lint, UI tests, and the UI build, and deploys only after every job passes.
+
 Project-local imports use `@/` for the repository root (for example, `@/src/index.js` and `@/ui/src/display`). Root/UI TypeScript paths, JavaScript editor configuration, and Vite resolve the same alias. npm scripts preload `tools/register-alias.mjs` for Node tests and examples; direct execution of those source scripts requires `node --import ./tools/register-alias.mjs <script>`. The engine build rewrites emitted imports to relative paths, so consumers of `dist` need no alias loader. Package and Node built-in imports retain their normal names.
 
 The 2014 System grants hit points automatically at each Class level: the starting Class receives its maximum Hit Die at level one, and subsequent levels use the fixed average, with Constitution applied at every level. Feature selection defaults to a dropdown; use **Use list** to browse the searchable, paginated cards. Existing browser workspaces keep their loaded System JSON; reload the updated bundled System to use revised rules.
