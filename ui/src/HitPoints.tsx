@@ -2,6 +2,7 @@ import { FeatureRolls } from '@/ui/src/FeatureRolls';
 import { useState } from 'react';
 import { adjustResource, changeHealth, type Character, type Engine, type EvaluationResult } from '@/src/index';
 import { ResourceSummary } from '@/ui/src/ResourceSummary';
+import { HitDiceIcons } from '@/ui/src/HitDiceIcons';
 
 export function HitPoints({ engine, character, result, update, report }: { engine: Engine; character: Character; result: EvaluationResult; update: (character: Character) => void; report: (message: string) => void }) {
   const [amount, setAmount] = useState('1');
@@ -69,7 +70,10 @@ export function HitPoints({ engine, character, result, update, report }: { engin
       {display?.counters && (display.countersVisibleAtOrBelow === undefined || (current !== undefined && current <= display.countersVisibleAtOrBelow)) && <div className="health-counters">{pools.filter((pool) => display.counters?.includes(pool.key)).map((pool) => <ResourceSummary key={pool.id} pool={pool} engine={engine} result={result} ready={ready} adjust={(delta) => attempt(() => adjustResource(engine, character, pool.id, delta, crypto.randomUUID()))} />)}</div>}
       {display?.showHealingFeatures !== false && engine.catalogue.system.healingFeaturesTag && [...new Set(result.instances.filter((instance) => instance.active && instance.eligible && engine.getFeature(instance.feature)?.tags?.includes(engine.catalogue.system.healingFeaturesTag!)).map((instance) => instance.feature))].map((id) => (
         <details className="panel rest-healing" key={id}>
-          <summary>{engine.getFeature(id)!.displayName ?? engine.getFeature(id)!.name}</summary>
+          <summary>
+            {engine.getFeature(id)!.displayName ?? engine.getFeature(id)!.name}
+            {display?.healingResourceIcons && pools.filter((pool) => pool.providers.some((provider) => result.instances.some((instance) => instance.feature === id && provider.startsWith(`${instance.id}/`)))).map((pool) => <HitDiceIcons key={pool.id} pool={pool} />)}
+          </summary>
           {Object.values(result.resources).filter((pool) => pool.providers.some((provider) => result.instances.some((instance) => instance.feature === id && provider.startsWith(`${instance.id}/`)))).map((pool) => <ResourceSummary key={pool.id} pool={pool} engine={engine} result={result} />)}
           <FeatureRolls feature={engine.getFeature(id)!} engine={engine} />
         </details>

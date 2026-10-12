@@ -1,5 +1,5 @@
 {
-  "assetVersion": "3.0.0",
+  "assetVersion": "4.0.0",
   "data": {
     "variant-1": {
       "id": "dnd5e:2014-srd5.1",
@@ -5935,11 +5935,6 @@
           "content": "items"
         },
         {
-          "id": "actions",
-          "name": "Actions",
-          "content": "actions"
-        },
-        {
           "id": "features",
           "name": "Features & traits",
           "content": "features"
@@ -6056,7 +6051,8 @@
           "counters": [
             "death-save.successes",
             "death-save.failures"
-          ]
+          ],
+          "healingResourceIcons": true
         },
         "descriptionProcessing": {
           "classLevelPhrases": true,
@@ -6132,7 +6128,8 @@
               "attackStat": "casting.charisma.attack",
               "saveStat": "casting.charisma.dc"
             }
-          ]
+          ],
+          "actionFilter": true
         },
         "restPreview": true,
         "rollHistory": true,
@@ -6161,6 +6158,13 @@
               "kinds": [
                 "reaction"
               ]
+            },
+            {
+              "id": "special",
+              "name": "Other / no action cost",
+              "kinds": [
+                "special"
+              ]
             }
           ],
           "itemCategories": [
@@ -6186,7 +6190,11 @@
               "condition"
             ]
           }
-        ]
+        ],
+        "abilities": {
+          "groupByActionCost": true,
+          "actionFilter": true
+        }
       }
     },
     "variant-2": {
@@ -12114,11 +12122,6 @@
           "content": "items"
         },
         {
-          "id": "actions",
-          "name": "Actions",
-          "content": "actions"
-        },
-        {
           "id": "features",
           "name": "Features & traits",
           "content": "features"
@@ -12235,7 +12238,8 @@
           "counters": [
             "death-save.successes",
             "death-save.failures"
-          ]
+          ],
+          "healingResourceIcons": true
         },
         "descriptionProcessing": {
           "classLevelPhrases": true,
@@ -12311,7 +12315,8 @@
               "attackStat": "casting.charisma.attack",
               "saveStat": "casting.charisma.dc"
             }
-          ]
+          ],
+          "actionFilter": true
         },
         "restPreview": true,
         "rollHistory": true,
@@ -12340,6 +12345,13 @@
               "kinds": [
                 "reaction"
               ]
+            },
+            {
+              "id": "special",
+              "name": "Other / no action cost",
+              "kinds": [
+                "special"
+              ]
             }
           ],
           "itemCategories": [
@@ -12365,7 +12377,11 @@
               "condition"
             ]
           }
-        ]
+        ],
+        "abilities": {
+          "groupByActionCost": true,
+          "actionFilter": true
+        }
       }
     },
     "variant-3": {
@@ -18302,11 +18318,6 @@
           "content": "items"
         },
         {
-          "id": "actions",
-          "name": "Actions",
-          "content": "actions"
-        },
-        {
           "id": "features",
           "name": "Features & traits",
           "content": "features"
@@ -18423,7 +18434,8 @@
           "counters": [
             "death-save.successes",
             "death-save.failures"
-          ]
+          ],
+          "healingResourceIcons": true
         },
         "descriptionProcessing": {
           "classLevelPhrases": true,
@@ -18499,7 +18511,8 @@
               "attackStat": "casting.charisma.attack",
               "saveStat": "casting.charisma.dc"
             }
-          ]
+          ],
+          "actionFilter": true
         },
         "restPreview": true,
         "rollHistory": true,
@@ -18528,6 +18541,13 @@
               "kinds": [
                 "reaction"
               ]
+            },
+            {
+              "id": "special",
+              "name": "Other / no action cost",
+              "kinds": [
+                "special"
+              ]
             }
           ],
           "itemCategories": [
@@ -18553,7 +18573,11 @@
               "condition"
             ]
           }
-        ]
+        ],
+        "abilities": {
+          "groupByActionCost": true,
+          "actionFilter": true
+        }
       }
     },
     "variant-4": {
@@ -24481,11 +24505,6 @@
           "content": "items"
         },
         {
-          "id": "actions",
-          "name": "Actions",
-          "content": "actions"
-        },
-        {
           "id": "features",
           "name": "Features & traits",
           "content": "features"
@@ -24602,7 +24621,8 @@
           "counters": [
             "death-save.successes",
             "death-save.failures"
-          ]
+          ],
+          "healingResourceIcons": true
         },
         "descriptionProcessing": {
           "classLevelPhrases": true,
@@ -24678,7 +24698,8 @@
               "attackStat": "casting.charisma.attack",
               "saveStat": "casting.charisma.dc"
             }
-          ]
+          ],
+          "actionFilter": true
         },
         "restPreview": true,
         "rollHistory": true,
@@ -24707,6 +24728,13 @@
               "kinds": [
                 "reaction"
               ]
+            },
+            {
+              "id": "special",
+              "name": "Other / no action cost",
+              "kinds": [
+                "special"
+              ]
             }
           ],
           "itemCategories": [
@@ -24732,7 +24760,11 @@
               "condition"
             ]
           }
-        ]
+        ],
+        "abilities": {
+          "groupByActionCost": true,
+          "actionFilter": true
+        }
       }
     },
     "variant-5": {
@@ -30326,11 +30358,6 @@
           "content": "items"
         },
         {
-          "id": "actions",
-          "name": "Actions",
-          "content": "actions"
-        },
-        {
           "id": "features",
           "name": "Features & traits",
           "content": "features"
@@ -30447,7 +30474,8 @@
           "counters": [
             "death-save.successes",
             "death-save.failures"
-          ]
+          ],
+          "healingResourceIcons": true
         },
         "descriptionProcessing": {
           "classLevelPhrases": true,
@@ -30523,7 +30551,8 @@
               "attackStat": "casting.charisma.attack",
               "saveStat": "casting.charisma.dc"
             }
-          ]
+          ],
+          "actionFilter": true
         },
         "restPreview": true,
         "rollHistory": true,
@@ -30552,6 +30581,13 @@
               "kinds": [
                 "reaction"
               ]
+            },
+            {
+              "id": "special",
+              "name": "Other / no action cost",
+              "kinds": [
+                "special"
+              ]
             }
           ],
           "itemCategories": [
@@ -30577,7 +30613,11 @@
               "condition"
             ]
           }
-        ]
+        ],
+        "abilities": {
+          "groupByActionCost": true,
+          "actionFilter": true
+        }
       }
     },
     "variant-6": {
@@ -36162,11 +36202,6 @@
           "content": "items"
         },
         {
-          "id": "actions",
-          "name": "Actions",
-          "content": "actions"
-        },
-        {
           "id": "features",
           "name": "Features & traits",
           "content": "features"
@@ -36283,7 +36318,8 @@
           "counters": [
             "death-save.successes",
             "death-save.failures"
-          ]
+          ],
+          "healingResourceIcons": true
         },
         "descriptionProcessing": {
           "classLevelPhrases": true,
@@ -36359,7 +36395,8 @@
               "attackStat": "casting.charisma.attack",
               "saveStat": "casting.charisma.dc"
             }
-          ]
+          ],
+          "actionFilter": true
         },
         "restPreview": true,
         "rollHistory": true,
@@ -36388,6 +36425,13 @@
               "kinds": [
                 "reaction"
               ]
+            },
+            {
+              "id": "special",
+              "name": "Other / no action cost",
+              "kinds": [
+                "special"
+              ]
             }
           ],
           "itemCategories": [
@@ -36413,7 +36457,11 @@
               "condition"
             ]
           }
-        ]
+        ],
+        "abilities": {
+          "groupByActionCost": true,
+          "actionFilter": true
+        }
       }
     },
     "variant-7": {
@@ -42007,11 +42055,6 @@
           "content": "items"
         },
         {
-          "id": "actions",
-          "name": "Actions",
-          "content": "actions"
-        },
-        {
           "id": "features",
           "name": "Features & traits",
           "content": "features"
@@ -42128,7 +42171,8 @@
           "counters": [
             "death-save.successes",
             "death-save.failures"
-          ]
+          ],
+          "healingResourceIcons": true
         },
         "descriptionProcessing": {
           "classLevelPhrases": true,
@@ -42204,7 +42248,8 @@
               "attackStat": "casting.charisma.attack",
               "saveStat": "casting.charisma.dc"
             }
-          ]
+          ],
+          "actionFilter": true
         },
         "restPreview": true,
         "rollHistory": true,
@@ -42233,6 +42278,13 @@
               "kinds": [
                 "reaction"
               ]
+            },
+            {
+              "id": "special",
+              "name": "Other / no action cost",
+              "kinds": [
+                "special"
+              ]
             }
           ],
           "itemCategories": [
@@ -42258,7 +42310,11 @@
               "condition"
             ]
           }
-        ]
+        ],
+        "abilities": {
+          "groupByActionCost": true,
+          "actionFilter": true
+        }
       }
     },
     "variant-8": {
@@ -47843,11 +47899,6 @@
           "content": "items"
         },
         {
-          "id": "actions",
-          "name": "Actions",
-          "content": "actions"
-        },
-        {
           "id": "features",
           "name": "Features & traits",
           "content": "features"
@@ -47964,7 +48015,8 @@
           "counters": [
             "death-save.successes",
             "death-save.failures"
-          ]
+          ],
+          "healingResourceIcons": true
         },
         "descriptionProcessing": {
           "classLevelPhrases": true,
@@ -48040,7 +48092,8 @@
               "attackStat": "casting.charisma.attack",
               "saveStat": "casting.charisma.dc"
             }
-          ]
+          ],
+          "actionFilter": true
         },
         "restPreview": true,
         "rollHistory": true,
@@ -48069,6 +48122,13 @@
               "kinds": [
                 "reaction"
               ]
+            },
+            {
+              "id": "special",
+              "name": "Other / no action cost",
+              "kinds": [
+                "special"
+              ]
             }
           ],
           "itemCategories": [
@@ -48094,7 +48154,11 @@
               "condition"
             ]
           }
-        ]
+        ],
+        "abilities": {
+          "groupByActionCost": true,
+          "actionFilter": true
+        }
       }
     },
     "variant-9": {
@@ -53486,11 +53550,6 @@
           "content": "items"
         },
         {
-          "id": "actions",
-          "name": "Actions",
-          "content": "actions"
-        },
-        {
           "id": "features",
           "name": "Features & traits",
           "content": "features"
@@ -53607,7 +53666,8 @@
           "counters": [
             "death-save.successes",
             "death-save.failures"
-          ]
+          ],
+          "healingResourceIcons": true
         },
         "descriptionProcessing": {
           "classLevelPhrases": true,
@@ -53683,7 +53743,8 @@
               "attackStat": "casting.charisma.attack",
               "saveStat": "casting.charisma.dc"
             }
-          ]
+          ],
+          "actionFilter": true
         },
         "restPreview": true,
         "rollHistory": true,
@@ -53712,6 +53773,13 @@
               "kinds": [
                 "reaction"
               ]
+            },
+            {
+              "id": "special",
+              "name": "Other / no action cost",
+              "kinds": [
+                "special"
+              ]
             }
           ],
           "itemCategories": [
@@ -53737,7 +53805,11 @@
               "condition"
             ]
           }
-        ]
+        ],
+        "abilities": {
+          "groupByActionCost": true,
+          "actionFilter": true
+        }
       }
     },
     "variant-10": {
@@ -59120,11 +59192,6 @@
           "content": "items"
         },
         {
-          "id": "actions",
-          "name": "Actions",
-          "content": "actions"
-        },
-        {
           "id": "features",
           "name": "Features & traits",
           "content": "features"
@@ -59241,7 +59308,8 @@
           "counters": [
             "death-save.successes",
             "death-save.failures"
-          ]
+          ],
+          "healingResourceIcons": true
         },
         "descriptionProcessing": {
           "classLevelPhrases": true,
@@ -59317,7 +59385,8 @@
               "attackStat": "casting.charisma.attack",
               "saveStat": "casting.charisma.dc"
             }
-          ]
+          ],
+          "actionFilter": true
         },
         "restPreview": true,
         "rollHistory": true,
@@ -59346,6 +59415,13 @@
               "kinds": [
                 "reaction"
               ]
+            },
+            {
+              "id": "special",
+              "name": "Other / no action cost",
+              "kinds": [
+                "special"
+              ]
             }
           ],
           "itemCategories": [
@@ -59371,7 +59447,11 @@
               "condition"
             ]
           }
-        ]
+        ],
+        "abilities": {
+          "groupByActionCost": true,
+          "actionFilter": true
+        }
       }
     },
     "variant-11": {
@@ -64763,11 +64843,6 @@
           "content": "items"
         },
         {
-          "id": "actions",
-          "name": "Actions",
-          "content": "actions"
-        },
-        {
           "id": "features",
           "name": "Features & traits",
           "content": "features"
@@ -64884,7 +64959,8 @@
           "counters": [
             "death-save.successes",
             "death-save.failures"
-          ]
+          ],
+          "healingResourceIcons": true
         },
         "descriptionProcessing": {
           "classLevelPhrases": true,
@@ -64960,7 +65036,8 @@
               "attackStat": "casting.charisma.attack",
               "saveStat": "casting.charisma.dc"
             }
-          ]
+          ],
+          "actionFilter": true
         },
         "restPreview": true,
         "rollHistory": true,
@@ -64989,6 +65066,13 @@
               "kinds": [
                 "reaction"
               ]
+            },
+            {
+              "id": "special",
+              "name": "Other / no action cost",
+              "kinds": [
+                "special"
+              ]
             }
           ],
           "itemCategories": [
@@ -65014,7 +65098,11 @@
               "condition"
             ]
           }
-        ]
+        ],
+        "abilities": {
+          "groupByActionCost": true,
+          "actionFilter": true
+        }
       }
     },
     "variant-12": {
@@ -70397,11 +70485,6 @@
           "content": "items"
         },
         {
-          "id": "actions",
-          "name": "Actions",
-          "content": "actions"
-        },
-        {
           "id": "features",
           "name": "Features & traits",
           "content": "features"
@@ -70518,7 +70601,8 @@
           "counters": [
             "death-save.successes",
             "death-save.failures"
-          ]
+          ],
+          "healingResourceIcons": true
         },
         "descriptionProcessing": {
           "classLevelPhrases": true,
@@ -70594,7 +70678,8 @@
               "attackStat": "casting.charisma.attack",
               "saveStat": "casting.charisma.dc"
             }
-          ]
+          ],
+          "actionFilter": true
         },
         "restPreview": true,
         "rollHistory": true,
@@ -70623,6 +70708,13 @@
               "kinds": [
                 "reaction"
               ]
+            },
+            {
+              "id": "special",
+              "name": "Other / no action cost",
+              "kinds": [
+                "special"
+              ]
             }
           ],
           "itemCategories": [
@@ -70648,7 +70740,11 @@
               "condition"
             ]
           }
-        ]
+        ],
+        "abilities": {
+          "groupByActionCost": true,
+          "actionFilter": true
+        }
       }
     }
   }

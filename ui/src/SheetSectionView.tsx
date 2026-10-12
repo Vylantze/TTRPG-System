@@ -59,7 +59,7 @@ export function SheetSectionView({ section, engine, character, result, update, r
                       </button>
                     </th>
                   ))}
-                  {expanded.length > 0 && <th>Calculation</th>}
+                  <th>Calculation</th>
                 </tr>
               </thead>
               <tbody>
@@ -75,11 +75,13 @@ export function SheetSectionView({ section, engine, character, result, update, r
                               <td key={column}>
                                 <div className="bonus-control">
                                   <strong>{row.roll ? <StatRollButton stat={row.stat} label={name(row)} value={primaryValue(result.stats[row.stat].value)} engine={engine} character={character} result={result} update={update} report={report} /> : primaryValue(result.stats[row.stat].value)}</strong>
-                                  <button className="link calculation-toggle" aria-label={`Calculation for ${name(row)}`} aria-expanded={expanded.includes(row.stat)} aria-controls={`calculation-${section.id}-${row.stat}`} onClick={() => setExpanded(expanded.includes(row.stat) ? expanded.filter((stat) => stat !== row.stat) : [...expanded, row.stat])}>{expanded.includes(row.stat) ? '▾' : '▸'}</button>
                                 </div>
                               </td>
                             ))}
-                    {expanded.length > 0 && <td id={`calculation-${section.id}-${row.stat}`}>{expanded.includes(row.stat) && <StatCalculation id={row.stat} engine={engine} character={character} result={result} />}</td>}
+                    <td className="skill-calculation">
+                      <button className="link calculation-toggle" aria-label={`Calculation for ${name(row)}`} aria-expanded={expanded.includes(row.stat)} aria-controls={`calculation-${section.id}-${row.stat}`} onClick={() => setExpanded(expanded.includes(row.stat) ? expanded.filter((stat) => stat !== row.stat) : [...expanded, row.stat])}>{expanded.includes(row.stat) ? '▾' : '▸'}</button>
+                      <div id={`calculation-${section.id}-${row.stat}`} hidden={!expanded.includes(row.stat)}>{expanded.includes(row.stat) && <StatCalculation id={row.stat} engine={engine} character={character} result={result} />}</div>
+                    </td>
                   </tr>
                 ))}
               </tbody>

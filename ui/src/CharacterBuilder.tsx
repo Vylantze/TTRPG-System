@@ -29,6 +29,9 @@ import { selectionBucket, selectionIssues, sortBuildSelections } from '@/ui/src/
 import { Modal } from '@/ui/src/Modal';
 import { FeatureRules, RulesText } from '@/ui/src/RulesText';
 import { ResourceSummary } from '@/ui/src/ResourceSummary';
+import { actionCostKind } from '@/ui/src/action-costs';
+import { setCharacterLevel } from '@/ui/src/character-leveling';
+import { EquippedAttacks } from '@/ui/src/EquippedAttacks';
 
 export function CharacterBuilder({ engine, character, update, openFeature, report }: { engine: Engine; character: Character; update: (c: Character) => void; openFeature: (id: string) => void; report: (message: string) => void }) {
   const systemTabs: SheetTab[] = engine.catalogue.system.sheetTabs ?? [
@@ -68,6 +71,19 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
   const incomplete = result.diagnostics.filter((d) => d.severity === 'incomplete').length;
   const ready = character.buildState !== 'draft' && result.status === 'valid';
   const [recoveryOpen, setRecoveryOpen] = useState(false);
+  const [abilityCategory, setAbilityCategory] = useState('');
+  const abilitySettings = engine.catalogue.system.sheetDisplay?.abilities;
+  const actionCategories = engine.catalogue.system.sheetDisplay?.actions?.categories ?? [];
+  const selectedKinds = abilitySettings?.actionFilter ? actionCategories.find((category) => category.id === abilityCategory)?.kinds : undefined;
+  const changeLevel = (progression: string, next: number) => attempt(() => {
+    update(setCharacterLevel(engine, character, progression, next));
+    const choices = tabs.find((entry) => entry.content === 'choices')?.id ?? tabs[0]?.id;
+    setTab(choices);
+    const [path, search] = window.location.hash.split('?');
+    const params = new URLSearchParams(search);
+    params.set('view', choices);
+    window.history.replaceState(null, '', `${path}?${params}`);
+  });
   const spells = useMemo(() => spellGroups(engine, result), [engine, result]);
   const spellIds = useMemo(() => new Set(spells.flatMap((spell) => spell.modes.map((mode) => mode.capability.id))), [spells]);
   const slotIds = useMemo(() => new Set(spellSlotPools(engine, result).map(({ pool }) => pool.id)), [engine, result]);
@@ -119,6 +135,12 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
             {' · '}
             {character.progressions.filter((progression) => progression.level > 0).map((progression) => `${engine.catalogue.classes.find((cls) => cls.id === progression.class)?.name ?? progression.class} ${progression.level}`).join(' / ') || 'No class selected'}
           </p>
+          <div className="toolbar level-up-controls">
+            {character.progressions.map((progression) => {
+              const cls = engine.catalogue.classes.find((entry) => entry.id === progression.class);
+              return <button className="quiet" key={progression.id} disabled={Object.keys(character.pending).length > 0 || progression.level >= (cls?.maximumLevel ?? Infinity)} onClick={() => changeLevel(progression.id, progression.level + 1)}>{`Level up ${cls?.name ?? progression.class}`}</button>;
+            })}
+          </div>
         </div>
         <button aria-expanded={showSummary || result.status === 'invalid'} aria-controls="build-summary" onClick={() => setShowSummary(!showSummary)} className={`badge ${result.status}`}>{result.status === 'valid' && character.buildState === 'draft' ? 'Ready to finalize' : result.status}</button>
       </div>
@@ -236,7 +258,10 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
                       defaultValue={p.level}
                       onBlur={(e) => {
                         if (e.target.value === '')e.target.value = String(p.level);
-                        if (Number(e.target.value) !== p.level)edit([{ kind: 'level', progression: p.id, level: Number(e.target.value) }]);
+                        const next = Number(e.target.value);
+                        if (Number.isInteger(next) && next >= 0 && next <= (engine.catalogue.classes.find((cls) => cls.id === p.class)?.maximumLevel ?? Infinity)) {
+                          if (next !== p.level) changeLevel(p.id, next);
+                        } else e.target.value = String(p.level);
                       }}
                     />
                     {character.buildState === 'draft' && <button className="link" onClick={() => edit([{ kind: 'removeProgression', progression: p.id }])}>Remove progression</button>}
@@ -344,7 +369,28 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
               {Boolean(character.rollResults?.length) && <button className="quiet" onClick={() => update(clearFeatureRolls(character))}>Clear all rolls</button>}
             </div>
             <h2>Abilities</h2>
-            <div className="ability-list">{abilities.map(ability)}</div>
+            <EquippedAttacks engine={engine} character={character} result={result} />
+            {abilitySettings?.actionFilter && (
+              <label className="ability-action-filter">
+                Ability action cost
+                <select value={abilityCategory} onChange={(event) => setAbilityCategory(event.target.value)}>
+                  <option value="">All action costs</option>
+                  {actionCategories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
+                </select>
+              </label>
+            )}
+            {abilitySettings?.groupByActionCost
+              ? [...actionCategories, { id: 'uncategorized', name: 'Other abilities', kinds: [] }].filter((category) => !selectedKinds || category.kinds.some((kind) => selectedKinds.includes(kind))).map((category) => {
+                  const grouped = abilities.filter((capability) => category.id === 'uncategorized' ? !actionCategories.some((entry) => entry.kinds.includes(actionCostKind(capability.definition.action))) : category.kinds.includes(actionCostKind(capability.definition.action)));
+                  return grouped.length > 0 && (
+                    <section key={category.id} className="ability-cost-group">
+                      <h3>{category.name}</h3>
+                      <div className="ability-list">{grouped.map(ability)}</div>
+                    </section>
+                  );
+                })
+              : <div className="ability-list">{abilities.filter((capability) => !selectedKinds || selectedKinds.includes(actionCostKind(capability.definition.action))).map(ability)}</div>}
+            {!abilities.some((capability) => !selectedKinds || selectedKinds.includes(actionCostKind(capability.definition.action))) && <p className="muted">No abilities match this action cost.</p>}
             {Object.values(result.resources).filter((pool) => ![engine.catalogue.system.healthRules?.resourceKey, engine.catalogue.system.healthRules?.temporaryResourceKey, ...engine.catalogue.system.sheetDisplay?.health?.counters ?? []].includes(pool.key) && !result.instances.some((instance) => engine.getFeature(instance.feature)?.companion?.resources.includes(pool.key)) && !Object.values(engine.catalogue.system.recoveryAllocations ?? {}).some((policy) => policy.keys.includes(pool.key)) && !slotIds.has(pool.id) && !abilities.some((capability) => Object.hasOwn(capability.costs, pool.id))).map((pool) => <div className="standalone-resource" key={pool.id}>{resource(pool.id)}</div>)}
             <SpellBook engine={engine} character={character} result={result} ready={ready} update={update} report={report} />
             {Object.entries(character.pending).map(([id, pending]) => (

@@ -342,3 +342,14 @@ button.resource-adjust-button { box-sizing: border-box; flex: 0 0 2rem; width: 2
 .feature-content-entry h4{font-size:18px;margin:0 0 12px}
 .feature-selection-content{margin-top:24px}
 .feature-content-pagination{flex-wrap:wrap;margin-top:20px;gap:12px}
+
+.hit-dice-icons{display:inline-flex;flex-wrap:wrap;vertical-align:middle;gap:3px;margin:0 8px;max-width:100%}
+.hit-dice-icons .available{color:var(--green);background:#e3eddf;border-radius:4px}
+.hit-dice-icons .spent{color:#92998f;opacity:.4}
+.skill-list{table-layout:auto}
+.skill-list .skill-calculation{min-width:84px;vertical-align:top}
+.skill-calculation .calculation-toggle{display:inline-block;border:1px solid var(--line);border-radius:4px;background:#fffefa;min-height:28px;margin-bottom:6px}
+.ability-action-filter{max-width:300px;margin-bottom:20px}
+.ability-cost-group{margin:24px 0}
+.level-up-controls{margin:12px 0 0}
+@media(max-width:760px){.subnav{padding-bottom:14px;scrollbar-gutter:stable}.subnav button.active{border-bottom:0;box-shadow:inset 0 -3px var(--green)}.skill-calculation{min-width:64px}.sheet-skills{overflow-x:auto}}

@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react';
-import { spellGroups, featureRollInstances, useAbility as activateAbility, itemProperties, infusedItemProperties, type Character, type Engine, type EvaluationResult } from '@/src/index';
+import { spellGroups, featureRollInstances, useAbility as activateAbility, type Character, type Engine, type EvaluationResult } from '@/src/index';
 import { FeatureLink } from '@/ui/src/FeatureLink';
 import { FeatureRolls } from '@/ui/src/FeatureRolls';
 import { Tooltip } from '@/ui/src/Tooltip';
+import { EquippedAttacks } from '@/ui/src/EquippedAttacks';
 
 export function ActionsView({ engine, character, result, update, report }: { engine: Engine; character: Character; result: EvaluationResult; update: (character: Character) => void; report: (message: string) => void }) {
   const [category, setCategory] = useState('');
@@ -89,28 +90,7 @@ export function ActionsView({ engine, character, result, update, report }: { eng
         </table>
       </div>
       {!capabilities.length && !spells.some((spell) => !kinds || spell.modes.some((mode) => kinds.includes(mode.capability.definition.action?.kind ?? ''))) && <p className="muted">No abilities or spells in this category.</p>}
-      {!category && (
-        <section className="panel equipped-attacks">
-          <h3>Equipped weapons</h3>
-          {(character.inventory ?? []).filter((entry) => entry.equipped && settings?.itemCategories?.includes(engine.catalogue.items?.find((item) => item.id === entry.item)?.category ?? '')).map((entry) => {
-            const item = engine.catalogue.items!.find((item) => item.id === entry.item)!;
-            const properties = { ...itemProperties(engine.catalogue, item.id), ...infusedItemProperties(character, engine.catalogue, entry.id, result.instances) };
-            return (
-              <div key={entry.id}>
-                <strong>{item.name}</strong>
-                <dl className="spell-quick-info">
-                  {Object.entries(properties).map(([name, value]) => (
-                    <div key={name}>
-                      <dt>{name}</dt>
-                      <dd>{String(value)}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            );
-          })}
-        </section>
-      )}
+      {!category && <EquippedAttacks engine={engine} character={character} result={result} />}
     </section>
   );
 }

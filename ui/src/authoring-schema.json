@@ -3779,6 +3779,12 @@
               },
               "optional": true
             },
+            "healingResourceIcons": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            },
             "countersVisibleAtOrBelow": {
               "schema": {
                 "kind": "number"
@@ -3791,6 +3797,26 @@
                 "item": {
                   "kind": "string"
                 }
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "abilities": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "groupByActionCost": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            },
+            "actionFilter": {
+              "schema": {
+                "kind": "boolean"
               },
               "optional": true
             }
@@ -4014,6 +4040,12 @@
               "optional": true
             },
             "levelFilter": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            },
+            "actionFilter": {
               "schema": {
                 "kind": "boolean"
               },
