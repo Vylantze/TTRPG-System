@@ -18,7 +18,8 @@
   "scripts": {
     "start": "npm run ui:dev",
     "lint": "eslint . --max-warnings 0 && npm run lint:css && node --import ./tools/register-alias.mjs tools/lint.mjs",
-    "lint:fix": "eslint . --fix --max-warnings 0 && npm run lint:css:fix && node --import ./tools/register-alias.mjs tools/lint.mjs",
+    "format:ui": "prettier \"ui/src/**/*.{ts,tsx}\" --write --single-quote --trailing-comma all",
+    "lint:fix": "npm run format:ui && eslint . --fix --max-warnings 0 && npm run lint:css:fix && node --import ./tools/register-alias.mjs tools/lint.mjs",
     "lint:test": "node --import ./tools/register-alias.mjs tests/lint.test.js",
     "version:test": "node --import ./tools/register-alias.mjs tests/ui-release.test.js",
     "hooks:install": "node --import ./tools/register-alias.mjs tools/install-hooks.mjs",
