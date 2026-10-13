@@ -6,8 +6,8 @@ import { catalogue } from '@/examples/catalogue.js';
 import { Engine } from '@/dist/index.js';
 
 const server = await createServer({ server: { middlewareMode: true }, appType: 'custom' });
-const { WorkspaceDatabase } = await server.ssrLoadModule('/src/WorkspaceDatabase.ts');
-const { writeWorkspace, STORAGE_KEY } = await server.ssrLoadModule('/src/workspace.ts');
+const { WorkspaceDatabase } = await server.ssrLoadModule('/src/services/storage/WorkspaceDatabase.ts');
+const { writeWorkspace, STORAGE_KEY } = await server.ssrLoadModule('/src/lib/workspace.ts');
 const file = { format: 'ttrpg-system', version: 1, id: catalogue.system.id, revision: 1, options: {}, features: catalogue.features, configurations: [{ id: catalogue.id, revision: 1, options: {}, system: catalogue.system, classes: catalogue.classes }] };
 const character = new Engine(catalogue).createCharacter('hero', 'Hero', [{ id: 'main', class: 'example:adventurer', level: 1 }], [], { draft: true });
 const workspace = () => ({ version: 1, systems: [file], characters: [structuredClone(character)], active: 'hero' });

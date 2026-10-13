@@ -17,8 +17,8 @@
   },
   "scripts": {
     "start": "npm run ui:dev",
-    "lint": "eslint . --max-warnings 0 && node --import ./tools/register-alias.mjs tools/lint.mjs",
-    "lint:fix": "eslint . --fix --max-warnings 0 && node --import ./tools/register-alias.mjs tools/lint.mjs",
+    "lint": "eslint . --max-warnings 0 && npm run lint:css && node --import ./tools/register-alias.mjs tools/lint.mjs",
+    "lint:fix": "eslint . --fix --max-warnings 0 && npm run lint:css:fix && node --import ./tools/register-alias.mjs tools/lint.mjs",
     "lint:test": "node --import ./tools/register-alias.mjs tests/lint.test.js",
     "version:test": "node --import ./tools/register-alias.mjs tests/ui-release.test.js",
     "hooks:install": "node --import ./tools/register-alias.mjs tools/install-hooks.mjs",
@@ -44,7 +44,9 @@
     "test:ui:database": "npm run build && npm run test:database --prefix ui",
     "test:ui:updates": "npm run build && npm run test:updates --prefix ui",
     "test:ui:packages": "npm run build && npm run test:packages --prefix ui",
-    "benchmark:loading": "npm run build && node --import ./tools/register-alias.mjs tools/benchmark-loading.mjs"
+    "benchmark:loading": "npm run build && node --import ./tools/register-alias.mjs tools/benchmark-loading.mjs",
+    "lint:css": "stylelint \"ui/src/**/*.css\" --max-warnings 0 && prettier \"ui/src/**/*.css\" --check",
+    "lint:css:fix": "prettier \"ui/src/**/*.css\" --write && stylelint \"ui/src/**/*.css\" --fix && prettier \"ui/src/**/*.css\" --write"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -53,6 +55,9 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.7",
     "globals": "^17.13.0",
+    "prettier": "^3.9.10",
+    "stylelint": "^17.16.0",
+    "stylelint-config-standard": "^40.0.0",
     "typescript": "5.4.5",
     "typescript-eslint": "^8.71.1"
   },
