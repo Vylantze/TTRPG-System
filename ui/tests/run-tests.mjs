@@ -41,7 +41,7 @@ test('calculation display renders signed contributions and their reasons instead
   assert.match(renderToStaticMarkup(createElement(StatCalculation, { id: 'defense', engine, result: empty, character: {} })), /0 \(Base, Defense\)/);
   const canceled = { stats: { defense: { value: 0, base: 10, modifiers: [], contributions: [{ amount: 10, label: 'Armor' }, { amount: -10, label: 'Penalty' }] } } };
   const canceledHtml = renderToStaticMarkup(createElement(StatCalculation, { id: 'defense', engine, result: canceled, character: {} }));
-  assert.match(canceledHtml, /10 \(Base, Defense\)/);
+  assert.doesNotMatch(canceledHtml, /Base, Defense/);
   assert.match(canceledHtml, /− 10 \(Penalty\)/);
 });
 
@@ -1066,3 +1066,30 @@ test('Structured System forms create, edit, and delete records without mutating 
 });
 
 test.after(() => server.close());
+
+test('sample sheets use proficiency markers, hide empty spells, and expose item pages and roll history', async () => {
+  const rogue = starterSaves.find((entry) => entry.progressions.some((progression) => progression.class.includes('rogue')));
+  const fighter = starterSaves[0];
+  const workspace = { ...data(), characters: [rogue, fighter] };
+  const skills = await render(workspace, `#characters/${rogue.id}?view=skills`);
+  assert.match(skills, /Proficiency/);
+  assert.match(skills, /aria-label="Expertise"[^>]*>◉/);
+  assert.doesNotMatch(skills, /id="tab-spells"/);
+  assert.match(skills, /id="tab-rolls"/);
+  assert.doesNotMatch(skills, /Clear all rolls/);
+  const inventory = await render(workspace, `#characters/${fighter.id}?view=items`);
+  assert.match(inventory, /<details class="inventory-item-details">/);
+  assert.match(inventory, /href="#items\//);
+  assert.match(inventory, /View item/);
+  const history = await render(workspace, `#characters/${fighter.id}?view=rolls`);
+  assert.match(history, /Clear all rolls/);
+  const registry = model.createRegistry([file]);
+  const engine = registry.createEngine(rogue.system.id, rogue.system.revision, rogue.system.options);
+  const { StatCalculation } = await server.ssrLoadModule('/src/StatCalculation.tsx');
+  const calculation = renderToStaticMarkup(createElement(StatCalculation, { id: 'skill.survival', engine, character: rogue, result: engine.evaluate(rogue) }));
+  assert.match(calculation, /0 \(Wisdom modifier\)/);
+  assert.doesNotMatch(calculation, /Base/);
+  const item = fighter.inventory[0].item;
+  const itemPage = await render(workspace, `#items/${encodeURIComponent(item)}?system=${encodeURIComponent(fighter.system.id)}&revision=1&catalogue=${encodeURIComponent(engine.catalogue.id)}`);
+  assert.match(itemPage, /Item components/);
+});

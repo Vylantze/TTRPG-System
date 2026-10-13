@@ -1,6 +1,7 @@
 import { useState, useContext, useDeferredValue } from 'react';
 import { CharacterRuleContext } from '@/ui/src/character-rule-context';
-import { Modal } from '@/ui/src/Modal';
+import { ItemDetail } from '@/ui/src/ItemDetail';
+import { itemHref } from '@/ui/src/item-href';
 import { getCurrency, itemProperties, infusedItemProperties, updateInventory, type Character, type Engine, type InventoryEntry } from '@/src/index';
 
 export function Inventory({ engine, character, update, report }: { engine: Engine;
@@ -10,13 +11,10 @@ export function Inventory({ engine, character, update, report }: { engine: Engin
   const [selected, setSelected] = useState('');
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
-  const [details, setDetails] = useState<string>();
   const query = useDeferredValue(search.trim().toLowerCase());
   const context = useContext(CharacterRuleContext);
   const entries = character.inventory ?? [];
   const settings = engine.catalogue.system.sheetDisplay?.inventory;
-  const detailEntry = entries.find((entry) => entry.id === details);
-  const detailItem = engine.catalogue.items?.find((item) => item.id === detailEntry?.item);
   const itemName = (entry: InventoryEntry) => {
     const item = engine.catalogue.items?.find((candidate) => candidate.id === entry.item);
     return String(infusedItemProperties(character, engine.catalogue, entry.id, context?.result.instances ?? [])['Replicated item'] ?? item?.name ?? 'Unavailable item');
@@ -70,7 +68,15 @@ export function Inventory({ engine, character, update, report }: { engine: Engin
               return (
                 <tr key={entry.id}>
                   <th scope="row">
-                    {engine.catalogue.system.sheetDisplay?.detailsDrawer && item ? <button className="link" onClick={() => setDetails(entry.id)}>{String(properties['Replicated item'] ?? item.name)}</button> : <span>{String(properties['Replicated item'] ?? item?.name ?? 'Unavailable item')}</span>}
+                    {item
+                      ? (
+                          <details className="inventory-item-details">
+                            <summary>{String(properties['Replicated item'] ?? item.name)}</summary>
+                            <a href={itemHref(item.id, engine)}>View item</a>
+                            <ItemDetail engine={engine} id={item.id} properties={properties} />
+                          </details>
+                        )
+                      : <span>Unavailable item</span>}
                     <small>
                       {item?.category}
                       {Object.entries(properties).map(([key, value]) => ` · ${key}: ${value}`).join('')}
@@ -128,22 +134,6 @@ export function Inventory({ engine, character, update, report }: { engine: Engin
           Add to inventory
         </button>
       </div>
-      {detailEntry && detailItem && (
-        <Modal className="details-drawer" title={itemName(detailEntry)} onClose={() => setDetails(undefined)}>
-          <p>{`${detailItem.category} · quantity ${detailEntry.quantity}${detailEntry.equipped ? ' · equipped' : ''}${detailEntry.attuned ? ' · attuned' : ''}`}</p>
-          <dl className="item-details-properties">
-            {Object.entries({ ...itemProperties(engine.catalogue, detailItem.id), ...infusedItemProperties(character, engine.catalogue, detailEntry.id, context?.result.instances ?? []) }).map(([name, value]) => (
-              <div key={name}>
-                <dt>{name}</dt>
-                <dd>{String(value)}</dd>
-              </div>
-            ))}
-          </dl>
-          <h3>Item components</h3>
-          <ul>{detailItem.features.map((id) => <li key={id}>{engine.catalogue.itemFeatures?.find((feature) => feature.id === id)?.name ?? id}</li>)}</ul>
-          {detailItem.source && <p className="source">{detailItem.source}</p>}
-        </Modal>
-      )}
     </section>
   );
 }

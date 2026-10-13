@@ -284,7 +284,7 @@ export class Engine {
           contributions = [{ amount: bounded, label: sourceLabel(bound.explanation.source) }];
         }
         if (value !== bounded) contributions = [{ amount: value, label: `${baseLabel} limit` }];
-        results[id] = { base, value, modifiers: explanations, contributions: contributions.filter((term) => term.amount !== 0) };
+        results[id] = { base, value, modifiers: explanations, contributions: contributions.some((term) => term.amount !== 0) ? contributions.filter((term) => term.amount !== 0) : contributions.slice(0, 1) };
         return value;
       } finally {
         visiting.pop();

@@ -43,12 +43,15 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
     { id: 'resources', name: 'Abilities & resources', content: 'resources' },
     { id: 'notes', name: 'Notes', content: 'notes' },
   ];
-  const tabs = orderedSheetTabs(systemTabs, character.tabOrder);
+  const result = useMemo(() => evaluateForSheet(engine, character), [engine, character]);
+  const availableTabs = systemTabs.filter((entry) => entry.content !== 'spells' || spellGroups(engine, result).length > 0);
+  if (engine.catalogue.system.sheetDisplay?.rollHistory && !availableTabs.some((entry) => entry.content === 'rolls')) availableTabs.push({ id: 'rolls', name: 'Roll history', content: 'rolls' });
+  const tabs = orderedSheetTabs(availableTabs, character.tabOrder);
   const [orderingTabs, setOrderingTabs] = useState(false);
   const [showSummary, setShowSummary] = useState(false);
   const [details, setDetails] = useState<string>();
   const [changingTab, startTabChange] = useTransition();
-  const result = useMemo(() => evaluateForSheet(engine, character), [engine, character]);
+
   const [tab, setTab] = useState(() => {
       const requested = typeof window !== 'undefined' ? new URLSearchParams(window.location.hash.split('?')[1]).get('view') : null;
       return requested && tabs.some((entry) => entry.id === requested) ? requested : (tabs.find((entry) => entry.content === (character.buildState === 'finalized' ? 'sheet' : 'choices')) ?? tabs[0])?.id;
@@ -361,6 +364,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
             <EquipmentEffects engine={engine} character={character} result={result} update={update} report={report} />
           </>
         )}
+        {currentTab?.content === 'rolls' && <RollHistory engine={engine} character={character} update={update} />}
         {currentTab?.content === 'notes' && <CharacterDetails notes engine={engine} character={character} result={result} update={update} />}
         {currentTab?.content === 'sections' && (engine.catalogue.system.sheetSections ?? []).filter((section) => currentTab.sections?.includes(section.id)).map((section) => <SheetSectionView key={section.id} section={section} engine={engine} character={character} result={result} update={update} report={report} />)}
         {currentTab?.content === 'sheet' && <CharacterSheet sectionIds={currentTab.sections} engine={engine} character={character} result={result} update={update} report={report} />}
@@ -427,7 +431,6 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
           </>
         )}
       </div>
-      <RollHistory engine={engine} character={character} update={update} />
       {details && engine.getFeature(details) && (
         <Modal className="details-drawer" title={featureName(engine.getFeature(details))} onClose={() => setDetails(undefined)}>
           <a className="link" href={featureHref(details, engine)} target="_blank" rel="noopener noreferrer">Open Feature in a new tab ↗</a>

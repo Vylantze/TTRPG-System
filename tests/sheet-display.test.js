@@ -157,3 +157,38 @@ test('Sheet configuration rejects malformed optional objects, unknown phrase sta
   catalogue.system.sheetSections = [{ id: 'test', name: 'Test', layout: 'skills', defaultSort: 'Ability', columns: ['Name', 'Bonus'], rows: [{ stat: 'bonus' }] }];
   assert.throws(() => new Engine(catalogue), /visible column/);
 });
+
+test('reset buttons combine recovery events, retain separate budgets, and reject unknown references', () => {
+  const { catalogue } = setup();
+  catalogue.system.resetConditions.push({ id: 'dawn', name: 'Dawn', description: 'Next dawn' }, { id: 'day', name: 'Day', description: 'New day' });
+  catalogue.system.resetButtons = [{ event: 'rest', displayName: 'Sleep', recoveries: ['rest', 'dawn', 'day'] }];
+  catalogue.features[0].components[0].recovery = [{ event: 'rest', amount: 'full' }];
+  catalogue.features[1].components[0].maximum = 5;
+  catalogue.features[1].components[0].initialAmount = 5;
+  catalogue.features[1].components[0].recovery = [{ event: 'dawn', amount: 'full' }];
+  catalogue.features[2].components[0].initialAmount = 3;
+  catalogue.features[2].components[0].recovery = [{ event: 'day', amount: 'full' }];
+  delete catalogue.system.healthRules.clearOnReset;
+  const engine = new Engine(catalogue);
+  let character = engine.createCharacter('test', 'Test');
+  for (const key of ['vitality', 'ward', 'successes']) character = adjustResource(engine, character, pool(engine, character, key).id, -2, `spend-${key}`);
+  const next = recoverResources(engine, character, 'rest', 'sleep');
+  assert.equal(pool(engine, next, 'vitality').current, 10);
+  assert.equal(pool(engine, next, 'ward').current, 5);
+  assert.equal(pool(engine, next, 'successes').current, 3);
+  assert.deepEqual(recoverResources(engine, next, 'rest', 'sleep'), next);
+  catalogue.system.resetButtons[0].recoveries.push('unknown');
+  assert.throws(() => new Engine(catalogue), /reset condition/);
+});
+
+test('zero skill contributions retain the ability source and roll reasons are snapshots', () => {
+  const { catalogue } = setup();
+  catalogue.system.stats = [{ id: 'wisdom', name: 'Wisdom modifier', kind: 'derived', expression: 0 }, { id: 'survival', name: 'Survival', kind: 'derived', expression: { op: 'add', args: [{ stat: 'wisdom' }, 0] } }];
+  catalogue.system.sheetDisplay.overview = [{ stat: 'survival', name: 'Survival', roll: { dice: '1d20' } }];
+  const engine = new Engine(catalogue), character = engine.createCharacter('test', 'Test');
+  assert.deepEqual(engine.evaluate(character).stats.survival.contributions, [{ amount: 0, label: 'Wisdom modifier' }]);
+  const rolled = rollStat(engine, character, 'survival', 'check', () => 0.8);
+  assert.equal(rolled.statRolls[0].modifierReasons, '0 (Wisdom modifier)');
+  assert.equal(rolled.statRolls[0].breakdown, '17 (1d20) + 0');
+  assert.deepEqual(deserializeCharacter(serializeCharacter(rolled)).statRolls, rolled.statRolls);
+});

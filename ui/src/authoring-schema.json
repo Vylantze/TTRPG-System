@@ -3513,6 +3513,12 @@
         },
         "optional": false
       },
+      "modifierReasons": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
       "applied": {
         "schema": {
           "kind": "number"
@@ -4477,6 +4483,10 @@
             {
               "kind": "literal",
               "value": "spells"
+            },
+            {
+              "kind": "literal",
+              "value": "rolls"
             }
           ]
         },
@@ -4754,6 +4764,12 @@
           "kind": "string"
         },
         "optional": false
+      },
+      "modifierReasons": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
       }
     }
   },
@@ -4923,11 +4939,26 @@
                 },
                 "optional": false
               },
+              "displayName": {
+                "schema": {
+                  "kind": "string"
+                },
+                "optional": true
+              },
               "label": {
                 "schema": {
                   "kind": "string"
                 },
-                "optional": false
+                "optional": true
+              },
+              "recoveries": {
+                "schema": {
+                  "kind": "array",
+                  "item": {
+                    "kind": "string"
+                  }
+                },
+                "optional": true
               }
             }
           }

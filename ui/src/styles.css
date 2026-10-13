@@ -368,3 +368,10 @@ button.resource-adjust-button { box-sizing: border-box; flex: 0 0 2rem; width: 2
 .ability-cost-group{margin:24px 0}
 .level-up-controls{margin:12px 0 0}
 @media(max-width:760px){.subnav{padding-bottom:14px;scrollbar-gutter:stable}.subnav button.active{border-bottom:0;box-shadow:inset 0 -3px var(--green)}.skill-calculation{min-width:64px}.sheet-skills{overflow-x:auto}}
+.inventory-item-details { margin:6px 0; font-weight:normal; }
+.inventory-item-details summary { cursor:pointer; font-weight:600; }
+.inventory-item-details>a { display:inline-block; margin:12px 0; }
+.item-details { margin:12px 0; overflow-wrap:anywhere; }
+.item-details-properties { display:grid; gap:8px; }
+.item-details-properties>div { display:flex; flex-wrap:wrap; gap:6px 12px; }
+.item-details-properties dd { margin:0; }

@@ -365,7 +365,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
         ids.add(condition.id);
       }
       const selected = compiled.system.commandRules?.selectedRecovery;
-      const references = [...(compiled.system.recoveryEvents ?? []), ...(compiled.system.resetButtons ?? []).map((button) => button.event), ...Object.keys(compiled.system.recoveryAllocations ?? {}), ...(selected ? [selected.requiredEvent, ...(selected.boundaryEvent ? [selected.boundaryEvent] : [])] : [])];
+      const references = [...(compiled.system.recoveryEvents ?? []), ...(compiled.system.resetButtons ?? []).flatMap((button) => [button.event, ...(button.recoveries ?? [])]), ...Object.keys(compiled.system.recoveryAllocations ?? {}), ...(selected ? [selected.requiredEvent, ...(selected.boundaryEvent ? [selected.boundaryEvent] : [])] : [])];
       if (references.some((id) => !ids.has(id))) throw new RuleError('RECOVERY', 'Unknown System reset condition reference.');
     }
     if (compiled.system.resetButtons !== undefined) {
@@ -374,7 +374,12 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       for (const button of compiled.system.resetButtons) {
         record(button);
         text(button.event);
-        text(button.label);
+        text(button.displayName ?? button.label);
+        if (button.recoveries !== undefined) {
+          list(button.recoveries);
+          button.recoveries.forEach(text);
+          if (!button.recoveries.length || new Set(button.recoveries).size !== button.recoveries.length) throw new RuleError('RECOVERY', 'Invalid reset button recoveries.');
+        }
         if (events.has(button.event)) throw new RuleError('SCHEMA', 'Duplicate reset button event.');
         events.add(button.event);
       }
@@ -404,7 +409,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
       for (const tab of compiled.system.sheetTabs) {
         text(tab.id);
         text(tab.name);
-        if (!['choices', 'sheet', 'features', 'resources', 'notes', 'sections', 'items', 'actions', 'spells'].includes(tab.content)) throw new RuleError('PRESENTATION', 'Unknown sheet tab content.');
+        if (!['choices', 'sheet', 'features', 'resources', 'notes', 'sections', 'items', 'actions', 'spells', 'rolls'].includes(tab.content)) throw new RuleError('PRESENTATION', 'Unknown sheet tab content.');
         if (tab.sections !== undefined) {
           list(tab.sections);
           for (const id of tab.sections) if (!compiled.system.sheetSections?.some((section) => section.id === id)) throw new RuleError('PRESENTATION', `Unknown sheet section ${id}.`);
@@ -891,6 +896,7 @@ export function checkCharacter(v: unknown): asserts v is Character {
     for (const roll of v.statRolls) {
       record(roll);
       for (const key of ['id', 'stat', 'name', 'expression', 'breakdown']) text(roll[key]);
+      if (roll.modifierReasons !== undefined) text(roll.modifierReasons);
       number(roll.total);
       rollDice(String(roll.expression), () => 0);
     }
@@ -978,6 +984,7 @@ export function checkCharacter(v: unknown): asserts v is Character {
     for (const roll of v.rollResults) {
       record(roll);
       for (const key of ['id', 'instance', 'feature', 'definition', 'expression', 'breakdown']) text(roll[key]);
+      if (roll.modifierReasons !== undefined) text(roll.modifierReasons);
       number(roll.total);
       if (!Number.isSafeInteger(roll.total)) throw new RuleError('SCHEMA', 'Invalid rolled total.');
       if (roll.applied !== undefined) number(roll.applied);

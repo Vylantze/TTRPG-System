@@ -8,6 +8,7 @@ export interface RolledFeature {
   casting?: { capability: string; spell: string; slotLevel: number; ritual: boolean };
   total: number;
   breakdown: string;
+  modifierReasons?: string;
   /** Undefined means not applied; zero is a completed, fully capped application. */
   applied?: number;
 }
