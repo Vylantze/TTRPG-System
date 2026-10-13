@@ -59,8 +59,33 @@ test('existing sample characters display evaluated equipment and race sources wi
   const html = await render({ ...data(), characters: [cleric] }, `#characters/${cleric.id}?view=stats`);
   assert.match(html, /16 \(Chain mail\)/);
   assert.match(html, /\+ 2 \(Shield\)/);
-  assert.match(html, /25 \(Walking Speed, Hill Dwarf\)/);
+  assert.match(html, /25 \(Hill Dwarf: Walking Speed\)/);
   assert.doesNotMatch(html, /Armor Base table|Worn armor index:|Base:/);
+});
+
+test('HP defaults to a compact card and saved preferences restore expanded controls', async () => {
+  const { HitPoints } = await server.ssrLoadModule('/src/HitPoints.tsx');
+  const character = starterSaves[1], engine = model.createRegistry([file]).engineForCharacter(character), result = engine.evaluate(character);
+  const props = { character, engine, result, update: () => {}, report: () => {} };
+  const compact = renderToStaticMarkup(createElement(HitPoints, props));
+  assert.match(compact, /health-compact-card/);
+  assert.match(compact, /Expand Hit points/);
+  assert.match(compact, /11 \/ 11/);
+  assert.doesNotMatch(compact, /Damage or healing amount|Temporary HP/);
+  const expanded = renderToStaticMarkup(createElement(HitPoints, { ...props, character: { ...character, displayPreferences: { healthExpanded: true } } }));
+  assert.match(expanded, /Collapse Hit points/);
+  assert.match(expanded, /Damage or healing amount/);
+});
+
+test('subfeatures and Class choices include their Feature or choice name without a Class parent tag', async () => {
+  const { instanceFeatureName } = await server.ssrLoadModule('/src/feature-instance-name.ts');
+  const character = starterSaves[0], engine = model.createRegistry([file]).engineForCharacter(character), result = engine.evaluate(character);
+  const defense = result.instances.find((instance) => instance.feature === 'dnd5e:2014:style.defense');
+  assert.ok(defense);
+  assert.equal(instanceFeatureName(defense, engine, result), 'Fighting Style: Defense');
+  const parent = result.instances.find((instance) => instance.feature === 'dnd5e:2014:fighter.second-wind');
+  assert.equal(instanceFeatureName({ ...defense, parent: parent.id }, engine, result), 'Second Wind: Defense');
+  assert.equal(engine.getFeature(defense.feature).displayName, 'Defense');
 });
 function storage() {
   const values = new Map();
@@ -106,7 +131,7 @@ test('Items follows Skills by default, puts money first, and saved tab order sur
 });
 
 test('System-defined overview, health workflow, roll controls, spells, and resource actions render on sample sheets', async () => {
-  const character = starterSaves[0];
+  const character = { ...starterSaves[0], displayPreferences: { ...starterSaves[0].displayPreferences, healthExpanded: true } };
   const workspace = { ...data(), characters: [character] };
   const sheet = await render(workspace, `#characters/${character.id}?view=stats`);
   assert.match(sheet, /Damage or healing amount/);
@@ -391,7 +416,7 @@ test('React character builder exposes nested selections and preserves a construc
   const { character } = exampleCharacter();
   character.buildState = 'draft';
   const html = await render({ ...data(), characters: [character] }, `#characters/${character.id}`);
-  assert.match(html, /Feature selections/);
+  assert.match(html, /Build Features &amp; choices/);
   assert.match(html, /Basic stats/);
   assert.match(html, /Finalize character/);
   assert.match(html, /Ready to finalize/);
@@ -425,14 +450,20 @@ test('class guide has a progression table, jump controls, and expanded source de
 });
 
 test('sheet controls show dice, separate skill calculations and configured action filters', async () => {
-  const character = starterSaves.find((entry) => entry.id === 'starter-2014-human-fighter-noble');
+  const sample = starterSaves.find((entry) => entry.id === 'starter-2014-human-fighter-noble');
+  const character = { ...sample, displayPreferences: { ...sample.displayPreferences, healthExpanded: true } };
   const workspace = { ...data(), characters: [character] };
   const skills = await render(workspace, `#characters/${character.id}?view=skills`);
   assert.match(skills, /hit-dice-icons/);
   assert.match(skills, /dice remaining/);
   assert.match(skills, /<th>Calculation<\/th>/);
   assert.match(skills, /class="skill-calculation"/);
-  assert.match(skills, /Level up Fighter/);
+  assert.doesNotMatch(skills, /Level up Fighter/);
+  const choices = await render(workspace, `#characters/${character.id}?view=choices`);
+  assert.match(choices, /Level up Fighter/);
+  assert.match(choices, /Automatically granted Features/);
+  assert.match(choices, /Second Wind/);
+  assert.match(choices, />Fighting Style: Defense<\/a>/);
   const sheet = await render(workspace, `#characters/${character.id}?view=stats`);
   const saves = sheet.match(/<table class="sheet-table skill-list table-values-left[^"]*">[\s\S]*?<\/table>/)?.[0];
   assert.ok(saves, 'Saving throws use left-aligned values');

@@ -59,7 +59,7 @@ test('System action grouping, filters, and healing dice settings validate their 
   catalogue.system.sheetDisplay.spells = { actionFilter: true };
   catalogue.system.sheetDisplay.health = { healingResourceIcons: true };
   assert.doesNotThrow(() => new Engine(catalogue));
-  for (const [section, key] of [['abilities', 'groupByActionCost'], ['abilities', 'actionFilter'], ['spells', 'actionFilter'], ['health', 'healingResourceIcons']]) {
+  for (const [section, key] of [['abilities', 'groupByActionCost'], ['abilities', 'actionFilter'], ['spells', 'actionFilter'], ['health', 'healingResourceIcons'], ['health', 'compactDefault']]) {
     const invalid = structuredClone(catalogue);
     invalid.system.sheetDisplay[section][key] = 'yes';
     assert.throws(() => new Engine(invalid), /boolean/);

@@ -3773,6 +3773,12 @@
               },
               "optional": true
             },
+            "compactDefault": {
+              "schema": {
+                "kind": "boolean"
+              },
+              "optional": true
+            },
             "showHealingFeatures": {
               "schema": {
                 "kind": "boolean"

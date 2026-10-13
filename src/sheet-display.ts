@@ -127,6 +127,7 @@ export function validateSheetDisplay(catalogue: Catalogue): void {
     object(display.health);
     if (display.health.name !== undefined) text(display.health.name);
     boolean(display.health.showHealingFeatures);
+    boolean(display.health.compactDefault);
     if (display.health.countersVisibleAtOrBelow !== undefined && !Number.isFinite(display.health.countersVisibleAtOrBelow)) fail('Invalid health counter visibility threshold.');
     if (display.health.counters !== undefined) {
       list(display.health.counters);

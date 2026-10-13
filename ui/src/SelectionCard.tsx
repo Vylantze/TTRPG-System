@@ -1,4 +1,5 @@
 import { FeatureLink } from '@/ui/src/FeatureLink';
+import { featureChoiceDisplayName } from '@/src/index';
 import { selectionLevel } from '@/ui/src/build-selections';
 import { featureName, tagName } from '@/ui/src/display';
 import { useMemo, useState } from 'react';
@@ -8,6 +9,7 @@ import { FeatureRules, RulesText } from '@/ui/src/RulesText';
 import { descriptionPreview, featureDescription } from '@/ui/src/feature-description';
 
 import { FeatureRequirements } from '@/ui/src/FeatureRequirements';
+import { scopedFeatureName } from '@/ui/src/feature-instance-name';
 
 const PAGE = 12;
 export function SelectionCard({ slot, engine, character, edit, openFeature, ownerName, issues = [] }: { slot: SelectionResult; engine: Engine; character: Character; edit: (edits: Edit[]) => void; openFeature: (id: string) => void; ownerName?: string; issues?: string[] }) {
@@ -17,6 +19,7 @@ export function SelectionCard({ slot, engine, character, edit, openFeature, owne
   const [option, setOption] = useState('');
   const pool = useMemo(() => engine.getSelectionFeatures(slot.definition), [engine, slot.definition]);
   const title = ownerName ? `${ownerName} · ${labelFromId(slot.definition.id)}` : labelFromId(slot.definition.id);
+  const selectedName = (feature: typeof definitions[number] | undefined) => scopedFeatureName(feature, ownerName ?? (slot.id.startsWith('class/') ? featureChoiceDisplayName(slot.definition.id) : undefined));
   const matches = useMemo(() => pool.filter((f) => `${featureName(f)} ${f.name} ${f.tags?.map((tag) => tagName(engine.catalogue.system, tag)).join(' ') ?? ''}`.toLowerCase().includes(query.toLowerCase())), [pool, query, engine.catalogue.system]);
   const visible = useMemo(() => listMode ? matches.slice(page * PAGE, (page + 1) * PAGE) : matches.filter((f) => f.id === option), [matches, page, listMode, option]);
   const candidates = useMemo(() => open ? engine.getCandidates(character, slot.id, {}, { features: visible.map((f) => f.id) }) : [], [engine, character, slot.id, open, visible]);
@@ -60,7 +63,7 @@ export function SelectionCard({ slot, engine, character, edit, openFeature, owne
         return (
           <div className="picked" key={p.id}>
             <div className="row">
-              <FeatureLink className="link" id={p.feature} engine={engine}>{featureName(feature)}</FeatureLink>
+              <FeatureLink className="link" id={p.feature} engine={engine}>{selectedName(feature)}</FeatureLink>
               <button className="quiet" aria-label={`Remove ${featureName(feature)}`} onClick={() => update(picks.filter((x) => x.id !== p.id))}>Remove</button>
             </div>
             {feature
@@ -135,7 +138,7 @@ export function SelectionCard({ slot, engine, character, edit, openFeature, owne
             Feature
             <select aria-label={`Feature for ${title}`} value={option} onChange={(e) => setOption(e.target.value)}>
               <option value="">Choose a Feature…</option>
-              {matches.map((f) => <option key={f.id} value={f.id} disabled={picks.some((p) => p.feature === f.id) && !slot.definition.allowDuplicates}>{featureName(f)}</option>)}
+              {matches.map((f) => <option key={f.id} value={f.id} disabled={picks.some((p) => p.feature === f.id) && !slot.definition.allowDuplicates}>{selectedName(f)}</option>)}
             </select>
           </label>
         )}
@@ -145,7 +148,7 @@ export function SelectionCard({ slot, engine, character, edit, openFeature, owne
             return (
               <div className="candidate" key={f.id}>
                 <div>
-                  <FeatureLink className="link" id={f.id} engine={engine}>{featureName(f)}</FeatureLink>
+                  <FeatureLink className="link" id={f.id} engine={engine}>{selectedName(f)}</FeatureLink>
                   <span className={`badge ${candidate?.status ?? 'incomplete'}`}>{candidate?.status === 'valid' ? 'Eligible' : candidate?.status === 'invalid' ? 'Requirements unmet' : 'Pending'}</span>
                   <RulesText text={descriptionPreview(featureDescription(f, engine))} engine={engine} openFeature={openFeature} exclude={[f.id]} />
                   <FeatureRequirements feature={f} engine={engine} compact />

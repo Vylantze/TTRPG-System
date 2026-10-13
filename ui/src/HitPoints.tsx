@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { adjustResource, changeHealth, type Character, type Engine, type EvaluationResult } from '@/src/index';
 import { ResourceSummary } from '@/ui/src/ResourceSummary';
 import { HitDiceIcons } from '@/ui/src/HitDiceIcons';
+import { Tooltip } from '@/ui/src/Tooltip';
 
 export function HitPoints({ engine, character, result, update, report }: { engine: Engine; character: Character; result: EvaluationResult; update: (character: Character) => void; report: (message: string) => void }) {
   const [amount, setAmount] = useState('1');
@@ -18,9 +19,28 @@ export function HitPoints({ engine, character, result, update, report }: { engin
   };
   const current = health ? health.current ?? health.capacity - health.spent : undefined;
   if (!health) return null;
+  const expanded = character.displayPreferences?.healthExpanded ?? !(display?.compactDefault ?? true);
+  const name = display?.name ?? health.name ?? 'Health';
+  const toggle = <Tooltip text={`${expanded ? 'Collapse' : 'Expand'} ${name}`}><button className="quiet icon-button health-toggle" aria-label={`${expanded ? 'Collapse' : 'Expand'} ${name}`} aria-expanded={expanded} onClick={() => update({ ...character, displayPreferences: { ...character.displayPreferences, healthExpanded: !expanded } })}><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d={expanded ? 'M4 9h5V4 M20 15h-5v5 M9 9 3 3 M15 15l6 6' : 'M9 3H3v6 M15 21h6v-6 M3 3l7 7 M21 21l-7-7'} /></svg></button></Tooltip>;
+  if (!expanded) return (
+    <div className="sheet-hit-points health-compact-card">
+      <div className="health-heading">
+        <span>{name}</span>
+        {toggle}
+      </div>
+      <strong aria-label="Current / maximum">
+        {current}
+        {' / '}
+        {Number.isFinite(health.capacity) ? health.capacity : 'No maximum'}
+      </strong>
+    </div>
+  );
   return (
     <div className="sheet-hit-points">
-      {health && <h2>{display?.name ?? health.name ?? 'Health'}</h2>}
+      <div className="health-heading">
+        <h2>{name}</h2>
+        {toggle}
+      </div>
       {pools.filter((pool) => pool.id === health?.id).map((pool) => (
         <ResourceSummary
           key={pool.id}

@@ -6,7 +6,7 @@ import type { Engine, EvaluationResult, Instance } from '@/src/index';
 import { FeatureRequirements } from '@/ui/src/FeatureRequirements';
 import { FeatureRules } from '@/ui/src/RulesText';
 import { FeatureLink } from '@/ui/src/FeatureLink';
-import { featureName } from '@/ui/src/display';
+import { instanceFeatureName } from '@/ui/src/feature-instance-name';
 
 /** Mount detailed rules only when opened; descendants stay with their owning Feature. */
 export function AcquiredFeature({ instance, engine, result, visible, openFeature }: { instance: Instance; engine: Engine; result: EvaluationResult; visible: Set<string>; openFeature: (id: string) => void }) {
@@ -21,7 +21,7 @@ export function AcquiredFeature({ instance, engine, result, visible, openFeature
     <details className="acquired-feature panel" onToggle={(event) => setOpen(event.currentTarget.open)}>
       <summary>
         <span>
-          {featureName(feature)}
+          {instanceFeatureName(instance, engine, result)}
           <small>{children.length ? `${children.length} included Features` : `Acquired at character level ${instance.acquiredCharacterLevel}`}</small>
         </span>
         <span className={`badge ${!instance.active ? 'incomplete' : instance.eligible ? 'valid' : 'invalid'}`}>{!instance.active ? 'Inactive' : instance.eligible ? 'Active' : 'Unmet requirements'}</span>

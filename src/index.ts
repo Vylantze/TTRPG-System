@@ -1,4 +1,5 @@
 export * from '@/src/model.js';
+export * from '@/src/feature-instance-display-name.js';
 export * from '@/src/engine.js';
 export * from '@/src/commands.js';
 export { RuleError, evaluateExpression } from '@/src/expression.js';
