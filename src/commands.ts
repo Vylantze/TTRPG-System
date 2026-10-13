@@ -79,11 +79,12 @@ export function rollStat(engine: Engine, input: Character, stat: string, eventId
   requireValid(result);
   const row = [...engine.catalogue.system.sheetSections?.flatMap((section) => section.rows) ?? [], ...engine.catalogue.system.sheetDisplay?.overview ?? []].find((entry) => entry.stat === stat && entry.roll);
   if (!row?.roll) throw new RuleError('ROLL', 'This stat has no configured sheet roll.');
-  const bonus = result.stats[row.roll.bonusStat ?? row.stat]?.value;
+  const bonusResult = result.stats[row.roll.bonusStat ?? row.stat];
+  const bonus = bonusResult?.value;
   if (!Number.isFinite(bonus)) throw new RuleError('ROLL', 'The check bonus is unavailable.');
   const expression = `${row.roll.dice} ${bonus! < 0 ? '-' : '+'} ${Math.abs(bonus!)}`;
   const rolled = rollDice(expression, random);
-  character.statRolls = [...character.statRolls ?? [], { id: eventId, stat, name: row.name ?? engine.getStatDefinition(stat)?.name ?? stat, expression, ...rolled }].slice(-100);
+  character.statRolls = [...character.statRolls ?? [], { id: eventId, stat, name: row.name ?? engine.getStatDefinition(stat)?.name ?? stat, expression, ...rolled, modifierReasons: (bonusResult?.contributions ?? []).map((term) => `${term.amount} (${term.label})`).join(' + ') || undefined }].slice(-100);
   return character;
 }
 
@@ -295,7 +296,14 @@ export function settleAbility(input: Character, pendingId: string, outcome: stri
   delete character.pending[pendingId];
   return character;
 }
+/** Configured reset buttons perform all referenced recoveries on a cloned character. */
 export function recoverResources(engine: Engine, input: Character, recoveryEvent: string, eventId: string, allocation?: Record<string, number>, random?: () => number): Character {
+  const recoveries = engine.catalogue.system.resetButtons?.find((button) => button.event === recoveryEvent)?.recoveries ?? [recoveryEvent];
+  let character = recoverSingleEvent(engine, input, recoveryEvent, eventId, recoveries.includes(recoveryEvent) ? allocation : undefined, random, !recoveries.includes(recoveryEvent));
+  for (const event of recoveries.filter((event) => event !== recoveryEvent)) character = recoverSingleEvent(engine, character, event, `${eventId}/${event}`, undefined, random);
+  return character;
+}
+function recoverSingleEvent(engine: Engine, input: Character, recoveryEvent: string, eventId: string, allocation?: Record<string, number>, random?: () => number, markerOnly = false): Character {
   checkCharacter(input);
   if (engine.catalogue.system.resetConditions && !engine.catalogue.system.resetConditions.some((condition) => condition.id === recoveryEvent)) throw new RuleError('RECOVERY', 'Unknown System reset condition.');
   const character = clone(input);
@@ -304,6 +312,7 @@ export function recoverResources(engine: Engine, input: Character, recoveryEvent
   const result = engine.evaluate(character);
   requireValid(result);
   storeTrackers(character, result.resources);
+  if (markerOnly) return character;
   const policy = engine.catalogue.system.recoveryAllocations?.[recoveryEvent];
   const amounts: Record<string, number> = {};
   if (allocation !== undefined && !policy) throw new RuleError('RECOVERY', 'This event has no recovery allocation.');

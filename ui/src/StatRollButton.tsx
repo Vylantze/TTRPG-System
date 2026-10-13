@@ -19,7 +19,7 @@ export function StatRollButton({ stat, label, value, engine, character, result, 
           {value}
         </button>
       </Tooltip>
-      {latest && <Tooltip text={`${latest.expression}: ${latest.breakdown}`}><output aria-live="polite">{latest.total}</output></Tooltip>}
+      {latest && <Tooltip text={`${latest.expression} (${latest.name}) = ${latest.breakdown}${latest.modifierReasons ? ` · ${latest.modifierReasons}` : ''}`}><output aria-live="polite">{latest.total}</output></Tooltip>}
     </span>
   );
 }

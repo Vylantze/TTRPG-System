@@ -22,7 +22,7 @@ export interface SystemDefinition {
   terminology?: { classSingular: string; classPlural: string; creatureSingular: string; creaturePlural: string; creatureTag: string };
   recoveryEvents?: string[];
   /** Ordered character-level reset controls. Empty explicitly hides all controls. */
-  resetButtons?: { event: string; label: string }[];
+  resetButtons?: { event: string; displayName?: string; label?: string; recoveries?: string[] }[];
   healingFeaturesTag?: string;
   sheetTabs?: SheetTab[];
   importantDetails?: string[];

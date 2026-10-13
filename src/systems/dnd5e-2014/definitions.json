@@ -1,5 +1,5 @@
 {
-  "assetVersion": "4.1.0",
+  "assetVersion": "4.2.0",
   "data": {
     "variant-1": {
       "id": "dnd5e:2014-srd5.1",
@@ -5548,13 +5548,16 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
           "primarySigned": true,
           "calculationPlacement": "belowValue",
-          "valueAlignment": "left"
+          "valueAlignment": "left",
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         },
         {
           "id": "skills",
@@ -5759,11 +5762,14 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         }
       ],
       "featureCategories": [
@@ -5955,6 +5961,11 @@
           "id": "notes",
           "name": "Notes",
           "content": "notes"
+        },
+        {
+          "id": "rolls",
+          "name": "Roll history",
+          "content": "rolls"
         }
       ],
       "healingFeaturesTag": "rest-healing",
@@ -6197,7 +6208,25 @@
           "groupByActionCost": true,
           "actionFilter": true
         }
-      }
+      },
+      "resetButtons": [
+        {
+          "event": "short-rest",
+          "displayName": "Short rest",
+          "recoveries": [
+            "short-rest"
+          ]
+        },
+        {
+          "event": "long-rest",
+          "displayName": "Long rest",
+          "recoveries": [
+            "long-rest",
+            "dawn",
+            "new-day"
+          ]
+        }
+      ]
     },
     "variant-2": {
       "id": "dnd5e:2014-srd5.1",
@@ -11737,13 +11766,16 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
           "primarySigned": true,
           "calculationPlacement": "belowValue",
-          "valueAlignment": "left"
+          "valueAlignment": "left",
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         },
         {
           "id": "skills",
@@ -11948,11 +11980,14 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         }
       ],
       "featureCategories": [
@@ -12144,6 +12179,11 @@
           "id": "notes",
           "name": "Notes",
           "content": "notes"
+        },
+        {
+          "id": "rolls",
+          "name": "Roll history",
+          "content": "rolls"
         }
       ],
       "healingFeaturesTag": "rest-healing",
@@ -12386,7 +12426,25 @@
           "groupByActionCost": true,
           "actionFilter": true
         }
-      }
+      },
+      "resetButtons": [
+        {
+          "event": "short-rest",
+          "displayName": "Short rest",
+          "recoveries": [
+            "short-rest"
+          ]
+        },
+        {
+          "event": "long-rest",
+          "displayName": "Long rest",
+          "recoveries": [
+            "long-rest",
+            "dawn",
+            "new-day"
+          ]
+        }
+      ]
     },
     "variant-3": {
       "id": "dnd5e:2014-srd5.1",
@@ -17935,13 +17993,16 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
           "primarySigned": true,
           "calculationPlacement": "belowValue",
-          "valueAlignment": "left"
+          "valueAlignment": "left",
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         },
         {
           "id": "skills",
@@ -18146,11 +18207,14 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         }
       ],
       "featureCategories": [
@@ -18342,6 +18406,11 @@
           "id": "notes",
           "name": "Notes",
           "content": "notes"
+        },
+        {
+          "id": "rolls",
+          "name": "Roll history",
+          "content": "rolls"
         }
       ],
       "healingFeaturesTag": "rest-healing",
@@ -18584,7 +18653,25 @@
           "groupByActionCost": true,
           "actionFilter": true
         }
-      }
+      },
+      "resetButtons": [
+        {
+          "event": "short-rest",
+          "displayName": "Short rest",
+          "recoveries": [
+            "short-rest"
+          ]
+        },
+        {
+          "event": "long-rest",
+          "displayName": "Long rest",
+          "recoveries": [
+            "long-rest",
+            "dawn",
+            "new-day"
+          ]
+        }
+      ]
     },
     "variant-4": {
       "id": "dnd5e:2014-srd5.1",
@@ -24124,13 +24211,16 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
           "primarySigned": true,
           "calculationPlacement": "belowValue",
-          "valueAlignment": "left"
+          "valueAlignment": "left",
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         },
         {
           "id": "skills",
@@ -24335,11 +24425,14 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         }
       ],
       "featureCategories": [
@@ -24531,6 +24624,11 @@
           "id": "notes",
           "name": "Notes",
           "content": "notes"
+        },
+        {
+          "id": "rolls",
+          "name": "Roll history",
+          "content": "rolls"
         }
       ],
       "healingFeaturesTag": "rest-healing",
@@ -24773,7 +24871,25 @@
           "groupByActionCost": true,
           "actionFilter": true
         }
-      }
+      },
+      "resetButtons": [
+        {
+          "event": "short-rest",
+          "displayName": "Short rest",
+          "recoveries": [
+            "short-rest"
+          ]
+        },
+        {
+          "event": "long-rest",
+          "displayName": "Long rest",
+          "recoveries": [
+            "long-rest",
+            "dawn",
+            "new-day"
+          ]
+        }
+      ]
     },
     "variant-5": {
       "id": "dnd5e:2014-srd5.1",
@@ -29979,13 +30095,16 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
           "primarySigned": true,
           "calculationPlacement": "belowValue",
-          "valueAlignment": "left"
+          "valueAlignment": "left",
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         },
         {
           "id": "skills",
@@ -30190,11 +30309,14 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         }
       ],
       "featureCategories": [
@@ -30386,6 +30508,11 @@
           "id": "notes",
           "name": "Notes",
           "content": "notes"
+        },
+        {
+          "id": "rolls",
+          "name": "Roll history",
+          "content": "rolls"
         }
       ],
       "healingFeaturesTag": "rest-healing",
@@ -30628,7 +30755,25 @@
           "groupByActionCost": true,
           "actionFilter": true
         }
-      }
+      },
+      "resetButtons": [
+        {
+          "event": "short-rest",
+          "displayName": "Short rest",
+          "recoveries": [
+            "short-rest"
+          ]
+        },
+        {
+          "event": "long-rest",
+          "displayName": "Long rest",
+          "recoveries": [
+            "long-rest",
+            "dawn",
+            "new-day"
+          ]
+        }
+      ]
     },
     "variant-6": {
       "id": "dnd5e:2014-srd5.1",
@@ -35825,13 +35970,16 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
           "primarySigned": true,
           "calculationPlacement": "belowValue",
-          "valueAlignment": "left"
+          "valueAlignment": "left",
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         },
         {
           "id": "skills",
@@ -36036,11 +36184,14 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         }
       ],
       "featureCategories": [
@@ -36232,6 +36383,11 @@
           "id": "notes",
           "name": "Notes",
           "content": "notes"
+        },
+        {
+          "id": "rolls",
+          "name": "Roll history",
+          "content": "rolls"
         }
       ],
       "healingFeaturesTag": "rest-healing",
@@ -36474,7 +36630,25 @@
           "groupByActionCost": true,
           "actionFilter": true
         }
-      }
+      },
+      "resetButtons": [
+        {
+          "event": "short-rest",
+          "displayName": "Short rest",
+          "recoveries": [
+            "short-rest"
+          ]
+        },
+        {
+          "event": "long-rest",
+          "displayName": "Long rest",
+          "recoveries": [
+            "long-rest",
+            "dawn",
+            "new-day"
+          ]
+        }
+      ]
     },
     "variant-7": {
       "id": "dnd5e:2014-srd5.1",
@@ -41680,13 +41854,16 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
           "primarySigned": true,
           "calculationPlacement": "belowValue",
-          "valueAlignment": "left"
+          "valueAlignment": "left",
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         },
         {
           "id": "skills",
@@ -41891,11 +42068,14 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         }
       ],
       "featureCategories": [
@@ -42087,6 +42267,11 @@
           "id": "notes",
           "name": "Notes",
           "content": "notes"
+        },
+        {
+          "id": "rolls",
+          "name": "Roll history",
+          "content": "rolls"
         }
       ],
       "healingFeaturesTag": "rest-healing",
@@ -42329,7 +42514,25 @@
           "groupByActionCost": true,
           "actionFilter": true
         }
-      }
+      },
+      "resetButtons": [
+        {
+          "event": "short-rest",
+          "displayName": "Short rest",
+          "recoveries": [
+            "short-rest"
+          ]
+        },
+        {
+          "event": "long-rest",
+          "displayName": "Long rest",
+          "recoveries": [
+            "long-rest",
+            "dawn",
+            "new-day"
+          ]
+        }
+      ]
     },
     "variant-8": {
       "id": "dnd5e:2014-srd5.1",
@@ -47526,13 +47729,16 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
           "primarySigned": true,
           "calculationPlacement": "belowValue",
-          "valueAlignment": "left"
+          "valueAlignment": "left",
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         },
         {
           "id": "skills",
@@ -47737,11 +47943,14 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         }
       ],
       "featureCategories": [
@@ -47933,6 +48142,11 @@
           "id": "notes",
           "name": "Notes",
           "content": "notes"
+        },
+        {
+          "id": "rolls",
+          "name": "Roll history",
+          "content": "rolls"
         }
       ],
       "healingFeaturesTag": "rest-healing",
@@ -48175,7 +48389,25 @@
           "groupByActionCost": true,
           "actionFilter": true
         }
-      }
+      },
+      "resetButtons": [
+        {
+          "event": "short-rest",
+          "displayName": "Short rest",
+          "recoveries": [
+            "short-rest"
+          ]
+        },
+        {
+          "event": "long-rest",
+          "displayName": "Long rest",
+          "recoveries": [
+            "long-rest",
+            "dawn",
+            "new-day"
+          ]
+        }
+      ]
     },
     "variant-9": {
       "id": "dnd5e:2014-srd5.1",
@@ -53179,13 +53411,16 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
           "primarySigned": true,
           "calculationPlacement": "belowValue",
-          "valueAlignment": "left"
+          "valueAlignment": "left",
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         },
         {
           "id": "skills",
@@ -53390,11 +53625,14 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         }
       ],
       "featureCategories": [
@@ -53586,6 +53824,11 @@
           "id": "notes",
           "name": "Notes",
           "content": "notes"
+        },
+        {
+          "id": "rolls",
+          "name": "Roll history",
+          "content": "rolls"
         }
       ],
       "healingFeaturesTag": "rest-healing",
@@ -53828,7 +54071,25 @@
           "groupByActionCost": true,
           "actionFilter": true
         }
-      }
+      },
+      "resetButtons": [
+        {
+          "event": "short-rest",
+          "displayName": "Short rest",
+          "recoveries": [
+            "short-rest"
+          ]
+        },
+        {
+          "event": "long-rest",
+          "displayName": "Long rest",
+          "recoveries": [
+            "long-rest",
+            "dawn",
+            "new-day"
+          ]
+        }
+      ]
     },
     "variant-10": {
       "id": "dnd5e:2014-srd5.1",
@@ -58823,13 +59084,16 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
           "primarySigned": true,
           "calculationPlacement": "belowValue",
-          "valueAlignment": "left"
+          "valueAlignment": "left",
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         },
         {
           "id": "skills",
@@ -59034,11 +59298,14 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         }
       ],
       "featureCategories": [
@@ -59230,6 +59497,11 @@
           "id": "notes",
           "name": "Notes",
           "content": "notes"
+        },
+        {
+          "id": "rolls",
+          "name": "Roll history",
+          "content": "rolls"
         }
       ],
       "healingFeaturesTag": "rest-healing",
@@ -59472,7 +59744,25 @@
           "groupByActionCost": true,
           "actionFilter": true
         }
-      }
+      },
+      "resetButtons": [
+        {
+          "event": "short-rest",
+          "displayName": "Short rest",
+          "recoveries": [
+            "short-rest"
+          ]
+        },
+        {
+          "event": "long-rest",
+          "displayName": "Long rest",
+          "recoveries": [
+            "long-rest",
+            "dawn",
+            "new-day"
+          ]
+        }
+      ]
     },
     "variant-11": {
       "id": "dnd5e:2014-srd5.1",
@@ -64476,13 +64766,16 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
           "primarySigned": true,
           "calculationPlacement": "belowValue",
-          "valueAlignment": "left"
+          "valueAlignment": "left",
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         },
         {
           "id": "skills",
@@ -64687,11 +64980,14 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         }
       ],
       "featureCategories": [
@@ -64883,6 +65179,11 @@
           "id": "notes",
           "name": "Notes",
           "content": "notes"
+        },
+        {
+          "id": "rolls",
+          "name": "Roll history",
+          "content": "rolls"
         }
       ],
       "healingFeaturesTag": "rest-healing",
@@ -65125,7 +65426,25 @@
           "groupByActionCost": true,
           "actionFilter": true
         }
-      }
+      },
+      "resetButtons": [
+        {
+          "event": "short-rest",
+          "displayName": "Short rest",
+          "recoveries": [
+            "short-rest"
+          ]
+        },
+        {
+          "event": "long-rest",
+          "displayName": "Long rest",
+          "recoveries": [
+            "long-rest",
+            "dawn",
+            "new-day"
+          ]
+        }
+      ]
     },
     "variant-12": {
       "id": "dnd5e:2014-srd5.1",
@@ -70120,13 +70439,16 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
           "primarySigned": true,
           "calculationPlacement": "belowValue",
-          "valueAlignment": "left"
+          "valueAlignment": "left",
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         },
         {
           "id": "skills",
@@ -70331,11 +70653,14 @@
             {
               "minimum": 2,
               "name": "Expertise",
-              "symbol": "◆",
+              "symbol": "◉",
               "trained": true
             }
           ],
-          "primarySigned": true
+          "primarySigned": true,
+          "columnLabels": {
+            "Training": "Proficiency"
+          }
         }
       ],
       "featureCategories": [
@@ -70527,6 +70852,11 @@
           "id": "notes",
           "name": "Notes",
           "content": "notes"
+        },
+        {
+          "id": "rolls",
+          "name": "Roll history",
+          "content": "rolls"
         }
       ],
       "healingFeaturesTag": "rest-healing",
@@ -70769,7 +71099,25 @@
           "groupByActionCost": true,
           "actionFilter": true
         }
-      }
+      },
+      "resetButtons": [
+        {
+          "event": "short-rest",
+          "displayName": "Short rest",
+          "recoveries": [
+            "short-rest"
+          ]
+        },
+        {
+          "event": "long-rest",
+          "displayName": "Long rest",
+          "recoveries": [
+            "long-rest",
+            "dawn",
+            "new-day"
+          ]
+        }
+      ]
     }
   }
 }

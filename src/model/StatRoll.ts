@@ -6,4 +6,5 @@ export interface StatRoll {
   expression: string;
   total: number;
   breakdown: string;
+  modifierReasons?: string;
 }

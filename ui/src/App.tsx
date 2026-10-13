@@ -16,6 +16,7 @@ const CharacterBuilder = lazy(() => import('@/ui/src/CharacterBuilder').then((mo
 const ClassDetail = lazy(() => import('@/ui/src/ClassDetail').then((module) => ({ default: memo(module.ClassDetail) })));
 const FeatureDetail = lazy(() => import('@/ui/src/FeatureDetail').then((module) => ({ default: memo(module.FeatureDetail) })));
 const SystemDataEditor = lazy(() => import('@/ui/src/SystemDataEditor').then((module) => ({ default: module.SystemDataEditor })));
+import { ItemDetail } from '@/ui/src/ItemDetail';
 import { Modal } from '@/ui/src/Modal';
 import { RulesText } from '@/ui/src/RulesText';
 import { descriptionPreview, featureDescription, featureHref } from '@/ui/src/feature-description';
@@ -37,9 +38,12 @@ function readRoute(): Route {
     return { page: 'characters' };
   }
 }
-function go(page: string, id?: string, engine?: Engine) {
+function pageHref(page: string, id?: string, engine?: Engine) {
   const query = engine ? `?${new URLSearchParams({ system: engine.catalogue.system.id, revision: String(engine.catalogue.system.revision), catalogue: engine.catalogue.id })}` : '';
-  window.location.hash = `${page}${id ? `/${encodeURIComponent(id)}` : ''}${query}`;
+  return `#${page}${id ? `/${encodeURIComponent(id)}` : ''}${query}`;
+}
+function go(page: string, id?: string, engine?: Engine) {
+  window.location.hash = pageHref(page, id, engine);
 }
 const errorMessage = (e: unknown) => e instanceof Error ? e.message : String(e);
 export function App({ initialWorkspace, persist, startupMessage = '' }: { initialWorkspace: Workspace; persist: (workspace: Workspace) => Promise<void>; startupMessage?: string }) {
@@ -510,7 +514,7 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
                           {' '}
                           class progressions
                         </p>
-                        <button className="quiet" onClick={() => go('characters', c.id)}>Open character →</button>
+                        <a className="quiet" href={pageHref('characters', c.id)}>Open character →</a>
                       </article>
                     ))}
                   </div>
@@ -624,7 +628,7 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
                                     {' '}
                                     levels of progression
                                   </p>
-                                  <button className="quiet" onClick={() => go('classes', c.id, engine)}>{`Explore ${engine.catalogue.system.terminology?.classSingular ?? 'Class'} →`}</button>
+                                  <a className="quiet" href={pageHref('classes', c.id, engine)}>{`Explore ${engine.catalogue.system.terminology?.classSingular ?? 'Class'} →`}</a>
                                 </article>
                               ))}
                             </div>
@@ -693,10 +697,16 @@ export function App({ initialWorkspace, persist, startupMessage = '' }: { initia
                 </>
               )
             : <p>This Feature is unavailable in the loaded catalogue.</p>)}
+          {route.page === 'items' && route.id && engine && (
+            <>
+              <a href={route.returnTo ?? '#characters'}>← Back</a>
+              <ItemDetail engine={engine} id={route.id} />
+            </>
+          )}
           {route.page === 'classes' && route.id && engine && (cls
             ? (
                 <>
-                  <button className="quiet" onClick={() => go('classes', undefined, engine)}>{`← ${engine.catalogue.system.terminology?.classPlural ?? 'Classes'}`}</button>
+                  <a className="quiet" href={pageHref('classes', undefined, engine)}>{`← ${engine.catalogue.system.terminology?.classPlural ?? 'Classes'}`}</a>
                   <ClassDetail key={`${engine.catalogue.id}:${cls.id}`} cls={cls} engine={engine} openFeature={openFeature} />
                 </>
               )

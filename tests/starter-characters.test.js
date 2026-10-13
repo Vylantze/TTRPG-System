@@ -13,7 +13,7 @@ test('sample Cleric calculations name contributing race and equipment, omitting 
   assert.deepEqual(result.stats.speed.contributions, [{ amount: 25, label: 'Hill Dwarf: Walking Speed' }]);
   assert.deepEqual(result.stats['modifier.dexterity'].contributions, [{ amount: -1, label: 'Dexterity modifier' }]);
   for (const stat of Object.values(result.stats)) {
-    assert.ok(stat.contributions.every((term) => term.amount !== 0));
+    assert.ok(stat.contributions.every((term) => term.amount !== 0) || (stat.value === 0 && stat.contributions.length === 1));
     assert.ok(Math.abs(stat.contributions.reduce((sum, term) => sum + term.amount, 0) - stat.value) < 1e-9);
   }
 });

@@ -66,7 +66,7 @@ export function FeatureRolls({ feature, engine, instanceId, castingCapability, r
             )}
             {records.map((record) => (
               <div className="toolbar roll-result" key={record.id}>
-                <Tooltip text={record.breakdown}><output aria-live="polite" aria-label={`Result of ${record.expression}`}>{record.total}</output></Tooltip>
+                <Tooltip text={`${record.breakdown}${record.modifierReasons ? ` · ${record.modifierReasons}` : ''}`}><output aria-live="polite" aria-label={`Result of ${record.expression}`}>{record.total}</output></Tooltip>
                 {(roll.restoreResource || record.casting) && <button className="quiet" disabled={!ready || record.applied !== undefined} onClick={() => attempt(() => update(applyFeatureRoll(engine, character, record.id, crypto.randomUUID()).character))}>{record.applied === undefined ? roll.restoreResource ? 'Apply healing' : 'Mark applied' : 'Applied'}</button>}
                 {record.casting && <small>{record.casting.ritual ? 'Ritual · no slot spent' : record.casting.slotLevel ? `Level ${record.casting.slotLevel} slot spent` : `${engine.catalogue.system.sheetDisplay?.spells?.zeroLevelName ?? 'Level 0 spell'} · no slot spent`}</small>}
                 {record.applied !== undefined && roll.restoreResource && <small>{`Restored ${record.applied} ${Object.values(result.resources).find((pool) => pool.key === roll.restoreResource && pool.scope === 'character')?.units ?? roll.restoreResource}`}</small>}
