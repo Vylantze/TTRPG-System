@@ -7,6 +7,15 @@ export function scopedFeatureName(feature: FeatureDefinition | undefined, owner?
   return owner && owner !== name && !name.startsWith(`${owner}:`) ? `${owner}: ${name}` : name;
 }
 
-export function instanceFeatureName(instance: Instance, engine: Engine, result: EvaluationResult): string {
-  return featureInstanceDisplayName(instance, result.instances, (id) => engine.getFeature(id), true);
+export function instanceFeatureName(
+  instance: Instance,
+  engine: Engine,
+  result: EvaluationResult,
+): string {
+  return featureInstanceDisplayName(
+    instance,
+    result.instances,
+    (id) => engine.getFeature(id),
+    true,
+  );
 }

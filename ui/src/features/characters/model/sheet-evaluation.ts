@@ -23,7 +23,7 @@ export function evaluateForSheet(engine: Engine, character: Character): Evaluati
   if (previous?.key === key) return previous.result;
   const result = engine.evaluate(character);
   freeze(result);
-  if (!cache) evaluations.set(engine, cache = new Map());
+  if (!cache) evaluations.set(engine, (cache = new Map()));
   if (cache.size >= 8 && !cache.has(character.id)) cache.delete(cache.keys().next().value!);
   cache.set(character.id, { key, result });
   return result;

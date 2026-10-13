@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { lintSource } from '@/tools/lint-rules.mjs';
 import { ESLint } from 'eslint';
+import { format, resolveConfig } from 'prettier';
+import { readFileSync } from 'node:fs';
 
 test('shared standard checks JavaScript formatting and Node globals', async () => {
   const eslint = new ESLint();
@@ -33,6 +35,33 @@ test('React JSX props and conditional children autofix into readable multiline t
   const [again] = await new ESLint({ fix: true }).lintText(fixed.output, { filePath });
   assert.deepEqual(again.messages, []);
   assert.equal(again.output ?? fixed.output, fixed.output);
+});
+
+test('lint:fix wraps long callbacks and ternaries while retaining the JSX prop layout', async () => {
+  const filePath = 'ui/src/components/LintProbe.tsx';
+  const source = `export function Layout({ expanded, row, setExpanded }: { expanded: string[]; row: { stat: string }; setExpanded: (value: string[]) => void }) {
+  const brief = expanded.length ? 'open' : 'closed';
+  return <button className="calculation-toggle" title={brief} onClick={() => setExpanded(expanded.includes(row.stat) ? expanded.filter((stat) => stat !== row.stat) : [...expanded, row.stat])}>{brief}</button>;
+}
+`;
+  const options = { ...await resolveConfig(filePath), filepath: filePath, singleQuote: true, trailingComma: 'all' };
+  const formatted = await format(source, options);
+  const eslint = new ESLint({ fix: true });
+  const [fixed] = await eslint.lintText(formatted, { filePath });
+  assert.deepEqual(fixed.messages, []);
+  const output = fixed.output ?? formatted;
+  assert.match(output, /onClick=\{\(\) =>\n\s+setExpanded\(/);
+  assert.match(output, /expanded\.includes\(row\.stat\)\n\s+\? expanded\.filter/);
+  assert.match(output, /\n\s+: \[\.\.\.expanded, row\.stat\]/);
+  assert.match(output, /<button\n\s+className=/);
+  assert.match(output, /expanded\.length \? 'open' : 'closed'/);
+  const formattedAgain = await format(output, options);
+  const [again] = await eslint.lintText(formattedAgain, { filePath });
+  assert.deepEqual(again.messages, []);
+  assert.equal(again.output ?? formattedAgain, output);
+  const scripts = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).scripts;
+  assert.match(scripts['lint:fix'], /^npm run format:ui && eslint .*--fix/);
+  assert.match(scripts['format:ui'], /prettier .*ui\/src\/\*\*\/\*\.\{ts,tsx\}/);
 });
 
 test('React hook rules apply to the UI, not engine commands named useAbility', async () => {
