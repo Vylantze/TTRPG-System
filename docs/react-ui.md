@@ -4,6 +4,32 @@ The atomic-block prototype starts a fresh workspace under `ttrpg-feature-forge:v
 
 The first React UI is implemented before additional Systems. It uses the existing DnD5e 2014 JSON milestone and accepts other engine-compatible System files. The UI source lives in `ui/`; the generic engine remains in `src/`. UI components call engine commands rather than duplicating calculation, eligibility, resource, or retraining rules.
 
+## Source organization
+
+React does not mandate a folder structure. This project groups related UI and model helpers by feature, following [React's guidance on file organization](https://legacy.reactjs.org/docs/faq-structure.html), with shallow folders and explicit `@/` imports:
+
+```text
+ui/src/
+  app/                   Application shell, database startup and error boundary
+  components/            Shared modal, tooltip and loading controls
+  features/
+    characters/          Character sheet components and character model helpers
+    catalogue/           Class, Feature and item views; rules text and linking
+    systems/             System loading and editing components and helpers
+  lib/                   Shared workspace utilities
+  services/storage/      IndexedDB adapters
+  styles/                Global CSS
+  types/                 Shared UI type definitions
+  workers/               System validation and loading worker
+  main.tsx               React entry point
+```
+
+Each feature groups `components/` and `model/` together. UI tests remain in `ui/tests/`, organized into independently runnable suites. Engine definitions stay in the repository's `src/`; the React refactor does not move rules or change character saves. The TypeScript and Vite `@/` alias remains rooted at the repository, so editor and build resolution use the same imports. The worker uses a relative `new URL` asset reference so Vite emits it as a separate bundle.
+
+CSS uses Stylelint's standard configuration and Prettier formatting: two-space indentation, readable declaration blocks, and separate selector lines. `npm run lint:css` validates CSS and formatting; `npm run lint:css:fix` applies safe rule fixes and formats it. These checks are included in `npm run lint` and the existing pre-commit hook. Repeated selectors and descending specificity remain allowed for the current stylesheet's intentional responsive and System overrides; all other standard rules apply.
+
+Expanded HP presents a native number input to the left of its maximum, using the same field styling as Amount. Typing or the input's native stepper changes the pending value; leaving the field or pressing Enter saves it through the engine. Invalid values restore the current value. The engine enforces minimum, maximum, whole-number settings and reservations. Direct HP edits set the raw balance; Damage and Heal retain their separate rules, including temporary HP absorption.
+
 ## Run
 
 Use Node.js 22.12 or later. From the repository root:

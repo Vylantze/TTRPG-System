@@ -8,9 +8,9 @@ import uiPackage from '@/ui/package.json' with { type: 'json' };
 
 const server = await createServer({ server: { middlewareMode: true }, appType: 'custom' });
 const { version } = uiPackage;
-const { hasBundledUpdate, bundledUpdateKind, applySystemPatch } = await server.ssrLoadModule('/src/system-updates.ts');
-const { UiVersion } = await server.ssrLoadModule('/src/UiVersion.tsx');
-const { reconcilePrototypeCharacters } = await server.ssrLoadModule('/src/prototype-characters.ts');
+const { hasBundledUpdate, bundledUpdateKind, applySystemPatch } = await server.ssrLoadModule('/src/features/systems/model/system-updates.ts');
+const { UiVersion } = await server.ssrLoadModule('/src/app/UiVersion.tsx');
+const { reconcilePrototypeCharacters } = await server.ssrLoadModule('/src/features/characters/model/prototype-characters.ts');
 const catalogue = { id: 'sample', revision: 1, system: { id: 'sample', revision: 1, name: 'Sample', allowMultipleClasses: false, characterLevel: { context: 'totalClassLevels' }, stats: [] }, classes: [{ id: 'class', revision: 1, name: 'Class', levels: {} }], features: [{ id: 'old', revision: 1, name: 'Old', components: [] }] };
 const file = { format: 'ttrpg-system', version: 1, id: 'sample', revision: 1, options: {}, features: catalogue.features, configurations: [{ id: 'sample', revision: 1, options: {}, system: catalogue.system, classes: catalogue.classes }] };
 const engine = new Engine(catalogue);

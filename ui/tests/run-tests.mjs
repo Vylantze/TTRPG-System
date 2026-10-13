@@ -10,26 +10,26 @@ import { Engine, finalizeCharacter, spellGroups, featureRollInstances, rollFeatu
 import { exampleCharacter } from '@/examples/dnd2014-character.js';
 
 const server = await createServer({ server: { middlewareMode: true }, appType: 'custom' });
-const model = await server.ssrLoadModule('/src/workspace.ts');
-const { App } = await server.ssrLoadModule('/src/App.tsx');
-const { RulesText, FeatureRules, ReferencePopup } = await server.ssrLoadModule('/src/RulesText.tsx');
-const { FeatureRequirements } = await server.ssrLoadModule('/src/FeatureRequirements.tsx');
-const { CharacterFeatures } = await server.ssrLoadModule('/src/CharacterFeatures.tsx');
-const { ResourceSummary } = await server.ssrLoadModule('/src/ResourceSummary.tsx');
-const { CompanionPanels } = await server.ssrLoadModule('/src/CompanionPanels.tsx');
-const { EquipmentEffects } = await server.ssrLoadModule('/src/EquipmentEffects.tsx');
-const { SelectionCard } = await server.ssrLoadModule('/src/SelectionCard.tsx');
-const { addStarterCharacters, addStarterInventory, migrateMoney } = await server.ssrLoadModule('/src/starter-characters.ts');
-const { CharacterRuleContext } = await server.ssrLoadModule('/src/character-rule-context.ts');
+const model = await server.ssrLoadModule('/src/lib/workspace.ts');
+const { App } = await server.ssrLoadModule('/src/app/App.tsx');
+const { RulesText, FeatureRules, ReferencePopup } = await server.ssrLoadModule('/src/features/catalogue/components/RulesText.tsx');
+const { FeatureRequirements } = await server.ssrLoadModule('/src/features/catalogue/components/FeatureRequirements.tsx');
+const { CharacterFeatures } = await server.ssrLoadModule('/src/features/characters/components/CharacterFeatures.tsx');
+const { ResourceSummary } = await server.ssrLoadModule('/src/features/characters/components/ResourceSummary.tsx');
+const { CompanionPanels } = await server.ssrLoadModule('/src/features/characters/components/CompanionPanels.tsx');
+const { EquipmentEffects } = await server.ssrLoadModule('/src/features/characters/components/EquipmentEffects.tsx');
+const { SelectionCard } = await server.ssrLoadModule('/src/features/characters/components/SelectionCard.tsx');
+const { addStarterCharacters, addStarterInventory, migrateMoney } = await server.ssrLoadModule('/src/features/characters/model/starter-characters.ts');
+const { CharacterRuleContext } = await server.ssrLoadModule('/src/features/characters/model/character-rule-context.ts');
 const starterSaves = JSON.parse(readFileSync(new URL('../../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8')).data;
-const { featureHref } = await server.ssrLoadModule('/src/feature-description.ts');
-const { safeReturn } = await server.ssrLoadModule('/src/feature-origin.ts');
-const { orderedSheetTabs, moveSheetTab } = await server.ssrLoadModule('/src/sheet-tabs.ts');
-const { advancementLabels } = await server.ssrLoadModule('/src/feature-requirements.ts');
+const { featureHref } = await server.ssrLoadModule('/src/features/catalogue/model/feature-description.ts');
+const { safeReturn } = await server.ssrLoadModule('/src/features/catalogue/model/feature-origin.ts');
+const { orderedSheetTabs, moveSheetTab } = await server.ssrLoadModule('/src/features/characters/model/sheet-tabs.ts');
+const { advancementLabels } = await server.ssrLoadModule('/src/features/catalogue/model/feature-requirements.ts');
 const file = model.decodeWorkspace({ version: 1, systems: [readSystem(new URL('../../src/systems/dnd5e-2014/system.json', import.meta.url))], characters: [] }).systems[0];
 
 test('calculation display renders signed contributions and their reasons instead of inactive inputs', async () => {
-  const { StatCalculation } = await server.ssrLoadModule('/src/StatCalculation.tsx');
+  const { StatCalculation } = await server.ssrLoadModule('/src/features/characters/components/StatCalculation.tsx');
   const engine = { getStatDefinition: () => ({ name: 'Defense' }) };
   const result = { stats: { defense: { value: 15, base: 10, modifiers: [], contributions: [{ amount: 16, label: 'Chain mail' }, { amount: 2, label: 'Shield' }, { amount: -3, label: 'Penalty' }, { amount: 0, label: 'Unused' }] } } };
   const html = renderToStaticMarkup(createElement(StatCalculation, { id: 'defense', engine, result, character: {} }));
@@ -46,7 +46,7 @@ test('calculation display renders signed contributions and their reasons instead
 });
 
 test('existing sample characters display evaluated equipment and race sources without formulas', async () => {
-  const { StatCalculation } = await server.ssrLoadModule('/src/StatCalculation.tsx');
+  const { StatCalculation } = await server.ssrLoadModule('/src/features/characters/components/StatCalculation.tsx');
   const registry = model.createRegistry([file]);
   for (const character of starterSaves) {
     const engine = registry.engineForCharacter(character), result = engine.evaluate(character);
@@ -64,7 +64,7 @@ test('existing sample characters display evaluated equipment and race sources wi
 });
 
 test('HP defaults to a compact card and saved preferences restore expanded controls', async () => {
-  const { HitPoints } = await server.ssrLoadModule('/src/HitPoints.tsx');
+  const { HitPoints } = await server.ssrLoadModule('/src/features/characters/components/HitPoints.tsx');
   const character = starterSaves[1], engine = model.createRegistry([file]).engineForCharacter(character), result = engine.evaluate(character);
   const props = { character, engine, result, update: () => {}, report: () => {} };
   const compact = renderToStaticMarkup(createElement(HitPoints, props));
@@ -75,10 +75,12 @@ test('HP defaults to a compact card and saved preferences restore expanded contr
   const expanded = renderToStaticMarkup(createElement(HitPoints, { ...props, character: { ...character, displayPreferences: { healthExpanded: true } } }));
   assert.match(expanded, /Collapse Hit points/);
   assert.match(expanded, /Damage or healing amount/);
+  assert.match(expanded, /aria-label="Current Hit points"[^>]*type="number"[^>]*min="0"[^>]*max="11"/);
+  assert.doesNotMatch(expanded, /Decrease Hit Points|Increase Hit Points/);
 });
 
 test('subfeatures and Class choices include their Feature or choice name without a Class parent tag', async () => {
-  const { instanceFeatureName } = await server.ssrLoadModule('/src/feature-instance-name.ts');
+  const { instanceFeatureName } = await server.ssrLoadModule('/src/features/catalogue/model/feature-instance-name.ts');
   const character = starterSaves[0], engine = model.createRegistry([file]).engineForCharacter(character), result = engine.evaluate(character);
   const defense = result.instances.find((instance) => instance.feature === 'dnd5e:2014:style.defense');
   assert.ok(defense);
@@ -478,15 +480,15 @@ test('sheet controls show dice, separate skill calculations and configured actio
   const wizard = starterSaves.find((entry) => entry.progressions.some((p) => p.class.endsWith(':wizard')));
   const spells = await render({ ...data(), characters: [wizard] }, `#characters/${wizard.id}?view=spells`);
   assert.match(spells, /Spell action cost/);
-  const { HitDiceIcons } = await server.ssrLoadModule('/src/HitDiceIcons.tsx');
+  const { HitDiceIcons } = await server.ssrLoadModule('/src/features/characters/components/HitDiceIcons.tsx');
   const icons = renderToStaticMarkup(createElement(HitDiceIcons, { pool: { name: 'Hit dice', available: 2, capacity: 3 } }));
   assert.equal((icons.match(/class="available"/g) ?? []).length, 2);
   assert.equal((icons.match(/class="spent"/g) ?? []).length, 1);
 });
 
 test('leveling a sample preserves edits and keeps unfinished choices in a recoverable draft', async () => {
-  const { setCharacterLevel } = await server.ssrLoadModule('/src/character-leveling.ts');
-  const { reconcilePrototypeCharacters } = await server.ssrLoadModule('/src/prototype-characters.ts');
+  const { setCharacterLevel } = await server.ssrLoadModule('/src/features/characters/model/character-leveling.ts');
+  const { reconcilePrototypeCharacters } = await server.ssrLoadModule('/src/features/characters/model/prototype-characters.ts');
   const character = structuredClone(starterSaves.find((entry) => entry.id === 'starter-2014-human-fighter-noble'));
   character.name = 'Edited sample';
   const workspace = { ...data(), characters: [character] };
@@ -513,7 +515,7 @@ test('Feature pages put rules first and keep authoring details collapsed', async
 });
 
 test('Feature content includes granted rules and selection options, with unique header tags', async () => {
-  const { FeatureDetail } = await server.ssrLoadModule('/src/FeatureDetail.tsx');
+  const { FeatureDetail } = await server.ssrLoadModule('/src/features/catalogue/components/FeatureDetail.tsx');
   const { engine } = exampleCharacter();
   const secondWind = engine.getFeature('dnd5e:2014:fighter.second-wind');
   const feature = {
@@ -926,10 +928,10 @@ test('Infusion assignment UI offers owned items and external recipients, with so
 });
 
 test('Generic sheet settings control value captions, training thresholds, phrases and health roles', async () => {
-  const { SheetSectionView } = await server.ssrLoadModule('/src/SheetSectionView.tsx');
-  const { HitPoints } = await server.ssrLoadModule('/src/HitPoints.tsx');
-  const { SheetOverview } = await server.ssrLoadModule('/src/SheetOverview.tsx');
-  const { resolvedRuleText } = await server.ssrLoadModule('/src/personalized-rules.tsx');
+  const { SheetSectionView } = await server.ssrLoadModule('/src/features/characters/components/SheetSectionView.tsx');
+  const { HitPoints } = await server.ssrLoadModule('/src/features/characters/components/HitPoints.tsx');
+  const { SheetOverview } = await server.ssrLoadModule('/src/features/characters/components/SheetOverview.tsx');
+  const { resolvedRuleText } = await server.ssrLoadModule('/src/features/catalogue/model/personalized-rules.tsx');
   const section = { id: 'custom', name: 'Ranks', layout: 'skills', trainingLevels: [{ minimum: 0, name: 'Novice', symbol: 'N' }, { minimum: 5, name: 'Master', symbol: 'M' }], rows: [{ stat: 'fortune', proficiencyStat: 'training' }] };
   const catalogue = { id: 'custom', revision: 1, classes: [], features: [{ id: 'health', revision: 1, name: 'Energy', components: [{ id: 'energy', kind: 'trackResource', key: 'hit-points', name: 'Energy', units: 'energy', initialAmount: 10, maximum: 10, recovery: [] }] }], system: { id: 'custom', revision: 1, name: 'Custom', allowMultipleClasses: false, characterLevel: 0, stats: [{ id: 'fortune', name: 'Fortune', kind: 'derived', expression: 7 }, { id: 'training', name: 'Training', kind: 'derived', expression: 6 }], sheetSections: [section], sheetDisplay: { descriptionProcessing: { statPhrases: [{ phrase: 'fortune modifier', stat: 'fortune' }] } }, advancement: { 0: [{ id: 'health', kind: 'grantFeature', feature: 'health' }] } } };
   const engine = new Engine(catalogue);
@@ -972,14 +974,14 @@ test('Missing casting bonus mappings disable affected rolls without crashing the
   const engine = model.createRegistry([old]).engineForCharacter(cleric), result = engine.evaluate(cleric);
   const roll = result.instances.map((instance) => engine.getFeature(instance.feature)?.roll).find((roll) => roll?.bonus && typeof roll.bonus === 'object' && 'castingAbility' in roll.bonus);
   assert.ok(roll?.spell);
-  const { FeatureRolls } = await server.ssrLoadModule('/src/FeatureRolls.tsx');
+  const { FeatureRolls } = await server.ssrLoadModule('/src/features/catalogue/components/FeatureRolls.tsx');
   const controls = renderToStaticMarkup(createElement(CharacterRuleContext.Provider, { value: { character: cleric, result, update: () => {}, report: () => {} } }, createElement(FeatureRolls, { engine, feature: engine.getFeature(roll.spell) })));
   assert.match(controls, /requires an unavailable stat/);
   assert.match(controls, /disabled="">Roll/);
 });
 
 test('Build choices sort numerically and highlight missing or invalid selections', async () => {
-  const { sortBuildSelections, selectionIssues } = await server.ssrLoadModule('/src/build-selections.ts');
+  const { sortBuildSelections, selectionIssues } = await server.ssrLoadModule('/src/features/characters/model/build-selections.ts');
   const { engine, character, evaluation } = exampleCharacter();
   const original = evaluation.selections[0];
   const slots = [10, 2, 3].map((level) => ({ ...original, id: `class/test/${level}/choice`, context: { acquiredClassLevel: level } }));
@@ -997,7 +999,7 @@ test('Build choices sort numerically and highlight missing or invalid selections
 });
 
 test('System data editor supports immutable record edits, versioning, and safe rejection', async () => {
-  const { prepareSystemDataEdit } = await server.ssrLoadModule('/src/system-data.ts');
+  const { prepareSystemDataEdit } = await server.ssrLoadModule('/src/features/systems/model/system-data.ts');
   const feature = file.features[0];
   const updated = prepareSystemDataEdit(file, 'features', JSON.stringify({ ...feature, name: 'Edited display name' }), '0');
   assert.equal(updated.features[0].name, 'Edited display name');
@@ -1025,9 +1027,9 @@ test('System data editor supports immutable record edits, versioning, and safe r
 });
 
 test('Structured System forms create, edit, and delete records without mutating loaded data', async () => {
-  const { editorRecords, newSystemRecord, editSystemRecord } = await server.ssrLoadModule('/src/system-editor-records.ts');
-  const { formSchema, formDefault, matchesFormSchema, switchFormVariant } = await server.ssrLoadModule('/src/authoring-form.ts');
-  const { AuthoringField } = await server.ssrLoadModule('/src/AuthoringField.tsx');
+  const { editorRecords, newSystemRecord, editSystemRecord } = await server.ssrLoadModule('/src/features/systems/model/system-editor-records.ts');
+  const { formSchema, formDefault, matchesFormSchema, switchFormVariant } = await server.ssrLoadModule('/src/features/systems/model/authoring-form.ts');
+  const { AuthoringField } = await server.ssrLoadModule('/src/features/systems/components/AuthoringField.tsx');
   for (const category of ['classes', 'features', 'spells', 'items', 'itemFeatures', 'blocks', 'settings']) {
     const records = editorRecords(file, category, 0);
     assert.ok(records.length, category);
@@ -1085,7 +1087,7 @@ test('sample sheets use proficiency markers, hide empty spells, and expose item 
   assert.match(history, /Clear all rolls/);
   const registry = model.createRegistry([file]);
   const engine = registry.createEngine(rogue.system.id, rogue.system.revision, rogue.system.options);
-  const { StatCalculation } = await server.ssrLoadModule('/src/StatCalculation.tsx');
+  const { StatCalculation } = await server.ssrLoadModule('/src/features/characters/components/StatCalculation.tsx');
   const calculation = renderToStaticMarkup(createElement(StatCalculation, { id: 'skill.survival', engine, character: rogue, result: engine.evaluate(rogue) }));
   assert.match(calculation, /0 \(Wisdom modifier\)/);
   assert.doesNotMatch(calculation, /Base/);

@@ -45,7 +45,7 @@ for (const filename of readdirSync('src/model').filter((name) => name.endsWith('
 const systemFile = ts.createSourceFile('SystemFile.ts', readFileSync('src/types/SystemFile.ts', 'utf8'), ts.ScriptTarget.Latest, true);
 const options = systemFile.statements.find(ts.isInterfaceDeclaration).members.find((member) => member.name.getText() === 'options');
 definitions.SystemOptions = schema(options.type);
-const path = 'ui/src/authoring-schema.json';
+const path = 'ui/src/features/systems/model/authoring-schema.json';
 const text = JSON.stringify(definitions, null, 2) + '\n';
 if (process.argv.includes('--check')) {
   if (readFileSync(path, 'utf8').replaceAll('\r\n', '\n') !== text) throw new Error('Editor schema is stale. Run node tools/generate-editor-schema.mjs.');

@@ -7,12 +7,12 @@ import { createServer } from 'vite';
 import { Engine } from '@/dist/index.js';
 
 const server = await createServer({ server: { middlewareMode: true, hmr: false }, appType: 'custom' });
-const { loadSelectedSystem } = await server.ssrLoadModule('/src/load-system-package.ts');
-const { SystemAssetDatabase } = await server.ssrLoadModule('/src/SystemAssetDatabase.ts');
-const { CharacterBuilder } = await server.ssrLoadModule('/src/CharacterBuilder.tsx');
-const { evaluateForSheet } = await server.ssrLoadModule('/src/sheet-evaluation.ts');
-const { validateSystemAsync } = await server.ssrLoadModule('/src/system-worker-client.ts');
-const { createRegistry } = await server.ssrLoadModule('/src/workspace.ts');
+const { loadSelectedSystem } = await server.ssrLoadModule('/src/features/systems/model/load-system-package.ts');
+const { SystemAssetDatabase } = await server.ssrLoadModule('/src/services/storage/SystemAssetDatabase.ts');
+const { CharacterBuilder } = await server.ssrLoadModule('/src/features/characters/components/CharacterBuilder.tsx');
+const { evaluateForSheet } = await server.ssrLoadModule('/src/features/characters/model/sheet-evaluation.ts');
+const { validateSystemAsync } = await server.ssrLoadModule('/src/features/systems/model/system-worker-client.ts');
+const { createRegistry } = await server.ssrLoadModule('/src/lib/workspace.ts');
 const system = { id: 'package', revision: 1, name: 'Package', allowMultipleClasses: false, characterLevel: 0, stats: [], resetConditions: [{ id: 'short-rest', name: 'Take a breather', description: 'Take a break.' }, { id: 'long-rest', name: 'Make camp', description: 'Finish resting.' }, { id: 'dawn', name: 'New day', description: 'Sunrise.' }, { id: 'hidden', name: 'Hidden condition', description: 'Triggered elsewhere.', showButton: false }] };
 const file = { format: 'ttrpg-system', version: 1, id: 'package', revision: 1, options: {}, features: [], configurations: [{ id: 'package', revision: 1, options: {}, system, classes: [] }] };
 
