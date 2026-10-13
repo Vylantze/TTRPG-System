@@ -1,12 +1,23 @@
 import { useEffect, useRef, type ReactNode } from 'react';
-export function Modal({ title, onClose, children, className = '' }: { title: string; onClose: () => void; children: ReactNode; className?: string }) {
+export function Modal({
+  title,
+  onClose,
+  children,
+  className = '',
+}: {
+  title: string;
+  onClose: () => void;
+  children: ReactNode;
+  className?: string;
+}) {
   const dialog = useRef<HTMLDialogElement>(null);
   useEffect(() => {
-    const element = dialog.current!, previous = document.activeElement as HTMLElement | null;
+    const element = dialog.current!,
+      previous = document.activeElement as HTMLElement | null;
     element.showModal();
     return () => {
       element.close();
-      if (previous?.isConnected)previous.focus();
+      if (previous?.isConnected) previous.focus();
     };
   }, []);
   return (
@@ -21,7 +32,13 @@ export function Modal({ title, onClose, children, className = '' }: { title: str
     >
       <div className="row modal-title">
         <h2>{title}</h2>
-        <button className="quiet" aria-label="Close dialog" onClick={onClose}>Close</button>
+        <button
+          className="quiet"
+          aria-label="Close dialog"
+          onClick={onClose}
+        >
+          Close
+        </button>
       </div>
       {children}
     </dialog>

@@ -49,6 +49,16 @@ export default defineConfig([
     extends: [reactHooks.configs.flat.recommended, reactRefresh.configs.vite],
   },
   {
+    files: ['ui/src/**/*.tsx'],
+    rules: {
+      '@stylistic/jsx-max-props-per-line': ['error', { maximum: 1, when: 'always' }],
+      '@stylistic/jsx-first-prop-new-line': ['error', 'multiprop'],
+      '@stylistic/jsx-closing-bracket-location': ['error', 'tag-aligned'],
+      '@stylistic/jsx-one-expression-per-line': ['error', { allow: 'single-line' }],
+      '@stylistic/jsx-curly-newline': ['error', 'never'],
+    },
+  },
+  {
     files: ['eslint.config.js', 'tools/**/*.{js,mjs,cjs}', 'tests/**/*.js', 'examples/**/*.js', 'ui/vite.config.js', 'ui/tests/**/*.mjs'],
     languageOptions: { globals: globals.node },
   },

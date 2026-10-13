@@ -5,14 +5,44 @@ import { labelFromId } from '@/ui/src/lib/workspace';
 import { FeatureRolls } from '@/ui/src/features/catalogue/components/FeatureRolls';
 import { expressionText } from '@/ui/src/features/catalogue/model/feature-requirements';
 
-export function RestControls({ engine, character, result, update, report }: { engine: Engine; character: Character; result: EvaluationResult; update: (character: Character) => void; report: (message: string) => void }) {
+export function RestControls({
+  engine,
+  character,
+  result,
+  update,
+  report,
+}: {
+  engine: Engine;
+  character: Character;
+  result: EvaluationResult;
+  update: (character: Character) => void;
+  report: (message: string) => void;
+}) {
   const [event, setEvent] = useState<string>();
   const [allocation, setAllocation] = useState<Record<string, number>>({});
   const ready = character.buildState !== 'draft' && result.status === 'valid';
-  const events = [...new Set([...(engine.catalogue.system.recoveryEvents ?? []), ...Object.values(result.resources).flatMap((pool) => pool.recovery.map((rule) => rule.event)), ...Object.keys(engine.catalogue.system.recoveryAllocations ?? {}), ...(engine.catalogue.system.commandRules?.selectedRecovery ? [engine.catalogue.system.commandRules.selectedRecovery.requiredEvent] : [])])];
+  const events = [
+    ...new Set([
+      ...(engine.catalogue.system.recoveryEvents ?? []),
+      ...Object.values(result.resources).flatMap((pool) => pool.recovery.map((rule) => rule.event)),
+      ...Object.keys(engine.catalogue.system.recoveryAllocations ?? {}),
+      ...(engine.catalogue.system.commandRules?.selectedRecovery
+        ? [engine.catalogue.system.commandRules.selectedRecovery.requiredEvent]
+        : []),
+    ]),
+  ];
   const conditions = engine.catalogue.system.resetConditions;
-  const buttons = engine.catalogue.system.resetButtons?.map((button) => ({ ...button, label: button.displayName ?? button.label ?? labelFromId(button.event) })) ?? conditions?.filter((condition) => condition.showButton !== false).map((condition) => ({ event: condition.id, label: condition.name })) ?? events.map((name) => ({ event: name, label: labelFromId(name) }));
-  const eventLabel = (name: string) => buttons.find((button) => button.event === name)?.label ?? labelFromId(name);
+  const buttons
+    = engine.catalogue.system.resetButtons?.map((button) => ({
+      ...button,
+      label: button.displayName ?? button.label ?? labelFromId(button.event),
+    }))
+    ?? conditions
+      ?.filter((condition) => condition.showButton !== false)
+      .map((condition) => ({ event: condition.id, label: condition.name }))
+      ?? events.map((name) => ({ event: name, label: labelFromId(name) }));
+  const eventLabel = (name: string) =>
+    buttons.find((button) => button.event === name)?.label ?? labelFromId(name);
   const recover = (name: string, counts?: Record<string, number>) => {
     try {
       update(recoverResources(engine, character, name, crypto.randomUUID(), counts));
@@ -21,12 +51,23 @@ export function RestControls({ engine, character, result, update, report }: { en
       report(error instanceof Error ? error.message : String(error));
     }
   };
-  const triggered = event ? engine.catalogue.system.resetButtons?.find((button) => button.event === event)?.recoveries ?? [event] : [];
+  const triggered = event
+    ? (engine.catalogue.system.resetButtons?.find((button) => button.event === event)
+        ?.recoveries ?? [event])
+    : [];
   const policy = event ? engine.catalogue.system.recoveryAllocations?.[event] : undefined;
-  const pools = policy ? Object.values(result.resources).filter((pool) => policy.keys.includes(pool.key) && pool.spent > 0) : [];
+  const pools = policy
+    ? Object.values(result.resources).filter(
+        (pool) => policy.keys.includes(pool.key) && pool.spent > 0,
+      )
+    : [];
   return (
     <>
-      <div className="toolbar rest-controls" role="group" aria-label="Character resets">
+      <div
+        className="toolbar rest-controls"
+        role="group"
+        aria-label="Character resets"
+      >
         {buttons.map(({ event: name, label }) => (
           <button
             className="quiet"
@@ -35,7 +76,14 @@ export function RestControls({ engine, character, result, update, report }: { en
             disabled={!ready}
             onClick={() => {
               const rule = engine.catalogue.system.recoveryAllocations?.[name];
-              if (!engine.catalogue.system.sheetDisplay?.restPreview && (!rule || !Object.values(result.resources).some((pool) => rule.keys.includes(pool.key) && pool.spent > 0))) return recover(name);
+              if (
+                !engine.catalogue.system.sheetDisplay?.restPreview
+                && (!rule
+                  || !Object.values(result.resources).some(
+                    (pool) => rule.keys.includes(pool.key) && pool.spent > 0,
+                  ))
+              )
+                return recover(name);
               let remaining = rule ? result.stats[rule.budgetStat].value : 0;
               const defaults: Record<string, number> = {};
               for (const key of rule?.keys ?? []) {
@@ -52,23 +100,91 @@ export function RestControls({ engine, character, result, update, report }: { en
         ))}
       </div>
       {event && (
-        <Modal title={`Complete ${eventLabel(event)}`} onClose={() => setEvent(undefined)}>
+        <Modal
+          title={`Complete ${eventLabel(event)}`}
+          onClose={() => setEvent(undefined)}
+        >
           <h3>Recovery preview</h3>
-          <ul>{Object.values(result.resources).filter((pool) => pool.recovery.some((recovery) => triggered.includes(recovery.event)) || policy?.keys.includes(pool.key) || engine.catalogue.system.healthRules?.clearOnReset?.[event]?.includes(pool.key)).map((pool) => <li key={pool.id}>{`${pool.name ?? labelFromId(pool.key)} · ${pool.current ?? pool.capacity - pool.spent} / ${Number.isFinite(pool.capacity) ? pool.capacity : 'no maximum'} · ${engine.catalogue.system.healthRules?.clearOnReset?.[event]?.includes(pool.key) ? 'clear to minimum' : policy?.keys.includes(pool.key) ? `recover ${allocation[pool.key] ?? 0}` : pool.recovery.filter((rule) => triggered.includes(rule.event)).map((rule) => rule.amount === 'full' ? 'restore to maximum' : `recover ${rule.dice ? `${rule.dice} + ` : ''}${expressionText(rule.amount, engine)}`).join(' · ')}`}</li>)}</ul>
-          {policy && <p>{`Recover up to ${result.stats[policy.budgetStat].value} spent resource units in total. Other resources recover normally.`}</p>}
+          <ul>
+            {Object.values(result.resources)
+              .filter(
+                (pool) =>
+                  pool.recovery.some((recovery) => triggered.includes(recovery.event))
+                  || policy?.keys.includes(pool.key)
+                  || engine.catalogue.system.healthRules?.clearOnReset?.[event]?.includes(pool.key),
+              )
+              .map((pool) => (
+                <li key={pool.id}>
+                  {`${pool.name ?? labelFromId(pool.key)} · ${pool.current ?? pool.capacity - pool.spent} / ${Number.isFinite(pool.capacity) ? pool.capacity : 'no maximum'} · ${
+                    engine.catalogue.system.healthRules?.clearOnReset?.[event]?.includes(pool.key)
+                      ? 'clear to minimum'
+                      : policy?.keys.includes(pool.key)
+                        ? `recover ${allocation[pool.key] ?? 0}`
+                        : pool.recovery
+                            .filter((rule) => triggered.includes(rule.event))
+                            .map((rule) =>
+                              rule.amount === 'full'
+                                ? 'restore to maximum'
+                                : `recover ${rule.dice ? `${rule.dice} + ` : ''}${expressionText(rule.amount, engine)}`,
+                            )
+                            .join(' · ')
+                  }`}
+                </li>
+              ))}
+          </ul>
+          {policy && (
+            <p>{`Recover up to ${result.stats[policy.budgetStat].value} spent resource units in total. Other resources recover normally.`}</p>
+          )}
           {engine.catalogue.system.healingFeaturesTag && (
             <details>
               <summary>Hit dice and rest healing</summary>
-              {[...new Set(result.instances.filter((instance) => instance.active && instance.eligible && engine.getFeature(instance.feature)?.tags?.includes(engine.catalogue.system.healingFeaturesTag!)).map((instance) => instance.feature))].map((id) => <FeatureRolls key={id} feature={engine.getFeature(id)!} engine={engine} />)}
+              {[
+                ...new Set(
+                  result.instances
+                    .filter(
+                      (instance) =>
+                        instance.active
+                        && instance.eligible
+                        && engine
+                          .getFeature(instance.feature)
+                          ?.tags?.includes(engine.catalogue.system.healingFeaturesTag!),
+                    )
+                    .map((instance) => instance.feature),
+                ),
+              ].map((id) => (
+                <FeatureRolls
+                  key={id}
+                  feature={engine.getFeature(id)!}
+                  engine={engine}
+                />
+              ))}
             </details>
           )}
           {pools.map((pool) => (
             <label key={pool.id}>
               {pool.name}
-              <input type="number" min="0" max={pool.spent} step="1" value={allocation[pool.key] ?? 0} onChange={(e) => setAllocation({ ...allocation, [pool.key]: Number(e.target.value) })} />
+              <input
+                type="number"
+                min="0"
+                max={pool.spent}
+                step="1"
+                value={allocation[pool.key] ?? 0}
+                onChange={(e) =>
+                  setAllocation({ ...allocation, [pool.key]: Number(e.target.value) })}
+              />
             </label>
           ))}
-          <button disabled={!!policy && (Object.values(allocation).some((amount) => !Number.isInteger(amount) || amount < 0) || Object.values(allocation).reduce((a, b) => a + b, 0) > result.stats[policy.budgetStat].value)} onClick={() => recover(event, policy ? allocation : undefined)}>{`Complete ${eventLabel(event)}`}</button>
+          <button
+            disabled={!!policy
+              && (Object.values(allocation).some(
+                (amount) => !Number.isInteger(amount) || amount < 0,
+              )
+              || Object.values(allocation).reduce((a, b) => a + b, 0)
+              > result.stats[policy.budgetStat].value)}
+            onClick={() => recover(event, policy ? allocation : undefined)}
+          >
+            {`Complete ${eventLabel(event)}`}
+          </button>
         </Modal>
       )}
     </>

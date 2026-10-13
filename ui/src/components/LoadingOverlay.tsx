@@ -13,9 +13,20 @@ export function LoadingOverlay() {
     };
   }, []);
   return (
-    <dialog ref={dialog} className="loading-overlay" aria-label="Loading" onCancel={(event) => event.preventDefault()}>
-      <div role="status" aria-live="polite">
-        <span className="loading-spinner" aria-hidden="true" />
+    <dialog
+      ref={dialog}
+      className="loading-overlay"
+      aria-label="Loading"
+      onCancel={(event) => event.preventDefault()}
+    >
+      <div
+        role="status"
+        aria-live="polite"
+      >
+        <span
+          className="loading-spinner"
+          aria-hidden="true"
+        />
         Loading…
       </div>
     </dialog>

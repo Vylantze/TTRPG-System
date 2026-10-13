@@ -6,9 +6,20 @@ import { versionSystemDataEdit } from '@/ui/src/features/systems/model/system-da
 import { LoadingOverlay } from '@/ui/src/components/LoadingOverlay';
 import { AuthoringField } from '@/ui/src/features/systems/components/AuthoringField';
 import { formSchema } from '@/ui/src/features/systems/model/authoring-form';
-import { editorRecords, editSystemRecord, newSystemRecord, editorCategories } from '@/ui/src/features/systems/model/system-editor-records';
+import {
+  editorRecords,
+  editSystemRecord,
+  newSystemRecord,
+  editorCategories,
+} from '@/ui/src/features/systems/model/system-editor-records';
 
-export function SystemDataEditor({ files, save }: { files: SystemFile[]; save: (existing: SystemFile, incoming: SystemFile) => void }) {
+export function SystemDataEditor({
+  files,
+  save,
+}: {
+  files: SystemFile[];
+  save: (existing: SystemFile, incoming: SystemFile) => void;
+}) {
   const baseline = useRef<SystemFile | undefined>(undefined);
   const [selected, setSelected] = useState(files[0] ? systemKey(files[0]) : '');
   const [category, setCategory] = useState('classes');
@@ -25,7 +36,9 @@ export function SystemDataEditor({ files, save }: { files: SystemFile[]; save: (
   const records = file ? editorRecords(file, category, configuration) : [];
   const entry = records.find((entry) => entry.id === record) ?? records[0];
   const definition = editorCategories.find((entry) => entry.id === category)!;
-  const matches = records.filter((entry) => `${entry.label} ${entry.id}`.toLowerCase().includes(query.toLowerCase()));
+  const matches = records.filter((entry) =>
+    `${entry.label} ${entry.id}`.toLowerCase().includes(query.toLowerCase()),
+  );
   const lastPage = Math.max(0, Math.ceil(matches.length / 50) - 1);
   const currentPage = Math.min(page, lastPage);
   const reset = () => {
@@ -44,22 +57,36 @@ export function SystemDataEditor({ files, save }: { files: SystemFile[]; save: (
     setBusy(true);
     setFailed(false);
     try {
-      if (baseline.current !== original) throw new Error('The System changed while you were editing. Discard these edits and try again.');
+      if (baseline.current !== original)
+        throw new Error(
+          'The System changed while you were editing. Discard these edits and try again.',
+        );
       const incoming = await validateSystemAsync(versionSystemDataEdit(original, draft));
       save(original, incoming);
       setDraft(undefined);
       baseline.current = undefined;
-      setMessage(`Saved local System ${releaseVersion(incoming.contentVersion)}. Character compatibility verified.`);
+      setMessage(
+        `Saved local System ${releaseVersion(incoming.contentVersion)}. Character compatibility verified.`,
+      );
     } catch (error) {
       setFailed(true);
       setMessage(error instanceof Error ? error.message : String(error));
-    } finally { setBusy(false); }
+    } finally {
+      setBusy(false);
+    }
   };
   return (
-    <section className="panel system-data-editor" aria-busy={busy}>
+    <section
+      className="panel system-data-editor"
+      aria-busy={busy}
+    >
       {busy && <LoadingOverlay />}
       <h1>System data</h1>
-      <p>Edit rules with forms. Changes are saved to this browser after validation; export from Systems to keep a portable copy. Existing characters are preserved, and incompatible edits are rejected.</p>
+      <p>
+        Edit rules with forms. Changes are saved to this browser after validation; export from
+        Systems to keep a portable copy. Existing characters are preserved, and incompatible edits
+        are rejected.
+      </p>
       {!files.length
         ? (
             <p>
@@ -84,7 +111,14 @@ export function SystemDataEditor({ files, save }: { files: SystemFile[]; save: (
                       reset();
                     }}
                   >
-                    {files.map((entry) => <option key={systemKey(entry)} value={systemKey(entry)}>{entry.configurations[0].system.name}</option>)}
+                    {files.map((entry) => (
+                      <option
+                        key={systemKey(entry)}
+                        value={systemKey(entry)}
+                      >
+                        {entry.configurations[0].system.name}
+                      </option>
+                    ))}
                   </select>
                 </label>
                 {file && (
@@ -97,12 +131,24 @@ export function SystemDataEditor({ files, save }: { files: SystemFile[]; save: (
                         setRecord('');
                       }}
                     >
-                      {file.configurations.map((config, index) => <option key={config.id} value={index}>{Object.entries(config.options).map(([key, value]) => `${key}: ${value}`).join(' · ') || config.id}</option>)}
+                      {file.configurations.map((config, index) => (
+                        <option
+                          key={config.id}
+                          value={index}
+                        >
+                          {Object.entries(config.options)
+                            .map(([key, value]) => `${key}: ${value}`)
+                            .join(' · ') || config.id}
+                        </option>
+                      ))}
                     </select>
                   </label>
                 )}
               </div>
-              <nav className="subnav" aria-label="System editor categories">
+              <nav
+                className="subnav"
+                aria-label="System editor categories"
+              >
                 {editorCategories.map((entry) => (
                   <button
                     key={entry.id}
@@ -133,28 +179,38 @@ export function SystemDataEditor({ files, save }: { files: SystemFile[]; save: (
                       />
                     </label>
                     <p className="muted small">
-                      {records.length}
-                      {' '}
-                      {definition.label.toLowerCase()}
+                      {records.length} {definition.label.toLowerCase()}
                     </p>
                     <div className="system-editor-records">
                       {matches.slice(currentPage * 50, (currentPage + 1) * 50).map((item) => (
-                        <button className={entry?.id === item.id ? '' : 'quiet'} key={item.id} onClick={() => setRecord(item.id)}>
+                        <button
+                          className={entry?.id === item.id ? '' : 'quiet'}
+                          key={item.id}
+                          onClick={() => setRecord(item.id)}
+                        >
                           {item.label}
                           <small>{item.id}</small>
                         </button>
                       ))}
                     </div>
                     <div className="toolbar">
-                      <button className="quiet" disabled={currentPage === 0} onClick={() => setPage(currentPage - 1)}>Previous</button>
+                      <button
+                        className="quiet"
+                        disabled={currentPage === 0}
+                        onClick={() => setPage(currentPage - 1)}
+                      >
+                        Previous
+                      </button>
                       <span>
-                        {currentPage + 1}
-                        {' '}
-                        /
-                        {' '}
-                        {lastPage + 1}
+                        {currentPage + 1} / {lastPage + 1}
                       </span>
-                      <button className="quiet" disabled={currentPage === lastPage} onClick={() => setPage(currentPage + 1)}>Next</button>
+                      <button
+                        className="quiet"
+                        disabled={currentPage === lastPage}
+                        onClick={() => setPage(currentPage + 1)}
+                      >
+                        Next
+                      </button>
                     </div>
                     {!['settings', 'options'].includes(category) && (
                       <button
@@ -173,7 +229,9 @@ export function SystemDataEditor({ files, save }: { files: SystemFile[]; save: (
                   </aside>
                   <article className="system-editor-form">
                     <h2>{entry?.label ?? `No ${definition.label.toLowerCase()} yet`}</h2>
-                    {(category === 'classes' || category === 'settings') && <p className="notice">Changes here apply to the selected rules configuration.</p>}
+                    {(category === 'classes' || category === 'settings') && (
+                      <p className="notice">Changes here apply to the selected rules configuration.</p>
+                    )}
                     {entry && (
                       <AuthoringField
                         key={`${category}/${configuration}`}
@@ -183,7 +241,13 @@ export function SystemDataEditor({ files, save }: { files: SystemFile[]; save: (
                         change={(value) => {
                           const next = editSystemRecord(file, category, configuration, entry.id, value);
                           change(next);
-                          if (category !== 'options' && value && typeof value === 'object' && 'id' in value) setRecord(String(value.id));
+                          if (
+                            category !== 'options'
+                            && value
+                            && typeof value === 'object'
+                            && 'id' in value
+                          )
+                            setRecord(String(value.id));
                         }}
                       />
                     )}
@@ -202,16 +266,72 @@ export function SystemDataEditor({ files, save }: { files: SystemFile[]; save: (
                   </article>
                 </div>
               )}
-              {!!draft && <p className="notice">Unsaved changes. You can switch categories and records without losing edits. Save or discard before switching Systems.</p>}
+              {!!draft && (
+                <p className="notice">
+                  Unsaved changes. You can switch categories and records without losing edits. Save or
+                  discard before switching Systems.
+                </p>
+              )}
               <div className="toolbar">
-                <button disabled={!draft} onClick={() => void apply()}>Validate and save</button>
-                <button className="quiet" disabled={!draft} onClick={reset}>Discard edits</button>
+                <button
+                  disabled={!draft}
+                  onClick={() => void apply()}
+                >
+                  Validate and save
+                </button>
+                <button
+                  className="quiet"
+                  disabled={!draft}
+                  onClick={reset}
+                >
+                  Discard edits
+                </button>
               </div>
-              <datalist id="authoring-references">{file && [...new Map([...file.features, ...file.configurations[configuration].classes, ...(file.items ?? []), ...(file.itemFeatures ?? []), ...(file.blocks ?? []), ...file.configurations[configuration].system.stats].map((entry) => [entry.id, entry])).values()].map((entry) => <option value={entry.id} key={entry.id}>{'name' in entry ? entry.name : entry.id}</option>)}</datalist>
-              <datalist id="authoring-tags">{file && [...new Set(file.features.flatMap((feature) => feature.tags ?? []))].sort().map((tag) => <option value={tag} key={tag}>{file.configurations[configuration].system.tagDisplayNames?.[tag] ?? tag}</option>)}</datalist>
+              <datalist id="authoring-references">
+                {file
+                  && [
+                    ...new Map(
+                      [
+                        ...file.features,
+                        ...file.configurations[configuration].classes,
+                        ...(file.items ?? []),
+                        ...(file.itemFeatures ?? []),
+                        ...(file.blocks ?? []),
+                        ...file.configurations[configuration].system.stats,
+                      ].map((entry) => [entry.id, entry]),
+                    ).values(),
+                  ].map((entry) => (
+                    <option
+                      value={entry.id}
+                      key={entry.id}
+                    >
+                      {'name' in entry ? entry.name : entry.id}
+                    </option>
+                  ))}
+              </datalist>
+              <datalist id="authoring-tags">
+                {file
+                  && [...new Set(file.features.flatMap((feature) => feature.tags ?? []))]
+                    .sort()
+                    .map((tag) => (
+                      <option
+                        value={tag}
+                        key={tag}
+                      >
+                        {file.configurations[configuration].system.tagDisplayNames?.[tag] ?? tag}
+                      </option>
+                    ))}
+              </datalist>
             </fieldset>
           )}
-      {message && <p role={failed ? 'alert' : 'status'} className={failed ? 'notice invalid' : 'notice'}>{message}</p>}
+      {message && (
+        <p
+          role={failed ? 'alert' : 'status'}
+          className={failed ? 'notice invalid' : 'notice'}
+        >
+          {message}
+        </p>
+      )}
     </section>
   );
 }
