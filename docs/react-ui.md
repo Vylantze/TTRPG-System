@@ -28,6 +28,8 @@ Each feature groups `components/` and `model/` together. UI tests remain in `ui/
 
 CSS uses Stylelint's standard configuration and Prettier formatting: two-space indentation, readable declaration blocks, and separate selector lines. `npm run lint:css` validates CSS and formatting; `npm run lint:css:fix` applies safe rule fixes and formats it. These checks are included in `npm run lint` and the existing pre-commit hook. Repeated selectors and descending specificity remain allowed for the current stylesheet's intentional responsive and System overrides; all other standard rules apply.
 
+React JSX uses two-space indentation. Elements with multiple props put their first prop on a new line and each prop on its own line; multiline opening tags align `>` or `/>` with the tag. Children of multiline tags have their own lines, and multiline conditional children use `&& (...)` with a complete closing `)}`. Short single-line elements and short inline value expressions can remain compact. ESLint enforces and autofixes the tag/child layout through `npm run lint:fix`; long handlers and ternaries in the existing components are expanded for readability.
+
 Expanded HP presents a native number input to the left of its maximum, using the same field styling as Amount. Typing or the input's native stepper changes the pending value; leaving the field or pressing Enter saves it through the engine. Invalid values restore the current value. The engine enforces minimum, maximum, whole-number settings and reservations. Direct HP edits set the raw balance; Damage and Heal retain their separate rules, including temporary HP absorption.
 
 ## Run

@@ -14,6 +14,27 @@ test('shared standard checks JavaScript formatting and Node globals', async () =
   assert.ok(browserLeak.messages.some((message) => message.ruleId === 'no-undef'));
 });
 
+test('React JSX props and conditional children autofix into readable multiline tags', async () => {
+  const source = `export function Layout({ visible }: { visible: boolean }) {
+  return <><button className="toggle" disabled={!visible} onClick={() => console.log('toggle')}>{visible ? '▾' : '▸'}</button><div id="details" hidden={!visible}>{visible && <span id="value" title="Value">Visible</span>}</div></>;
+}
+`;
+  const filePath = 'ui/src/components/LintProbe.tsx';
+  const [compact] = await new ESLint().lintText(source, { filePath });
+  assert.ok(compact.messages.some((message) => message.ruleId === '@stylistic/jsx-max-props-per-line'));
+  assert.ok(compact.messages.some((message) => message.ruleId === '@stylistic/jsx-first-prop-new-line'));
+  const [fixed] = await new ESLint({ fix: true }).lintText(source, { filePath });
+  assert.deepEqual(fixed.messages, []);
+  assert.match(fixed.output, /<button\n\s+className="toggle"\n\s+disabled=/);
+  assert.match(fixed.output, /<div\n\s+id="details"\n\s+hidden=/);
+  assert.match(fixed.output, /visible && \(\n\s+<span\n/);
+  assert.match(fixed.output, /<\/span>\n\s+\)}/);
+  assert.doesNotMatch(fixed.output, /\t/);
+  const [again] = await new ESLint({ fix: true }).lintText(fixed.output, { filePath });
+  assert.deepEqual(again.messages, []);
+  assert.equal(again.output ?? fixed.output, fixed.output);
+});
+
 test('React hook rules apply to the UI, not engine commands named useAbility', async () => {
   const eslint = new ESLint({ fix: true });
   const [engine] = await eslint.lintText('import { useAbility } from \'./commands.js\';\nexport function activate() {\n  return useAbility();\n}\n', { filePath: 'src/lint-probe.ts' });

@@ -2,14 +2,38 @@ import { resetConditionName } from '@/ui/src/features/systems/model/reset-condit
 import { expressionText } from '@/ui/src/features/catalogue/model/feature-requirements';
 import { labelFromId } from '@/ui/src/lib/workspace';
 import { useMemo, useState, useDeferredValue } from 'react';
-import { featureRollInstances, adjustResource, spellGroups, spellSlotPools, useAbility as activateAbility, type Character, type Engine, type EvaluationResult, type SpellGroup } from '@/src/index';
+import {
+  featureRollInstances,
+  adjustResource,
+  spellGroups,
+  spellSlotPools,
+  useAbility as activateAbility,
+  type Character,
+  type Engine,
+  type EvaluationResult,
+  type SpellGroup,
+} from '@/src/index';
 import { FeatureLink } from '@/ui/src/features/catalogue/components/FeatureLink';
 import { FeatureRules } from '@/ui/src/features/catalogue/components/RulesText';
 import { FeatureRolls } from '@/ui/src/features/catalogue/components/FeatureRolls';
 import { Modal } from '@/ui/src/components/Modal';
 import { actionCostKind } from '@/ui/src/features/characters/model/action-costs';
 
-export function SpellBook({ engine, character, result, ready, update, report }: { engine: Engine; character: Character; result: EvaluationResult; ready: boolean; update: (character: Character) => void; report: (message: string) => void }) {
+export function SpellBook({
+  engine,
+  character,
+  result,
+  ready,
+  update,
+  report,
+}: {
+  engine: Engine;
+  character: Character;
+  result: EvaluationResult;
+  ready: boolean;
+  update: (character: Character) => void;
+  report: (message: string) => void;
+}) {
   const [showEmpty, setShowEmpty] = useState(false);
   const [casting, setCasting] = useState<string>();
   const [mode, setMode] = useState('');
@@ -20,10 +44,20 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
   const query = useDeferredValue(search.trim().toLowerCase());
   const settings = engine.catalogue.system.sheetDisplay?.spells;
   const categories = engine.catalogue.system.sheetDisplay?.actions?.categories ?? [];
-  const kinds = settings?.actionFilter ? categories.find((category) => category.id === actionCategory)?.kinds : undefined;
+  const kinds = settings?.actionFilter
+    ? categories.find((category) => category.id === actionCategory)?.kinds
+    : undefined;
   const spells = useMemo(() => spellGroups(engine, result), [engine, result]);
   const slots = useMemo(() => spellSlotPools(engine, result), [engine, result]);
-  const visibleSpells = spells.filter((spell) => (!settings?.search || spell.name.toLowerCase().includes(query)) && (!settings?.levelFilter || filterLevel === 'all' || spell.level === Number(filterLevel)) && (!kinds || spell.modes.some((mode) => kinds.includes(actionCostKind(mode.capability.definition.action)))));
+  const visibleSpells = spells.filter(
+    (spell) =>
+      (!settings?.search || spell.name.toLowerCase().includes(query))
+      && (!settings?.levelFilter || filterLevel === 'all' || spell.level === Number(filterLevel))
+      && (!kinds
+        || spell.modes.some((mode) =>
+          kinds.includes(actionCostKind(mode.capability.definition.action)),
+        )),
+  );
   const selected = spells.find((spell) => spell.id === casting);
   const attempt = (action: () => void) => {
     try {
@@ -32,19 +66,54 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
       report(error instanceof Error ? error.message : String(error));
     }
   };
-  const cast = (id: string) => attempt(() => {
-    const spell = spells.find((entry) => entry.modes.some((option) => option.capability.id === id))!;
-    const option = spell.modes.find((entry) => entry.capability.id === id)!;
-    const costs = Object.entries(option.capability.costs).filter(([, amount]) => amount > 0).map(([pool, amount]) => `${amount} ${result.resources[pool].name} spent`).join(' · ');
-    update(activateAbility(engine, character, id, crypto.randomUUID(), { actionTracking: 'manual' }).character);
-    setSpent({ ...spent, [spell.id]: costs });
-    setCasting(undefined);
-  });
-  const label = (option: SpellGroup['modes'][number]) => option.ritual ? 'Ritual — no spell slot' : option.slotLevel === 0 ? `${settings?.zeroLevelName ?? 'Level 0 spell'} — no spell slot` : `Level ${option.slotLevel} · ${Object.keys(option.capability.costs).map((id) => result.resources[id]?.name ?? 'Spell slot').join(', ')}${option.available ? '' : ' — none remaining'}`;
-  const actionable = (spell: SpellGroup) => featureRollInstances(engine, result, spell.feature).length > 0 || spell.modes.some((option) => Object.values(option.capability.costs).some((amount) => amount > 0));
+  const cast = (id: string) =>
+    attempt(() => {
+      const spell = spells.find((entry) =>
+        entry.modes.some((option) => option.capability.id === id),
+      )!;
+      const option = spell.modes.find((entry) => entry.capability.id === id)!;
+      const costs = Object.entries(option.capability.costs)
+        .filter(([, amount]) => amount > 0)
+        .map(([pool, amount]) => `${amount} ${result.resources[pool].name} spent`)
+        .join(' · ');
+      update(
+        activateAbility(engine, character, id, crypto.randomUUID(), { actionTracking: 'manual' })
+          .character,
+      );
+      setSpent({ ...spent, [spell.id]: costs });
+      setCasting(undefined);
+    });
+  const label = (option: SpellGroup['modes'][number]) =>
+    option.ritual
+      ? 'Ritual — no spell slot'
+      : option.slotLevel === 0
+        ? `${settings?.zeroLevelName ?? 'Level 0 spell'} — no spell slot`
+        : `Level ${option.slotLevel} · ${Object.keys(option.capability.costs)
+          .map((id) => result.resources[id]?.name ?? 'Spell slot')
+          .join(', ')}${option.available ? '' : ' — none remaining'}`;
+  const actionable = (spell: SpellGroup) =>
+    featureRollInstances(engine, result, spell.feature).length > 0
+    || spell.modes.some((option) =>
+      Object.values(option.capability.costs).some((amount) => amount > 0),
+    );
   const notification = (spell: SpellGroup) => {
-    const latest = character.rollResults?.filter((record) => record.casting?.spell === spell.feature && spell.modes.some((option) => option.capability.id === record.casting?.capability)).at(-1);
-    return spent[spell.id] ?? (latest?.casting ? latest.casting.ritual ? 'Ritual · no spell slot spent' : latest.casting.slotLevel ? `1 level ${latest.casting.slotLevel} spell slot spent` : `${settings?.zeroLevelName ?? 'Level 0 spell'} · no spell slot spent` : undefined);
+    const latest = character.rollResults
+      ?.filter(
+        (record) =>
+          record.casting?.spell === spell.feature
+          && spell.modes.some((option) => option.capability.id === record.casting?.capability),
+      )
+      .at(-1);
+    return (
+      spent[spell.id]
+      ?? (latest?.casting
+        ? latest.casting.ritual
+          ? 'Ritual · no spell slot spent'
+          : latest.casting.slotLevel
+            ? `1 level ${latest.casting.slotLevel} spell slot spent`
+            : `${settings?.zeroLevelName ?? 'Level 0 spell'} · no spell slot spent`
+        : undefined)
+    );
   };
   if (!spells.length && !slots.length) return null;
   return (
@@ -52,128 +121,291 @@ export function SpellBook({ engine, character, result, ready, update, report }: 
       <div className="row">
         <h2>Spell slots</h2>
         <label className="checkbox-label">
-          <input type="checkbox" checked={showEmpty} onChange={(event) => setShowEmpty(event.target.checked)} />
+          <input
+            type="checkbox"
+            checked={showEmpty}
+            onChange={(event) => setShowEmpty(event.target.checked)}
+          />
           Show all spell slots
         </label>
       </div>
       <div className="spell-slots">
-        {slots.filter(({ pool }) => showEmpty || (pool.current ?? pool.capacity - pool.spent) > 0).map(({ level, pool }) => (
-          <article className="spell-slot" key={pool.id}>
-            <h3>{`${pool.name ?? 'Spell slots'} · Level ${level}`}</h3>
-            <strong>{`${pool.current ?? pool.capacity - pool.spent} / ${pool.capacity}`}</strong>
-            <p className="muted small">{pool.recovery.map((recovery) => `${resetConditionName(engine.catalogue.system, recovery.event)}: ${recovery.amount === 'full' ? 'restore to maximum' : `${recovery.dice ? `${recovery.dice} + ` : ''}${expressionText(recovery.amount, engine)}`}`).join(' · ')}</p>
-            <div className="slot-pips" aria-hidden="true">{Array.from({ length: Math.min(settings?.slotPipLimit ?? 12, pool.capacity) }, (_, index) => <span className={index < pool.available ? 'filled' : ''} key={index} />)}</div>
-            <div className="toolbar">
-              <button className="quiet resource-adjust-button" aria-label={`Decrease ${pool.name}`} disabled={!ready || pool.available < 1} onClick={() => attempt(() => update(adjustResource(engine, character, pool.id, -1, crypto.randomUUID())))}>−</button>
-              <button className="quiet resource-adjust-button" aria-label={`Increase ${pool.name}`} disabled={!ready || (pool.current ?? pool.capacity - pool.spent) >= pool.capacity} onClick={() => attempt(() => update(adjustResource(engine, character, pool.id, 1, crypto.randomUUID())))}>+</button>
-            </div>
-          </article>
-        ))}
+        {slots
+          .filter(({ pool }) => showEmpty || (pool.current ?? pool.capacity - pool.spent) > 0)
+          .map(({ level, pool }) => (
+            <article
+              className="spell-slot"
+              key={pool.id}
+            >
+              <h3>{`${pool.name ?? 'Spell slots'} · Level ${level}`}</h3>
+              <strong>{`${pool.current ?? pool.capacity - pool.spent} / ${pool.capacity}`}</strong>
+              <p className="muted small">
+                {pool.recovery
+                  .map(
+                    (recovery) =>
+                      `${resetConditionName(engine.catalogue.system, recovery.event)}: ${recovery.amount === 'full' ? 'restore to maximum' : `${recovery.dice ? `${recovery.dice} + ` : ''}${expressionText(recovery.amount, engine)}`}`,
+                  )
+                  .join(' · ')}
+              </p>
+              <div
+                className="slot-pips"
+                aria-hidden="true"
+              >
+                {Array.from(
+                  { length: Math.min(settings?.slotPipLimit ?? 12, pool.capacity) },
+                  (_, index) => (
+                    <span
+                      className={index < pool.available ? 'filled' : ''}
+                      key={index}
+                    />
+                  ),
+                )}
+              </div>
+              <div className="toolbar">
+                <button
+                  className="quiet resource-adjust-button"
+                  aria-label={`Decrease ${pool.name}`}
+                  disabled={!ready || pool.available < 1}
+                  onClick={() =>
+                    attempt(() =>
+                      update(adjustResource(engine, character, pool.id, -1, crypto.randomUUID())),
+                    )}
+                >
+                  −
+                </button>
+                <button
+                  className="quiet resource-adjust-button"
+                  aria-label={`Increase ${pool.name}`}
+                  disabled={!ready || (pool.current ?? pool.capacity - pool.spent) >= pool.capacity}
+                  onClick={() =>
+                    attempt(() =>
+                      update(adjustResource(engine, character, pool.id, 1, crypto.randomUUID())),
+                    )}
+                >
+                  +
+                </button>
+              </div>
+            </article>
+          ))}
       </div>
-      {!showEmpty && !slots.some(({ pool }) => (pool.current ?? pool.capacity - pool.spent) > 0) && <p className="muted">No spell slots remaining. Show all spell slots to adjust or inspect them.</p>}
+      {!showEmpty
+        && !slots.some(({ pool }) => (pool.current ?? pool.capacity - pool.spent) > 0) && (
+        <p className="muted">
+          No spell slots remaining. Show all spell slots to adjust or inspect them.
+        </p>
+      )}
       <h2>Spells</h2>
       <div className="toolbar spell-filters">
         {settings?.actionFilter && (
           <label>
             Spell action cost
-            <select value={actionCategory} onChange={(event) => setActionCategory(event.target.value)}>
+            <select
+              value={actionCategory}
+              onChange={(event) => setActionCategory(event.target.value)}
+            >
               <option value="">All action costs</option>
-              {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
+              {categories.map((category) => (
+                <option
+                  key={category.id}
+                  value={category.id}
+                >
+                  {category.name}
+                </option>
+              ))}
             </select>
           </label>
         )}
         {settings?.search && (
           <label>
             Search spells
-            <input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Find a spell…" />
+            <input
+              type="search"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="Find a spell…"
+            />
           </label>
         )}
         {settings?.levelFilter && (
           <label>
             Spell level
-            <select value={filterLevel} onChange={(event) => setFilterLevel(event.target.value)}>
+            <select
+              value={filterLevel}
+              onChange={(event) => setFilterLevel(event.target.value)}
+            >
               <option value="all">All levels</option>
-              {[...new Set(spells.map((spell) => spell.level))].sort((a, b) => a - b).map((level) => <option key={level} value={level}>{level === 0 ? (settings?.zeroLevelHeading ?? 'Level 0 spells') : `Level ${level}`}</option>)}
+              {[...new Set(spells.map((spell) => spell.level))]
+                .sort((a, b) => a - b)
+                .map((level) => (
+                  <option
+                    key={level}
+                    value={level}
+                  >
+                    {level === 0
+                      ? (settings?.zeroLevelHeading ?? 'Level 0 spells')
+                      : `Level ${level}`}
+                  </option>
+                ))}
             </select>
           </label>
         )}
       </div>
       <div className="casting-summary">
-        {(settings?.castingStats ?? []).filter((source) => spells.some((spell) => spell.castingAbility === source.ability)).map((source) => {
-          const attack = result.stats[source.attackStat]?.value ?? 0;
-          return <p key={source.ability}>{`${labelFromId(source.ability)} · spell attack ${attack >= 0 ? '+' : ''}${attack} · save DC ${result.stats[source.saveStat]?.value ?? 0}`}</p>;
-        })}
+        {(settings?.castingStats ?? [])
+          .filter((source) => spells.some((spell) => spell.castingAbility === source.ability))
+          .map((source) => {
+            const attack = result.stats[source.attackStat]?.value ?? 0;
+            return (
+              <p key={source.ability}>
+                {`${labelFromId(source.ability)} · spell attack ${attack >= 0 ? '+' : ''}${attack} · save DC ${result.stats[source.saveStat]?.value ?? 0}`}
+              </p>
+            );
+          })}
       </div>
-      {spells.length > 0 && !visibleSpells.length && <p className="muted">No spells match these filters.</p>}
-      {[...new Set(visibleSpells.map((spell) => spell.level))].sort((a, b) => a - b).map((level) => (
-        <details className="spell-level" key={level} open>
-          <summary>{level === 0 ? (settings?.zeroLevelHeading ?? 'Level 0 spells') : `Level ${level} spells`}</summary>
-          {visibleSpells.filter((spell) => spell.level === level).map((spell) => (
-            <article className={`panel spell-row ${settings?.compact ? 'spell-compact' : ''}`} key={spell.id}>
-              <div className="row">
-                <div>
-                  <h3><FeatureLink id={spell.feature} engine={engine}>{spell.name}</FeatureLink></h3>
-                  <small>
-                    {`Casting ability: ${labelFromId(spell.castingAbility)}`}
-                    {spell.modes.every((mode) => mode.ritual) ? ' · Ritual only' : ''}
-                  </small>
-                  <dl className="spell-quick-info">
-                    {(settings?.columns ?? []).map((column) => {
-                      const value = spell.modes.find((mode) => !mode.ritual)?.capability.definition.metadata?.[column.metadataKey] ?? spell.modes[0]?.capability.definition.metadata?.[column.metadataKey];
-                      return value === undefined
-                        ? null
-                        : (
-                            <div key={column.metadataKey}>
-                              <dt>{column.name}</dt>
-                              <dd>{String(value)}</dd>
-                            </div>
-                          );
-                    })}
-                  </dl>
-                </div>
-                <div className="spell-action">
-                  {actionable(spell) && (
-                    <button
-                      disabled={!ready || !spell.modes.some((option) => option.available)}
-                      onClick={() => {
-                        const available = spell.modes.filter((option) => option.available);
-                        if (spell.modes.length === 1 && !featureRollInstances(engine, result, spell.feature).length) cast(available[0].capability.id);
-                        else {
-                          setMode(available[0].capability.id);
-                          setCasting(spell.id);
-                        }
-                      }}
-                    >
-                      Use Spell
-                    </button>
+      {spells.length > 0 && !visibleSpells.length && (
+        <p className="muted">No spells match these filters.</p>
+      )}
+      {[...new Set(visibleSpells.map((spell) => spell.level))]
+        .sort((a, b) => a - b)
+        .map((level) => (
+          <details
+            className="spell-level"
+            key={level}
+            open
+          >
+            <summary>
+              {level === 0
+                ? (settings?.zeroLevelHeading ?? 'Level 0 spells')
+                : `Level ${level} spells`}
+            </summary>
+            {visibleSpells
+              .filter((spell) => spell.level === level)
+              .map((spell) => (
+                <article
+                  className={`panel spell-row ${settings?.compact ? 'spell-compact' : ''}`}
+                  key={spell.id}
+                >
+                  <div className="row">
+                    <div>
+                      <h3>
+                        <FeatureLink
+                          id={spell.feature}
+                          engine={engine}
+                        >
+                          {spell.name}
+                        </FeatureLink>
+                      </h3>
+                      <small>
+                        {`Casting ability: ${labelFromId(spell.castingAbility)}`}
+                        {spell.modes.every((mode) => mode.ritual) ? ' · Ritual only' : ''}
+                      </small>
+                      <dl className="spell-quick-info">
+                        {(settings?.columns ?? []).map((column) => {
+                          const value
+                            = spell.modes.find((mode) => !mode.ritual)?.capability.definition
+                              .metadata?.[column.metadataKey]
+                              ?? spell.modes[0]?.capability.definition.metadata?.[column.metadataKey];
+                          return value === undefined
+                            ? null
+                            : (
+                                <div key={column.metadataKey}>
+                                  <dt>{column.name}</dt>
+                                  <dd>{String(value)}</dd>
+                                </div>
+                              );
+                        })}
+                      </dl>
+                    </div>
+                    <div className="spell-action">
+                      {actionable(spell) && (
+                        <button
+                          disabled={!ready || !spell.modes.some((option) => option.available)}
+                          onClick={() => {
+                            const available = spell.modes.filter((option) => option.available);
+                            if (
+                              spell.modes.length === 1
+                              && !featureRollInstances(engine, result, spell.feature).length
+                            )
+                              cast(available[0].capability.id);
+                            else {
+                              setMode(available[0].capability.id);
+                              setCasting(spell.id);
+                            }
+                          }}
+                        >
+                          Use Spell
+                        </button>
+                      )}
+                      {notification(spell) && <small role="status">{notification(spell)}</small>}
+                    </div>
+                  </div>
+                  <details>
+                    <summary>Spell description</summary>
+                    {engine.getFeature(spell.feature) && (
+                      <FeatureRules
+                        feature={engine.getFeature(spell.feature)!}
+                        engine={engine}
+                        showRolls={false}
+                      />
+                    )}
+                  </details>
+                  {engine.getFeature(spell.feature) && (
+                    <FeatureRolls
+                      feature={engine.getFeature(spell.feature)!}
+                      engine={engine}
+                      resultsOnly
+                    />
                   )}
-                  {notification(spell) && <small role="status">{notification(spell)}</small>}
-                </div>
-              </div>
-              <details>
-                <summary>Spell description</summary>
-                {engine.getFeature(spell.feature) && <FeatureRules feature={engine.getFeature(spell.feature)!} engine={engine} showRolls={false} />}
-              </details>
-              {engine.getFeature(spell.feature) && <FeatureRolls feature={engine.getFeature(spell.feature)!} engine={engine} resultsOnly />}
-            </article>
-          ))}
-        </details>
-      ))}
+                </article>
+              ))}
+          </details>
+        ))}
       {selected && (
-        <Modal title={`Cast ${selected.name}`} onClose={() => setCasting(undefined)}>
+        <Modal
+          title={`Cast ${selected.name}`}
+          onClose={() => setCasting(undefined)}
+        >
           <p>{`Original level: ${selected.level}. Choose an available casting option.`}</p>
           <label>
             Cast using
-            <select value={mode} onChange={(event) => setMode(event.target.value)}>{selected.modes.map((option) => <option key={option.capability.id} value={option.capability.id} disabled={!option.available}>{label(option)}</option>)}</select>
+            <select
+              value={mode}
+              onChange={(event) => setMode(event.target.value)}
+            >
+              {selected.modes.map((option) => (
+                <option
+                  key={option.capability.id}
+                  value={option.capability.id}
+                  disabled={!option.available}
+                >
+                  {label(option)}
+                </option>
+              ))}
+            </select>
           </label>
           {featureRollInstances(engine, result, selected.feature).length
             ? (
                 <>
-                  <p>Rolling spends the selected casting cost immediately. Apply the saved result separately.</p>
-                  <FeatureRolls feature={engine.getFeature(selected.feature)!} engine={engine} castingCapability={mode} />
+                  <p>
+                    Rolling spends the selected casting cost immediately. Apply the saved result
+                    separately.
+                  </p>
+                  <FeatureRolls
+                    feature={engine.getFeature(selected.feature)!}
+                    engine={engine}
+                    castingCapability={mode}
+                  />
                 </>
               )
-            : <button disabled={!ready || !selected.modes.some((option) => option.capability.id === mode && option.available)} onClick={() => cast(mode)}>Use Spell</button>}
+            : (
+                <button
+                  disabled={!ready
+                    || !selected.modes.some((option) => option.capability.id === mode && option.available)}
+                  onClick={() => cast(mode)}
+                >
+                  Use Spell
+                </button>
+              )}
         </Modal>
       )}
     </section>
