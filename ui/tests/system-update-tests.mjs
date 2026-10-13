@@ -57,7 +57,8 @@ test('UI version note reads the published package version', () => {
   const html = renderToStaticMarkup(createElement(UiVersion));
   assert.match(html, /class="ui-version"/);
   assert.ok(html.includes(`UI version ${version}`));
-  assert.ok(html.replace(/<!--[\s\S]*?-->/g, '').includes(`UI v${version}`));
+  assert.ok(html.replace(/<!--[\s\S]*?-->/g, '').includes(`>${version}</div>`));
+  assert.doesNotMatch(html, />UI v/);
 });
 
 test('reload preserves edited compatible characters and rebuilds only incompatible samples', () => {

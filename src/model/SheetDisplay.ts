@@ -1,7 +1,7 @@
 /** System-authored sheet presentation; resource behavior lives in healthRules. */
 export interface SheetDisplay {
   overview?: { stat: string; name?: string; signed?: boolean; unit?: string; roll?: { dice: string; bonusStat?: string } }[];
-  health?: { name?: string; showHealingFeatures?: boolean; healingResourceIcons?: boolean; countersVisibleAtOrBelow?: number; counters?: string[] };
+  health?: { name?: string; compactDefault?: boolean; showHealingFeatures?: boolean; healingResourceIcons?: boolean; countersVisibleAtOrBelow?: number; counters?: string[] };
   abilities?: { groupByActionCost?: boolean; actionFilter?: boolean };
   descriptionProcessing?: { statPhrases?: { phrase: string; stat: string }[]; classLevelPhrases?: boolean };
   resources?: { compact?: boolean; showDetailsByDefault?: boolean };

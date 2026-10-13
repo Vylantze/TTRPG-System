@@ -12,6 +12,7 @@ import { checkCharacter, validateCatalogue } from '@/src/validation.js';
 import { compileBlocks } from '@/src/blocks.js';
 import { trackerPools, storeTrackers } from '@/src/resource-trackers.js';
 import { expressionContributions } from '@/src/stat-contributions.js';
+import { featureInstanceDisplayName } from '@/src/feature-instance-display-name.js';
 
 export const segment = (id: string): string => encodeURIComponent(id);
 export const rootPath = (id: string): string => `root/${segment(id)}`;
@@ -257,10 +258,7 @@ export class Engine {
         const sourceLabel = (source: string): string => {
           if (source.startsWith('item/')) return this.catalogue.items?.find((item) => item.id === character.inventory?.find((entry) => entry.id === decodeURIComponent(source.split('/')[1]))?.item)?.name ?? baseLabel;
           const instance = instances.find((entry) => entry.id === source);
-          const feature = instance && this.features.get(instance.feature);
-          const parent = instance?.parent && instances.find((entry) => entry.id === instance.parent);
-          const parentFeature = parent && this.features.get(parent.feature);
-          return [...new Set([feature?.displayName ?? feature?.name, parentFeature && (parentFeature.displayName ?? parentFeature.name)].filter(Boolean))].join(', ') || baseLabel;
+          return instance ? featureInstanceDisplayName(instance, instances, (id) => this.features.get(id), true) : baseLabel;
         };
         let contributions = baseExpression === undefined
           ? [{ amount: base, label: baseLabel }]

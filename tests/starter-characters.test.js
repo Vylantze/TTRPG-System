@@ -10,12 +10,16 @@ const engine = createDnd2014Engine();
 test('sample Cleric calculations name contributing race and equipment, omitting zero terms', () => {
   const result = engine.evaluate(characters[1]);
   assert.deepEqual(result.stats.armorClass.contributions, [{ amount: 16, label: 'Chain mail' }, { amount: 2, label: 'Shield' }]);
-  assert.deepEqual(result.stats.speed.contributions, [{ amount: 25, label: 'Walking Speed, Hill Dwarf' }]);
+  assert.deepEqual(result.stats.speed.contributions, [{ amount: 25, label: 'Hill Dwarf: Walking Speed' }]);
   assert.deepEqual(result.stats['modifier.dexterity'].contributions, [{ amount: -1, label: 'Dexterity modifier' }]);
   for (const stat of Object.values(result.stats)) {
     assert.ok(stat.contributions.every((term) => term.amount !== 0));
     assert.ok(Math.abs(stat.contributions.reduce((sum, term) => sum + term.amount, 0) - stat.value) < 1e-9);
   }
+});
+test('Fighter AC identifies the fighting style choice in its contributing source', () => {
+  const result = engine.evaluate(characters[0]);
+  assert.ok(result.stats.armorClass.contributions.some((term) => term.amount === 1 && term.label === 'Fighting Style: Defense'));
 });
 const expected = [
   { abilities: [16, 9, 15, 11, 13, 14], hp: 12, ac: 17, speed: 30, skills: { athletics: 5, history: 2, perception: 3, persuasion: 4 } },

@@ -1,7 +1,8 @@
 import { AcquiredFeature } from '@/ui/src/AcquiredFeature';
 import { useMemo, useState } from 'react';
 import type { Character, Engine, EvaluationResult } from '@/src/index';
-import { featureName, tagName } from '@/ui/src/display';
+import { tagName } from '@/ui/src/display';
+import { instanceFeatureName } from '@/ui/src/feature-instance-name';
 
 export function CharacterFeatures({ engine, character, result, openFeature }: { engine: Engine; character: Character; result: EvaluationResult; openFeature: (id: string) => void }) {
   const [query, setQuery] = useState(''), [origin, setOrigin] = useState('all'), [showInactive, setShowInactive] = useState(false), [category, setCategory] = useState('all');
@@ -9,7 +10,7 @@ export function CharacterFeatures({ engine, character, result, openFeature }: { 
     const feature = engine.getFeature(instance.feature);
     const group = engine.catalogue.system.featureCategories?.find((item) => item.id === category);
     return (!group || group.tags.some((tag) => feature?.tags?.includes(tag))) && (showInactive || instance.active) && (origin === 'all' || (origin === 'other' ? !instance.progression : instance.progression === origin))
-      && `${featureName(feature)} ${feature?.tags?.map((tag) => tagName(engine.catalogue.system, tag)).join(' ') ?? ''}`.toLowerCase().includes(query.toLowerCase());
+      && `${instanceFeatureName(instance, engine, result)} ${feature?.tags?.map((tag) => tagName(engine.catalogue.system, tag)).join(' ') ?? ''}`.toLowerCase().includes(query.toLowerCase());
   }), [engine, result, origin, query, showInactive, category]);
   const visible = new Set(instances.map((instance) => instance.id));
   for (const instance of instances) {

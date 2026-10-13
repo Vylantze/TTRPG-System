@@ -32,6 +32,7 @@ import { ResourceSummary } from '@/ui/src/ResourceSummary';
 import { actionCostKind } from '@/ui/src/action-costs';
 import { setCharacterLevel } from '@/ui/src/character-leveling';
 import { EquippedAttacks } from '@/ui/src/EquippedAttacks';
+import { BuildGrants } from '@/ui/src/BuildGrants';
 
 export function CharacterBuilder({ engine, character, update, openFeature, report }: { engine: Engine; character: Character; update: (c: Character) => void; openFeature: (id: string) => void; report: (message: string) => void }) {
   const systemTabs: SheetTab[] = engine.catalogue.system.sheetTabs ?? [
@@ -66,7 +67,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
     else setPreview({ edits, result: previewEdit(engine, character, edits) });
   });
   const slots = sortBuildSelections(result.selections).filter((slot) => level === 'all' || selectionBucket(slot) === level);
-  const levels = [...new Set(sortBuildSelections(result.selections).map(selectionBucket))];
+  const levels = [...new Set([...sortBuildSelections(result.selections).map(selectionBucket), ...result.instances.filter((instance) => instance.active && !instance.selection && !instance.id.startsWith('root/')).map((instance) => instance.progression ? String(instance.acquiredClassLevel) : 'origins')])].sort((a, b) => (Number(a) || 0) - (Number(b) || 0));
   const inputs = engine.catalogue.system.stats.filter((s) => s.kind === 'input');
   const incomplete = result.diagnostics.filter((d) => d.severity === 'incomplete').length;
   const ready = character.buildState !== 'draft' && result.status === 'valid';
@@ -135,12 +136,6 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
             {' · '}
             {character.progressions.filter((progression) => progression.level > 0).map((progression) => `${engine.catalogue.classes.find((cls) => cls.id === progression.class)?.name ?? progression.class} ${progression.level}`).join(' / ') || 'No class selected'}
           </p>
-          <div className="toolbar level-up-controls">
-            {character.progressions.map((progression) => {
-              const cls = engine.catalogue.classes.find((entry) => entry.id === progression.class);
-              return <button className="quiet" key={progression.id} disabled={Object.keys(character.pending).length > 0 || progression.level >= (cls?.maximumLevel ?? Infinity)} onClick={() => changeLevel(progression.id, progression.level + 1)}>{`Level up ${cls?.name ?? progression.class}`}</button>;
-            })}
-          </div>
         </div>
         <button aria-expanded={showSummary || result.status === 'invalid'} aria-controls="build-summary" onClick={() => setShowSummary(!showSummary)} className={`badge ${result.status}`}>{result.status === 'valid' && character.buildState === 'draft' ? 'Ready to finalize' : result.status}</button>
       </div>
@@ -231,6 +226,12 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
             <aside className="builder-setup">
               <section className="panel">
                 <h3>{`${engine.catalogue.system.terminology?.classSingular ?? 'Class'} progression`}</h3>
+                <div className="toolbar level-up-controls">
+                  {character.progressions.map((progression) => {
+                    const cls = engine.catalogue.classes.find((entry) => entry.id === progression.class);
+                    return <button className="quiet" key={progression.id} disabled={Object.keys(character.pending).length > 0 || progression.level >= (cls?.maximumLevel ?? Infinity)} onClick={() => changeLevel(progression.id, progression.level + 1)}>{`Level up ${cls?.name ?? progression.class}`}</button>;
+                  })}
+                </div>
                 {character.progressions.map((p) => {
                   const cls = engine.catalogue.classes.find((c) => c.id === p.class);
                   return cls?.description
@@ -313,7 +314,7 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
             </aside>
             <section>
               <div className="row">
-                <h2>Feature selections</h2>
+                <h2>Build Features & choices</h2>
                 <label className="compact">
                   Show
                   <select aria-label="Filter selections by level" value={level} onChange={(e) => setLevel(e.target.value)}>
@@ -323,11 +324,16 @@ export function CharacterBuilder({ engine, character, update, openFeature, repor
                 </label>
               </div>
               <p className="muted">Each slot is independent. Choose a Feature to reveal its parameters and nested choices.</p>
-              {slots.map((slot) => {
-                const owner = result.instances.find((i) => i.id === slot.owner), name = owner ? featureName(engine.catalogue.features.find((f) => f.id === owner.feature)) : undefined;
-                return <SelectionCard key={slot.id} slot={slot} engine={engine} character={character} edit={edit} openFeature={openFeature} ownerName={name} issues={selectionIssues(slot, result.diagnostics)} />;
-              })}
-              {!slots.length && <p>No selections at this level.</p>}
+              {(level === 'all' ? levels : [level]).map((bucket) => (
+                <section className="build-level" key={bucket}>
+                  <h3>{bucket === 'origins' ? 'Origins' : bucket === 'extra' ? 'Additional Features' : `Level ${bucket}`}</h3>
+                  {slots.filter((slot) => selectionBucket(slot) === bucket).map((slot) => {
+                    const owner = result.instances.find((i) => i.id === slot.owner), name = owner ? featureName(engine.catalogue.features.find((f) => f.id === owner.feature)) : undefined;
+                    return <SelectionCard key={slot.id} slot={slot} engine={engine} character={character} edit={edit} openFeature={openFeature} ownerName={name} issues={selectionIssues(slot, result.diagnostics)} />;
+                  })}
+                  <BuildGrants engine={engine} character={character} result={result} level={bucket} openFeature={openFeature} />
+                </section>
+              ))}
               <details className="panel">
                 <summary>Additional root Features</summary>
                 <p className="muted">Add supported extra acquisitions from this System. Engine prerequisites and resource rules still apply.</p>

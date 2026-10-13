@@ -6,8 +6,9 @@ import { FeatureLink } from '@/ui/src/FeatureLink';
 
 export function SheetOverview({ engine, character, result, update, report }: { engine: Engine; character: Character; result: EvaluationResult; update: (character: Character) => void; report: (message: string) => void }) {
   const hasHealth = Object.values(result.resources).some((pool) => pool.key === engine.catalogue.system.healthRules?.resourceKey);
+  const compactHealth = hasHealth && !(character.displayPreferences?.healthExpanded ?? !(engine.catalogue.system.sheetDisplay?.health?.compactDefault ?? true));
   return (
-    <section className={`sheet-overview ${hasHealth ? '' : 'without-health'}`} aria-label="Character overview">
+    <section className={`sheet-overview ${hasHealth ? '' : 'without-health'} ${compactHealth ? 'health-compact' : ''}`} aria-label="Character overview">
       <HitPoints engine={engine} character={character} result={result} update={update} report={report} />
       <div className="overview-stats">
         {(engine.catalogue.system.sheetDisplay?.overview ?? []).filter((row) => result.stats[row.stat]).map((row) => {
