@@ -6,7 +6,7 @@ This specification defines the generic model, now implemented by the [TypeScript
 
 ## Scope and decisions
 
-The first deliverable is a written specification. Retraining, prerequisites, and limited-use abilities belong in the initial model. The design reference is `D:\User\Workspace\Anime5e`; official D&D rules and SRDs are additionally authorized to study and define the 5e systems. All new project work belongs in `D:\User\Workspace\TTRPG System`.
+The first deliverable is a written specification. Retraining, prerequisites, and limited-use abilities belong in the initial model. The design reference is `D:\User\Workspace\Anime5e`; official D&D rules and SRDs are additionally authorized to study and define the 5e systems. All new project work belongs in `X:\AI\TTRPG System`.
 
 Confirmed decisions are an unrestricted named-stat registry, support for independent class progressions with system-controlled legality, and prerequisite repair after retraining. Dependent choices that lose eligibility make the build invalid until repaired; they are never changed automatically.
 
