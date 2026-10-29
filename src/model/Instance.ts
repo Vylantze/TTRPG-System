@@ -1,6 +1,8 @@
 import type { Value } from '@/src/model/Value.js';
 
 export interface Instance {
+  /** Applied-effect ownership, propagated through granted and selected descendants. */
+  effect?: string;
   id: string; feature: string; parent?: string; progression?: string;
   parameters: Record<string, Value>; acquiredCharacterLevel: number; acquiredClassLevel: number;
   acquiredEvent?: number;

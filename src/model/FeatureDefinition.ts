@@ -7,7 +7,10 @@ import type { ParameterDefinition } from '@/src/model/ParameterDefinition.js';
 import type { ResourceRequirement } from '@/src/model/ResourceRequirement.js';
 import type { Component } from '@/src/model/Component.js';
 
+import type { EffectPolicy } from '@/src/model/EffectPolicy.js';
+
 export interface FeatureDefinition {
+  effect?: EffectPolicy;
   equipmentEffect?: EquipmentEffect;
   companion?: CompanionDisplay;
   /** Authored implementation notes, explicitly separate from quoted source descriptions. */

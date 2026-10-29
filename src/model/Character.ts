@@ -7,7 +7,10 @@ import type { InventoryEntry } from '@/src/model/InventoryEntry.js';
 import type { EquipmentAssignment } from '@/src/model/EquipmentAssignment.js';
 import type { StatRoll } from '@/src/model/StatRoll.js';
 
+import type { EffectInstance } from '@/src/model/EffectInstance.js';
+
 export interface Character {
+  effects?: EffectInstance[];
   statRolls?: StatRoll[];
   equipmentAssignments?: EquipmentAssignment[];
   deployedCompanions?: string[];

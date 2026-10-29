@@ -1,3 +1,4 @@
+import { canonical, stamp } from '@/src/command-event.js';
 import { checkMoney, moneyTotal } from '@/src/currency.js';
 import { rollDice } from '@/src/dice.js';
 import { Engine, clone } from '@/src/engine.js';
@@ -58,17 +59,6 @@ export function adjustResource(engine: Engine, input: Character, poolId: string,
   }
   return character;
 }
-function stamp(character: Character, id: string, payload: unknown): boolean {
-  if (!id) throw new RuleError('EVENT_ID', 'An event ID is required.');
-  const fingerprint = canonical(payload);
-  const prior = character.events.find((e) => e.id === id);
-  if (prior) {
-    if (prior.fingerprint !== fingerprint) throw new RuleError('EVENT_CONFLICT', 'Event ID was reused with different data.');
-    return false;
-  }
-  character.events.push({ id, fingerprint });
-  return true;
-}
 
 /** System-defined free checks use evaluated stats and persist across sheet tabs. */
 export function rollStat(engine: Engine, input: Character, stat: string, eventId: string, random?: () => number): Character {
@@ -118,14 +108,6 @@ export function changeHealth(engine: Engine, input: Character, kind: 'damage' | 
     set(pool, pool.minimum ?? 0);
   }
   return character;
-}
-function canonical(value: unknown): string {
-  const order = (v: unknown): unknown => {
-    if (Array.isArray(v)) return v.map(order);
-    if (v && typeof v === 'object') return Object.fromEntries(Object.entries(v).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0).map(([k, x]) => [k, order(x)]));
-    return v;
-  };
-  return JSON.stringify(order(value));
 }
 export function previewEdit(engine: Engine, input: Character, edits: Edit[]): EditPreview {
   checkCharacter(input);
@@ -367,7 +349,7 @@ export function deserializeCharacter(text: string, engine?: Engine): Character {
   checkCharacter(parsed);
   if (engine) {
     const result = engine.evaluate(parsed);
-    const errors = result.diagnostics.filter((d) => ['MONEY', 'INVENTORY', 'REVISION', 'HISTORY', 'UNKNOWN_INPUT', 'UNKNOWN_CLASS', 'UNKNOWN_SELECTION'].includes(d.code));
+    const errors = result.diagnostics.filter((d) => d.code.startsWith('EFFECT_') || ['MONEY', 'INVENTORY', 'REVISION', 'HISTORY', 'UNKNOWN_INPUT', 'UNKNOWN_CLASS', 'UNKNOWN_SELECTION'].includes(d.code));
     if (errors.length) throw new RuleError(errors[0].code, errors[0].message);
   }
   return parsed;

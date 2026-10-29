@@ -1,6 +1,6 @@
 {
   "name": "ttrpg-system",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "private": true,
   "type": "module",
   "exports": {
@@ -17,9 +17,11 @@
   },
   "scripts": {
     "start": "npm run ui:dev",
-    "lint": "eslint . --max-warnings 0 && npm run lint:css && node --import ./tools/register-alias.mjs tools/lint.mjs",
+    "lint": "eslint . --max-warnings 0 && npm run format:effects:check && npm run lint:css && node --import ./tools/register-alias.mjs tools/lint.mjs",
+    "format:effects": "prettier \"src/effect*.ts\" src/command-event.ts \"src/model/*Effect*.ts\" \"src/types/*Effect*.ts\" tests/effects.test.ts --write --single-quote --trailing-comma all --experimental-operator-position start",
+    "format:effects:check": "prettier \"src/effect*.ts\" src/command-event.ts \"src/model/*Effect*.ts\" \"src/types/*Effect*.ts\" tests/effects.test.ts --check --single-quote --trailing-comma all --experimental-operator-position start",
     "format:ui": "prettier \"ui/src/**/*.{ts,tsx}\" --write --single-quote --trailing-comma all",
-    "lint:fix": "npm run format:ui && eslint . --fix --max-warnings 0 && npm run lint:css:fix && node --import ./tools/register-alias.mjs tools/lint.mjs",
+    "lint:fix": "npm run format:ui && npm run format:effects && eslint . --fix --max-warnings 0 && npm run lint:css:fix && node --import ./tools/register-alias.mjs tools/lint.mjs",
     "lint:test": "node --import ./tools/register-alias.mjs tests/lint.test.js",
     "version:test": "node --import ./tools/register-alias.mjs tests/ui-release.test.js",
     "hooks:install": "node --import ./tools/register-alias.mjs tools/install-hooks.mjs",
@@ -52,6 +54,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
+    "@types/node": "^22.20.5",
     "eslint": "^10.12.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.7",

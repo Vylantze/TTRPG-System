@@ -1,5 +1,5 @@
 export const engineTestSuites = {
-  core: { description: 'Engine evaluation, building blocks, drafts, queries, and caching', files: ['engine.test.js', 'building-blocks.test.js', 'drafts.test.js', 'catalogue-queries.test.js', 'loading-performance.test.js'] },
+  core: { description: 'Engine evaluation, building blocks, effects, drafts, queries, and caching', files: ['engine.test.js', 'building-blocks.test.js', 'effects.test.ts', 'drafts.test.js', 'catalogue-queries.test.js', 'loading-performance.test.js'] },
   systems: { description: 'System loading, asset packages, and version policies', files: ['system-loader.test.js', 'system-package.test.js', 'version-policy.test.js'] },
   content: { description: 'Descriptions, automatic links, tokens, and spell display', files: ['descriptions.test.js', 'feature-text.test.js', 'description-tokens.test.js', 'spell-display.test.js'] },
   characters: { description: 'Character sheets, inventory, resources, currency, and play', files: ['starter-characters.test.js', 'inventory-resources.test.js', 'currency.test.js', 'character-play.test.js', 'equipment-effects.test.js', 'sheet-display.test.js'] },

@@ -1,4 +1,16 @@
 export * from '@/src/model.js';
+export * from '@/src/effects.js';
+export { effectPath } from '@/src/effect-state.js';
+export type { EffectDuration } from '@/src/model/EffectDuration.js';
+export type { EffectPolicy } from '@/src/model/EffectPolicy.js';
+export type { EffectSource } from '@/src/model/EffectSource.js';
+export type { EffectInstance } from '@/src/model/EffectInstance.js';
+export type { EffectTagFilter } from '@/src/model/EffectTagFilter.js';
+export type { EffectOperation } from '@/src/model/EffectOperation.js';
+export type { ApplyEffectOperation } from '@/src/model/ApplyEffectOperation.js';
+export type { RemoveEffectsOperation } from '@/src/model/RemoveEffectsOperation.js';
+export type { ApplyEffectRequest } from '@/src/types/ApplyEffectRequest.js';
+export type { EffectLifecycleEvent } from '@/src/types/EffectLifecycleEvent.js';
 export * from '@/src/feature-instance-display-name.js';
 export * from '@/src/engine.js';
 export * from '@/src/commands.js';

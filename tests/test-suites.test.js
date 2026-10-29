@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readdirSync } from 'node:fs';
 import { availableEngineSuites, engineTestSuites, selectEngineTests } from '@/tools/test-suites.mjs';
 
-const discovered = readdirSync(new URL('./', import.meta.url)).filter((name) => name.endsWith('.test.js')).sort();
+const discovered = readdirSync(new URL('./', import.meta.url)).filter((name) => /\.test\.(?:js|ts)$/.test(name)).sort();
 
 test('named engine suites cover every current test file exactly once', () => {
   const suites = availableEngineSuites(discovered);

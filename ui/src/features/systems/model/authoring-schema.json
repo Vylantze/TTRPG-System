@@ -1,4 +1,32 @@
 {
+  "ApplyEffectOperation": {
+    "kind": "object",
+    "fields": {
+      "kind": {
+        "schema": {
+          "kind": "literal",
+          "value": "applyEffect"
+        },
+        "optional": false
+      },
+      "feature": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "parameters": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "Value"
+          }
+        },
+        "optional": true
+      }
+    }
+  },
   "BlockDefinition": {
     "kind": "object",
     "fields": {
@@ -99,6 +127,16 @@
       {
         "kind": "object",
         "fields": {
+          "effects": {
+            "schema": {
+              "kind": "array",
+              "item": {
+                "kind": "ref",
+                "name": "EffectOperation"
+              }
+            },
+            "optional": true
+          },
           "kind": {
             "schema": {
               "kind": "literal",
@@ -308,6 +346,16 @@
   "Character": {
     "kind": "object",
     "fields": {
+      "effects": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "ref",
+            "name": "EffectInstance"
+          }
+        },
+        "optional": true
+      },
       "statRolls": {
         "schema": {
           "kind": "array",
@@ -1407,6 +1455,223 @@
       }
     }
   },
+  "EffectDuration": {
+    "kind": "object",
+    "fields": {
+      "clock": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "amount": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      }
+    }
+  },
+  "EffectInstance": {
+    "kind": "object",
+    "fields": {
+      "id": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "feature": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      },
+      "revision": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": false
+      },
+      "source": {
+        "schema": {
+          "kind": "ref",
+          "name": "EffectSource"
+        },
+        "optional": false
+      },
+      "parameters": {
+        "schema": {
+          "kind": "record",
+          "item": {
+            "kind": "ref",
+            "name": "Value"
+          }
+        },
+        "optional": true
+      },
+      "remaining": {
+        "schema": {
+          "kind": "ref",
+          "name": "EffectDuration"
+        },
+        "optional": true
+      }
+    }
+  },
+  "EffectOperation": {
+    "kind": "union",
+    "variants": [
+      {
+        "kind": "ref",
+        "name": "ApplyEffectOperation"
+      },
+      {
+        "kind": "ref",
+        "name": "RemoveEffectsOperation"
+      }
+    ]
+  },
+  "EffectPolicy": {
+    "kind": "object",
+    "fields": {
+      "tags": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": false
+      },
+      "duration": {
+        "schema": {
+          "kind": "ref",
+          "name": "EffectDuration"
+        },
+        "optional": true
+      },
+      "endOn": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "stacking": {
+        "schema": {
+          "kind": "object",
+          "fields": {
+            "key": {
+              "schema": {
+                "kind": "string"
+              },
+              "optional": true
+            },
+            "mode": {
+              "schema": {
+                "kind": "union",
+                "variants": [
+                  {
+                    "kind": "literal",
+                    "value": "stack"
+                  },
+                  {
+                    "kind": "literal",
+                    "value": "replace"
+                  },
+                  {
+                    "kind": "literal",
+                    "value": "reject"
+                  }
+                ]
+              },
+              "optional": false
+            }
+          }
+        },
+        "optional": true
+      },
+      "removalMethods": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      }
+    }
+  },
+  "EffectSource": {
+    "kind": "object",
+    "fields": {
+      "character": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "origin": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "feature": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "instance": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
+      "application": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": false
+      }
+    }
+  },
+  "EffectTagFilter": {
+    "kind": "object",
+    "fields": {
+      "all": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "any": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      },
+      "none": {
+        "schema": {
+          "kind": "array",
+          "item": {
+            "kind": "string"
+          }
+        },
+        "optional": true
+      }
+    }
+  },
   "EquipmentAssignment": {
     "kind": "object",
     "fields": {
@@ -1860,6 +2125,13 @@
   "FeatureDefinition": {
     "kind": "object",
     "fields": {
+      "effect": {
+        "schema": {
+          "kind": "ref",
+          "name": "EffectPolicy"
+        },
+        "optional": true
+      },
       "equipmentEffect": {
         "schema": {
           "kind": "ref",
@@ -2389,6 +2661,12 @@
   "Instance": {
     "kind": "object",
     "fields": {
+      "effect": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
+      },
       "id": {
         "schema": {
           "kind": "string"
@@ -3234,6 +3512,37 @@
           "kind": "unknown"
         },
         "optional": false
+      }
+    }
+  },
+  "RemoveEffectsOperation": {
+    "kind": "object",
+    "fields": {
+      "kind": {
+        "schema": {
+          "kind": "literal",
+          "value": "removeEffects"
+        },
+        "optional": false
+      },
+      "tags": {
+        "schema": {
+          "kind": "ref",
+          "name": "EffectTagFilter"
+        },
+        "optional": false
+      },
+      "maximum": {
+        "schema": {
+          "kind": "number"
+        },
+        "optional": true
+      },
+      "method": {
+        "schema": {
+          "kind": "string"
+        },
+        "optional": true
       }
     }
   },

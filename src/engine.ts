@@ -1,3 +1,4 @@
+import { checkEffectDefinitions, effectPath } from '@/src/effect-state.js';
 import { checkMoney, moneyTotal } from '@/src/currency.js';
 import { equipmentContext, equipmentModifiers, validateEquipment } from '@/src/equipment-effects.js';
 import { inventoryModifiers, checkInventory } from '@/src/items.js';
@@ -358,6 +359,7 @@ export class Engine {
     const character = input;
     try {
       checkCharacter(character);
+      checkEffectDefinitions(character, (id) => this.getFeature(id));
       checkInventory(character, this.catalogue);
       checkMoney(character.money, this.catalogue.system);
       moneyTotal(character, this.catalogue.system);
@@ -460,6 +462,14 @@ export class Engine {
           }
         }
       }
+      // Effects are admitted after all build acquisitions, so they cannot qualify a past choice.
+      const effectEvent = eventSnapshots.size;
+      eventSnapshots.set(effectEvent, Object.fromEntries(character.progressions.map((p) => [p.id, p.level])));
+      for (const effect of character.effects ?? []) {
+        const start = result.instances.length;
+        instantiate(effectPath(effect.id), effect, result.characterLevel, 0, true, undefined, undefined, false, undefined, effectEvent);
+        for (const instance of result.instances.slice(start)) instance.effect = effect.id;
+      }
       const knownSlots = new Set(rawSlots.map((s) => s.id));
       for (const id of Object.keys(character.selections)) if (!knownSlots.has(id)) throw new RuleError('UNKNOWN_SELECTION', `Unknown selection ${id}.`);
       // Validate membership before admitting effects. Invalid picks never supply resources.
@@ -518,7 +528,7 @@ export class Engine {
       while (changed) {
         changed = false;
         for (const i of result.instances.filter((i) => i.active && i.eligible)) {
-          const peers = result.instances.filter((p) => p.active && p.eligible && p.id !== i.id && !p.id.startsWith(i.id + '/'));
+          const peers = result.instances.filter((p) => p.active && p.eligible && (i.effect || !p.effect) && p.id !== i.id && !p.id.startsWith(i.id + '/'));
           try {
             if (i.parent && !peers.some((p) => p.id === i.parent)) throw new RuleError('PARENT_INELIGIBLE', 'Owning Feature is inactive.');
             const view = this.statView(character, peers);
@@ -537,7 +547,7 @@ export class Engine {
         const definition = this.features.get(i.feature)!;
         const sharedTracker = definition.components.some((c) => c.kind === 'trackResource') && definition.components.every((c) => ['trackResource', 'defineStat', 'describe'].includes(c.kind));
         const repeat = definition.repeat ?? { maximum: sharedTracker ? 10000 : 1, scope: 'character' as const };
-        const key = JSON.stringify([i.feature, repeat.scope === 'parent' ? i.parent ?? i.id : repeat.scope === 'progression' ? i.progression : '', ...(repeat.uniqueBy ?? []).map((k) => i.parameters[k])]);
+        const key = JSON.stringify([i.feature, i.effect ?? '', repeat.scope === 'parent' ? i.parent ?? i.id : repeat.scope === 'progression' ? i.progression : '', ...(repeat.uniqueBy ?? []).map((k) => i.parameters[k])]);
         const group = [...repeats.get(key) ?? [], i];
         repeats.set(key, group);
         if (group.length > repeat.maximum) {
@@ -546,7 +556,8 @@ export class Engine {
         }
       }
       const view = this.statView(character, result.instances, undefined, runtime);
-      const permanentView = Object.keys(runtime).length ? this.statView(character, result.instances) : view;
+      const buildInstances = result.instances.filter((i) => !i.effect);
+      const permanentView = Object.keys(runtime).length || character.effects?.length ? this.statView(character, buildInstances) : view;
       const stub: Instance = { id: 'system', feature: '', parameters: {}, acquiredCharacterLevel: 0, acquiredClassLevel: 0, active: true, eligible: true, waived: false };
       const permanentContext = this.context(character);
       try {
@@ -556,7 +567,7 @@ export class Engine {
       }
       for (const rule of this.catalogue.system.validation ?? []) {
         try {
-          if (!this.satisfies(rule.requirement, stub, result.instances, permanentView.get, permanentContext)) report(new RuleError('SYSTEM_RULE', rule.message), `system/${rule.id}`);
+          if (!this.satisfies(rule.requirement, stub, buildInstances, permanentView.get, permanentContext)) report(new RuleError('SYSTEM_RULE', rule.message), `system/${rule.id}`);
         } catch (e) {
           report(e, `system/${rule.id}`);
         }
@@ -564,7 +575,7 @@ export class Engine {
       if (number(permanentContext.classCount) > 1) for (const p of character.progressions.filter((p) => p.level > 0)) {
         const cls = this.catalogue.classes.find((c) => c.id === p.class)!;
         try {
-          if (!this.satisfies(cls.multiclassPrerequisites, { ...stub, progression: p.id }, result.instances, permanentView.get, this.context(character, undefined, {}, { ...stub, progression: p.id }))) report(new RuleError('MULTICLASS_PREREQUISITE', `Multiclass prerequisites are not met for ${cls.name}.`), `class/${segment(p.id)}`);
+          if (!this.satisfies(cls.multiclassPrerequisites, { ...stub, progression: p.id }, buildInstances, permanentView.get, this.context(character, undefined, {}, { ...stub, progression: p.id }))) report(new RuleError('MULTICLASS_PREREQUISITE', `Multiclass prerequisites are not met for ${cls.name}.`), `class/${segment(p.id)}`);
         } catch (e) {
           report(e, `class/${segment(p.id)}`);
         }
@@ -608,7 +619,7 @@ export class Engine {
           const owner = slot.owner ? result.instances.find((i) => i.id === slot.owner)! : undefined;
           const context = { ...this.context(character, undefined, {}, owner), acquiredCharacterLevel: slot.level, acquiredClassLevel: slot.classLevel,
             classLevel: slot.progression ? character.progressions.find((p) => p.id === slot.progression)!.level : 0 };
-          const env = this.environment(context, permanentView.get, owner);
+          const env = this.environment(context, owner?.effect ? view.get : permanentView.get, owner);
           const minimum = constrain(number(evaluateExpression(slot.definition.minimum, env)), { integer: true, minimum: 0 });
           const maximum = constrain(number(evaluateExpression(slot.definition.maximum, env)), { integer: true, minimum });
           const picks = character.selections[slot.id] ?? [];

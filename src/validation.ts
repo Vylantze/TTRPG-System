@@ -1,3 +1,4 @@
+import { checkEffectInstances, checkEffectOperation, checkEffectPolicy } from '@/src/effect-validation.js';
 import { rollDice } from '@/src/dice.js';
 import { validateSheetDisplay } from '@/src/sheet-display.js';
 import { checkEquipmentState } from '@/src/equipment-effects.js';
@@ -233,6 +234,11 @@ function checkComponent(v: unknown, c: Catalogue, functions: FunctionRegistry): 
       break;
     case 'grantCapability':
       text(v.name);
+      if (v.effects !== undefined) {
+        list(v.effects);
+        if (!v.effects.length || v.spendOnOutcomes !== undefined) throw new RuleError('EFFECT_SCHEMA', 'Effect abilities need operations and immediate costs.');
+        v.effects.forEach((operation) => checkEffectOperation(operation, c));
+      }
       if (v.requirements) checkPredicate(v.requirements, c, 0, functions);
       if (v.action !== undefined) {
         record(v.action);
@@ -489,6 +495,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
         }
       }
       if (f.processDescriptionAutomatically !== undefined && typeof f.processDescriptionAutomatically !== 'boolean') throw new RuleError('SCHEMA', 'processDescriptionAutomatically must be a boolean.');
+      if (f.effect !== undefined) checkEffectPolicy(f.effect);
       if (f.descriptionOverride !== undefined) {
         list(f.descriptionOverride);
         for (const entry of f.descriptionOverride) {
@@ -938,6 +945,7 @@ export function checkCharacter(v: unknown): asserts v is Character {
     rows.forEach(pick);
   });
   list(v.roots);
+  if (v.effects !== undefined) checkEffectInstances(v.effects);
   v.roots.forEach((p) => {
     pick(p);
     record(p);

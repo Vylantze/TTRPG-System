@@ -170,3 +170,55 @@ Nested `grantFeature` components can specify `atClassLevel`. The child activates
 Resource recovery rules can add `dice` to their numeric/expression `amount`: `{ "event": "dawn", "amount": 0, "dice": "1d4" }`. Recovery rolls once per pool, caps at its maximum, and retains existing event replay protection. `recoverResources` accepts an optional sixth random function for deterministic tests. Recovery is an application of the reset event, not an ability Roll Feature.
 
 `mechanicalSummary` is an array of authored implementation notes displayed separately from source descriptions. It must never be presented as a quotation from a licensed book.
+
+## Applied effects
+
+An acquired Feature applies its components directly. It does not create an effect record. Mobile, Fighting Style and item bonuses therefore remain ordinary build/equipment contributions. A Feature may additionally opt into application with an `effect` policy. `Character.effects` stores applications separately, including a unique ID, Feature/revision reference, parameters, source character or non-character origin/application and optional remaining duration. The same Feature can be owned normally or applied as an effect; an application uses an `effect/<encoded-id>` instance namespace and propagates its `effect` ownership ID to descendants.
+
+```json
+{
+  "id": "example:swiftness",
+  "revision": 1,
+  "name": "Swiftness",
+  "effect": {
+    "tags": ["magical", "spell"],
+    "duration": { "clock": "round", "amount": 10 },
+    "endOn": ["concentration-ended"],
+    "stacking": { "mode": "replace", "key": "example:swiftness" }
+  },
+  "components": [
+    { "id": "speed", "kind": "modifyStat", "stat": "speed", "operation": "add", "value": 10 }
+  ]
+}
+```
+
+Omit `duration` for an indefinite effect. Duration, removal eligibility and source dependency are independent: an indefinite effect may still be removable; leaving or losing its source does not implicitly end it. Clock names and `endOn` event names are authored by the System's content. `advanceEffects` consumes explicit game-clock ticks or dispatches a named lifecycle event; no wall-clock timers run. A source filter can restrict an event to one source character/application (or origin/application for shrines, items and other sources), such as ending the effects of one casting. The caller must dispatch that event to all affected characters; there is no cross-character concentration manager or automatic rest integration yet.
+
+`effect.tags` are application classification tags, independent of the Feature's catalogue tags. Removal uses `all`, `any` and `none` clauses, combined with AND. Empty `all`/`none` clauses impose no restriction, and an empty `any` clause also imposes no restriction. At least one nonempty clause is required. Only applied effect records are candidates; acquired Features, their children and item Features cannot be removed by this operation.
+
+```json
+{
+  "kind": "removeEffects",
+  "tags": { "all": ["curse"], "none": ["protected"] },
+  "maximum": 1,
+  "method": "curse-removal"
+}
+```
+
+An omitted `maximum` permits all matches. If there are more matches than the maximum, the caller must supply explicit matching application IDs; the engine does not choose an arbitrary first effect. Effects need no individual removal rule by default. Optional `removalMethods` restricts them to the listed method IDs; an empty list forbids method-based removal. Expiry and authored lifecycle events still work. These identifiers classify rules; the engine does not infer dispellability from a `magical` tag.
+
+Stacking defaults to `reject` for the same Feature. `stack` permits independent applications; `replace` removes existing applications in the same group. A custom stacking key groups different definitions. Descendant repeat limits are enforced within an application independently from normal build ownership. Replacement and removal delete only the ended application's selections/bindings. Effect modifiers do not qualify permanent acquisition prerequisites or multiclass entry. Resource contracts remain required even for effects.
+
+### Engine commands
+
+- `applyEffect(engine, character, { id, feature, source, parameters? }, eventId)` applies an adjudicated effect and initializes its authored duration. It does not charge another character or roll dice. The application must evaluate as valid and complete; unresolved required selections must be represented by explicitly parameterized/granted variants for now.
+- `matchingEffects(engine, character, tags, method?)` returns cloned matching application records for selection.
+- `removeEffects(engine, character, operation, eventId, selectedIds?)` removes eligible applications. Removing a dependency can leave the remaining character invalid, requiring repair rather than silently preserving the expired/removed effect.
+- `advanceEffects(engine, character, { clock, amount } | { event }, eventId)` advances game time or ends matching effects. Either form can include `source: { character, application }` or `source: { origin, application }`.
+- `useEffectAbility(engine, actor, target, capabilityId, eventId, selections?)` pays an immediate ability's costs and executes its authored `effects` operations in order. Operations are `applyEffect` or `removeEffects`; optional removal selections use the zero-based operation index as their key. The result contains both `actor` and `target` and must be persisted atomically by the caller. A failure returns no partial changes, and replay requires both saved participants. Self-targeting returns the same resulting state for both roles. Action timing remains manually adjudicated.
+
+All commands clone their inputs and use event receipts. Application IDs cannot be reused after removal, and replaying a completed event does not apply or charge again. Applications require a valid finalized character. Removal and expiry can also repair dependency-invalid characters, but reject malformed state or revision mismatches. All mutations reject construction drafts and outstanding resource reservations. Shared tracker balances and assignment receipts are retained when providers disappear: the pool becomes unavailable with its last provider, but reapplying a provider does not automatically refill it. Explicit `grantResource` components remain assignment grants and apply once for each new application.
+
+`Capability.effects` describes immediate effect operations. The existing `useAbility` command continues to spend/reserve only; it does not dispatch those operations implicitly. Existing roll-and-apply commands are unchanged. Do not call `useEffectAbility` after already charging the same cast; use direct application after separately adjudicated rolls instead. Automated check-dependent removal, Dispel Magic level comparisons, persistent roll-to-effect receipts, automatic concentration management and the Effects UI are later work. No bundled spell has been converted by this structural milestone.
+
+Effect saves are optional additions to character format 1. Definitions and applications are validated, and applied Feature revisions remain pinned; a revision change needs an explicit migration. The generated authoring schema includes the new contracts. Run the strict TypeScript effect tests through `npm run test:core` or, after building, `node --experimental-strip-types --import ./tools/register-alias.mjs --test tests/effects.test.ts`.

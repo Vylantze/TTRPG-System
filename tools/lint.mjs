@@ -23,7 +23,7 @@ if (problems.length) {
   process.exit(1);
 }
 // Type checking is part of linting for both the engine and React UI.
-for (const config of ['tsconfig.json', 'ui/tsconfig.json']) {
+for (const config of ['tsconfig.json', 'tests/tsconfig.json', 'ui/tsconfig.json']) {
   const result = spawnSync(process.execPath, [join(root, 'node_modules/typescript/bin/tsc'), '--noEmit', '-p', config], { cwd: root, stdio: 'inherit' });
   if (result.error) console.error(result.error.message);
   if (result.status !== 0) process.exit(result.status ?? 1);

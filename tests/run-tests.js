@@ -6,7 +6,7 @@ import { availableEngineSuites, selectEngineTests } from '@/tools/test-suites.mj
 // Separate test files so expensive progressions do not serialize the entire suite.
 // A bounded worker count avoids loading every large rules catalogue at once.
 const directory = new URL('./', import.meta.url);
-const discovered = readdirSync(directory).filter((name) => name.endsWith('.test.js')).sort();
+const discovered = readdirSync(directory).filter((name) => /\.test\.(?:js|ts)$/.test(name)).sort();
 const args = process.argv.slice(2);
 try {
   if (args.includes('--list')) {
@@ -18,7 +18,7 @@ try {
     console.log(`Engine suites: ${names.join(', ') || 'all'} (${files.length} files)`);
     const result = spawnSync(process.execPath, [
       '--import', new URL('../tools/register-alias.mjs', import.meta.url).href,
-      '--test', '--test-concurrency=2', ...args.filter((arg) => !arg.startsWith('--suite=')), ...files,
+      '--experimental-strip-types', '--test', '--test-concurrency=2', ...args.filter((arg) => !arg.startsWith('--suite=')), ...files,
     ], { stdio: 'inherit' });
     if (result.error) console.error(result.error.message);
     process.exitCode = result.status ?? 1;

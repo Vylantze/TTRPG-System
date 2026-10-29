@@ -3,7 +3,10 @@ import type { Expression } from '@/src/model/Expression.js';
 import type { Predicate } from '@/src/model/Predicate.js';
 import type { ComponentBase } from '@/src/model/ComponentBase.js';
 
+import type { EffectOperation } from '@/src/model/EffectOperation.js';
+
 export interface Capability extends ComponentBase {
+  effects?: EffectOperation[];
   kind: 'grantCapability'; name: string; description?: string; action?: { kind: string; amount: number };
   requirements?: Predicate; costs?: { key: string; amount: Expression; requirement?: string }[];
   /** Outcomes that consume a reserved use. Other outcomes release it. */
