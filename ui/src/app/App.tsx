@@ -3,8 +3,8 @@ import multiclassUrl from '@/src/systems/dnd5e-2014/multiclass-sample.json?url';
 import { SystemLoader } from '@/ui/src/features/systems/components/SystemLoader';
 import { ReloadSystemButton } from '@/ui/src/features/systems/components/ReloadSystemButton';
 import { safeReturn } from '@/ui/src/features/catalogue/model/feature-origin';
-import { FeatureLink } from '@/ui/src/features/catalogue/components/FeatureLink';
-import { Tooltip } from '@/ui/src/components/Tooltip';
+import { AppHeader } from '@/ui/src/app/AppHeader';
+import { CatalogueBrowser } from '@/ui/src/features/catalogue/components/CatalogueBrowser';
 import {
   lazy,
   memo,
@@ -57,14 +57,7 @@ const SystemDataEditor = lazy(() =>
 );
 import { ItemDetail } from '@/ui/src/features/catalogue/components/ItemDetail';
 import { Modal } from '@/ui/src/components/Modal';
-import { RulesText } from '@/ui/src/features/catalogue/components/RulesText';
-import {
-  descriptionPreview,
-  featureDescription,
-  featureHref,
-} from '@/ui/src/features/catalogue/model/feature-description';
-
-import { featureName, tagName } from '@/ui/src/features/catalogue/model/display';
+import { featureHref } from '@/ui/src/features/catalogue/model/feature-description';
 import type { Route } from '@/ui/src/types/Route';
 import {
   createRegistry,
@@ -94,6 +87,7 @@ function readRoute(): Route {
       catalogue: params.get('catalogue') ?? undefined,
       query: params.get('q') ?? '',
       tag: params.get('tag') ?? '',
+      level: params.get('level') ?? '',
       sort: params.get('sort') ?? 'name',
       listPage: Math.max(0, Math.floor(Number(params.get('page')) || 0)),
       returnTo: safeReturn(params.get('returnTo')),
@@ -121,14 +115,6 @@ export function App({
   persist: (workspace: Workspace) => Promise<void>;
   startupMessage?: string;
 }) {
-  const [sidebarPreference, setSidebarPreference] = useState<boolean | undefined>(() => {
-    try {
-      const saved = localStorage.getItem('ttrpg-sidebar-collapsed');
-      return saved === null ? undefined : saved === 'true';
-    } catch {
-      return undefined;
-    }
-  });
   const [workspace, setWorkspace] = useState(initialWorkspace),
     [route, setRoute] = useState(readRoute),
     [error, setError] = useState(''),
@@ -187,8 +173,6 @@ export function App({
     workspace.systems,
   ]);
   const engine = resolved.engine;
-  const sidebarCollapsed
-    = sidebarPreference ?? engine?.catalogue.system.sheetDisplay?.sidebarCollapsed ?? false;
   useEffect(() => {
     const loaded = workspace.systems.find((file) => file.id === 'dnd5e:2014-srd5.1');
     if (!loaded) return;
@@ -371,20 +355,18 @@ export function App({
     }
   };
   const query = route.query ?? '',
-    tag = route.tag ?? '',
-    sort = route.sort ?? 'name',
+    tags = (route.tag ?? '').split(',').filter(Boolean),
     page = route.listPage ?? 0;
-  const browse = (key: string, value: string) => {
+  const browse = (changes: Record<string, string>) => {
     const [path, search] = window.location.hash.split('?');
     const params = new URLSearchParams(search);
-    if (value) params.set(key, value);
-    else params.delete(key);
+    for (const [key, value] of Object.entries(changes)) {
+      if (value) params.set(key, value);
+      else params.delete(key);
+    }
     window.history.replaceState(null, '', `${path}?${params}`);
     setRoute(readRoute());
   };
-  const setQuery = (value: string) => browse('q', value);
-  const setTag = (value: string) => browse('tag', value);
-  const setPage = (value: number) => browse('page', String(value));
   const openFeature = useCallback(
     (id: string) => {
       if (engine) window.location.hash = featureHref(id, engine);
@@ -428,31 +410,9 @@ export function App({
   };
   const feature = engine?.catalogue.features.find((f) => f.id === route.id);
   const cls = engine?.catalogue.classes.find((c) => c.id === route.id);
-  const list = useMemo(
-    () =>
-      ['features', 'races'].includes(route.page) && !route.id
-        ? (engine?.catalogue.features
-            .filter(
-              (f) =>
-                (route.page !== 'races'
-                  || f.tags?.includes(engine.catalogue.system.terminology?.creatureTag ?? 'race'))
-                && `${featureName(f)} ${f.name} ${featureDescription(f, engine!) ?? ''} ${f.source ?? ''}`
-                  .toLowerCase()
-                  .includes(query.toLowerCase())
-                  && (!tag || f.tags?.includes(tag)),
-            )
-            .sort((a, b) =>
-              sort === 'level'
-                ? (a.contentLevel ?? 0) - (b.contentLevel ?? 0)
-                || featureName(a).localeCompare(featureName(b))
-                : featureName(a).localeCompare(featureName(b)) * (sort === 'name-desc' ? -1 : 1),
-            ) ?? [])
-        : [],
-    [engine, query, tag, sort, route.page, route.id],
-  );
   return (
     <div
-      className={`app-shell${sidebarCollapsed ? ' sidebar-collapsed' : ''}`}
+      className="app-shell"
       aria-busy={loading || navigating}
     >
       {(loading || navigating) && <LoadingOverlay />}
@@ -466,770 +426,521 @@ export function App({
       >
         Skip to content
       </a>
-      <aside className="sidebar">
-        <a
-          href="#characters"
-          className="brand"
-        >
-          <img
-            className="brand-icon"
-            src={`${import.meta.env.BASE_URL}wizard-die.svg`}
-            alt="Wizard die"
-            width="48"
-            height="48"
-          />
-          <span>
-            Feature Forge
-            <small>TTRPG SYSTEM</small>
-          </span>
-        </a>
-        <p className="sidebar-label">WORKSPACE</p>
-        <nav aria-label="Main navigation">
-          {[
-            ['characters', 'Characters', '◈'],
-            ['classes', engine?.catalogue.system.terminology?.classPlural ?? 'Classes', '▤'],
-            ['races', engine?.catalogue.system.terminology?.creaturePlural ?? 'Races', '♧'],
-            ['features', 'Features', '◇'],
-            ['systems', 'Systems', '⬡'],
-            ['system-data', 'System data', '✎'],
-          ].map(([id, title, icon]) => (
-            <a
-              href={`#${id}`}
-              className={route.page === id ? 'active' : ''}
-              aria-current={route.page === id ? 'page' : undefined}
-              key={id}
-            >
-              <span aria-hidden="true">{icon}</span>
-              {title}
-              {id === 'characters' && <small>{workspace.characters.length}</small>}
-            </a>
-          ))}
-        </nav>
-        <div className="sidebar-characters">
-          <p className="sidebar-label">YOUR CHARACTERS</p>
-          {workspace.characters.length
-            ? (
-                workspace.characters.map((c) => (
-                  <a
-                    href={`#characters/${encodeURIComponent(c.id)}`}
-                    className={active?.id === c.id ? 'selected' : ''}
-                    key={c.id}
-                  >
-                    <span className="avatar">{c.name.slice(0, 1)}</span>
-                    <span>
-                      {c.name}
-                      <small>{c.buildState === 'draft' ? 'Construction draft' : 'Character'}</small>
-                    </span>
-                  </a>
-                ))
-              )
-            : (
-                <p className="muted small">Your next story starts here.</p>
-              )}
-        </div>
-        <div className="sidebar-bottom">
-          <span className={`save-dot ${saved ? '' : 'unsaved'}`} />
-          {saved ? 'Saved in local database' : 'Changes not saved'}
-          <p>Local workspace · no account required</p>
-        </div>
-      </aside>
-      <div className="main-shell">
-        <header className="topbar">
-          <Tooltip text={sidebarCollapsed ? 'Expand navigation' : 'Collapse navigation'}>
+      <AppHeader
+        page={route.page}
+        systems={workspace.systems}
+        selectedSystem={selected}
+        selectSystem={(key) => {
+          setSelectedSystem(key);
+          setOptions({});
+          go(route.page === 'characters' ? 'characters' : route.page);
+        }}
+        saved={saved}
+        characterCount={workspace.characters.length}
+        classPlural={engine?.catalogue.system.terminology?.classPlural ?? 'Classes'}
+        creaturePlural={engine?.catalogue.system.terminology?.creaturePlural ?? 'Races'}
+        createCharacter={selected ? () => setCreating(true) : undefined}
+      />
+      <main
+        id="main-content"
+        className={active ? 'character-page' : undefined}
+        tabIndex={-1}
+        aria-busy={loading || navigating}
+      >
+        {reloadMessage && (
+          <p
+            className="notice"
+            role="status"
+          >
+            {reloadMessage}
+          </p>
+        )}
+        {bundledUpdate && workspace.systems.includes(bundledUpdate) && (
+          <div
+            className="notice row"
+            role="status"
+          >
+            <span>
+              A minor or major System update is available and requires reloading. Compatible
+              characters are preserved; incompatible samples are rebuilt and other incompatible
+              characters are removed.
+            </span>
             <button
-              className="quiet icon-button sidebar-toggle"
-              aria-label={sidebarCollapsed ? 'Expand navigation' : 'Collapse navigation'}
-              aria-expanded={!sidebarCollapsed}
-              onClick={() => {
-                setSidebarPreference(!sidebarCollapsed);
-                try {
-                  localStorage.setItem('ttrpg-sidebar-collapsed', String(!sidebarCollapsed));
-                } catch {
-                  setError('Navigation preference could not be saved.');
-                }
-              }}
+              disabled={loading}
+              onClick={() => void reload(bundledUpdate)}
             >
-              ☰
-            </button>
-          </Tooltip>
-          <span>
-            {route.page === 'system-data'
-              ? 'System data'
-              : route.page === 'races'
-                ? (engine?.catalogue.system.terminology?.creaturePlural ?? 'Races')
-                : route.page === 'classes'
-                  ? (engine?.catalogue.system.terminology?.classPlural ?? 'Classes')
-                  : route.page.slice(0, 1).toUpperCase() + route.page.slice(1)}
-          </span>
-          <div className="toolbar">
-            {selected && (
-              <label className="system-switch">
-                <span>System</span>
-                <select
-                  aria-label="Browse System"
-                  value={systemKey(selected)}
-                  onChange={(e) => {
-                    setSelectedSystem(e.target.value);
-                    setOptions({});
-                    go(route.page === 'characters' ? 'characters' : route.page);
-                  }}
-                >
-                  {workspace.systems.map((s) => (
-                    <option
-                      key={systemKey(s)}
-                      value={systemKey(s)}
-                    >
-                      {s.configurations[0].system.name} · r{s.revision}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            )}
-            <button
-              onClick={() => setCreating(true)}
-              disabled={!selected}
-            >
-              + New character
+              Reload updated System
             </button>
           </div>
-        </header>
-        <main
-          id="main-content"
-          className={active ? 'character-page' : undefined}
-          tabIndex={-1}
-          aria-busy={loading || navigating}
-        >
-          {reloadMessage && (
-            <p
-              className="notice"
-              role="status"
+        )}
+        {updateError && (
+          <p
+            className="notice"
+            role="status"
+          >
+            {updateError}
+          </p>
+        )}
+        {(loading || navigating) && (
+          <div
+            className="loading-banner"
+            role="status"
+          >
+            Loading…
+          </div>
+        )}
+        {error && (
+          <div
+            role="alert"
+            className="alert row"
+          >
+            <span>{error}</span>
+            <button
+              className="quiet"
+              onClick={() => setError('')}
             >
-              {reloadMessage}
-            </p>
-          )}
-          {bundledUpdate && workspace.systems.includes(bundledUpdate) && (
-            <div
-              className="notice row"
-              role="status"
-            >
-              <span>
-                A minor or major System update is available and requires reloading. Compatible
-                characters are preserved; incompatible samples are rebuilt and other incompatible
-                characters are removed.
-              </span>
-              <button
-                disabled={loading}
-                onClick={() => void reload(bundledUpdate)}
-              >
-                Reload updated System
-              </button>
-            </div>
-          )}
-          {updateError && (
-            <p
-              className="notice"
-              role="status"
-            >
-              {updateError}
-            </p>
-          )}
-          {(loading || navigating) && (
-            <div
-              className="loading-banner"
-              role="status"
-            >
-              Loading…
-            </div>
-          )}
-          {error && (
-            <div
-              role="alert"
-              className="alert row"
-            >
-              <span>{error}</span>
-              <button
-                className="quiet"
-                onClick={() => setError('')}
-              >
-                Dismiss
-              </button>
-            </div>
-          )}
-          {storageError && (
-            <div
-              role="alert"
-              className="alert"
-            >
-              <p>{storageError}</p>
-            </div>
-          )}
-          {resolved.error && (
-            <div className="notice">
-              <p>{resolved.error}</p>
-              <a href="#systems">Manage Systems →</a>
-            </div>
-          )}
-          {route.page === 'system-data' && (
-            <SystemDataEditor
-              files={workspace.systems}
-              save={(existing, incoming) => {
-                const current = workspaceRef.current;
-                const next = reloadSystem(current, existing, incoming);
-                change(next);
-                setOptions({});
-              }}
+              Dismiss
+            </button>
+          </div>
+        )}
+        {storageError && (
+          <div
+            role="alert"
+            className="alert"
+          >
+            <p>{storageError}</p>
+          </div>
+        )}
+        {resolved.error && (
+          <div className="notice">
+            <p>{resolved.error}</p>
+            <a href="#systems">Manage Systems →</a>
+          </div>
+        )}
+        {route.page === 'system-data' && (
+          <SystemDataEditor
+            files={workspace.systems}
+            save={(existing, incoming) => {
+              const current = workspaceRef.current;
+              const next = reloadSystem(current, existing, incoming);
+              change(next);
+              setOptions({});
+            }}
+          />
+        )}
+        {route.page === 'systems' && (
+          <>
+            <PageTitle
+              eyebrow="Your rules, your table"
+              title="Systems"
+              description="Load a System from JSON into the local browser database. Its Classes, Features, options, and calculations become available throughout your workspace."
             />
-          )}
-          {route.page === 'systems' && (
-            <>
-              <PageTitle
-                eyebrow="Your rules, your table"
-                title="Systems"
-                description="Load a System from JSON into the local browser database. Its Classes, Features, options, and calculations become available throughout your workspace."
-              />
-              <SystemLoader
-                loading={loading}
-                bundledLoaded={workspace.systems.some((s) => s.id === 'dnd5e:2014-srd5.1')}
-                loadBundled={() => void loadBundled()}
-                loadFile={(file) => void loadFile(file)}
-              />
-              <div className="cards">
-                {workspace.systems.map((file) => (
-                  <article
-                    className="panel system-card"
-                    key={systemKey(file)}
-                  >
-                    <p className="eyebrow">
-                      {'Loaded · revision '}
-                      {file.revision}
-                      {' · content version '}
-                      {releaseVersion(file.contentVersion)}
-                    </p>
-                    <h2>{file.configurations[0].system.name}</h2>
-                    <p>
-                      {file.configurations[0].classes.length}
-                      {' '}
-                      {`${file.configurations[0].system.terminology?.classPlural ?? 'Classes'} · `}
-                      {' '}
-                      {file.features.length}
-                      {' '}
-                      {'Features · '}
-                      {' '}
-                      {file.configurations.length}
-                      {' '}
-                      configurations
-                    </p>
-                    <div className="toolbar">
-                      <button
-                        className="quiet"
-                        onClick={() =>
-                          download(
-                            `${file.id.replace(/[^a-z0-9-]/gi, '-')}.json`,
-                            JSON.stringify(file, null, 2),
-                          )}
-                      >
-                        Export JSON
-                      </button>
-                      <button
-                        className="quiet danger"
-                        onClick={() => {
-                          const next = workspace.systems.filter(
-                            (s) => systemKey(s) !== systemKey(file),
-                          );
-                          change({ ...workspace, systems: next });
-                          setOptions({});
-                          setSelectedSystem(next[0] ? systemKey(next[0]) : '');
+            <SystemLoader
+              loading={loading}
+              bundledLoaded={workspace.systems.some((s) => s.id === 'dnd5e:2014-srd5.1')}
+              loadBundled={() => void loadBundled()}
+              loadFile={(file) => void loadFile(file)}
+            />
+            <div className="cards">
+              {workspace.systems.map((file) => (
+                <article
+                  className="panel system-card"
+                  key={systemKey(file)}
+                >
+                  <p className="eyebrow">
+                    {'Loaded · revision '}
+                    {file.revision}
+                    {' · content version '}
+                    {releaseVersion(file.contentVersion)}
+                  </p>
+                  <h2>{file.configurations[0].system.name}</h2>
+                  <p>
+                    {file.configurations[0].classes.length}
+                    {' '}
+                    {`${file.configurations[0].system.terminology?.classPlural ?? 'Classes'} · `}
+                    {' '}
+                    {file.features.length}
+                    {' '}
+                    {'Features · '}
+                    {' '}
+                    {file.configurations.length}
+                    {' '}
+                    configurations
+                  </p>
+                  <div className="toolbar">
+                    <button
+                      className="quiet"
+                      onClick={() =>
+                        download(
+                          `${file.id.replace(/[^a-z0-9-]/gi, '-')}.json`,
+                          JSON.stringify(file, null, 2),
+                        )}
+                    >
+                      Export JSON
+                    </button>
+                    <button
+                      className="quiet danger"
+                      onClick={() => {
+                        const next = workspace.systems.filter(
+                          (s) => systemKey(s) !== systemKey(file),
+                        );
+                        change({ ...workspace, systems: next });
+                        setOptions({});
+                        setSelectedSystem(next[0] ? systemKey(next[0]) : '');
+                      }}
+                    >
+                      Unload System
+                    </button>
+                    <ReloadSystemButton
+                      name={file.configurations[0].system.name}
+                      loading={loading}
+                      bundled={file.id === 'dnd5e:2014-srd5.1'}
+                      reload={(source) => void reload(file, source)}
+                    />
+                  </div>
+                  <p className="muted small">
+                    Unloading preserves characters. Reload the same revision to resume them.
+                  </p>
+                </article>
+              ))}
+            </div>
+            <section className="panel">
+              <h3>Current bundled content</h3>
+              <p>
+                DnD5e 2014 includes the 12 SRD classes, Tasha’s Artificer, and partner Blood
+                Hunter, with 124 accessible subclass progressions. Partner content is labelled.
+                New entries include source links and automation notes without paid book
+                descriptions; locked entries are excluded. Each Feature identifies its supported
+                mechanics and effects that require table resolution.
+              </p>
+              <p className="muted">
+                {'The SRD 5.1 is licensed under CC BY 4.0. '}
+                <a
+                  href="https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Official SRD
+                </a>
+                {' '}
+                {'· '}
+                <a
+                  href="https://creativecommons.org/licenses/by/4.0/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  License
+                </a>
+                {' '}
+                {'· '}
+                <a
+                  href={noticeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Full attribution
+                </a>
+              </p>
+            </section>
+          </>
+        )}
+        {route.page === 'characters'
+          && (!active
+            ? (
+                <>
+                  <PageTitle
+                    eyebrow="A character is a collection of choices"
+                    title="Every adventure starts with a Feature."
+                    description="Build your character one choice at a time. Explore what makes them different, and let the System handle the numbers."
+                  />
+                  <div className="toolbar">
+                    <button
+                      disabled={!selected}
+                      onClick={() => setCreating(true)}
+                    >
+                      Create a character →
+                    </button>
+                    <button
+                      className="quiet"
+                      disabled={loading || !selected}
+                      onClick={() => void loadMulticlassSample()}
+                    >
+                      Add multiclass sample
+                    </button>
+                    <button
+                      className="quiet"
+                      disabled={loading}
+                      onClick={() => void loadStarterParty()}
+                    >
+                      {loading ? 'Loading…' : 'Add 2014 Starter Set party'}
+                    </button>
+                    <label className="button quiet">
+                      Import character
+                      <input
+                        className="file-input"
+                        type="file"
+                        accept=".json,application/json"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) void importCharacter(f);
+                          e.target.value = '';
                         }}
-                      >
-                        Unload System
-                      </button>
-                      <ReloadSystemButton
-                        name={file.configurations[0].system.name}
-                        loading={loading}
-                        bundled={file.id === 'dnd5e:2014-srd5.1'}
-                        reload={(source) => void reload(file, source)}
                       />
+                    </label>
+                  </div>
+                  {!workspace.systems.length && (
+                    <div className="welcome panel">
+                      <span className="large-mark">◇</span>
+                      <h2>Choose the rules for your story</h2>
+                      <p>
+                        Load the bundled DnD5e 2014 System to begin, or bring your own System JSON.
+                      </p>
+                      <button
+                        disabled={loading}
+                        onClick={() => void loadBundled()}
+                      >
+                        {loading ? 'Loading System…' : 'Load DnD5e 2014'}
+                      </button>
+                      <a href="#systems">Manage Systems →</a>
                     </div>
-                    <p className="muted small">
-                      Unloading preserves characters. Reload the same revision to resume them.
-                    </p>
-                  </article>
-                ))}
-              </div>
-              <section className="panel">
-                <h3>Current bundled content</h3>
-                <p>
-                  DnD5e 2014 includes the 12 SRD classes, Tasha’s Artificer, and partner Blood
-                  Hunter, with 124 accessible subclass progressions. Partner content is labelled.
-                  New entries include source links and automation notes without paid book
-                  descriptions; locked entries are excluded. Each Feature identifies its supported
-                  mechanics and effects that require table resolution.
-                </p>
-                <p className="muted">
-                  {'The SRD 5.1 is licensed under CC BY 4.0. '}
-                  <a
-                    href="https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Official SRD
-                  </a>
-                  {' '}
-                  {'· '}
-                  <a
-                    href="https://creativecommons.org/licenses/by/4.0/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    License
-                  </a>
-                  {' '}
-                  {'· '}
-                  <a
-                    href={noticeUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Full attribution
-                  </a>
-                </p>
-              </section>
-            </>
-          )}
-          {route.page === 'characters'
-            && (!active
+                  )}
+                  <div className="cards">
+                    {workspace.characters.map((c) => (
+                      <article
+                        className="panel character-card"
+                        key={c.id}
+                      >
+                        <span className="avatar">{c.name.slice(0, 1)}</span>
+                        <h2>{c.name}</h2>
+                        <p className="muted">
+                          {c.buildState === 'draft' ? 'Construction draft' : 'Character'}
+                          {' '}
+                          {'· '}
+                          {' '}
+                          {c.progressions.length}
+                          {' '}
+                          class progressions
+                        </p>
+                        <a
+                          className="quiet"
+                          href={pageHref('characters', c.id)}
+                        >
+                          Open character →
+                        </a>
+                      </article>
+                    ))}
+                  </div>
+                </>
+              )
+            : (
+                <>
+                  <div className="toolbar character-actions">
+                    <a href="#characters">← All characters</a>
+                    <label className="character-switch">
+                      <span>Character</span>
+                      <select
+                        aria-label="Switch character"
+                        value={active.id}
+                        onChange={(e) => go('characters', e.target.value)}
+                      >
+                        {workspace.characters.map((c) => (
+                          <option
+                            key={c.id}
+                            value={c.id}
+                          >
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <button
+                      className="quiet"
+                      onClick={() =>
+                        download(
+                          `${active.name.replace(/[^a-z0-9-]/gi, '-')}.json`,
+                          serializeCharacter(active),
+                        )}
+                    >
+                      Export character
+                    </button>
+                    <button
+                      className="quiet"
+                      onClick={() => {
+                        const copy = {
+                          ...structuredClone(active),
+                          id: crypto.randomUUID(),
+                          name: `${active.name} (copy)`,
+                        };
+                        change({
+                          ...workspace,
+                          characters: [...workspace.characters, copy],
+                          active: copy.id,
+                        });
+                        go('characters', copy.id);
+                      }}
+                    >
+                      Duplicate
+                    </button>
+                  </div>
+                  {engine
+                    ? (
+                        <CharacterBuilder
+                          key={active.id}
+                          engine={engine}
+                          character={active}
+                          update={update}
+                          openFeature={openFeature}
+                          report={setError}
+                        />
+                      )
+                    : (
+                        <h1>{active.name}</h1>
+                      )}
+                </>
+              ))}
+        {['classes', 'features', 'races'].includes(route.page) && !route.id && (
+          <>
+            <PageTitle
+              eyebrow="The building blocks of a character"
+              title={route.page === 'classes'
+                ? 'Find your path.'
+                : route.page === 'races'
+                  ? `Explore ${engine?.catalogue.system.terminology?.creaturePlural ?? 'Races'}.`
+                  : 'Explore Features.'}
+              description={route.page === 'classes'
+                ? `Inspect each ${engine?.catalogue.system.terminology?.classSingular ?? 'Class'} progression, including every independent grant and selection at each level.`
+                : 'Browse reusable abilities, choices, resources, and stat modifiers. Open a Feature to see what it contains.'}
+            />
+            {engine
               ? (
                   <>
-                    <PageTitle
-                      eyebrow="A character is a collection of choices"
-                      title="Every adventure starts with a Feature."
-                      description="Build your character one choice at a time. Explore what makes them different, and let the System handle the numbers."
-                    />
-                    <div className="toolbar">
-                      <button
-                        disabled={!selected}
-                        onClick={() => setCreating(true)}
-                      >
-                        Create a character →
-                      </button>
-                      <button
-                        className="quiet"
-                        disabled={loading || !selected}
-                        onClick={() => void loadMulticlassSample()}
-                      >
-                        Add multiclass sample
-                      </button>
-                      <button
-                        className="quiet"
-                        disabled={loading}
-                        onClick={() => void loadStarterParty()}
-                      >
-                        {loading ? 'Loading…' : 'Add 2014 Starter Set party'}
-                      </button>
-                      <label className="button quiet">
-                        Import character
-                        <input
-                          className="file-input"
-                          type="file"
-                          accept=".json,application/json"
-                          onChange={(e) => {
-                            const f = e.target.files?.[0];
-                            if (f) void importCharacter(f);
-                            e.target.value = '';
-                          }}
-                        />
-                      </label>
-                    </div>
-                    {!workspace.systems.length && (
-                      <div className="welcome panel">
-                        <span className="large-mark">◇</span>
-                        <h2>Choose the rules for your story</h2>
-                        <p>
-                          Load the bundled DnD5e 2014 System to begin, or bring your own System JSON.
-                        </p>
-                        <button
-                          disabled={loading}
-                          onClick={() => void loadBundled()}
-                        >
-                          {loading ? 'Loading System…' : 'Load DnD5e 2014'}
-                        </button>
-                        <a href="#systems">Manage Systems →</a>
-                      </div>
-                    )}
-                    <div className="cards">
-                      {workspace.characters.map((c) => (
-                        <article
-                          className="panel character-card"
-                          key={c.id}
-                        >
-                          <span className="avatar">{c.name.slice(0, 1)}</span>
-                          <h2>{c.name}</h2>
-                          <p className="muted">
-                            {c.buildState === 'draft' ? 'Construction draft' : 'Character'}
-                            {' '}
-                            {'· '}
-                            {' '}
-                            {c.progressions.length}
-                            {' '}
-                            class progressions
-                          </p>
-                          <a
-                            className="quiet"
-                            href={pageHref('characters', c.id)}
-                          >
-                            Open character →
-                          </a>
-                        </article>
-                      ))}
-                    </div>
-                  </>
-                )
-              : (
-                  <>
-                    <div className="toolbar character-actions">
-                      <a href="#characters">← All characters</a>
-                      <button
-                        className="quiet"
-                        onClick={() =>
-                          download(
-                            `${active.name.replace(/[^a-z0-9-]/gi, '-')}.json`,
-                            serializeCharacter(active),
-                          )}
-                      >
-                        Export character
-                      </button>
-                      <button
-                        className="quiet"
-                        onClick={() => {
-                          const copy = {
-                            ...structuredClone(active),
-                            id: crypto.randomUUID(),
-                            name: `${active.name} (copy)`,
-                          };
-                          change({
-                            ...workspace,
-                            characters: [...workspace.characters, copy],
-                            active: copy.id,
-                          });
-                          go('characters', copy.id);
-                        }}
-                      >
-                        Duplicate
-                      </button>
-                    </div>
-                    {engine
-                      ? (
-                          <CharacterBuilder
-                            key={active.id}
-                            engine={engine}
-                            character={active}
-                            update={update}
-                            openFeature={openFeature}
-                            report={setError}
-                          />
-                        )
-                      : (
-                          <h1>{active.name}</h1>
-                        )}
-                  </>
-                ))}
-          {['classes', 'features', 'races'].includes(route.page) && !route.id && (
-            <>
-              <PageTitle
-                eyebrow="The building blocks of a character"
-                title={route.page === 'classes'
-                  ? 'Find your path.'
-                  : route.page === 'races'
-                    ? `Explore ${engine?.catalogue.system.terminology?.creaturePlural ?? 'Races'}.`
-                    : 'Explore Features.'}
-                description={route.page === 'classes'
-                  ? `Inspect each ${engine?.catalogue.system.terminology?.classSingular ?? 'Class'} progression, including every independent grant and selection at each level.`
-                  : 'Browse reusable abilities, choices, resources, and stat modifiers. Open a Feature to see what it contains.'}
-              />
-              {engine
-                ? (
-                    <>
-                      {selected && (
-                        <details className="configuration-options">
-                          <summary>Browse configuration</summary>
-                          <div className="input-grid">
-                            {Object.entries(selected.options).map(([key, domain]) => (
-                              <label key={key}>
-                                {labelFromId(key)}
-                                <select
-                                  value={JSON.stringify(options[key] ?? domain.default)}
-                                  onChange={(e) => {
-                                    setOptions({ ...options, [key]: JSON.parse(e.target.value) });
-                                    setPage(0);
-                                    go(route.page);
-                                  }}
-                                >
-                                  {domain.values.map((value) => (
-                                    <option
-                                      value={JSON.stringify(value)}
-                                      key={JSON.stringify(value)}
-                                    >
-                                      {typeof value === 'boolean'
-                                        ? value
-                                          ? 'Enabled'
-                                          : 'Disabled'
-                                        : String(value).replaceAll('-', ' ')}
-                                    </option>
-                                  ))}
-                                </select>
-                              </label>
-                            ))}
-                          </div>
-                        </details>
-                      )}
-                      <div className="toolbar browser-filters">
-                        {['features', 'races'].includes(route.page) && (
-                          <label>
-                            Sort
-                            <select
-                              value={sort}
-                              onChange={(event) => {
-                                browse('sort', event.target.value);
-                                setPage(0);
-                              }}
-                            >
-                              <option value="name">Name A–Z</option>
-                              <option value="name-desc">Name Z–A</option>
-                              <option value="level">Level, then name</option>
-                            </select>
-                          </label>
-                        )}
-                        <label>
-                          Search
-                          <input
-                            type="search"
-                            placeholder={`Search ${route.page}…`}
-                            value={query}
-                            onChange={(e) => {
-                              setQuery(e.target.value);
-                              setPage(0);
-                            }}
-                          />
-                        </label>
-                        {route.page === 'features' && (
-                          <label>
-                            Tag
-                            <select
-                              value={tag}
-                              onChange={(e) => {
-                                setTag(e.target.value);
-                                setPage(0);
-                              }}
-                            >
-                              <option value="">All tags</option>
-                              {[...new Set(engine.catalogue.features.flatMap((f) => f.tags ?? []))]
-                                .sort()
-                                .map((t) => (
+                    {selected && (
+                      <details className="configuration-options">
+                        <summary>Browse configuration</summary>
+                        <div className="input-grid">
+                          {Object.entries(selected.options).map(([key, domain]) => (
+                            <label key={key}>
+                              {labelFromId(key)}
+                              <select
+                                value={JSON.stringify(options[key] ?? domain.default)}
+                                onChange={(e) => {
+                                  setOptions({ ...options, [key]: JSON.parse(e.target.value) });
+                                  browse({ page: '' });
+                                  go(route.page);
+                                }}
+                              >
+                                {domain.values.map((value) => (
                                   <option
-                                    key={t}
-                                    value={t}
+                                    value={JSON.stringify(value)}
+                                    key={JSON.stringify(value)}
                                   >
-                                    {tagName(engine.catalogue.system, t)}
+                                    {typeof value === 'boolean'
+                                      ? value
+                                        ? 'Enabled'
+                                        : 'Disabled'
+                                      : String(value).replaceAll('-', ' ')}
                                   </option>
                                 ))}
-                            </select>
-                          </label>
-                        )}
-                      </div>
-                      {route.page === 'classes'
-                        ? (
-                            <div className="cards">
-                              {engine.catalogue.classes
-                                .filter((c) =>
-                                  `${c.name} ${c.description ?? ''}`
-                                    .toLowerCase()
-                                    .includes(query.toLowerCase()),
-                                )
-                                .map((c) => (
-                                  <article
-                                    className="panel class-card"
-                                    key={c.id}
-                                  >
-                                    <p className="eyebrow">
-                                      {`${engine.catalogue.system.terminology?.classSingular ?? 'Class'} · revision `}
-                                      {c.revision}
-                                    </p>
-                                    <h2>{c.name}</h2>
-                                    {c.description && (
-                                      <p className="muted">{descriptionPreview(c.description)}</p>
-                                    )}
-                                    <p>{Object.keys(c.levels).length} levels of progression</p>
-                                    <a
-                                      className="quiet"
-                                      href={pageHref('classes', c.id, engine)}
-                                    >
-                                      {`Explore ${engine.catalogue.system.terminology?.classSingular ?? 'Class'} →`}
-                                    </a>
-                                  </article>
-                                ))}
-                            </div>
-                          )
-                        : (
-                            <>
-                              <p className="muted small">
-                                {list.length}
-                                {' '}
-                                {route.page === 'races'
-                                  ? `${engine.catalogue.system.terminology?.creaturePlural ?? 'Races'} found`
-                                  : 'Features found'}
-                              </p>
-                              <div className="catalogue-grid">
-                                {list.slice(page * 24, (page + 1) * 24).map((f) => (
-                                  <article
-                                    className="feature-card"
-                                    key={f.id}
-                                  >
-                                    <span className="eyebrow">
-                                      {f.tags?.[0]
-                                        ? tagName(engine.catalogue.system, f.tags[0])
-                                        : 'Feature'}
-                                      {f.contentLevel !== undefined ? ` · level ${f.contentLevel}` : ''}
-                                      {f.tags?.includes('partner-content')
-                                        ? ` · ${tagName(engine.catalogue.system, 'partner-content')}`
-                                        : ''}
-                                    </span>
-                                    <FeatureLink
-                                      className="link feature-card-title"
-                                      id={f.id}
-                                      engine={engine}
-                                    >
-                                      {featureName(f)}
-                                    </FeatureLink>
-                                    <RulesText
-                                      text={descriptionPreview(featureDescription(f, engine))}
-                                      engine={engine}
-                                      openFeature={openFeature}
-                                      exclude={[f.id]}
-                                    />
-                                    {!featureDescription(f, engine) && !!f.mechanicalSummary?.length && (
-                                      <p className="muted small">
-                                        {descriptionPreview(f.mechanicalSummary[0])}
-                                      </p>
-                                    )}
-                                    <span className="muted small">
-                                      {f.components.length} building blocks · r{f.revision}
-                                    </span>
-                                    <span
-                                      className="card-arrow"
-                                      aria-hidden="true"
-                                    >
-                                      ↗
-                                    </span>
-                                  </article>
-                                ))}
-                              </div>
-                              <div className="row pagination">
-                                <button
-                                  className="quiet"
-                                  disabled={page === 0}
-                                  onClick={() => setPage(page - 1)}
-                                >
-                                  Previous
-                                </button>
-                                <span>
-                                  {'Page '}
-                                  {page + 1}
-                                  {' '}
-                                  {'of '}
-                                  {Math.max(1, Math.ceil(list.length / 24))}
-                                </span>
-                                <button
-                                  className="quiet"
-                                  disabled={(page + 1) * 24 >= list.length}
-                                  onClick={() => setPage(page + 1)}
-                                >
-                                  Next
-                                </button>
-                              </div>
-                            </>
-                          )}
-                      <p className="muted small">
-                        Custom Feature authoring will use these same building blocks in a future editor.
-                      </p>
-                    </>
-                  )
-                : (
-                    <p>
-                      <a href="#systems">Load a System</a> to browse its content.
+                              </select>
+                            </label>
+                          ))}
+                        </div>
+                      </details>
+                    )}
+                    <CatalogueBrowser
+                      key={route.page}
+                      page={route.page as 'classes' | 'features' | 'races'}
+                      engine={engine}
+                      query={query}
+                      tags={tags}
+                      level={route.level ?? ''}
+                      listPage={page}
+                      sort={route.sort ?? 'name'}
+                      browse={browse}
+                      openFeature={openFeature}
+                      classHref={(id) => pageHref('classes', id, engine)}
+                    />
+                    <p className="muted small">
+                      Custom Feature authoring will use these same building blocks in a future editor.
                     </p>
-                  )}
-            </>
-          )}
-          {route.page === 'features'
-            && route.id
-            && engine
-            && (feature
-              ? (
-                  <>
-                    <a
-                      className="button quiet"
-                      href={route.returnTo
-                        ?? featureHref('', engine)
-                          .replace('#features/', '#features')
-                          .split('&returnTo=')[0]}
-                    >
-                      {'← '}
-                      {route.returnTo?.startsWith('#classes/')
-                        ? `Back to ${engine.catalogue.system.terminology?.classSingular ?? 'Class'} Features`
-                        : route.returnTo?.startsWith('#characters/')
-                          ? 'Back to character'
-                          : route.returnTo?.startsWith('#races')
-                            ? `Back to ${engine.catalogue.system.terminology?.creaturePlural ?? 'Races'}`
-                            : 'Features'}
-                    </a>
-                    <FeatureDetail
-                      feature={feature}
-                      engine={engine}
-                      openFeature={openFeature}
-                    />
                   </>
                 )
               : (
-                  <p>This Feature is unavailable in the loaded catalogue.</p>
-                ))}
-          {route.page === 'items' && route.id && engine && (
-            <>
-              <a href={route.returnTo ?? '#characters'}>← Back</a>
-              <ItemDetail
-                engine={engine}
-                id={route.id}
-              />
-            </>
-          )}
-          {route.page === 'classes'
-            && route.id
-            && engine
-            && (cls
-              ? (
-                  <>
-                    <a
-                      className="quiet"
-                      href={pageHref('classes', undefined, engine)}
-                    >
-                      {`← ${engine.catalogue.system.terminology?.classPlural ?? 'Classes'}`}
-                    </a>
-                    <ClassDetail
-                      key={`${engine.catalogue.id}:${cls.id}`}
-                      cls={cls}
-                      engine={engine}
-                      openFeature={openFeature}
-                    />
-                  </>
-                )
-              : (
-                  <p>{`This ${engine.catalogue.system.terminology?.classSingular ?? 'Class'} is unavailable in the loaded catalogue.`}</p>
-                ))}
-        </main>
-        <footer>
-          {'Feature Forge '}
-          <span>Built from Features. Governed by your System.</span>
-        </footer>
-      </div>
+                  <p>
+                    <a href="#systems">Load a System</a> to browse its content.
+                  </p>
+                )}
+          </>
+        )}
+        {route.page === 'features'
+          && route.id
+          && engine
+          && (feature
+            ? (
+                <>
+                  <a
+                    className="button quiet"
+                    href={route.returnTo
+                      ?? featureHref('', engine)
+                        .replace('#features/', '#features')
+                        .split('&returnTo=')[0]}
+                  >
+                    {'← '}
+                    {route.returnTo?.startsWith('#classes/')
+                      ? `Back to ${engine.catalogue.system.terminology?.classSingular ?? 'Class'} Features`
+                      : route.returnTo?.startsWith('#characters/')
+                        ? 'Back to character'
+                        : route.returnTo?.startsWith('#races')
+                          ? `Back to ${engine.catalogue.system.terminology?.creaturePlural ?? 'Races'}`
+                          : 'Features'}
+                  </a>
+                  <FeatureDetail
+                    feature={feature}
+                    engine={engine}
+                    openFeature={openFeature}
+                  />
+                </>
+              )
+            : (
+                <p>This Feature is unavailable in the loaded catalogue.</p>
+              ))}
+        {route.page === 'items' && route.id && engine && (
+          <>
+            <a href={route.returnTo ?? '#characters'}>← Back</a>
+            <ItemDetail
+              engine={engine}
+              id={route.id}
+            />
+          </>
+        )}
+        {route.page === 'classes'
+          && route.id
+          && engine
+          && (cls
+            ? (
+                <>
+                  <a
+                    className="quiet"
+                    href={pageHref('classes', undefined, engine)}
+                  >
+                    {`← ${engine.catalogue.system.terminology?.classPlural ?? 'Classes'}`}
+                  </a>
+                  <ClassDetail
+                    key={`${engine.catalogue.id}:${cls.id}`}
+                    cls={cls}
+                    engine={engine}
+                    openFeature={openFeature}
+                  />
+                </>
+              )
+            : (
+                <p>{`This ${engine.catalogue.system.terminology?.classSingular ?? 'Class'} is unavailable in the loaded catalogue.`}</p>
+              ))}
+      </main>
+      <footer>
+        {'Feature Forge '}
+        <span>Built from Features. Governed by your System.</span>
+      </footer>
       {creating && selected && (
         <Modal
           title="Create a character"

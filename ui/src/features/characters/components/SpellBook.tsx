@@ -17,6 +17,8 @@ import { FeatureLink } from '@/ui/src/features/catalogue/components/FeatureLink'
 import { FeatureRules } from '@/ui/src/features/catalogue/components/RulesText';
 import { FeatureRolls } from '@/ui/src/features/catalogue/components/FeatureRolls';
 import { Modal } from '@/ui/src/components/Modal';
+import { DataTable } from '@/ui/src/components/DataTable';
+import type { DataTableColumn } from '@/ui/src/types/DataTableColumn';
 import { actionCostKind } from '@/ui/src/features/characters/model/action-costs';
 
 export function SpellBook({
@@ -116,6 +118,75 @@ export function SpellBook({
     );
   };
   if (!spells.length && !slots.length) return null;
+  const metadata = (spell: SpellGroup, key: string) =>
+    spell.modes.find((option) => !option.ritual)?.capability.definition.metadata?.[key]
+    ?? spell.modes[0]?.capability.definition.metadata?.[key];
+  const spellColumns: DataTableColumn<SpellGroup>[] = [
+    {
+      key: 'name',
+      header: 'Spell',
+      cell: (spell) => (
+        <span className="spell-name">
+          <FeatureLink
+            id={spell.feature}
+            engine={engine}
+          >
+            {spell.name}
+          </FeatureLink>
+          <small>
+            {labelFromId(spell.castingAbility)}
+            {spell.modes.every((option) => option.ritual) ? ' · Ritual only' : ''}
+          </small>
+        </span>
+      ),
+    },
+    ...(settings?.columns ?? []).map((column, index): DataTableColumn<SpellGroup> => ({
+      key: column.metadataKey,
+      header: column.name,
+      secondary: index > 1,
+      cell: (spell) => {
+        const value = metadata(spell, column.metadataKey);
+        return value === undefined ? '—' : String(value);
+      },
+    })),
+    {
+      key: 'use',
+      header: '',
+      className: 'spell-use',
+      cell: (spell) => (
+        <>
+          {actionable(spell) && (
+            <button
+              className="small-button"
+              disabled={!ready || !spell.modes.some((option) => option.available)}
+              onClick={() => {
+                const available = spell.modes.filter((option) => option.available);
+                if (
+                  spell.modes.length === 1
+                  && !featureRollInstances(engine, result, spell.feature).length
+                )
+                  cast(available[0].capability.id);
+                else {
+                  setMode(available[0].capability.id);
+                  setCasting(spell.id);
+                }
+              }}
+            >
+              Use Spell
+            </button>
+          )}
+          {notification(spell) && <small role="status">{notification(spell)}</small>}
+          {engine.getFeature(spell.feature) && (
+            <FeatureRolls
+              feature={engine.getFeature(spell.feature)!}
+              engine={engine}
+              resultsOnly
+            />
+          )}
+        </>
+      ),
+    },
+  ];
   return (
     <section className="spellbook">
       <div className="row">
@@ -278,86 +349,21 @@ export function SpellBook({
                 ? (settings?.zeroLevelHeading ?? 'Level 0 spells')
                 : `Level ${level} spells`}
             </summary>
-            {visibleSpells
-              .filter((spell) => spell.level === level)
-              .map((spell) => (
-                <article
-                  className={`panel spell-row ${settings?.compact ? 'spell-compact' : ''}`}
-                  key={spell.id}
-                >
-                  <div className="row">
-                    <div>
-                      <h3>
-                        <FeatureLink
-                          id={spell.feature}
-                          engine={engine}
-                        >
-                          {spell.name}
-                        </FeatureLink>
-                      </h3>
-                      <small>
-                        {`Casting ability: ${labelFromId(spell.castingAbility)}`}
-                        {spell.modes.every((mode) => mode.ritual) ? ' · Ritual only' : ''}
-                      </small>
-                      <dl className="spell-quick-info">
-                        {(settings?.columns ?? []).map((column) => {
-                          const value
-                            = spell.modes.find((mode) => !mode.ritual)?.capability.definition
-                              .metadata?.[column.metadataKey]
-                              ?? spell.modes[0]?.capability.definition.metadata?.[column.metadataKey];
-                          return value === undefined
-                            ? null
-                            : (
-                                <div key={column.metadataKey}>
-                                  <dt>{column.name}</dt>
-                                  <dd>{String(value)}</dd>
-                                </div>
-                              );
-                        })}
-                      </dl>
-                    </div>
-                    <div className="spell-action">
-                      {actionable(spell) && (
-                        <button
-                          disabled={!ready || !spell.modes.some((option) => option.available)}
-                          onClick={() => {
-                            const available = spell.modes.filter((option) => option.available);
-                            if (
-                              spell.modes.length === 1
-                              && !featureRollInstances(engine, result, spell.feature).length
-                            )
-                              cast(available[0].capability.id);
-                            else {
-                              setMode(available[0].capability.id);
-                              setCasting(spell.id);
-                            }
-                          }}
-                        >
-                          Use Spell
-                        </button>
-                      )}
-                      {notification(spell) && <small role="status">{notification(spell)}</small>}
-                    </div>
-                  </div>
-                  <details>
-                    <summary>Spell description</summary>
-                    {engine.getFeature(spell.feature) && (
-                      <FeatureRules
-                        feature={engine.getFeature(spell.feature)!}
-                        engine={engine}
-                        showRolls={false}
-                      />
-                    )}
-                  </details>
-                  {engine.getFeature(spell.feature) && (
-                    <FeatureRolls
-                      feature={engine.getFeature(spell.feature)!}
-                      engine={engine}
-                      resultsOnly
-                    />
-                  )}
-                </article>
-              ))}
+            <DataTable
+              label={level === 0 ? (settings?.zeroLevelHeading ?? 'Level 0 spells') : `Level ${level} spells`}
+              columns={spellColumns}
+              rows={visibleSpells.filter((spell) => spell.level === level)}
+              rowKey={(spell) => spell.id}
+              empty="No spells at this level."
+              detail={(spell) =>
+                engine.getFeature(spell.feature) && (
+                  <FeatureRules
+                    feature={engine.getFeature(spell.feature)!}
+                    engine={engine}
+                    showRolls={false}
+                  />
+                )}
+            />
           </details>
         ))}
       {selected && (

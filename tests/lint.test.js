@@ -60,7 +60,8 @@ test('lint:fix wraps long callbacks and ternaries while retaining the JSX prop l
   assert.deepEqual(again.messages, []);
   assert.equal(again.output ?? formattedAgain, output);
   const scripts = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).scripts;
-  assert.match(scripts['lint:fix'], /^npm run format:ui && eslint .*--fix/);
+  // Prettier passes run before ESLint so ESLint's JSX layout is the final word.
+  assert.match(scripts['lint:fix'], /^npm run format:ui && (npm run format:effects && )?eslint .*--fix/);
   assert.match(scripts['format:ui'], /prettier .*ui\/src\/\*\*\/\*\.\{ts,tsx\}/);
 });
 
@@ -92,4 +93,15 @@ test('syntax errors, debugger statements and var declarations are rejected', () 
 });
 test('React syntax and ordinary functions do not count as definitions', () => {
   assert.deepEqual(lintSource('example.tsx', 'type Props = { name: string }; function App({ name }: Props) { return <p>{name}</p>; }'), []);
+});
+
+test('CSS colours are only written as :root design tokens', async () => {
+  const { lintCssColours } = await import('@/tools/lint-css-colours.mjs');
+  const css = ':root { --text: #1f1e1d; }\n@media (prefers-color-scheme: dark) {\n  :root { --text: #f5f4ef; }\n}\n.a {\n  color: var(--text);\n  white-space: nowrap;\n}\n.b { --local: #fff; background: rgb(1 2 3); border-color: black; }\n';
+  assert.deepEqual(lintCssColours('probe.css', css).map((problem) => problem.split(': ')[0]), [
+    'probe.css:9',
+    'probe.css:9',
+    'probe.css:9',
+  ]);
+  assert.deepEqual(lintCssColours('ui/src/styles/app.css', readFileSync('ui/src/styles/app.css', 'utf8')), []);
 });

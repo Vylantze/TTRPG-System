@@ -4809,6 +4809,13 @@
           }
         },
         "optional": true
+      },
+      "placement": {
+        "schema": {
+          "kind": "literal",
+          "value": "rail"
+        },
+        "optional": true
       }
     }
   },

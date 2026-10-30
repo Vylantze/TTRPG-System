@@ -1,5 +1,7 @@
-import { AcquiredFeature } from '@/ui/src/features/characters/components/AcquiredFeature';
-import { useMemo, useState } from 'react';
+import { FeatureTree } from '@/ui/src/components/FeatureTree';
+import { CharacterRuleContext } from '@/ui/src/features/characters/model/character-rule-context';
+import { instanceNodes } from '@/ui/src/features/characters/model/instance-tree';
+import { useContext, useMemo, useState } from 'react';
 import type { Character, Engine, EvaluationResult } from '@/src/index';
 import { tagName } from '@/ui/src/features/catalogue/model/display';
 import { instanceFeatureName } from '@/ui/src/features/catalogue/model/feature-instance-name';
@@ -15,6 +17,7 @@ export function CharacterFeatures({
   result: EvaluationResult;
   openFeature: (id: string) => void;
 }) {
+  const inSheet = useContext(CharacterRuleContext) !== undefined;
   const [query, setQuery] = useState(''),
     [origin, setOrigin] = useState('all'),
     [showInactive, setShowInactive] = useState(false),
@@ -118,18 +121,10 @@ export function CharacterFeatures({
       >
         {instances.length} acquired Feature instances
       </p>
-      <div className="acquired-library">
-        {roots.map((instance) => (
-          <AcquiredFeature
-            key={instance.id}
-            instance={instance}
-            engine={engine}
-            result={result}
-            visible={visible}
-            openFeature={openFeature}
-          />
-        ))}
-      </div>
+      <FeatureTree
+        nodes={instanceNodes(roots, engine, character, result, visible, openFeature, inSheet)}
+        storageKey={`ttrpg-feature-tree:${character.id}`}
+      />
       {!instances.length && <p className="panel">No acquired Features match these filters.</p>}
     </section>
   );

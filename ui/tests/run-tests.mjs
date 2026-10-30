@@ -166,7 +166,7 @@ test('Races catalogue and class labels use System terminology', async () => {
   const renamed = structuredClone(file);
   for (const configuration of renamed.configurations) configuration.system.terminology = { classSingular: 'Profession', classPlural: 'Professions', creatureSingular: 'Ancestry', creaturePlural: 'Ancestries', creatureTag: 'race' };
   const html = await render({ ...data(), systems: [renamed] }, '#races');
-  assert.match(html, /Ancestries found/);
+  assert.match(html, /[0-9]+ of [0-9]+ ancestries/);
   assert.match(html, /Professions/);
   assert.match(html, /Human/);
   assert.doesNotMatch(html, /feature-card-title[^>]*>Second Wind/);
@@ -223,12 +223,12 @@ test('React initial screen explains System loading and provides character import
 });
 test('React Class and Feature browsers render directly from the loaded JSON', async () => {
   const classes = await render(data(), '#classes');
-  assert.match(classes, /Explore Class/);
+  assert.match(classes, /<table class="data-table" aria-label="Classes">/);
   assert.match(classes, /Fighter/);
   assert.match(classes, /Wizard/);
   const features = await render(data(), '#features');
   assert.match(features, /Explore Features/);
-  assert.match(features, /Features found/);
+  assert.match(features, /[0-9]+ of [0-9]+ Features/);
   const detail = await render(data(), '#features/dnd5e%3A2014%3Awizard.spellcasting');
   assert.match(detail, /Building blocks/);
   assert.match(detail, /chooseFeatures/);
@@ -334,7 +334,7 @@ test('bundled category refresh accepts the Class Feature tag but preserves tags 
   changedRoots.features.find((f) => f.id.endsWith(':fighter.second-wind')).tags = [];
   assert.throws(() => model.updateSystemDescriptions(changedRoots, roots), /rules differ/);
   const html = await render(data(), '#features');
-  assert.match(html, /value="class-feature">Class Feature/);
+  assert.match(html, /aria-pressed="false">Class Feature<span class="chip-count">/);
   assert.match(await render(data(), '#features/dnd5e%3A2014%3Afighter.second-wind'), /class="tag">Class Feature/);
 });
 test('Feature pages show Class progression timing and preserve readable prerequisite logic', async () => {
@@ -370,7 +370,7 @@ test('React uses Feature and tag display names while retaining internal filter i
   const workspace = { version: 1, systems: [custom], characters: [] };
   const browse = await render(workspace, '#features?q=Graceful');
   assert.match(browse, /Graceful Movement/);
-  assert.match(browse, /value="skill-proficiency">Trained Skill/);
+  assert.match(browse, /aria-pressed="false">Trained Skill<span class="chip-count">/);
   assert.doesNotMatch(browse, /internal_feature_name/);
   const detail = await render(workspace, '#features/dnd5e%3A2014%3Askill.acrobatics');
   assert.match(detail, /<h1>Graceful Movement<\/h1>/);
@@ -553,7 +553,8 @@ test('acquired Feature library exposes search, origins and acquisition levels', 
   assert.match(html, /Fighter/);
   assert.match(html, /Rogue/);
   assert.match(html, /Show inactive Features/);
-  assert.match(html, /included Features/);
+  assert.match(html, /[0-9]+ inside/);
+  assert.match(html, /class="feature-tree"/);
 });
 
 test('resource summaries expose actual balance, maximum, recovery and shared providers', async () => {
@@ -637,7 +638,8 @@ test('Feature links preserve list filters and class anchors in native anchor URL
   assert.match(html, /<a class="link" href="#features\/dnd5e%3A2014%3Afighter.second-wind/);
   const filtered = await render(data(), '#features?q=Second%20Wind&sort=name-desc&tag=class-feature');
   assert.match(filtered, /value="Second Wind"/);
-  assert.match(filtered, /value="name-desc" selected/);
+  assert.match(filtered, /<th aria-sort="descending"><button class="sort-button">Feature/);
+  assert.match(filtered, /aria-pressed="true">Class Feature/);
 });
 
 test('Fighter resource UI omits Arcane Recovery, while Wizard recovery and adjustment controls remain', async () => {
@@ -830,7 +832,7 @@ test('sheet display keeps Hit Point class levels literal and resolves modifiers'
 test('spell levels collapse and free utility spells have no use control', async () => {
   const html = await render({ ...data(), characters: [starterSaves[3]] }, `#characters/${starterSaves[3].id}?view=resources`);
   assert.match(html, /<details class="spell-level" open=""><summary>Cantrips/);
-  const cards = [...html.matchAll(/<article class="panel spell-row[^"]*">([\s\S]*?)<\/article>/g)].map((match) => match[1]);
+  const cards = [...html.matchAll(/<tr>(<td><span class="row-head">[\s\S]*?)<\/tr>/g)].map((match) => match[1]);
   const utility = cards.find((card) => card.includes('Mage Hand'));
   assert.ok(utility);
   assert.doesNotMatch(utility, /Use Spell/);

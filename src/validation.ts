@@ -416,6 +416,7 @@ export function validateCatalogue(input: unknown, functions: FunctionRegistry = 
         text(tab.id);
         text(tab.name);
         if (!['choices', 'sheet', 'features', 'resources', 'notes', 'sections', 'items', 'actions', 'spells', 'rolls'].includes(tab.content)) throw new RuleError('PRESENTATION', 'Unknown sheet tab content.');
+        if (tab.placement !== undefined && tab.placement !== 'rail') throw new RuleError('PRESENTATION', 'Unknown sheet tab placement.');
         if (tab.sections !== undefined) {
           list(tab.sections);
           for (const id of tab.sections) if (!compiled.system.sheetSections?.some((section) => section.id === id)) throw new RuleError('PRESENTATION', `Unknown sheet section ${id}.`);

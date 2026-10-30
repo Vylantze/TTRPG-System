@@ -1,5 +1,8 @@
 import type { Character, Engine, EvaluationResult } from '@/src/index';
-import { AcquiredFeature } from '@/ui/src/features/characters/components/AcquiredFeature';
+import { useContext } from 'react';
+import { FeatureTree } from '@/ui/src/components/FeatureTree';
+import { CharacterRuleContext } from '@/ui/src/features/characters/model/character-rule-context';
+import { instanceNodes } from '@/ui/src/features/characters/model/instance-tree';
 
 export function BuildGrants({
   engine,
@@ -14,6 +17,7 @@ export function BuildGrants({
   level: string;
   openFeature: (id: string) => void;
 }) {
+  const inSheet = useContext(CharacterRuleContext) !== undefined;
   const grants = result.instances
     .filter(
       (instance) =>
@@ -35,22 +39,10 @@ export function BuildGrants({
     <section className="automatic-grants">
       <h3>Automatically granted Features</h3>
       {!grants.length && <p className="muted">No automatic Features at this level.</p>}
-      {roots.map((instance) => (
-        <div key={instance.id}>
-          <small>
-            {instance.progression
-              ? `${engine.catalogue.classes.find((entry) => entry.id === character.progressions.find((progression) => progression.id === instance.progression)?.class)?.name ?? 'Class'} · Level ${instance.acquiredClassLevel}`
-              : `Origin · Character level ${instance.acquiredCharacterLevel}`}
-          </small>
-          <AcquiredFeature
-            instance={instance}
-            engine={engine}
-            result={result}
-            visible={visible}
-            openFeature={openFeature}
-          />
-        </div>
-      ))}
+      <FeatureTree
+        nodes={instanceNodes(roots, engine, character, result, visible, openFeature, inSheet)}
+        controls={false}
+      />
     </section>
   );
 }

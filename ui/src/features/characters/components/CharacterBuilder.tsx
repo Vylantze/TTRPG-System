@@ -22,6 +22,7 @@ import { featureHref } from '@/ui/src/features/catalogue/model/feature-descripti
 import { CharacterFeatures } from '@/ui/src/features/characters/components/CharacterFeatures';
 import { featureName } from '@/ui/src/features/catalogue/model/display';
 import { useMemo, useState, useTransition } from 'react';
+import { useMediaQuery } from '@/ui/src/lib/use-media-query';
 import {
   clearFeatureRolls,
   featureRollInstances,
@@ -107,7 +108,16 @@ export function CharacterBuilder({
     }),
     [level, setLevel] = useState('all'),
     [classId, setClassId] = useState(engine.catalogue.classes[0]?.id ?? '');
-  const currentTab = tabs.find((entry) => entry.id === tab) ?? tabs[0];
+  // Wide screens keep rail tabs (System placement "rail") beside the panel instead of as tabs.
+  const wide = useMediaQuery('(width >= 1100px)');
+  const railTabs = wide ? tabs.filter((entry) => entry.placement === 'rail') : [];
+  const panelTabs = tabs.filter((entry) => !railTabs.includes(entry));
+  const currentTab = panelTabs.find((entry) => entry.id === tab) ?? panelTabs[0];
+  // Build & choices needs the full width for its setup and choice columns.
+  const showRail = railTabs.length > 0 && currentTab?.content !== 'choices';
+  const health = Object.values(result.resources).find(
+    (pool) => pool.key === engine.catalogue.system.healthRules?.resourceKey,
+  );
   const [preview, setPreview] = useState<{ edits: Edit[]; result: EditPreview } | null>(null);
   const attempt = (action: () => void) => {
     try {
@@ -275,223 +285,11 @@ export function CharacterBuilder({
       </article>
     );
   };
-  return (
-    <CharacterRuleContext.Provider value={{
-      character,
-      result,
-      update,
-      report,
-      openDetails: engine.catalogue.system.sheetDisplay?.detailsDrawer ? setDetails : undefined,
-    }}
-    >
-      <div className="character-title">
-        <div>
-          <p className="eyebrow">Character workspace</p>
-          <input
-            className="name-input"
-            aria-label="Character name"
-            key={character.id}
-            defaultValue={character.name}
-            onBlur={(e) => {
-              const name = e.target.value.trim() || 'Unnamed character';
-              e.target.value = name;
-              if (name !== character.name) update({ ...character, name });
-            }}
-          />
-          <p className="muted">
-            {result.instances
-              .filter(
-                (instance) =>
-                  instance.active
-                  && instance.eligible
-                  && engine
-                    .getFeature(instance.feature)
-                    ?.tags?.includes(engine.catalogue.system.terminology?.creatureTag ?? ''),
-              )
-              .map((instance) => featureName(engine.getFeature(instance.feature)))
-              .join(', ') || 'Origin not selected'}
-            {' · '}
-            {character.progressions
-              .filter((progression) => progression.level > 0)
-              .map(
-                (progression) =>
-                  `${engine.catalogue.classes.find((cls) => cls.id === progression.class)?.name ?? progression.class} ${progression.level}`,
-              )
-              .join(' / ') || 'No class selected'}
-          </p>
-        </div>
-        <button
-          aria-expanded={showSummary || result.status === 'invalid'}
-          aria-controls="build-summary"
-          onClick={() => setShowSummary(!showSummary)}
-          className={`badge ${result.status}`}
-        >
-          {result.status === 'valid' && character.buildState === 'draft'
-            ? 'Ready to finalize'
-            : result.status}
-        </button>
-      </div>
-      <RestControls
-        engine={engine}
-        character={character}
-        result={result}
-        update={update}
-        report={report}
-      />
-      <SheetOverview
-        engine={engine}
-        character={character}
-        result={result}
-        update={update}
-        report={report}
-      />
-      {(showSummary || result.status === 'invalid') && (
-        <div
-          id="build-summary"
-          className="summary-strip"
-        >
-          <div>
-            <span>Selections</span>
-            <strong>{result.selections.reduce((n, s) => n + s.picks.length, 0)}</strong>
-          </div>
-          <div>
-            <span>Open requirements</span>
-            <strong>{result.diagnostics.length}</strong>
-          </div>
-          <div>
-            <span>Acquired Features</span>
-            <strong>{result.instances.filter((i) => i.active && i.eligible).length}</strong>
-          </div>
-          <div>
-            <span>Resource pools</span>
-            <strong>{Object.keys(result.resources).length}</strong>
-          </div>
-        </div>
-      )}
-      {changingTab && <LoadingOverlay />}
-      <button
-        className="link reorder-tabs"
-        aria-expanded={orderingTabs}
-        onClick={() => setOrderingTabs(!orderingTabs)}
-      >
-        {orderingTabs ? 'Done arranging tabs' : 'Rearrange tabs'}
-      </button>
-      {orderingTabs && (
-        <div className="panel tab-order-editor">
-          {tabs.map((entry, index) => (
-            <div
-              className="row"
-              key={entry.id}
-            >
-              <span>{entry.name}</span>
-              <div className="toolbar">
-                <button
-                  className="quiet"
-                  aria-label={`Move ${entry.name} left`}
-                  disabled={index === 0}
-                  onClick={() =>
-                    update({
-                      ...character,
-                      tabOrder: moveSheetTab(
-                        tabs.map((tab) => tab.id),
-                        entry.id,
-                        -1,
-                      ),
-                    })}
-                >
-                  ←
-                </button>
-                <button
-                  className="quiet"
-                  aria-label={`Move ${entry.name} right`}
-                  disabled={index === tabs.length - 1}
-                  onClick={() =>
-                    update({
-                      ...character,
-                      tabOrder: moveSheetTab(
-                        tabs.map((tab) => tab.id),
-                        entry.id,
-                        1,
-                      ),
-                    })}
-                >
-                  →
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-      <nav
-        className="subnav"
-        aria-label="Character sections"
-        role="tablist"
-      >
-        {tabs.map(({ id, name }) => (
-          <button
-            key={id}
-            id={`tab-${id}`}
-            role="tab"
-            aria-selected={currentTab?.id === id}
-            aria-controls="character-tab-panel"
-            tabIndex={currentTab?.id === id ? 0 : -1}
-            onKeyDown={(event) => {
-              const index = tabs.findIndex((entry) => entry.id === id);
-              const next
-                = event.key === 'Home'
-                  ? 0
-                  : event.key === 'End'
-                    ? tabs.length - 1
-                    : event.key === 'ArrowRight'
-                      ? (index + 1) % tabs.length
-                      : event.key === 'ArrowLeft'
-                        ? (index + tabs.length - 1) % tabs.length
-                        : undefined;
-              if (next === undefined) return;
-              event.preventDefault();
-              document.getElementById(`tab-${tabs[next].id}`)?.click();
-              document.getElementById(`tab-${tabs[next].id}`)?.focus();
-            }}
-            className={tab === id ? 'active' : ''}
-            onClick={() => {
-              startTabChange(() => setTab(id));
-              const [path, search] = window.location.hash.split('?');
-              const params = new URLSearchParams(search);
-              params.set('view', id);
-              window.history.replaceState(null, '', `${path}?${params}`);
-            }}
-          >
-            {name}
-          </button>
-        ))}
-      </nav>
-      <div
-        id="character-tab-panel"
-        role="tabpanel"
-        aria-labelledby={`tab-${currentTab?.id}`}
-      >
-        {result.diagnostics.length > 0 && (
-          <details
-            className="diagnostics"
-            open={result.status === 'invalid'}
-          >
-            <summary>
-              {result.status === 'invalid'
-                ? 'Build needs repair'
-                : `${incomplete} requirements to finish`}
-            </summary>
-            <ul>
-              {result.diagnostics.map((d, i) => (
-                <li key={i}>
-                  <strong>{d.message}</strong>
-                  <small>{d.path}</small>
-                </li>
-              ))}
-            </ul>
-            <p>Totals are provisional until every requirement is satisfied.</p>
-          </details>
-        )}
-        {currentTab?.content === 'choices' && (
+  /** One tab's content; rail tabs render the same content beside the tab panel. */
+  const tabContent = (entry: SheetTab | undefined) =>
+    entry && (
+      <>
+        {entry.content === 'choices' && (
           <div className="builder-grid">
             <aside className="builder-setup">
               <section className="panel">
@@ -777,7 +575,7 @@ export function CharacterBuilder({
             </section>
           </div>
         )}
-        {currentTab?.content === 'items' && (
+        {entry.content === 'items' && (
           <>
             <MoneySection
               engine={engine}
@@ -800,14 +598,14 @@ export function CharacterBuilder({
             />
           </>
         )}
-        {currentTab?.content === 'rolls' && (
+        {entry.content === 'rolls' && (
           <RollHistory
             engine={engine}
             character={character}
             update={update}
           />
         )}
-        {currentTab?.content === 'notes' && (
+        {entry.content === 'notes' && (
           <CharacterDetails
             notes
             engine={engine}
@@ -816,9 +614,9 @@ export function CharacterBuilder({
             update={update}
           />
         )}
-        {currentTab?.content === 'sections'
+        {entry.content === 'sections'
           && (engine.catalogue.system.sheetSections ?? [])
-            .filter((section) => currentTab.sections?.includes(section.id))
+            .filter((section) => entry.sections?.includes(section.id))
             .map((section) => (
               <SheetSectionView
                 key={section.id}
@@ -830,9 +628,9 @@ export function CharacterBuilder({
                 report={report}
               />
             ))}
-        {currentTab?.content === 'sheet' && (
+        {entry.content === 'sheet' && (
           <CharacterSheet
-            sectionIds={currentTab.sections}
+            sectionIds={entry.sections}
             engine={engine}
             character={character}
             result={result}
@@ -840,7 +638,7 @@ export function CharacterBuilder({
             report={report}
           />
         )}
-        {currentTab?.content === 'features' && (
+        {entry.content === 'features' && (
           <CharacterFeatures
             engine={engine}
             character={character}
@@ -848,7 +646,7 @@ export function CharacterBuilder({
             openFeature={openFeature}
           />
         )}
-        {currentTab?.content === 'actions' && (
+        {entry.content === 'actions' && (
           <ActionsView
             engine={engine}
             character={character}
@@ -857,7 +655,7 @@ export function CharacterBuilder({
             report={report}
           />
         )}
-        {currentTab?.content === 'spells' && (
+        {entry.content === 'spells' && (
           <SpellBook
             engine={engine}
             character={character}
@@ -867,7 +665,7 @@ export function CharacterBuilder({
             report={report}
           />
         )}
-        {currentTab?.content === 'resources' && (
+        {entry.content === 'resources' && (
           <>
             <CompanionPanels
               engine={engine}
@@ -1025,6 +823,266 @@ export function CharacterBuilder({
             ))}
           </>
         )}
+      </>
+    );
+  return (
+    <CharacterRuleContext.Provider value={{
+      character,
+      result,
+      update,
+      report,
+      openDetails: engine.catalogue.system.sheetDisplay?.detailsDrawer ? setDetails : undefined,
+    }}
+    >
+      <div className="character-title">
+        <div>
+          <p className="eyebrow">Character workspace</p>
+          <input
+            className="name-input"
+            aria-label="Character name"
+            key={character.id}
+            defaultValue={character.name}
+            onBlur={(e) => {
+              const name = e.target.value.trim() || 'Unnamed character';
+              e.target.value = name;
+              if (name !== character.name) update({ ...character, name });
+            }}
+          />
+          <p className="muted">
+            {result.instances
+              .filter(
+                (instance) =>
+                  instance.active
+                  && instance.eligible
+                  && engine
+                    .getFeature(instance.feature)
+                    ?.tags?.includes(engine.catalogue.system.terminology?.creatureTag ?? ''),
+              )
+              .map((instance) => featureName(engine.getFeature(instance.feature)))
+              .join(', ') || 'Origin not selected'}
+            {' · '}
+            {character.progressions
+              .filter((progression) => progression.level > 0)
+              .map(
+                (progression) =>
+                  `${engine.catalogue.classes.find((cls) => cls.id === progression.class)?.name ?? progression.class} ${progression.level}`,
+              )
+              .join(' / ') || 'No class selected'}
+          </p>
+        </div>
+        <button
+          aria-expanded={showSummary || result.status === 'invalid'}
+          aria-controls="build-summary"
+          onClick={() => setShowSummary(!showSummary)}
+          className={`badge ${result.status}`}
+        >
+          {result.status === 'valid' && character.buildState === 'draft'
+            ? 'Ready to finalize'
+            : result.status}
+        </button>
+      </div>
+      <RestControls
+        engine={engine}
+        character={character}
+        result={result}
+        update={update}
+        report={report}
+      />
+      <SheetOverview
+        engine={engine}
+        character={character}
+        result={result}
+        update={update}
+        report={report}
+      />
+      {(showSummary || result.status === 'invalid') && (
+        <div
+          id="build-summary"
+          className="summary-strip"
+        >
+          <div>
+            <span>Selections</span>
+            <strong>{result.selections.reduce((n, s) => n + s.picks.length, 0)}</strong>
+          </div>
+          <div>
+            <span>Open requirements</span>
+            <strong>{result.diagnostics.length}</strong>
+          </div>
+          <div>
+            <span>Acquired Features</span>
+            <strong>{result.instances.filter((i) => i.active && i.eligible).length}</strong>
+          </div>
+          <div>
+            <span>Resource pools</span>
+            <strong>{Object.keys(result.resources).length}</strong>
+          </div>
+        </div>
+      )}
+      {changingTab && <LoadingOverlay />}
+      <button
+        className="link reorder-tabs"
+        aria-expanded={orderingTabs}
+        onClick={() => setOrderingTabs(!orderingTabs)}
+      >
+        {orderingTabs ? 'Done arranging tabs' : 'Rearrange tabs'}
+      </button>
+      {orderingTabs && (
+        <div className="panel tab-order-editor">
+          {tabs.map((entry, index) => (
+            <div
+              className="row"
+              key={entry.id}
+            >
+              <span>{entry.name}</span>
+              <div className="toolbar">
+                <button
+                  className="quiet"
+                  aria-label={`Move ${entry.name} left`}
+                  disabled={index === 0}
+                  onClick={() =>
+                    update({
+                      ...character,
+                      tabOrder: moveSheetTab(
+                        tabs.map((tab) => tab.id),
+                        entry.id,
+                        -1,
+                      ),
+                    })}
+                >
+                  ←
+                </button>
+                <button
+                  className="quiet"
+                  aria-label={`Move ${entry.name} right`}
+                  disabled={index === tabs.length - 1}
+                  onClick={() =>
+                    update({
+                      ...character,
+                      tabOrder: moveSheetTab(
+                        tabs.map((tab) => tab.id),
+                        entry.id,
+                        1,
+                      ),
+                    })}
+                >
+                  →
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      <div className={showRail ? 'sheet-layout with-rail' : 'sheet-layout'}>
+        {showRail && (
+          <aside
+            className="sheet-rail"
+            aria-label="Character summary"
+          >
+            {railTabs.map((entry) => (
+              <section
+                className="rail-section"
+                key={entry.id}
+              >
+                {tabContent(entry)}
+              </section>
+            ))}
+          </aside>
+        )}
+        <div className="sheet-main">
+          <div className="sheet-tabs-bar">
+            <p
+              className="sheet-vitals"
+              aria-hidden="true"
+            >
+              <strong>{character.name}</strong>
+              {health && (
+                <span>{`HP ${health.current ?? health.capacity - health.spent} / ${health.capacity}`}</span>
+              )}
+              {(engine.catalogue.system.sheetDisplay?.overview ?? [])
+                .filter((row) => result.stats[row.stat])
+                .slice(0, 3)
+                .map((row) => {
+                  const value = result.stats[row.stat].value;
+                  return (
+                    <span key={row.stat}>
+                      {`${row.name ?? engine.getStatDefinition(row.stat)?.name ?? row.stat} ${row.signed && value >= 0 ? '+' : ''}${value}`}
+                    </span>
+                  );
+                })}
+            </p>
+            <nav
+              className="subnav"
+              aria-label="Character sections"
+              role="tablist"
+            >
+              {panelTabs.map(({ id, name }) => (
+                <button
+                  key={id}
+                  id={`tab-${id}`}
+                  role="tab"
+                  aria-selected={currentTab?.id === id}
+                  aria-controls="character-tab-panel"
+                  tabIndex={currentTab?.id === id ? 0 : -1}
+                  onKeyDown={(event) => {
+                    const index = panelTabs.findIndex((entry) => entry.id === id);
+                    const next
+                      = event.key === 'Home'
+                        ? 0
+                        : event.key === 'End'
+                          ? panelTabs.length - 1
+                          : event.key === 'ArrowRight'
+                            ? (index + 1) % panelTabs.length
+                            : event.key === 'ArrowLeft'
+                              ? (index + panelTabs.length - 1) % panelTabs.length
+                              : undefined;
+                    if (next === undefined) return;
+                    event.preventDefault();
+                    document.getElementById(`tab-${panelTabs[next].id}`)?.click();
+                    document.getElementById(`tab-${panelTabs[next].id}`)?.focus();
+                  }}
+                  className={currentTab?.id === id ? 'active' : ''}
+                  onClick={() => {
+                    startTabChange(() => setTab(id));
+                    const [path, search] = window.location.hash.split('?');
+                    const params = new URLSearchParams(search);
+                    params.set('view', id);
+                    window.history.replaceState(null, '', `${path}?${params}`);
+                  }}
+                >
+                  {name}
+                </button>
+              ))}
+            </nav>
+          </div>
+          <div
+            id="character-tab-panel"
+            role="tabpanel"
+            aria-labelledby={`tab-${currentTab?.id}`}
+          >
+            {result.diagnostics.length > 0 && (
+              <details
+                className="diagnostics"
+                open={result.status === 'invalid'}
+              >
+                <summary>
+                  {result.status === 'invalid'
+                    ? 'Build needs repair'
+                    : `${incomplete} requirements to finish`}
+                </summary>
+                <ul>
+                  {result.diagnostics.map((d, i) => (
+                    <li key={i}>
+                      <strong>{d.message}</strong>
+                      <small>{d.path}</small>
+                    </li>
+                  ))}
+                </ul>
+                <p>Totals are provisional until every requirement is satisfied.</p>
+              </details>
+            )}
+            {tabContent(currentTab)}
+          </div>
+        </div>
       </div>
       {details && engine.getFeature(details) && (
         <Modal

@@ -3,21 +3,26 @@ import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { lintSource } from '@/tools/lint-rules.mjs';
+import { lintCssColours } from '@/tools/lint-css-colours.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const schemaCheck = spawnSync(process.execPath, ['tools/generate-editor-schema.mjs', '--check'], { cwd: root, stdio: 'inherit' });
 if (schemaCheck.status !== 0) process.exit(schemaCheck.status ?? 1);
 const excluded = new Set(['node_modules', 'dist', 'coverage']);
-function sources(directory) {
+function sources(directory, pattern = /\.(?:[cm]?[jt]s|[jt]sx)$/) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     if (entry.name.startsWith('.') || excluded.has(entry.name)) return [];
     const filename = join(directory, entry.name);
-    if (entry.isDirectory()) return sources(filename);
-    return /\.(?:[cm]?[jt]s|[jt]sx)$/.test(entry.name) ? [filename] : [];
+    if (entry.isDirectory()) return sources(filename, pattern);
+    return pattern.test(entry.name) ? [filename] : [];
   });
 }
 const files = sources(root);
-const problems = files.flatMap((file) => lintSource(relative(root, file), readFileSync(file, 'utf8')));
+const stylesheets = sources(join(root, 'ui/src'), /\.css$/);
+const problems = [
+  ...files.flatMap((file) => lintSource(relative(root, file), readFileSync(file, 'utf8'))),
+  ...stylesheets.flatMap((file) => lintCssColours(relative(root, file), readFileSync(file, 'utf8'))),
+];
 if (problems.length) {
   console.error(problems.join('\n'));
   process.exit(1);
