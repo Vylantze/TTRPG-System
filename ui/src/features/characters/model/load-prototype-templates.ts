@@ -1,6 +1,6 @@
 import { assetData, deserializeCharacter } from '@/src/index';
-import starterUrl from '@/src/systems/dnd5e-2014/starter-characters.json?url';
-import multiclassUrl from '@/src/systems/dnd5e-2014/multiclass-sample.json?url';
+import starterUrl from '@/src/systems/dnd5e-2024/starter-characters.json?url';
+import multiclassUrl from '@/src/systems/dnd5e-2024/multiclass-sample.json?url';
 
 let pending: Promise<ReturnType<typeof deserializeCharacter>[]> | undefined;
 export function loadPrototypeTemplates() {

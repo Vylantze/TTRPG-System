@@ -2,9 +2,9 @@ import { readSystem } from '@/tools/read-system.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { parseSystemFile, catalogueFromSystemFile, compileBlocks, SystemRegistry, Engine, castSpell, recoverSelectedResources, recoverResources, useAbility, serializeCharacter } from '@/dist/index.js';
-import { exampleCharacter } from '@/examples/dnd2014-character.js';
+import { exampleCharacter } from '@/examples/dnd2024-character.js';
 
-const text = JSON.stringify(readSystem(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url)));
+const text = JSON.stringify(readSystem(new URL('../src/systems/dnd5e-2024/system.json', import.meta.url)));
 const raw = JSON.parse(text);
 const fixture = () => {
   const system = { id: 'fixture', revision: 1, name: 'Custom System', allowMultipleClasses: false, characterLevel: 0,
@@ -30,9 +30,9 @@ const cap = (engine, character, name) => engine.evaluate(character).capabilities
 const spent = (engine, character, key) => Object.values(engine.evaluate(character).resources).find((p) => p.key === key).spent;
 const fresh = () => ({ bonusActionSpell: false, otherSpell: false, onlyActionCantrips: true });
 
-test('2014 System JSON contains all twelve option configurations and matches bundled content', () => {
+test('2024 System JSON contains all six option configurations and matches bundled content', () => {
   const file = parseSystemFile(text);
-  assert.equal(file.configurations.length, 12);
+  assert.equal(file.configurations.length, 6);
   const registry = new SystemRegistry();
   registry.load(file);
   for (const c of file.configurations) {
@@ -48,8 +48,8 @@ test('registry loads independent Systems, isolates input and list data, and reje
   assert.equal(registry.list().length, 2);
   assert.equal(registry.createEngine('fixture', 1).catalogue.features[0].name, 'Kit');
   const listing = registry.list();
-  listing[1].options.feats.default = true;
-  assert.equal(registry.list()[1].options.feats.default, false);
+  listing[1].options.multiclass.default = true;
+  assert.equal(registry.list()[1].options.multiclass.default, false);
   assert.throws(() => registry.load(fixture()), (e) => e.code === 'SYSTEM_LOADED');
 });
 test('unloading preserves saves, disables lookup, and exact reload restores evaluation', () => {
@@ -97,7 +97,7 @@ test('JSON loader rejects malformed versions, unsafe keys, non-JSON values, and 
   missing.configurations.pop();
   assert.throws(() => parseSystemFile(missing), (e) => e.code === 'SYSTEM_OPTIONS');
   assert.throws(() => catalogueFromSystemFile(fixture(), { unknown: true }), (e) => e.code === 'SYSTEM_OPTIONS');
-  assert.throws(() => catalogueFromSystemFile(raw, { feats: null }), (e) => e.code === 'SYSTEM_OPTIONS');
+  assert.throws(() => catalogueFromSystemFile(raw, { multiclass: null }), (e) => e.code === 'SYSTEM_OPTIONS');
 });
 test('loaded revisions are explicit and catalogue identities cannot collide across Systems', () => {
   const registry = new SystemRegistry();

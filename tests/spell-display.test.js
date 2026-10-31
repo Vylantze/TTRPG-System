@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spellGroups, spellSlotPools, useAbility, adjustResource, finalizeCharacter, featureRollInstances, rollFeature, applyFeatureRoll, serializeCharacter, deserializeCharacter } from '@/dist/index.js';
-import { exampleCharacter } from '@/examples/dnd2014-character.js';
+import { exampleCharacter } from '@/examples/dnd2024-character.js';
 
 test('spells group casting modes at their original level and upcasting spends only the chosen slot', () => {
   const { engine, character } = exampleCharacter({ classes: [{ class: 'wizard', level: 5 }] });

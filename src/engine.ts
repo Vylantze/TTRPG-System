@@ -73,7 +73,7 @@ export class Engine {
           found.set(id, levels);
           for (const component of feature.components) {
             if (component.kind === 'grantFeature') visit(component.feature, Math.max(level, component.atClassLevel ?? level));
-            if (component.kind === 'chooseFeatures') for (const candidate of this.getSelectionFeatures(component)) visit(candidate.id, level);
+            if (component.kind === 'chooseFeatures') for (const candidate of this.getSelectionFeatures(component)) visit(candidate.id, this.firstCandidateLevel(component, candidate, id, level));
           }
         };
         for (const row of this.getClassLevels(cls.id)) for (const entry of row.entries) {
@@ -88,6 +88,28 @@ export class Engine {
       }
     }
     return clone(this.advancement.get(featureId) ?? []);
+  }
+
+  /**
+   * A choice offered from `level` with a class-level-dependent maximum content level (a
+   * Spellcasting feature's prepared spells) first offers a candidate at the earliest class
+   * level whose maximum covers it. Limits that need character stats keep `level`.
+   */
+  private firstCandidateLevel(choice: Choice, candidate: Catalogue['features'][number], owner: string, level: number): number {
+    const maximum = choice.candidates.maximumLevel;
+    if (maximum === undefined || candidate.contentLevel === undefined) return level;
+    const env = (classLevel: number): Environment => ({
+      stats: () => {
+        throw new RuleError('ADVANCEMENT_STAT', 'Advancement levels cannot depend on character stats.');
+      },
+      context: { classLevel }, parameters: {}, owner, features: this.features, functions: this.functions,
+    });
+    try {
+      for (let classLevel = level; classLevel <= 20; classLevel += 1) if (number(evaluateExpression(maximum, env(classLevel))) >= candidate.contentLevel) return classLevel;
+    } catch {
+      return level;
+    }
+    return level;
   }
 
   readonly catalogue: Catalogue;

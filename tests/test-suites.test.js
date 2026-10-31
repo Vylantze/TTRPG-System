@@ -15,7 +15,7 @@ test('named engine suites cover every current test file exactly once', () => {
 });
 
 test('suite selection supports combinations, deduplicates files, and rejects typos', () => {
-  assert.deepEqual(selectEngineTests(['artificer'], discovered), ['artificer.test.js']);
+  assert.deepEqual(selectEngineTests(['classes'], discovered), ['audit-regressions.test.js', 'dnd2024.test.js']);
   assert.deepEqual(selectEngineTests(['core', 'systems', 'core'], discovered), [...engineTestSuites.core.files, ...engineTestSuites.systems.files].sort());
   assert.throws(() => selectEngineTests(['cor'], discovered), /Unknown test suite/);
   assert.throws(() => selectEngineTests(['all', 'cor'], discovered), /Unknown test suite/);

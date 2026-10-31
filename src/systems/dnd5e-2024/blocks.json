@@ -1,0 +1,6746 @@
+{
+  "assetVersion": "1.0.0",
+  "data": [
+    {
+      "id": "core:training",
+      "parameters": {
+        "stat": {
+          "kind": "string"
+        },
+        "rank": {
+          "kind": "number",
+          "minimum": 0,
+          "integer": true
+        }
+      },
+      "components": [
+        {
+          "id": "training",
+          "kind": "modifyStat",
+          "stat": {
+            "argument": "stat"
+          },
+          "operation": "floor",
+          "value": {
+            "argument": "rank"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2024:casting.level-0",
+      "parameters": {
+        "castingAbility": {
+          "kind": "string"
+        },
+        "ritualAllowed": {
+          "kind": "boolean",
+          "default": false
+        },
+        "spellName": {
+          "kind": "string"
+        },
+        "spell": {
+          "kind": "string"
+        },
+        "school": {
+          "kind": "string"
+        },
+        "sourcePage": {
+          "kind": "number"
+        },
+        "castingTime": {
+          "kind": "string"
+        },
+        "range": {
+          "kind": "string"
+        },
+        "components": {
+          "kind": "string"
+        },
+        "actionKind": {
+          "kind": "string"
+        },
+        "actionAmount": {
+          "kind": "number"
+        },
+        "minimumLevel": {
+          "kind": "number",
+          "default": 0,
+          "integer": true,
+          "minimum": 0
+        }
+      },
+      "components": [
+        {
+          "id": "cantrip",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "armorProficient"
+                  },
+                  1
+                ]
+              },
+              {
+                "context": "spellComponentsAvailable"
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "context": "characterLevel"
+                  },
+                  {
+                    "argument": "minimumLevel"
+                  }
+                ]
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 0,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 0,
+            "ritual": false,
+            "castingMode": "cantrip"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2024:casting.level-1",
+      "parameters": {
+        "castingAbility": {
+          "kind": "string"
+        },
+        "ritualAllowed": {
+          "kind": "boolean",
+          "default": false
+        },
+        "spellName": {
+          "kind": "string"
+        },
+        "spell": {
+          "kind": "string"
+        },
+        "school": {
+          "kind": "string"
+        },
+        "sourcePage": {
+          "kind": "number"
+        },
+        "castingTime": {
+          "kind": "string"
+        },
+        "range": {
+          "kind": "string"
+        },
+        "components": {
+          "kind": "string"
+        },
+        "actionKind": {
+          "kind": "string"
+        },
+        "actionAmount": {
+          "kind": "number"
+        },
+        "minimumLevel": {
+          "kind": "number",
+          "default": 0,
+          "integer": true,
+          "minimum": 0
+        }
+      },
+      "components": [
+        {
+          "id": "slot-1",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.1"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.1",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 1,
+            "ritual": false,
+            "castingMode": "slot-1"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-2",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.2"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.2",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 2,
+            "ritual": false,
+            "castingMode": "slot-2"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-3",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.3"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.3",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 3,
+            "ritual": false,
+            "castingMode": "slot-3"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-4",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.4"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.4",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 4,
+            "ritual": false,
+            "castingMode": "slot-4"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-5",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.5"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.5",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 5,
+            "ritual": false,
+            "castingMode": "slot-5"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-6",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.6"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.6",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 6,
+            "ritual": false,
+            "castingMode": "slot-6"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-7",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.7"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.7",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 7,
+            "ritual": false,
+            "castingMode": "slot-7"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-8",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.8"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.8",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 8,
+            "ritual": false,
+            "castingMode": "slot-8"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-9",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.9"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.9",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 9,
+            "ritual": false,
+            "castingMode": "slot-9"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-1",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  1
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 1,
+            "ritual": false,
+            "castingMode": "pact-1"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-2",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  2
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 2,
+            "ritual": false,
+            "castingMode": "pact-2"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-3",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  3
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 3,
+            "ritual": false,
+            "castingMode": "pact-3"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-4",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  4
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 4,
+            "ritual": false,
+            "castingMode": "pact-4"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-5",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  5
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 5,
+            "ritual": false,
+            "castingMode": "pact-5"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "ritual",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "argument": "ritualAllowed"
+              },
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 1,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 0,
+            "ritual": true,
+            "castingMode": "ritual"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2024:casting.level-2",
+      "parameters": {
+        "castingAbility": {
+          "kind": "string"
+        },
+        "ritualAllowed": {
+          "kind": "boolean",
+          "default": false
+        },
+        "spellName": {
+          "kind": "string"
+        },
+        "spell": {
+          "kind": "string"
+        },
+        "school": {
+          "kind": "string"
+        },
+        "sourcePage": {
+          "kind": "number"
+        },
+        "castingTime": {
+          "kind": "string"
+        },
+        "range": {
+          "kind": "string"
+        },
+        "components": {
+          "kind": "string"
+        },
+        "actionKind": {
+          "kind": "string"
+        },
+        "actionAmount": {
+          "kind": "number"
+        },
+        "minimumLevel": {
+          "kind": "number",
+          "default": 0,
+          "integer": true,
+          "minimum": 0
+        }
+      },
+      "components": [
+        {
+          "id": "slot-2",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.2"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.2",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 2,
+            "ritual": false,
+            "castingMode": "slot-2"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-3",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.3"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.3",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 3,
+            "ritual": false,
+            "castingMode": "slot-3"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-4",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.4"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.4",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 4,
+            "ritual": false,
+            "castingMode": "slot-4"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-5",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.5"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.5",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 5,
+            "ritual": false,
+            "castingMode": "slot-5"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-6",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.6"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.6",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 6,
+            "ritual": false,
+            "castingMode": "slot-6"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-7",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.7"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.7",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 7,
+            "ritual": false,
+            "castingMode": "slot-7"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-8",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.8"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.8",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 8,
+            "ritual": false,
+            "castingMode": "slot-8"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-9",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.9"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.9",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 9,
+            "ritual": false,
+            "castingMode": "slot-9"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-2",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  2
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 2,
+            "ritual": false,
+            "castingMode": "pact-2"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-3",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  3
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 3,
+            "ritual": false,
+            "castingMode": "pact-3"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-4",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  4
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 4,
+            "ritual": false,
+            "castingMode": "pact-4"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-5",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  5
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 5,
+            "ritual": false,
+            "castingMode": "pact-5"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "ritual",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "argument": "ritualAllowed"
+              },
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 2,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 0,
+            "ritual": true,
+            "castingMode": "ritual"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2024:casting.level-3",
+      "parameters": {
+        "castingAbility": {
+          "kind": "string"
+        },
+        "ritualAllowed": {
+          "kind": "boolean",
+          "default": false
+        },
+        "spellName": {
+          "kind": "string"
+        },
+        "spell": {
+          "kind": "string"
+        },
+        "school": {
+          "kind": "string"
+        },
+        "sourcePage": {
+          "kind": "number"
+        },
+        "castingTime": {
+          "kind": "string"
+        },
+        "range": {
+          "kind": "string"
+        },
+        "components": {
+          "kind": "string"
+        },
+        "actionKind": {
+          "kind": "string"
+        },
+        "actionAmount": {
+          "kind": "number"
+        },
+        "minimumLevel": {
+          "kind": "number",
+          "default": 0,
+          "integer": true,
+          "minimum": 0
+        }
+      },
+      "components": [
+        {
+          "id": "slot-3",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.3"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.3",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 3,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 3,
+            "ritual": false,
+            "castingMode": "slot-3"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-4",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.4"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.4",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 3,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 4,
+            "ritual": false,
+            "castingMode": "slot-4"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-5",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.5"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.5",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 3,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 5,
+            "ritual": false,
+            "castingMode": "slot-5"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-6",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.6"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.6",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 3,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 6,
+            "ritual": false,
+            "castingMode": "slot-6"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-7",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.7"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.7",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 3,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 7,
+            "ritual": false,
+            "castingMode": "slot-7"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-8",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.8"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.8",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 3,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 8,
+            "ritual": false,
+            "castingMode": "slot-8"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-9",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.9"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.9",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 3,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 9,
+            "ritual": false,
+            "castingMode": "slot-9"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-3",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  3
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 3,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 3,
+            "ritual": false,
+            "castingMode": "pact-3"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-4",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  4
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 3,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 4,
+            "ritual": false,
+            "castingMode": "pact-4"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-5",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  5
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 3,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 5,
+            "ritual": false,
+            "castingMode": "pact-5"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "ritual",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "argument": "ritualAllowed"
+              },
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 3,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 0,
+            "ritual": true,
+            "castingMode": "ritual"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2024:casting.level-4",
+      "parameters": {
+        "castingAbility": {
+          "kind": "string"
+        },
+        "ritualAllowed": {
+          "kind": "boolean",
+          "default": false
+        },
+        "spellName": {
+          "kind": "string"
+        },
+        "spell": {
+          "kind": "string"
+        },
+        "school": {
+          "kind": "string"
+        },
+        "sourcePage": {
+          "kind": "number"
+        },
+        "castingTime": {
+          "kind": "string"
+        },
+        "range": {
+          "kind": "string"
+        },
+        "components": {
+          "kind": "string"
+        },
+        "actionKind": {
+          "kind": "string"
+        },
+        "actionAmount": {
+          "kind": "number"
+        },
+        "minimumLevel": {
+          "kind": "number",
+          "default": 0,
+          "integer": true,
+          "minimum": 0
+        }
+      },
+      "components": [
+        {
+          "id": "slot-4",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.4"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.4",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 4,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 4,
+            "ritual": false,
+            "castingMode": "slot-4"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-5",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.5"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.5",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 4,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 5,
+            "ritual": false,
+            "castingMode": "slot-5"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-6",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.6"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.6",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 4,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 6,
+            "ritual": false,
+            "castingMode": "slot-6"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-7",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.7"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.7",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 4,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 7,
+            "ritual": false,
+            "castingMode": "slot-7"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-8",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.8"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.8",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 4,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 8,
+            "ritual": false,
+            "castingMode": "slot-8"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-9",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.9"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.9",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 4,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 9,
+            "ritual": false,
+            "castingMode": "slot-9"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-4",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  4
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 4,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 4,
+            "ritual": false,
+            "castingMode": "pact-4"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-5",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  5
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 4,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 5,
+            "ritual": false,
+            "castingMode": "pact-5"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "ritual",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "argument": "ritualAllowed"
+              },
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 4,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 0,
+            "ritual": true,
+            "castingMode": "ritual"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2024:casting.level-5",
+      "parameters": {
+        "castingAbility": {
+          "kind": "string"
+        },
+        "ritualAllowed": {
+          "kind": "boolean",
+          "default": false
+        },
+        "spellName": {
+          "kind": "string"
+        },
+        "spell": {
+          "kind": "string"
+        },
+        "school": {
+          "kind": "string"
+        },
+        "sourcePage": {
+          "kind": "number"
+        },
+        "castingTime": {
+          "kind": "string"
+        },
+        "range": {
+          "kind": "string"
+        },
+        "components": {
+          "kind": "string"
+        },
+        "actionKind": {
+          "kind": "string"
+        },
+        "actionAmount": {
+          "kind": "number"
+        },
+        "minimumLevel": {
+          "kind": "number",
+          "default": 0,
+          "integer": true,
+          "minimum": 0
+        }
+      },
+      "components": [
+        {
+          "id": "slot-5",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.5"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.5",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 5,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 5,
+            "ritual": false,
+            "castingMode": "slot-5"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-6",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.6"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.6",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 5,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 6,
+            "ritual": false,
+            "castingMode": "slot-6"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-7",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.7"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.7",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 5,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 7,
+            "ritual": false,
+            "castingMode": "slot-7"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-8",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.8"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.8",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 5,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 8,
+            "ritual": false,
+            "castingMode": "slot-8"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-9",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.9"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.9",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 5,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 9,
+            "ritual": false,
+            "castingMode": "slot-9"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "pact-5",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "pactSlotLevel"
+                  },
+                  5
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "pactSlotCount"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "pact-slot",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 5,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 5,
+            "ritual": false,
+            "castingMode": "pact-5"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "ritual",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "argument": "ritualAllowed"
+              },
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 5,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 0,
+            "ritual": true,
+            "castingMode": "ritual"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2024:casting.level-6",
+      "parameters": {
+        "castingAbility": {
+          "kind": "string"
+        },
+        "ritualAllowed": {
+          "kind": "boolean",
+          "default": false
+        },
+        "spellName": {
+          "kind": "string"
+        },
+        "spell": {
+          "kind": "string"
+        },
+        "school": {
+          "kind": "string"
+        },
+        "sourcePage": {
+          "kind": "number"
+        },
+        "castingTime": {
+          "kind": "string"
+        },
+        "range": {
+          "kind": "string"
+        },
+        "components": {
+          "kind": "string"
+        },
+        "actionKind": {
+          "kind": "string"
+        },
+        "actionAmount": {
+          "kind": "number"
+        },
+        "minimumLevel": {
+          "kind": "number",
+          "default": 0,
+          "integer": true,
+          "minimum": 0
+        }
+      },
+      "components": [
+        {
+          "id": "slot-6",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.6"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.6",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 6,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 6,
+            "ritual": false,
+            "castingMode": "slot-6"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-7",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.7"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.7",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 6,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 7,
+            "ritual": false,
+            "castingMode": "slot-7"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-8",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.8"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.8",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 6,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 8,
+            "ritual": false,
+            "castingMode": "slot-8"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-9",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.9"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.9",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 6,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 9,
+            "ritual": false,
+            "castingMode": "slot-9"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "ritual",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "argument": "ritualAllowed"
+              },
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 6,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 0,
+            "ritual": true,
+            "castingMode": "ritual"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2024:casting.level-7",
+      "parameters": {
+        "castingAbility": {
+          "kind": "string"
+        },
+        "ritualAllowed": {
+          "kind": "boolean",
+          "default": false
+        },
+        "spellName": {
+          "kind": "string"
+        },
+        "spell": {
+          "kind": "string"
+        },
+        "school": {
+          "kind": "string"
+        },
+        "sourcePage": {
+          "kind": "number"
+        },
+        "castingTime": {
+          "kind": "string"
+        },
+        "range": {
+          "kind": "string"
+        },
+        "components": {
+          "kind": "string"
+        },
+        "actionKind": {
+          "kind": "string"
+        },
+        "actionAmount": {
+          "kind": "number"
+        },
+        "minimumLevel": {
+          "kind": "number",
+          "default": 0,
+          "integer": true,
+          "minimum": 0
+        }
+      },
+      "components": [
+        {
+          "id": "slot-7",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.7"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.7",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 7,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 7,
+            "ritual": false,
+            "castingMode": "slot-7"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-8",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.8"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.8",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 7,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 8,
+            "ritual": false,
+            "castingMode": "slot-8"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-9",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.9"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.9",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 7,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 9,
+            "ritual": false,
+            "castingMode": "slot-9"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "ritual",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "argument": "ritualAllowed"
+              },
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 7,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 0,
+            "ritual": true,
+            "castingMode": "ritual"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2024:casting.level-8",
+      "parameters": {
+        "castingAbility": {
+          "kind": "string"
+        },
+        "ritualAllowed": {
+          "kind": "boolean",
+          "default": false
+        },
+        "spellName": {
+          "kind": "string"
+        },
+        "spell": {
+          "kind": "string"
+        },
+        "school": {
+          "kind": "string"
+        },
+        "sourcePage": {
+          "kind": "number"
+        },
+        "castingTime": {
+          "kind": "string"
+        },
+        "range": {
+          "kind": "string"
+        },
+        "components": {
+          "kind": "string"
+        },
+        "actionKind": {
+          "kind": "string"
+        },
+        "actionAmount": {
+          "kind": "number"
+        },
+        "minimumLevel": {
+          "kind": "number",
+          "default": 0,
+          "integer": true,
+          "minimum": 0
+        }
+      },
+      "components": [
+        {
+          "id": "slot-8",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.8"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.8",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 8,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 8,
+            "ritual": false,
+            "castingMode": "slot-8"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "slot-9",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.9"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.9",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 8,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 9,
+            "ritual": false,
+            "castingMode": "slot-9"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "ritual",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "argument": "ritualAllowed"
+              },
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 8,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 0,
+            "ritual": true,
+            "castingMode": "ritual"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dnd5e:2024:casting.level-9",
+      "parameters": {
+        "castingAbility": {
+          "kind": "string"
+        },
+        "ritualAllowed": {
+          "kind": "boolean",
+          "default": false
+        },
+        "spellName": {
+          "kind": "string"
+        },
+        "spell": {
+          "kind": "string"
+        },
+        "school": {
+          "kind": "string"
+        },
+        "sourcePage": {
+          "kind": "number"
+        },
+        "castingTime": {
+          "kind": "string"
+        },
+        "range": {
+          "kind": "string"
+        },
+        "components": {
+          "kind": "string"
+        },
+        "actionKind": {
+          "kind": "string"
+        },
+        "actionAmount": {
+          "kind": "number"
+        },
+        "minimumLevel": {
+          "kind": "number",
+          "default": 0,
+          "integer": true,
+          "minimum": 0
+        }
+      },
+      "components": [
+        {
+          "id": "slot-9",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "gte",
+                "args": [
+                  {
+                    "stat": "spellSlots.9"
+                  },
+                  1
+                ]
+              }
+            ]
+          },
+          "costs": [
+            {
+              "key": "spell-slot.9",
+              "amount": 1
+            }
+          ],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 9,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 9,
+            "ritual": false,
+            "castingMode": "slot-9"
+          },
+          "action": {
+            "kind": {
+              "argument": "actionKind"
+            },
+            "amount": {
+              "argument": "actionAmount"
+            }
+          }
+        },
+        {
+          "id": "ritual",
+          "kind": "grantCapability",
+          "name": {
+            "argument": "spellName"
+          },
+          "condition": {
+            "op": "and",
+            "args": [
+              {
+                "argument": "ritualAllowed"
+              },
+              {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "armorProficient"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "context": "spellComponentsAvailable"
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      {
+                        "argument": "minimumLevel"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "costs": [],
+          "metadata": {
+            "spell": {
+              "argument": "spell"
+            },
+            "spellLevel": 9,
+            "school": {
+              "argument": "school"
+            },
+            "sourcePage": {
+              "argument": "sourcePage"
+            },
+            "castingTime": {
+              "argument": "castingTime"
+            },
+            "range": {
+              "argument": "range"
+            },
+            "components": {
+              "argument": "components"
+            },
+            "castingAbility": {
+              "argument": "castingAbility"
+            },
+            "spellSlotLevel": 0,
+            "ritual": true,
+            "castingMode": "ritual"
+          }
+        }
+      ]
+    }
+  ]
+}

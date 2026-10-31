@@ -1,0 +1,3128 @@
+{
+  "assetVersion": "1.0.0",
+  "data": [
+    {
+      "id": "dnd5e:2024:barbarian",
+      "revision": 1,
+      "name": "Barbarian",
+      "description": "Primary Ability: Strength\nHit Point Die: D12 per Barbarian level\nSaving Throw Proficiencies: Strength and Constitution\nSkill Proficiencies: Choose 2: Animal Handling, Athletics, Intimidation, Nature, Perception, or Survival\nWeapon Proficiencies: Simple and Martial weapons\nArmor Training: Light and Medium armor and Shields\nStarting Equipment: Choose A or B: (A) Greataxe, 4 Handaxes, Explorer’s Pack, and 15 GP; or (B) 75 GP",
+      "source": "SRD 5.2.1 p. 28 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=28",
+      "levels": {
+        "1": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "core-traits",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.core-traits"
+          },
+          {
+            "id": "rest-healing",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:hit-dice.d12"
+          },
+          {
+            "id": "rage",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.rage"
+          },
+          {
+            "id": "unarmored-defense",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.unarmored-defense"
+          },
+          {
+            "id": "weapon-mastery",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.weapon-mastery"
+          }
+        ],
+        "2": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "danger-sense",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.danger-sense"
+          },
+          {
+            "id": "reckless-attack",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.reckless-attack"
+          }
+        ],
+        "3": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "primal-knowledge",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.primal-knowledge"
+          },
+          {
+            "id": "subclass",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.subclass"
+          }
+        ],
+        "4": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.ability-score-improvement"
+          }
+        ],
+        "5": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "extra-attack",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.extra-attack"
+          },
+          {
+            "id": "fast-movement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.fast-movement"
+          }
+        ],
+        "6": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          }
+        ],
+        "7": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "feral-instinct",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.feral-instinct"
+          },
+          {
+            "id": "instinctive-pounce",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.instinctive-pounce"
+          }
+        ],
+        "8": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.ability-score-improvement"
+          }
+        ],
+        "9": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "brutal-strike",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.brutal-strike"
+          }
+        ],
+        "10": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          }
+        ],
+        "11": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "relentless-rage",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.relentless-rage"
+          }
+        ],
+        "12": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.ability-score-improvement"
+          }
+        ],
+        "13": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "improved-brutal-strike",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.improved-brutal-strike"
+          }
+        ],
+        "14": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          }
+        ],
+        "15": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "persistent-rage",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.persistent-rage"
+          }
+        ],
+        "16": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.ability-score-improvement"
+          }
+        ],
+        "17": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "improved-brutal-strike",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.improved-brutal-strike-17"
+          }
+        ],
+        "18": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "indomitable-might",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.indomitable-might"
+          }
+        ],
+        "19": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "epic-boon",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.epic-boon"
+          }
+        ],
+        "20": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.hit-points"
+          },
+          {
+            "id": "primal-champion",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:barbarian.primal-champion"
+          }
+        ]
+      },
+      "multiclassPrerequisites": {
+        "stat": "strength",
+        "minimum": 13
+      }
+    },
+    {
+      "id": "dnd5e:2024:bard",
+      "revision": 1,
+      "name": "Bard",
+      "description": "Primary Ability: Charisma\nHit Point Die: D8 per Bard level\nSaving Throw Proficiencies: Dexterity and Charisma\nSkill Proficiencies: Choose any 3 skills (see “Playing the Game”)\nWeapon Proficiencies: Simple weapons\nTool Proficiencies: Choose 3 Musical Instruments (see “Equipment”)\nArmor Training: Light armor\nStarting Equipment: Choose A or B: (A) Leather Armor, 2 Daggers, Musical Instrument of your choice, Entertainer’s Pack, and 19 GP; or (B) 90 GP",
+      "source": "SRD 5.2.1 p. 31 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=31",
+      "levels": {
+        "1": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "core-traits",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.core-traits"
+          },
+          {
+            "id": "rest-healing",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:hit-dice.d8"
+          },
+          {
+            "id": "bardic-inspiration",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.bardic-inspiration"
+          },
+          {
+            "id": "spellcasting",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.spellcasting"
+          }
+        ],
+        "2": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "expertise",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.expertise"
+          },
+          {
+            "id": "jack-of-all-trades",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.jack-of-all-trades"
+          }
+        ],
+        "3": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "subclass",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.subclass"
+          }
+        ],
+        "4": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.ability-score-improvement"
+          }
+        ],
+        "5": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "font-of-inspiration",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.font-of-inspiration"
+          }
+        ],
+        "6": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          }
+        ],
+        "7": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "countercharm",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.countercharm"
+          }
+        ],
+        "8": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.ability-score-improvement"
+          }
+        ],
+        "9": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "expertise-9",
+            "kind": "chooseFeatures",
+            "minimum": 2,
+            "maximum": 2,
+            "candidates": {
+              "tags": [
+                "expertise"
+              ]
+            },
+            "retraining": {
+              "allowed": false
+            }
+          }
+        ],
+        "10": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "magical-secrets",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.magical-secrets"
+          }
+        ],
+        "11": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          }
+        ],
+        "12": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.ability-score-improvement"
+          }
+        ],
+        "13": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          }
+        ],
+        "14": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          }
+        ],
+        "15": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          }
+        ],
+        "16": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.ability-score-improvement"
+          }
+        ],
+        "17": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          }
+        ],
+        "18": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "superior-inspiration",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.superior-inspiration"
+          }
+        ],
+        "19": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "epic-boon",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.epic-boon"
+          }
+        ],
+        "20": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.hit-points"
+          },
+          {
+            "id": "words-of-creation",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:bard.words-of-creation"
+          }
+        ]
+      },
+      "multiclassPrerequisites": {
+        "stat": "charisma",
+        "minimum": 13
+      }
+    },
+    {
+      "id": "dnd5e:2024:cleric",
+      "revision": 1,
+      "name": "Cleric",
+      "description": "Primary Ability: Wisdom\nHit Point Die: D8 per Cleric level\nSaving Throw Proficiencies: Wisdom and Charisma\nSkill Proficiencies: Choose 2: History, Insight, Medicine, Persuasion, or Religion\nWeapon Proficiencies: Simple weapons\nArmor Training: Light and Medium armor and Shields\nStarting Equipment: Choose A or B: (A) Chain Shirt, Shield, Mace, Holy Symbol, Priest’s Pack, and 7 GP; or (B) 110 GP",
+      "source": "SRD 5.2.1 p. 36 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=36",
+      "levels": {
+        "1": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "core-traits",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.core-traits"
+          },
+          {
+            "id": "rest-healing",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:hit-dice.d8"
+          },
+          {
+            "id": "spellcasting",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.spellcasting"
+          },
+          {
+            "id": "divine-order",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.divine-order"
+          }
+        ],
+        "2": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "channel-divinity",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.channel-divinity"
+          }
+        ],
+        "3": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "subclass",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.subclass"
+          }
+        ],
+        "4": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.ability-score-improvement"
+          }
+        ],
+        "5": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "sear-undead",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.sear-undead"
+          }
+        ],
+        "6": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          }
+        ],
+        "7": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "blessed-strikes",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.blessed-strikes"
+          }
+        ],
+        "8": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.ability-score-improvement"
+          }
+        ],
+        "9": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          }
+        ],
+        "10": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "divine-intervention",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.divine-intervention"
+          }
+        ],
+        "11": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          }
+        ],
+        "12": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.ability-score-improvement"
+          }
+        ],
+        "13": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          }
+        ],
+        "14": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "improved-blessed-strikes",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.improved-blessed-strikes"
+          }
+        ],
+        "15": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          }
+        ],
+        "16": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.ability-score-improvement"
+          }
+        ],
+        "17": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          }
+        ],
+        "18": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          }
+        ],
+        "19": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "epic-boon",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.epic-boon"
+          }
+        ],
+        "20": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.hit-points"
+          },
+          {
+            "id": "greater-divine-intervention",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:cleric.greater-divine-intervention"
+          }
+        ]
+      },
+      "multiclassPrerequisites": {
+        "stat": "wisdom",
+        "minimum": 13
+      }
+    },
+    {
+      "id": "dnd5e:2024:druid",
+      "revision": 1,
+      "name": "Druid",
+      "description": "Primary Ability: Wisdom\nHit Point Die: D8 per Druid level\nSaving Throw Proficiencies: Intelligence and Wisdom\nSkill Proficiencies: Choose 2: Animal Handling, Arcana, Insight, Medicine, Nature, Perception, Religion, or Survival\nWeapon Proficiencies: Simple weapons\nTool Proficiencies: Herbalism Kit\nArmor Training: Light armor and Shields\nStarting Equipment: Choose A or B: (A) Leather Armor, Shield, Sickle, Druidic Focus (Quarterstaff), Explorer’s Pack, Herbalism Kit, and 9 GP; or (B) 50 GP",
+      "source": "SRD 5.2.1 p. 41 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=41",
+      "levels": {
+        "1": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "core-traits",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.core-traits"
+          },
+          {
+            "id": "rest-healing",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:hit-dice.d8"
+          },
+          {
+            "id": "spellcasting",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.spellcasting"
+          },
+          {
+            "id": "druidic",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.druidic"
+          },
+          {
+            "id": "primal-order",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.primal-order"
+          }
+        ],
+        "2": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "wild-shape",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.wild-shape"
+          },
+          {
+            "id": "wild-companion",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.wild-companion"
+          }
+        ],
+        "3": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "subclass",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.subclass"
+          }
+        ],
+        "4": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.ability-score-improvement"
+          }
+        ],
+        "5": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "wild-resurgence",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.wild-resurgence"
+          }
+        ],
+        "6": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          }
+        ],
+        "7": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "elemental-fury",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.elemental-fury"
+          }
+        ],
+        "8": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.ability-score-improvement"
+          }
+        ],
+        "9": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          }
+        ],
+        "10": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          }
+        ],
+        "11": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          }
+        ],
+        "12": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.ability-score-improvement"
+          }
+        ],
+        "13": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          }
+        ],
+        "14": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          }
+        ],
+        "15": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "improved-elemental-fury",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.improved-elemental-fury"
+          }
+        ],
+        "16": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.ability-score-improvement"
+          }
+        ],
+        "17": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          }
+        ],
+        "18": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "beast-spells",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.beast-spells"
+          }
+        ],
+        "19": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "epic-boon",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.epic-boon"
+          }
+        ],
+        "20": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.hit-points"
+          },
+          {
+            "id": "archdruid",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:druid.archdruid"
+          }
+        ]
+      },
+      "multiclassPrerequisites": {
+        "stat": "wisdom",
+        "minimum": 13
+      }
+    },
+    {
+      "id": "dnd5e:2024:fighter",
+      "revision": 1,
+      "name": "Fighter",
+      "description": "Primary Ability: Strength or Dexterity\nHit Point Die: D10 per Fighter level\nSaving Throw Proficiencies: Strength and Constitution\nSkill Proficiencies: Choose 2: Acrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Persuasion, Perception, or Survival\nWeapon Proficiencies: Simple and Martial weapons\nArmor Training: Light, Medium, and Heavy armor and Shields\nStarting Equipment: Choose A, B, or C: (A) Chain Mail, Greatsword, Flail, 8 Javelins, Dungeoneer’s Pack, and 4 GP; (B) Studded Leather Armor, Scimitar, Short sword, Longbow, 20 Arrows, Quiver, Dungeoneer’s Pack, and 11 GP; or (C) 155 GP",
+      "source": "SRD 5.2.1 p. 47 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=47",
+      "levels": {
+        "1": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "core-traits",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.core-traits"
+          },
+          {
+            "id": "rest-healing",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:hit-dice.d10"
+          },
+          {
+            "id": "fighting-style",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.fighting-style"
+          },
+          {
+            "id": "second-wind",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.second-wind"
+          },
+          {
+            "id": "weapon-mastery",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.weapon-mastery"
+          }
+        ],
+        "2": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "action-surge",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.action-surge"
+          },
+          {
+            "id": "tactical-mind",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.tactical-mind"
+          }
+        ],
+        "3": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "subclass",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.subclass"
+          }
+        ],
+        "4": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.ability-score-improvement"
+          }
+        ],
+        "5": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "extra-attack",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.extra-attack"
+          },
+          {
+            "id": "tactical-shift",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.tactical-shift"
+          }
+        ],
+        "6": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.ability-score-improvement"
+          }
+        ],
+        "7": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          }
+        ],
+        "8": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.ability-score-improvement"
+          }
+        ],
+        "9": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "indomitable",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.indomitable"
+          },
+          {
+            "id": "tactical-master",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.tactical-master"
+          }
+        ],
+        "10": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          }
+        ],
+        "11": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "two-extra-attacks",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.two-extra-attacks"
+          }
+        ],
+        "12": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.ability-score-improvement"
+          }
+        ],
+        "13": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "studied-attacks",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.studied-attacks"
+          }
+        ],
+        "14": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.ability-score-improvement"
+          }
+        ],
+        "15": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          }
+        ],
+        "16": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.ability-score-improvement"
+          }
+        ],
+        "17": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          }
+        ],
+        "18": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          }
+        ],
+        "19": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "epic-boon",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.epic-boon"
+          }
+        ],
+        "20": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.hit-points"
+          },
+          {
+            "id": "three-extra-attacks",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:fighter.three-extra-attacks"
+          }
+        ]
+      },
+      "multiclassPrerequisites": {
+        "any": [
+          {
+            "stat": "strength",
+            "minimum": 13
+          },
+          {
+            "stat": "dexterity",
+            "minimum": 13
+          }
+        ]
+      }
+    },
+    {
+      "id": "dnd5e:2024:monk",
+      "revision": 1,
+      "name": "Monk",
+      "description": "Primary Ability: Dexterity and Wisdom\nHit Point Die: D8 per Monk level\nSaving Throw Proficiencies: Strength and Dexterity\nSkill Proficiencies: Choose 2: Acrobatics, Athletics, History, Insight, Religion, or Stealth\nWeapon Proficiencies: Simple weapons and Martial weapons that have the Light property\nTool Proficiencies: Choose one type of Artisan’s Tools or Musical Instrument (see “Equipment”)\nArmor Training: None\nStarting Equipment: Choose A or B: (A) Spear, 5 Daggers, Artisan’s Tools or Musical Instrument chosen for the tool proficiency above, Explorer’s Pack, and 11 GP; or (B) 50 GP",
+      "source": "SRD 5.2.1 p. 49 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=49",
+      "levels": {
+        "1": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "core-traits",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.core-traits"
+          },
+          {
+            "id": "rest-healing",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:hit-dice.d8"
+          },
+          {
+            "id": "martial-arts",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.martial-arts"
+          },
+          {
+            "id": "unarmored-defense",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.unarmored-defense"
+          }
+        ],
+        "2": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "monks-focus",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.monks-focus"
+          },
+          {
+            "id": "unarmored-movement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.unarmored-movement"
+          },
+          {
+            "id": "uncanny-metabolism",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.uncanny-metabolism"
+          }
+        ],
+        "3": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "deflect-attacks",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.deflect-attacks"
+          },
+          {
+            "id": "subclass",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.subclass"
+          }
+        ],
+        "4": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "slow-fall",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.slow-fall"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.ability-score-improvement"
+          }
+        ],
+        "5": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "extra-attack",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.extra-attack"
+          },
+          {
+            "id": "stunning-strike",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.stunning-strike"
+          }
+        ],
+        "6": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "empowered-strikes",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.empowered-strikes"
+          }
+        ],
+        "7": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "evasion",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.evasion"
+          }
+        ],
+        "8": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.ability-score-improvement"
+          }
+        ],
+        "9": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "acrobatic-movement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.acrobatic-movement"
+          }
+        ],
+        "10": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "heightened-focus",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.heightened-focus"
+          },
+          {
+            "id": "self-restoration",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.self-restoration"
+          }
+        ],
+        "11": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          }
+        ],
+        "12": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.ability-score-improvement"
+          }
+        ],
+        "13": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "deflect-energy",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.deflect-energy"
+          }
+        ],
+        "14": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "disciplined-survivor",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.disciplined-survivor"
+          }
+        ],
+        "15": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "perfect-focus",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.perfect-focus"
+          }
+        ],
+        "16": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.ability-score-improvement"
+          }
+        ],
+        "17": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          }
+        ],
+        "18": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "superior-defense",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.superior-defense"
+          }
+        ],
+        "19": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "epic-boon",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.epic-boon"
+          }
+        ],
+        "20": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.hit-points"
+          },
+          {
+            "id": "body-and-mind",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:monk.body-and-mind"
+          }
+        ]
+      },
+      "multiclassPrerequisites": {
+        "all": [
+          {
+            "stat": "dexterity",
+            "minimum": 13
+          },
+          {
+            "stat": "wisdom",
+            "minimum": 13
+          }
+        ]
+      }
+    },
+    {
+      "id": "dnd5e:2024:paladin",
+      "revision": 1,
+      "name": "Paladin",
+      "description": "Primary Ability: Strength and Charisma\nHit Point Die: D10 per Paladin level\nSaving Throw Proficiencies: Wisdom and Charisma\nSkill Proficiencies: Choose 2: Athletics, Insight, Intimidation, Medicine, Persuasion, or Religion\nWeapon Proficiencies: Simple and Martial weapons\nArmor Training: Light, Medium, and Heavy armor and Shields\nStarting Equipment: Choose A or B: (A) Chain Mail, Shield, Longsword, 6 Javelins, Holy Symbol, Priest’s Pack, and 9 GP; or (B) 150 GP",
+      "source": "SRD 5.2.1 p. 53 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=53",
+      "levels": {
+        "1": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "core-traits",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.core-traits"
+          },
+          {
+            "id": "rest-healing",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:hit-dice.d10"
+          },
+          {
+            "id": "lay-on-hands",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.lay-on-hands"
+          },
+          {
+            "id": "spellcasting",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.spellcasting"
+          },
+          {
+            "id": "weapon-mastery",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.weapon-mastery"
+          }
+        ],
+        "2": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "fighting-style",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.fighting-style"
+          },
+          {
+            "id": "paladins-smite",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.paladins-smite"
+          }
+        ],
+        "3": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "channel-divinity",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.channel-divinity"
+          },
+          {
+            "id": "subclass",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.subclass"
+          }
+        ],
+        "4": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.ability-score-improvement"
+          }
+        ],
+        "5": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "extra-attack",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.extra-attack"
+          },
+          {
+            "id": "faithful-steed",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.faithful-steed"
+          }
+        ],
+        "6": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "aura-of-protection",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.aura-of-protection"
+          }
+        ],
+        "7": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          }
+        ],
+        "8": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.ability-score-improvement"
+          }
+        ],
+        "9": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "abjure-foes",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.abjure-foes"
+          }
+        ],
+        "10": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "aura-of-courage",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.aura-of-courage"
+          }
+        ],
+        "11": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "radiant-strikes",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.radiant-strikes"
+          }
+        ],
+        "12": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.ability-score-improvement"
+          }
+        ],
+        "13": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          }
+        ],
+        "14": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "restoring-touch",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.restoring-touch"
+          }
+        ],
+        "15": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          }
+        ],
+        "16": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.ability-score-improvement"
+          }
+        ],
+        "17": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          }
+        ],
+        "18": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "aura-expansion",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.aura-expansion"
+          }
+        ],
+        "19": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          },
+          {
+            "id": "epic-boon",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.epic-boon"
+          }
+        ],
+        "20": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:paladin.hit-points"
+          }
+        ]
+      },
+      "multiclassPrerequisites": {
+        "all": [
+          {
+            "stat": "strength",
+            "minimum": 13
+          },
+          {
+            "stat": "charisma",
+            "minimum": 13
+          }
+        ]
+      }
+    },
+    {
+      "id": "dnd5e:2024:ranger",
+      "revision": 1,
+      "name": "Ranger",
+      "description": "Primary Ability: Dexterity and Wisdom\nHit Point Die: D10 per Ranger level\nSaving Throw Proficiencies: Strength and Dexterity\nSkill Proficiencies: Choose 3: Animal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, or Survival\nWeapon Proficiencies: Simple and Martial weapons\nArmor Training: Light and Medium armor and Shields\nStarting Equipment: Choose A or B: (A) Studded Leather Armor, Scimitar, Shortsword, Longbow, 20 Arrows, Quiver, Druidic Focus (sprig of mistletoe), Explorer’s Pack, and 7 GP; or (B) 150 GP",
+      "source": "SRD 5.2.1 p. 57 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=57",
+      "levels": {
+        "1": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "core-traits",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.core-traits"
+          },
+          {
+            "id": "rest-healing",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:hit-dice.d10"
+          },
+          {
+            "id": "spellcasting",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.spellcasting"
+          },
+          {
+            "id": "favored-enemy",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.favored-enemy"
+          },
+          {
+            "id": "weapon-mastery",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.weapon-mastery"
+          }
+        ],
+        "2": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "deft-explorer",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.deft-explorer"
+          },
+          {
+            "id": "fighting-style",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.fighting-style"
+          }
+        ],
+        "3": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "subclass",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.subclass"
+          }
+        ],
+        "4": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.ability-score-improvement"
+          }
+        ],
+        "5": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "extra-attack",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.extra-attack"
+          }
+        ],
+        "6": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "roving",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.roving"
+          }
+        ],
+        "7": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          }
+        ],
+        "8": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.ability-score-improvement"
+          }
+        ],
+        "9": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "expertise",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.expertise"
+          }
+        ],
+        "10": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "tireless",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.tireless"
+          }
+        ],
+        "11": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          }
+        ],
+        "12": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.ability-score-improvement"
+          }
+        ],
+        "13": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "relentless-hunter",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.relentless-hunter"
+          }
+        ],
+        "14": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "natures-veil",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.natures-veil"
+          }
+        ],
+        "15": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          }
+        ],
+        "16": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.ability-score-improvement"
+          }
+        ],
+        "17": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "precise-hunter",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.precise-hunter"
+          }
+        ],
+        "18": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "feral-senses",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.feral-senses"
+          }
+        ],
+        "19": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "epic-boon",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.epic-boon"
+          }
+        ],
+        "20": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.hit-points"
+          },
+          {
+            "id": "foe-slayer",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:ranger.foe-slayer"
+          }
+        ]
+      },
+      "multiclassPrerequisites": {
+        "all": [
+          {
+            "stat": "dexterity",
+            "minimum": 13
+          },
+          {
+            "stat": "wisdom",
+            "minimum": 13
+          }
+        ]
+      }
+    },
+    {
+      "id": "dnd5e:2024:rogue",
+      "revision": 1,
+      "name": "Rogue",
+      "description": "Primary Ability: Dexterity\nHit Point Die: D8 per Rogue level\nSaving Throw Proficiencies: Dexterity and Intelligence\nSkill Proficiencies: Choose 4: Acrobatics, Athletics, Deception, Insight, Intimidation, Investigation, Perception, Persuasion, Sleight of Hand, or Stealth\nWeapon Proficiencies: Simple weapons and Martial weapons that have the Finesse or Light property\nTool Proficiencies: Thieves’ Tools\nArmor Training: Light armor\nStarting Equipment: Choose A or B: (A) Leather Armor, 2 Daggers, Short sword, Shortbow, 20 Arrows, Quiver, Thieves’ Tools, Burglar’s Pack, and 8 GP; or (B) 100 GP",
+      "source": "SRD 5.2.1 p. 61 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=61",
+      "levels": {
+        "1": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "core-traits",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.core-traits"
+          },
+          {
+            "id": "rest-healing",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:hit-dice.d8"
+          },
+          {
+            "id": "expertise",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.expertise"
+          },
+          {
+            "id": "sneak-attack",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.sneak-attack"
+          },
+          {
+            "id": "thieves-cant",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.thieves-cant"
+          },
+          {
+            "id": "weapon-mastery",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.weapon-mastery"
+          }
+        ],
+        "2": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "cunning-action",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.cunning-action"
+          }
+        ],
+        "3": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "steady-aim",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.steady-aim"
+          },
+          {
+            "id": "subclass",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.subclass"
+          }
+        ],
+        "4": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.ability-score-improvement"
+          }
+        ],
+        "5": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "cunning-strike",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.cunning-strike"
+          },
+          {
+            "id": "uncanny-dodge",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.uncanny-dodge"
+          }
+        ],
+        "6": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "expertise-6",
+            "kind": "chooseFeatures",
+            "minimum": 2,
+            "maximum": 2,
+            "candidates": {
+              "tags": [
+                "expertise"
+              ]
+            },
+            "retraining": {
+              "allowed": false
+            }
+          }
+        ],
+        "7": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "evasion",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.evasion"
+          },
+          {
+            "id": "reliable-talent",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.reliable-talent"
+          }
+        ],
+        "8": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.ability-score-improvement"
+          }
+        ],
+        "9": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          }
+        ],
+        "10": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.ability-score-improvement"
+          }
+        ],
+        "11": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "improved-cunning-strike",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.improved-cunning-strike"
+          }
+        ],
+        "12": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.ability-score-improvement"
+          }
+        ],
+        "13": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          }
+        ],
+        "14": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "devious-strikes",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.devious-strikes"
+          }
+        ],
+        "15": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "slippery-mind",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.slippery-mind"
+          }
+        ],
+        "16": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.ability-score-improvement"
+          }
+        ],
+        "17": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          }
+        ],
+        "18": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "elusive",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.elusive"
+          }
+        ],
+        "19": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "epic-boon",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.epic-boon"
+          }
+        ],
+        "20": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.hit-points"
+          },
+          {
+            "id": "stroke-of-luck",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:rogue.stroke-of-luck"
+          }
+        ]
+      },
+      "multiclassPrerequisites": {
+        "stat": "dexterity",
+        "minimum": 13
+      }
+    },
+    {
+      "id": "dnd5e:2024:sorcerer",
+      "revision": 1,
+      "name": "Sorcerer",
+      "description": "Primary Ability: Charisma\nHit Point Die: D6 per Sorcerer level\nSaving Throw Proficiencies: Constitution and Charisma\nSkill Proficiencies: Choose 2: Arcana, Deception, Insight, Intimidation, Persuasion, or Religion\nWeapon Proficiencies: Simple weapons\nArmor Training: None\nStarting Equipment: Choose A or B: (A) Spear, 2 Daggers, Arcane Focus (crystal), Dungeoneer’s Pack, and 28 GP; or (B) 50 GP",
+      "source": "SRD 5.2.1 p. 64 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=64",
+      "levels": {
+        "1": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          },
+          {
+            "id": "core-traits",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.core-traits"
+          },
+          {
+            "id": "rest-healing",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:hit-dice.d6"
+          },
+          {
+            "id": "spellcasting",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.spellcasting"
+          },
+          {
+            "id": "innate-sorcery",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.innate-sorcery"
+          }
+        ],
+        "2": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          },
+          {
+            "id": "font-of-magic",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.font-of-magic"
+          },
+          {
+            "id": "metamagic",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.metamagic"
+          }
+        ],
+        "3": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          },
+          {
+            "id": "subclass",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.subclass"
+          }
+        ],
+        "4": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.ability-score-improvement"
+          }
+        ],
+        "5": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          },
+          {
+            "id": "sorcerous-restoration",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.sorcerous-restoration"
+          }
+        ],
+        "6": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          }
+        ],
+        "7": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          },
+          {
+            "id": "sorcery-incarnate",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.sorcery-incarnate"
+          }
+        ],
+        "8": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.ability-score-improvement"
+          }
+        ],
+        "9": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          }
+        ],
+        "10": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          }
+        ],
+        "11": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          }
+        ],
+        "12": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.ability-score-improvement"
+          }
+        ],
+        "13": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          }
+        ],
+        "14": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          }
+        ],
+        "15": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          }
+        ],
+        "16": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.ability-score-improvement"
+          }
+        ],
+        "17": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          }
+        ],
+        "18": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          }
+        ],
+        "19": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          },
+          {
+            "id": "epic-boon",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.epic-boon"
+          }
+        ],
+        "20": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.hit-points"
+          },
+          {
+            "id": "arcane-apotheosis",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:sorcerer.arcane-apotheosis"
+          }
+        ]
+      },
+      "multiclassPrerequisites": {
+        "stat": "charisma",
+        "minimum": 13
+      }
+    },
+    {
+      "id": "dnd5e:2024:warlock",
+      "revision": 1,
+      "name": "Warlock",
+      "description": "Primary Ability: Charisma\nHit Point Die: D8 per Warlock level\nSaving Throw Proficiencies: Wisdom and Charisma\nSkill Proficiencies: Choose 2: Arcana, Deception, History, Intimidation, Investigation, Nature, or Religion\nWeapon Proficiencies: Simple weapons\nArmor Training: Light armor\nStarting Equipment: Choose A or B: (A) Leather Armor, Sickle, 2 Daggers, Arcane Focus (orb), Book (occult lore), Scholar’s Pack, and 15 GP; or (B) 100 GP",
+      "source": "SRD 5.2.1 p. 70 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=70",
+      "levels": {
+        "1": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "core-traits",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.core-traits"
+          },
+          {
+            "id": "rest-healing",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:hit-dice.d8"
+          },
+          {
+            "id": "eldritch-invocations",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.eldritch-invocations"
+          },
+          {
+            "id": "pact-magic",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.pact-magic"
+          }
+        ],
+        "2": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "magical-cunning",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.magical-cunning"
+          }
+        ],
+        "3": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "subclass",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.subclass"
+          }
+        ],
+        "4": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.ability-score-improvement"
+          }
+        ],
+        "5": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          }
+        ],
+        "6": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          }
+        ],
+        "7": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          }
+        ],
+        "8": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.ability-score-improvement"
+          }
+        ],
+        "9": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "contact-patron",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.contact-patron"
+          }
+        ],
+        "10": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          }
+        ],
+        "11": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "mystic-arcanum",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.mystic-arcanum"
+          }
+        ],
+        "12": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.ability-score-improvement"
+          }
+        ],
+        "13": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "arcanum-7",
+            "kind": "chooseFeatures",
+            "minimum": 1,
+            "maximum": 1,
+            "candidates": {
+              "tags": [
+                "warlock-arcanum-7"
+              ]
+            },
+            "retraining": {
+              "allowed": true
+            }
+          }
+        ],
+        "14": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          }
+        ],
+        "15": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "arcanum-8",
+            "kind": "chooseFeatures",
+            "minimum": 1,
+            "maximum": 1,
+            "candidates": {
+              "tags": [
+                "warlock-arcanum-8"
+              ]
+            },
+            "retraining": {
+              "allowed": true
+            }
+          }
+        ],
+        "16": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.ability-score-improvement"
+          }
+        ],
+        "17": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "arcanum-9",
+            "kind": "chooseFeatures",
+            "minimum": 1,
+            "maximum": 1,
+            "candidates": {
+              "tags": [
+                "warlock-arcanum-9"
+              ]
+            },
+            "retraining": {
+              "allowed": true
+            }
+          }
+        ],
+        "18": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          }
+        ],
+        "19": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "epic-boon",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.epic-boon"
+          }
+        ],
+        "20": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.hit-points"
+          },
+          {
+            "id": "eldritch-master",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:warlock.eldritch-master"
+          }
+        ]
+      },
+      "multiclassPrerequisites": {
+        "stat": "charisma",
+        "minimum": 13
+      }
+    },
+    {
+      "id": "dnd5e:2024:wizard",
+      "revision": 1,
+      "name": "Wizard",
+      "description": "Primary Ability: Intelligence\nHit Point Die: D6 per Wizard level\nSaving Throw Proficiencies: Intelligence and Wisdom\nSkill Proficiencies: Choose 2: Arcana, History, Insight, Investigation, Medicine, Nature, or Religion\nWeapon Proficiencies: Simple weapons\nArmor Training: None\nStarting Equipment: Choose A or B: (A) 2 Daggers, Arcane Focus (Quarterstaff), Robe, Spellbook, Scholar’s Pack, and 5 GP; or (B) 55 GP",
+      "source": "SRD 5.2.1 p. 77 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=77",
+      "levels": {
+        "1": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          },
+          {
+            "id": "core-traits",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.core-traits"
+          },
+          {
+            "id": "rest-healing",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:hit-dice.d6"
+          },
+          {
+            "id": "spellcasting",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.spellcasting"
+          },
+          {
+            "id": "ritual-adept",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.ritual-adept"
+          },
+          {
+            "id": "arcane-recovery",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.arcane-recovery"
+          }
+        ],
+        "2": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          },
+          {
+            "id": "scholar",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.scholar"
+          }
+        ],
+        "3": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          },
+          {
+            "id": "subclass",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.subclass"
+          }
+        ],
+        "4": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.ability-score-improvement"
+          }
+        ],
+        "5": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          },
+          {
+            "id": "memorize-spell",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.memorize-spell"
+          }
+        ],
+        "6": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          }
+        ],
+        "7": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          }
+        ],
+        "8": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.ability-score-improvement"
+          }
+        ],
+        "9": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          }
+        ],
+        "10": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          }
+        ],
+        "11": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          }
+        ],
+        "12": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.ability-score-improvement"
+          }
+        ],
+        "13": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          }
+        ],
+        "14": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          }
+        ],
+        "15": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          }
+        ],
+        "16": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          },
+          {
+            "id": "improvement",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.ability-score-improvement"
+          }
+        ],
+        "17": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          }
+        ],
+        "18": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          },
+          {
+            "id": "spell-mastery",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.spell-mastery"
+          }
+        ],
+        "19": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          },
+          {
+            "id": "epic-boon",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.epic-boon"
+          }
+        ],
+        "20": [
+          {
+            "id": "hit-points",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.hit-points"
+          },
+          {
+            "id": "signature-spells",
+            "kind": "grantFeature",
+            "feature": "dnd5e:2024:wizard.signature-spells"
+          }
+        ]
+      },
+      "multiclassPrerequisites": {
+        "stat": "intelligence",
+        "minimum": 13
+      }
+    }
+  ]
+}

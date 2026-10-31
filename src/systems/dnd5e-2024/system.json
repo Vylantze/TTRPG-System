@@ -1,0 +1,2218 @@
+{
+  "format": "ttrpg-system",
+  "contentVersion": "1.0.0",
+  "version": 1,
+  "id": "dnd5e:2024-srd5.2.1",
+  "revision": 1,
+  "options": {
+    "abilityMethod": {
+      "default": "standard-array",
+      "values": [
+        "standard-array",
+        "point-buy",
+        "manual"
+      ]
+    },
+    "multiclass": {
+      "default": false,
+      "values": [
+        false,
+        true
+      ]
+    }
+  },
+  "features": [
+    {
+      "$ref": "features.json"
+    },
+    {
+      "$ref": "class-features.json"
+    },
+    {
+      "$ref": "spells.json"
+    }
+  ],
+  "configurations": [
+    {
+      "options": {
+        "abilityMethod": "standard-array",
+        "multiclass": false
+      },
+      "id": "dnd5e:2024:catalogue:standard-array:multiclass-false",
+      "revision": 1,
+      "system": {
+        "id": "dnd5e:2024-srd5.2.1",
+        "revision": 1,
+        "name": "DnD5e 2024",
+        "allowMultipleClasses": false,
+        "validation": [
+          {
+            "id": "standard-array",
+            "message": "Assign the Standard Array 15, 14, 13, 12, 10, 8 exactly once before background adjustments.",
+            "requirement": {
+              "expression": {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.strength"
+                                },
+                                15
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.dexterity"
+                                },
+                                15
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.constitution"
+                                },
+                                15
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.intelligence"
+                                },
+                                15
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.wisdom"
+                                },
+                                15
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.charisma"
+                                },
+                                15
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          }
+                        ]
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.strength"
+                                },
+                                14
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.dexterity"
+                                },
+                                14
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.constitution"
+                                },
+                                14
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.intelligence"
+                                },
+                                14
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.wisdom"
+                                },
+                                14
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.charisma"
+                                },
+                                14
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          }
+                        ]
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.strength"
+                                },
+                                13
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.dexterity"
+                                },
+                                13
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.constitution"
+                                },
+                                13
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.intelligence"
+                                },
+                                13
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.wisdom"
+                                },
+                                13
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.charisma"
+                                },
+                                13
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          }
+                        ]
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.strength"
+                                },
+                                12
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.dexterity"
+                                },
+                                12
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.constitution"
+                                },
+                                12
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.intelligence"
+                                },
+                                12
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.wisdom"
+                                },
+                                12
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.charisma"
+                                },
+                                12
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          }
+                        ]
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.strength"
+                                },
+                                10
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.dexterity"
+                                },
+                                10
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.constitution"
+                                },
+                                10
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.intelligence"
+                                },
+                                10
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.wisdom"
+                                },
+                                10
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.charisma"
+                                },
+                                10
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          }
+                        ]
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.strength"
+                                },
+                                8
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.dexterity"
+                                },
+                                8
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.constitution"
+                                },
+                                8
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.intelligence"
+                                },
+                                8
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.wisdom"
+                                },
+                                8
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.charisma"
+                                },
+                                8
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          }
+                        ]
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "level-range",
+            "message": "DnD5e 2024 characters have total level 1–20.",
+            "requirement": {
+              "expression": {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "lte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      20
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "stats": {
+          "$ref": "definitions.json#/stats"
+        },
+        "classes": {
+          "$ref": "definitions.json#/classes"
+        },
+        "allowDuplicateClasses": {
+          "$ref": "definitions.json#/allowDuplicateClasses"
+        },
+        "characterLevel": {
+          "$ref": "definitions.json#/characterLevel"
+        },
+        "contextDefaults": {
+          "$ref": "definitions.json#/contextDefaults"
+        },
+        "advancement": {
+          "$ref": "definitions.json#/advancement"
+        },
+        "commandRules": {
+          "$ref": "definitions.json#/commandRules"
+        },
+        "tagDisplayNames": {
+          "$ref": "definitions.json#/tagDisplayNames"
+        },
+        "sheetSections": {
+          "$ref": "definitions.json#/sheetSections"
+        },
+        "featureCategories": {
+          "$ref": "definitions.json#/featureCategories"
+        },
+        "currency": {
+          "$ref": "definitions.json#/currency"
+        },
+        "spellDisplay": {
+          "$ref": "definitions.json#/spellDisplay"
+        },
+        "importantDetails": {
+          "$ref": "definitions.json#/importantDetails"
+        },
+        "sheetTabs": {
+          "$ref": "definitions.json#/sheetTabs"
+        },
+        "healingFeaturesTag": {
+          "$ref": "definitions.json#/healingFeaturesTag"
+        },
+        "terminology": {
+          "$ref": "definitions.json#/terminology"
+        },
+        "equipmentRules": {
+          "$ref": "definitions.json#/equipmentRules"
+        },
+        "resetConditions": {
+          "$ref": "definitions.json#/resetConditions"
+        },
+        "healthRules": {
+          "$ref": "definitions.json#/healthRules"
+        },
+        "resetButtons": {
+          "$ref": "definitions.json#/resetButtons"
+        },
+        "sheetDisplay": {
+          "$ref": "definitions.json#/sheetDisplay"
+        }
+      },
+      "classes": {
+        "$ref": "classes.json"
+      }
+    },
+    {
+      "options": {
+        "abilityMethod": "standard-array",
+        "multiclass": true
+      },
+      "id": "dnd5e:2024:catalogue:standard-array:multiclass-true",
+      "revision": 1,
+      "system": {
+        "id": "dnd5e:2024-srd5.2.1",
+        "revision": 1,
+        "name": "DnD5e 2024",
+        "allowMultipleClasses": true,
+        "validation": [
+          {
+            "id": "standard-array",
+            "message": "Assign the Standard Array 15, 14, 13, 12, 10, 8 exactly once before background adjustments.",
+            "requirement": {
+              "expression": {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.strength"
+                                },
+                                15
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.dexterity"
+                                },
+                                15
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.constitution"
+                                },
+                                15
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.intelligence"
+                                },
+                                15
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.wisdom"
+                                },
+                                15
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.charisma"
+                                },
+                                15
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          }
+                        ]
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.strength"
+                                },
+                                14
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.dexterity"
+                                },
+                                14
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.constitution"
+                                },
+                                14
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.intelligence"
+                                },
+                                14
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.wisdom"
+                                },
+                                14
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.charisma"
+                                },
+                                14
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          }
+                        ]
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.strength"
+                                },
+                                13
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.dexterity"
+                                },
+                                13
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.constitution"
+                                },
+                                13
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.intelligence"
+                                },
+                                13
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.wisdom"
+                                },
+                                13
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.charisma"
+                                },
+                                13
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          }
+                        ]
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.strength"
+                                },
+                                12
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.dexterity"
+                                },
+                                12
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.constitution"
+                                },
+                                12
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.intelligence"
+                                },
+                                12
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.wisdom"
+                                },
+                                12
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.charisma"
+                                },
+                                12
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          }
+                        ]
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.strength"
+                                },
+                                10
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.dexterity"
+                                },
+                                10
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.constitution"
+                                },
+                                10
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.intelligence"
+                                },
+                                10
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.wisdom"
+                                },
+                                10
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.charisma"
+                                },
+                                10
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          }
+                        ]
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.strength"
+                                },
+                                8
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.dexterity"
+                                },
+                                8
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.constitution"
+                                },
+                                8
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.intelligence"
+                                },
+                                8
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.wisdom"
+                                },
+                                8
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          },
+                          {
+                            "if": {
+                              "op": "eq",
+                              "args": [
+                                {
+                                  "stat": "base.charisma"
+                                },
+                                8
+                              ]
+                            },
+                            "then": 1,
+                            "else": 0
+                          }
+                        ]
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "level-range",
+            "message": "DnD5e 2024 characters have total level 1–20.",
+            "requirement": {
+              "expression": {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "lte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      20
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "stats": {
+          "$ref": "definitions.json#/stats"
+        },
+        "classes": {
+          "$ref": "definitions.json#/classes"
+        },
+        "allowDuplicateClasses": {
+          "$ref": "definitions.json#/allowDuplicateClasses"
+        },
+        "characterLevel": {
+          "$ref": "definitions.json#/characterLevel"
+        },
+        "contextDefaults": {
+          "$ref": "definitions.json#/contextDefaults"
+        },
+        "advancement": {
+          "$ref": "definitions.json#/advancement"
+        },
+        "commandRules": {
+          "$ref": "definitions.json#/commandRules"
+        },
+        "tagDisplayNames": {
+          "$ref": "definitions.json#/tagDisplayNames"
+        },
+        "sheetSections": {
+          "$ref": "definitions.json#/sheetSections"
+        },
+        "featureCategories": {
+          "$ref": "definitions.json#/featureCategories"
+        },
+        "currency": {
+          "$ref": "definitions.json#/currency"
+        },
+        "spellDisplay": {
+          "$ref": "definitions.json#/spellDisplay"
+        },
+        "importantDetails": {
+          "$ref": "definitions.json#/importantDetails"
+        },
+        "sheetTabs": {
+          "$ref": "definitions.json#/sheetTabs"
+        },
+        "healingFeaturesTag": {
+          "$ref": "definitions.json#/healingFeaturesTag"
+        },
+        "terminology": {
+          "$ref": "definitions.json#/terminology"
+        },
+        "equipmentRules": {
+          "$ref": "definitions.json#/equipmentRules"
+        },
+        "resetConditions": {
+          "$ref": "definitions.json#/resetConditions"
+        },
+        "healthRules": {
+          "$ref": "definitions.json#/healthRules"
+        },
+        "resetButtons": {
+          "$ref": "definitions.json#/resetButtons"
+        },
+        "sheetDisplay": {
+          "$ref": "definitions.json#/sheetDisplay"
+        }
+      },
+      "classes": {
+        "$ref": "classes.json"
+      }
+    },
+    {
+      "options": {
+        "abilityMethod": "point-buy",
+        "multiclass": false
+      },
+      "id": "dnd5e:2024:catalogue:point-buy:multiclass-false",
+      "revision": 1,
+      "system": {
+        "id": "dnd5e:2024-srd5.2.1",
+        "revision": 1,
+        "name": "DnD5e 2024",
+        "allowMultipleClasses": false,
+        "validation": [
+          {
+            "id": "point-buy",
+            "message": "Point buy permits base scores 8–15 and a total cost of at most 27.",
+            "requirement": {
+              "expression": {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "base.strength"
+                          },
+                          8
+                        ]
+                      },
+                      {
+                        "op": "lte",
+                        "args": [
+                          {
+                            "stat": "base.strength"
+                          },
+                          15
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "base.dexterity"
+                          },
+                          8
+                        ]
+                      },
+                      {
+                        "op": "lte",
+                        "args": [
+                          {
+                            "stat": "base.dexterity"
+                          },
+                          15
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "base.constitution"
+                          },
+                          8
+                        ]
+                      },
+                      {
+                        "op": "lte",
+                        "args": [
+                          {
+                            "stat": "base.constitution"
+                          },
+                          15
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "base.intelligence"
+                          },
+                          8
+                        ]
+                      },
+                      {
+                        "op": "lte",
+                        "args": [
+                          {
+                            "stat": "base.intelligence"
+                          },
+                          15
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "base.wisdom"
+                          },
+                          8
+                        ]
+                      },
+                      {
+                        "op": "lte",
+                        "args": [
+                          {
+                            "stat": "base.wisdom"
+                          },
+                          15
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "base.charisma"
+                          },
+                          8
+                        ]
+                      },
+                      {
+                        "op": "lte",
+                        "args": [
+                          {
+                            "stat": "base.charisma"
+                          },
+                          15
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "lte",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "table": "pointBuy",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "base.strength"
+                            }
+                          },
+                          {
+                            "table": "pointBuy",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "base.dexterity"
+                            }
+                          },
+                          {
+                            "table": "pointBuy",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "base.constitution"
+                            }
+                          },
+                          {
+                            "table": "pointBuy",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "base.intelligence"
+                            }
+                          },
+                          {
+                            "table": "pointBuy",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "base.wisdom"
+                            }
+                          },
+                          {
+                            "table": "pointBuy",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "base.charisma"
+                            }
+                          }
+                        ]
+                      },
+                      27
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "level-range",
+            "message": "DnD5e 2024 characters have total level 1–20.",
+            "requirement": {
+              "expression": {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "lte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      20
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "stats": {
+          "$ref": "definitions.json#/stats"
+        },
+        "classes": {
+          "$ref": "definitions.json#/classes"
+        },
+        "allowDuplicateClasses": {
+          "$ref": "definitions.json#/allowDuplicateClasses"
+        },
+        "characterLevel": {
+          "$ref": "definitions.json#/characterLevel"
+        },
+        "contextDefaults": {
+          "$ref": "definitions.json#/contextDefaults"
+        },
+        "advancement": {
+          "$ref": "definitions.json#/advancement"
+        },
+        "commandRules": {
+          "$ref": "definitions.json#/commandRules"
+        },
+        "tagDisplayNames": {
+          "$ref": "definitions.json#/tagDisplayNames"
+        },
+        "sheetSections": {
+          "$ref": "definitions.json#/sheetSections"
+        },
+        "featureCategories": {
+          "$ref": "definitions.json#/featureCategories"
+        },
+        "currency": {
+          "$ref": "definitions.json#/currency"
+        },
+        "spellDisplay": {
+          "$ref": "definitions.json#/spellDisplay"
+        },
+        "importantDetails": {
+          "$ref": "definitions.json#/importantDetails"
+        },
+        "sheetTabs": {
+          "$ref": "definitions.json#/sheetTabs"
+        },
+        "healingFeaturesTag": {
+          "$ref": "definitions.json#/healingFeaturesTag"
+        },
+        "terminology": {
+          "$ref": "definitions.json#/terminology"
+        },
+        "equipmentRules": {
+          "$ref": "definitions.json#/equipmentRules"
+        },
+        "resetConditions": {
+          "$ref": "definitions.json#/resetConditions"
+        },
+        "healthRules": {
+          "$ref": "definitions.json#/healthRules"
+        },
+        "resetButtons": {
+          "$ref": "definitions.json#/resetButtons"
+        },
+        "sheetDisplay": {
+          "$ref": "definitions.json#/sheetDisplay"
+        }
+      },
+      "classes": {
+        "$ref": "classes.json"
+      }
+    },
+    {
+      "options": {
+        "abilityMethod": "point-buy",
+        "multiclass": true
+      },
+      "id": "dnd5e:2024:catalogue:point-buy:multiclass-true",
+      "revision": 1,
+      "system": {
+        "id": "dnd5e:2024-srd5.2.1",
+        "revision": 1,
+        "name": "DnD5e 2024",
+        "allowMultipleClasses": true,
+        "validation": [
+          {
+            "id": "point-buy",
+            "message": "Point buy permits base scores 8–15 and a total cost of at most 27.",
+            "requirement": {
+              "expression": {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "base.strength"
+                          },
+                          8
+                        ]
+                      },
+                      {
+                        "op": "lte",
+                        "args": [
+                          {
+                            "stat": "base.strength"
+                          },
+                          15
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "base.dexterity"
+                          },
+                          8
+                        ]
+                      },
+                      {
+                        "op": "lte",
+                        "args": [
+                          {
+                            "stat": "base.dexterity"
+                          },
+                          15
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "base.constitution"
+                          },
+                          8
+                        ]
+                      },
+                      {
+                        "op": "lte",
+                        "args": [
+                          {
+                            "stat": "base.constitution"
+                          },
+                          15
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "base.intelligence"
+                          },
+                          8
+                        ]
+                      },
+                      {
+                        "op": "lte",
+                        "args": [
+                          {
+                            "stat": "base.intelligence"
+                          },
+                          15
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "base.wisdom"
+                          },
+                          8
+                        ]
+                      },
+                      {
+                        "op": "lte",
+                        "args": [
+                          {
+                            "stat": "base.wisdom"
+                          },
+                          15
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "base.charisma"
+                          },
+                          8
+                        ]
+                      },
+                      {
+                        "op": "lte",
+                        "args": [
+                          {
+                            "stat": "base.charisma"
+                          },
+                          15
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "lte",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "table": "pointBuy",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "base.strength"
+                            }
+                          },
+                          {
+                            "table": "pointBuy",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "base.dexterity"
+                            }
+                          },
+                          {
+                            "table": "pointBuy",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "base.constitution"
+                            }
+                          },
+                          {
+                            "table": "pointBuy",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "base.intelligence"
+                            }
+                          },
+                          {
+                            "table": "pointBuy",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "base.wisdom"
+                            }
+                          },
+                          {
+                            "table": "pointBuy",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "base.charisma"
+                            }
+                          }
+                        ]
+                      },
+                      27
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "id": "level-range",
+            "message": "DnD5e 2024 characters have total level 1–20.",
+            "requirement": {
+              "expression": {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "lte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      20
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "stats": {
+          "$ref": "definitions.json#/stats"
+        },
+        "classes": {
+          "$ref": "definitions.json#/classes"
+        },
+        "allowDuplicateClasses": {
+          "$ref": "definitions.json#/allowDuplicateClasses"
+        },
+        "characterLevel": {
+          "$ref": "definitions.json#/characterLevel"
+        },
+        "contextDefaults": {
+          "$ref": "definitions.json#/contextDefaults"
+        },
+        "advancement": {
+          "$ref": "definitions.json#/advancement"
+        },
+        "commandRules": {
+          "$ref": "definitions.json#/commandRules"
+        },
+        "tagDisplayNames": {
+          "$ref": "definitions.json#/tagDisplayNames"
+        },
+        "sheetSections": {
+          "$ref": "definitions.json#/sheetSections"
+        },
+        "featureCategories": {
+          "$ref": "definitions.json#/featureCategories"
+        },
+        "currency": {
+          "$ref": "definitions.json#/currency"
+        },
+        "spellDisplay": {
+          "$ref": "definitions.json#/spellDisplay"
+        },
+        "importantDetails": {
+          "$ref": "definitions.json#/importantDetails"
+        },
+        "sheetTabs": {
+          "$ref": "definitions.json#/sheetTabs"
+        },
+        "healingFeaturesTag": {
+          "$ref": "definitions.json#/healingFeaturesTag"
+        },
+        "terminology": {
+          "$ref": "definitions.json#/terminology"
+        },
+        "equipmentRules": {
+          "$ref": "definitions.json#/equipmentRules"
+        },
+        "resetConditions": {
+          "$ref": "definitions.json#/resetConditions"
+        },
+        "healthRules": {
+          "$ref": "definitions.json#/healthRules"
+        },
+        "resetButtons": {
+          "$ref": "definitions.json#/resetButtons"
+        },
+        "sheetDisplay": {
+          "$ref": "definitions.json#/sheetDisplay"
+        }
+      },
+      "classes": {
+        "$ref": "classes.json"
+      }
+    },
+    {
+      "options": {
+        "abilityMethod": "manual",
+        "multiclass": false
+      },
+      "id": "dnd5e:2024:catalogue:manual:multiclass-false",
+      "revision": 1,
+      "system": {
+        "id": "dnd5e:2024-srd5.2.1",
+        "revision": 1,
+        "name": "DnD5e 2024",
+        "allowMultipleClasses": false,
+        "validation": [
+          {
+            "id": "level-range",
+            "message": "DnD5e 2024 characters have total level 1–20.",
+            "requirement": {
+              "expression": {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "lte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      20
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "stats": {
+          "$ref": "definitions.json#/stats"
+        },
+        "classes": {
+          "$ref": "definitions.json#/classes"
+        },
+        "allowDuplicateClasses": {
+          "$ref": "definitions.json#/allowDuplicateClasses"
+        },
+        "characterLevel": {
+          "$ref": "definitions.json#/characterLevel"
+        },
+        "contextDefaults": {
+          "$ref": "definitions.json#/contextDefaults"
+        },
+        "advancement": {
+          "$ref": "definitions.json#/advancement"
+        },
+        "commandRules": {
+          "$ref": "definitions.json#/commandRules"
+        },
+        "tagDisplayNames": {
+          "$ref": "definitions.json#/tagDisplayNames"
+        },
+        "sheetSections": {
+          "$ref": "definitions.json#/sheetSections"
+        },
+        "featureCategories": {
+          "$ref": "definitions.json#/featureCategories"
+        },
+        "currency": {
+          "$ref": "definitions.json#/currency"
+        },
+        "spellDisplay": {
+          "$ref": "definitions.json#/spellDisplay"
+        },
+        "importantDetails": {
+          "$ref": "definitions.json#/importantDetails"
+        },
+        "sheetTabs": {
+          "$ref": "definitions.json#/sheetTabs"
+        },
+        "healingFeaturesTag": {
+          "$ref": "definitions.json#/healingFeaturesTag"
+        },
+        "terminology": {
+          "$ref": "definitions.json#/terminology"
+        },
+        "equipmentRules": {
+          "$ref": "definitions.json#/equipmentRules"
+        },
+        "resetConditions": {
+          "$ref": "definitions.json#/resetConditions"
+        },
+        "healthRules": {
+          "$ref": "definitions.json#/healthRules"
+        },
+        "resetButtons": {
+          "$ref": "definitions.json#/resetButtons"
+        },
+        "sheetDisplay": {
+          "$ref": "definitions.json#/sheetDisplay"
+        }
+      },
+      "classes": {
+        "$ref": "classes.json"
+      }
+    },
+    {
+      "options": {
+        "abilityMethod": "manual",
+        "multiclass": true
+      },
+      "id": "dnd5e:2024:catalogue:manual:multiclass-true",
+      "revision": 1,
+      "system": {
+        "id": "dnd5e:2024-srd5.2.1",
+        "revision": 1,
+        "name": "DnD5e 2024",
+        "allowMultipleClasses": true,
+        "validation": [
+          {
+            "id": "level-range",
+            "message": "DnD5e 2024 characters have total level 1–20.",
+            "requirement": {
+              "expression": {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      1
+                    ]
+                  },
+                  {
+                    "op": "lte",
+                    "args": [
+                      {
+                        "context": "characterLevel"
+                      },
+                      20
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "stats": {
+          "$ref": "definitions.json#/stats"
+        },
+        "classes": {
+          "$ref": "definitions.json#/classes"
+        },
+        "allowDuplicateClasses": {
+          "$ref": "definitions.json#/allowDuplicateClasses"
+        },
+        "characterLevel": {
+          "$ref": "definitions.json#/characterLevel"
+        },
+        "contextDefaults": {
+          "$ref": "definitions.json#/contextDefaults"
+        },
+        "advancement": {
+          "$ref": "definitions.json#/advancement"
+        },
+        "commandRules": {
+          "$ref": "definitions.json#/commandRules"
+        },
+        "tagDisplayNames": {
+          "$ref": "definitions.json#/tagDisplayNames"
+        },
+        "sheetSections": {
+          "$ref": "definitions.json#/sheetSections"
+        },
+        "featureCategories": {
+          "$ref": "definitions.json#/featureCategories"
+        },
+        "currency": {
+          "$ref": "definitions.json#/currency"
+        },
+        "spellDisplay": {
+          "$ref": "definitions.json#/spellDisplay"
+        },
+        "importantDetails": {
+          "$ref": "definitions.json#/importantDetails"
+        },
+        "sheetTabs": {
+          "$ref": "definitions.json#/sheetTabs"
+        },
+        "healingFeaturesTag": {
+          "$ref": "definitions.json#/healingFeaturesTag"
+        },
+        "terminology": {
+          "$ref": "definitions.json#/terminology"
+        },
+        "equipmentRules": {
+          "$ref": "definitions.json#/equipmentRules"
+        },
+        "resetConditions": {
+          "$ref": "definitions.json#/resetConditions"
+        },
+        "healthRules": {
+          "$ref": "definitions.json#/healthRules"
+        },
+        "resetButtons": {
+          "$ref": "definitions.json#/resetButtons"
+        },
+        "sheetDisplay": {
+          "$ref": "definitions.json#/sheetDisplay"
+        }
+      },
+      "classes": {
+        "$ref": "classes.json"
+      }
+    }
+  ],
+  "blocks": {
+    "$ref": "blocks.json"
+  },
+  "items": {
+    "$ref": "items.json"
+  },
+  "itemFeatures": {
+    "$ref": "item-features.json"
+  },
+  "assetVersions": {
+    "blocks.json": "1.0.0",
+    "class-features.json": "1.0.0",
+    "classes.json": "1.0.0",
+    "definitions.json": "1.0.0",
+    "features.json": "1.0.0",
+    "item-features.json": "1.0.0",
+    "items.json": "1.0.0",
+    "multiclass-sample.json": "1.0.0",
+    "spells.json": "1.0.0",
+    "starter-characters.json": "1.0.0"
+  }
+}

@@ -1,10 +1,10 @@
 # DnD5e System Comparison
 
-The canonical System documents are [DnD5e 2014 System](dnd5e-2014-system.md) and [DnD5e 2024 System](dnd5e-2024-system.md). This document compares those two Systems; it does not define a combined DnD5e System. [PF2e System](pf2e-system.md) follows them in the implementation order.
+The canonical System document is [DnD5e 2024 System](dnd5e-2024-system.md). This document compares the 2014 and 2024 rules editions as design reference; only DnD5e 2024 is implemented. [PF2e System](pf2e-system.md) follows it in the implementation order.
 
-Dungeons and Dragons 5e, DnD5e, and 5e are interchangeable project terms. The first implemented system will have two separate Systems: DnD5e 2014 and DnD5e 2024. Both precede PF2e. Build the 2014 system first, then the 2024 system against the same generic engine, so differences become explicit system data and policies. React follows the engine and the 5e character-building contracts.
+Dungeons and Dragons 5e, DnD5e, and 5e are interchangeable project terms. The 2014 rules informed the generic engine; their System was removed on 2026-10-31, and DnD5e 2024 is the implemented 5e System, built against the same generic engine so rules differences are explicit System data and policies.
 
-The generic engine and the first DnD5e 2014 character-building milestone are implemented; see its canonical System document for coverage. The initial distributable catalogues target SRD content rather than every published supplement. The official SRD index provides SRD 5.1 and SRD 5.2.1; use the former for the 2014 baseline and the latter for the revised baseline. Retain document revision and attribution with imported content. Official Basic Rules are also authorized study references. [Official SRD index](https://www.dndbeyond.com/srd).
+The generic engine and DnD5e 2024 are implemented; see its canonical System document for coverage. The distributable catalogue targets SRD 5.2.1 content rather than every published supplement. Retain document revision and attribution with imported content. Official Basic Rules are also authorized study references. [Official SRD index](https://www.dndbeyond.com/srd).
 
 ## Shared rules and model implications
 

@@ -2,7 +2,7 @@
 
 A class is a progression of Features. Each level contains independent grants and choices; each Feature can grant other Features, offer further choices, and contain small mechanical components. A character stores its acquired instances and choices separately from reusable definitions. Numeric stats are defined by the rules system and calculated from basic inputs, formulas, and Feature effects.
 
-This specification defines the generic model, now implemented by the [TypeScript engine](engine.md). Dungeons and Dragons 5e, DnD5e, and 5e refer to the same system. Implement separate 2014 and 2024 5e systems first, before PF2e. Pathfinder2e and PF2e refer to the same system. The engine must not require fixed ability names, proficiency ranks, class names, or a particular action economy.
+This specification defines the generic model, now implemented by the [TypeScript engine](engine.md). Dungeons and Dragons 5e, DnD5e, and 5e refer to the same system. DnD5e 2024 is implemented first, before PF2e. Pathfinder2e and PF2e refer to the same system. The engine must not require fixed ability names, proficiency ranks, class names, or a particular action economy.
 
 ## Scope and decisions
 
@@ -28,7 +28,7 @@ Do not copy Anime5e's fixed ability calculations or class instances as the gener
 
 ## Core entities
 
-DnD5e 2014, DnD5e 2024, and PF2e are Systems. Their canonical documents are [DnD5e 2014 System](systems/dnd5e-2014-system.md), [DnD5e 2024 System](systems/dnd5e-2024-system.md), and [PF2e System](systems/pf2e-system.md). Each is represented by a `SystemDefinition`; the character pins its System ID and revision.
+DnD5e 2024 and PF2e are Systems. Their canonical documents are [DnD5e 2024 System](systems/dnd5e-2024-system.md) and [PF2e System](systems/pf2e-system.md). Each is represented by a `SystemDefinition`; the character pins its System ID and revision.
 
 | Entity | Responsibility |
 | --- | --- |
@@ -465,13 +465,13 @@ Acceptance scenarios for the UI include creating and reopening a complete charac
 ### Implementation sequence
 
 1. Formal schemas, engine evaluation, resource resolution, transactions, and serialization, with an invented example catalogue.
-2. First 2014 JSON milestone using authorized official rules and SRDs, following the [DnD5e System comparison](systems/dnd5e-system-comparison.md).
+2. DnD5e 2024 JSON from SRD 5.2.1, following the [DnD5e System comparison](systems/dnd5e-system-comparison.md).
 3. React application shell, loadable JSON Systems, Class and Feature browsing, character builder, sheet, local persistence, import/export, retraining previews, and resource commands.
 4. Extend the UI with custom Feature authoring, expression and table controls, previews, local catalogue revisions, and migrations.
-5. Complete remaining 2014 content and implement the separate DnD5e 2024 System.
+5. Add further DnD5e 2024 content from the user's list of options, as names, mechanics and links.
 6. PF2e System and converted content after both 5e Systems satisfy their character-building acceptance criteria.
 
-The generic engine and the first DnD5e 2014 character-building milestone are implemented. The 2014 catalogue supports Fighter, Rogue, Wizard, SRD racial options, Acolyte, and Wizard spell selections; its canonical document records calculated and descriptive coverage. The React UI baseline is implemented now, before completing the remaining 2014 classes and implementing DnD5e 2024 or PF2e. Structured Feature authoring remains future work.
+The generic engine and the DnD5e 2024 System are implemented. The 2024 catalogue supports the twelve SRD classes, species, backgrounds, feats and spell selections; its canonical document records calculated and descriptive coverage. Structured Feature authoring remains future work.
 
 ### Loadable JSON Systems
 

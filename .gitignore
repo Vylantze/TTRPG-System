@@ -5,3 +5,5 @@ coverage/
 *.tsbuildinfo
 .reference-cache/
 __pycache__/
+# Removed DnD5e 2014 data, kept locally and never committed.
+local-archive/

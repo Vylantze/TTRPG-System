@@ -3,7 +3,7 @@ import { performance } from 'node:perf_hooks';
 import { loadSystemFile, SystemRegistry } from '@/dist/index.js';
 import { retainSystemSnapshot } from '@/dist/system-snapshot.js';
 
-const root = new URL('../src/systems/dnd5e-2014/', import.meta.url);
+const root = new URL('../src/systems/dnd5e-2024/', import.meta.url);
 const manifest = await readFile(new URL('system.json', root), 'utf8');
 async function measure(name, task) {
   const start = performance.now();

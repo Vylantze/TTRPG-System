@@ -4,8 +4,8 @@ import assert from 'node:assert/strict';
 import { Engine, parseSystemFile, validateCatalogue } from '@/dist/index.js';
 import { catalogue as fixture } from '@/examples/catalogue.js';
 
-const file = readSystem(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url));
-const feature = (name) => file.features.find((f) => f.id === `dnd5e:2014:${name}`);
+const file = readSystem(new URL('../src/systems/dnd5e-2024/system.json', import.meta.url));
+const feature = (name) => file.features.find((f) => f.id === `dnd5e:2024:${name}`);
 
 test('text link contexts reject malformed metadata', () => {
   for (const context of [{}, { before: [] }, { after: [' '] }, { before: [42] }, { unknown: ['spell'] }]) {
@@ -15,86 +15,58 @@ test('text link contexts reject malformed metadata', () => {
   }
 });
 
-test('2014 JSON preserves SRD descriptions and plain-text credits for licensed-only content', () => {
+test('2024 JSON quotes SRD 5.2.1 with page sources and has no paid or third-party content', () => {
   parseSystemFile(file);
-  assert.doesNotMatch(JSON.stringify(file), /https?:\/\/(?:[\w-]+\.)*(?:dndbeyond\.com|roll20\.net)\b/i);
+  // The only external host is the SRD PDF itself.
+  const urls = [...JSON.stringify(file).matchAll(/https?:\/\/[^\s"),]+/g)].map((match) => match[0].split('#')[0]);
+  assert.deepEqual([...new Set(urls)], ['https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf']);
+  const internal = new Set(['dnd5e:2024:tables', 'dnd5e:2024:resource.pact-slot']);
   for (const f of file.features) {
-    const externalBackground = /^dnd5e:2014:background(?:-trait)?\.(noble|soldier|criminal|folk-hero)$/.test(f.id);
-    const sheetTracker = ['resource.temporary-hit-points', 'resource.death-save.successes', 'resource.death-save.failures'].some((id) => f.id === `dnd5e:2014:${id}`);
-    if (sheetTracker) {
-      assert.ok(f.components.length > 0 && f.components.every((component) => component.kind === 'trackResource'), f.id);
-      assert.equal(f.description, undefined, 'Internal sheet trackers do not duplicate source prose');
-    } else if (f.source && !/SRD 5.1|StarterSet_Charactersv2/.test(f.source)) assert.equal(f.description, undefined, f.id);
-    else if (externalBackground) assert.match(f.source, /StarterSet_Charactersv2.pdf#page=/);
-    else assert.ok(f.description?.trim() || f.textReferences?.length, f.id);
+    if (f.description) assert.match(f.source, /^SRD 5\.2\.1 p\. \d+ \(CC BY 4\.0\).*#page=\d+$/, f.id);
+    if (internal.has(f.id)) continue;
+    assert.ok(f.description?.trim() || f.textReferences?.length || f.mechanicalSummary?.length || f.components.some((c) => c.kind === 'describe'), f.id);
     assert.ok(f.displayName?.trim(), f.id);
   }
   for (const config of file.configurations) for (const cls of config.classes) {
-    if (cls.id === 'dnd5e:2014:artificer') {
-      assert.equal(cls.description, undefined);
-      assert.match(cls.source, /Tasha’s Cauldron of Everything/);
-      continue;
-    }
-    if (cls.id === 'dnd5e:2014:blood-hunter') {
-      assert.equal(cls.description, undefined);
-      assert.match(cls.source, /Critical Role.*partner content/);
-      continue;
-    }
-    assert.match(cls.description, /Hit Points at 1st Level/);
-    assert.match(cls.description, /Equipment/);
-    assert.match(cls.source, /SRD 5.1/);
-    assert.doesNotMatch(cls.description, /20th \+6/, 'PDF progression tables must not spill into introductory prose');
+    assert.match(cls.description, /^Primary Ability: .+\nHit Point Die: D\d+ per /, cls.name);
+    assert.match(cls.description, /\nStarting Equipment: Choose /, cls.name);
+    assert.match(cls.source, /SRD 5\.2\.1/);
   }
-  assert.match(feature('fighter.second-wind').description, /1d10 \+ your fighter level/);
-  assert.match(feature('rogue.thief').description, /Second-Story Work/);
-  assert.equal((feature('ability-score-improvement').description.match(/Ability Score Improvement\n/g) ?? []).length, 3);
-  assert.doesNotMatch(feature('wizard.overchannel').description, /Your Spellbook/);
-  assert.match(feature('wizard.spellcasting').description, /Copying a Spell into the Book/);
-  assert.match(file.configurations[0].classes.find((c) => c.name === 'Wizard').description, /Weapons: Daggers, darts, slings/);
-  for (const config of file.configurations) for (const f of file.features) for (const tag of f.tags ?? [])assert.ok(config.system.tagDisplayNames[tag]?.trim(), tag);
+  assert.match(feature('fighter.second-wind').description, /regain Hit Points equal to 1d10 plus your Fighter level/);
+  assert.match(feature('rogue.subclass.thief.second-story-work').description, /Climb Speed/);
+  assert.match(feature('feat.ability-score-improvement').description, /can’t increase an ability score above 20/);
+  for (const config of file.configurations) for (const f of file.features) for (const tag of f.tags ?? []) assert.ok(config.system.tagDisplayNames[tag]?.trim(), tag);
   assert.equal(feature('skill.animal-handling').displayName, 'Animal Handling Proficiency');
 });
 
-test('supporting Features use source passages and spell wrappers only share original spell text', () => {
-  for (const f of file.features) {
-    if (f.description)assert.match(f.source, /#page=\d+/);
-    assert.doesNotMatch(f.description ?? '', /Effects and duration: SRD|require adjudication|proficiency contribution|supplied by another origin|breathWeaponDC/);
-  }
-  assert.match(feature('skill.acrobatics').description, /Your Dexterity \(Acrobatics\) check covers your attempt/);
-  assert.match(feature('skill.sleight-of-hand').description, /coin purse off another person/);
-  assert.match(feature('expertise.arcana').description, /At 1st level, choose two of your skill proficiencies/);
-  assert.match(feature('fighter.upgrade-11').description, /The number of attacks increases to three/);
-  assert.doesNotMatch(feature('fighter.indomitable').description, /r ests/);
-  assert.doesNotMatch(feature('rogue.thief').description, /e qual/);
-  assert.doesNotMatch(feature('rogue.entry').description, /Thievesʼ Cant/);
-  assert.match(feature('race.dragonborn').description, /Breath Weapon\. You can use your action/);
-  assert.match(feature('dragon-ancestry.red').description, /Damage Resistance\./);
-  assert.doesNotMatch(feature('dragon-ancestry.red').description, /Ability Score Increase/);
-  assert.match(feature('tool.smith').description, /Each type of artisan/);
-  assert.match(feature('background-replacement.insight').description, /If a character would gain the same proficiency/);
-  for (const name of ['prepared.fireball', 'spellbook.fireball', 'mastery.alarm'])assert.equal(feature(name).description, undefined);
+test('extracted text keeps reading order, paragraphs and small-caps headings', () => {
+  // Body lines once sorted below the following heading (p. 48); Acid Splash uses small caps.
+  assert.doesNotMatch(feature('fighter.weapon-mastery').description, /^Wind column/);
+  assert.match(feature('fighter.second-wind').description, /Fighter level\.\nYou can use this feature twice/);
+  assert.match(feature('spell.acid-splash').description, /^Evocation Cantrip \(Sorcerer, Wizard\)/);
+  assert.match(feature('species.dragonborn.breath-weapon').description, /^Breath Weapon\. When you take the Attack action/);
+  assert.match(feature('tool.smiths-tools').description, /Ability: Strength/);
+  assert.match(feature('background.soldier').description, /\nFeat: Savage Attacker/);
   assert.deepEqual(feature('skill.sleight-of-hand').textAliases, ['Sleight of Hand']);
 });
 
-test('spell descriptions retain complete effects and share canonical text across wrappers', () => {
-  const spells = file.features.filter((f) => f.id.startsWith('dnd5e:2014:spell.') && !f.roll && f.source?.includes('SRD 5.1'));
-  assert.equal(spells.length, 319);
+test('spell descriptions retain complete effects and class entries share canonical text', () => {
+  const spells = file.features.filter((f) => f.id.startsWith('dnd5e:2024:spell.') && !f.roll);
+  assert.equal(spells.length, 339);
   for (const spell of spells) {
-    assert.match(spell.description, /Casting Time:/);
-    assert.match(spell.description, /Duration:/);
+    assert.match(spell.description, /\nCasting Time: .+\nRange: .+\nComponents: .+\nDuration: /, spell.id);
     assert.match(spell.source, /#page=\d+/);
   }
-  assert.match(feature('spell.fireball').description, /8d6 fire damage/);
-  assert.match(feature('spell.fireball').description, /At Higher Levels/);
-  assert.match(feature('spell.ice-storm').description, /20-foot-radius, 40-foot-high cylinder/);
-  assert.match(feature('spell.wish').description, /life drain attack/);
-  assert.match(feature('spell.wish').description, /You undo a single recent event/);
-  assert.match(feature('spell.wish').description, /33 percent chance/);
-  for (const name of ['spellbook.fireball', 'prepared.fireball', 'signature.fireball'])assert.deepEqual(feature(name).textReferences, ['dnd5e:2014:spell.fireball']);
+  assert.match(feature('spell.fireball').description, /8d6 Fire damage/);
+  for (const name of ['wizard.spell.fireball', 'sorcerer.spell.fireball']) {
+    assert.deepEqual(feature(name).textReferences, ['dnd5e:2024:spell.fireball']);
+    assert.equal(feature(name).description, undefined);
+  }
 });
-test('Class Feature category includes class and subclass abilities without categorizing individual spells or origins', () => {
-  for (const name of ['fighter.second-wind', 'fighter.champion', 'fighter.remarkable-athlete', 'rogue.cunning-action', 'rogue.thief', 'wizard.spellcasting', 'wizard.arcane-recovery', 'style.defense', 'expertise.arcana', 'ability-score-improvement'])assert.ok(feature(name).tags.includes('class-feature'), name);
-  for (const name of ['race.human', 'background.acolyte', 'spell.fireball', 'prepared.fireball', 'spellbook.fireball', 'feat.grappler'])assert.ok(!feature(name).tags.includes('class-feature'), name);
+
+test('Class Feature category includes class and subclass abilities without categorizing spells or origins', () => {
+  for (const name of ['fighter.second-wind', 'fighter.subclass.champion.improved-critical', 'rogue.cunning-action', 'wizard.spellcasting', 'wizard.arcane-recovery', 'fighter.ability-score-improvement'])assert.ok(feature(name).tags.includes('class-feature'), name);
+  for (const name of ['species.human', 'background.acolyte', 'spell.fireball', 'wizard.spell.fireball', 'feat.grappler', 'feat.defense'])assert.ok(!feature(name).tags.includes('class-feature'), name);
   for (const config of file.configurations)assert.equal(config.system.tagDisplayNames['class-feature'], 'Class Feature');
 });
 

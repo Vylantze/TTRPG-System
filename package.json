@@ -8,12 +8,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./systems/dnd5e-2014": {
-      "types": "./dist/systems/dnd5e-2014/index.d.ts",
-      "import": "./dist/systems/dnd5e-2014/index.js"
+    "./systems/dnd5e-2024": {
+      "types": "./dist/systems/dnd5e-2024/index.d.ts",
+      "import": "./dist/systems/dnd5e-2024/index.js"
     },
-    "./systems/dnd5e-2014/system.json": "./dist/systems/dnd5e-2014/system.json",
-    "./systems/dnd5e-2014/metadata.json": "./dist/systems/dnd5e-2014/metadata.json"
+    "./systems/dnd5e-2024/system.json": "./dist/systems/dnd5e-2024/system.json"
   },
   "scripts": {
     "start": "npm run ui:dev",
@@ -35,11 +34,10 @@
     "test:content": "npm test -- --suite=content",
     "test:characters": "npm test -- --suite=characters",
     "test:classes": "npm test -- --suite=classes",
-    "test:artificer": "npm test -- --suite=artificer",
     "test:tooling": "npm test -- --suite=tooling",
     "demo": "npm run build && node --import ./tools/register-alias.mjs examples/demo.js",
-    "demo:dnd2014": "npm run build && node --import ./tools/register-alias.mjs examples/dnd2014-demo.js",
-    "templates:build": "npm run build && node --import ./tools/register-alias.mjs tools/build-starter-characters.mjs",
+    "build:dnd2024": "node --experimental-strip-types --no-warnings --import ./tools/register-alias.mjs tools/dnd2024/build.ts && npm run build && node --experimental-strip-types --no-warnings --import ./tools/register-alias.mjs tools/dnd2024/samples.ts",
+    "extract:srd2024": "X:/AI/utils/python-envs/pdf-extraction/Scripts/python.exe tools/extract-dnd2024-srd.py",
     "ui:dev": "npm run dev --prefix ui",
     "ui:build": "npm run build --prefix ui",
     "test:ui": "npm run build && npm run test --prefix ui",

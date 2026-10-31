@@ -1,11 +1,11 @@
 import { loadPackageAsync } from '@/ui/src/features/systems/model/system-worker-client';
 import type { SystemFile } from '@/src/index';
-import bundledUrl from '@/src/systems/dnd5e-2014/system.json?url';
+import bundledUrl from '@/src/systems/dnd5e-2024/system.json?url';
 
 // Vite emits each JSON separately and rewrites its URL for the deployment base.
 const bundledParts = Object.fromEntries(
   Object.entries(
-    import.meta.glob('@/src/systems/dnd5e-2014/*.json', {
+    import.meta.glob('@/src/systems/dnd5e-2024/*.json', {
       query: '?url',
       import: 'default',
       eager: true,

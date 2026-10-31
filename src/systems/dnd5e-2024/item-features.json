@@ -1,0 +1,1530 @@
+{
+  "assetVersion": "1.0.0",
+  "data": [
+    {
+      "id": "damage.bludgeoning",
+      "name": "Bludgeoning damage",
+      "properties": {
+        "Damage type": "Bludgeoning"
+      }
+    },
+    {
+      "id": "weapon.club",
+      "name": "Club",
+      "features": [
+        "damage.bludgeoning"
+      ],
+      "properties": {
+        "Damage dice": "1d4",
+        "Properties": "Light",
+        "Mastery": "Slow",
+        "Weight": "2 lb.",
+        "Cost": "1 SP"
+      }
+    },
+    {
+      "id": "damage.piercing",
+      "name": "Piercing damage",
+      "properties": {
+        "Damage type": "Piercing"
+      }
+    },
+    {
+      "id": "weapon.dagger",
+      "name": "Dagger",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d4",
+        "Properties": "Finesse, Light, Thrown (Range 20/60)",
+        "Mastery": "Nick",
+        "Weight": "1 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "weapon.greatclub",
+      "name": "Greatclub",
+      "features": [
+        "damage.bludgeoning"
+      ],
+      "properties": {
+        "Damage dice": "1d8",
+        "Properties": "Two-Handed",
+        "Mastery": "Push",
+        "Weight": "10 lb.",
+        "Cost": "2 SP"
+      }
+    },
+    {
+      "id": "damage.slashing",
+      "name": "Slashing damage",
+      "properties": {
+        "Damage type": "Slashing"
+      }
+    },
+    {
+      "id": "weapon.handaxe",
+      "name": "Handaxe",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "1d6",
+        "Properties": "Light, Thrown (Range 20/60)",
+        "Mastery": "Vex",
+        "Weight": "2 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "weapon.javelin",
+      "name": "Javelin",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d6",
+        "Properties": "Thrown (Range 30/120)",
+        "Mastery": "Slow",
+        "Weight": "2 lb.",
+        "Cost": "5 SP"
+      }
+    },
+    {
+      "id": "weapon.light-hammer",
+      "name": "Light Hammer",
+      "features": [
+        "damage.bludgeoning"
+      ],
+      "properties": {
+        "Damage dice": "1d4",
+        "Properties": "Light, Thrown (Range 20/60)",
+        "Mastery": "Nick",
+        "Weight": "2 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "weapon.mace",
+      "name": "Mace",
+      "features": [
+        "damage.bludgeoning"
+      ],
+      "properties": {
+        "Damage dice": "1d6",
+        "Properties": "—",
+        "Mastery": "Sap",
+        "Weight": "4 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "weapon.quarterstaff",
+      "name": "Quarterstaff",
+      "features": [
+        "damage.bludgeoning"
+      ],
+      "properties": {
+        "Damage dice": "1d6",
+        "Properties": "Versatile (1d8)",
+        "Mastery": "Topple",
+        "Weight": "4 lb.",
+        "Cost": "2 SP"
+      }
+    },
+    {
+      "id": "weapon.sickle",
+      "name": "Sickle",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "1d4",
+        "Properties": "Light",
+        "Mastery": "Nick",
+        "Weight": "2 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "weapon.spear",
+      "name": "Spear",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d6",
+        "Properties": "Thrown (Range 20/60), Versatile (1d8)",
+        "Mastery": "Sap",
+        "Weight": "3 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "weapon.dart",
+      "name": "Dart",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d4",
+        "Properties": "Finesse, Thrown (Range 20/60)",
+        "Mastery": "Vex",
+        "Weight": "1/4 lb.",
+        "Cost": "5 CP"
+      }
+    },
+    {
+      "id": "weapon.light-crossbow",
+      "name": "Light Crossbow",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d8",
+        "Properties": "Ammunition (Range 80/320; Bolt), Loading,",
+        "Mastery": "Slow",
+        "Weight": "5 lb.",
+        "Cost": "25 GP"
+      }
+    },
+    {
+      "id": "weapon.shortbow",
+      "name": "Shortbow",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d6",
+        "Properties": "Ammunition (Range 80/320; Arrow), Two-Handed",
+        "Mastery": "Vex",
+        "Weight": "2 lb.",
+        "Cost": "25 GP"
+      }
+    },
+    {
+      "id": "weapon.sling",
+      "name": "Sling",
+      "features": [
+        "damage.bludgeoning"
+      ],
+      "properties": {
+        "Damage dice": "1d4",
+        "Properties": "Ammunition (Range 30/120; Bullet)",
+        "Mastery": "Slow",
+        "Weight": "—",
+        "Cost": "1 SP"
+      }
+    },
+    {
+      "id": "weapon.battleaxe",
+      "name": "Battleaxe",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "1d8",
+        "Properties": "Versatile (1d10)",
+        "Mastery": "Topple",
+        "Weight": "4 lb.",
+        "Cost": "10 GP"
+      }
+    },
+    {
+      "id": "weapon.flail",
+      "name": "Flail",
+      "features": [
+        "damage.bludgeoning"
+      ],
+      "properties": {
+        "Damage dice": "1d8",
+        "Properties": "—",
+        "Mastery": "Sap",
+        "Weight": "2 lb.",
+        "Cost": "10 GP"
+      }
+    },
+    {
+      "id": "weapon.glaive",
+      "name": "Glaive",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "1d10",
+        "Properties": "Heavy, Reach, Two-Handed",
+        "Mastery": "Graze",
+        "Weight": "6 lb.",
+        "Cost": "20 GP"
+      }
+    },
+    {
+      "id": "weapon.greataxe",
+      "name": "Greataxe",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "1d12",
+        "Properties": "Heavy, Two-Handed",
+        "Mastery": "Cleave",
+        "Weight": "7 lb.",
+        "Cost": "30 GP"
+      }
+    },
+    {
+      "id": "weapon.greatsword",
+      "name": "Greatsword",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "2d6",
+        "Properties": "Heavy, Two-Handed",
+        "Mastery": "Graze",
+        "Weight": "6 lb.",
+        "Cost": "50 GP"
+      }
+    },
+    {
+      "id": "weapon.halberd",
+      "name": "Halberd",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "1d10",
+        "Properties": "Heavy, Reach, Two-Handed",
+        "Mastery": "Cleave",
+        "Weight": "6 lb.",
+        "Cost": "20 GP"
+      }
+    },
+    {
+      "id": "weapon.lance",
+      "name": "Lance",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d10",
+        "Properties": "Heavy, Reach, Two-Handed (unless mounted)",
+        "Mastery": "Topple",
+        "Weight": "6 lb.",
+        "Cost": "10 GP"
+      }
+    },
+    {
+      "id": "weapon.longsword",
+      "name": "Longsword",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "1d8",
+        "Properties": "Versatile (1d10)",
+        "Mastery": "Sap",
+        "Weight": "3 lb.",
+        "Cost": "15 GP"
+      }
+    },
+    {
+      "id": "weapon.maul",
+      "name": "Maul",
+      "features": [
+        "damage.bludgeoning"
+      ],
+      "properties": {
+        "Damage dice": "2d6",
+        "Properties": "Heavy, Two-Handed",
+        "Mastery": "Topple",
+        "Weight": "10 lb.",
+        "Cost": "10 GP"
+      }
+    },
+    {
+      "id": "weapon.morningstar",
+      "name": "Morningstar",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d8",
+        "Properties": "—",
+        "Mastery": "Sap",
+        "Weight": "4 lb.",
+        "Cost": "15 GP"
+      }
+    },
+    {
+      "id": "weapon.pike",
+      "name": "Pike",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d10",
+        "Properties": "Heavy, Reach, Two-Handed",
+        "Mastery": "Push",
+        "Weight": "18 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "weapon.rapier",
+      "name": "Rapier",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d8",
+        "Properties": "Finesse",
+        "Mastery": "Vex",
+        "Weight": "2 lb.",
+        "Cost": "25 GP"
+      }
+    },
+    {
+      "id": "weapon.scimitar",
+      "name": "Scimitar",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "1d6",
+        "Properties": "Finesse, Light",
+        "Mastery": "Nick",
+        "Weight": "3 lb.",
+        "Cost": "25 GP"
+      }
+    },
+    {
+      "id": "weapon.shortsword",
+      "name": "Shortsword",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d6",
+        "Properties": "Finesse, Light",
+        "Mastery": "Vex",
+        "Weight": "2 lb.",
+        "Cost": "10 GP"
+      }
+    },
+    {
+      "id": "weapon.trident",
+      "name": "Trident",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d8",
+        "Properties": "Thrown (Range 20/60), Versatile (1d10)",
+        "Mastery": "Topple",
+        "Weight": "4 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "weapon.warhammer",
+      "name": "Warhammer",
+      "features": [
+        "damage.bludgeoning"
+      ],
+      "properties": {
+        "Damage dice": "1d8",
+        "Properties": "Versatile (1d10)",
+        "Mastery": "Push",
+        "Weight": "5 lb.",
+        "Cost": "15 GP"
+      }
+    },
+    {
+      "id": "weapon.war-pick",
+      "name": "War Pick",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d8",
+        "Properties": "Versatile (1d10)",
+        "Mastery": "Sap",
+        "Weight": "2 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "weapon.whip",
+      "name": "Whip",
+      "features": [
+        "damage.slashing"
+      ],
+      "properties": {
+        "Damage dice": "1d4",
+        "Properties": "Finesse, Reach",
+        "Mastery": "Slow",
+        "Weight": "3 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "weapon.blowgun",
+      "name": "Blowgun",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1",
+        "Properties": "Ammunition (Range 25/100; Needle), Loading",
+        "Mastery": "Vex",
+        "Weight": "1 lb.",
+        "Cost": "10 GP"
+      }
+    },
+    {
+      "id": "weapon.hand-crossbow",
+      "name": "Hand Crossbow",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d6",
+        "Properties": "Ammunition (Range 30/120; Bolt), Light, Loading",
+        "Mastery": "Vex",
+        "Weight": "3 lb.",
+        "Cost": "75 GP"
+      }
+    },
+    {
+      "id": "weapon.heavy-crossbow",
+      "name": "Heavy Crossbow",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d10",
+        "Properties": "Ammunition (Range 100/400; Bolt), Heavy, Loading,",
+        "Mastery": "Push",
+        "Weight": "18 lb.",
+        "Cost": "50 GP"
+      }
+    },
+    {
+      "id": "weapon.longbow",
+      "name": "Longbow",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d8",
+        "Properties": "Ammunition (Range 150/600; Arrow), Heavy,",
+        "Mastery": "Slow",
+        "Weight": "2 lb.",
+        "Cost": "50 GP"
+      }
+    },
+    {
+      "id": "weapon.musket",
+      "name": "Musket",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d12",
+        "Properties": "Ammunition (Range 40/120; Bullet), Loading,",
+        "Mastery": "Slow",
+        "Weight": "10 lb.",
+        "Cost": "500 GP"
+      }
+    },
+    {
+      "id": "weapon.pistol",
+      "name": "Pistol",
+      "features": [
+        "damage.piercing"
+      ],
+      "properties": {
+        "Damage dice": "1d10",
+        "Properties": "Ammunition (Range 30/90; Bullet), Loading",
+        "Mastery": "Vex",
+        "Weight": "3 lb.",
+        "Cost": "250 GP"
+      }
+    },
+    {
+      "id": "armor.padded-armor",
+      "name": "Padded Armor",
+      "properties": {
+        "Armor Class": "11 + Dex modifier",
+        "Strength": "—",
+        "Stealth": "Disadvantage",
+        "Weight": "8 lb.",
+        "Cost": "5 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": "armor.leather-armor",
+      "name": "Leather Armor",
+      "properties": {
+        "Armor Class": "11 + Dex modifier",
+        "Strength": "—",
+        "Stealth": "—",
+        "Weight": "10 lb.",
+        "Cost": "10 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "id": "armor.studded-leather-armor",
+      "name": "Studded Leather Armor",
+      "properties": {
+        "Armor Class": "12 + Dex modifier",
+        "Strength": "—",
+        "Stealth": "—",
+        "Weight": "13 lb.",
+        "Cost": "45 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": "armor.hide-armor",
+      "name": "Hide Armor",
+      "properties": {
+        "Armor Class": "12 + Dex modifier (max 2)",
+        "Strength": "—",
+        "Stealth": "—",
+        "Weight": "12 lb.",
+        "Cost": "10 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "id": "armor.chain-shirt",
+      "name": "Chain Shirt",
+      "properties": {
+        "Armor Class": "13 + Dex modifier (max 2)",
+        "Strength": "—",
+        "Stealth": "—",
+        "Weight": "20 lb.",
+        "Cost": "50 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "id": "armor.scale-mail",
+      "name": "Scale Mail",
+      "properties": {
+        "Armor Class": "14 + Dex modifier (max 2)",
+        "Strength": "—",
+        "Stealth": "Disadvantage",
+        "Weight": "45 lb.",
+        "Cost": "50 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "id": "armor.breastplate",
+      "name": "Breastplate",
+      "properties": {
+        "Armor Class": "14 + Dex modifier (max 2)",
+        "Strength": "—",
+        "Stealth": "—",
+        "Weight": "20 lb.",
+        "Cost": "400 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 7
+        }
+      ]
+    },
+    {
+      "id": "armor.half-plate-armor",
+      "name": "Half Plate Armor",
+      "properties": {
+        "Armor Class": "15 + Dex modifier (max 2)",
+        "Strength": "—",
+        "Stealth": "Disadvantage",
+        "Weight": "40 lb.",
+        "Cost": "750 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 8
+        }
+      ]
+    },
+    {
+      "id": "armor.ring-mail",
+      "name": "Ring Mail",
+      "properties": {
+        "Armor Class": "14",
+        "Strength": "—",
+        "Stealth": "Disadvantage",
+        "Weight": "40 lb.",
+        "Cost": "30 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 9
+        }
+      ]
+    },
+    {
+      "id": "armor.chain-mail",
+      "name": "Chain Mail",
+      "properties": {
+        "Armor Class": "16",
+        "Strength": "Str 13",
+        "Stealth": "Disadvantage",
+        "Weight": "55 lb.",
+        "Cost": "75 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 10
+        }
+      ]
+    },
+    {
+      "id": "armor.splint-armor",
+      "name": "Splint Armor",
+      "properties": {
+        "Armor Class": "17",
+        "Strength": "Str 15",
+        "Stealth": "Disadvantage",
+        "Weight": "60 lb.",
+        "Cost": "200 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 11
+        }
+      ]
+    },
+    {
+      "id": "armor.plate-armor",
+      "name": "Plate Armor",
+      "properties": {
+        "Armor Class": "18",
+        "Strength": "Str 15",
+        "Stealth": "Disadvantage",
+        "Weight": "65 lb.",
+        "Cost": "1,500 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "armorIndex",
+          "operation": "override",
+          "value": 12
+        }
+      ]
+    },
+    {
+      "id": "armor.shield",
+      "name": "Shield",
+      "properties": {
+        "Armor Class": "+2",
+        "Strength": "—",
+        "Stealth": "—",
+        "Weight": "6 lb.",
+        "Cost": "10 GP"
+      },
+      "modifiers": [
+        {
+          "id": "armor",
+          "kind": "modifyStat",
+          "stat": "shield",
+          "operation": "override",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": "gear.ink-pen",
+      "name": "Ink Pen",
+      "properties": {
+        "Weight": "—",
+        "Cost": "2 CP"
+      }
+    },
+    {
+      "id": "gear.acid",
+      "name": "Acid",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "25 GP"
+      }
+    },
+    {
+      "id": "gear.jug",
+      "name": "Jug",
+      "properties": {
+        "Weight": "4 lb.",
+        "Cost": "2 CP"
+      }
+    },
+    {
+      "id": "gear.alchemists-fire",
+      "name": "Alchemist’s Fire",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "50 GP"
+      }
+    },
+    {
+      "id": "gear.ladder",
+      "name": "Ladder",
+      "properties": {
+        "Weight": "25 lb.",
+        "Cost": "1 SP"
+      }
+    },
+    {
+      "id": "gear.lamp",
+      "name": "Lamp",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "5 SP"
+      }
+    },
+    {
+      "id": "gear.antitoxin",
+      "name": "Antitoxin",
+      "properties": {
+        "Weight": "—",
+        "Cost": "50 GP"
+      }
+    },
+    {
+      "id": "gear.bullseye-lantern",
+      "name": "Bullseye Lantern",
+      "properties": {
+        "Weight": "2 lb.",
+        "Cost": "10 GP"
+      }
+    },
+    {
+      "id": "gear.hooded-lantern",
+      "name": "Hooded Lantern",
+      "properties": {
+        "Weight": "2 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.backpack",
+      "name": "Backpack",
+      "properties": {
+        "Weight": "5 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "gear.lock",
+      "name": "Lock",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "10 GP"
+      }
+    },
+    {
+      "id": "gear.ball-bearings",
+      "name": "Ball Bearings",
+      "properties": {
+        "Weight": "2 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.magnifying-glass",
+      "name": "Magnifying Glass",
+      "properties": {
+        "Weight": "—",
+        "Cost": "100 GP"
+      }
+    },
+    {
+      "id": "gear.barrel",
+      "name": "Barrel",
+      "properties": {
+        "Weight": "70 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "gear.manacles",
+      "name": "Manacles",
+      "properties": {
+        "Weight": "6 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "gear.basket",
+      "name": "Basket",
+      "properties": {
+        "Weight": "2 lb.",
+        "Cost": "4 SP"
+      }
+    },
+    {
+      "id": "gear.map",
+      "name": "Map",
+      "properties": {
+        "Weight": "—",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.bedroll",
+      "name": "Bedroll",
+      "properties": {
+        "Weight": "7 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.mirror",
+      "name": "Mirror",
+      "properties": {
+        "Weight": "1/2 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.bell",
+      "name": "Bell",
+      "properties": {
+        "Weight": "—",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.net",
+      "name": "Net",
+      "properties": {
+        "Weight": "3 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.blanket",
+      "name": "Blanket",
+      "properties": {
+        "Weight": "3 lb.",
+        "Cost": "5 SP"
+      }
+    },
+    {
+      "id": "gear.oil",
+      "name": "Oil",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "1 SP"
+      }
+    },
+    {
+      "id": "gear.block-and-tackle",
+      "name": "Block and Tackle",
+      "properties": {
+        "Weight": "5 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.paper",
+      "name": "Paper",
+      "properties": {
+        "Weight": "—",
+        "Cost": "2 SP"
+      }
+    },
+    {
+      "id": "gear.book",
+      "name": "Book",
+      "properties": {
+        "Weight": "5 lb.",
+        "Cost": "25 GP"
+      }
+    },
+    {
+      "id": "gear.parchment",
+      "name": "Parchment",
+      "properties": {
+        "Weight": "—",
+        "Cost": "1 SP"
+      }
+    },
+    {
+      "id": "gear.glass-bottle",
+      "name": "Glass Bottle",
+      "properties": {
+        "Weight": "2 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "gear.perfume",
+      "name": "Perfume",
+      "properties": {
+        "Weight": "—",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.bucket",
+      "name": "Bucket",
+      "properties": {
+        "Weight": "2 lb.",
+        "Cost": "5 CP"
+      }
+    },
+    {
+      "id": "gear.basic-poison",
+      "name": "Basic Poison",
+      "properties": {
+        "Weight": "—",
+        "Cost": "100 GP"
+      }
+    },
+    {
+      "id": "gear.burglars-pack",
+      "name": "Burglar’s Pack",
+      "properties": {
+        "Weight": "42 lb.",
+        "Cost": "16 GP"
+      }
+    },
+    {
+      "id": "gear.pole",
+      "name": "Pole",
+      "properties": {
+        "Weight": "7 lb.",
+        "Cost": "5 CP"
+      }
+    },
+    {
+      "id": "gear.caltrops",
+      "name": "Caltrops",
+      "properties": {
+        "Weight": "2 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.iron-pot",
+      "name": "Iron Pot",
+      "properties": {
+        "Weight": "10 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "gear.candle",
+      "name": "Candle",
+      "properties": {
+        "Weight": "—",
+        "Cost": "1 CP"
+      }
+    },
+    {
+      "id": "gear.potion-of-healing",
+      "name": "Potion of Healing",
+      "properties": {
+        "Weight": "1/2 lb.",
+        "Cost": "50 GP"
+      }
+    },
+    {
+      "id": "gear.crossbow-bolt-case",
+      "name": "Crossbow Bolt Case",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.pouch",
+      "name": "Pouch",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "5 SP"
+      }
+    },
+    {
+      "id": "gear.map-or-scroll-case",
+      "name": "Map or Scroll Case",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.priests-pack",
+      "name": "Priest’s Pack",
+      "properties": {
+        "Weight": "29 lb.",
+        "Cost": "33 GP"
+      }
+    },
+    {
+      "id": "gear.chain",
+      "name": "Chain",
+      "properties": {
+        "Weight": "10 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.quiver",
+      "name": "Quiver",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.chest",
+      "name": "Chest",
+      "properties": {
+        "Weight": "25 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.portable-ram",
+      "name": "Portable Ram",
+      "properties": {
+        "Weight": "35 lb.",
+        "Cost": "4 GP"
+      }
+    },
+    {
+      "id": "gear.climbers-kit",
+      "name": "Climber’s Kit",
+      "properties": {
+        "Weight": "12 lb.",
+        "Cost": "25 GP"
+      }
+    },
+    {
+      "id": "gear.rations",
+      "name": "Rations",
+      "properties": {
+        "Weight": "2 lb.",
+        "Cost": "5 SP"
+      }
+    },
+    {
+      "id": "gear.fine-clothes",
+      "name": "Fine Clothes",
+      "properties": {
+        "Weight": "6 lb.",
+        "Cost": "15 GP"
+      }
+    },
+    {
+      "id": "gear.robe",
+      "name": "Robe",
+      "properties": {
+        "Weight": "4 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.travelers-clothes",
+      "name": "Traveler’s Clothes",
+      "properties": {
+        "Weight": "4 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "gear.rope",
+      "name": "Rope",
+      "properties": {
+        "Weight": "5 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.component-pouch",
+      "name": "Component Pouch",
+      "properties": {
+        "Weight": "2 lb.",
+        "Cost": "25 GP"
+      }
+    },
+    {
+      "id": "gear.sack",
+      "name": "Sack",
+      "properties": {
+        "Weight": "1/2 lb.",
+        "Cost": "1 CP"
+      }
+    },
+    {
+      "id": "gear.costume",
+      "name": "Costume",
+      "properties": {
+        "Weight": "4 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.scholars-pack",
+      "name": "Scholar’s Pack",
+      "properties": {
+        "Weight": "22 lb.",
+        "Cost": "40 GP"
+      }
+    },
+    {
+      "id": "gear.crowbar",
+      "name": "Crowbar",
+      "properties": {
+        "Weight": "5 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "gear.shovel",
+      "name": "Shovel",
+      "properties": {
+        "Weight": "5 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "gear.diplomats-pack",
+      "name": "Diplomat’s Pack",
+      "properties": {
+        "Weight": "39 lb.",
+        "Cost": "39 GP"
+      }
+    },
+    {
+      "id": "gear.signal-whistle",
+      "name": "Signal Whistle",
+      "properties": {
+        "Weight": "—",
+        "Cost": "5 CP"
+      }
+    },
+    {
+      "id": "gear.spell-scroll-cantrip",
+      "name": "Spell Scroll (Cantrip)",
+      "properties": {
+        "Weight": "—",
+        "Cost": "30 GP"
+      }
+    },
+    {
+      "id": "gear.dungeoneers-pack",
+      "name": "Dungeoneer’s Pack",
+      "properties": {
+        "Weight": "55 lb.",
+        "Cost": "12 GP"
+      }
+    },
+    {
+      "id": "gear.spell-scroll-level-1",
+      "name": "Spell Scroll (Level 1)",
+      "properties": {
+        "Weight": "—",
+        "Cost": "50 GP"
+      }
+    },
+    {
+      "id": "gear.entertainers-pack",
+      "name": "Entertainer’s Pack",
+      "properties": {
+        "Weight": "58½ lb.",
+        "Cost": "40 GP"
+      }
+    },
+    {
+      "id": "gear.iron-spikes",
+      "name": "Iron Spikes",
+      "properties": {
+        "Weight": "5 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.explorers-pack",
+      "name": "Explorer’s Pack",
+      "properties": {
+        "Weight": "55 lb.",
+        "Cost": "10 GP"
+      }
+    },
+    {
+      "id": "gear.spyglass",
+      "name": "Spyglass",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "1,000 GP"
+      }
+    },
+    {
+      "id": "gear.flask",
+      "name": "Flask",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "2 CP"
+      }
+    },
+    {
+      "id": "gear.string",
+      "name": "String",
+      "properties": {
+        "Weight": "—",
+        "Cost": "1 SP"
+      }
+    },
+    {
+      "id": "gear.grappling-hook",
+      "name": "Grappling Hook",
+      "properties": {
+        "Weight": "4 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "gear.tent",
+      "name": "Tent",
+      "properties": {
+        "Weight": "20 lb.",
+        "Cost": "2 GP"
+      }
+    },
+    {
+      "id": "gear.healers-kit",
+      "name": "Healer’s Kit",
+      "properties": {
+        "Weight": "3 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.tinderbox",
+      "name": "Tinderbox",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "5 SP"
+      }
+    },
+    {
+      "id": "gear.torch",
+      "name": "Torch",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "1 CP"
+      }
+    },
+    {
+      "id": "gear.holy-water",
+      "name": "Holy Water",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "25 GP"
+      }
+    },
+    {
+      "id": "gear.vial",
+      "name": "Vial",
+      "properties": {
+        "Weight": "—",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.hunting-trap",
+      "name": "Hunting Trap",
+      "properties": {
+        "Weight": "25 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.waterskin",
+      "name": "Waterskin",
+      "properties": {
+        "Weight": "5 lb. (full)",
+        "Cost": "2 SP"
+      }
+    },
+    {
+      "id": "gear.ink",
+      "name": "Ink",
+      "properties": {
+        "Weight": "—",
+        "Cost": "10 GP"
+      }
+    },
+    {
+      "id": "gear.arrows-20-quiver",
+      "name": "Arrows 20 Quiver",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "1 GP"
+      }
+    },
+    {
+      "id": "gear.sling-20-pouch-bullets",
+      "name": "Sling 20 Pouch Bullets",
+      "properties": {
+        "Weight": "1½ lb.",
+        "Cost": "4 CP"
+      }
+    },
+    {
+      "id": "gear.crystal",
+      "name": "Crystal",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "10 GP"
+      }
+    },
+    {
+      "id": "gear.orb",
+      "name": "Orb",
+      "properties": {
+        "Weight": "3 lb.",
+        "Cost": "20 GP"
+      }
+    },
+    {
+      "id": "gear.staff-also-a-quarterstaff",
+      "name": "Staff (also a Quarterstaff)",
+      "properties": {
+        "Weight": "4 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.wand",
+      "name": "Wand",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "10 GP"
+      }
+    },
+    {
+      "id": "gear.druidic-focus-varies-amulet-worn-or-held",
+      "name": "Druidic Focus (Varies) Amulet (worn or held)",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.emblem-borne-on-fabric-or-a-shield",
+      "name": "Emblem (borne on fabric or a Shield)",
+      "properties": {
+        "Weight": "—",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.reliquary-held",
+      "name": "Reliquary (held)",
+      "properties": {
+        "Weight": "2 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.wooden-staff-also-a-quarterstaff",
+      "name": "Wooden staff (also a Quarterstaff)",
+      "properties": {
+        "Weight": "4 lb.",
+        "Cost": "5 GP"
+      }
+    },
+    {
+      "id": "gear.yew-wand",
+      "name": "Yew wand",
+      "properties": {
+        "Weight": "1 lb.",
+        "Cost": "10 GP"
+      }
+    }
+  ]
+}

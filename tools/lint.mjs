@@ -8,7 +8,7 @@ import { lintCssColours } from '@/tools/lint-css-colours.mjs';
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const schemaCheck = spawnSync(process.execPath, ['tools/generate-editor-schema.mjs', '--check'], { cwd: root, stdio: 'inherit' });
 if (schemaCheck.status !== 0) process.exit(schemaCheck.status ?? 1);
-const excluded = new Set(['node_modules', 'dist', 'coverage']);
+const excluded = new Set(['node_modules', 'dist', 'coverage', 'local-archive']);
 function sources(directory, pattern = /\.(?:[cm]?[jt]s|[jt]sx)$/) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     if (entry.name.startsWith('.') || excluded.has(entry.name)) return [];
@@ -28,7 +28,7 @@ if (problems.length) {
   process.exit(1);
 }
 // Type checking is part of linting for both the engine and React UI.
-for (const config of ['tsconfig.json', 'tests/tsconfig.json', 'ui/tsconfig.json']) {
+for (const config of ['tsconfig.json', 'tests/tsconfig.json', 'tools/tsconfig.json', 'ui/tsconfig.json']) {
   const result = spawnSync(process.execPath, [join(root, 'node_modules/typescript/bin/tsc'), '--noEmit', '-p', config], { cwd: root, stdio: 'inherit' });
   if (result.error) console.error(result.error.message);
   if (result.status !== 0) process.exit(result.status ?? 1);

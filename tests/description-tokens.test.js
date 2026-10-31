@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { applyDescriptionOverrides, descriptionTokenValues, validateCatalogue } from '@/dist/index.js';
-import { exampleCharacter } from '@/examples/dnd2014-character.js';
+import { exampleCharacter } from '@/examples/dnd2024-character.js';
 
 test('explicit description tokens resolve named stats and class levels only', () => {
   const { engine, character } = exampleCharacter({ classes: [{ class: 'wizard', level: 3 }] });
   const result = engine.evaluate(character);
-  const text = 'Constitution modifier {{stat:modifier.constitution}} {{stat:constitution}} {{class:dnd5e:2014:wizard}} {{UNKNOWN}} {{stat:absent}} {{1+2}} {{ stat:modifier.constitution }}';
+  const text = 'Constitution modifier {{stat:modifier.constitution}} {{stat:constitution}} {{class:dnd5e:2024:wizard}} {{UNKNOWN}} {{stat:absent}} {{1+2}} {{ stat:modifier.constitution }}';
   const values = descriptionTokenValues(text, engine, character, result);
   assert.deepEqual(values.map((value) => value.value), [result.stats['modifier.constitution'].value, result.stats.constitution.value, 3, result.stats['modifier.constitution'].value]);
-  assert.deepEqual(values.map((value) => text.slice(value.start, value.end)), ['{{stat:modifier.constitution}}', '{{stat:constitution}}', '{{class:dnd5e:2014:wizard}}', '{{ stat:modifier.constitution }}']);
+  assert.deepEqual(values.map((value) => text.slice(value.start, value.end)), ['{{stat:modifier.constitution}}', '{{stat:constitution}}', '{{class:dnd5e:2024:wizard}}', '{{ stat:modifier.constitution }}']);
   assert.match(values[0].label, /Constitution modifier/i);
   const unavailable = { ...result, stats: { ...result.stats, constitution: undefined } };
   assert.deepEqual(descriptionTokenValues('{{stat:constitution}}', engine, character, unavailable), []);

@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { bundledSystem } from '@/ui/src/features/systems/model/bundled-system';
 
 export function SystemLoader({
   loading,
@@ -11,7 +12,7 @@ export function SystemLoader({
   loadBundled: () => void;
   loadFile: (files: File[]) => void;
 }) {
-  const [source, setSource] = useState('dnd2014');
+  const [source, setSource] = useState('bundled');
   const input = useRef<HTMLInputElement>(null);
   return (
     <div className="toolbar system-loader">
@@ -22,15 +23,15 @@ export function SystemLoader({
           disabled={loading}
           onChange={(event) => setSource(event.target.value)}
         >
-          <option value="dnd2014">
-            DnD5e 2014
+          <option value="bundled">
+            {bundledSystem.name}
             {bundledLoaded ? ' — loaded' : ''}
           </option>
           <option value="json">Other System from JSON…</option>
         </select>
       </label>
       <button
-        disabled={loading || (source === 'dnd2014' && bundledLoaded)}
+        disabled={loading || (source === 'bundled' && bundledLoaded)}
         onClick={() => (source === 'json' ? input.current?.click() : loadBundled())}
       >
         {loading ? 'Loading…' : source === 'json' ? 'Choose JSON files' : 'Load System'}

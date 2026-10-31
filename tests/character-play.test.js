@@ -3,34 +3,34 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { Engine, clearFeatureRolls, SystemRegistry, reopenCharacter, applyEdit, finalizeCharacter, adjustResource, rollDice, rollFeature, applyFeatureRoll, serializeCharacter, deserializeCharacter } from '@/dist/index.js';
-import { exampleCharacter } from '@/examples/dnd2014-character.js';
+import { exampleCharacter } from '@/examples/dnd2024-character.js';
 
-const file = readSystem(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url));
+const file = readSystem(new URL('../src/systems/dnd5e-2024/system.json', import.meta.url));
 test('multiclass sample is valid and shares one HP pool; engine cache invalidates on unload', () => {
   const registry = new SystemRegistry();
   registry.load(file);
-  const character = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/multiclass-sample.json', import.meta.url), 'utf8')).data;
+  const character = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2024/multiclass-sample.json', import.meta.url), 'utf8')).data;
   const engine = registry.engineForCharacter(character);
   assert.equal(registry.engineForCharacter({ ...character, name: 'Renamed' }), engine);
   const result = engine.evaluate(character);
   assert.equal(result.status, 'valid');
   assert.equal(result.characterLevel, 5);
-  assert.deepEqual(character.progressions.map((p) => p.level), [2, 3]);
+  assert.deepEqual(character.progressions.map((p) => p.level), [3, 2]);
   assert.equal(Object.values(result.resources).filter((pool) => pool.key === 'hit-points').length, 1);
   registry.unload(file.id, file.revision);
   assert.throws(() => registry.engineForCharacter(character), /must be loaded/);
   registry.load(file);
   assert.notEqual(registry.engineForCharacter(character), engine);
 });
-test('finalized samples reopen for race changes and race Features supply speed', () => {
+test('finalized samples reopen for species changes and species Features supply speed', () => {
   const { engine, character } = exampleCharacter();
   const finalized = finalizeCharacter(engine, character, 'finalize');
   const draft = reopenCharacter(engine, finalized, 'edit-build');
   assert.equal(draft.buildState, 'draft');
   assert.equal(finalized.buildState, 'finalized');
-  const changed = applyEdit(engine, draft, [{ kind: 'select', selection: 'advancement/0/race', picks: [{ id: 'halfling', feature: 'dnd5e:2014:race.lightfoot-halfling' }] }], 'change-race');
-  assert.equal(engine.evaluate(changed).stats.walkingSpeed.value, 25);
-  const empty = applyEdit(engine, changed, [{ kind: 'select', selection: 'advancement/0/race', picks: [] }], 'no-race');
+  const changed = applyEdit(engine, draft, [{ kind: 'select', selection: 'advancement/0/species', picks: [{ id: 'goliath', feature: 'dnd5e:2024:species.goliath' }] }], 'change-species');
+  assert.equal(engine.evaluate(changed).stats.walkingSpeed.value, 35);
+  const empty = applyEdit(engine, changed, [{ kind: 'select', selection: 'advancement/0/species', picks: [] }], 'no-species');
   assert.equal(engine.evaluate(empty).stats.walkingSpeed.value, 0);
 });
 test('Second Wind spends its use on roll, persists the result, and applies healing once later', () => {
@@ -39,23 +39,25 @@ test('Second Wind spends its use on roll, persists the result, and applies heali
   const result = engine.evaluate(ready);
   const hp = Object.values(result.resources).find((pool) => pool.key === 'hit-points');
   const wind = Object.values(result.resources).find((pool) => pool.key === 'second-wind');
-  const instance = result.instances.find((item) => item.feature === 'dnd5e:2014:fighter.second-wind.roll.healing');
+  const instance = result.instances.find((item) => item.feature === 'dnd5e:2024:fighter.second-wind.roll');
   ready = adjustResource(engine, ready, hp.id, hp.capacity - hp.current - 3, 'damage');
   const rolled = rollFeature(engine, ready, instance.id, 'heal', () => 0.1);
   assert.equal(rolled.outcome.total, 4);
   assert.equal(rolled.outcome.breakdown, '2 (1d10) + 2');
   assert.equal(engine.evaluate(rolled.character).resources[hp.id].current, hp.capacity - 3);
-  assert.equal(engine.evaluate(rolled.character).resources[wind.id].current, 0);
-  assert.throws(() => rollFeature(engine, rolled.character, instance.id, 'again'), /Insufficient/);
+  // 2024 Second Wind has two uses at Fighter level 2.
+  assert.equal(engine.evaluate(rolled.character).resources[wind.id].current, 1);
+  const second = rollFeature(engine, rolled.character, instance.id, 'again', () => 0.1).character;
+  assert.throws(() => rollFeature(engine, second, instance.id, 'third'), /Insufficient/);
   assert.throws(() => rollFeature(engine, rolled.character, instance.id, 'heal'), /already recorded/);
   const restored = deserializeCharacter(serializeCharacter(rolled.character), engine);
   assert.deepEqual(restored.rollResults[0], rolled.outcome);
   const applied = applyFeatureRoll(engine, restored, 'heal', 'apply-heal');
   assert.equal(applied.applied, 3);
   assert.equal(engine.evaluate(applied.character).resources[hp.id].current, hp.capacity);
-  assert.equal(engine.evaluate(applied.character).resources[wind.id].current, 0);
+  assert.equal(engine.evaluate(applied.character).resources[wind.id].current, 1);
   assert.throws(() => applyFeatureRoll(engine, applied.character, 'heal', 'apply-twice'), /already applied/);
-  assert.equal(engine.evaluate(ready).resources[wind.id].current, 1);
+  assert.equal(engine.evaluate(ready).resources[wind.id].current, 2);
 });
 test('dice parser supports additive dice and rejects executable or unbounded notation', () => {
   assert.deepEqual(rollDice('2d6 + 2 - 1', () => 0), { total: 3, breakdown: '1 + 1 (2d6) + 2 - 1' });
@@ -72,7 +74,7 @@ test('Roll Features are atomic children and full-health application still comple
   assert.ok(rolls.length > 100);
   assert.ok(rolls.every((feature) => feature.components.length === 0));
   assert.ok(file.features.every((feature) => !feature.rolls));
-  const instance = engine.evaluate(ready).instances.find((item) => item.feature === 'dnd5e:2014:fighter.second-wind.roll.healing');
+  const instance = engine.evaluate(ready).instances.find((item) => item.feature === 'dnd5e:2024:fighter.second-wind.roll');
   const rolled = rollFeature(engine, ready, instance.id, 'full-health-roll', () => 0);
   const applied = applyFeatureRoll(engine, rolled.character, 'full-health-roll', 'full-health-apply');
   assert.equal(applied.applied, 0);
@@ -82,7 +84,7 @@ test('Roll Features are atomic children and full-health application still comple
 test('clearing rolls preserves spent resources and replay protection', () => {
   const { engine, character } = exampleCharacter({ classes: [{ class: 'fighter', level: 2 }] });
   const ready = finalizeCharacter(engine, character, 'finalize');
-  const instance = engine.evaluate(ready).instances.find((entry) => entry.feature === 'dnd5e:2014:fighter.second-wind.roll.healing');
+  const instance = engine.evaluate(ready).instances.find((entry) => entry.feature === 'dnd5e:2024:fighter.second-wind.roll');
   const rolled = rollFeature(engine, ready, instance.id, 'roll-to-clear', () => 0).character;
   assert.equal(clearFeatureRolls(rolled, ['unrelated']).rollResults.length, 1);
   for (const cleared of [clearFeatureRolls(rolled), clearFeatureRolls(rolled, [instance.id])]) {
@@ -95,20 +97,21 @@ test('clearing rolls preserves spent resources and replay protection', () => {
   assert.equal(rolled.rollResults.length, 1);
 });
 
-test('spell roll children exclude At Higher Levels dice but retain base dice', () => {
-  const fireball = file.features.find((feature) => feature.id === 'dnd5e:2014:spell.fireball');
+test('spell roll children exclude higher-level slot dice but retain base dice and scaling', () => {
+  const fireball = file.features.find((feature) => feature.id === 'dnd5e:2024:spell.fireball');
   const rolls = fireball.components.filter((component) => component.kind === 'grantFeature').map((component) => file.features.find((feature) => feature.id === component.feature)?.roll).filter(Boolean);
-  assert.deepEqual(rolls.map((roll) => roll.dice), ['8d6']);
-  assert.match(fireball.description, /At Higher Levels/);
+  assert.deepEqual(rolls.map((roll) => [roll.dice, roll.slotScaling]), [['8d6', { baseLevel: 3, dicePerLevel: 1 }]]);
+  assert.match(fireball.description, /Using a Higher-Level Spell Slot/);
 });
 
-test('manual base abilities enforce 3–18 without capping Feature bonuses at 18', () => {
+test('manual base abilities enforce 3–18 without capping background bonuses at 18', () => {
   const { engine, character } = exampleCharacter({ settings: { abilityMethod: 'manual' } });
   for (const value of [3, 18]) {
     const edited = { ...character, inputs: { ...character.inputs, 'base.strength': value } };
     const result = engine.evaluate(edited);
     assert.equal(result.stats['base.strength'].value, value);
-    assert.equal(result.stats.strength.value, value + 1);
+    // The example's Soldier background adds +2 Strength.
+    assert.equal(result.stats.strength.value, value + 2);
   }
   for (const value of [2, 19]) {
     const result = engine.evaluate({ ...character, inputs: { ...character.inputs, 'base.strength': value } });
@@ -119,7 +122,7 @@ test('manual base abilities enforce 3–18 without capping Feature bonuses at 18
 test('final ability scores clamp Feature modifiers to 1–30 independently of base inputs', () => {
   const { engine, character } = exampleCharacter({ settings: { abilityMethod: 'manual' } });
   const catalogue = structuredClone(engine.catalogue);
-  catalogue.features.find((feature) => feature.id === 'dnd5e:2014:race.human').components.push(
+  catalogue.features.find((feature) => feature.id === 'dnd5e:2024:species.human').components.push(
     { id: 'test-high', kind: 'modifyStat', stat: 'strength', operation: 'add', value: 100 },
     { id: 'test-low', kind: 'modifyStat', stat: 'dexterity', operation: 'add', value: -100 },
   );

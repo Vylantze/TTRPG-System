@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { Engine, getCurrency, moneyTotal, setMoney, convertCurrencyItems, useAbility, deserializeCharacter } from '@/dist/index.js';
-import { createDnd2014Engine } from '@/dist/systems/dnd5e-2014/index.js';
+import { createDnd2024Engine } from '@/dist/systems/dnd5e-2024/index.js';
 
-const engine = createDnd2014Engine();
-const fighter = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8')).data[0];
+const engine = createDnd2024Engine();
+const fighter = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2024/starter-characters.json', import.meta.url), 'utf8')).data.find((character) => character.name === 'Brakka Stonewatch');
 
 test('five coin balances retain quantities, total correctly and survive saves', () => {
   const money = { cp: 3, sp: 2, ep: 1, gp: 4, pp: 2 };
@@ -15,7 +15,8 @@ test('five coin balances retain quantities, total correctly and survive saves', 
   assert.deepEqual(deserializeCharacter(JSON.stringify(changed), engine).money, money);
   assert.deepEqual(setMoney(engine, changed, money, 'coins'), changed);
   assert.throws(() => setMoney(engine, changed, { gp: 0 }, 'coins'), /reused/);
-  assert.equal(fighter.money.gp, 25);
+  // Fighter option A (4 GP) plus Soldier option A (14 GP).
+  assert.equal(fighter.money.gp, 18);
   assert(!fighter.inventory.some((entry) => entry.item.endsWith('gold-piece')));
 });
 
@@ -41,11 +42,14 @@ test('Systems without currency use one decimal balance and invalid currency sche
 });
 
 test('legacy coin migration is idempotent and preserves existing money and equipment', () => {
-  const old = { ...fighter, money: { sp: 2 }, inventory: [...fighter.inventory, { id: 'coins', item: 'dnd5e:2014:item.gold-piece', quantity: 25, equipped: false }] };
-  const changed = convertCurrencyItems(old, engine.catalogue.system);
+  // A System can name the items that older saves used for coins.
+  const system = structuredClone(engine.catalogue.system);
+  system.currency.denominations.find((coin) => coin.id === 'gp').legacyItemIds = ['legacy:item.gold-piece'];
+  const old = { ...fighter, money: { sp: 2 }, inventory: [...fighter.inventory, { id: 'coins', item: 'legacy:item.gold-piece', quantity: 25, equipped: false }] };
+  const changed = convertCurrencyItems(old, system);
   assert.deepEqual(changed.money, { sp: 2, gp: 25 });
   assert.deepEqual(changed.inventory, fighter.inventory);
-  assert.equal(convertCurrencyItems(changed, engine.catalogue.system), changed);
+  assert.equal(convertCurrencyItems(changed, system), changed);
 });
 
 test('manual action timing still enforces ability ownership and resource costs', () => {
@@ -55,8 +59,10 @@ test('manual action timing still enforces ability ownership and resource costs',
   assert.throws(() => useAbility(engine, fighter, ability.id, 'budget-required'), /actions/);
   const used = useAbility(engine, fighter, ability.id, 'use', { actionTracking: 'manual' });
   assert.equal(used.actions, undefined);
-  assert.equal(Object.values(engine.evaluate(used.character).resources).find((pool) => pool.key === 'second-wind').current, 0);
-  assert.throws(() => useAbility(engine, used.character, ability.id, 'empty', { actionTracking: 'manual' }), /Insufficient/);
+  // Two uses at Fighter level 1 in 2024.
+  assert.equal(Object.values(engine.evaluate(used.character).resources).find((pool) => pool.key === 'second-wind').current, 1);
+  const emptied = useAbility(engine, used.character, ability.id, 'use-again', { actionTracking: 'manual' }).character;
+  assert.throws(() => useAbility(engine, emptied, ability.id, 'empty', { actionTracking: 'manual' }), /Insufficient/);
   assert.throws(() => useAbility(engine, fighter, 'unowned', 'unknown', { actionTracking: 'manual' }), /unavailable/);
   assert.throws(() => useAbility(engine, fighter, ability.id, 'ambiguous', { actionTracking: 'manual', actions: {} }), /cannot include/);
 });

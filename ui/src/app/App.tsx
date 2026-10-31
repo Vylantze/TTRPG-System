@@ -1,5 +1,5 @@
 import { LoadingOverlay } from '@/ui/src/components/LoadingOverlay';
-import multiclassUrl from '@/src/systems/dnd5e-2014/multiclass-sample.json?url';
+import multiclassUrl from '@/src/systems/dnd5e-2024/multiclass-sample.json?url';
 import { SystemLoader } from '@/ui/src/features/systems/components/SystemLoader';
 import { ReloadSystemButton } from '@/ui/src/features/systems/components/ReloadSystemButton';
 import { safeReturn } from '@/ui/src/features/catalogue/model/feature-origin';
@@ -29,8 +29,8 @@ import {
   loadBundledSystem,
   loadSelectedSystem,
 } from '@/ui/src/features/systems/model/load-system-package';
-import bundledUrl from '@/src/systems/dnd5e-2014/system.json?url';
-import starterUrl from '@/src/systems/dnd5e-2014/starter-characters.json?url';
+import bundledUrl from '@/src/systems/dnd5e-2024/system.json?url';
+import starterUrl from '@/src/systems/dnd5e-2024/starter-characters.json?url';
 import {
   addStarterCharacters,
   migrateMoney,
@@ -69,6 +69,7 @@ import {
 } from '@/ui/src/lib/workspace';
 import { reconcilePrototypeCharacters } from '@/ui/src/features/characters/model/prototype-characters';
 import { loadPrototypeTemplates } from '@/ui/src/features/characters/model/load-prototype-templates';
+import { bundledSystem } from '@/ui/src/features/systems/model/bundled-system';
 import {
   bundledUpdateKind,
   applySystemPatch,
@@ -174,7 +175,7 @@ export function App({
   ]);
   const engine = resolved.engine;
   useEffect(() => {
-    const loaded = workspace.systems.find((file) => file.id === 'dnd5e:2014-srd5.1');
+    const loaded = workspace.systems.find((file) => file.id === bundledSystem.id);
     if (!loaded) return;
     let cancelled = false;
     void (async () => {
@@ -378,7 +379,7 @@ export function App({
     setError('');
     try {
       const [system, response] = await Promise.all([loadBundledSystem(), fetch(starterUrl)]);
-      if (!response.ok) throw new Error('Starter Set files could not be loaded.');
+      if (!response.ok) throw new Error('Sample characters could not be loaded.');
       const saves = assetData(await response.json());
       const next = addStarterCharacters(workspaceRef.current, system, saves);
       change(next);
@@ -537,7 +538,7 @@ export function App({
             />
             <SystemLoader
               loading={loading}
-              bundledLoaded={workspace.systems.some((s) => s.id === 'dnd5e:2014-srd5.1')}
+              bundledLoaded={workspace.systems.some((s) => s.id === bundledSystem.id)}
               loadBundled={() => void loadBundled()}
               loadFile={(file) => void loadFile(file)}
             />
@@ -594,7 +595,7 @@ export function App({
                     <ReloadSystemButton
                       name={file.configurations[0].system.name}
                       loading={loading}
-                      bundled={file.id === 'dnd5e:2014-srd5.1'}
+                      bundled={file.id === bundledSystem.id}
                       reload={(source) => void reload(file, source)}
                     />
                   </div>
@@ -607,16 +608,17 @@ export function App({
             <section className="panel">
               <h3>Current bundled content</h3>
               <p>
-                DnD5e 2014 includes the 12 SRD classes, Tasha’s Artificer, and partner Blood
-                Hunter, with 124 accessible subclass progressions. Partner content is labelled.
-                New entries include source links and automation notes without paid book
-                descriptions; locked entries are excluded. Each Feature identifies its supported
-                mechanics and effects that require table resolution.
+                {bundledSystem.name}
+                {' '}
+                includes the 12 SRD 5.2.1 classes with one subclass each, 9
+                species, 4 backgrounds, 17 feats, 339 spells and the SRD equipment, plus 12 sample
+                characters. Each Feature quotes its source page and lists the effects that need table
+                resolution.
               </p>
               <p className="muted">
-                {'The SRD 5.1 is licensed under CC BY 4.0. '}
+                {'The SRD 5.2.1 is licensed under CC BY 4.0. '}
                 <a
-                  href="https://media.wizards.com/2023/downloads/dnd/SRD_CC_v5.1.pdf"
+                  href="https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -672,7 +674,7 @@ export function App({
                       disabled={loading}
                       onClick={() => void loadStarterParty()}
                     >
-                      {loading ? 'Loading…' : 'Add 2014 Starter Set party'}
+                      {loading ? 'Loading…' : 'Add sample party'}
                     </button>
                     <label className="button quiet">
                       Import character
@@ -693,13 +695,13 @@ export function App({
                       <span className="large-mark">◇</span>
                       <h2>Choose the rules for your story</h2>
                       <p>
-                        Load the bundled DnD5e 2014 System to begin, or bring your own System JSON.
+                        Load the bundled {bundledSystem.name} System to begin, or bring your own System JSON.
                       </p>
                       <button
                         disabled={loading}
                         onClick={() => void loadBundled()}
                       >
-                        {loading ? 'Loading System…' : 'Load DnD5e 2014'}
+                        {loading ? 'Loading System…' : `Load ${bundledSystem.name}`}
                       </button>
                       <a href="#systems">Manage Systems →</a>
                     </div>

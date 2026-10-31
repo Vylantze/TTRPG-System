@@ -1,0 +1,1666 @@
+{
+  "assetVersion": "1.0.0",
+  "data": [
+    {
+      "id": "dnd5e:2024:item.club",
+      "revision": 1,
+      "name": "Club",
+      "category": "Weapons",
+      "features": [
+        "weapon.club"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.dagger",
+      "revision": 1,
+      "name": "Dagger",
+      "category": "Weapons",
+      "features": [
+        "weapon.dagger"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.greatclub",
+      "revision": 1,
+      "name": "Greatclub",
+      "category": "Weapons",
+      "features": [
+        "weapon.greatclub"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.handaxe",
+      "revision": 1,
+      "name": "Handaxe",
+      "category": "Weapons",
+      "features": [
+        "weapon.handaxe"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.javelin",
+      "revision": 1,
+      "name": "Javelin",
+      "category": "Weapons",
+      "features": [
+        "weapon.javelin"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.light-hammer",
+      "revision": 1,
+      "name": "Light Hammer",
+      "category": "Weapons",
+      "features": [
+        "weapon.light-hammer"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.mace",
+      "revision": 1,
+      "name": "Mace",
+      "category": "Weapons",
+      "features": [
+        "weapon.mace"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.quarterstaff",
+      "revision": 1,
+      "name": "Quarterstaff",
+      "category": "Weapons",
+      "features": [
+        "weapon.quarterstaff"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.sickle",
+      "revision": 1,
+      "name": "Sickle",
+      "category": "Weapons",
+      "features": [
+        "weapon.sickle"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.spear",
+      "revision": 1,
+      "name": "Spear",
+      "category": "Weapons",
+      "features": [
+        "weapon.spear"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.dart",
+      "revision": 1,
+      "name": "Dart",
+      "category": "Weapons",
+      "features": [
+        "weapon.dart"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.light-crossbow",
+      "revision": 1,
+      "name": "Light Crossbow",
+      "category": "Weapons",
+      "features": [
+        "weapon.light-crossbow"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.shortbow",
+      "revision": 1,
+      "name": "Shortbow",
+      "category": "Weapons",
+      "features": [
+        "weapon.shortbow"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.sling",
+      "revision": 1,
+      "name": "Sling",
+      "category": "Weapons",
+      "features": [
+        "weapon.sling"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.battleaxe",
+      "revision": 1,
+      "name": "Battleaxe",
+      "category": "Weapons",
+      "features": [
+        "weapon.battleaxe"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.flail",
+      "revision": 1,
+      "name": "Flail",
+      "category": "Weapons",
+      "features": [
+        "weapon.flail"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.glaive",
+      "revision": 1,
+      "name": "Glaive",
+      "category": "Weapons",
+      "features": [
+        "weapon.glaive"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.greataxe",
+      "revision": 1,
+      "name": "Greataxe",
+      "category": "Weapons",
+      "features": [
+        "weapon.greataxe"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.greatsword",
+      "revision": 1,
+      "name": "Greatsword",
+      "category": "Weapons",
+      "features": [
+        "weapon.greatsword"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.halberd",
+      "revision": 1,
+      "name": "Halberd",
+      "category": "Weapons",
+      "features": [
+        "weapon.halberd"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.lance",
+      "revision": 1,
+      "name": "Lance",
+      "category": "Weapons",
+      "features": [
+        "weapon.lance"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.longsword",
+      "revision": 1,
+      "name": "Longsword",
+      "category": "Weapons",
+      "features": [
+        "weapon.longsword"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.maul",
+      "revision": 1,
+      "name": "Maul",
+      "category": "Weapons",
+      "features": [
+        "weapon.maul"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.morningstar",
+      "revision": 1,
+      "name": "Morningstar",
+      "category": "Weapons",
+      "features": [
+        "weapon.morningstar"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.pike",
+      "revision": 1,
+      "name": "Pike",
+      "category": "Weapons",
+      "features": [
+        "weapon.pike"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.rapier",
+      "revision": 1,
+      "name": "Rapier",
+      "category": "Weapons",
+      "features": [
+        "weapon.rapier"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.scimitar",
+      "revision": 1,
+      "name": "Scimitar",
+      "category": "Weapons",
+      "features": [
+        "weapon.scimitar"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.shortsword",
+      "revision": 1,
+      "name": "Shortsword",
+      "category": "Weapons",
+      "features": [
+        "weapon.shortsword"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.trident",
+      "revision": 1,
+      "name": "Trident",
+      "category": "Weapons",
+      "features": [
+        "weapon.trident"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.warhammer",
+      "revision": 1,
+      "name": "Warhammer",
+      "category": "Weapons",
+      "features": [
+        "weapon.warhammer"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.war-pick",
+      "revision": 1,
+      "name": "War Pick",
+      "category": "Weapons",
+      "features": [
+        "weapon.war-pick"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.whip",
+      "revision": 1,
+      "name": "Whip",
+      "category": "Weapons",
+      "features": [
+        "weapon.whip"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.blowgun",
+      "revision": 1,
+      "name": "Blowgun",
+      "category": "Weapons",
+      "features": [
+        "weapon.blowgun"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.hand-crossbow",
+      "revision": 1,
+      "name": "Hand Crossbow",
+      "category": "Weapons",
+      "features": [
+        "weapon.hand-crossbow"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.heavy-crossbow",
+      "revision": 1,
+      "name": "Heavy Crossbow",
+      "category": "Weapons",
+      "features": [
+        "weapon.heavy-crossbow"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.longbow",
+      "revision": 1,
+      "name": "Longbow",
+      "category": "Weapons",
+      "features": [
+        "weapon.longbow"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.musket",
+      "revision": 1,
+      "name": "Musket",
+      "category": "Weapons",
+      "features": [
+        "weapon.musket"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.pistol",
+      "revision": 1,
+      "name": "Pistol",
+      "category": "Weapons",
+      "features": [
+        "weapon.pistol"
+      ],
+      "source": "SRD 5.2.1 p. 91 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=91"
+    },
+    {
+      "id": "dnd5e:2024:item.padded-armor",
+      "revision": 1,
+      "name": "Padded Armor",
+      "category": "Armor",
+      "features": [
+        "armor.padded-armor"
+      ],
+      "slot": "armor",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.leather-armor",
+      "revision": 1,
+      "name": "Leather Armor",
+      "category": "Armor",
+      "features": [
+        "armor.leather-armor"
+      ],
+      "slot": "armor",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.studded-leather-armor",
+      "revision": 1,
+      "name": "Studded Leather Armor",
+      "category": "Armor",
+      "features": [
+        "armor.studded-leather-armor"
+      ],
+      "slot": "armor",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.hide-armor",
+      "revision": 1,
+      "name": "Hide Armor",
+      "category": "Armor",
+      "features": [
+        "armor.hide-armor"
+      ],
+      "slot": "armor",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.chain-shirt",
+      "revision": 1,
+      "name": "Chain Shirt",
+      "category": "Armor",
+      "features": [
+        "armor.chain-shirt"
+      ],
+      "slot": "armor",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.scale-mail",
+      "revision": 1,
+      "name": "Scale Mail",
+      "category": "Armor",
+      "features": [
+        "armor.scale-mail"
+      ],
+      "slot": "armor",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.breastplate",
+      "revision": 1,
+      "name": "Breastplate",
+      "category": "Armor",
+      "features": [
+        "armor.breastplate"
+      ],
+      "slot": "armor",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.half-plate-armor",
+      "revision": 1,
+      "name": "Half Plate Armor",
+      "category": "Armor",
+      "features": [
+        "armor.half-plate-armor"
+      ],
+      "slot": "armor",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.ring-mail",
+      "revision": 1,
+      "name": "Ring Mail",
+      "category": "Armor",
+      "features": [
+        "armor.ring-mail"
+      ],
+      "slot": "armor",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.chain-mail",
+      "revision": 1,
+      "name": "Chain Mail",
+      "category": "Armor",
+      "features": [
+        "armor.chain-mail"
+      ],
+      "slot": "armor",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.splint-armor",
+      "revision": 1,
+      "name": "Splint Armor",
+      "category": "Armor",
+      "features": [
+        "armor.splint-armor"
+      ],
+      "slot": "armor",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.plate-armor",
+      "revision": 1,
+      "name": "Plate Armor",
+      "category": "Armor",
+      "features": [
+        "armor.plate-armor"
+      ],
+      "slot": "armor",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.shield",
+      "revision": 1,
+      "name": "Shield",
+      "category": "Armor",
+      "features": [
+        "armor.shield"
+      ],
+      "slot": "shield",
+      "source": "SRD 5.2.1 p. 92 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=92"
+    },
+    {
+      "id": "dnd5e:2024:item.alchemists-supplies",
+      "revision": 1,
+      "name": "Alchemist’s Supplies",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.brewers-supplies",
+      "revision": 1,
+      "name": "Brewer’s Supplies",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.calligraphers-supplies",
+      "revision": 1,
+      "name": "Calligrapher’s Supplies",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.carpenters-tools",
+      "revision": 1,
+      "name": "Carpenter’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.cartographers-tools",
+      "revision": 1,
+      "name": "Cartographer’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.cobblers-tools",
+      "revision": 1,
+      "name": "Cobbler’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.cooks-utensils",
+      "revision": 1,
+      "name": "Cook’s Utensils",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.glassblowers-tools",
+      "revision": 1,
+      "name": "Glassblower’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.jewelers-tools",
+      "revision": 1,
+      "name": "Jeweler’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.leatherworkers-tools",
+      "revision": 1,
+      "name": "Leatherworker’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.masons-tools",
+      "revision": 1,
+      "name": "Mason’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.painters-supplies",
+      "revision": 1,
+      "name": "Painter’s Supplies",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.potters-tools",
+      "revision": 1,
+      "name": "Potter’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.smiths-tools",
+      "revision": 1,
+      "name": "Smith’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.tinkers-tools",
+      "revision": 1,
+      "name": "Tinker’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.weavers-tools",
+      "revision": 1,
+      "name": "Weaver’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.woodcarvers-tools",
+      "revision": 1,
+      "name": "Woodcarver’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.disguise-kit",
+      "revision": 1,
+      "name": "Disguise Kit",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.forgery-kit",
+      "revision": 1,
+      "name": "Forgery Kit",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.gaming-set",
+      "revision": 1,
+      "name": "Gaming Set",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.herbalism-kit",
+      "revision": 1,
+      "name": "Herbalism Kit",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.musical-instrument",
+      "revision": 1,
+      "name": "Musical Instrument",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.navigators-tools",
+      "revision": 1,
+      "name": "Navigator’s Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.poisoners-kit",
+      "revision": 1,
+      "name": "Poisoner’s Kit",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.thieves-tools",
+      "revision": 1,
+      "name": "Thieves’ Tools",
+      "category": "Tools",
+      "features": [],
+      "source": "SRD 5.2.1 p. 93 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=93"
+    },
+    {
+      "id": "dnd5e:2024:item.ink-pen",
+      "revision": 1,
+      "name": "Ink Pen",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.ink-pen"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.acid",
+      "revision": 1,
+      "name": "Acid",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.acid"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.jug",
+      "revision": 1,
+      "name": "Jug",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.jug"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.alchemists-fire",
+      "revision": 1,
+      "name": "Alchemist’s Fire",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.alchemists-fire"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.ladder",
+      "revision": 1,
+      "name": "Ladder",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.ladder"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.lamp",
+      "revision": 1,
+      "name": "Lamp",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.lamp"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.antitoxin",
+      "revision": 1,
+      "name": "Antitoxin",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.antitoxin"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.bullseye-lantern",
+      "revision": 1,
+      "name": "Bullseye Lantern",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.bullseye-lantern"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.hooded-lantern",
+      "revision": 1,
+      "name": "Hooded Lantern",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.hooded-lantern"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.backpack",
+      "revision": 1,
+      "name": "Backpack",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.backpack"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.lock",
+      "revision": 1,
+      "name": "Lock",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.lock"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.ball-bearings",
+      "revision": 1,
+      "name": "Ball Bearings",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.ball-bearings"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.magnifying-glass",
+      "revision": 1,
+      "name": "Magnifying Glass",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.magnifying-glass"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.barrel",
+      "revision": 1,
+      "name": "Barrel",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.barrel"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.manacles",
+      "revision": 1,
+      "name": "Manacles",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.manacles"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.basket",
+      "revision": 1,
+      "name": "Basket",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.basket"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.map",
+      "revision": 1,
+      "name": "Map",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.map"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.bedroll",
+      "revision": 1,
+      "name": "Bedroll",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.bedroll"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.mirror",
+      "revision": 1,
+      "name": "Mirror",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.mirror"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.bell",
+      "revision": 1,
+      "name": "Bell",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.bell"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.net",
+      "revision": 1,
+      "name": "Net",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.net"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.blanket",
+      "revision": 1,
+      "name": "Blanket",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.blanket"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.oil",
+      "revision": 1,
+      "name": "Oil",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.oil"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.block-and-tackle",
+      "revision": 1,
+      "name": "Block and Tackle",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.block-and-tackle"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.paper",
+      "revision": 1,
+      "name": "Paper",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.paper"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.book",
+      "revision": 1,
+      "name": "Book",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.book"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.parchment",
+      "revision": 1,
+      "name": "Parchment",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.parchment"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.glass-bottle",
+      "revision": 1,
+      "name": "Glass Bottle",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.glass-bottle"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.perfume",
+      "revision": 1,
+      "name": "Perfume",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.perfume"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.bucket",
+      "revision": 1,
+      "name": "Bucket",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.bucket"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.basic-poison",
+      "revision": 1,
+      "name": "Basic Poison",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.basic-poison"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.burglars-pack",
+      "revision": 1,
+      "name": "Burglar’s Pack",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.burglars-pack"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.pole",
+      "revision": 1,
+      "name": "Pole",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.pole"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.caltrops",
+      "revision": 1,
+      "name": "Caltrops",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.caltrops"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.iron-pot",
+      "revision": 1,
+      "name": "Iron Pot",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.iron-pot"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.candle",
+      "revision": 1,
+      "name": "Candle",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.candle"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.potion-of-healing",
+      "revision": 1,
+      "name": "Potion of Healing",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.potion-of-healing"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.crossbow-bolt-case",
+      "revision": 1,
+      "name": "Crossbow Bolt Case",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.crossbow-bolt-case"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.pouch",
+      "revision": 1,
+      "name": "Pouch",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.pouch"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.map-or-scroll-case",
+      "revision": 1,
+      "name": "Map or Scroll Case",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.map-or-scroll-case"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.priests-pack",
+      "revision": 1,
+      "name": "Priest’s Pack",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.priests-pack"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.chain",
+      "revision": 1,
+      "name": "Chain",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.chain"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.quiver",
+      "revision": 1,
+      "name": "Quiver",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.quiver"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.chest",
+      "revision": 1,
+      "name": "Chest",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.chest"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.portable-ram",
+      "revision": 1,
+      "name": "Portable Ram",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.portable-ram"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.climbers-kit",
+      "revision": 1,
+      "name": "Climber’s Kit",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.climbers-kit"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.rations",
+      "revision": 1,
+      "name": "Rations",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.rations"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.fine-clothes",
+      "revision": 1,
+      "name": "Fine Clothes",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.fine-clothes"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.robe",
+      "revision": 1,
+      "name": "Robe",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.robe"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.travelers-clothes",
+      "revision": 1,
+      "name": "Traveler’s Clothes",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.travelers-clothes"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.rope",
+      "revision": 1,
+      "name": "Rope",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.rope"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.component-pouch",
+      "revision": 1,
+      "name": "Component Pouch",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.component-pouch"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.sack",
+      "revision": 1,
+      "name": "Sack",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.sack"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.costume",
+      "revision": 1,
+      "name": "Costume",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.costume"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.scholars-pack",
+      "revision": 1,
+      "name": "Scholar’s Pack",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.scholars-pack"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.crowbar",
+      "revision": 1,
+      "name": "Crowbar",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.crowbar"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.shovel",
+      "revision": 1,
+      "name": "Shovel",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.shovel"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.diplomats-pack",
+      "revision": 1,
+      "name": "Diplomat’s Pack",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.diplomats-pack"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.signal-whistle",
+      "revision": 1,
+      "name": "Signal Whistle",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.signal-whistle"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.spell-scroll-cantrip",
+      "revision": 1,
+      "name": "Spell Scroll (Cantrip)",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.spell-scroll-cantrip"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.dungeoneers-pack",
+      "revision": 1,
+      "name": "Dungeoneer’s Pack",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.dungeoneers-pack"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.spell-scroll-level-1",
+      "revision": 1,
+      "name": "Spell Scroll (Level 1)",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.spell-scroll-level-1"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.entertainers-pack",
+      "revision": 1,
+      "name": "Entertainer’s Pack",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.entertainers-pack"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.iron-spikes",
+      "revision": 1,
+      "name": "Iron Spikes",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.iron-spikes"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.explorers-pack",
+      "revision": 1,
+      "name": "Explorer’s Pack",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.explorers-pack"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.spyglass",
+      "revision": 1,
+      "name": "Spyglass",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.spyglass"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.flask",
+      "revision": 1,
+      "name": "Flask",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.flask"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.string",
+      "revision": 1,
+      "name": "String",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.string"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.grappling-hook",
+      "revision": 1,
+      "name": "Grappling Hook",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.grappling-hook"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.tent",
+      "revision": 1,
+      "name": "Tent",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.tent"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.healers-kit",
+      "revision": 1,
+      "name": "Healer’s Kit",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.healers-kit"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.tinderbox",
+      "revision": 1,
+      "name": "Tinderbox",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.tinderbox"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.torch",
+      "revision": 1,
+      "name": "Torch",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.torch"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.holy-water",
+      "revision": 1,
+      "name": "Holy Water",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.holy-water"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.vial",
+      "revision": 1,
+      "name": "Vial",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.vial"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.hunting-trap",
+      "revision": 1,
+      "name": "Hunting Trap",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.hunting-trap"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.waterskin",
+      "revision": 1,
+      "name": "Waterskin",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.waterskin"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.ink",
+      "revision": 1,
+      "name": "Ink",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.ink"
+      ],
+      "source": "SRD 5.2.1 p. 95 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=95"
+    },
+    {
+      "id": "dnd5e:2024:item.arrows-20-quiver",
+      "revision": 1,
+      "name": "Arrows 20 Quiver",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.arrows-20-quiver"
+      ],
+      "source": "SRD 5.2.1 p. 96 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    {
+      "id": "dnd5e:2024:item.sling-20-pouch-bullets",
+      "revision": 1,
+      "name": "Sling 20 Pouch Bullets",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.sling-20-pouch-bullets"
+      ],
+      "source": "SRD 5.2.1 p. 96 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    {
+      "id": "dnd5e:2024:item.crystal",
+      "revision": 1,
+      "name": "Crystal",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.crystal"
+      ],
+      "source": "SRD 5.2.1 p. 96 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    {
+      "id": "dnd5e:2024:item.orb",
+      "revision": 1,
+      "name": "Orb",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.orb"
+      ],
+      "source": "SRD 5.2.1 p. 96 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    {
+      "id": "dnd5e:2024:item.staff-also-a-quarterstaff",
+      "revision": 1,
+      "name": "Staff (also a Quarterstaff)",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.staff-also-a-quarterstaff"
+      ],
+      "source": "SRD 5.2.1 p. 96 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    {
+      "id": "dnd5e:2024:item.wand",
+      "revision": 1,
+      "name": "Wand",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.wand"
+      ],
+      "source": "SRD 5.2.1 p. 96 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    {
+      "id": "dnd5e:2024:item.druidic-focus-varies-amulet-worn-or-held",
+      "revision": 1,
+      "name": "Druidic Focus (Varies) Amulet (worn or held)",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.druidic-focus-varies-amulet-worn-or-held"
+      ],
+      "source": "SRD 5.2.1 p. 97 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=97"
+    },
+    {
+      "id": "dnd5e:2024:item.emblem-borne-on-fabric-or-a-shield",
+      "revision": 1,
+      "name": "Emblem (borne on fabric or a Shield)",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.emblem-borne-on-fabric-or-a-shield"
+      ],
+      "source": "SRD 5.2.1 p. 97 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=97"
+    },
+    {
+      "id": "dnd5e:2024:item.reliquary-held",
+      "revision": 1,
+      "name": "Reliquary (held)",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.reliquary-held"
+      ],
+      "source": "SRD 5.2.1 p. 97 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=97"
+    },
+    {
+      "id": "dnd5e:2024:item.wooden-staff-also-a-quarterstaff",
+      "revision": 1,
+      "name": "Wooden staff (also a Quarterstaff)",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.wooden-staff-also-a-quarterstaff"
+      ],
+      "source": "SRD 5.2.1 p. 97 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=97"
+    },
+    {
+      "id": "dnd5e:2024:item.yew-wand",
+      "revision": 1,
+      "name": "Yew wand",
+      "category": "Adventuring Gear",
+      "features": [
+        "gear.yew-wand"
+      ],
+      "source": "SRD 5.2.1 p. 97 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=97"
+    },
+    {
+      "id": "dnd5e:2024:item.arcane-focus",
+      "revision": 1,
+      "name": "Arcane Focus",
+      "category": "Adventuring Gear",
+      "features": [],
+      "source": "SRD 5.2.1 p. 96 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    {
+      "id": "dnd5e:2024:item.druidic-focus",
+      "revision": 1,
+      "name": "Druidic Focus",
+      "category": "Adventuring Gear",
+      "features": [],
+      "source": "SRD 5.2.1 p. 97 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=97"
+    },
+    {
+      "id": "dnd5e:2024:item.holy-symbol",
+      "revision": 1,
+      "name": "Holy Symbol",
+      "category": "Adventuring Gear",
+      "features": [],
+      "source": "SRD 5.2.1 p. 97 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=97"
+    },
+    {
+      "id": "dnd5e:2024:item.spellbook",
+      "revision": 1,
+      "name": "Spellbook",
+      "category": "Adventuring Gear",
+      "features": [],
+      "source": "SRD 5.2.1 p. 77 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=77"
+    },
+    {
+      "id": "dnd5e:2024:item.arrows",
+      "revision": 1,
+      "name": "Arrows",
+      "category": "Ammunition",
+      "features": [],
+      "source": "SRD 5.2.1 p. 96 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    },
+    {
+      "id": "dnd5e:2024:item.bolts",
+      "revision": 1,
+      "name": "Bolts",
+      "category": "Ammunition",
+      "features": [],
+      "source": "SRD 5.2.1 p. 96 (CC BY 4.0), https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.1.pdf#page=96"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+import { Engine, clone } from '@/src/engine.js';
+import type { Catalogue } from '@/src/model.js';
+import { SystemRegistry, getFeatureCoverage } from '@/src/system-loader.js';
+import systemFile from '@/src/systems/dnd5e-2024/system.json' with { type: 'json' };
+import { systemDocuments } from '@/src/systems/dnd5e-2024/documents.js';
+import { resolveSystemFile } from '@/src/system-package.js';
+import type { Dnd2024Options } from '@/src/systems/dnd5e-2024/types/Dnd2024Options.js';
+export type { Dnd2024Options } from '@/src/systems/dnd5e-2024/types/Dnd2024Options.js';
+const registry = new SystemRegistry();
+registry.load(resolveSystemFile(systemFile, systemDocuments));
+export const createDnd2024Engine = (options: Dnd2024Options = {}): Engine => registry.createEngine(systemFile.id, systemFile.revision, Object.fromEntries(Object.entries(options).filter(([, value]) => value !== undefined)));
+export const createDnd2024Catalogue = (options: Dnd2024Options = {}): Catalogue => clone(createDnd2024Engine(options).catalogue);
+export const getDnd2024FeatureCoverage = (catalogue: Catalogue = createDnd2024Catalogue()) => getFeatureCoverage(catalogue);

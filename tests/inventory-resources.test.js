@@ -3,30 +3,31 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { Engine, adjustResource, updateInventory, itemProperties, parseSystemFile, deserializeCharacter } from '@/dist/index.js';
-import { createDnd2014Engine } from '@/dist/systems/dnd5e-2014/index.js';
+import { createDnd2024Engine } from '@/dist/systems/dnd5e-2024/index.js';
 
-const engine = createDnd2014Engine();
-const characters = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2014/starter-characters.json', import.meta.url), 'utf8')).data;
+const engine = createDnd2024Engine();
+const characters = JSON.parse(readFileSync(new URL('../src/systems/dnd5e-2024/starter-characters.json', import.meta.url), 'utf8')).data;
 
 test('inventory is separate from acquired Features and equipment changes recalculate AC', () => {
-  const fighter = characters[0];
+  const fighter = characters.find((character) => character.name === 'Brakka Stonewatch');
   const before = engine.evaluate(fighter);
   assert.equal(before.stats.armorClass.value, 17);
   const inventory = fighter.inventory.map((entry) => ({ ...entry, equipped: false }));
   const after = updateInventory(engine, fighter, inventory, 'remove-armor');
-  assert.equal(engine.evaluate(after).stats.armorClass.value, 9);
+  // Chain Mail and Defense removed: 10 + Dexterity modifier (+1).
+  assert.equal(engine.evaluate(after).stats.armorClass.value, 11);
   assert.deepEqual(engine.evaluate(after).instances, before.instances);
   assert(!engine.catalogue.features.some((feature) => feature.id.includes(':item.')));
-  assert.equal(itemProperties(engine.catalogue, 'dnd5e:2014:item.greataxe')['Damage type'], 'Slashing');
-  assert.equal(itemProperties(engine.catalogue, 'dnd5e:2014:item.greataxe')['Damage dice'], '1d12');
+  assert.equal(itemProperties(engine.catalogue, 'dnd5e:2024:item.greataxe')['Damage type'], 'Slashing');
+  assert.equal(itemProperties(engine.catalogue, 'dnd5e:2024:item.greataxe')['Damage dice'], '1d12');
   assert.deepEqual(updateInventory(engine, after, inventory, 'remove-armor'), after);
   assert.throws(() => updateInventory(engine, after, fighter.inventory, 'remove-armor'), /reused/);
   assert.equal(engine.evaluate(updateInventory(engine, after, fighter.inventory, 'equip-armor')).stats.armorClass.value, 17);
 });
 
 test('inventory rejects unknown items, invalid quantities, duplicate identities and conflicting armor slots', () => {
-  const fighter = characters[0];
-  for (const inventory of [[{ id: 'x', item: 'missing', quantity: 1, equipped: false }], [{ ...fighter.inventory[0], quantity: 0 }], [fighter.inventory[0], fighter.inventory[0]], [...fighter.inventory, { id: 'extra', item: 'dnd5e:2014:item.leather-armor', quantity: 1, equipped: true }]]) {
+  const fighter = characters.find((character) => character.name === 'Brakka Stonewatch');
+  for (const inventory of [[{ id: 'x', item: 'missing', quantity: 1, equipped: false }], [{ ...fighter.inventory[0], quantity: 0 }], [fighter.inventory[0], fighter.inventory[0]], [...fighter.inventory, { id: 'extra', item: 'dnd5e:2024:item.leather-armor', quantity: 1, equipped: true }]]) {
     assert.throws(() => updateInventory(engine, fighter, inventory, 'invalid'));
     assert.throws(() => deserializeCharacter(JSON.stringify({ ...fighter, inventory }), engine));
   }
@@ -39,19 +40,20 @@ test('item Features detect recursive cycles and invalid stat modifiers without e
   const bad = structuredClone(engine.catalogue);
   bad.itemFeatures[0].modifiers = [{ kind: 'modifyStat', id: 'bad', stat: 'missing', operation: 'add', value: 1 }];
   assert.throws(() => new Engine(bad), /stat/i);
-  const file = readSystem(new URL('../src/systems/dnd5e-2014/system.json', import.meta.url));
+  const file = readSystem(new URL('../src/systems/dnd5e-2024/system.json', import.meta.url));
   file.configurations[0].system.sheetSections[0].rows[0].stat = 'missing';
   assert.throws(() => parseSystemFile(file), /displayed stat/);
 });
 
 test('resource adjustments enforce ownership, capacity, integer amounts and idempotency', () => {
-  const fighter = characters[0], result = engine.evaluate(fighter);
+  const fighter = characters.find((character) => character.name === 'Brakka Stonewatch'), result = engine.evaluate(fighter);
   const pool = Object.values(result.resources).find((resource) => resource.key === 'second-wind');
   assert(pool);
   assert(!result.capabilities.some((capability) => capability.definition.name === 'Arcane Recovery'));
-  const reduced = adjustResource(engine, fighter, pool.id, -1, 'decrease');
+  // 2024 Second Wind has two uses at Fighter level 1.
+  const reduced = adjustResource(engine, fighter, pool.id, -2, 'decrease');
   assert.equal(engine.evaluate(reduced).resources[pool.id].current, 0);
-  assert.deepEqual(adjustResource(engine, reduced, pool.id, -1, 'decrease'), reduced);
+  assert.deepEqual(adjustResource(engine, reduced, pool.id, -2, 'decrease'), reduced);
   assert.throws(() => adjustResource(engine, reduced, pool.id, -1, 'below-minimum'));
   assert.throws(() => adjustResource(engine, fighter, pool.id, 1, 'above-maximum'));
   assert.throws(() => adjustResource(engine, fighter, pool.id, -0.5, 'fraction'));

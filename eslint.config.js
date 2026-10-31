@@ -9,7 +9,8 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 const sourceFiles = ['**/*.{js,mjs,cjs,jsx,ts,tsx}'];
 
 export default defineConfig([
-  globalIgnores(['**/dist/**', '**/node_modules/**', '**/coverage/**', '**/.*']),
+  // local-archive holds the removed DnD5e 2014 data outside version control.
+  globalIgnores(['**/dist/**', '**/node_modules/**', '**/coverage/**', '**/.*', 'local-archive/**']),
   {
     files: sourceFiles,
     extends: [

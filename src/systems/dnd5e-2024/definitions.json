@@ -1,0 +1,2933 @@
+{
+  "assetVersion": "1.0.0",
+  "data": {
+    "stats": [
+      {
+        "id": "base.strength",
+        "name": "Base strength",
+        "kind": "input",
+        "default": 15,
+        "integer": true,
+        "minimum": 3,
+        "maximum": 18
+      },
+      {
+        "id": "base.dexterity",
+        "name": "Base dexterity",
+        "kind": "input",
+        "default": 14,
+        "integer": true,
+        "minimum": 3,
+        "maximum": 18
+      },
+      {
+        "id": "base.constitution",
+        "name": "Base constitution",
+        "kind": "input",
+        "default": 13,
+        "integer": true,
+        "minimum": 3,
+        "maximum": 18
+      },
+      {
+        "id": "base.intelligence",
+        "name": "Base intelligence",
+        "kind": "input",
+        "default": 12,
+        "integer": true,
+        "minimum": 3,
+        "maximum": 18
+      },
+      {
+        "id": "base.wisdom",
+        "name": "Base wisdom",
+        "kind": "input",
+        "default": 10,
+        "integer": true,
+        "minimum": 3,
+        "maximum": 18
+      },
+      {
+        "id": "base.charisma",
+        "name": "Base charisma",
+        "kind": "input",
+        "default": 8,
+        "integer": true,
+        "minimum": 3,
+        "maximum": 18
+      },
+      {
+        "id": "strength",
+        "name": "Strength",
+        "kind": "derived",
+        "expression": {
+          "stat": "base.strength"
+        },
+        "minimum": 1,
+        "maximum": 30,
+        "clamp": true,
+        "integer": true
+      },
+      {
+        "id": "modifier.strength",
+        "name": "Strength modifier",
+        "kind": "derived",
+        "expression": {
+          "op": "floor",
+          "args": [
+            {
+              "op": "divide",
+              "args": [
+                {
+                  "op": "subtract",
+                  "args": [
+                    {
+                      "stat": "strength"
+                    },
+                    10
+                  ]
+                },
+                2
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "dexterity",
+        "name": "Dexterity",
+        "kind": "derived",
+        "expression": {
+          "stat": "base.dexterity"
+        },
+        "minimum": 1,
+        "maximum": 30,
+        "clamp": true,
+        "integer": true
+      },
+      {
+        "id": "modifier.dexterity",
+        "name": "Dexterity modifier",
+        "kind": "derived",
+        "expression": {
+          "op": "floor",
+          "args": [
+            {
+              "op": "divide",
+              "args": [
+                {
+                  "op": "subtract",
+                  "args": [
+                    {
+                      "stat": "dexterity"
+                    },
+                    10
+                  ]
+                },
+                2
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "constitution",
+        "name": "Constitution",
+        "kind": "derived",
+        "expression": {
+          "stat": "base.constitution"
+        },
+        "minimum": 1,
+        "maximum": 30,
+        "clamp": true,
+        "integer": true
+      },
+      {
+        "id": "modifier.constitution",
+        "name": "Constitution modifier",
+        "kind": "derived",
+        "expression": {
+          "op": "floor",
+          "args": [
+            {
+              "op": "divide",
+              "args": [
+                {
+                  "op": "subtract",
+                  "args": [
+                    {
+                      "stat": "constitution"
+                    },
+                    10
+                  ]
+                },
+                2
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "intelligence",
+        "name": "Intelligence",
+        "kind": "derived",
+        "expression": {
+          "stat": "base.intelligence"
+        },
+        "minimum": 1,
+        "maximum": 30,
+        "clamp": true,
+        "integer": true
+      },
+      {
+        "id": "modifier.intelligence",
+        "name": "Intelligence modifier",
+        "kind": "derived",
+        "expression": {
+          "op": "floor",
+          "args": [
+            {
+              "op": "divide",
+              "args": [
+                {
+                  "op": "subtract",
+                  "args": [
+                    {
+                      "stat": "intelligence"
+                    },
+                    10
+                  ]
+                },
+                2
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "wisdom",
+        "name": "Wisdom",
+        "kind": "derived",
+        "expression": {
+          "stat": "base.wisdom"
+        },
+        "minimum": 1,
+        "maximum": 30,
+        "clamp": true,
+        "integer": true
+      },
+      {
+        "id": "modifier.wisdom",
+        "name": "Wisdom modifier",
+        "kind": "derived",
+        "expression": {
+          "op": "floor",
+          "args": [
+            {
+              "op": "divide",
+              "args": [
+                {
+                  "op": "subtract",
+                  "args": [
+                    {
+                      "stat": "wisdom"
+                    },
+                    10
+                  ]
+                },
+                2
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "charisma",
+        "name": "Charisma",
+        "kind": "derived",
+        "expression": {
+          "stat": "base.charisma"
+        },
+        "minimum": 1,
+        "maximum": 30,
+        "clamp": true,
+        "integer": true
+      },
+      {
+        "id": "modifier.charisma",
+        "name": "Charisma modifier",
+        "kind": "derived",
+        "expression": {
+          "op": "floor",
+          "args": [
+            {
+              "op": "divide",
+              "args": [
+                {
+                  "op": "subtract",
+                  "args": [
+                    {
+                      "stat": "charisma"
+                    },
+                    10
+                  ]
+                },
+                2
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "proficiencyBonus",
+        "name": "Proficiency Bonus",
+        "kind": "derived",
+        "expression": {
+          "if": {
+            "op": "gt",
+            "args": [
+              {
+                "context": "characterLevel"
+              },
+              0
+            ]
+          },
+          "then": {
+            "op": "add",
+            "args": [
+              2,
+              {
+                "op": "floor",
+                "args": [
+                  {
+                    "op": "divide",
+                    "args": [
+                      {
+                        "op": "subtract",
+                        "args": [
+                          {
+                            "context": "characterLevel"
+                          },
+                          1
+                        ]
+                      },
+                      4
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "else": 0
+        }
+      },
+      {
+        "id": "training.save.strength",
+        "name": "Strength save training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "save.strength",
+        "name": "Strength saving throw",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.strength"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.save.strength"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.save.dexterity",
+        "name": "Dexterity save training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "save.dexterity",
+        "name": "Dexterity saving throw",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.dexterity"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.save.dexterity"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.save.constitution",
+        "name": "Constitution save training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "save.constitution",
+        "name": "Constitution saving throw",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.constitution"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.save.constitution"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.save.intelligence",
+        "name": "Intelligence save training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "save.intelligence",
+        "name": "Intelligence saving throw",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.intelligence"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.save.intelligence"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.save.wisdom",
+        "name": "Wisdom save training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "save.wisdom",
+        "name": "Wisdom saving throw",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.wisdom"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.save.wisdom"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.save.charisma",
+        "name": "Charisma save training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "save.charisma",
+        "name": "Charisma saving throw",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.charisma"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.save.charisma"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.acrobatics",
+        "name": "Acrobatics training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.acrobatics",
+        "name": "Acrobatics",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.dexterity"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.acrobatics"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.animal-handling",
+        "name": "Animal Handling training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.animal-handling",
+        "name": "Animal Handling",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.wisdom"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.animal-handling"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.arcana",
+        "name": "Arcana training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.arcana",
+        "name": "Arcana",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.intelligence"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.arcana"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.athletics",
+        "name": "Athletics training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.athletics",
+        "name": "Athletics",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.strength"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.athletics"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.deception",
+        "name": "Deception training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.deception",
+        "name": "Deception",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.charisma"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.deception"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.history",
+        "name": "History training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.history",
+        "name": "History",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.intelligence"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.history"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.insight",
+        "name": "Insight training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.insight",
+        "name": "Insight",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.wisdom"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.insight"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.intimidation",
+        "name": "Intimidation training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.intimidation",
+        "name": "Intimidation",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.charisma"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.intimidation"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.investigation",
+        "name": "Investigation training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.investigation",
+        "name": "Investigation",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.intelligence"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.investigation"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.medicine",
+        "name": "Medicine training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.medicine",
+        "name": "Medicine",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.wisdom"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.medicine"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.nature",
+        "name": "Nature training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.nature",
+        "name": "Nature",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.intelligence"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.nature"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.perception",
+        "name": "Perception training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.perception",
+        "name": "Perception",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.wisdom"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.perception"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.performance",
+        "name": "Performance training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.performance",
+        "name": "Performance",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.charisma"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.performance"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.persuasion",
+        "name": "Persuasion training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.persuasion",
+        "name": "Persuasion",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.charisma"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.persuasion"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.religion",
+        "name": "Religion training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.religion",
+        "name": "Religion",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.intelligence"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.religion"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.sleight-of-hand",
+        "name": "Sleight of Hand training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.sleight-of-hand",
+        "name": "Sleight of Hand",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.dexterity"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.sleight-of-hand"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.stealth",
+        "name": "Stealth training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.stealth",
+        "name": "Stealth",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.dexterity"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.stealth"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.skill.survival",
+        "name": "Survival training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "skill.survival",
+        "name": "Survival",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "modifier.wisdom"
+            },
+            {
+              "op": "multiply",
+              "args": [
+                {
+                  "stat": "training.skill.survival"
+                },
+                {
+                  "stat": "proficiencyBonus"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "training.tool.alchemists-supplies",
+        "name": "Alchemist’s Supplies training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.brewers-supplies",
+        "name": "Brewer’s Supplies training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.calligraphers-supplies",
+        "name": "Calligrapher’s Supplies training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.carpenters-tools",
+        "name": "Carpenter’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.cartographers-tools",
+        "name": "Cartographer’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.cobblers-tools",
+        "name": "Cobbler’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.cooks-utensils",
+        "name": "Cook’s Utensils training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.glassblowers-tools",
+        "name": "Glassblower’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.jewelers-tools",
+        "name": "Jeweler’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.leatherworkers-tools",
+        "name": "Leatherworker’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.masons-tools",
+        "name": "Mason’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.painters-supplies",
+        "name": "Painter’s Supplies training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.potters-tools",
+        "name": "Potter’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.smiths-tools",
+        "name": "Smith’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.tinkers-tools",
+        "name": "Tinker’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.weavers-tools",
+        "name": "Weaver’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.woodcarvers-tools",
+        "name": "Woodcarver’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.disguise-kit",
+        "name": "Disguise Kit training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.forgery-kit",
+        "name": "Forgery Kit training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.gaming-set",
+        "name": "Gaming Set training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.herbalism-kit",
+        "name": "Herbalism Kit training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.musical-instrument",
+        "name": "Musical Instrument training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.navigators-tools",
+        "name": "Navigator’s Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.poisoners-kit",
+        "name": "Poisoner’s Kit training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.tool.thieves-tools",
+        "name": "Thieves’ Tools training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.armor.light",
+        "name": "Light armor training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.armor.medium",
+        "name": "Medium armor training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.armor.heavy",
+        "name": "Heavy armor training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.armor.shield",
+        "name": "Shield armor training",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.weapons.simple",
+        "name": "Simple weapon proficiency",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "training.weapons.martial",
+        "name": "Martial weapon proficiency",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "hitPoints",
+        "name": "Hit Point maximum",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "attacksPerAction",
+        "name": "Attacks per Attack action",
+        "kind": "derived",
+        "expression": 1
+      },
+      {
+        "id": "criticalThreshold",
+        "name": "Critical Hit threshold",
+        "kind": "derived",
+        "expression": 20
+      },
+      {
+        "id": "rangedWeaponAttackBonus",
+        "name": "Ranged weapon attack bonus",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "initiative",
+        "name": "Initiative",
+        "kind": "derived",
+        "expression": {
+          "stat": "modifier.dexterity"
+        }
+      },
+      {
+        "id": "passivePerception",
+        "name": "Passive Perception",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            10,
+            {
+              "stat": "skill.perception"
+            }
+          ]
+        }
+      },
+      {
+        "id": "armorIndex",
+        "name": "Worn armor",
+        "kind": "input",
+        "default": 0,
+        "integer": true,
+        "minimum": 0,
+        "maximum": 12
+      },
+      {
+        "id": "shield",
+        "name": "Wielding a shield",
+        "kind": "input",
+        "default": 0,
+        "integer": true,
+        "minimum": 0,
+        "maximum": 1
+      },
+      {
+        "id": "armorStrengthExemption",
+        "name": "Heavy armor Strength exemption",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "unarmoredDefense",
+        "name": "Unarmored Defense bonus",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "walkingSpeed",
+        "name": "Walking speed",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "speed",
+        "name": "Speed",
+        "kind": "derived",
+        "expression": {
+          "op": "subtract",
+          "args": [
+            {
+              "stat": "walkingSpeed"
+            },
+            {
+              "if": {
+                "op": "and",
+                "args": [
+                  {
+                    "op": "lt",
+                    "args": [
+                      {
+                        "stat": "strength"
+                      },
+                      {
+                        "table": "armorStrength",
+                        "owner": "dnd5e:2024:tables",
+                        "input": {
+                          "stat": "armorIndex"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "stat": "armorStrengthExemption"
+                      },
+                      0
+                    ]
+                  }
+                ]
+              },
+              "then": 10,
+              "else": 0
+            }
+          ]
+        }
+      },
+      {
+        "id": "armorClass",
+        "name": "Armor Class",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "table": "armorBase",
+              "owner": "dnd5e:2024:tables",
+              "input": {
+                "stat": "armorIndex"
+              }
+            },
+            {
+              "if": {
+                "op": "eq",
+                "args": [
+                  {
+                    "table": "armorCategory",
+                    "owner": "dnd5e:2024:tables",
+                    "input": {
+                      "stat": "armorIndex"
+                    }
+                  },
+                  3
+                ]
+              },
+              "then": 0,
+              "else": {
+                "op": "min",
+                "args": [
+                  {
+                    "stat": "modifier.dexterity"
+                  },
+                  {
+                    "table": "armorDexterityCap",
+                    "owner": "dnd5e:2024:tables",
+                    "input": {
+                      "stat": "armorIndex"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "op": "multiply",
+              "args": [
+                2,
+                {
+                  "stat": "shield"
+                }
+              ]
+            },
+            {
+              "if": {
+                "op": "eq",
+                "args": [
+                  {
+                    "stat": "armorIndex"
+                  },
+                  0
+                ]
+              },
+              "then": {
+                "stat": "unarmoredDefense"
+              },
+              "else": 0
+            }
+          ]
+        }
+      },
+      {
+        "id": "armorProficient",
+        "name": "Trained with worn armor",
+        "kind": "derived",
+        "expression": {
+          "if": {
+            "op": "and",
+            "args": [
+              {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "stat": "armorIndex"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "table": "armorCategory",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "armorIndex"
+                            }
+                          },
+                          1
+                        ]
+                      },
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "training.armor.light"
+                          },
+                          1
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "table": "armorCategory",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "armorIndex"
+                            }
+                          },
+                          2
+                        ]
+                      },
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "training.armor.medium"
+                          },
+                          1
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "op": "and",
+                    "args": [
+                      {
+                        "op": "eq",
+                        "args": [
+                          {
+                            "table": "armorCategory",
+                            "owner": "dnd5e:2024:tables",
+                            "input": {
+                              "stat": "armorIndex"
+                            }
+                          },
+                          3
+                        ]
+                      },
+                      {
+                        "op": "gte",
+                        "args": [
+                          {
+                            "stat": "training.armor.heavy"
+                          },
+                          1
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "op": "or",
+                "args": [
+                  {
+                    "op": "eq",
+                    "args": [
+                      {
+                        "stat": "shield"
+                      },
+                      0
+                    ]
+                  },
+                  {
+                    "op": "gte",
+                    "args": [
+                      {
+                        "stat": "training.armor.shield"
+                      },
+                      1
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "then": 1,
+          "else": 0
+        }
+      },
+      {
+        "id": "darkvision",
+        "name": "Darkvision range",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "sizeCategory",
+        "name": "Size (0 Small, 1 Medium)",
+        "kind": "derived",
+        "expression": 1
+      },
+      {
+        "id": "casterLevel",
+        "name": "Spellcasting level",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "spellSlots.1",
+        "name": "Level 1 spell slots",
+        "kind": "derived",
+        "expression": {
+          "table": "slots1",
+          "owner": "dnd5e:2024:tables",
+          "input": {
+            "op": "min",
+            "args": [
+              20,
+              {
+                "stat": "casterLevel"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "spellSlots.2",
+        "name": "Level 2 spell slots",
+        "kind": "derived",
+        "expression": {
+          "table": "slots2",
+          "owner": "dnd5e:2024:tables",
+          "input": {
+            "op": "min",
+            "args": [
+              20,
+              {
+                "stat": "casterLevel"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "spellSlots.3",
+        "name": "Level 3 spell slots",
+        "kind": "derived",
+        "expression": {
+          "table": "slots3",
+          "owner": "dnd5e:2024:tables",
+          "input": {
+            "op": "min",
+            "args": [
+              20,
+              {
+                "stat": "casterLevel"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "spellSlots.4",
+        "name": "Level 4 spell slots",
+        "kind": "derived",
+        "expression": {
+          "table": "slots4",
+          "owner": "dnd5e:2024:tables",
+          "input": {
+            "op": "min",
+            "args": [
+              20,
+              {
+                "stat": "casterLevel"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "spellSlots.5",
+        "name": "Level 5 spell slots",
+        "kind": "derived",
+        "expression": {
+          "table": "slots5",
+          "owner": "dnd5e:2024:tables",
+          "input": {
+            "op": "min",
+            "args": [
+              20,
+              {
+                "stat": "casterLevel"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "spellSlots.6",
+        "name": "Level 6 spell slots",
+        "kind": "derived",
+        "expression": {
+          "table": "slots6",
+          "owner": "dnd5e:2024:tables",
+          "input": {
+            "op": "min",
+            "args": [
+              20,
+              {
+                "stat": "casterLevel"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "spellSlots.7",
+        "name": "Level 7 spell slots",
+        "kind": "derived",
+        "expression": {
+          "table": "slots7",
+          "owner": "dnd5e:2024:tables",
+          "input": {
+            "op": "min",
+            "args": [
+              20,
+              {
+                "stat": "casterLevel"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "spellSlots.8",
+        "name": "Level 8 spell slots",
+        "kind": "derived",
+        "expression": {
+          "table": "slots8",
+          "owner": "dnd5e:2024:tables",
+          "input": {
+            "op": "min",
+            "args": [
+              20,
+              {
+                "stat": "casterLevel"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "spellSlots.9",
+        "name": "Level 9 spell slots",
+        "kind": "derived",
+        "expression": {
+          "table": "slots9",
+          "owner": "dnd5e:2024:tables",
+          "input": {
+            "op": "min",
+            "args": [
+              20,
+              {
+                "stat": "casterLevel"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "pactSlotLevel",
+        "name": "Pact Magic slot level",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "pactSlotCount",
+        "name": "Pact Magic slots",
+        "kind": "derived",
+        "expression": 0
+      },
+      {
+        "id": "attunementLimit",
+        "name": "Attunement limit",
+        "kind": "derived",
+        "expression": 3
+      },
+      {
+        "id": "resource.capacity.hit-dice.d6",
+        "name": "Hit Point Dice (d6) maximum",
+        "kind": "derived",
+        "expression": 0,
+        "minimum": 0,
+        "integer": true
+      },
+      {
+        "id": "resource.capacity.hit-dice.d8",
+        "name": "Hit Point Dice (d8) maximum",
+        "kind": "derived",
+        "expression": 0,
+        "minimum": 0,
+        "integer": true
+      },
+      {
+        "id": "resource.capacity.hit-dice.d10",
+        "name": "Hit Point Dice (d10) maximum",
+        "kind": "derived",
+        "expression": 0,
+        "minimum": 0,
+        "integer": true
+      },
+      {
+        "id": "resource.capacity.hit-dice.d12",
+        "name": "Hit Point Dice (d12) maximum",
+        "kind": "derived",
+        "expression": 0,
+        "minimum": 0,
+        "integer": true
+      },
+      {
+        "id": "casting.intelligence.attack",
+        "name": "Intelligence spell attack",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "proficiencyBonus"
+            },
+            {
+              "stat": "modifier.intelligence"
+            }
+          ]
+        }
+      },
+      {
+        "id": "casting.intelligence.dc",
+        "name": "Intelligence spell save DC",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            8,
+            {
+              "stat": "casting.intelligence.attack"
+            }
+          ]
+        }
+      },
+      {
+        "id": "casting.wisdom.attack",
+        "name": "Wisdom spell attack",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "proficiencyBonus"
+            },
+            {
+              "stat": "modifier.wisdom"
+            }
+          ]
+        }
+      },
+      {
+        "id": "casting.wisdom.dc",
+        "name": "Wisdom spell save DC",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            8,
+            {
+              "stat": "casting.wisdom.attack"
+            }
+          ]
+        }
+      },
+      {
+        "id": "casting.charisma.attack",
+        "name": "Charisma spell attack",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "stat": "proficiencyBonus"
+            },
+            {
+              "stat": "modifier.charisma"
+            }
+          ]
+        }
+      },
+      {
+        "id": "casting.charisma.dc",
+        "name": "Charisma spell save DC",
+        "kind": "derived",
+        "expression": {
+          "op": "add",
+          "args": [
+            8,
+            {
+              "stat": "casting.charisma.attack"
+            }
+          ]
+        }
+      }
+    ],
+    "classes": [
+      "dnd5e:2024:barbarian",
+      "dnd5e:2024:bard",
+      "dnd5e:2024:cleric",
+      "dnd5e:2024:druid",
+      "dnd5e:2024:fighter",
+      "dnd5e:2024:monk",
+      "dnd5e:2024:paladin",
+      "dnd5e:2024:ranger",
+      "dnd5e:2024:rogue",
+      "dnd5e:2024:sorcerer",
+      "dnd5e:2024:warlock",
+      "dnd5e:2024:wizard"
+    ],
+    "allowDuplicateClasses": false,
+    "characterLevel": {
+      "context": "totalClassLevels"
+    },
+    "contextDefaults": {
+      "spellComponentsAvailable": true
+    },
+    "advancement": {
+      "0": [
+        {
+          "id": "species",
+          "kind": "chooseFeatures",
+          "minimum": 1,
+          "maximum": 1,
+          "candidates": {
+            "ids": [
+              "dnd5e:2024:species.dragonborn",
+              "dnd5e:2024:species.dwarf",
+              "dnd5e:2024:species.elf",
+              "dnd5e:2024:species.gnome",
+              "dnd5e:2024:species.goliath",
+              "dnd5e:2024:species.halfling",
+              "dnd5e:2024:species.human",
+              "dnd5e:2024:species.orc",
+              "dnd5e:2024:species.tiefling"
+            ]
+          },
+          "retraining": {
+            "allowed": false
+          }
+        },
+        {
+          "id": "background",
+          "kind": "chooseFeatures",
+          "minimum": 1,
+          "maximum": 1,
+          "candidates": {
+            "ids": [
+              "dnd5e:2024:background.acolyte",
+              "dnd5e:2024:background.criminal",
+              "dnd5e:2024:background.sage",
+              "dnd5e:2024:background.soldier"
+            ]
+          },
+          "retraining": {
+            "allowed": false
+          }
+        },
+        {
+          "id": "languages",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2024:languages"
+        },
+        {
+          "id": "heroic-inspiration",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2024:resource.heroic-inspiration"
+        },
+        {
+          "id": "temporary-hit-points",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2024:resource.temporary-hit-points"
+        },
+        {
+          "id": "death-save.successes",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2024:resource.death-save.successes"
+        },
+        {
+          "id": "death-save.failures",
+          "kind": "grantFeature",
+          "feature": "dnd5e:2024:resource.death-save.failures"
+        }
+      ]
+    },
+    "commandRules": {
+      "selectedRecovery": {
+        "capabilityName": "Arcane Recovery",
+        "requiredEvent": "short-rest",
+        "boundaryEvent": "long-rest",
+        "budgetStat": "arcaneRecoveryBudget",
+        "eventKind": "dnd2024-arcane-recovery",
+        "targets": {
+          "1": {
+            "key": "spell-slot.1",
+            "scope": "character",
+            "weight": 1
+          },
+          "2": {
+            "key": "spell-slot.2",
+            "scope": "character",
+            "weight": 2
+          },
+          "3": {
+            "key": "spell-slot.3",
+            "scope": "character",
+            "weight": 3
+          },
+          "4": {
+            "key": "spell-slot.4",
+            "scope": "character",
+            "weight": 4
+          },
+          "5": {
+            "key": "spell-slot.5",
+            "scope": "character",
+            "weight": 5
+          }
+        }
+      }
+    },
+    "tagDisplayNames": {
+      "class-feature": "Class Feature",
+      "subclass-feature": "Subclass Feature",
+      "subclass": "Subclasses",
+      "species": "Species",
+      "species-trait": "Species Trait",
+      "species-option": "Species Option",
+      "background": "Background",
+      "ability-adjustment": "Ability Adjustment",
+      "feat": "Feat",
+      "origin-feat": "Origin Feat",
+      "general-feat": "General Feat",
+      "fighting-style-feat": "Fighting Style Feat",
+      "epic-boon-feat": "Epic Boon Feat",
+      "skill-proficiency": "Skill Proficiency",
+      "expertise": "Expertise",
+      "tool-proficiency": "Tool Proficiency",
+      "artisan-tools": "Artisan’s Tools",
+      "other-tools": "Other Tools",
+      "language": "Language",
+      "standard-language": "Standard Language",
+      "rare-language": "Rare Language",
+      "weapon-mastery": "Weapon Mastery",
+      "simple-weapon": "Simple Weapon",
+      "martial-weapon": "Martial Weapon",
+      "melee-weapon": "Melee Weapon",
+      "ranged-weapon": "Ranged Weapon",
+      "spell": "Spell",
+      "cantrip": "Cantrip",
+      "leveled-spell": "Leveled Spell",
+      "ritual": "Ritual",
+      "concentration": "Concentration",
+      "resistance": "Resistance",
+      "resource-tracker": "Resource Tracker",
+      "roll-feature": "Roll Feature",
+      "rest-healing": "Rest Healing",
+      "spellcasting-ability-choice": "Spellcasting Ability",
+      "bard-list": "Bard Spell List",
+      "cleric-list": "Cleric Spell List",
+      "druid-list": "Druid Spell List",
+      "paladin-list": "Paladin Spell List",
+      "ranger-list": "Ranger Spell List",
+      "sorcerer-list": "Sorcerer Spell List",
+      "warlock-list": "Warlock Spell List",
+      "wizard-list": "Wizard Spell List",
+      "barbarian-subclass": "Barbarian Subclasses",
+      "bard-subclass": "Bard Subclasses",
+      "cleric-subclass": "Cleric Subclasses",
+      "druid-subclass": "Druid Subclasses",
+      "fighter-subclass": "Fighter Subclasses",
+      "monk-subclass": "Monk Subclasses",
+      "paladin-subclass": "Paladin Subclasses",
+      "ranger-subclass": "Ranger Subclasses",
+      "rogue-subclass": "Rogue Subclasses",
+      "sorcerer-subclass": "Sorcerer Subclasses",
+      "warlock-subclass": "Warlock Subclasses",
+      "wizard-subclass": "Wizard Subclasses",
+      "light-weapon": "Light Weapon",
+      "finesse-weapon": "Finesse Weapon",
+      "spellcasting-feature": "Spellcasting Feature",
+      "bard-spell": "Bard Spell",
+      "bard-leveled-spell": "Bard Leveled Spell",
+      "bard-cantrip": "Bard Cantrip",
+      "cleric-spell": "Cleric Spell",
+      "cleric-leveled-spell": "Cleric Leveled Spell",
+      "cleric-cantrip": "Cleric Cantrip",
+      "class-option": "Class Option",
+      "druid-spell": "Druid Spell",
+      "druid-leveled-spell": "Druid Leveled Spell",
+      "druid-cantrip": "Druid Cantrip",
+      "fighting-style-feature": "Fighting Style Feature",
+      "paladin-spell": "Paladin Spell",
+      "paladin-leveled-spell": "Paladin Leveled Spell",
+      "ranger-spell": "Ranger Spell",
+      "ranger-leveled-spell": "Ranger Leveled Spell",
+      "sorcerer-spell": "Sorcerer Spell",
+      "sorcerer-cantrip": "Sorcerer Cantrip",
+      "sorcerer-leveled-spell": "Sorcerer Leveled Spell",
+      "metamagic": "Metamagic",
+      "eldritch-invocation": "Eldritch Invocation",
+      "warlock-spell": "Warlock Spell",
+      "warlock-leveled-spell": "Warlock Leveled Spell",
+      "warlock-cantrip": "Warlock Cantrip",
+      "warlock-arcanum-6": "Warlock Arcanum (level 6)",
+      "warlock-arcanum-7": "Warlock Arcanum (level 7)",
+      "warlock-arcanum-8": "Warlock Arcanum (level 8)",
+      "warlock-arcanum-9": "Warlock Arcanum (level 9)",
+      "wizard-spell": "Wizard Spell",
+      "wizard-leveled-spell": "Wizard Leveled Spell",
+      "wizard-cantrip": "Wizard Cantrip",
+      "initiate-cleric-intelligence-spell": "Initiate Cleric Intelligence Spell",
+      "initiate-cleric-intelligence-cantrip": "Initiate Cleric Intelligence Cantrip",
+      "initiate-cleric-wisdom-spell": "Initiate Cleric Wisdom Spell",
+      "initiate-cleric-wisdom-cantrip": "Initiate Cleric Wisdom Cantrip",
+      "initiate-cleric-charisma-spell": "Initiate Cleric Charisma Spell",
+      "initiate-cleric-charisma-cantrip": "Initiate Cleric Charisma Cantrip",
+      "initiate-druid-intelligence-spell": "Initiate Druid Intelligence Spell",
+      "initiate-druid-intelligence-cantrip": "Initiate Druid Intelligence Cantrip",
+      "initiate-druid-wisdom-spell": "Initiate Druid Wisdom Spell",
+      "initiate-druid-wisdom-cantrip": "Initiate Druid Wisdom Cantrip",
+      "initiate-druid-charisma-spell": "Initiate Druid Charisma Spell",
+      "initiate-druid-charisma-cantrip": "Initiate Druid Charisma Cantrip",
+      "initiate-wizard-intelligence-cantrip": "Initiate Wizard Intelligence Cantrip",
+      "initiate-wizard-intelligence-spell": "Initiate Wizard Intelligence Spell",
+      "initiate-wizard-wisdom-cantrip": "Initiate Wizard Wisdom Cantrip",
+      "initiate-wizard-wisdom-spell": "Initiate Wizard Wisdom Spell",
+      "initiate-wizard-charisma-cantrip": "Initiate Wizard Charisma Cantrip",
+      "initiate-wizard-charisma-spell": "Initiate Wizard Charisma Spell"
+    },
+    "sheetSections": [
+      {
+        "id": "abilities",
+        "name": "Abilities",
+        "layout": "abilities",
+        "rows": [
+          {
+            "stat": "strength",
+            "secondaryStat": "modifier.strength",
+            "name": "Strength",
+            "roll": {
+              "dice": "1d20",
+              "bonusStat": "modifier.strength"
+            }
+          },
+          {
+            "stat": "dexterity",
+            "secondaryStat": "modifier.dexterity",
+            "name": "Dexterity",
+            "roll": {
+              "dice": "1d20",
+              "bonusStat": "modifier.dexterity"
+            }
+          },
+          {
+            "stat": "constitution",
+            "secondaryStat": "modifier.constitution",
+            "name": "Constitution",
+            "roll": {
+              "dice": "1d20",
+              "bonusStat": "modifier.constitution"
+            }
+          },
+          {
+            "stat": "intelligence",
+            "secondaryStat": "modifier.intelligence",
+            "name": "Intelligence",
+            "roll": {
+              "dice": "1d20",
+              "bonusStat": "modifier.intelligence"
+            }
+          },
+          {
+            "stat": "wisdom",
+            "secondaryStat": "modifier.wisdom",
+            "name": "Wisdom",
+            "roll": {
+              "dice": "1d20",
+              "bonusStat": "modifier.wisdom"
+            }
+          },
+          {
+            "stat": "charisma",
+            "secondaryStat": "modifier.charisma",
+            "name": "Charisma",
+            "roll": {
+              "dice": "1d20",
+              "bonusStat": "modifier.charisma"
+            }
+          }
+        ],
+        "modifierFirst": true,
+        "primaryValueLabel": "score",
+        "secondaryValueLabel": "modifier",
+        "secondarySigned": true
+      },
+      {
+        "id": "combat",
+        "name": "Combat & exploration",
+        "layout": "stats",
+        "rows": []
+      },
+      {
+        "id": "saves",
+        "name": "Saving throws",
+        "layout": "skills",
+        "rows": [
+          {
+            "stat": "save.strength",
+            "name": "Strength",
+            "proficiencyStat": "training.save.strength",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "save.dexterity",
+            "name": "Dexterity",
+            "proficiencyStat": "training.save.dexterity",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "save.constitution",
+            "name": "Constitution",
+            "proficiencyStat": "training.save.constitution",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "save.intelligence",
+            "name": "Intelligence",
+            "proficiencyStat": "training.save.intelligence",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "save.wisdom",
+            "name": "Wisdom",
+            "proficiencyStat": "training.save.wisdom",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "save.charisma",
+            "name": "Charisma",
+            "proficiencyStat": "training.save.charisma",
+            "roll": {
+              "dice": "1d20"
+            }
+          }
+        ],
+        "defaultSort": "Name",
+        "trainingLevels": [
+          {
+            "minimum": 0,
+            "name": "Not proficient",
+            "symbol": "○",
+            "trained": false
+          },
+          {
+            "minimum": 1,
+            "name": "Proficient",
+            "symbol": "●",
+            "trained": true
+          },
+          {
+            "minimum": 2,
+            "name": "Expertise",
+            "symbol": "◉",
+            "trained": true
+          }
+        ],
+        "primarySigned": true,
+        "columnLabels": {
+          "Training": "Proficiency"
+        },
+        "columns": [
+          "Training",
+          "Name",
+          "Bonus"
+        ],
+        "calculationPlacement": "belowValue",
+        "valueAlignment": "left"
+      },
+      {
+        "id": "skills",
+        "name": "Skills",
+        "layout": "skills",
+        "rows": [
+          {
+            "stat": "skill.acrobatics",
+            "name": "Acrobatics",
+            "ability": "DEX",
+            "proficiencyStat": "training.skill.acrobatics",
+            "feature": "dnd5e:2024:skill.acrobatics",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.animal-handling",
+            "name": "Animal Handling",
+            "ability": "WIS",
+            "proficiencyStat": "training.skill.animal-handling",
+            "feature": "dnd5e:2024:skill.animal-handling",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.arcana",
+            "name": "Arcana",
+            "ability": "INT",
+            "proficiencyStat": "training.skill.arcana",
+            "feature": "dnd5e:2024:skill.arcana",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.athletics",
+            "name": "Athletics",
+            "ability": "STR",
+            "proficiencyStat": "training.skill.athletics",
+            "feature": "dnd5e:2024:skill.athletics",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.deception",
+            "name": "Deception",
+            "ability": "CHA",
+            "proficiencyStat": "training.skill.deception",
+            "feature": "dnd5e:2024:skill.deception",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.history",
+            "name": "History",
+            "ability": "INT",
+            "proficiencyStat": "training.skill.history",
+            "feature": "dnd5e:2024:skill.history",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.insight",
+            "name": "Insight",
+            "ability": "WIS",
+            "proficiencyStat": "training.skill.insight",
+            "feature": "dnd5e:2024:skill.insight",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.intimidation",
+            "name": "Intimidation",
+            "ability": "CHA",
+            "proficiencyStat": "training.skill.intimidation",
+            "feature": "dnd5e:2024:skill.intimidation",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.investigation",
+            "name": "Investigation",
+            "ability": "INT",
+            "proficiencyStat": "training.skill.investigation",
+            "feature": "dnd5e:2024:skill.investigation",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.medicine",
+            "name": "Medicine",
+            "ability": "WIS",
+            "proficiencyStat": "training.skill.medicine",
+            "feature": "dnd5e:2024:skill.medicine",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.nature",
+            "name": "Nature",
+            "ability": "INT",
+            "proficiencyStat": "training.skill.nature",
+            "feature": "dnd5e:2024:skill.nature",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.perception",
+            "name": "Perception",
+            "ability": "WIS",
+            "proficiencyStat": "training.skill.perception",
+            "feature": "dnd5e:2024:skill.perception",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.performance",
+            "name": "Performance",
+            "ability": "CHA",
+            "proficiencyStat": "training.skill.performance",
+            "feature": "dnd5e:2024:skill.performance",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.persuasion",
+            "name": "Persuasion",
+            "ability": "CHA",
+            "proficiencyStat": "training.skill.persuasion",
+            "feature": "dnd5e:2024:skill.persuasion",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.religion",
+            "name": "Religion",
+            "ability": "INT",
+            "proficiencyStat": "training.skill.religion",
+            "feature": "dnd5e:2024:skill.religion",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.sleight-of-hand",
+            "name": "Sleight of Hand",
+            "ability": "DEX",
+            "proficiencyStat": "training.skill.sleight-of-hand",
+            "feature": "dnd5e:2024:skill.sleight-of-hand",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.stealth",
+            "name": "Stealth",
+            "ability": "DEX",
+            "proficiencyStat": "training.skill.stealth",
+            "feature": "dnd5e:2024:skill.stealth",
+            "roll": {
+              "dice": "1d20"
+            }
+          },
+          {
+            "stat": "skill.survival",
+            "name": "Survival",
+            "ability": "WIS",
+            "proficiencyStat": "training.skill.survival",
+            "feature": "dnd5e:2024:skill.survival",
+            "roll": {
+              "dice": "1d20"
+            }
+          }
+        ],
+        "defaultSort": "Name",
+        "trainingLevels": [
+          {
+            "minimum": 0,
+            "name": "Not proficient",
+            "symbol": "○",
+            "trained": false
+          },
+          {
+            "minimum": 1,
+            "name": "Proficient",
+            "symbol": "●",
+            "trained": true
+          },
+          {
+            "minimum": 2,
+            "name": "Expertise",
+            "symbol": "◉",
+            "trained": true
+          }
+        ],
+        "primarySigned": true,
+        "columnLabels": {
+          "Training": "Proficiency"
+        }
+      }
+    ],
+    "featureCategories": [
+      {
+        "id": "class",
+        "name": "Class Features",
+        "tags": [
+          "class-feature"
+        ]
+      },
+      {
+        "id": "feats",
+        "name": "Feats",
+        "tags": [
+          "feat"
+        ]
+      },
+      {
+        "id": "skills",
+        "name": "Skill proficiencies",
+        "tags": [
+          "skill-proficiency"
+        ]
+      },
+      {
+        "id": "spells",
+        "name": "Spells",
+        "tags": [
+          "spell"
+        ]
+      },
+      {
+        "id": "species",
+        "name": "Species",
+        "tags": [
+          "species"
+        ]
+      }
+    ],
+    "currency": {
+      "name": "Coins",
+      "primary": "gp",
+      "decimalPlaces": 0,
+      "denominations": [
+        {
+          "id": "cp",
+          "name": "Copper",
+          "symbol": "cp",
+          "value": 1
+        },
+        {
+          "id": "sp",
+          "name": "Silver",
+          "symbol": "sp",
+          "value": 10
+        },
+        {
+          "id": "ep",
+          "name": "Electrum",
+          "symbol": "ep",
+          "value": 50
+        },
+        {
+          "id": "gp",
+          "name": "Gold",
+          "symbol": "gp",
+          "value": 100
+        },
+        {
+          "id": "pp",
+          "name": "Platinum",
+          "symbol": "pp",
+          "value": 1000
+        }
+      ]
+    },
+    "spellDisplay": {
+      "spellKey": "spell",
+      "levelKey": "spellLevel",
+      "slotLevelKey": "spellSlotLevel",
+      "ritualKey": "ritual",
+      "castingAbilityKey": "castingAbility",
+      "slots": [
+        {
+          "level": 1,
+          "key": "spell-slot.1",
+          "scope": "character"
+        },
+        {
+          "level": 2,
+          "key": "spell-slot.2",
+          "scope": "character"
+        },
+        {
+          "level": 3,
+          "key": "spell-slot.3",
+          "scope": "character"
+        },
+        {
+          "level": 4,
+          "key": "spell-slot.4",
+          "scope": "character"
+        },
+        {
+          "level": 5,
+          "key": "spell-slot.5",
+          "scope": "character"
+        },
+        {
+          "level": 6,
+          "key": "spell-slot.6",
+          "scope": "character"
+        },
+        {
+          "level": 7,
+          "key": "spell-slot.7",
+          "scope": "character"
+        },
+        {
+          "level": 8,
+          "key": "spell-slot.8",
+          "scope": "character"
+        },
+        {
+          "level": 9,
+          "key": "spell-slot.9",
+          "scope": "character"
+        },
+        {
+          "key": "pact-slot",
+          "scope": "character",
+          "levelStat": "pactSlotLevel"
+        }
+      ],
+      "castingBonusStats": {
+        "strength": "modifier.strength",
+        "dexterity": "modifier.dexterity",
+        "constitution": "modifier.constitution",
+        "intelligence": "modifier.intelligence",
+        "wisdom": "modifier.wisdom",
+        "charisma": "modifier.charisma"
+      }
+    },
+    "importantDetails": [
+      "Name",
+      "Alignment"
+    ],
+    "sheetTabs": [
+      {
+        "id": "choices",
+        "name": "Build & choices",
+        "content": "choices"
+      },
+      {
+        "id": "stats",
+        "name": "Character sheet",
+        "content": "sheet",
+        "placement": "rail",
+        "sections": [
+          "abilities",
+          "combat",
+          "saves"
+        ]
+      },
+      {
+        "id": "skills",
+        "name": "Skills",
+        "content": "sections",
+        "placement": "rail",
+        "sections": [
+          "skills"
+        ]
+      },
+      {
+        "id": "items",
+        "name": "Items",
+        "content": "items"
+      },
+      {
+        "id": "features",
+        "name": "Features & traits",
+        "content": "features"
+      },
+      {
+        "id": "resources",
+        "name": "Abilities & resources",
+        "content": "resources"
+      },
+      {
+        "id": "spells",
+        "name": "Spells",
+        "content": "spells"
+      },
+      {
+        "id": "notes",
+        "name": "Notes",
+        "content": "notes"
+      },
+      {
+        "id": "rolls",
+        "name": "Roll history",
+        "content": "rolls"
+      }
+    ],
+    "healingFeaturesTag": "rest-healing",
+    "terminology": {
+      "classSingular": "Class",
+      "classPlural": "Classes",
+      "creatureSingular": "Species",
+      "creaturePlural": "Species",
+      "creatureTag": "species"
+    },
+    "equipmentRules": {
+      "attunementLimitStat": "attunementLimit",
+      "preventDuplicateAttunement": true
+    },
+    "resetConditions": [
+      {
+        "id": "short-rest",
+        "name": "Short Rest",
+        "description": "Complete a Short Rest."
+      },
+      {
+        "id": "long-rest",
+        "name": "Long Rest",
+        "description": "Complete a Long Rest."
+      },
+      {
+        "id": "dawn",
+        "name": "Dawn",
+        "description": "The next dawn occurs."
+      }
+    ],
+    "healthRules": {
+      "resourceKey": "hit-points",
+      "temporaryResourceKey": "temporary-hit-points",
+      "resetResourceKeysOnHealing": [
+        "death-save.successes",
+        "death-save.failures"
+      ],
+      "clearOnReset": {
+        "long-rest": [
+          "temporary-hit-points",
+          "death-save.successes",
+          "death-save.failures"
+        ]
+      }
+    },
+    "resetButtons": [
+      {
+        "event": "short-rest",
+        "displayName": "Short Rest",
+        "recoveries": [
+          "short-rest"
+        ]
+      },
+      {
+        "event": "long-rest",
+        "displayName": "Long Rest",
+        "recoveries": [
+          "long-rest",
+          "dawn"
+        ]
+      }
+    ],
+    "sheetDisplay": {
+      "overview": [
+        {
+          "stat": "armorClass",
+          "name": "Armor Class"
+        },
+        {
+          "stat": "initiative",
+          "name": "Initiative",
+          "signed": true,
+          "roll": {
+            "dice": "1d20"
+          }
+        },
+        {
+          "stat": "speed",
+          "name": "Speed",
+          "unit": "ft"
+        },
+        {
+          "stat": "proficiencyBonus",
+          "name": "Proficiency",
+          "signed": true
+        },
+        {
+          "stat": "passivePerception",
+          "name": "Passive Perception"
+        }
+      ],
+      "health": {
+        "name": "Hit Points",
+        "showHealingFeatures": true,
+        "countersVisibleAtOrBelow": 0,
+        "counters": [
+          "death-save.successes",
+          "death-save.failures"
+        ],
+        "healingResourceIcons": true
+      },
+      "descriptionProcessing": {
+        "classLevelPhrases": true,
+        "statPhrases": [
+          {
+            "phrase": "strength modifier",
+            "stat": "modifier.strength"
+          },
+          {
+            "phrase": "dexterity modifier",
+            "stat": "modifier.dexterity"
+          },
+          {
+            "phrase": "constitution modifier",
+            "stat": "modifier.constitution"
+          },
+          {
+            "phrase": "intelligence modifier",
+            "stat": "modifier.intelligence"
+          },
+          {
+            "phrase": "wisdom modifier",
+            "stat": "modifier.wisdom"
+          },
+          {
+            "phrase": "charisma modifier",
+            "stat": "modifier.charisma"
+          },
+          {
+            "phrase": "proficiency bonus",
+            "stat": "proficiencyBonus"
+          }
+        ]
+      },
+      "resources": {
+        "compact": true,
+        "showDetailsByDefault": false
+      },
+      "inventory": {
+        "search": true,
+        "categoryFilter": true
+      },
+      "spells": {
+        "compact": true,
+        "search": true,
+        "levelFilter": true,
+        "zeroLevelName": "Cantrip",
+        "zeroLevelHeading": "Cantrips",
+        "slotPipLimit": 12,
+        "columns": [
+          {
+            "name": "Casting time",
+            "metadataKey": "castingTime"
+          },
+          {
+            "name": "Range",
+            "metadataKey": "range"
+          }
+        ],
+        "castingStats": [
+          {
+            "ability": "intelligence",
+            "attackStat": "casting.intelligence.attack",
+            "saveStat": "casting.intelligence.dc"
+          },
+          {
+            "ability": "wisdom",
+            "attackStat": "casting.wisdom.attack",
+            "saveStat": "casting.wisdom.dc"
+          },
+          {
+            "ability": "charisma",
+            "attackStat": "casting.charisma.attack",
+            "saveStat": "casting.charisma.dc"
+          }
+        ],
+        "actionFilter": true
+      },
+      "restPreview": true,
+      "rollHistory": true,
+      "showAllStats": false,
+      "detailsDrawer": true,
+      "actions": {
+        "categories": [
+          {
+            "id": "action",
+            "name": "Actions",
+            "kinds": [
+              "action"
+            ]
+          },
+          {
+            "id": "bonus",
+            "name": "Bonus Actions",
+            "kinds": [
+              "bonus-action"
+            ]
+          },
+          {
+            "id": "reaction",
+            "name": "Reactions",
+            "kinds": [
+              "reaction"
+            ]
+          },
+          {
+            "id": "special",
+            "name": "Other / no action cost",
+            "kinds": [
+              "special"
+            ]
+          }
+        ],
+        "itemCategories": [
+          "Weapons"
+        ],
+        "columns": [
+          {
+            "name": "Casting time",
+            "metadataKey": "castingTime"
+          },
+          {
+            "name": "Range",
+            "metadataKey": "range"
+          }
+        ]
+      },
+      "statuses": [
+        {
+          "name": "Defenses & conditions",
+          "tags": [
+            "resistance",
+            "immunity",
+            "condition"
+          ]
+        }
+      ],
+      "abilities": {
+        "groupByActionCost": true,
+        "actionFilter": true
+      }
+    }
+  }
+}
