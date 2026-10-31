@@ -4,10 +4,19 @@
     "noEmit": true,
     "rootDir": "..",
     "allowImportingTsExtensions": true,
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "paths": {
-      "@/*": ["*"]
+      "@/dist/*": [
+        "src/*"
+      ],
+      "@/*": [
+        "*"
+      ]
     }
   },
-  "include": ["./**/*.ts"]
+  "include": [
+    "./**/*.ts"
+  ]
 }
